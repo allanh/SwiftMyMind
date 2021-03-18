@@ -15,6 +15,11 @@
 		A44A5A7A25F9B0D300995823 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A44A5A7825F9B0D300995823 /* LaunchScreen.storyboard */; };
 		A44A5A8525F9B0D300995823 /* MyMindTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44A5A8425F9B0D300995823 /* MyMindTests.swift */; };
 		A44A5A9025F9B0D300995823 /* MyMindUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44A5A8F25F9B0D300995823 /* MyMindUITests.swift */; };
+		A4705B9126020E5700B30CE6 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4705B9026020E5700B30CE6 /* Response.swift */; };
+		A49CF8B6260301DE00AFC170 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49CF8B5260301DE00AFC170 /* Endpoint.swift */; };
+		A49CF8BB2603028C00AFC170 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49CF8BA2603028C00AFC170 /* APIService.swift */; };
+		A49CF8C0260306D200AFC170 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49CF8BF260306D200AFC170 /* APIError.swift */; };
+		A49CF8C526030CEE00AFC170 /* SignInService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49CF8C426030CEE00AFC170 /* SignInService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +54,11 @@
 		A44A5A8B25F9B0D300995823 /* MyMindUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyMindUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A44A5A8F25F9B0D300995823 /* MyMindUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMindUITests.swift; sourceTree = "<group>"; };
 		A44A5A9125F9B0D300995823 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A4705B9026020E5700B30CE6 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
+		A49CF8B5260301DE00AFC170 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		A49CF8BA2603028C00AFC170 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		A49CF8BF260306D200AFC170 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
+		A49CF8C426030CEE00AFC170 /* SignInService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -279,8 +289,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A49CF8C526030CEE00AFC170 /* SignInService.swift in Sources */,
+				A4705B9126020E5700B30CE6 /* Response.swift in Sources */,
+				A49CF8BB2603028C00AFC170 /* APIService.swift in Sources */,
 				A44A5A7225F9B0D200995823 /* ViewController.swift in Sources */,
 				A44A5A6E25F9B0D200995823 /* AppDelegate.swift in Sources */,
+				A49CF8C0260306D200AFC170 /* APIError.swift in Sources */,
+				A49CF8B6260301DE00AFC170 /* Endpoint.swift in Sources */,
 				A44A5A7025F9B0D200995823 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -469,6 +484,7 @@
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.shopping.udi.MyMind.debug;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SIGN_IN_SERVER_URL = "http://api-alpha-auth.udnshopping.com\n";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -492,6 +508,7 @@
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.shopping.udi.MyMind;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SIGN_IN_SERVER_URL = "http://api-alpha-auth.udnshopping.com";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
