@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -23,6 +23,10 @@
 		A49CF8BB2603028C00AFC170 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49CF8BA2603028C00AFC170 /* APIService.swift */; };
 		A49CF8C0260306D200AFC170 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49CF8BF260306D200AFC170 /* APIError.swift */; };
 		A49CF8C526030CEE00AFC170 /* SignInService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49CF8C426030CEE00AFC170 /* SignInService.swift */; };
+		A49CF92A26034BEA00AFC170 /* CaptchaSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49CF92926034BEA00AFC170 /* CaptchaSession.swift */; };
+		A49CF9302603518A00AFC170 /* CodableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49CF92F2603518A00AFC170 /* CodableTests.swift */; };
+		A49CF9382603523100AFC170 /* captcha_session.json in Resources */ = {isa = PBXBuildFile; fileRef = A49CF9372603523100AFC170 /* captcha_session.json */; };
+		A49CF93C2603527500AFC170 /* captcha_session.json in Resources */ = {isa = PBXBuildFile; fileRef = A49CF9372603523100AFC170 /* captcha_session.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +75,9 @@
 		A49CF8BA2603028C00AFC170 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		A49CF8BF260306D200AFC170 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		A49CF8C426030CEE00AFC170 /* SignInService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInService.swift; sourceTree = "<group>"; };
+		A49CF92926034BEA00AFC170 /* CaptchaSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptchaSession.swift; sourceTree = "<group>"; };
+		A49CF92F2603518A00AFC170 /* CodableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableTests.swift; sourceTree = "<group>"; };
+		A49CF9372603523100AFC170 /* captcha_session.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = captcha_session.json; sourceTree = "<group>"; };
 		A64D73FCB71924FE21D7799F /* Pods-MyMind.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMind.release.xcconfig"; path = "Target Support Files/Pods-MyMind/Pods-MyMind.release.xcconfig"; sourceTree = "<group>"; };
 		BE0100A79B8C832CE91F6186 /* Pods_MyMind.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyMind.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB6BB17D55B5E80D4362936C /* Pods-MyMind-MyMindUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMind-MyMindUITests.release.xcconfig"; path = "Target Support Files/Pods-MyMind-MyMindUITests/Pods-MyMind-MyMindUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -139,6 +146,7 @@
 		A44A5A6C25F9B0D200995823 /* MyMind */ = {
 			isa = PBXGroup;
 			children = (
+				A49CF92E26034D1900AFC170 /* APICache */,
 				A49CF8AC2602FEB100AFC170 /* API */,
 				A4705B8C26020E4400B30CE6 /* Model */,
 				A44A5A6D25F9B0D200995823 /* AppDelegate.swift */,
@@ -157,6 +165,7 @@
 			children = (
 				A44A5A8425F9B0D300995823 /* MyMindTests.swift */,
 				A44A5A8625F9B0D300995823 /* Info.plist */,
+				A49CF92F2603518A00AFC170 /* CodableTests.swift */,
 			);
 			path = MyMindTests;
 			sourceTree = "<group>";
@@ -173,6 +182,8 @@
 		A4705B8C26020E4400B30CE6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				A4705B9026020E5700B30CE6 /* Response.swift */,
+				A49CF92926034BEA00AFC170 /* CaptchaSession.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -180,8 +191,20 @@
 		A49CF8AC2602FEB100AFC170 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				A49CF8B5260301DE00AFC170 /* Endpoint.swift */,
+				A49CF8BA2603028C00AFC170 /* APIService.swift */,
+				A49CF8BF260306D200AFC170 /* APIError.swift */,
+				A49CF8C426030CEE00AFC170 /* SignInService.swift */,
 			);
 			path = API;
+			sourceTree = "<group>";
+		};
+		A49CF92E26034D1900AFC170 /* APICache */ = {
+			isa = PBXGroup;
+			children = (
+				A49CF9372603523100AFC170 /* captcha_session.json */,
+			);
+			path = APICache;
 			sourceTree = "<group>";
 		};
 		FE90B85D82B6B4639CD1A164 /* Pods */ = {
@@ -197,7 +220,6 @@
 				3B6D7B8475F284AB766B490C /* Pods-MyMindTests.alpha.xcconfig */,
 				134E37E4F16EA43954BE94DF /* Pods-MyMindTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -309,6 +331,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A49CF9382603523100AFC170 /* captcha_session.json in Resources */,
 				A44A5A7A25F9B0D300995823 /* LaunchScreen.storyboard in Resources */,
 				A44A5A7725F9B0D300995823 /* Assets.xcassets in Resources */,
 				A44A5A7525F9B0D200995823 /* Main.storyboard in Resources */,
@@ -319,6 +342,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A49CF93C2603527500AFC170 /* captcha_session.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -441,6 +465,7 @@
 			files = (
 				A49CF8C526030CEE00AFC170 /* SignInService.swift in Sources */,
 				A4705B9126020E5700B30CE6 /* Response.swift in Sources */,
+				A49CF92A26034BEA00AFC170 /* CaptchaSession.swift in Sources */,
 				A49CF8BB2603028C00AFC170 /* APIService.swift in Sources */,
 				A44A5A7225F9B0D200995823 /* ViewController.swift in Sources */,
 				A44A5A6E25F9B0D200995823 /* AppDelegate.swift in Sources */,
@@ -454,6 +479,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A49CF9302603518A00AFC170 /* CodableTests.swift in Sources */,
 				A44A5A8525F9B0D300995823 /* MyMindTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
