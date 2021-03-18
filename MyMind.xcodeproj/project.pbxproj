@@ -99,6 +99,8 @@
 		A44A5A6C25F9B0D200995823 /* MyMind */ = {
 			isa = PBXGroup;
 			children = (
+				A49CF8AC2602FEB100AFC170 /* API */,
+				A4705B8C26020E4400B30CE6 /* Model */,
 				A44A5A6D25F9B0D200995823 /* AppDelegate.swift */,
 				A44A5A6F25F9B0D200995823 /* SceneDelegate.swift */,
 				A44A5A7125F9B0D200995823 /* ViewController.swift */,
@@ -126,6 +128,25 @@
 				A44A5A9125F9B0D300995823 /* Info.plist */,
 			);
 			path = MyMindUITests;
+			sourceTree = "<group>";
+		};
+		A4705B8C26020E4400B30CE6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A4705B9026020E5700B30CE6 /* Response.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		A49CF8AC2602FEB100AFC170 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				A49CF8B5260301DE00AFC170 /* Endpoint.swift */,
+				A49CF8BA2603028C00AFC170 /* APIService.swift */,
+				A49CF8BF260306D200AFC170 /* APIError.swift */,
+				A49CF8C426030CEE00AFC170 /* SignInService.swift */,
+			);
+			path = API;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
