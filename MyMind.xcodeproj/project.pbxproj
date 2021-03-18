@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		01CF6195FA67834B4B66F5E3 /* Pods_MyMind_MyMindUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20E97C84258EA1B1937DA48F /* Pods_MyMind_MyMindUITests.framework */; };
+		2E5069A60BD231A8689574B6 /* Pods_MyMind.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE0100A79B8C832CE91F6186 /* Pods_MyMind.framework */; };
+		9660C0DF9C9E4D5B23E221A7 /* Pods_MyMindTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E343FC883B3C7BBFB9A075 /* Pods_MyMindTests.framework */; };
 		A44A5A6E25F9B0D200995823 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44A5A6D25F9B0D200995823 /* AppDelegate.swift */; };
 		A44A5A7025F9B0D200995823 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44A5A6F25F9B0D200995823 /* SceneDelegate.swift */; };
 		A44A5A7225F9B0D200995823 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44A5A7125F9B0D200995823 /* ViewController.swift */; };
@@ -40,6 +43,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0AF0378B82A57CDF6EBF3621 /* Pods-MyMind.alpha.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMind.alpha.xcconfig"; path = "Target Support Files/Pods-MyMind/Pods-MyMind.alpha.xcconfig"; sourceTree = "<group>"; };
+		134E37E4F16EA43954BE94DF /* Pods-MyMindTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMindTests.release.xcconfig"; path = "Target Support Files/Pods-MyMindTests/Pods-MyMindTests.release.xcconfig"; sourceTree = "<group>"; };
+		1B3C32F18D3A714EFDC0B22E /* Pods-MyMindTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMindTests.debug.xcconfig"; path = "Target Support Files/Pods-MyMindTests/Pods-MyMindTests.debug.xcconfig"; sourceTree = "<group>"; };
+		20E97C84258EA1B1937DA48F /* Pods_MyMind_MyMindUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyMind_MyMindUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		36D22F503087EEC031CF0D02 /* Pods-MyMind-MyMindUITests.alpha.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMind-MyMindUITests.alpha.xcconfig"; path = "Target Support Files/Pods-MyMind-MyMindUITests/Pods-MyMind-MyMindUITests.alpha.xcconfig"; sourceTree = "<group>"; };
+		3B6D7B8475F284AB766B490C /* Pods-MyMindTests.alpha.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMindTests.alpha.xcconfig"; path = "Target Support Files/Pods-MyMindTests/Pods-MyMindTests.alpha.xcconfig"; sourceTree = "<group>"; };
+		56E343FC883B3C7BBFB9A075 /* Pods_MyMindTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyMindTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5DE023121A8831DEABDA0767 /* Pods-MyMind-MyMindUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMind-MyMindUITests.debug.xcconfig"; path = "Target Support Files/Pods-MyMind-MyMindUITests/Pods-MyMind-MyMindUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		8A105A1720C2E5FCBADB8898 /* Pods-MyMind.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMind.debug.xcconfig"; path = "Target Support Files/Pods-MyMind/Pods-MyMind.debug.xcconfig"; sourceTree = "<group>"; };
 		A44A5A6A25F9B0D200995823 /* MyMind.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyMind.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A44A5A6D25F9B0D200995823 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A44A5A6F25F9B0D200995823 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -59,6 +71,9 @@
 		A49CF8BA2603028C00AFC170 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		A49CF8BF260306D200AFC170 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		A49CF8C426030CEE00AFC170 /* SignInService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInService.swift; sourceTree = "<group>"; };
+		A64D73FCB71924FE21D7799F /* Pods-MyMind.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMind.release.xcconfig"; path = "Target Support Files/Pods-MyMind/Pods-MyMind.release.xcconfig"; sourceTree = "<group>"; };
+		BE0100A79B8C832CE91F6186 /* Pods_MyMind.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyMind.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB6BB17D55B5E80D4362936C /* Pods-MyMind-MyMindUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMind-MyMindUITests.release.xcconfig"; path = "Target Support Files/Pods-MyMind-MyMindUITests/Pods-MyMind-MyMindUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +81,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E5069A60BD231A8689574B6 /* Pods_MyMind.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -73,6 +89,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9660C0DF9C9E4D5B23E221A7 /* Pods_MyMindTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,12 +97,23 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01CF6195FA67834B4B66F5E3 /* Pods_MyMind_MyMindUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		99DF18E649B1BAAECF6252D2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BE0100A79B8C832CE91F6186 /* Pods_MyMind.framework */,
+				20E97C84258EA1B1937DA48F /* Pods_MyMind_MyMindUITests.framework */,
+				56E343FC883B3C7BBFB9A075 /* Pods_MyMindTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		A44A5A6125F9B0D200995823 = {
 			isa = PBXGroup;
 			children = (
@@ -93,6 +121,8 @@
 				A44A5A8325F9B0D300995823 /* MyMindTests */,
 				A44A5A8E25F9B0D300995823 /* MyMindUITests */,
 				A44A5A6B25F9B0D200995823 /* Products */,
+				FE90B85D82B6B4639CD1A164 /* Pods */,
+				99DF18E649B1BAAECF6252D2 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -143,7 +173,6 @@
 		A4705B8C26020E4400B30CE6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				A4705B9026020E5700B30CE6 /* Response.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -151,12 +180,25 @@
 		A49CF8AC2602FEB100AFC170 /* API */ = {
 			isa = PBXGroup;
 			children = (
-				A49CF8B5260301DE00AFC170 /* Endpoint.swift */,
-				A49CF8BA2603028C00AFC170 /* APIService.swift */,
-				A49CF8BF260306D200AFC170 /* APIError.swift */,
-				A49CF8C426030CEE00AFC170 /* SignInService.swift */,
 			);
 			path = API;
+			sourceTree = "<group>";
+		};
+		FE90B85D82B6B4639CD1A164 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8A105A1720C2E5FCBADB8898 /* Pods-MyMind.debug.xcconfig */,
+				0AF0378B82A57CDF6EBF3621 /* Pods-MyMind.alpha.xcconfig */,
+				A64D73FCB71924FE21D7799F /* Pods-MyMind.release.xcconfig */,
+				5DE023121A8831DEABDA0767 /* Pods-MyMind-MyMindUITests.debug.xcconfig */,
+				36D22F503087EEC031CF0D02 /* Pods-MyMind-MyMindUITests.alpha.xcconfig */,
+				EB6BB17D55B5E80D4362936C /* Pods-MyMind-MyMindUITests.release.xcconfig */,
+				1B3C32F18D3A714EFDC0B22E /* Pods-MyMindTests.debug.xcconfig */,
+				3B6D7B8475F284AB766B490C /* Pods-MyMindTests.alpha.xcconfig */,
+				134E37E4F16EA43954BE94DF /* Pods-MyMindTests.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -166,9 +208,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A44A5A9425F9B0D300995823 /* Build configuration list for PBXNativeTarget "MyMind" */;
 			buildPhases = (
+				28331022F70DEA26F0C2484F /* [CP] Check Pods Manifest.lock */,
 				A44A5A6625F9B0D200995823 /* Sources */,
 				A44A5A6725F9B0D200995823 /* Frameworks */,
 				A44A5A6825F9B0D200995823 /* Resources */,
+				E7E644337FF60CF92A16E4A4 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -183,6 +227,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A44A5A9725F9B0D300995823 /* Build configuration list for PBXNativeTarget "MyMindTests" */;
 			buildPhases = (
+				B7DA1CB1CCCF9026970FF5AB /* [CP] Check Pods Manifest.lock */,
 				A44A5A7C25F9B0D300995823 /* Sources */,
 				A44A5A7D25F9B0D300995823 /* Frameworks */,
 				A44A5A7E25F9B0D300995823 /* Resources */,
@@ -201,9 +246,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A44A5A9A25F9B0D300995823 /* Build configuration list for PBXNativeTarget "MyMindUITests" */;
 			buildPhases = (
+				15F551ED0AB8E9CD1085CB52 /* [CP] Check Pods Manifest.lock */,
 				A44A5A8725F9B0D300995823 /* Sources */,
 				A44A5A8825F9B0D300995823 /* Frameworks */,
 				A44A5A8925F9B0D300995823 /* Resources */,
+				5A633D295713D14FFC1D929A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -283,6 +330,109 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		15F551ED0AB8E9CD1085CB52 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MyMind-MyMindUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		28331022F70DEA26F0C2484F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MyMind-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5A633D295713D14FFC1D929A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MyMind-MyMindUITests/Pods-MyMind-MyMindUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MyMind-MyMindUITests/Pods-MyMind-MyMindUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MyMind-MyMindUITests/Pods-MyMind-MyMindUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B7DA1CB1CCCF9026970FF5AB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MyMindTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E7E644337FF60CF92A16E4A4 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MyMind/Pods-MyMind-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MyMind/Pods-MyMind-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MyMind/Pods-MyMind-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		A44A5A6625F9B0D200995823 /* Sources */ = {
@@ -469,6 +619,7 @@
 		};
 		A44A5A9525F9B0D300995823 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8A105A1720C2E5FCBADB8898 /* Pods-MyMind.debug.xcconfig */;
 			buildSettings = {
 				APP_DISPLAY_NAME = "MyMind Debug";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -493,6 +644,7 @@
 		};
 		A44A5A9625F9B0D300995823 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A64D73FCB71924FE21D7799F /* Pods-MyMind.release.xcconfig */;
 			buildSettings = {
 				APP_DISPLAY_NAME = MyMind;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -517,6 +669,7 @@
 		};
 		A44A5A9825F9B0D300995823 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1B3C32F18D3A714EFDC0B22E /* Pods-MyMindTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -539,6 +692,7 @@
 		};
 		A44A5A9925F9B0D300995823 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 134E37E4F16EA43954BE94DF /* Pods-MyMindTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -561,6 +715,7 @@
 		};
 		A44A5A9B25F9B0D300995823 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5DE023121A8831DEABDA0767 /* Pods-MyMind-MyMindUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -581,6 +736,7 @@
 		};
 		A44A5A9C25F9B0D300995823 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EB6BB17D55B5E80D4362936C /* Pods-MyMind-MyMindUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -662,6 +818,7 @@
 		};
 		A49CF8CA2603248600AFC170 /* Alpha */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0AF0378B82A57CDF6EBF3621 /* Pods-MyMind.alpha.xcconfig */;
 			buildSettings = {
 				APP_DISPLAY_NAME = "MyMind Alpha";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -686,6 +843,7 @@
 		};
 		A49CF8CB2603248600AFC170 /* Alpha */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3B6D7B8475F284AB766B490C /* Pods-MyMindTests.alpha.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -708,6 +866,7 @@
 		};
 		A49CF8CC2603248600AFC170 /* Alpha */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 36D22F503087EEC031CF0D02 /* Pods-MyMind-MyMindUITests.alpha.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
