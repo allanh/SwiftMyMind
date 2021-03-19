@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import RxSwift
 
 class SignInService: APIService {
     private let baseURL: String = {
@@ -19,4 +20,17 @@ class SignInService: APIService {
         var components: URLComponents = URLComponents(string: baseURL) ?? URLComponents()
         return components
     }()
+
+    func captcha() -> Single<CaptchaSession> {
+        var urlComponents = self.urlComponents
+        urlComponents.path = Endpoint().captcha
+        let request = dataRequest(urlComponents: urlComponents)
+        return request.map {
+            let response = try JSONDecoder().decode(Response<CaptchaSession>.self, from: $0)
+            guard let session = response.data else {
+                throw APIError.dataNotFoundError
+            }
+            return session
+        }.asSingle()
+    }
 }
