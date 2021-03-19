@@ -31,6 +31,24 @@ class SignInService: APIService {
                 throw APIError.dataNotFoundError
             }
             return session
-        }.asSingle()
+        }
+        .asSingle()
+    }
+
+    func signIn(info: SignInInfo) -> Single<UserSession> {
+        var urlComponents = self.urlComponents
+        urlComponents.path = Endpoint().signIn
+        guard let body = try? JSONEncoder().encode(info) else {
+            return Single.error(APIError.parseError)
+        }
+        let request = dataRequest(urlComponents: urlComponents, httpMethod: "POST", httpBody: body)
+        return request.map {
+            let response = try JSONDecoder().decode(Response<UserSession>.self, from: $0)
+            guard let session = response.data else {
+                throw APIError.dataNotFoundError
+            }
+            return session
+        }
+        .asSingle()
     }
 }
