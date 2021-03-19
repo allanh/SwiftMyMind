@@ -44,4 +44,14 @@ class CodableTests: XCTestCase {
             XCTAssertNotNil(image)
         }
     }
+
+    func test_Decode_UserSession() {
+        guard let data = cachedFileData(name: "user_session") else {
+            XCTFail()
+            return
+        }
+
+        let userSession = try? JSONDecoder().decode(Response<UserSession>.self, from: data).data
+        XCTAssertNotNil(userSession)
+    }
 }
