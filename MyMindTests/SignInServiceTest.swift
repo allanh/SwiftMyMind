@@ -6,6 +6,8 @@
 //
 
 import XCTest
+import RxBlocking
+@testable import MyMind
 
 class SignInServiceTest: XCTestCase {
 
@@ -17,16 +19,15 @@ class SignInServiceTest: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    func test_captcha_observable() {
+        let service = SignInService()
+        do {
+            let result = try service.captcha().toBlocking(timeout: 3).first()
+            XCTAssertNotNil(result)
+        } catch let error {
+            XCTFail(error.localizedDescription)
         }
+
     }
 
 }

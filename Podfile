@@ -12,6 +12,7 @@ target 'MyMind' do
   target 'MyMindTests' do
     inherit! :search_paths
     # Pods for testing
+    pod 'RxBlocking'
   end
 
   target 'MyMindUITests' do
