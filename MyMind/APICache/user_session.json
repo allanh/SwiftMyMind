@@ -1,0 +1,23 @@
+{
+    "data": {
+        "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9hcGktYWxwaGEtZG9zLnVkbnNob3BwaW5nLmNvbVwvYXBpXC9iYWNrZW5kXC9jb21tb25cL3YxXC9hdXRoXC9sb2dpbiIsImlhdCI6MTU2NjM1NDU2MiwiZXhwIjoxNTY4OTQ2NTYyLCJuYmYiOjE1NjYzNTQ1NjIsImp0aSI6InQwaWdndUZpRDF2NXZ5UUYiLCJzdWIiOjEsInBydiI6IjIxNjliNTZiY2I5NmVjNjRmMGMxYjUwM2MwMmVhZWIyOGJiOTQ3MjcifQ.ivUk2wf-txTzmPjyLkvzK_z_KRLuVWNakTt6bsWvPB8",
+        "customer": {
+            "customer_id": "1",
+            "customer_name": "客戶名稱"
+        },
+        "business_unit": {
+            "business_unit_id": "1",
+            "name": "事業體名稱"
+        },
+        "partner": {
+            "partner_id": "3",
+            "name": "商店名稱"
+        },
+        "employee": {
+            "employee_id": "1",
+            "name": "John"
+        }
+    },
+    "id": "c0e3128d809e08f3c5ad40493fa18f60",
+    "status": "SUCCESS"
+}
