@@ -22,6 +22,14 @@
 		A4793C682604423800AD280C /* SignInServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4793C672604423700AD280C /* SignInServiceTest.swift */; };
 		A4793C7A2604534100AD280C /* SignInInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4793C792604534100AD280C /* SignInInfo.swift */; };
 		A4793C7F2604573700AD280C /* UserSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4793C7E2604573700AD280C /* UserSession.swift */; };
+		A4793C9626047C8000AD280C /* NibOwnerLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4793C9526047C8000AD280C /* NibOwnerLoadable.swift */; };
+		A4793C9F26047DB900AD280C /* UIStoryboard+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4793C9E26047DB900AD280C /* UIStoryboard+.swift */; };
+		A4793CA72604873B00AD280C /* SignInRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4793CA62604873B00AD280C /* SignInRootView.swift */; };
+		A4793CAC260488E800AD280C /* Declarative.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4793CAB260488E800AD280C /* Declarative.swift */; };
+		A4793CB126048BB600AD280C /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4793CB026048BB600AD280C /* UIFont+.swift */; };
+		A4793CB626048EBA00AD280C /* ValidatableInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4793CB526048EBA00AD280C /* ValidatableInputView.swift */; };
+		A4793CBB260490A600AD280C /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4793CBA260490A600AD280C /* UIColor+.swift */; };
+		A4793CC02604A59C00AD280C /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4793CBF2604A59C00AD280C /* GradientView.swift */; };
 		A49CF8B6260301DE00AFC170 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49CF8B5260301DE00AFC170 /* Endpoint.swift */; };
 		A49CF8BB2603028C00AFC170 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49CF8BA2603028C00AFC170 /* APIService.swift */; };
 		A49CF8C0260306D200AFC170 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49CF8BF260306D200AFC170 /* APIError.swift */; };
@@ -78,6 +86,14 @@
 		A4793C792604534100AD280C /* SignInInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInInfo.swift; sourceTree = "<group>"; };
 		A4793C7E2604573700AD280C /* UserSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSession.swift; sourceTree = "<group>"; };
 		A4793C832604592000AD280C /* captcha_session copy.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "captcha_session copy.json"; sourceTree = "<group>"; };
+		A4793C9526047C8000AD280C /* NibOwnerLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibOwnerLoadable.swift; sourceTree = "<group>"; };
+		A4793C9E26047DB900AD280C /* UIStoryboard+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+.swift"; sourceTree = "<group>"; };
+		A4793CA62604873B00AD280C /* SignInRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInRootView.swift; sourceTree = "<group>"; };
+		A4793CAB260488E800AD280C /* Declarative.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Declarative.swift; sourceTree = "<group>"; };
+		A4793CB026048BB600AD280C /* UIFont+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+.swift"; sourceTree = "<group>"; };
+		A4793CB526048EBA00AD280C /* ValidatableInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatableInputView.swift; sourceTree = "<group>"; };
+		A4793CBA260490A600AD280C /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
+		A4793CBF2604A59C00AD280C /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		A49CF8B5260301DE00AFC170 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		A49CF8BA2603028C00AFC170 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		A49CF8BF260306D200AFC170 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
@@ -153,9 +169,11 @@
 		A44A5A6C25F9B0D200995823 /* MyMind */ = {
 			isa = PBXGroup;
 			children = (
+				A4793C9426047C6500AD280C /* Utilities */,
 				A49CF92E26034D1900AFC170 /* APICache */,
 				A49CF8AC2602FEB100AFC170 /* API */,
 				A4705B8C26020E4400B30CE6 /* Model */,
+				A4793C932604768200AD280C /* Sign In */,
 				A44A5A6D25F9B0D200995823 /* AppDelegate.swift */,
 				A44A5A6F25F9B0D200995823 /* SceneDelegate.swift */,
 				A44A5A7125F9B0D200995823 /* ViewController.swift */,
@@ -196,6 +214,36 @@
 				A4793C7E2604573700AD280C /* UserSession.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		A4793C932604768200AD280C /* Sign In */ = {
+			isa = PBXGroup;
+			children = (
+				A4793CA62604873B00AD280C /* SignInRootView.swift */,
+				A4793CB526048EBA00AD280C /* ValidatableInputView.swift */,
+				A4793CBF2604A59C00AD280C /* GradientView.swift */,
+			);
+			path = "Sign In";
+			sourceTree = "<group>";
+		};
+		A4793C9426047C6500AD280C /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				A4793C9D26047DA300AD280C /* Extensions */,
+				A4793C9526047C8000AD280C /* NibOwnerLoadable.swift */,
+				A4793CAB260488E800AD280C /* Declarative.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		A4793C9D26047DA300AD280C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				A4793C9E26047DB900AD280C /* UIStoryboard+.swift */,
+				A4793CB026048BB600AD280C /* UIFont+.swift */,
+				A4793CBA260490A600AD280C /* UIColor+.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		A49CF8AC2602FEB100AFC170 /* API */ = {
@@ -304,6 +352,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 1240;
 				LastUpgradeCheck = 1240;
+				ORGANIZATIONNAME = "United Digital Intelligence";
 				TargetAttributes = {
 					A44A5A6925F9B0D200995823 = {
 						CreatedOnToolsVersion = 12.4;
@@ -492,17 +541,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4793CC02604A59C00AD280C /* GradientView.swift in Sources */,
 				A49CF8C526030CEE00AFC170 /* SignInService.swift in Sources */,
+				A4793C9626047C8000AD280C /* NibOwnerLoadable.swift in Sources */,
 				A4793C7A2604534100AD280C /* SignInInfo.swift in Sources */,
 				A4705B9126020E5700B30CE6 /* Response.swift in Sources */,
+				A4793C9F26047DB900AD280C /* UIStoryboard+.swift in Sources */,
+				A4793CAC260488E800AD280C /* Declarative.swift in Sources */,
 				A49CF92A26034BEA00AFC170 /* CaptchaSession.swift in Sources */,
 				A49CF8BB2603028C00AFC170 /* APIService.swift in Sources */,
+				A4793CB126048BB600AD280C /* UIFont+.swift in Sources */,
 				A44A5A7225F9B0D200995823 /* ViewController.swift in Sources */,
 				A4793C7F2604573700AD280C /* UserSession.swift in Sources */,
 				A44A5A6E25F9B0D200995823 /* AppDelegate.swift in Sources */,
+				A4793CA72604873B00AD280C /* SignInRootView.swift in Sources */,
 				A49CF8C0260306D200AFC170 /* APIError.swift in Sources */,
 				A49CF8B6260301DE00AFC170 /* Endpoint.swift in Sources */,
+				A4793CB626048EBA00AD280C /* ValidatableInputView.swift in Sources */,
 				A44A5A7025F9B0D200995823 /* SceneDelegate.swift in Sources */,
+				A4793CBB260490A600AD280C /* UIColor+.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
