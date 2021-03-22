@@ -8,7 +8,6 @@
 import UIKit
 
 class SignInRootView: UIView {
-
     private let bannerImageView: UIImageView = UIImageView {
         let image = UIImage(named: "my_mind")
         $0.image = image
@@ -25,31 +24,65 @@ class SignInRootView: UIView {
 
     private let titleLabel: UILabel = UILabel {
         $0.font = UIFont.pingFangTCSemibold(ofSize: 16)
+        $0.text = "管理後台"
         $0.textColor = .white
         $0.backgroundColor = .clear
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
 
     let companyIDInputView: ValidatableInputView = ValidatableInputView {
+        $0.textField.placeholder = "企業編碼-5~8碼"
+        let image = UIImage(named: "company")
+        let containerView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 30, height: 30)))
+        let imageView = UIImageView(frame: CGRect(x: 8, y: containerView.frame.midY-7, width: 14, height: 14))
+        imageView.image = image
+        containerView.addSubview(imageView)
+        $0.textField.leftView = containerView
+        $0.textField.leftViewMode = .always
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
 
     let accountInputView: ValidatableInputView = ValidatableInputView {
+        $0.textField.placeholder = "使用者帳號-3~20碼"
+        let image = UIImage(named: "id")
+        let containerView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 30, height: 30)))
+        let imageView = UIImageView(frame: CGRect(x: 8, y: containerView.frame.midY-7, width: 14, height: 14))
+        imageView.image = image
+        containerView.addSubview(imageView)
+        $0.textField.leftView = containerView
+        $0.textField.leftViewMode = .always
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
 
     let passwordInputView: ValidatableInputView = ValidatableInputView {
+        $0.textField.placeholder = "密碼-6~20碼，英文字母需區分大小寫"
+        let image = UIImage(named: "lock")
+        let containerView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 30, height: 30)))
+        let imageView = UIImageView(frame: CGRect(x: 8, y: containerView.frame.midY-7, width: 14, height: 14))
+        imageView.image = image
+        containerView.addSubview(imageView)
+        $0.textField.leftView = containerView
+        $0.textField.leftViewMode = .always
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
 
     lazy var inputStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [companyIDInputView, accountInputView, passwordInputView])
         stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
         stackView.distribution = .fillEqually
         return stackView
     }()
 
     let captchaInputView: ValidatableInputView = ValidatableInputView {
+        $0.textField.placeholder = "驗證碼-6碼"
+        let image = UIImage(named: "security")
+        let containerView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 30, height: 30)))
+        let imageView = UIImageView(frame: CGRect(x: 8, y: containerView.frame.midY-7, width: 14, height: 14))
+        imageView.image = image
+        containerView.addSubview(imageView)
+        $0.textField.leftView = containerView
+        $0.textField.leftViewMode = .always
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
 
@@ -59,6 +92,8 @@ class SignInRootView: UIView {
 
     let reloadCaptchaButton: UIButton = UIButton {
         $0.translatesAutoresizingMaskIntoConstraints = false
+        let image = UIImage(named: "reload")
+        $0.setImage(image, for: .normal)
     }
 
     let signInButton: UIButton = UIButton {
@@ -66,23 +101,27 @@ class SignInRootView: UIView {
         $0.setTitle("登入", for: .normal)
         $0.titleLabel?.font = UIFont.pingFangTCSemibold(ofSize: 16)
         $0.backgroundColor = UIColor(hex: "ff7d2c")
+        $0.layer.cornerRadius = 4
     }
 
     let resetPasswordButton: UIButton = UIButton {
-        $0.setTitle("忘記密碼?", for: .normal)
         let attributedString = NSAttributedString(
             string: "忘記密碼?",
             attributes: [
                 NSAttributedString.Key.font: UIFont.pingFangTCRegular(ofSize: 14),
                 NSAttributedString.Key.foregroundColor: UIColor(hex: "ff7d2c"),
-                NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single
+                NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue,
+                NSAttributedString.Key.underlineColor: UIColor(hex: "ff7d2c")
             ])
+        $0.setAttributedTitle(attributedString, for: .normal)
+        $0.translatesAutoresizingMaskIntoConstraints = false
     }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         constructViewHeirachy()
         activateConstraints()
+        backgroundColor = .white
     }
 
     required init?(coder: NSCoder) {
@@ -105,6 +144,7 @@ class SignInRootView: UIView {
         activateConstraintsBannerImageView()
         activateConstraintsGradientLabel()
         activateConstraintsTitleLabel()
+        activateConstraintsStackView()
         activateConstriantsInputView()
         activateConstraintsCaptchaInputView()
         activateConstraintsCaptchaImageView()
@@ -116,13 +156,13 @@ class SignInRootView: UIView {
 // MARK: - Layout
 extension SignInRootView {
     func activateConstraintsBannerImageView() {
-        let top = bannerImageView.topAnchor.constraint(equalTo: topAnchor, constant: 30)
+        let centerY = bannerImageView.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -250)
         let centerX = bannerImageView.centerXAnchor.constraint(equalTo: centerXAnchor)
         let width = bannerImageView.widthAnchor.constraint(equalToConstant: 173)
         let height = bannerImageView.heightAnchor.constraint(equalToConstant: 72)
 
         NSLayoutConstraint.activate([
-            top, centerX, width, height
+            centerY, centerX, width, height
         ])
     }
 
@@ -147,6 +187,7 @@ extension SignInRootView {
     }
 
     func activateConstraintsStackView() {
+//        let top = inputStackView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 50)
         let centerY = inputStackView.centerYAnchor.constraint(equalTo: centerYAnchor)
         let leading = inputStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 50)
         let trailing = inputStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -50)
@@ -158,10 +199,12 @@ extension SignInRootView {
 
     func activateConstriantsInputView() {
         companyIDInputView.heightAnchor.constraint(equalToConstant: 52).isActive = true
+        accountInputView.heightAnchor.constraint(equalToConstant: 52).isActive = true
+        passwordInputView.heightAnchor.constraint(equalToConstant: 52).isActive = true
     }
 
     func activateConstraintsCaptchaInputView() {
-        let top = captchaInputView.topAnchor.constraint(equalTo: inputStackView.bottomAnchor, constant: 30)
+        let top = captchaInputView.topAnchor.constraint(equalTo: inputStackView.bottomAnchor)
         let leading = captchaInputView.leadingAnchor.constraint(equalTo: inputStackView.leadingAnchor)
         let trailing = captchaInputView.trailingAnchor.constraint(equalTo: captchaImageView.leadingAnchor, constant: -15)
         let height = captchaInputView.heightAnchor.constraint(equalToConstant: 52)

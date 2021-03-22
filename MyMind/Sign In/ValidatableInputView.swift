@@ -11,6 +11,7 @@ class ValidatableInputView: UIView {
 
     let textField: UITextField = UITextField {
         $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.layer.cornerRadius = 4
         $0.borderStyle = .none
         $0.layer.borderWidth = 1
         $0.layer.borderColor = UIColor(hex: "cccccc").cgColor

@@ -32,6 +32,16 @@ class GradientView: UIView {
         gradient.colors = [gradientEndColor.cgColor, gradientStartColor.cgColor]
         gradient.startPoint = CGPoint(x: 0, y: 0.5)
         gradient.endPoint = CGPoint(x: 1, y: 0.5)
+
+        let cornerRadius = layer.cornerRadius
+        let maskedCorners = layer.maskedCorners
+        let roundingCorners = UIRectCorner(rawValue: maskedCorners.rawValue)
+        let shapeLayer = CAShapeLayer()
+        let path = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: roundingCorners, cornerRadii: CGSize(width: cornerRadius, height: cornerRadius))
+        shapeLayer.path = path.cgPath
+        shapeLayer.fillColor = UIColor.black.cgColor
+        gradient.mask = shapeLayer
+
         if gradient.superlayer == nil {
             layer.insertSublayer(gradient, at: 0)
         }

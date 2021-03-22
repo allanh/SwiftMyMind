@@ -30,6 +30,7 @@
 		A4793CB626048EBA00AD280C /* ValidatableInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4793CB526048EBA00AD280C /* ValidatableInputView.swift */; };
 		A4793CBB260490A600AD280C /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4793CBA260490A600AD280C /* UIColor+.swift */; };
 		A4793CC02604A59C00AD280C /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4793CBF2604A59C00AD280C /* GradientView.swift */; };
+		A48389AF2608360A0044C09E /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48389AE2608360A0044C09E /* SignInViewController.swift */; };
 		A49CF8B6260301DE00AFC170 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49CF8B5260301DE00AFC170 /* Endpoint.swift */; };
 		A49CF8BB2603028C00AFC170 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49CF8BA2603028C00AFC170 /* APIService.swift */; };
 		A49CF8C0260306D200AFC170 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49CF8BF260306D200AFC170 /* APIError.swift */; };
@@ -94,6 +95,7 @@
 		A4793CB526048EBA00AD280C /* ValidatableInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatableInputView.swift; sourceTree = "<group>"; };
 		A4793CBA260490A600AD280C /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		A4793CBF2604A59C00AD280C /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		A48389AE2608360A0044C09E /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		A49CF8B5260301DE00AFC170 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		A49CF8BA2603028C00AFC170 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		A49CF8BF260306D200AFC170 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
@@ -222,6 +224,7 @@
 				A4793CA62604873B00AD280C /* SignInRootView.swift */,
 				A4793CB526048EBA00AD280C /* ValidatableInputView.swift */,
 				A4793CBF2604A59C00AD280C /* GradientView.swift */,
+				A48389AE2608360A0044C09E /* SignInViewController.swift */,
 			);
 			path = "Sign In";
 			sourceTree = "<group>";
@@ -549,6 +552,7 @@
 				A4793C9F26047DB900AD280C /* UIStoryboard+.swift in Sources */,
 				A4793CAC260488E800AD280C /* Declarative.swift in Sources */,
 				A49CF92A26034BEA00AFC170 /* CaptchaSession.swift in Sources */,
+				A48389AF2608360A0044C09E /* SignInViewController.swift in Sources */,
 				A49CF8BB2603028C00AFC170 /* APIService.swift in Sources */,
 				A4793CB126048BB600AD280C /* UIFont+.swift in Sources */,
 				A44A5A7225F9B0D200995823 /* ViewController.swift in Sources */,
