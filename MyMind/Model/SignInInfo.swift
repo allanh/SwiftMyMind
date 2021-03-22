@@ -19,6 +19,14 @@ struct SignInInfo {
     var password: String
     var captchaKey: String
     var captchaValue: String
+
+    init(storeID: String = "", account: String = "", password: String = "", captchaKey: String = "", captchaValue: String = "") {
+        self.storeID = storeID
+        self.account = account
+        self.password = password
+        self.captchaKey = captchaKey
+        self.captchaValue = captchaValue
+    }
 }
 extension SignInInfo: Encodable {
     func encode(to encoder: Encoder) throws {

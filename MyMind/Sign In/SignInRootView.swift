@@ -6,8 +6,13 @@
 //
 
 import UIKit
+import RxSwift
 
 class SignInRootView: UIView {
+    let viewModel: SignInViewModel
+    var hierarchyNotReady: Bool = true
+    let bag: DisposeBag = DisposeBag()
+
     private let bannerImageView: UIImageView = UIImageView {
         let image = UIImage(named: "my_mind")
         $0.image = image
@@ -117,18 +122,29 @@ class SignInRootView: UIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
 
-    override init(frame: CGRect) {
+    init(frame: CGRect = .zero, viewModel: SignInViewModel) {
+        self.viewModel = viewModel
         super.init(frame: frame)
-        constructViewHeirachy()
-        activateConstraints()
-        backgroundColor = .white
+        bindToViewModel()
+        bindViewModelToViews()
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func constructViewHeirachy() {
+    override func didMoveToWindow() {
+        super.didMoveToWindow()
+        guard hierarchyNotReady else {
+          return
+        }
+        constructViewHierarchy()
+        activateConstraints()
+        backgroundColor = .white
+        hierarchyNotReady = false
+    }
+
+    func constructViewHierarchy() {
         addSubview(bannerImageView)
         addSubview(titleGradientView)
         titleGradientView.addSubview(titleLabel)
@@ -151,6 +167,27 @@ class SignInRootView: UIView {
         activateConstraintsReloadCaptchaButton()
         activateConstraintsSignInButton()
         activateConstraintsResetPasswordButton()
+    }
+
+    func bindToViewModel() {
+        Observable.combineLatest(
+            companyIDInputView.textField.rx.text.orEmpty,
+            accountInputView.textField.rx.text.orEmpty,
+            passwordInputView.textField.rx.text.orEmpty,
+            captchaInputView.textField.rx.text.orEmpty
+        ) { storeID, account, password, captcha in
+            (storeID, account, password, captcha)
+        }
+        .subscribe(onNext: { [unowned self] in
+            self.viewModel.signInInfo.storeID = $0.0
+            self.viewModel.signInInfo.account = $0.1
+            self.viewModel.signInInfo.password = $0.2
+            self.viewModel.signInInfo.captchaValue = $0.3
+        })
+        .disposed(by: bag)
+
+        signInButton.addTarget(viewModel, action: #selector(SignInViewModel.signIn), for: .touchUpInside)
+        reloadCaptchaButton.addTarget(viewModel, action: #selector(SignInViewModel.captcha), for: .touchUpInside)
     }
 }
 // MARK: - Layout
@@ -187,7 +224,6 @@ extension SignInRootView {
     }
 
     func activateConstraintsStackView() {
-//        let top = inputStackView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 50)
         let centerY = inputStackView.centerYAnchor.constraint(equalTo: centerYAnchor)
         let leading = inputStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 50)
         let trailing = inputStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -50)
@@ -256,5 +292,31 @@ extension SignInRootView {
         NSLayoutConstraint.activate([
             top, leading, width, height
         ])
+    }
+}
+// MARK: - Behaviors
+extension SignInRootView {
+    func bindViewModelToViews() {
+        viewModel.signInButtonEnable
+            .asDriver(onErrorJustReturn: true)
+            .drive(signInButton.rx.isEnabled)
+            .disposed(by: bag)
+
+        viewModel.reloadButtonEnable
+            .asDriver(onErrorJustReturn: true)
+            .drive(reloadCaptchaButton.rx.isEnabled)
+            .disposed(by: bag)
+
+        viewModel.captchaSession
+            .subscribe(on: MainScheduler.instance)
+            .do(onNext: { print($0.key) })
+            .map { session -> UIImage? in
+                guard let data = session.imageData else {
+                    return nil
+                }
+                return UIImage(data: data)
+            }
+            .bind(to: captchaImageView.rx.image)
+            .disposed(by: bag)
     }
 }

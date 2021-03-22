@@ -10,7 +10,27 @@ import UIKit
 
 class SignInViewController: UIViewController {
 
+    let viewModel: SignInViewModel
+
+    init(viewModel: SignInViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     override func loadView() {
-        view = SignInRootView()
+        view = SignInRootView(viewModel: viewModel)
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        viewModel.captcha()
+    }
+
+    func observerViewModel() {
+
     }
 }
