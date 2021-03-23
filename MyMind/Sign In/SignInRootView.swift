@@ -13,6 +13,16 @@ class SignInRootView: UIView {
     var hierarchyNotReady: Bool = true
     let bag: DisposeBag = DisposeBag()
 
+    private let scrollView: UIScrollView = UIScrollView {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.showsVerticalScrollIndicator = false
+    }
+
+    private let contentView: UIView = UIView {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.backgroundColor = .white
+    }
+
     private let bannerImageView: UIImageView = UIImageView {
         let image = UIImage(named: "my_mind")
         $0.image = image
@@ -121,7 +131,7 @@ class SignInRootView: UIView {
         $0.setAttributedTitle(attributedString, for: .normal)
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
-
+    // MARK: - Methods
     init(frame: CGRect = .zero, viewModel: SignInViewModel) {
         self.viewModel = viewModel
         super.init(frame: frame)
@@ -145,20 +155,24 @@ class SignInRootView: UIView {
     }
 
     func constructViewHierarchy() {
-        addSubview(bannerImageView)
-        addSubview(titleGradientView)
+        scrollView.addSubview(contentView)
+        contentView.addSubview(bannerImageView)
+        contentView.addSubview(titleGradientView)
         titleGradientView.addSubview(titleLabel)
-        addSubview(inputStackView)
-        addSubview(captchaInputView)
-        addSubview(captchaImageView)
-        addSubview(reloadCaptchaButton)
-        addSubview(signInButton)
-        addSubview(resetPasswordButton)
+        contentView.addSubview(inputStackView)
+        contentView.addSubview(captchaInputView)
+        contentView.addSubview(captchaImageView)
+        contentView.addSubview(reloadCaptchaButton)
+        contentView.addSubview(signInButton)
+        contentView.addSubview(resetPasswordButton)
+        addSubview(scrollView)
     }
 
     func activateConstraints() {
+        activateConstraintsScrollView()
+        activateConstraintsContentView()
         activateConstraintsBannerImageView()
-        activateConstraintsGradientLabel()
+        activateConstraintsGradientView()
         activateConstraintsTitleLabel()
         activateConstraintsStackView()
         activateConstriantsInputView()
@@ -167,6 +181,26 @@ class SignInRootView: UIView {
         activateConstraintsReloadCaptchaButton()
         activateConstraintsSignInButton()
         activateConstraintsResetPasswordButton()
+    }
+
+    func resetScrollViewContentInsets() {
+        let scrollViewBounds = scrollView.bounds
+        let contentViewBounds = contentView.bounds
+
+        var insets = UIEdgeInsets.zero
+        insets.top = scrollViewBounds.height / 2.0
+        insets.top -= contentViewBounds.height / 2.0
+
+        insets.bottom = scrollViewBounds.height / 2.0
+        insets.bottom -= contentViewBounds.height / 2.0
+
+        scrollView.contentInset = insets
+    }
+
+    func moveContent(forKeyboardFrame keyboardFrame: CGRect) {
+        var insets = scrollView.contentInset
+        insets.bottom = keyboardFrame.height
+        scrollView.contentInset = insets
     }
 
     func bindToViewModel() {
@@ -192,111 +226,180 @@ class SignInRootView: UIView {
 }
 // MARK: - Layout
 extension SignInRootView {
-    func activateConstraintsBannerImageView() {
-        let centerY = bannerImageView.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -250)
-        let centerX = bannerImageView.centerXAnchor.constraint(equalTo: centerXAnchor)
-        let width = bannerImageView.widthAnchor.constraint(equalToConstant: 173)
-        let height = bannerImageView.heightAnchor.constraint(equalToConstant: 72)
+    private func activateConstraintsScrollView() {
+        let top = scrollView.topAnchor
+            .constraint(equalTo: safeAreaLayoutGuide.topAnchor)
+        let bottom = scrollView.bottomAnchor
+            .constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
+        let leading = scrollView.leadingAnchor
+            .constraint(equalTo: leadingAnchor)
+        let trailing = scrollView.trailingAnchor
+            .constraint(equalTo: trailingAnchor)
 
         NSLayoutConstraint.activate([
-            centerY, centerX, width, height
+            top, bottom, leading, trailing
         ])
     }
 
-    func activateConstraintsGradientLabel() {
-        let top = titleGradientView.topAnchor.constraint(equalTo: bannerImageView.bottomAnchor, constant: 30)
-        let leading = titleGradientView.leadingAnchor.constraint(equalTo: leadingAnchor)
-        let width = titleGradientView.widthAnchor.constraint(equalToConstant: 126)
-        let height = titleGradientView.heightAnchor.constraint(equalToConstant: 30)
+    private func activateConstraintsContentView() {
+        let width = contentView.widthAnchor
+            .constraint(equalTo: scrollView.widthAnchor)
+        let top = contentView.topAnchor
+            .constraint(equalTo: scrollView.topAnchor)
+        let bottom = contentView.bottomAnchor
+            .constraint(equalTo: scrollView.bottomAnchor)
+        let leading = contentView.leadingAnchor
+            .constraint(equalTo: scrollView.leadingAnchor)
+        let trailing = contentView.trailingAnchor
+            .constraint(equalTo: scrollView.trailingAnchor)
+
+        NSLayoutConstraint.activate([
+            width, top, bottom, leading, trailing
+        ])
+    }
+    private func activateConstraintsBannerImageView() {
+        let top = bannerImageView.topAnchor
+            .constraint(equalTo: contentView.topAnchor)
+        let centerX = bannerImageView.centerXAnchor
+            .constraint(equalTo: contentView.centerXAnchor)
+        let width = bannerImageView.widthAnchor
+            .constraint(equalToConstant: 173)
+        let height = bannerImageView.heightAnchor
+            .constraint(equalToConstant: 72)
+
+        NSLayoutConstraint.activate([
+            top, centerX, width, height
+        ])
+    }
+
+    private func activateConstraintsGradientView() {
+        let top = titleGradientView.topAnchor
+            .constraint(equalTo: bannerImageView.bottomAnchor, constant: 30)
+        let leading = titleGradientView.leadingAnchor
+            .constraint(equalTo: contentView.leadingAnchor)
+        let width = titleGradientView.widthAnchor
+            .constraint(equalToConstant: 126)
+        let height = titleGradientView.heightAnchor
+            .constraint(equalToConstant: 30)
 
         NSLayoutConstraint.activate([
             top, leading, width, height
         ])
     }
 
-    func activateConstraintsTitleLabel() {
-        let centerY = titleLabel.centerYAnchor.constraint(equalTo: titleGradientView.centerYAnchor)
-        let trailing = titleLabel.trailingAnchor.constraint(equalTo: titleGradientView.trailingAnchor, constant: -12)
+    private func activateConstraintsTitleLabel() {
+        let centerY = titleLabel.centerYAnchor
+            .constraint(equalTo: titleGradientView.centerYAnchor)
+        let trailing = titleLabel.trailingAnchor
+            .constraint(equalTo: titleGradientView.trailingAnchor, constant: -12)
 
         NSLayoutConstraint.activate([
             centerY, trailing
         ])
     }
 
-    func activateConstraintsStackView() {
-        let centerY = inputStackView.centerYAnchor.constraint(equalTo: centerYAnchor)
-        let leading = inputStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 50)
-        let trailing = inputStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -50)
+    private func activateConstraintsStackView() {
+        let top = inputStackView.topAnchor
+            .constraint(equalTo: titleGradientView.bottomAnchor, constant: 30)
+        let leading = inputStackView.leadingAnchor
+            .constraint(equalTo: contentView.leadingAnchor, constant: 50)
+        let trailing = inputStackView.trailingAnchor
+            .constraint(equalTo: contentView.trailingAnchor, constant: -50)
 
         NSLayoutConstraint.activate([
-            centerY, leading, trailing
+            top, leading, trailing
         ])
     }
 
-    func activateConstriantsInputView() {
-        companyIDInputView.heightAnchor.constraint(equalToConstant: 52).isActive = true
-        accountInputView.heightAnchor.constraint(equalToConstant: 52).isActive = true
-        passwordInputView.heightAnchor.constraint(equalToConstant: 52).isActive = true
+    private func activateConstriantsInputView() {
+        companyIDInputView.heightAnchor
+            .constraint(equalToConstant: 52).isActive = true
+        accountInputView.heightAnchor
+            .constraint(equalToConstant: 52).isActive = true
+        passwordInputView.heightAnchor
+            .constraint(equalToConstant: 52).isActive = true
     }
 
-    func activateConstraintsCaptchaInputView() {
-        let top = captchaInputView.topAnchor.constraint(equalTo: inputStackView.bottomAnchor)
-        let leading = captchaInputView.leadingAnchor.constraint(equalTo: inputStackView.leadingAnchor)
-        let trailing = captchaInputView.trailingAnchor.constraint(equalTo: captchaImageView.leadingAnchor, constant: -15)
-        let height = captchaInputView.heightAnchor.constraint(equalToConstant: 52)
+    private func activateConstraintsCaptchaInputView() {
+        let top = captchaInputView.topAnchor
+            .constraint(equalTo: inputStackView.bottomAnchor)
+        let leading = captchaInputView.leadingAnchor
+            .constraint(equalTo: inputStackView.leadingAnchor)
+        let trailing = captchaInputView.trailingAnchor
+            .constraint(equalTo: captchaImageView.leadingAnchor, constant: -15)
+        let height = captchaInputView.heightAnchor
+            .constraint(equalToConstant: 52)
 
         NSLayoutConstraint.activate([
             top, leading, trailing, height
         ])
     }
 
-    func activateConstraintsCaptchaImageView() {
-        let top = captchaImageView.topAnchor.constraint(equalTo: captchaInputView.topAnchor)
-        let width = captchaImageView.widthAnchor.constraint(equalToConstant: 115)
-        let height = captchaImageView.heightAnchor.constraint(equalToConstant: 32)
-        let trailing = captchaImageView.trailingAnchor.constraint(equalTo: reloadCaptchaButton.leadingAnchor)
+    private func activateConstraintsCaptchaImageView() {
+        let top = captchaImageView.topAnchor
+            .constraint(equalTo: captchaInputView.topAnchor)
+        let width = captchaImageView.widthAnchor
+            .constraint(equalToConstant: 115)
+        let height = captchaImageView.heightAnchor
+            .constraint(equalToConstant: 32)
+        let trailing = captchaImageView.trailingAnchor
+            .constraint(equalTo: reloadCaptchaButton.leadingAnchor)
 
         NSLayoutConstraint.activate([
             top, width, height, trailing
         ])
     }
 
-    func activateConstraintsReloadCaptchaButton() {
-        let trailing = reloadCaptchaButton.trailingAnchor.constraint(equalTo: inputStackView.trailingAnchor)
-        let centerY = reloadCaptchaButton.centerYAnchor.constraint(equalTo: captchaImageView.centerYAnchor)
-        let width = reloadCaptchaButton.widthAnchor.constraint(equalToConstant: 20)
-        let height = reloadCaptchaButton.heightAnchor.constraint(equalTo: reloadCaptchaButton.heightAnchor)
+    private func activateConstraintsReloadCaptchaButton() {
+        let trailing = reloadCaptchaButton.trailingAnchor
+            .constraint(equalTo: inputStackView.trailingAnchor)
+        let centerY = reloadCaptchaButton.centerYAnchor
+            .constraint(equalTo: captchaImageView.centerYAnchor)
+        let width = reloadCaptchaButton.widthAnchor
+            .constraint(equalToConstant: 20)
+        let height = reloadCaptchaButton.heightAnchor
+            .constraint(equalTo: reloadCaptchaButton.heightAnchor)
 
         NSLayoutConstraint.activate([
             trailing, centerY, width, height
         ])
     }
 
-    func activateConstraintsSignInButton() {
-        let top = signInButton.topAnchor.constraint(equalTo: captchaInputView.bottomAnchor)
-        let leading = signInButton.leadingAnchor.constraint(equalTo: inputStackView.leadingAnchor)
-        let trailing = signInButton.trailingAnchor.constraint(equalTo: inputStackView.trailingAnchor)
-        let height = signInButton.heightAnchor.constraint(equalToConstant: 40)
+    private func activateConstraintsSignInButton() {
+        let top = signInButton.topAnchor
+            .constraint(equalTo: captchaInputView.bottomAnchor)
+        let leading = signInButton.leadingAnchor
+            .constraint(equalTo: inputStackView.leadingAnchor)
+        let trailing = signInButton.trailingAnchor
+            .constraint(equalTo: inputStackView.trailingAnchor)
+        let height = signInButton.heightAnchor
+            .constraint(equalToConstant: 40)
 
         NSLayoutConstraint.activate([
             top, leading, trailing, height
         ])
     }
 
-    func activateConstraintsResetPasswordButton() {
-        let top = resetPasswordButton.topAnchor.constraint(equalTo: signInButton.bottomAnchor, constant: 20)
-        let leading = resetPasswordButton.leadingAnchor.constraint(equalTo: inputStackView.leadingAnchor)
-        let width = resetPasswordButton.widthAnchor.constraint(equalToConstant: 64)
-        let height = resetPasswordButton.heightAnchor.constraint(equalToConstant: 24)
-
+    private func activateConstraintsResetPasswordButton() {
+        let top = resetPasswordButton.topAnchor
+            .constraint(equalTo: signInButton.bottomAnchor, constant: 20)
+        let leading = resetPasswordButton.leadingAnchor
+            .constraint(equalTo: inputStackView.leadingAnchor)
+        let width = resetPasswordButton.widthAnchor
+            .constraint(equalToConstant: 64)
+        let height = resetPasswordButton.heightAnchor
+            .constraint(equalToConstant: 24)
+        let bottom = contentView.bottomAnchor
+            .constraint(equalTo: resetPasswordButton.bottomAnchor)
+        
         NSLayoutConstraint.activate([
-            top, leading, width, height
+            top, leading, width, height, bottom
         ])
     }
 }
 // MARK: - Behaviors
 extension SignInRootView {
-    func bindViewModelToViews() {
+    private func bindViewModelToViews() {
         viewModel.signInButtonEnable
             .asDriver(onErrorJustReturn: true)
             .drive(signInButton.rx.isEnabled)
