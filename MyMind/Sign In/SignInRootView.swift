@@ -7,6 +7,7 @@
 
 import UIKit
 import RxSwift
+import NVActivityIndicatorView
 
 class SignInRootView: UIView {
     let viewModel: SignInViewModel
@@ -45,7 +46,7 @@ class SignInRootView: UIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
 
-    let companyIDInputView: ValidatableInputView = ValidatableInputView {
+    private let storeIDInputView: ValidatableInputView = ValidatableInputView {
         $0.textField.placeholder = "企業編碼-5~8碼"
         let image = UIImage(named: "company")
         let containerView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 30, height: 30)))
@@ -57,7 +58,7 @@ class SignInRootView: UIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
 
-    let accountInputView: ValidatableInputView = ValidatableInputView {
+    private let accountInputView: ValidatableInputView = ValidatableInputView {
         $0.textField.placeholder = "使用者帳號-3~20碼"
         let image = UIImage(named: "id")
         let containerView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 30, height: 30)))
@@ -69,7 +70,7 @@ class SignInRootView: UIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
 
-    let passwordInputView: ValidatableInputView = ValidatableInputView {
+    private let passwordInputView: ValidatableInputView = ValidatableInputView {
         $0.textField.placeholder = "密碼-6~20碼，英文字母需區分大小寫"
         let image = UIImage(named: "lock")
         let containerView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 30, height: 30)))
@@ -81,15 +82,23 @@ class SignInRootView: UIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
 
-    lazy var inputStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [companyIDInputView, accountInputView, passwordInputView])
+    private lazy var inputStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [storeIDInputView, accountInputView, passwordInputView])
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.distribution = .fillEqually
         return stackView
     }()
 
-    let captchaInputView: ValidatableInputView = ValidatableInputView {
+    private let rememberAccountButton: UIButton = UIButton {
+        $0.setImage(UIImage(named: "unchecked"), for: .normal)
+        $0.setTitle(" 記住帳號", for: .normal)
+        $0.titleLabel?.font = UIFont.pingFangTCRegular(ofSize: 14)
+        $0.setTitleColor(UIColor(hex: "545454"), for: .normal)
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+
+    private let captchaInputView: ValidatableInputView = ValidatableInputView {
         $0.textField.placeholder = "驗證碼-6碼"
         let image = UIImage(named: "security")
         let containerView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 30, height: 30)))
@@ -105,6 +114,15 @@ class SignInRootView: UIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
 
+    let captchaActivityIndicatorView: NVActivityIndicatorView = {
+        let indicator = NVActivityIndicatorView(
+            frame: .zero,
+            type: .ballSpinFadeLoader,
+            color: UIColor(hex: "043458"))
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        return indicator
+    }()
+
     let reloadCaptchaButton: UIButton = UIButton {
         $0.translatesAutoresizingMaskIntoConstraints = false
         let image = UIImage(named: "reload")
@@ -114,6 +132,8 @@ class SignInRootView: UIView {
     let signInButton: UIButton = UIButton {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.setTitle("登入", for: .normal)
+        $0.setTitleColor(UIColor.white, for: .normal)
+        $0.setTitleColor(UIColor(hex: "b4b4b4"), for: .disabled)
         $0.titleLabel?.font = UIFont.pingFangTCSemibold(ofSize: 16)
         $0.backgroundColor = UIColor(hex: "ff7d2c")
         $0.layer.cornerRadius = 4
@@ -154,33 +174,68 @@ class SignInRootView: UIView {
         hierarchyNotReady = false
     }
 
-    func constructViewHierarchy() {
+    private func constructViewHierarchy() {
         scrollView.addSubview(contentView)
         contentView.addSubview(bannerImageView)
         contentView.addSubview(titleGradientView)
         titleGradientView.addSubview(titleLabel)
         contentView.addSubview(inputStackView)
+        contentView.addSubview(rememberAccountButton)
         contentView.addSubview(captchaInputView)
         contentView.addSubview(captchaImageView)
+        contentView.addSubview(captchaActivityIndicatorView)
         contentView.addSubview(reloadCaptchaButton)
         contentView.addSubview(signInButton)
         contentView.addSubview(resetPasswordButton)
         addSubview(scrollView)
     }
 
-    func activateConstraints() {
+    private func activateConstraints() {
         activateConstraintsScrollView()
         activateConstraintsContentView()
         activateConstraintsBannerImageView()
         activateConstraintsGradientView()
         activateConstraintsTitleLabel()
         activateConstraintsStackView()
-        activateConstriantsInputView()
+        activateConstraintsInputView()
+        activateConstraintsRememberPasswordButton()
+        activateConstraintsResetPasswordButton()
         activateConstraintsCaptchaInputView()
         activateConstraintsCaptchaImageView()
+        activateConstraintsCaptchaActivityIndicatorView()
         activateConstraintsReloadCaptchaButton()
         activateConstraintsSignInButton()
-        activateConstraintsResetPasswordButton()
+    }
+
+    private func bindToViewModel() {
+        Observable.combineLatest(
+            storeIDInputView.textField.rx.text.orEmpty,
+            accountInputView.textField.rx.text.orEmpty,
+            passwordInputView.textField.rx.text.orEmpty,
+            captchaInputView.textField.rx.text.orEmpty
+        ) { storeID, account, password, captcha in
+            (storeID, account, password, captcha)
+        }
+        .subscribe(onNext: { [unowned self] in
+            self.viewModel.signInInfo.storeID = $0.0
+            self.viewModel.signInInfo.account = $0.1
+            self.viewModel.signInInfo.password = $0.2
+            self.viewModel.signInInfo.captchaValue = $0.3
+        })
+        .disposed(by: bag)
+
+        rememberAccountButton.rx.tap
+//            .do(onNext: { [unowned self] in
+//                self.rememberAccountButton.isSelected.toggle()
+//            })
+            .map { [unowned self] in
+                !self.rememberAccountButton.isSelected
+            }
+            .bind(to: viewModel.shouldRememberAccount)
+            .disposed(by: bag)
+
+        signInButton.addTarget(viewModel, action: #selector(SignInViewModel.signIn), for: .touchUpInside)
+        reloadCaptchaButton.addTarget(viewModel, action: #selector(SignInViewModel.captcha), for: .touchUpInside)
     }
 
     func resetScrollViewContentInsets() {
@@ -201,27 +256,6 @@ class SignInRootView: UIView {
         var insets = scrollView.contentInset
         insets.bottom = keyboardFrame.height
         scrollView.contentInset = insets
-    }
-
-    func bindToViewModel() {
-        Observable.combineLatest(
-            companyIDInputView.textField.rx.text.orEmpty,
-            accountInputView.textField.rx.text.orEmpty,
-            passwordInputView.textField.rx.text.orEmpty,
-            captchaInputView.textField.rx.text.orEmpty
-        ) { storeID, account, password, captcha in
-            (storeID, account, password, captcha)
-        }
-        .subscribe(onNext: { [unowned self] in
-            self.viewModel.signInInfo.storeID = $0.0
-            self.viewModel.signInInfo.account = $0.1
-            self.viewModel.signInInfo.password = $0.2
-            self.viewModel.signInInfo.captchaValue = $0.3
-        })
-        .disposed(by: bag)
-
-        signInButton.addTarget(viewModel, action: #selector(SignInViewModel.signIn), for: .touchUpInside)
-        reloadCaptchaButton.addTarget(viewModel, action: #selector(SignInViewModel.captcha), for: .touchUpInside)
     }
 }
 // MARK: - Layout
@@ -311,8 +345,8 @@ extension SignInRootView {
         ])
     }
 
-    private func activateConstriantsInputView() {
-        companyIDInputView.heightAnchor
+    private func activateConstraintsInputView() {
+        storeIDInputView.heightAnchor
             .constraint(equalToConstant: 52).isActive = true
         accountInputView.heightAnchor
             .constraint(equalToConstant: 52).isActive = true
@@ -320,9 +354,39 @@ extension SignInRootView {
             .constraint(equalToConstant: 52).isActive = true
     }
 
+    private func activateConstraintsRememberPasswordButton() {
+        let top = rememberAccountButton.topAnchor
+            .constraint(equalTo: inputStackView.bottomAnchor)
+        let leading = rememberAccountButton.leadingAnchor
+            .constraint(equalTo: inputStackView.leadingAnchor)
+        let width = rememberAccountButton.widthAnchor
+            .constraint(equalToConstant: 90)
+        let height = rememberAccountButton.heightAnchor
+            .constraint(equalToConstant: 20)
+
+        NSLayoutConstraint.activate([
+            top, leading, width, height
+        ])
+    }
+
+    private func activateConstraintsResetPasswordButton() {
+        let top = resetPasswordButton.topAnchor
+            .constraint(equalTo: rememberAccountButton.topAnchor)
+        let trailing = resetPasswordButton.trailingAnchor
+            .constraint(equalTo: inputStackView.trailingAnchor)
+        let width = resetPasswordButton.widthAnchor
+            .constraint(equalToConstant: 64)
+        let height = resetPasswordButton.heightAnchor
+            .constraint(equalToConstant: 20)
+
+        NSLayoutConstraint.activate([
+            top, trailing, width, height
+        ])
+    }
+
     private func activateConstraintsCaptchaInputView() {
         let top = captchaInputView.topAnchor
-            .constraint(equalTo: inputStackView.bottomAnchor)
+            .constraint(equalTo: rememberAccountButton.bottomAnchor, constant: 20)
         let leading = captchaInputView.leadingAnchor
             .constraint(equalTo: inputStackView.leadingAnchor)
         let trailing = captchaInputView.trailingAnchor
@@ -350,6 +414,21 @@ extension SignInRootView {
         ])
     }
 
+    private func activateConstraintsCaptchaActivityIndicatorView() {
+        let centerX = captchaActivityIndicatorView.centerXAnchor
+            .constraint(equalTo: captchaImageView.centerXAnchor)
+        let centerY = captchaActivityIndicatorView.centerYAnchor
+            .constraint(equalTo: captchaImageView.centerYAnchor)
+        let width = captchaActivityIndicatorView.widthAnchor
+            .constraint(equalToConstant: 25)
+        let height = captchaActivityIndicatorView.heightAnchor
+            .constraint(equalTo: captchaActivityIndicatorView.widthAnchor)
+
+        NSLayoutConstraint.activate([
+            centerX, centerY, width, height
+        ])
+    }
+
     private func activateConstraintsReloadCaptchaButton() {
         let trailing = reloadCaptchaButton.trailingAnchor
             .constraint(equalTo: inputStackView.trailingAnchor)
@@ -374,42 +453,68 @@ extension SignInRootView {
             .constraint(equalTo: inputStackView.trailingAnchor)
         let height = signInButton.heightAnchor
             .constraint(equalToConstant: 40)
+        let bottom = signInButton.bottomAnchor
+            .constraint(equalTo: contentView.bottomAnchor)
 
         NSLayoutConstraint.activate([
-            top, leading, trailing, height
-        ])
-    }
-
-    private func activateConstraintsResetPasswordButton() {
-        let top = resetPasswordButton.topAnchor
-            .constraint(equalTo: signInButton.bottomAnchor, constant: 20)
-        let leading = resetPasswordButton.leadingAnchor
-            .constraint(equalTo: inputStackView.leadingAnchor)
-        let width = resetPasswordButton.widthAnchor
-            .constraint(equalToConstant: 64)
-        let height = resetPasswordButton.heightAnchor
-            .constraint(equalToConstant: 24)
-        let bottom = contentView.bottomAnchor
-            .constraint(equalTo: resetPasswordButton.bottomAnchor)
-        
-        NSLayoutConstraint.activate([
-            top, leading, width, height, bottom
+            top, leading, trailing, height, bottom
         ])
     }
 }
 // MARK: - Behaviors
 extension SignInRootView {
     private func bindViewModelToViews() {
+        bindViewModelToRememberAccountButton()
+        bindViewModelToSignInButton()
+        bindViewModelToReloadCaptchaButton()
+        bindViewModelToCaptchaImageView()
+        bindViewModelToCaptchaActivityIndicator()
+        bindViewModelToTextFields()
+    }
+
+    private func bindViewModelToRememberAccountButton() {
+        viewModel.shouldRememberAccount
+            .asDriver()
+            .drive(onNext: { [unowned self] in
+                switch $0 {
+                case true:
+                    self.rememberAccountButton.isSelected = true
+                    self.rememberAccountButton.isEnabled = false
+                    UIView.transition(
+                        with: self.rememberAccountButton,
+                        duration: 0.3,
+                        options: .transitionCrossDissolve) {
+                        self.rememberAccountButton.setImage(UIImage(named: "checked"), for: .normal)
+                    } completion: { _ in
+                        self.rememberAccountButton.isEnabled = true
+                    }
+                case false:
+                    self.rememberAccountButton.isSelected = false
+                    self.rememberAccountButton.setImage(UIImage(named: "unchecked"), for: .normal)
+                }
+            })
+            .disposed(by: bag)
+    }
+
+    private func bindViewModelToSignInButton() {
         viewModel.signInButtonEnable
             .asDriver(onErrorJustReturn: true)
+            .do(onNext: { [unowned self] in
+                let backgroundColor: UIColor = $0 ? UIColor(hex: "ff7d2c") : UIColor(hex: "f2f2f2")
+                self.signInButton.backgroundColor = backgroundColor
+            })
             .drive(signInButton.rx.isEnabled)
             .disposed(by: bag)
+    }
 
+    private func bindViewModelToReloadCaptchaButton() {
         viewModel.reloadButtonEnable
             .asDriver(onErrorJustReturn: true)
             .drive(reloadCaptchaButton.rx.isEnabled)
             .disposed(by: bag)
+    }
 
+    private func bindViewModelToCaptchaImageView() {
         viewModel.captchaSession
             .subscribe(on: MainScheduler.instance)
             .do(onNext: { print($0.key) })
@@ -420,6 +525,70 @@ extension SignInRootView {
                 return UIImage(data: data)
             }
             .bind(to: captchaImageView.rx.image)
+            .disposed(by: bag)
+    }
+
+    private func bindViewModelToCaptchaActivityIndicator() {
+        viewModel.captchaActivityIndicatorAnimating
+            .asDriver()
+            .do(onNext:{ [unowned self] in
+                let alpha: CGFloat = $0 ? 0.3 : 1
+                self.captchaImageView.alpha = alpha
+            })
+            .drive(onNext: { [unowned self] in
+                switch $0 {
+                case true: captchaActivityIndicatorView.startAnimating()
+                case false: captchaActivityIndicatorView.stopAnimating()
+                }
+            })
+            .disposed(by: bag)
+    }
+
+    private func bindViewModelToTextFields() {
+        viewModel.lastSignInInfo
+            .asDriver(onErrorJustReturn: .empty())
+            .drive(onNext: { [unowned self] signInInfo in
+                self.storeIDInputView.textField.text = signInInfo.storeID
+                self.storeIDInputView.textField.sendActions(for: .valueChanged)
+                self.accountInputView.textField.text = signInInfo.account
+                self.accountInputView.textField.sendActions(for: .valueChanged)
+            })
+            .disposed(by: bag)
+
+        viewModel.storeIDValidationResult.asDriver()
+            .drive(onNext:{ [unowned self] in
+                switch $0 {
+                case .valid: self.storeIDInputView.clearError()
+                case .invalid(let message): self.storeIDInputView.showError(with: message)
+                }
+            })
+            .disposed(by: bag)
+
+        viewModel.accountValidationResult.asDriver()
+            .drive(onNext:{ [unowned self] in
+                switch $0 {
+                case .valid: self.accountInputView.clearError()
+                case .invalid(let message): self.accountInputView.showError(with: message)
+                }
+            })
+            .disposed(by: bag)
+
+        viewModel.passwordValidationResult.asDriver()
+            .drive(onNext:{ [unowned self] in
+                switch $0 {
+                case .valid: self.passwordInputView.clearError()
+                case .invalid(let message): self.passwordInputView.showError(with: message)
+                }
+            })
+            .disposed(by: bag)
+
+        viewModel.captchaValueValidationResult.asDriver()
+            .drive(onNext:{ [unowned self] in
+                switch $0 {
+                case .valid: self.captchaInputView.clearError()
+                case .invalid(let message): self.captchaInputView.showError(with: message)
+                }
+            })
             .disposed(by: bag)
     }
 }

@@ -14,27 +14,85 @@ class SignInViewModel {
 
     let bag: DisposeBag = DisposeBag()
     let signInService: SignInService
+    let signInValidationService: SignInValidatoinService
     var signInInfo: SignInInfo = SignInInfo()
+    let userDefault: UserDefaults = UserDefaults.standard
+    let keychainHelper: KeychainHelper = KeychainHelper()
     // MARK: - Output
+    let lastSignInInfo: BehaviorRelay<SignInAccountInfo> = BehaviorRelay.init(value: .empty())
+    let storeIDValidationResult: BehaviorRelay<ValidationResult> = BehaviorRelay.init(value: .valid)
+    let accountValidationResult: BehaviorRelay<ValidationResult> = BehaviorRelay.init(value: .valid)
+    let passwordValidationResult: BehaviorRelay<ValidationResult> = BehaviorRelay.init(value: .valid)
+    let captchaValueValidationResult: BehaviorRelay<ValidationResult> = BehaviorRelay.init(value: .valid)
+
+    let shouldRememberAccount: BehaviorRelay<Bool> = BehaviorRelay.init(value: true)
     let signInButtonEnable: BehaviorRelay<Bool> = BehaviorRelay.init(value: true)
     let reloadButtonEnable: BehaviorRelay<Bool> = BehaviorRelay.init(value: true)
     let activityIndicatorAnimating: BehaviorRelay<Bool> = BehaviorRelay.init(value: false)
     let captchaActivityIndicatorAnimating: BehaviorRelay<Bool> = BehaviorRelay.init(value: false)
+
     let userSession: PublishRelay<UserSession> = PublishRelay.init()
     let captchaSession: PublishRelay<CaptchaSession> = PublishRelay.init()
     let errorMessage: PublishRelay<String> = PublishRelay.init()
 
     private let unexpectedErrorMessage: String = "未知的錯誤發生"
+    private let shouldRememberAccountKey: String = "shouldRememberAccount"
     // MARK: - Methods
-    init(signInService: SignInService) {
+    init(signInService: SignInService,
+         signInValidationService: SignInValidatoinService) {
         self.signInService = signInService
+        self.signInValidationService = signInValidationService
+
+        if let shouldRememberAccount = userDefault.value(forKey: shouldRememberAccountKey) as? Bool {
+            self.shouldRememberAccount.accept(shouldRememberAccount)
+        }
+
+        if let lastSignInInfo = try? keychainHelper.readItem(key: .lastSignInAccountInfo, valueType: SignInAccountInfo.self) {
+            self.lastSignInInfo.accept(lastSignInInfo)
+        }
+    }
+
+    func validateSignInInfo() -> Bool {
+        let storeIDResult = signInValidationService.validateStoreID(signInInfo.storeID)
+        storeIDValidationResult.accept(storeIDResult)
+
+        let accountResult = signInValidationService.validateAccount(signInInfo.account)
+        accountValidationResult.accept(accountResult)
+
+        let passwordResult = signInValidationService.validatePassword(signInInfo.password)
+        passwordValidationResult.accept(passwordResult)
+
+        let captchaValueResult = signInValidationService.validateCaptchaValue(signInInfo.captchaValue)
+        captchaValueValidationResult.accept(captchaValueResult)
+
+        if storeIDResult == .valid,
+           accountResult == .valid,
+           passwordResult == .valid,
+           captchaValueResult == .valid {
+            return true
+        } else {
+            return false
+        }
     }
 
     @objc
     func signIn() {
         indicateSigningIn(true)
+        guard validateSignInInfo() else {
+            indicateSigningIn(false)
+            return
+        }
         signInService.signIn(info: signInInfo)
-            .do(onDispose: { [unowned self] in
+            .do(onSuccess: { [unowned self] _ in
+                guard shouldRememberAccount.value else {
+                    try? self.keychainHelper.removeItem(key: .lastSignInAccountInfo)
+                    return
+                }
+                let storeID = self.signInInfo.storeID
+                let account = self.signInInfo.account
+                let accountInfo = SignInAccountInfo(storeID: storeID, account: account)
+                try? self.keychainHelper.saveItem(accountInfo, for: .lastSignInAccountInfo)
+            }, onDispose: { [unowned self] in
                 self.indicateSigningIn(false)
             })
             .subscribe{ [unowned self] in

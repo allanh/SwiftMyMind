@@ -10,9 +10,9 @@ import Foundation
 struct UserSession: Codable {
     struct CustomerInfo: Codable {
         private enum CodingKeys: String, CodingKey {
-            case id = "customer_id", name = "customer_name"
+            case id = "customer_id", name
         }
-        let id: String
+        let id: Int
         let name: String
     }
 
@@ -20,7 +20,7 @@ struct UserSession: Codable {
         private enum CodingKeys: String, CodingKey {
             case id = "business_unit_id", name
         }
-        let id: String
+        let id: Int
         let name: String
     }
 
@@ -28,7 +28,7 @@ struct UserSession: Codable {
         private enum CodingKeys: String, CodingKey {
             case id = "partner_id", name
         }
-        let id: String
+        let id: Int
         let name: String
     }
 
@@ -36,7 +36,7 @@ struct UserSession: Codable {
         private enum CodingKeys: String, CodingKey {
             case id = "employee_id", name
         }
-        let id: String
+        let id: Int
         let name: String
     }
 

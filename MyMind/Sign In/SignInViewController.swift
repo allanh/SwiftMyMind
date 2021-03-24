@@ -63,12 +63,13 @@ class SignInViewController: UIViewController {
             .disposed(by: bag)
 
         viewModel.activityIndicatorAnimating
+            .bind(to: self.rx.isActivityIndicatorAnimating)
+            .disposed(by: bag)
+
+        viewModel.userSession
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [unowned self] in
-                switch $0 {
-                case true: self.startAnimatingActivityIndicator()
-                case false: self.stopAnimatinActivityIndicator()
-                }
+            .subscribe(onNext: { [unowned self] _ in
+                ToastView.showIn(self, message: "登入成功", iconName: "success")
             })
             .disposed(by: bag)
     }

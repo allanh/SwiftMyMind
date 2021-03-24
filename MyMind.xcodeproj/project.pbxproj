@@ -44,6 +44,10 @@
 		A49CF9302603518A00AFC170 /* CodableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49CF92F2603518A00AFC170 /* CodableTests.swift */; };
 		A49CF9382603523100AFC170 /* user_session.json in Resources */ = {isa = PBXBuildFile; fileRef = A49CF9372603523100AFC170 /* user_session.json */; };
 		A49CF93C2603527500AFC170 /* user_session.json in Resources */ = {isa = PBXBuildFile; fileRef = A49CF9372603523100AFC170 /* user_session.json */; };
+		A4BDC79E260ADFC5005C33A5 /* UIViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BDC79D260ADFC5005C33A5 /* UIViewController+Rx.swift */; };
+		A4BDC7B4260B10E2005C33A5 /* SignInValidationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BDC7B3260B10E2005C33A5 /* SignInValidationService.swift */; };
+		A4BDC7B9260B3E0A005C33A5 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BDC7B8260B3E0A005C33A5 /* KeychainHelper.swift */; };
+		A4BDC7BE260B418E005C33A5 /* SignInAccountInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BDC7BD260B418E005C33A5 /* SignInAccountInfo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -113,6 +117,10 @@
 		A49CF92926034BEA00AFC170 /* CaptchaSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptchaSession.swift; sourceTree = "<group>"; };
 		A49CF92F2603518A00AFC170 /* CodableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableTests.swift; sourceTree = "<group>"; };
 		A49CF9372603523100AFC170 /* user_session.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = user_session.json; sourceTree = "<group>"; };
+		A4BDC79D260ADFC5005C33A5 /* UIViewController+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Rx.swift"; sourceTree = "<group>"; };
+		A4BDC7B3260B10E2005C33A5 /* SignInValidationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInValidationService.swift; sourceTree = "<group>"; };
+		A4BDC7B8260B3E0A005C33A5 /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
+		A4BDC7BD260B418E005C33A5 /* SignInAccountInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInAccountInfo.swift; sourceTree = "<group>"; };
 		A64D73FCB71924FE21D7799F /* Pods-MyMind.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMind.release.xcconfig"; path = "Target Support Files/Pods-MyMind/Pods-MyMind.release.xcconfig"; sourceTree = "<group>"; };
 		BE0100A79B8C832CE91F6186 /* Pods_MyMind.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyMind.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB6BB17D55B5E80D4362936C /* Pods-MyMind-MyMindUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMind-MyMindUITests.release.xcconfig"; path = "Target Support Files/Pods-MyMind-MyMindUITests/Pods-MyMind-MyMindUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -224,6 +232,7 @@
 				A49CF92926034BEA00AFC170 /* CaptchaSession.swift */,
 				A4793C792604534100AD280C /* SignInInfo.swift */,
 				A4793C7E2604573700AD280C /* UserSession.swift */,
+				A4BDC7BD260B418E005C33A5 /* SignInAccountInfo.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -233,9 +242,9 @@
 			children = (
 				A4793CA62604873B00AD280C /* SignInRootView.swift */,
 				A4793CB526048EBA00AD280C /* ValidatableInputView.swift */,
-				A4793CBF2604A59C00AD280C /* GradientView.swift */,
 				A48389AE2608360A0044C09E /* SignInViewController.swift */,
 				A48389B3260869940044C09E /* SignInViewModel.swift */,
+				A4BDC7B3260B10E2005C33A5 /* SignInValidationService.swift */,
 			);
 			path = "Sign In";
 			sourceTree = "<group>";
@@ -243,10 +252,10 @@
 		A4793C9426047C6500AD280C /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				A4BDC7B2260B0F34005C33A5 /* UILayer */,
 				A4793C9D26047DA300AD280C /* Extensions */,
-				A4793C9526047C8000AD280C /* NibOwnerLoadable.swift */,
 				A4793CAB260488E800AD280C /* Declarative.swift */,
-				A439B53B2609CDC3002352C2 /* ToastView.swift */,
+				A4BDC7B8260B3E0A005C33A5 /* KeychainHelper.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -258,6 +267,7 @@
 				A4793CB026048BB600AD280C /* UIFont+.swift */,
 				A4793CBA260490A600AD280C /* UIColor+.swift */,
 				A439B52B26099AA1002352C2 /* UIViewController+.swift */,
+				A4BDC79D260ADFC5005C33A5 /* UIViewController+Rx.swift */,
 				A439B5402609D61C002352C2 /* String+.swift */,
 			);
 			path = Extensions;
@@ -282,6 +292,16 @@
 				A49CF9372603523100AFC170 /* user_session.json */,
 			);
 			path = APICache;
+			sourceTree = "<group>";
+		};
+		A4BDC7B2260B0F34005C33A5 /* UILayer */ = {
+			isa = PBXGroup;
+			children = (
+				A439B53B2609CDC3002352C2 /* ToastView.swift */,
+				A4793CBF2604A59C00AD280C /* GradientView.swift */,
+				A4793C9526047C8000AD280C /* NibOwnerLoadable.swift */,
+			);
+			path = UILayer;
 			sourceTree = "<group>";
 		};
 		FE90B85D82B6B4639CD1A164 /* Pods */ = {
@@ -565,12 +585,16 @@
 				A4793C7A2604534100AD280C /* SignInInfo.swift in Sources */,
 				A4705B9126020E5700B30CE6 /* Response.swift in Sources */,
 				A4793C9F26047DB900AD280C /* UIStoryboard+.swift in Sources */,
+				A4BDC79E260ADFC5005C33A5 /* UIViewController+Rx.swift in Sources */,
 				A4793CAC260488E800AD280C /* Declarative.swift in Sources */,
 				A49CF92A26034BEA00AFC170 /* CaptchaSession.swift in Sources */,
+				A4BDC7B4260B10E2005C33A5 /* SignInValidationService.swift in Sources */,
 				A48389B4260869940044C09E /* SignInViewModel.swift in Sources */,
+				A4BDC7B9260B3E0A005C33A5 /* KeychainHelper.swift in Sources */,
 				A48389AF2608360A0044C09E /* SignInViewController.swift in Sources */,
 				A49CF8BB2603028C00AFC170 /* APIService.swift in Sources */,
 				A48389BE260876770044C09E /* SignInService.swift in Sources */,
+				A4BDC7BE260B418E005C33A5 /* SignInAccountInfo.swift in Sources */,
 				A439B5412609D61C002352C2 /* String+.swift in Sources */,
 				A4793CB126048BB600AD280C /* UIFont+.swift in Sources */,
 				A44A5A7225F9B0D200995823 /* ViewController.swift in Sources */,
