@@ -8,6 +8,7 @@ target 'MyMind' do
   # Pods for MyMind
     pod 'RxSwift', '6.1.0'
     pod 'RxCocoa', '6.1.0'
+    pod 'NVActivityIndicatorView'
 
   target 'MyMindTests' do
     inherit! :search_paths
