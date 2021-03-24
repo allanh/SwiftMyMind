@@ -26,7 +26,7 @@ class MyMindSignInService: APIService, SignInService {
         urlComponents.path = Endpoint().captcha
         let request = dataRequest(urlComponents: urlComponents)
         return request.map {
-            let response = try JSONDecoder().decode(Response<CaptchaSession>.self, from: $0)
+            let response = try JSONDecoder().decode(Response<CaptchaSession>.self, from: $0.1)
             guard let session = response.data else {
                 throw APIError.serviceError(response.message ?? "")
             }
@@ -43,9 +43,9 @@ class MyMindSignInService: APIService, SignInService {
         }
         let request = dataRequest(urlComponents: urlComponents, httpMethod: "POST", httpBody: body)
         return request.map {
-            let response = try JSONDecoder().decode(Response<UserSession>.self, from: $0)
+            let response = try JSONDecoder().decode(Response<UserSession>.self, from: $0.1)
             guard let session = response.data else {
-                throw APIError.dataNotFoundError
+                throw APIError.serviceError(response.message ?? "")
             }
             return session
         }

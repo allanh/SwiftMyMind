@@ -8,6 +8,7 @@
 
 import Foundation
 import RxSwift
+import RxRelay
 
 class SignInViewModel {
 
@@ -15,12 +16,15 @@ class SignInViewModel {
     let signInService: SignInService
     var signInInfo: SignInInfo = SignInInfo()
     // MARK: - Output
-    let signInButtonEnable: BehaviorSubject<Bool> = BehaviorSubject.init(value: true)
-    let reloadButtonEnable: BehaviorSubject<Bool> = BehaviorSubject.init(value: true)
-    let activityIndicatorAnimating: BehaviorSubject<Bool> = BehaviorSubject.init(value: false)
-    let userSession: PublishSubject<UserSession> = PublishSubject.init()
-    let captchaSession: PublishSubject<CaptchaSession> = PublishSubject.init()
+    let signInButtonEnable: BehaviorRelay<Bool> = BehaviorRelay.init(value: true)
+    let reloadButtonEnable: BehaviorRelay<Bool> = BehaviorRelay.init(value: true)
+    let activityIndicatorAnimating: BehaviorRelay<Bool> = BehaviorRelay.init(value: false)
+    let captchaActivityIndicatorAnimating: BehaviorRelay<Bool> = BehaviorRelay.init(value: false)
+    let userSession: PublishRelay<UserSession> = PublishRelay.init()
+    let captchaSession: PublishRelay<CaptchaSession> = PublishRelay.init()
+    let errorMessage: PublishRelay<String> = PublishRelay.init()
 
+    private let unexpectedErrorMessage: String = "未知的錯誤發生"
     // MARK: - Methods
     init(signInService: SignInService) {
         self.signInService = signInService
@@ -28,37 +32,63 @@ class SignInViewModel {
 
     @objc
     func signIn() {
-        indicateNetworkProcessing()
+        indicateSigningIn(true)
         signInService.signIn(info: signInInfo)
-            .subscribe { [unowned self] userSession in
-                self.userSession.onNext(userSession)
-            } onFailure: { error in
-
+            .do(onDispose: { [unowned self] in
+                self.indicateSigningIn(false)
+            })
+            .subscribe{ [unowned self] in
+                switch $0 {
+                case .success(let userSession):
+                    self.userSession.accept(userSession)
+                case .failure(let error):
+                    switch error {
+                    case APIError.serviceError(let message):
+                        self.errorMessage.accept(message)
+                    default:
+                        self.errorMessage.accept(unexpectedErrorMessage)
+                    }
+                }
             }
             .disposed(by: bag)
     }
 
     @objc
     func captcha() {
-        indicateNetworkProcessing()
+        indicateUpdatingCaptcha(true)
         signInService.captcha()
             .do(onDispose: { [unowned self] in
-                self.reloadButtonEnable.onNext(true)
-                self.signInButtonEnable.onNext(true)
+                indicateUpdatingCaptcha(false)
             })
-            .asObservable()
-            .subscribe(onNext: { [unowned self] (session) in
-                self.captchaSession.onNext(session)
-                self.signInInfo.captchaKey = session.key
-            }, onError: { (error) in
-                // TODO: handle error
-            })
+            .subscribe { [unowned self] in
+                switch $0 {
+                case .success(let session):
+                    self.captchaSession.accept(session)
+                    self.signInInfo.captchaKey = session.key
+                case .failure(let error):
+                    switch error {
+                    case APIError.serviceError(let message):
+                        self.errorMessage.accept(message)
+                    default:
+                        self.errorMessage.accept(unexpectedErrorMessage)
+                    }
+                }
+            }
             .disposed(by: bag)
     }
 
-    private func indicateNetworkProcessing() {
-        signInButtonEnable.onNext(false)
-        reloadButtonEnable.onNext(false)
-        activityIndicatorAnimating.onNext(true)
+    private func indicateUpdatingCaptcha(_ isUpdating: Bool) {
+        indicateNetworkProcessing(isUpdating)
+        captchaActivityIndicatorAnimating.accept(isUpdating)
+    }
+
+    private func indicateSigningIn(_ isSigningIn: Bool) {
+        indicateNetworkProcessing(isSigningIn)
+        activityIndicatorAnimating.accept(isSigningIn)
+    }
+
+    private func indicateNetworkProcessing(_ isProcessing: Bool) {
+        signInButtonEnable.accept(!isProcessing)
+        reloadButtonEnable.accept(!isProcessing)
     }
 }

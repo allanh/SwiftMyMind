@@ -7,10 +7,13 @@
 //
 
 import UIKit
+import RxSwift
+import NVActivityIndicatorView
 
 class SignInViewController: UIViewController {
 
     let viewModel: SignInViewModel
+    let bag: DisposeBag = DisposeBag()
 
     var rootView: SignInRootView {
         return view as! SignInRootView
@@ -33,6 +36,7 @@ class SignInViewController: UIViewController {
         super.viewDidLoad()
         viewModel.captcha()
         addTapToResignKeyboardGesture()
+        observerViewModel()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -51,7 +55,22 @@ class SignInViewController: UIViewController {
     }
 
     func observerViewModel() {
+        viewModel.errorMessage
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] in
+                ToastView.showIn(self, message: $0)
+            })
+            .disposed(by: bag)
 
+        viewModel.activityIndicatorAnimating
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] in
+                switch $0 {
+                case true: self.startAnimatingActivityIndicator()
+                case false: self.stopAnimatinActivityIndicator()
+                }
+            })
+            .disposed(by: bag)
     }
 }
 // MARK: - Keyboard handle
