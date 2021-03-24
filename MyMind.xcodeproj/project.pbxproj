@@ -11,6 +11,8 @@
 		2E5069A60BD231A8689574B6 /* Pods_MyMind.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE0100A79B8C832CE91F6186 /* Pods_MyMind.framework */; };
 		9660C0DF9C9E4D5B23E221A7 /* Pods_MyMindTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E343FC883B3C7BBFB9A075 /* Pods_MyMindTests.framework */; };
 		A439B52C26099AA1002352C2 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A439B52B26099AA1002352C2 /* UIViewController+.swift */; };
+		A439B53C2609CDC3002352C2 /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A439B53B2609CDC3002352C2 /* ToastView.swift */; };
+		A439B5412609D61C002352C2 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A439B5402609D61C002352C2 /* String+.swift */; };
 		A44A5A6E25F9B0D200995823 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44A5A6D25F9B0D200995823 /* AppDelegate.swift */; };
 		A44A5A7025F9B0D200995823 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44A5A6F25F9B0D200995823 /* SceneDelegate.swift */; };
 		A44A5A7225F9B0D200995823 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44A5A7125F9B0D200995823 /* ViewController.swift */; };
@@ -72,6 +74,8 @@
 		5DE023121A8831DEABDA0767 /* Pods-MyMind-MyMindUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMind-MyMindUITests.debug.xcconfig"; path = "Target Support Files/Pods-MyMind-MyMindUITests/Pods-MyMind-MyMindUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		8A105A1720C2E5FCBADB8898 /* Pods-MyMind.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMind.debug.xcconfig"; path = "Target Support Files/Pods-MyMind/Pods-MyMind.debug.xcconfig"; sourceTree = "<group>"; };
 		A439B52B26099AA1002352C2 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
+		A439B53B2609CDC3002352C2 /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
+		A439B5402609D61C002352C2 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		A44A5A6A25F9B0D200995823 /* MyMind.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyMind.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A44A5A6D25F9B0D200995823 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A44A5A6F25F9B0D200995823 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -242,6 +246,7 @@
 				A4793C9D26047DA300AD280C /* Extensions */,
 				A4793C9526047C8000AD280C /* NibOwnerLoadable.swift */,
 				A4793CAB260488E800AD280C /* Declarative.swift */,
+				A439B53B2609CDC3002352C2 /* ToastView.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -253,6 +258,7 @@
 				A4793CB026048BB600AD280C /* UIFont+.swift */,
 				A4793CBA260490A600AD280C /* UIColor+.swift */,
 				A439B52B26099AA1002352C2 /* UIViewController+.swift */,
+				A439B5402609D61C002352C2 /* String+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -565,10 +571,12 @@
 				A48389AF2608360A0044C09E /* SignInViewController.swift in Sources */,
 				A49CF8BB2603028C00AFC170 /* APIService.swift in Sources */,
 				A48389BE260876770044C09E /* SignInService.swift in Sources */,
+				A439B5412609D61C002352C2 /* String+.swift in Sources */,
 				A4793CB126048BB600AD280C /* UIFont+.swift in Sources */,
 				A44A5A7225F9B0D200995823 /* ViewController.swift in Sources */,
 				A439B52C26099AA1002352C2 /* UIViewController+.swift in Sources */,
 				A4793C7F2604573700AD280C /* UserSession.swift in Sources */,
+				A439B53C2609CDC3002352C2 /* ToastView.swift in Sources */,
 				A44A5A6E25F9B0D200995823 /* AppDelegate.swift in Sources */,
 				A4793CA72604873B00AD280C /* SignInRootView.swift in Sources */,
 				A49CF8C0260306D200AFC170 /* APIError.swift in Sources */,
