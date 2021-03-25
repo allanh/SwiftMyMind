@@ -11,4 +11,5 @@ struct Endpoint {
     let captcha: String = "/captcha"
     let signIn: String = "/login"
     let resetPassword: String = "/reset_password"
+    let forgotPassword: String = "/forgot_password"
 }
