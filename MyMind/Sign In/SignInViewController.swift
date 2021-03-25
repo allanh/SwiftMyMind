@@ -14,9 +14,14 @@ class SignInViewController: UIViewController {
 
     let viewModel: SignInViewModel
     let bag: DisposeBag = DisposeBag()
+    private var didLayoutRootView: Bool = false
 
     var rootView: SignInRootView {
         return view as! SignInRootView
+    }
+
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        .darkContent
     }
 
     init(viewModel: SignInViewModel) {
@@ -40,18 +45,21 @@ class SignInViewController: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-      super.viewWillAppear(animated)
-      addKeyboardObservers()
+        super.viewWillAppear(animated)
+        addKeyboardObservers()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
-      super.viewWillDisappear(animated)
-      removeObservers()
+        super.viewWillDisappear(animated)
+        removeObservers()
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        rootView.resetScrollViewContentInsets()
+        if didLayoutRootView == false {
+            rootView.resetScrollViewContentInsets()
+            didLayoutRootView = true
+        }
     }
 
     func observerViewModel() {

@@ -16,7 +16,7 @@ extension UIViewController {
             viewToAddGesture = view!
         }
         let tapGesture = UITapGestureRecognizer(target: viewToAddGesture, action: #selector(UIView.endEditing))
-        tapGesture.cancelsTouchesInView = false
+//        tapGesture.cancelsTouchesInView = false
         viewToAddGesture.addGestureRecognizer(tapGesture)
     }
 }

@@ -47,7 +47,11 @@ class SignInRootView: UIView {
     }
 
     private let storeIDInputView: ValidatableInputView = ValidatableInputView {
-        $0.textField.placeholder = "企業編碼-5~8碼"
+        $0.textField.attributedPlaceholder = NSAttributedString(
+            string: "企業編碼-5~8碼",
+            attributes: [.foregroundColor: UIColor(hex: "b4b4b4")]
+        )
+        $0.textField.textColor = UIColor(hex: "545454")
         let image = UIImage(named: "company")
         let containerView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 30, height: 30)))
         let imageView = UIImageView(frame: CGRect(x: 8, y: containerView.frame.midY-7, width: 14, height: 14))
@@ -59,7 +63,11 @@ class SignInRootView: UIView {
     }
 
     private let accountInputView: ValidatableInputView = ValidatableInputView {
-        $0.textField.placeholder = "使用者帳號-3~20碼"
+        $0.textField.attributedPlaceholder = NSAttributedString(
+            string: "使用者帳號-3~20碼",
+            attributes: [.foregroundColor: UIColor(hex: "b4b4b4")]
+        )
+        $0.textField.textColor = UIColor(hex: "545454")
         let image = UIImage(named: "id")
         let containerView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 30, height: 30)))
         let imageView = UIImageView(frame: CGRect(x: 8, y: containerView.frame.midY-7, width: 14, height: 14))
@@ -70,15 +78,32 @@ class SignInRootView: UIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
 
-    private let passwordInputView: ValidatableInputView = ValidatableInputView {
-        $0.textField.placeholder = "密碼-6~20碼，英文字母需區分大小寫"
+    private let passwordSecureButton: UIButton = UIButton {
+        $0.setImage(UIImage(named: "eye_open"), for: .normal)
+        $0.setImage(UIImage(named: "eye_close"), for: .selected)
+        $0.touchEdgeInsets = UIEdgeInsets(top: -10, left: -10, bottom: -10, right: -10)
+    }
+
+    private lazy var passwordInputView: ValidatableInputView = ValidatableInputView {
+        $0.textField.attributedPlaceholder = NSAttributedString(
+            string: "密碼-6~20碼，英文字母需區分大小寫",
+            attributes: [.foregroundColor: UIColor(hex: "b4b4b4")]
+        )
+        $0.textField.textColor = UIColor(hex: "545454")
         let image = UIImage(named: "lock")
-        let containerView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 30, height: 30)))
-        let imageView = UIImageView(frame: CGRect(x: 8, y: containerView.frame.midY-7, width: 14, height: 14))
+        let leftContainerView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 30, height: 30)))
+        let imageView = UIImageView(frame: CGRect(x: 8, y: leftContainerView.frame.midY-7, width: 14, height: 14))
         imageView.image = image
-        containerView.addSubview(imageView)
-        $0.textField.leftView = containerView
+        leftContainerView.addSubview(imageView)
+        $0.textField.leftView = leftContainerView
         $0.textField.leftViewMode = .always
+
+        let rightContainerView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 30, height: 30)))
+        self.passwordSecureButton.frame = CGRect(x: 8, y: rightContainerView.frame.midY-7, width: 14, height: 14)
+        rightContainerView.addSubview(self.passwordSecureButton)
+        $0.textField.rightView = rightContainerView
+        $0.textField.rightViewMode = .always
+        $0.textField.isSecureTextEntry = true
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
 
@@ -91,6 +116,7 @@ class SignInRootView: UIView {
     }()
 
     private let rememberAccountButton: UIButton = UIButton {
+        $0.isSelected = true
         $0.setImage(UIImage(named: "unchecked"), for: .normal)
         $0.setTitle(" 記住帳號", for: .normal)
         $0.titleLabel?.font = UIFont.pingFangTCRegular(ofSize: 14)
@@ -99,7 +125,11 @@ class SignInRootView: UIView {
     }
 
     private let captchaInputView: ValidatableInputView = ValidatableInputView {
-        $0.textField.placeholder = "驗證碼-6碼"
+        $0.textField.attributedPlaceholder = NSAttributedString(
+            string: "驗證碼-6碼",
+            attributes: [.foregroundColor: UIColor(hex: "b4b4b4")]
+        )
+        $0.textField.textColor = UIColor(hex: "545454")
         let image = UIImage(named: "security")
         let containerView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 30, height: 30)))
         let imageView = UIImageView(frame: CGRect(x: 8, y: containerView.frame.midY-7, width: 14, height: 14))
@@ -225,13 +255,17 @@ class SignInRootView: UIView {
         .disposed(by: bag)
 
         rememberAccountButton.rx.tap
-//            .do(onNext: { [unowned self] in
-//                self.rememberAccountButton.isSelected.toggle()
-//            })
             .map { [unowned self] in
                 !self.rememberAccountButton.isSelected
             }
             .bind(to: viewModel.shouldRememberAccount)
+            .disposed(by: bag)
+
+        passwordSecureButton.rx.tap
+            .map { [unowned self] in
+                !self.passwordSecureButton.isSelected
+            }
+            .bind(to: viewModel.isSecureTextEntry)
             .disposed(by: bag)
 
         signInButton.addTarget(viewModel, action: #selector(SignInViewModel.signIn), for: .touchUpInside)
@@ -240,14 +274,14 @@ class SignInRootView: UIView {
 
     func resetScrollViewContentInsets() {
         let scrollViewBounds = scrollView.bounds
-        let contentViewBounds = contentView.bounds
+        let contentViewHeight: CGFloat = 450
 
         var insets = UIEdgeInsets.zero
         insets.top = scrollViewBounds.height / 2.0
-        insets.top -= contentViewBounds.height / 2.0
+        insets.top -= contentViewHeight / 2.0
 
         insets.bottom = scrollViewBounds.height / 2.0
-        insets.bottom -= contentViewBounds.height / 2.0
+        insets.bottom -= contentViewHeight / 2.0
 
         scrollView.contentInset = insets
     }
@@ -469,6 +503,7 @@ extension SignInRootView {
         bindViewModelToReloadCaptchaButton()
         bindViewModelToCaptchaImageView()
         bindViewModelToCaptchaActivityIndicator()
+        bindViewModelToPasswordSecureButton()
         bindViewModelToTextFields()
     }
 
@@ -540,6 +575,18 @@ extension SignInRootView {
                 case true: captchaActivityIndicatorView.startAnimating()
                 case false: captchaActivityIndicatorView.stopAnimating()
                 }
+            })
+            .disposed(by: bag)
+    }
+
+    private func bindViewModelToPasswordSecureButton() {
+        viewModel.isSecureTextEntry
+            .asDriver()
+            .do(onNext: { [unowned self] in
+                self.passwordSecureButton.isSelected = $0
+            })
+            .drive(onNext: { [unowned self] in
+                self.passwordInputView.textField.isSecureTextEntry = $0
             })
             .disposed(by: bag)
     }

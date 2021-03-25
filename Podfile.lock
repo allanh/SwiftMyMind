@@ -1,4 +1,5 @@
 PODS:
+  - LookinServer (1.0.0)
   - NVActivityIndicatorView (5.1.1):
     - NVActivityIndicatorView/Base (= 5.1.1)
   - NVActivityIndicatorView/Base (5.1.1)
@@ -12,6 +13,7 @@ PODS:
   - RxSwift (6.1.0)
 
 DEPENDENCIES:
+  - LookinServer
   - NVActivityIndicatorView
   - RxBlocking
   - RxCocoa (= 6.1.0)
@@ -19,6 +21,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - LookinServer
     - NVActivityIndicatorView
     - RxBlocking
     - RxCocoa
@@ -26,12 +29,13 @@ SPEC REPOS:
     - RxSwift
 
 SPEC CHECKSUMS:
+  LookinServer: 0002891cd3cec5e082a910e897dfe71b4f06b89e
   NVActivityIndicatorView: 1f6c5687f1171810aa27a3296814dc2d7dec3667
   RxBlocking: 602095fba0bce7b16b56ccec89edf780c248b7d9
   RxCocoa: 5c51f02d562cbd94629f6c26cf0c80fe4ab8d343
   RxRelay: 483e1a19fad961b41f0b0c0bee506f46c1ae14fe
   RxSwift: a834e5c538e89eca0cae86f403f4fbf0336786ce
 
-PODFILE CHECKSUM: 1fd052981f9d592f10c7b314ec3fc717569738d0
+PODFILE CHECKSUM: a6fab9cd892a84b883c503877512694ffecd615b
 
 COCOAPODS: 1.10.0

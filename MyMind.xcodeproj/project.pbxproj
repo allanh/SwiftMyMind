@@ -10,6 +10,7 @@
 		01CF6195FA67834B4B66F5E3 /* Pods_MyMind_MyMindUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20E97C84258EA1B1937DA48F /* Pods_MyMind_MyMindUITests.framework */; };
 		2E5069A60BD231A8689574B6 /* Pods_MyMind.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE0100A79B8C832CE91F6186 /* Pods_MyMind.framework */; };
 		9660C0DF9C9E4D5B23E221A7 /* Pods_MyMindTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E343FC883B3C7BBFB9A075 /* Pods_MyMindTests.framework */; };
+		A4159204260C394F00FD3989 /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4159203260C394F00FD3989 /* UIButton+.swift */; };
 		A439B52C26099AA1002352C2 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A439B52B26099AA1002352C2 /* UIViewController+.swift */; };
 		A439B53C2609CDC3002352C2 /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A439B53B2609CDC3002352C2 /* ToastView.swift */; };
 		A439B5412609D61C002352C2 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A439B5402609D61C002352C2 /* String+.swift */; };
@@ -77,6 +78,7 @@
 		56E343FC883B3C7BBFB9A075 /* Pods_MyMindTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyMindTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DE023121A8831DEABDA0767 /* Pods-MyMind-MyMindUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMind-MyMindUITests.debug.xcconfig"; path = "Target Support Files/Pods-MyMind-MyMindUITests/Pods-MyMind-MyMindUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		8A105A1720C2E5FCBADB8898 /* Pods-MyMind.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMind.debug.xcconfig"; path = "Target Support Files/Pods-MyMind/Pods-MyMind.debug.xcconfig"; sourceTree = "<group>"; };
+		A4159203260C394F00FD3989 /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
 		A439B52B26099AA1002352C2 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		A439B53B2609CDC3002352C2 /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
 		A439B5402609D61C002352C2 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
@@ -269,6 +271,7 @@
 				A439B52B26099AA1002352C2 /* UIViewController+.swift */,
 				A4BDC79D260ADFC5005C33A5 /* UIViewController+Rx.swift */,
 				A439B5402609D61C002352C2 /* String+.swift */,
+				A4159203260C394F00FD3989 /* UIButton+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -598,6 +601,7 @@
 				A439B5412609D61C002352C2 /* String+.swift in Sources */,
 				A4793CB126048BB600AD280C /* UIFont+.swift in Sources */,
 				A44A5A7225F9B0D200995823 /* ViewController.swift in Sources */,
+				A4159204260C394F00FD3989 /* UIButton+.swift in Sources */,
 				A439B52C26099AA1002352C2 /* UIViewController+.swift in Sources */,
 				A4793C7F2604573700AD280C /* UserSession.swift in Sources */,
 				A439B53C2609CDC3002352C2 /* ToastView.swift in Sources */,
@@ -798,7 +802,7 @@
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.shopping.udi.MyMind.debug;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SIGN_IN_SERVER_URL = "http://api-alpha-auth.udnshopping.com\n";
+				SIGN_IN_SERVER_URL = "http://api-alpha-auth.udnshopping.com";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";

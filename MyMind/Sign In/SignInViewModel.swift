@@ -24,6 +24,7 @@ class SignInViewModel {
     let accountValidationResult: BehaviorRelay<ValidationResult> = BehaviorRelay.init(value: .valid)
     let passwordValidationResult: BehaviorRelay<ValidationResult> = BehaviorRelay.init(value: .valid)
     let captchaValueValidationResult: BehaviorRelay<ValidationResult> = BehaviorRelay.init(value: .valid)
+    let isSecureTextEntry: BehaviorRelay<Bool> = BehaviorRelay.init(value: true)
 
     let shouldRememberAccount: BehaviorRelay<Bool> = BehaviorRelay.init(value: true)
     let signInButtonEnable: BehaviorRelay<Bool> = BehaviorRelay.init(value: true)
