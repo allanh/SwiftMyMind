@@ -42,16 +42,19 @@ class SignInViewController: UIViewController {
         viewModel.captcha()
         addTapToResignKeyboardGesture()
         observerViewModel()
+        configForgotPasswordButton()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         addKeyboardObservers()
+        navigationController?.isNavigationBarHidden = true
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         removeObservers()
+        navigationController?.isNavigationBarHidden = false
     }
 
     override func viewDidLayoutSubviews() {
@@ -60,6 +63,15 @@ class SignInViewController: UIViewController {
             rootView.resetScrollViewContentInsets()
             didLayoutRootView = true
         }
+    }
+
+    func configForgotPasswordButton() {
+        rootView.resetPasswordButton.rx.tap
+            .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] in
+                self.showForgotPasswordViewController()
+            })
+            .disposed(by: bag)
     }
 
     func observerViewModel() {
@@ -80,6 +92,11 @@ class SignInViewController: UIViewController {
                 ToastView.showIn(self, message: "登入成功", iconName: "success")
             })
             .disposed(by: bag)
+    }
+
+    func showForgotPasswordViewController() {
+        let viewController = ForgotPasswordViewController()
+        show(viewController, sender: self)
     }
 }
 // MARK: - Keyboard handle

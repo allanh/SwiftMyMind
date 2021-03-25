@@ -21,8 +21,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             signInService: MyMindSignInService(),
             signInValidationService: SignInValidatoinService()
         )
-        self.window?.rootViewController = SignInViewController(viewModel: viewModel)
+        let signInViewController = SignInViewController(viewModel: viewModel)
+        let navigationController = UINavigationController(rootViewController: signInViewController)
+
         self.window?.makeKeyAndVisible()
+        self.window?.rootViewController = navigationController
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

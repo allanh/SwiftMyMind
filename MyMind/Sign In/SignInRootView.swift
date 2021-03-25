@@ -274,7 +274,7 @@ class SignInRootView: UIView {
 
     func resetScrollViewContentInsets() {
         let scrollViewBounds = scrollView.bounds
-        let contentViewHeight: CGFloat = 450
+        let contentViewHeight: CGFloat = 480
 
         var insets = UIEdgeInsets.zero
         insets.top = scrollViewBounds.height / 2.0
@@ -325,6 +325,7 @@ extension SignInRootView {
             width, top, bottom, leading, trailing
         ])
     }
+
     private func activateConstraintsBannerImageView() {
         let top = bannerImageView.topAnchor
             .constraint(equalTo: contentView.topAnchor)
@@ -488,7 +489,7 @@ extension SignInRootView {
         let height = signInButton.heightAnchor
             .constraint(equalToConstant: 40)
         let bottom = signInButton.bottomAnchor
-            .constraint(equalTo: contentView.bottomAnchor)
+            .constraint(equalTo: contentView.bottomAnchor, constant: 30)
 
         NSLayoutConstraint.activate([
             top, leading, trailing, height, bottom
