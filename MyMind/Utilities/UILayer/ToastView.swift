@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ToastView: UIView {
+class ToastView: NiblessView {
 
     private let imageView: UIImageView = UIImageView {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -31,11 +31,6 @@ class ToastView: UIView {
         activateConstraints()
         backgroundColor = UIColor.black.withAlphaComponent(0.7)
         layer.cornerRadius = 4
-    }
-
-    @available(*, unavailable, message: "No Nib implement")
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 
     private func constructViewHierarchy() {

@@ -7,22 +7,42 @@
 //
 
 import UIKit
+import RxSwift
 
-class ForgotPasswordViewController: UIViewController {
+class ForgotPasswordViewController: NiblessViewController {
 
+    let viewModel: ForgotPasswordViewModel
     private var didLayoutRootView: Bool = false
+    let bag: DisposeBag = DisposeBag()
 
     var rootView: ForgotPasswordRootView {
         return view as! ForgotPasswordRootView
     }
 
+    init(viewModel: ForgotPasswordViewModel) {
+        self.viewModel = viewModel
+        super.init()
+    }
+
     override func loadView() {
-        view = ForgotPasswordRootView()
+        view = ForgotPasswordRootView(viewModel: viewModel)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        navigationController?.setNavigationBarHidden(false, animated: false)
+        viewModel.captcha()
+        observerViewModel()
+        addTapToResignKeyboardGesture()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        addKeyboardObservers()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        removeObservers()
     }
 
     override func viewDidLayoutSubviews() {
@@ -31,6 +51,26 @@ class ForgotPasswordViewController: UIViewController {
             rootView.resetScrollViewContentInsets()
             didLayoutRootView = true
         }
+    }
+
+    func observerViewModel() {
+        viewModel.activityIndicatorAnimating
+            .bind(to: self.rx.isActivityIndicatorAnimating)
+            .disposed(by: bag)
+
+        viewModel.successMessage
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] in
+                ToastView.showIn(self, message: $0, iconName: "success")
+            })
+            .disposed(by: bag)
+
+        viewModel.errorMessage
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] in
+                ToastView.showIn(self, message: $0)
+            })
+            .disposed(by: bag)
     }
 }
 

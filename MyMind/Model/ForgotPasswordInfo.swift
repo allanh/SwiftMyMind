@@ -1,5 +1,5 @@
 //
-//  ResetPasswordInfo.swift
+//  ForgotPasswordInfo.swift
 //  MyMind
 //
 //  Created by Barry Chen on 2021/3/25.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct ResetPasswordInfo {
+struct ForgotPasswordInfo {
     private enum CodingKeys: String, CodingKey {
         case id, account, email, captcha
     }
@@ -21,9 +21,14 @@ struct ResetPasswordInfo {
     var email: String
     var captchaKey: String
     var captchaValue: String
+
+    static func empty() -> ForgotPasswordInfo {
+        let info = ForgotPasswordInfo(storeID: "", account: "", email: "", captchaKey: "", captchaValue: "")
+        return info
+    }
 }
 
-extension ResetPasswordInfo: Encodable {
+extension ForgotPasswordInfo: Encodable {
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(storeID, forKey: .id)

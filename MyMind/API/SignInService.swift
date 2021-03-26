@@ -12,4 +12,5 @@ import RxSwift
 protocol SignInService {
     func captcha() -> Single<CaptchaSession>
     func signIn(info: SignInInfo) -> Single<UserSession>
+    func forgotPasswordMail(info: ForgotPasswordInfo) -> Completable
 }

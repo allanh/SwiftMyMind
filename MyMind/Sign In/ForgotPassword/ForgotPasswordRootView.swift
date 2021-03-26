@@ -10,10 +10,11 @@ import UIKit
 import RxSwift
 import NVActivityIndicatorView
 
-class ForgotPasswordRootView: UIView {
+class ForgotPasswordRootView: NiblessView {
 
     var hierarchyNotReady: Bool = true
     let bag: DisposeBag = DisposeBag()
+    let viewModel: ForgotPasswordViewModel
 
     private let scrollView: UIScrollView = UIScrollView {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -165,15 +166,12 @@ class ForgotPasswordRootView: UIView {
     }
 
     // MARK: - Methods
-    override init(frame: CGRect = .zero) {
-//        self.viewModel = viewModel
+    init(frame: CGRect = .zero,
+         viewModel: ForgotPasswordViewModel) {
+        self.viewModel = viewModel
         super.init(frame: frame)
-//        bindToViewModel()
-//        bindViewModelToViews()
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        bindToViewModel()
+        bindViewModelToViews()
     }
 
     override func didMoveToWindow() {
@@ -218,6 +216,27 @@ class ForgotPasswordRootView: UIView {
         activateConstraintsCaptchaActivityIndicatorView()
         activateConstraintsReloadCaptchaButton()
         activateConstraintsConfirmButton()
+    }
+
+    private func bindToViewModel() {
+        Observable.combineLatest(
+            storeIDInputView.textField.rx.text.orEmpty,
+            accountInputView.textField.rx.text.orEmpty,
+            emailInputView.textField.rx.text.orEmpty,
+            captchaInputView.textField.rx.text.orEmpty
+        ) { storeID, account, email, captcha in
+            (storeID, account, email, captcha)
+        }
+        .subscribe(onNext: { [unowned self] in
+            self.viewModel.forgotPasswordInfo.storeID = $0.0
+            self.viewModel.forgotPasswordInfo.account = $0.1
+            self.viewModel.forgotPasswordInfo.email = $0.2
+            self.viewModel.forgotPasswordInfo.captchaValue = $0.3
+        })
+        .disposed(by: bag)
+
+        confirmButton.addTarget(viewModel, action: #selector(ForgotPasswordViewModel.confirmSendEmail), for: .touchUpInside)
+        reloadCaptchaButton.addTarget(viewModel, action: #selector(ForgotPasswordViewModel.captcha), for: .touchUpInside)
     }
 
     func resetScrollViewContentInsets() {
@@ -438,5 +457,112 @@ extension ForgotPasswordRootView {
         NSLayoutConstraint.activate([
             top, leading, trailing, height, bottom
         ])
+    }
+}
+// MARK: - Behaviors
+extension ForgotPasswordRootView {
+    func bindViewModelToViews() {
+        bindViewModelToInputViews()
+        bindViewModelToReloadButton()
+        bindViewModelToConfirmButton()
+        bindViewModelToCaptchaImageView()
+        bindViewModelToCaptchaActivityIndicator()
+    }
+
+    func bindViewModelToInputViews() {
+        viewModel.storeIDValidationResult
+            .asDriver()
+            .drive(onNext: { [unowned self] in
+                switch $0 {
+                case .valid:
+                    self.storeIDInputView.clearError()
+                case .invalid(let message):
+                    self.storeIDInputView.showError(with: message)
+                }
+            })
+            .disposed(by: bag)
+
+        viewModel.accountValidationResult
+            .asDriver()
+            .drive(onNext: { [unowned self] in
+                switch $0 {
+                case .valid:
+                    self.accountInputView.clearError()
+                case .invalid(let message):
+                    self.accountInputView.showError(with: message)
+                }
+            })
+            .disposed(by: bag)
+
+        viewModel.emailValidationResult
+            .asDriver()
+            .drive(onNext: { [unowned self] in
+                switch $0 {
+                case .valid:
+                    self.emailInputView.clearError()
+                case .invalid(let message):
+                    self.emailInputView.showError(with: message)
+                }
+            })
+            .disposed(by: bag)
+
+        viewModel.emailValidationResult
+            .asDriver()
+            .drive(onNext: { [unowned self] in
+                switch $0 {
+                case .valid:
+                    self.emailInputView.clearError()
+                case .invalid(let message):
+                    self.emailInputView.showError(with: message)
+                }
+            })
+            .disposed(by: bag)
+
+        viewModel.captchaValueValidationResult
+            .asDriver()
+            .drive(onNext: { [unowned self] in
+                switch $0 {
+                case .valid:
+                    self.captchaInputView.clearError()
+                case .invalid(let message):
+                    self.captchaInputView.showError(with: message)
+                }
+            })
+            .disposed(by: bag)
+    }
+
+    private func bindViewModelToConfirmButton() {
+        viewModel.confirmButtonEnabled
+            .asDriver()
+            .drive(confirmButton.rx.isEnabled)
+            .disposed(by: bag)
+    }
+
+    private func bindViewModelToReloadButton() {
+        viewModel.reloadButtonEnabled
+            .asDriver()
+            .drive(reloadCaptchaButton.rx.isEnabled)
+            .disposed(by: bag)
+    }
+
+    private func bindViewModelToCaptchaActivityIndicator() {
+        viewModel.captchaActivityIndicatorAnimating
+            .asDriver()
+            .drive(captchaActivityIndicatorView.rx.isAnimating)
+            .disposed(by: bag)
+    }
+
+    private func bindViewModelToCaptchaImageView() {
+        viewModel.captchaSession
+            .asObservable()
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] in
+                guard let data = $0.imageData else {
+                    return
+                }
+                let image = UIImage(data: data)
+                self.captchaImageView.image = image
+            })
+            .disposed(by: bag)
     }
 }

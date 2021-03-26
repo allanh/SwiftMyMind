@@ -52,9 +52,9 @@ class MyMindSignInService: APIService, SignInService {
         .asSingle()
     }
 
-    func forgotPasswordMail(info: ResetPasswordInfo) -> Completable {
+    func forgotPasswordMail(info: ForgotPasswordInfo) -> Completable {
         var urlComponents = self.urlComponents
-        urlComponents.path = Endpoint().resetPassword
+        urlComponents.path = Endpoint().forgotPassword
         guard let body = try? JSONEncoder().encode(info) else {
             return Completable.error(APIError.parseError)
         }
