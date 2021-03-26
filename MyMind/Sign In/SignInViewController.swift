@@ -45,13 +45,13 @@ class SignInViewController: NiblessViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         addKeyboardObservers()
-        navigationController?.isNavigationBarHidden = true
+//        navigationController?.isNavigationBarHidden = true
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         removeObservers()
-        navigationController?.isNavigationBarHidden = false
+//        navigationController?.isNavigationBarHidden = false
     }
 
     override func viewDidLayoutSubviews() {

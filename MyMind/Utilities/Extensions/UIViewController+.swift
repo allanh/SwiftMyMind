@@ -19,6 +19,22 @@ extension UIViewController {
 //        tapGesture.cancelsTouchesInView = false
         viewToAddGesture.addGestureRecognizer(tapGesture)
     }
+
+    func addCustomBackNavigationItem(image: String = "back_arrow", action: (() -> Void)? = nil) {
+        let button = UIButton()
+        button.setImage(UIImage(named: image), for: .normal)
+
+        button.addAction { [weak self] in
+            if let action = action {
+                action()
+            } else {
+                self?.navigationController?.popViewController(animated: true)
+            }
+        }
+        let barButton = UIBarButtonItem(customView: button)
+        barButton.style = .plain
+        navigationItem.setLeftBarButton(barButton, animated: true)
+    }
 }
 
 private var indicator: Void?

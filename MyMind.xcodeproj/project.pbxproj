@@ -22,6 +22,7 @@
 		A43E0B64260D7CA4005FC6CE /* NiblessNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43E0B61260D7CA4005FC6CE /* NiblessNavigationController.swift */; };
 		A43E0B65260D7CA4005FC6CE /* NiblessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43E0B62260D7CA4005FC6CE /* NiblessView.swift */; };
 		A43E0B6A260D84FB005FC6CE /* NVActivityIndicatorView+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43E0B69260D84FB005FC6CE /* NVActivityIndicatorView+Rx.swift */; };
+		A43E0B6F260DC66D005FC6CE /* UIControl+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43E0B6E260DC66D005FC6CE /* UIControl+.swift */; };
 		A44A5A6E25F9B0D200995823 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44A5A6D25F9B0D200995823 /* AppDelegate.swift */; };
 		A44A5A7025F9B0D200995823 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44A5A6F25F9B0D200995823 /* SceneDelegate.swift */; };
 		A44A5A7225F9B0D200995823 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44A5A7125F9B0D200995823 /* ViewController.swift */; };
@@ -98,6 +99,7 @@
 		A43E0B61260D7CA4005FC6CE /* NiblessNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NiblessNavigationController.swift; path = "../../../../arch-materials/05-architecture-mvvm/projects/final/KooberApp/KooberUIKit/Reusable/UIKit/NiblessComponents/NiblessNavigationController.swift"; sourceTree = "<group>"; };
 		A43E0B62260D7CA4005FC6CE /* NiblessView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NiblessView.swift; path = "../../../../arch-materials/05-architecture-mvvm/projects/final/KooberApp/KooberUIKit/Reusable/UIKit/NiblessComponents/NiblessView.swift"; sourceTree = "<group>"; };
 		A43E0B69260D84FB005FC6CE /* NVActivityIndicatorView+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NVActivityIndicatorView+Rx.swift"; sourceTree = "<group>"; };
+		A43E0B6E260DC66D005FC6CE /* UIControl+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIControl+.swift"; sourceTree = "<group>"; };
 		A44A5A6A25F9B0D200995823 /* MyMind.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyMind.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A44A5A6D25F9B0D200995823 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A44A5A6F25F9B0D200995823 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -301,6 +303,7 @@
 				A439B5402609D61C002352C2 /* String+.swift */,
 				A4159203260C394F00FD3989 /* UIButton+.swift */,
 				A43E0B69260D84FB005FC6CE /* NVActivityIndicatorView+Rx.swift */,
+				A43E0B6E260DC66D005FC6CE /* UIControl+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -644,6 +647,7 @@
 				A439B53C2609CDC3002352C2 /* ToastView.swift in Sources */,
 				A44A5A6E25F9B0D200995823 /* AppDelegate.swift in Sources */,
 				A4793CA72604873B00AD280C /* SignInRootView.swift in Sources */,
+				A43E0B6F260DC66D005FC6CE /* UIControl+.swift in Sources */,
 				A43E0B63260D7CA4005FC6CE /* NiblessViewController.swift in Sources */,
 				A49CF8C0260306D200AFC170 /* APIError.swift in Sources */,
 				A415920F260C796500FD3989 /* ForgotPasswordRootView.swift in Sources */,

@@ -33,6 +33,7 @@ class ForgotPasswordViewController: NiblessViewController {
         viewModel.captcha()
         observerViewModel()
         addTapToResignKeyboardGesture()
+        addCustomBackNavigationItem()
     }
 
     override func viewWillAppear(_ animated: Bool) {
