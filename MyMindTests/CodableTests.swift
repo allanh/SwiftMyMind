@@ -30,7 +30,7 @@ class CodableTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func test_Decode_CapchaSession() {
+    func test_decode_capchaSession() {
         guard let data = cachedFileData(name: "captcha_session") else {
             XCTFail()
             return
@@ -45,7 +45,7 @@ class CodableTests: XCTestCase {
         }
     }
 
-    func test_Decode_UserSession() {
+    func test_decode_userSession() {
         guard let data = cachedFileData(name: "user_session") else {
             XCTFail()
             return
