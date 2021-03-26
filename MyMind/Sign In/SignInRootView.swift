@@ -9,7 +9,7 @@ import UIKit
 import RxSwift
 import NVActivityIndicatorView
 
-class SignInRootView: UIView {
+class SignInRootView: NiblessView {
     let viewModel: SignInViewModel
     var hierarchyNotReady: Bool = true
     let bag: DisposeBag = DisposeBag()
@@ -187,10 +187,6 @@ class SignInRootView: UIView {
         super.init(frame: frame)
         bindToViewModel()
         bindViewModelToViews()
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 
     override func didMoveToWindow() {
@@ -488,8 +484,8 @@ extension SignInRootView {
             .constraint(equalTo: inputStackView.trailingAnchor)
         let height = signInButton.heightAnchor
             .constraint(equalToConstant: 40)
-        let bottom = signInButton.bottomAnchor
-            .constraint(equalTo: contentView.bottomAnchor, constant: 30)
+        let bottom = contentView.bottomAnchor
+            .constraint(equalTo: signInButton.bottomAnchor, constant: 30)
 
         NSLayoutConstraint.activate([
             top, leading, trailing, height, bottom
@@ -533,7 +529,7 @@ extension SignInRootView {
     }
 
     private func bindViewModelToSignInButton() {
-        viewModel.signInButtonEnable
+        viewModel.signInButtonEnabled
             .asDriver(onErrorJustReturn: true)
             .do(onNext: { [unowned self] in
                 let backgroundColor: UIColor = $0 ? UIColor(hex: "ff7d2c") : UIColor(hex: "f2f2f2")
@@ -544,7 +540,7 @@ extension SignInRootView {
     }
 
     private func bindViewModelToReloadCaptchaButton() {
-        viewModel.reloadButtonEnable
+        viewModel.reloadButtonEnabled
             .asDriver(onErrorJustReturn: true)
             .drive(reloadCaptchaButton.rx.isEnabled)
             .disposed(by: bag)

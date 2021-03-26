@@ -50,4 +50,11 @@ struct SignInValidatoinService {
             return .invalid("驗證碼長度為5碼")
         }
     }
+
+    func validateEmail(_ email: String) -> ValidationResult {
+        let isValid = email.range(
+            of: #"^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$"#,
+            options: [.regularExpression, .caseInsensitive]) != nil
+        return isValid ? .valid : .invalid("Email 輸入格式錯誤")
+    }
 }

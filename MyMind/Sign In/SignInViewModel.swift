@@ -27,8 +27,8 @@ class SignInViewModel {
     let isSecureTextEntry: BehaviorRelay<Bool> = BehaviorRelay.init(value: true)
 
     let shouldRememberAccount: BehaviorRelay<Bool> = BehaviorRelay.init(value: true)
-    let signInButtonEnable: BehaviorRelay<Bool> = BehaviorRelay.init(value: true)
-    let reloadButtonEnable: BehaviorRelay<Bool> = BehaviorRelay.init(value: true)
+    let signInButtonEnabled: BehaviorRelay<Bool> = BehaviorRelay.init(value: true)
+    let reloadButtonEnabled: BehaviorRelay<Bool> = BehaviorRelay.init(value: true)
     let activityIndicatorAnimating: BehaviorRelay<Bool> = BehaviorRelay.init(value: false)
     let captchaActivityIndicatorAnimating: BehaviorRelay<Bool> = BehaviorRelay.init(value: false)
 
@@ -147,7 +147,7 @@ class SignInViewModel {
     }
 
     private func indicateNetworkProcessing(_ isProcessing: Bool) {
-        signInButtonEnable.accept(!isProcessing)
-        reloadButtonEnable.accept(!isProcessing)
+        signInButtonEnabled.accept(!isProcessing)
+        reloadButtonEnabled.accept(!isProcessing)
     }
 }

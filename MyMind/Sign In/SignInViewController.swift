@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import NVActivityIndicatorView
 
-class SignInViewController: UIViewController {
+class SignInViewController: NiblessViewController {
 
     let viewModel: SignInViewModel
     let bag: DisposeBag = DisposeBag()
@@ -26,12 +26,9 @@ class SignInViewController: UIViewController {
 
     init(viewModel: SignInViewModel) {
         self.viewModel = viewModel
-        super.init(nibName: nil, bundle: nil)
+        super.init()
     }
 
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
 
     override func loadView() {
         view = SignInRootView(viewModel: viewModel)
@@ -95,7 +92,11 @@ class SignInViewController: UIViewController {
     }
 
     func showForgotPasswordViewController() {
-        let viewController = ForgotPasswordViewController()
+        let viewModel = ForgotPasswordViewModel(
+            signInService: MyMindSignInService(),
+            signInValidationService: SignInValidatoinService()
+        )
+        let viewController = ForgotPasswordViewController(viewModel: viewModel)
         show(viewController, sender: self)
     }
 }
