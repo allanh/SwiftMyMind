@@ -11,7 +11,8 @@ import XCTest
 class CodableTests: XCTestCase {
 
     private func cachedFileData(name: String, ext: String = "json") -> Data? {
-        guard let path = Bundle.main.path(forResource: name, ofType: ext) else {
+        let bundle = Bundle(for: type(of: self))
+        guard let path = bundle.path(forResource: name, ofType: ext) else {
             print("File not found.")
             return nil
         }

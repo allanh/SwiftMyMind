@@ -10,6 +10,7 @@
 		01CF6195FA67834B4B66F5E3 /* Pods_MyMind_MyMindUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20E97C84258EA1B1937DA48F /* Pods_MyMind_MyMindUITests.framework */; };
 		2E5069A60BD231A8689574B6 /* Pods_MyMind.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE0100A79B8C832CE91F6186 /* Pods_MyMind.framework */; };
 		9660C0DF9C9E4D5B23E221A7 /* Pods_MyMindTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E343FC883B3C7BBFB9A075 /* Pods_MyMindTests.framework */; };
+		A40A1FDA2611700000553207 /* captcha_session.json in Resources */ = {isa = PBXBuildFile; fileRef = A4793C832604592000AD280C /* captcha_session.json */; };
 		A4159204260C394F00FD3989 /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4159203260C394F00FD3989 /* UIButton+.swift */; };
 		A4159209260C603B00FD3989 /* ForgotPasswordInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4159208260C603B00FD3989 /* ForgotPasswordInfo.swift */; };
 		A415920F260C796500FD3989 /* ForgotPasswordRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A415920E260C796500FD3989 /* ForgotPasswordRootView.swift */; };
@@ -24,6 +25,7 @@
 		A43E0B6A260D84FB005FC6CE /* NVActivityIndicatorView+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43E0B69260D84FB005FC6CE /* NVActivityIndicatorView+Rx.swift */; };
 		A43E0B6F260DC66D005FC6CE /* UIControl+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43E0B6E260DC66D005FC6CE /* UIControl+.swift */; };
 		A43E0B74260DC944005FC6CE /* SignInValidationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43E0B73260DC944005FC6CE /* SignInValidationServiceTests.swift */; };
+		A43E0B79260DD598005FC6CE /* SignInViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43E0B78260DD598005FC6CE /* SignInViewModelTests.swift */; };
 		A44A5A6E25F9B0D200995823 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44A5A6D25F9B0D200995823 /* AppDelegate.swift */; };
 		A44A5A7025F9B0D200995823 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44A5A6F25F9B0D200995823 /* SceneDelegate.swift */; };
 		A44A5A7225F9B0D200995823 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44A5A7125F9B0D200995823 /* ViewController.swift */; };
@@ -53,7 +55,6 @@
 		A49CF8C526030CEE00AFC170 /* MyMindSignInService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49CF8C426030CEE00AFC170 /* MyMindSignInService.swift */; };
 		A49CF92A26034BEA00AFC170 /* CaptchaSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49CF92926034BEA00AFC170 /* CaptchaSession.swift */; };
 		A49CF9302603518A00AFC170 /* CodableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49CF92F2603518A00AFC170 /* CodableTests.swift */; };
-		A49CF9382603523100AFC170 /* user_session.json in Resources */ = {isa = PBXBuildFile; fileRef = A49CF9372603523100AFC170 /* user_session.json */; };
 		A49CF93C2603527500AFC170 /* user_session.json in Resources */ = {isa = PBXBuildFile; fileRef = A49CF9372603523100AFC170 /* user_session.json */; };
 		A4BDC79E260ADFC5005C33A5 /* UIViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BDC79D260ADFC5005C33A5 /* UIViewController+Rx.swift */; };
 		A4BDC7B4260B10E2005C33A5 /* SignInValidationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BDC7B3260B10E2005C33A5 /* SignInValidationService.swift */; };
@@ -102,6 +103,7 @@
 		A43E0B69260D84FB005FC6CE /* NVActivityIndicatorView+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NVActivityIndicatorView+Rx.swift"; sourceTree = "<group>"; };
 		A43E0B6E260DC66D005FC6CE /* UIControl+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIControl+.swift"; sourceTree = "<group>"; };
 		A43E0B73260DC944005FC6CE /* SignInValidationServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInValidationServiceTests.swift; sourceTree = "<group>"; };
+		A43E0B78260DD598005FC6CE /* SignInViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModelTests.swift; sourceTree = "<group>"; };
 		A44A5A6A25F9B0D200995823 /* MyMind.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyMind.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A44A5A6D25F9B0D200995823 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A44A5A6F25F9B0D200995823 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -120,7 +122,7 @@
 		A4793C672604423700AD280C /* SignInServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInServiceTest.swift; sourceTree = "<group>"; };
 		A4793C792604534100AD280C /* SignInInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInInfo.swift; sourceTree = "<group>"; };
 		A4793C7E2604573700AD280C /* UserSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSession.swift; sourceTree = "<group>"; };
-		A4793C832604592000AD280C /* captcha_session copy.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "captcha_session copy.json"; sourceTree = "<group>"; };
+		A4793C832604592000AD280C /* captcha_session.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = captcha_session.json; sourceTree = "<group>"; };
 		A4793C9526047C8000AD280C /* NibOwnerLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibOwnerLoadable.swift; sourceTree = "<group>"; };
 		A4793C9E26047DB900AD280C /* UIStoryboard+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+.swift"; sourceTree = "<group>"; };
 		A4793CA62604873B00AD280C /* SignInRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInRootView.swift; sourceTree = "<group>"; };
@@ -245,6 +247,7 @@
 				A49CF92F2603518A00AFC170 /* CodableTests.swift */,
 				A4793C672604423700AD280C /* SignInServiceTest.swift */,
 				A43E0B73260DC944005FC6CE /* SignInValidationServiceTests.swift */,
+				A43E0B78260DD598005FC6CE /* SignInViewModelTests.swift */,
 			);
 			path = MyMindTests;
 			sourceTree = "<group>";
@@ -326,7 +329,7 @@
 		A49CF92E26034D1900AFC170 /* APICache */ = {
 			isa = PBXGroup;
 			children = (
-				A4793C832604592000AD280C /* captcha_session copy.json */,
+				A4793C832604592000AD280C /* captcha_session.json */,
 				A49CF9372603523100AFC170 /* user_session.json */,
 			);
 			path = APICache;
@@ -471,7 +474,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A49CF9382603523100AFC170 /* user_session.json in Resources */,
 				A44A5A7A25F9B0D300995823 /* LaunchScreen.storyboard in Resources */,
 				A44A5A7725F9B0D300995823 /* Assets.xcassets in Resources */,
 				A44A5A7525F9B0D200995823 /* Main.storyboard in Resources */,
@@ -483,6 +485,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A49CF93C2603527500AFC170 /* user_session.json in Resources */,
+				A40A1FDA2611700000553207 /* captcha_session.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -668,6 +671,7 @@
 			files = (
 				A43E0B74260DC944005FC6CE /* SignInValidationServiceTests.swift in Sources */,
 				A49CF9302603518A00AFC170 /* CodableTests.swift in Sources */,
+				A43E0B79260DD598005FC6CE /* SignInViewModelTests.swift in Sources */,
 				A4793C682604423800AD280C /* SignInServiceTest.swift in Sources */,
 				A44A5A8525F9B0D300995823 /* MyMindTests.swift in Sources */,
 			);
