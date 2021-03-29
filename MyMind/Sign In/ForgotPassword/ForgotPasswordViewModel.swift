@@ -78,8 +78,8 @@ class ForgotPasswordViewModel {
                 default:
                     self.errorMessage.accept(unexpectedErrorMessage)
                 }
-            } onDisposed: { [unowned self] in
-                self.indicateSendingEmail(false)
+            } onDisposed: { [weak self] in
+                self?.indicateSendingEmail(false)
             }
             .disposed(by: bag)
     }
@@ -88,8 +88,8 @@ class ForgotPasswordViewModel {
     func captcha() {
         indicateUpdatingCaptcha(true)
         signInService.captcha()
-            .do(onDispose: { [unowned self] in
-                indicateUpdatingCaptcha(false)
+            .do(onDispose: { [weak self] in
+                self?.indicateUpdatingCaptcha(false)
             })
             .subscribe { [unowned self] in
                 switch $0 {

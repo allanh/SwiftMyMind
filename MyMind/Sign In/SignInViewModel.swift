@@ -93,8 +93,8 @@ class SignInViewModel {
                 let account = self.signInInfo.account
                 let accountInfo = SignInAccountInfo(storeID: storeID, account: account)
                 try? self.keychainHelper.saveItem(accountInfo, for: .lastSignInAccountInfo)
-            }, onDispose: { [unowned self] in
-                self.indicateSigningIn(false)
+            }, onDispose: { [weak self] in
+                self?.indicateSigningIn(false)
             })
             .subscribe{ [unowned self] in
                 switch $0 {
@@ -116,8 +116,8 @@ class SignInViewModel {
     func captcha() {
         indicateUpdatingCaptcha(true)
         signInService.captcha()
-            .do(onDispose: { [unowned self] in
-                indicateUpdatingCaptcha(false)
+            .do(onDispose: { [weak self] in
+                self?.indicateUpdatingCaptcha(false)
             })
             .subscribe { [unowned self] in
                 switch $0 {

@@ -23,9 +23,7 @@ class ForgotPasswordViewModelTests: XCTestCase {
     }
 
     override func tearDownWithError() throws {
-        // Make sure keychain cleared after test
-        sut = nil
-        mockSignInService = nil
+
     }
 
     func test_validate_input_info() {
@@ -58,10 +56,11 @@ class ForgotPasswordViewModelTests: XCTestCase {
             email: "test@gmail.com",
             captchaKey: "test",
             captchaValue: "23412")
+        let successMessage = sut.successMessage.asObservable()
+
         sut.forgotPasswordInfo = validInfo
         sut.confirmSendEmail()
 
-        let successMessage = sut.successMessage.asObservable()
         let result = try? successMessage.toBlocking(timeout: 1).first()
         XCTAssertEqual(result, "重設密碼連結已寄出！")
     }
@@ -74,28 +73,30 @@ class ForgotPasswordViewModelTests: XCTestCase {
             captchaKey: "test",
             captchaValue: "23412")
         sut.forgotPasswordInfo = validInfo
+        let errorMessage = sut.errorMessage.asObservable()
+
         mockSignInService.isSuccess = false
         sut.confirmSendEmail()
 
-        let errorMessage = sut.errorMessage.asObservable()
         let result = try? errorMessage.toBlocking(timeout: 1).first()
         XCTAssertEqual(result, sut.unexpectedErrorMessage)
     }
 
     func test_captcha_success() {
-        sut.captcha()
         let captchaSessiong = sut.captchaSession.asObservable()
+        sut.captcha()
 
-        let result = try?             captchaSessiong.toBlocking(timeout: 1).first()
+        let result = try? captchaSessiong.toBlocking(timeout: 1).first()
         XCTAssertNotNil(result)
+        sut = nil
     }
 
     func test_captcha_failed() {
+        let errorMessage = sut.errorMessage.asObservable()
         mockSignInService.isSuccess = false
         sut.captcha()
-        let errorMessage = sut.errorMessage.asObservable()
 
-        let result = try?            errorMessage.toBlocking(timeout: 1).first()
+        let result = try? errorMessage.toBlocking(timeout: 1).first()
 
         XCTAssertNotNil(result)
         XCTAssertEqual(sut.unexpectedErrorMessage, result)

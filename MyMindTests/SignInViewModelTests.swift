@@ -75,8 +75,6 @@ class SignInViewModelTests: XCTestCase {
         try sut.keychainHelper.removeItem(key: .lastSignInAccountInfo)
         let info = try? sut.keychainHelper.readItem(key: .lastSignInAccountInfo, valueType: SignInAccountInfo.self)
         XCTAssertNil(info)
-        sut = nil
-        mockSignInService = nil
     }
 
     func test_validate_signInInfo() {
@@ -112,11 +110,11 @@ class SignInViewModelTests: XCTestCase {
             captchaValue: "33414"
         )
         sut.signInInfo = signInInfo
+        let userSession = sut.userSession.asObservable().observe(on: MainScheduler.instance)
         sut.signIn()
-        let userSession = sut.userSession.asObservable()
 
-        let result = try             userSession.toBlocking(timeout: 1).first()
-        let info = try? sut.keychainHelper.readItem(key: .lastSignInAccountInfo, valueType: SignInAccountInfo.self)
+        let result = try userSession.toBlocking(timeout: 1).first()
+        let info = try sut.keychainHelper.readItem(key: .lastSignInAccountInfo, valueType: SignInAccountInfo.self)
         XCTAssertNotNil(info)
         XCTAssertNotNil(result)
         XCTAssertEqual(result?.token, "test")
@@ -131,28 +129,28 @@ class SignInViewModelTests: XCTestCase {
             captchaValue: "33414"
         )
         sut.signInInfo = signInInfo
+        let errorMessage = sut.errorMessage.asObservable().observe(on: MainScheduler.instance)
         mockSignInService.isSuccess = false
         sut.signIn()
-        let errorMessage = sut.errorMessage.asObservable()
 
-        let result = try?            errorMessage.toBlocking(timeout: 1).first()
+        let result = try? errorMessage.toBlocking(timeout: 1).first()
 
         XCTAssertNotNil(result)
         XCTAssertEqual(sut.unexpectedErrorMessage, result)
     }
 
     func test_captcha_success() {
+        let captchaSessiong = sut.captchaSession.asObservable().observe(on: MainScheduler.instance)
         sut.captcha()
-        let captchaSessiong = sut.captchaSession.asObservable()
 
         let result = try? captchaSessiong.toBlocking(timeout: 1).first()
         XCTAssertNotNil(result)
     }
 
     func test_captcha_failed() {
+        let errorMessage = sut.errorMessage.asObservable().observe(on: MainScheduler.instance)
         mockSignInService.isSuccess = false
         sut.captcha()
-        let errorMessage = sut.errorMessage.asObservable()
 
         let result = try? errorMessage.toBlocking(timeout: 1).first()
 
