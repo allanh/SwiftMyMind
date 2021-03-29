@@ -145,13 +145,8 @@ class SignInViewModelTests: XCTestCase {
         sut.captcha()
         let captchaSessiong = sut.captchaSession.asObservable()
 
-        do {
-            let result = try             captchaSessiong.toBlocking(timeout: 1).first()
-            XCTAssertNotNil(result)
-        } catch let error {
-            let apiError = error as? APIError
-            XCTAssertNil(apiError)
-        }
+        let result = try? captchaSessiong.toBlocking(timeout: 1).first()
+        XCTAssertNotNil(result)
     }
 
     func test_captcha_failed() {
@@ -159,7 +154,7 @@ class SignInViewModelTests: XCTestCase {
         sut.captcha()
         let errorMessage = sut.errorMessage.asObservable()
 
-        let result = try?            errorMessage.toBlocking(timeout: 1).first()
+        let result = try? errorMessage.toBlocking(timeout: 1).first()
 
         XCTAssertNotNil(result)
         XCTAssertEqual(sut.unexpectedErrorMessage, result)

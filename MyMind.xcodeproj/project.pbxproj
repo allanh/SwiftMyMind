@@ -11,6 +11,7 @@
 		2E5069A60BD231A8689574B6 /* Pods_MyMind.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE0100A79B8C832CE91F6186 /* Pods_MyMind.framework */; };
 		9660C0DF9C9E4D5B23E221A7 /* Pods_MyMindTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E343FC883B3C7BBFB9A075 /* Pods_MyMindTests.framework */; };
 		A40A1FDA2611700000553207 /* captcha_session.json in Resources */ = {isa = PBXBuildFile; fileRef = A4793C832604592000AD280C /* captcha_session.json */; };
+		A40A1FF22611791000553207 /* ForgotPasswordViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40A1FF12611791000553207 /* ForgotPasswordViewModelTests.swift */; };
 		A4159204260C394F00FD3989 /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4159203260C394F00FD3989 /* UIButton+.swift */; };
 		A4159209260C603B00FD3989 /* ForgotPasswordInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4159208260C603B00FD3989 /* ForgotPasswordInfo.swift */; };
 		A415920F260C796500FD3989 /* ForgotPasswordRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A415920E260C796500FD3989 /* ForgotPasswordRootView.swift */; };
@@ -89,6 +90,7 @@
 		56E343FC883B3C7BBFB9A075 /* Pods_MyMindTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyMindTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DE023121A8831DEABDA0767 /* Pods-MyMind-MyMindUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMind-MyMindUITests.debug.xcconfig"; path = "Target Support Files/Pods-MyMind-MyMindUITests/Pods-MyMind-MyMindUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		8A105A1720C2E5FCBADB8898 /* Pods-MyMind.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMind.debug.xcconfig"; path = "Target Support Files/Pods-MyMind/Pods-MyMind.debug.xcconfig"; sourceTree = "<group>"; };
+		A40A1FF12611791000553207 /* ForgotPasswordViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewModelTests.swift; sourceTree = "<group>"; };
 		A4159203260C394F00FD3989 /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
 		A4159208260C603B00FD3989 /* ForgotPasswordInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordInfo.swift; sourceTree = "<group>"; };
 		A415920E260C796500FD3989 /* ForgotPasswordRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordRootView.swift; sourceTree = "<group>"; };
@@ -248,6 +250,7 @@
 				A4793C672604423700AD280C /* SignInServiceTest.swift */,
 				A43E0B73260DC944005FC6CE /* SignInValidationServiceTests.swift */,
 				A43E0B78260DD598005FC6CE /* SignInViewModelTests.swift */,
+				A40A1FF12611791000553207 /* ForgotPasswordViewModelTests.swift */,
 			);
 			path = MyMindTests;
 			sourceTree = "<group>";
@@ -673,6 +676,7 @@
 				A49CF9302603518A00AFC170 /* CodableTests.swift in Sources */,
 				A43E0B79260DD598005FC6CE /* SignInViewModelTests.swift in Sources */,
 				A4793C682604423800AD280C /* SignInServiceTest.swift in Sources */,
+				A40A1FF22611791000553207 /* ForgotPasswordViewModelTests.swift in Sources */,
 				A44A5A8525F9B0D300995823 /* MyMindTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

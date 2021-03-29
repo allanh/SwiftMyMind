@@ -32,7 +32,7 @@ class ForgotPasswordViewModel {
     let captchaSession: PublishRelay<CaptchaSession> = PublishRelay.init()
     let errorMessage: PublishRelay<String> = PublishRelay.init()
 
-    private let unexpectedErrorMessage: String = "未知的錯誤發生"
+    let unexpectedErrorMessage: String = "未知的錯誤發生"
 
     init(signInService: SignInService,
          signInValidationService: SignInValidatoinService) {
