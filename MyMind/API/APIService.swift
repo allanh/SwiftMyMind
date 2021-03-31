@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import RxSwift
+import RxCocoa
 
 protocol APIService { }
 
@@ -22,7 +24,12 @@ extension APIService {
         }
         var request = URLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: timeoutInterval)
         request.httpMethod = httpMethod
-        request.httpBody = httpBody
+
+        if let body = httpBody {
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.httpBody = body
+        }
+
         if let header = httpHeader {
             for (key, value) in header {
                 request.addValue(value, forHTTPHeaderField: key)
@@ -85,5 +92,25 @@ extension APIService {
             }
         }
         task.resume()
+    }
+
+    func dataRequest(urlComponents: URLComponents,
+                 httpMethod: String = "GET",
+                 httpHeader: [String: String]? = nil,
+                 httpBody: Data? = nil,
+                 timeoutInterval: TimeInterval = 5) -> Observable<(response: HTTPURLResponse, data: Data)> {
+
+        do {
+            guard let request = request(urlComponents: urlComponents, httpMethod: httpMethod, httpHeader: httpHeader, httpBody: httpBody, timeoutInterval: timeoutInterval) else {
+                throw APIError.urlError
+            }
+            return URLSession.shared.rx.response(request: request)
+        } catch let error {
+            return Observable<(response: HTTPURLResponse, data: Data)>.create { observer in
+                observer.onError(error)
+                return Disposables.create()
+            }
+        }
+
     }
 }

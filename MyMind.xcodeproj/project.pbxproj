@@ -3,13 +3,31 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		01CF6195FA67834B4B66F5E3 /* Pods_MyMind_MyMindUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20E97C84258EA1B1937DA48F /* Pods_MyMind_MyMindUITests.framework */; };
 		2E5069A60BD231A8689574B6 /* Pods_MyMind.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE0100A79B8C832CE91F6186 /* Pods_MyMind.framework */; };
 		9660C0DF9C9E4D5B23E221A7 /* Pods_MyMindTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E343FC883B3C7BBFB9A075 /* Pods_MyMindTests.framework */; };
+		A40A1FDA2611700000553207 /* captcha_session.json in Resources */ = {isa = PBXBuildFile; fileRef = A4793C832604592000AD280C /* captcha_session.json */; };
+		A40A1FF22611791000553207 /* ForgotPasswordViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40A1FF12611791000553207 /* ForgotPasswordViewModelTests.swift */; };
+		A40A1FF92611BFBD00553207 /* MyMindUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44A5A8F25F9B0D300995823 /* MyMindUITests.swift */; };
+		A4159204260C394F00FD3989 /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4159203260C394F00FD3989 /* UIButton+.swift */; };
+		A4159209260C603B00FD3989 /* ForgotPasswordInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4159208260C603B00FD3989 /* ForgotPasswordInfo.swift */; };
+		A415920F260C796500FD3989 /* ForgotPasswordRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A415920E260C796500FD3989 /* ForgotPasswordRootView.swift */; };
+		A4159214260C861F00FD3989 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4159213260C861F00FD3989 /* ForgotPasswordViewController.swift */; };
+		A4159219260C8FC600FD3989 /* ForgotPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4159218260C8FC600FD3989 /* ForgotPasswordViewModel.swift */; };
+		A439B52C26099AA1002352C2 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A439B52B26099AA1002352C2 /* UIViewController+.swift */; };
+		A439B53C2609CDC3002352C2 /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A439B53B2609CDC3002352C2 /* ToastView.swift */; };
+		A439B5412609D61C002352C2 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A439B5402609D61C002352C2 /* String+.swift */; };
+		A43E0B63260D7CA4005FC6CE /* NiblessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43E0B60260D7CA4005FC6CE /* NiblessViewController.swift */; };
+		A43E0B64260D7CA4005FC6CE /* NiblessNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43E0B61260D7CA4005FC6CE /* NiblessNavigationController.swift */; };
+		A43E0B65260D7CA4005FC6CE /* NiblessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43E0B62260D7CA4005FC6CE /* NiblessView.swift */; };
+		A43E0B6A260D84FB005FC6CE /* NVActivityIndicatorView+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43E0B69260D84FB005FC6CE /* NVActivityIndicatorView+Rx.swift */; };
+		A43E0B6F260DC66D005FC6CE /* UIControl+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43E0B6E260DC66D005FC6CE /* UIControl+.swift */; };
+		A43E0B74260DC944005FC6CE /* SignInValidationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43E0B73260DC944005FC6CE /* SignInValidationServiceTests.swift */; };
+		A43E0B79260DD598005FC6CE /* SignInViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43E0B78260DD598005FC6CE /* SignInViewModelTests.swift */; };
 		A44A5A6E25F9B0D200995823 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44A5A6D25F9B0D200995823 /* AppDelegate.swift */; };
 		A44A5A7025F9B0D200995823 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44A5A6F25F9B0D200995823 /* SceneDelegate.swift */; };
 		A44A5A7225F9B0D200995823 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44A5A7125F9B0D200995823 /* ViewController.swift */; };
@@ -17,7 +35,32 @@
 		A44A5A7725F9B0D300995823 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A44A5A7625F9B0D300995823 /* Assets.xcassets */; };
 		A44A5A7A25F9B0D300995823 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A44A5A7825F9B0D300995823 /* LaunchScreen.storyboard */; };
 		A44A5A8525F9B0D300995823 /* MyMindTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44A5A8425F9B0D300995823 /* MyMindTests.swift */; };
-		A44A5A9025F9B0D300995823 /* MyMindUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44A5A8F25F9B0D300995823 /* MyMindUITests.swift */; };
+		A4705B9126020E5700B30CE6 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4705B9026020E5700B30CE6 /* Response.swift */; };
+		A4793C682604423800AD280C /* SignInServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4793C672604423700AD280C /* SignInServiceTest.swift */; };
+		A4793C7A2604534100AD280C /* SignInInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4793C792604534100AD280C /* SignInInfo.swift */; };
+		A4793C7F2604573700AD280C /* UserSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4793C7E2604573700AD280C /* UserSession.swift */; };
+		A4793C9626047C8000AD280C /* NibOwnerLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4793C9526047C8000AD280C /* NibOwnerLoadable.swift */; };
+		A4793C9F26047DB900AD280C /* UIStoryboard+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4793C9E26047DB900AD280C /* UIStoryboard+.swift */; };
+		A4793CA72604873B00AD280C /* SignInRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4793CA62604873B00AD280C /* SignInRootView.swift */; };
+		A4793CAC260488E800AD280C /* Declarative.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4793CAB260488E800AD280C /* Declarative.swift */; };
+		A4793CB126048BB600AD280C /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4793CB026048BB600AD280C /* UIFont+.swift */; };
+		A4793CB626048EBA00AD280C /* ValidatableInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4793CB526048EBA00AD280C /* ValidatableInputView.swift */; };
+		A4793CBB260490A600AD280C /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4793CBA260490A600AD280C /* UIColor+.swift */; };
+		A4793CC02604A59C00AD280C /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4793CBF2604A59C00AD280C /* GradientView.swift */; };
+		A48389AF2608360A0044C09E /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48389AE2608360A0044C09E /* SignInViewController.swift */; };
+		A48389B4260869940044C09E /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48389B3260869940044C09E /* SignInViewModel.swift */; };
+		A48389BE260876770044C09E /* SignInService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48389BD260876770044C09E /* SignInService.swift */; };
+		A49CF8B6260301DE00AFC170 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49CF8B5260301DE00AFC170 /* Endpoint.swift */; };
+		A49CF8BB2603028C00AFC170 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49CF8BA2603028C00AFC170 /* APIService.swift */; };
+		A49CF8C0260306D200AFC170 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49CF8BF260306D200AFC170 /* APIError.swift */; };
+		A49CF8C526030CEE00AFC170 /* MyMindSignInService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49CF8C426030CEE00AFC170 /* MyMindSignInService.swift */; };
+		A49CF92A26034BEA00AFC170 /* CaptchaSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49CF92926034BEA00AFC170 /* CaptchaSession.swift */; };
+		A49CF9302603518A00AFC170 /* CodableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49CF92F2603518A00AFC170 /* CodableTests.swift */; };
+		A49CF93C2603527500AFC170 /* user_session.json in Resources */ = {isa = PBXBuildFile; fileRef = A49CF9372603523100AFC170 /* user_session.json */; };
+		A4BDC79E260ADFC5005C33A5 /* UIViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BDC79D260ADFC5005C33A5 /* UIViewController+Rx.swift */; };
+		A4BDC7B4260B10E2005C33A5 /* SignInValidationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BDC7B3260B10E2005C33A5 /* SignInValidationService.swift */; };
+		A4BDC7B9260B3E0A005C33A5 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BDC7B8260B3E0A005C33A5 /* KeychainHelper.swift */; };
+		A4BDC7BE260B418E005C33A5 /* SignInAccountInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BDC7BD260B418E005C33A5 /* SignInAccountInfo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +90,22 @@
 		56E343FC883B3C7BBFB9A075 /* Pods_MyMindTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyMindTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DE023121A8831DEABDA0767 /* Pods-MyMind-MyMindUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMind-MyMindUITests.debug.xcconfig"; path = "Target Support Files/Pods-MyMind-MyMindUITests/Pods-MyMind-MyMindUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		8A105A1720C2E5FCBADB8898 /* Pods-MyMind.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMind.debug.xcconfig"; path = "Target Support Files/Pods-MyMind/Pods-MyMind.debug.xcconfig"; sourceTree = "<group>"; };
+		A40A1FF12611791000553207 /* ForgotPasswordViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewModelTests.swift; sourceTree = "<group>"; };
+		A4159203260C394F00FD3989 /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
+		A4159208260C603B00FD3989 /* ForgotPasswordInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordInfo.swift; sourceTree = "<group>"; };
+		A415920E260C796500FD3989 /* ForgotPasswordRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordRootView.swift; sourceTree = "<group>"; };
+		A4159213260C861F00FD3989 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
+		A4159218260C8FC600FD3989 /* ForgotPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewModel.swift; sourceTree = "<group>"; };
+		A439B52B26099AA1002352C2 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
+		A439B53B2609CDC3002352C2 /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
+		A439B5402609D61C002352C2 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
+		A43E0B60260D7CA4005FC6CE /* NiblessViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NiblessViewController.swift; path = "../../../../arch-materials/05-architecture-mvvm/projects/final/KooberApp/KooberUIKit/Reusable/UIKit/NiblessComponents/NiblessViewController.swift"; sourceTree = "<group>"; };
+		A43E0B61260D7CA4005FC6CE /* NiblessNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NiblessNavigationController.swift; path = "../../../../arch-materials/05-architecture-mvvm/projects/final/KooberApp/KooberUIKit/Reusable/UIKit/NiblessComponents/NiblessNavigationController.swift"; sourceTree = "<group>"; };
+		A43E0B62260D7CA4005FC6CE /* NiblessView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NiblessView.swift; path = "../../../../arch-materials/05-architecture-mvvm/projects/final/KooberApp/KooberUIKit/Reusable/UIKit/NiblessComponents/NiblessView.swift"; sourceTree = "<group>"; };
+		A43E0B69260D84FB005FC6CE /* NVActivityIndicatorView+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NVActivityIndicatorView+Rx.swift"; sourceTree = "<group>"; };
+		A43E0B6E260DC66D005FC6CE /* UIControl+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIControl+.swift"; sourceTree = "<group>"; };
+		A43E0B73260DC944005FC6CE /* SignInValidationServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInValidationServiceTests.swift; sourceTree = "<group>"; };
+		A43E0B78260DD598005FC6CE /* SignInViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModelTests.swift; sourceTree = "<group>"; };
 		A44A5A6A25F9B0D200995823 /* MyMind.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyMind.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A44A5A6D25F9B0D200995823 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A44A5A6F25F9B0D200995823 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -61,6 +120,33 @@
 		A44A5A8B25F9B0D300995823 /* MyMindUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyMindUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A44A5A8F25F9B0D300995823 /* MyMindUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMindUITests.swift; sourceTree = "<group>"; };
 		A44A5A9125F9B0D300995823 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A4705B9026020E5700B30CE6 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
+		A4793C672604423700AD280C /* SignInServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInServiceTest.swift; sourceTree = "<group>"; };
+		A4793C792604534100AD280C /* SignInInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInInfo.swift; sourceTree = "<group>"; };
+		A4793C7E2604573700AD280C /* UserSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSession.swift; sourceTree = "<group>"; };
+		A4793C832604592000AD280C /* captcha_session.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = captcha_session.json; sourceTree = "<group>"; };
+		A4793C9526047C8000AD280C /* NibOwnerLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibOwnerLoadable.swift; sourceTree = "<group>"; };
+		A4793C9E26047DB900AD280C /* UIStoryboard+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+.swift"; sourceTree = "<group>"; };
+		A4793CA62604873B00AD280C /* SignInRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInRootView.swift; sourceTree = "<group>"; };
+		A4793CAB260488E800AD280C /* Declarative.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Declarative.swift; sourceTree = "<group>"; };
+		A4793CB026048BB600AD280C /* UIFont+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+.swift"; sourceTree = "<group>"; };
+		A4793CB526048EBA00AD280C /* ValidatableInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatableInputView.swift; sourceTree = "<group>"; };
+		A4793CBA260490A600AD280C /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
+		A4793CBF2604A59C00AD280C /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		A48389AE2608360A0044C09E /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		A48389B3260869940044C09E /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
+		A48389BD260876770044C09E /* SignInService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInService.swift; sourceTree = "<group>"; };
+		A49CF8B5260301DE00AFC170 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		A49CF8BA2603028C00AFC170 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		A49CF8BF260306D200AFC170 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
+		A49CF8C426030CEE00AFC170 /* MyMindSignInService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMindSignInService.swift; sourceTree = "<group>"; };
+		A49CF92926034BEA00AFC170 /* CaptchaSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptchaSession.swift; sourceTree = "<group>"; };
+		A49CF92F2603518A00AFC170 /* CodableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableTests.swift; sourceTree = "<group>"; };
+		A49CF9372603523100AFC170 /* user_session.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = user_session.json; sourceTree = "<group>"; };
+		A4BDC79D260ADFC5005C33A5 /* UIViewController+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Rx.swift"; sourceTree = "<group>"; };
+		A4BDC7B3260B10E2005C33A5 /* SignInValidationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInValidationService.swift; sourceTree = "<group>"; };
+		A4BDC7B8260B3E0A005C33A5 /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
+		A4BDC7BD260B418E005C33A5 /* SignInAccountInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInAccountInfo.swift; sourceTree = "<group>"; };
 		A64D73FCB71924FE21D7799F /* Pods-MyMind.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMind.release.xcconfig"; path = "Target Support Files/Pods-MyMind/Pods-MyMind.release.xcconfig"; sourceTree = "<group>"; };
 		BE0100A79B8C832CE91F6186 /* Pods_MyMind.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyMind.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB6BB17D55B5E80D4362936C /* Pods-MyMind-MyMindUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMind-MyMindUITests.release.xcconfig"; path = "Target Support Files/Pods-MyMind-MyMindUITests/Pods-MyMind-MyMindUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -104,6 +190,16 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		A415920D260C794700FD3989 /* ForgotPassword */ = {
+			isa = PBXGroup;
+			children = (
+				A415920E260C796500FD3989 /* ForgotPasswordRootView.swift */,
+				A4159213260C861F00FD3989 /* ForgotPasswordViewController.swift */,
+				A4159218260C8FC600FD3989 /* ForgotPasswordViewModel.swift */,
+			);
+			path = ForgotPassword;
+			sourceTree = "<group>";
+		};
 		A44A5A6125F9B0D200995823 = {
 			isa = PBXGroup;
 			children = (
@@ -129,8 +225,11 @@
 		A44A5A6C25F9B0D200995823 /* MyMind */ = {
 			isa = PBXGroup;
 			children = (
+				A4793C9426047C6500AD280C /* Utilities */,
+				A49CF92E26034D1900AFC170 /* APICache */,
 				A49CF8AC2602FEB100AFC170 /* API */,
 				A4705B8C26020E4400B30CE6 /* Model */,
+				A4793C932604768200AD280C /* Sign In */,
 				A44A5A6D25F9B0D200995823 /* AppDelegate.swift */,
 				A44A5A6F25F9B0D200995823 /* SceneDelegate.swift */,
 				A44A5A7125F9B0D200995823 /* ViewController.swift */,
@@ -147,6 +246,11 @@
 			children = (
 				A44A5A8425F9B0D300995823 /* MyMindTests.swift */,
 				A44A5A8625F9B0D300995823 /* Info.plist */,
+				A49CF92F2603518A00AFC170 /* CodableTests.swift */,
+				A4793C672604423700AD280C /* SignInServiceTest.swift */,
+				A43E0B73260DC944005FC6CE /* SignInValidationServiceTests.swift */,
+				A43E0B78260DD598005FC6CE /* SignInViewModelTests.swift */,
+				A40A1FF12611791000553207 /* ForgotPasswordViewModelTests.swift */,
 			);
 			path = MyMindTests;
 			sourceTree = "<group>";
@@ -163,15 +267,88 @@
 		A4705B8C26020E4400B30CE6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				A4705B9026020E5700B30CE6 /* Response.swift */,
+				A49CF92926034BEA00AFC170 /* CaptchaSession.swift */,
+				A4793C792604534100AD280C /* SignInInfo.swift */,
+				A4793C7E2604573700AD280C /* UserSession.swift */,
+				A4BDC7BD260B418E005C33A5 /* SignInAccountInfo.swift */,
+				A4159208260C603B00FD3989 /* ForgotPasswordInfo.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		A4793C932604768200AD280C /* Sign In */ = {
+			isa = PBXGroup;
+			children = (
+				A415920D260C794700FD3989 /* ForgotPassword */,
+				A4793CA62604873B00AD280C /* SignInRootView.swift */,
+				A4793CB526048EBA00AD280C /* ValidatableInputView.swift */,
+				A48389AE2608360A0044C09E /* SignInViewController.swift */,
+				A48389B3260869940044C09E /* SignInViewModel.swift */,
+				A4BDC7B3260B10E2005C33A5 /* SignInValidationService.swift */,
+			);
+			path = "Sign In";
+			sourceTree = "<group>";
+		};
+		A4793C9426047C6500AD280C /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				A4BDC7B2260B0F34005C33A5 /* UILayer */,
+				A4793C9D26047DA300AD280C /* Extensions */,
+				A4793CAB260488E800AD280C /* Declarative.swift */,
+				A4BDC7B8260B3E0A005C33A5 /* KeychainHelper.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		A4793C9D26047DA300AD280C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				A4793C9E26047DB900AD280C /* UIStoryboard+.swift */,
+				A4793CB026048BB600AD280C /* UIFont+.swift */,
+				A4793CBA260490A600AD280C /* UIColor+.swift */,
+				A439B52B26099AA1002352C2 /* UIViewController+.swift */,
+				A4BDC79D260ADFC5005C33A5 /* UIViewController+Rx.swift */,
+				A439B5402609D61C002352C2 /* String+.swift */,
+				A4159203260C394F00FD3989 /* UIButton+.swift */,
+				A43E0B69260D84FB005FC6CE /* NVActivityIndicatorView+Rx.swift */,
+				A43E0B6E260DC66D005FC6CE /* UIControl+.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		A49CF8AC2602FEB100AFC170 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				A49CF8B5260301DE00AFC170 /* Endpoint.swift */,
+				A49CF8BA2603028C00AFC170 /* APIService.swift */,
+				A49CF8BF260306D200AFC170 /* APIError.swift */,
+				A49CF8C426030CEE00AFC170 /* MyMindSignInService.swift */,
+				A48389BD260876770044C09E /* SignInService.swift */,
 			);
 			path = API;
+			sourceTree = "<group>";
+		};
+		A49CF92E26034D1900AFC170 /* APICache */ = {
+			isa = PBXGroup;
+			children = (
+				A4793C832604592000AD280C /* captcha_session.json */,
+				A49CF9372603523100AFC170 /* user_session.json */,
+			);
+			path = APICache;
+			sourceTree = "<group>";
+		};
+		A4BDC7B2260B0F34005C33A5 /* UILayer */ = {
+			isa = PBXGroup;
+			children = (
+				A43E0B61260D7CA4005FC6CE /* NiblessNavigationController.swift */,
+				A43E0B62260D7CA4005FC6CE /* NiblessView.swift */,
+				A43E0B60260D7CA4005FC6CE /* NiblessViewController.swift */,
+				A439B53B2609CDC3002352C2 /* ToastView.swift */,
+				A4793CBF2604A59C00AD280C /* GradientView.swift */,
+				A4793C9526047C8000AD280C /* NibOwnerLoadable.swift */,
+			);
+			path = UILayer;
 			sourceTree = "<group>";
 		};
 		FE90B85D82B6B4639CD1A164 /* Pods */ = {
@@ -187,7 +364,6 @@
 				3B6D7B8475F284AB766B490C /* Pods-MyMindTests.alpha.xcconfig */,
 				134E37E4F16EA43954BE94DF /* Pods-MyMindTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -221,6 +397,7 @@
 				A44A5A7C25F9B0D300995823 /* Sources */,
 				A44A5A7D25F9B0D300995823 /* Frameworks */,
 				A44A5A7E25F9B0D300995823 /* Resources */,
+				75F4A5022B25211776205A55 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -260,6 +437,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 1240;
 				LastUpgradeCheck = 1240;
+				ORGANIZATIONNAME = "United Digital Intelligence";
 				TargetAttributes = {
 					A44A5A6925F9B0D200995823 = {
 						CreatedOnToolsVersion = 12.4;
@@ -309,6 +487,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A49CF93C2603527500AFC170 /* user_session.json in Resources */,
+				A40A1FDA2611700000553207 /* captcha_session.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -383,6 +563,23 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MyMind-MyMindUITests/Pods-MyMind-MyMindUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		75F4A5022B25211776205A55 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MyMindTests/Pods-MyMindTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MyMindTests/Pods-MyMindTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MyMindTests/Pods-MyMindTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		B7DA1CB1CCCF9026970FF5AB /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -429,9 +626,45 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4793CC02604A59C00AD280C /* GradientView.swift in Sources */,
+				A49CF8C526030CEE00AFC170 /* MyMindSignInService.swift in Sources */,
+				A4159214260C861F00FD3989 /* ForgotPasswordViewController.swift in Sources */,
+				A4793C9626047C8000AD280C /* NibOwnerLoadable.swift in Sources */,
+				A4793C7A2604534100AD280C /* SignInInfo.swift in Sources */,
+				A4705B9126020E5700B30CE6 /* Response.swift in Sources */,
+				A4793C9F26047DB900AD280C /* UIStoryboard+.swift in Sources */,
+				A4BDC79E260ADFC5005C33A5 /* UIViewController+Rx.swift in Sources */,
+				A4793CAC260488E800AD280C /* Declarative.swift in Sources */,
+				A49CF92A26034BEA00AFC170 /* CaptchaSession.swift in Sources */,
+				A4BDC7B4260B10E2005C33A5 /* SignInValidationService.swift in Sources */,
+				A48389B4260869940044C09E /* SignInViewModel.swift in Sources */,
+				A43E0B6A260D84FB005FC6CE /* NVActivityIndicatorView+Rx.swift in Sources */,
+				A43E0B64260D7CA4005FC6CE /* NiblessNavigationController.swift in Sources */,
+				A4159219260C8FC600FD3989 /* ForgotPasswordViewModel.swift in Sources */,
+				A4BDC7B9260B3E0A005C33A5 /* KeychainHelper.swift in Sources */,
+				A48389AF2608360A0044C09E /* SignInViewController.swift in Sources */,
+				A49CF8BB2603028C00AFC170 /* APIService.swift in Sources */,
+				A48389BE260876770044C09E /* SignInService.swift in Sources */,
+				A4BDC7BE260B418E005C33A5 /* SignInAccountInfo.swift in Sources */,
+				A439B5412609D61C002352C2 /* String+.swift in Sources */,
+				A43E0B65260D7CA4005FC6CE /* NiblessView.swift in Sources */,
+				A4793CB126048BB600AD280C /* UIFont+.swift in Sources */,
 				A44A5A7225F9B0D200995823 /* ViewController.swift in Sources */,
+				A4159204260C394F00FD3989 /* UIButton+.swift in Sources */,
+				A439B52C26099AA1002352C2 /* UIViewController+.swift in Sources */,
+				A4793C7F2604573700AD280C /* UserSession.swift in Sources */,
+				A439B53C2609CDC3002352C2 /* ToastView.swift in Sources */,
 				A44A5A6E25F9B0D200995823 /* AppDelegate.swift in Sources */,
+				A4793CA72604873B00AD280C /* SignInRootView.swift in Sources */,
+				A43E0B6F260DC66D005FC6CE /* UIControl+.swift in Sources */,
+				A43E0B63260D7CA4005FC6CE /* NiblessViewController.swift in Sources */,
+				A49CF8C0260306D200AFC170 /* APIError.swift in Sources */,
+				A415920F260C796500FD3989 /* ForgotPasswordRootView.swift in Sources */,
+				A49CF8B6260301DE00AFC170 /* Endpoint.swift in Sources */,
+				A4793CB626048EBA00AD280C /* ValidatableInputView.swift in Sources */,
+				A4159209260C603B00FD3989 /* ForgotPasswordInfo.swift in Sources */,
 				A44A5A7025F9B0D200995823 /* SceneDelegate.swift in Sources */,
+				A4793CBB260490A600AD280C /* UIColor+.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -439,6 +672,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A43E0B74260DC944005FC6CE /* SignInValidationServiceTests.swift in Sources */,
+				A49CF9302603518A00AFC170 /* CodableTests.swift in Sources */,
+				A43E0B79260DD598005FC6CE /* SignInViewModelTests.swift in Sources */,
+				A4793C682604423800AD280C /* SignInServiceTest.swift in Sources */,
+				A40A1FF22611791000553207 /* ForgotPasswordViewModelTests.swift in Sources */,
 				A44A5A8525F9B0D300995823 /* MyMindTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -447,7 +685,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A44A5A9025F9B0D300995823 /* MyMindUITests.swift in Sources */,
+				A40A1FF92611BFBD00553207 /* MyMindUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -620,6 +858,7 @@
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.shopping.udi.MyMind.debug;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SIGN_IN_SERVER_URL = "http://api-alpha-auth.udnshopping.com";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -644,6 +883,7 @@
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.shopping.udi.MyMind;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SIGN_IN_SERVER_URL = "http://api-alpha-auth.udnshopping.com";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -817,7 +1057,7 @@
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.shopping.udi.MyMind.alpha;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SIGN_IN_SERVER_URL = "http://api-alpha-auth.udnshopping.com\n";
+				SIGN_IN_SERVER_URL = "http://api-alpha-auth.udnshopping.com";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
