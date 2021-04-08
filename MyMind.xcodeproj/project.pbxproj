@@ -7,9 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		01CF6195FA67834B4B66F5E3 /* Pods_MyMind_MyMindUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20E97C84258EA1B1937DA48F /* Pods_MyMind_MyMindUITests.framework */; };
-		2E5069A60BD231A8689574B6 /* Pods_MyMind.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE0100A79B8C832CE91F6186 /* Pods_MyMind.framework */; };
-		9660C0DF9C9E4D5B23E221A7 /* Pods_MyMindTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E343FC883B3C7BBFB9A075 /* Pods_MyMindTests.framework */; };
 		A40A1FDA2611700000553207 /* captcha_session.json in Resources */ = {isa = PBXBuildFile; fileRef = A4793C832604592000AD280C /* captcha_session.json */; };
 		A40A1FF22611791000553207 /* ForgotPasswordViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40A1FF12611791000553207 /* ForgotPasswordViewModelTests.swift */; };
 		A40A1FF92611BFBD00553207 /* MyMindUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44A5A8F25F9B0D300995823 /* MyMindUITests.swift */; };
@@ -61,6 +58,9 @@
 		A4BDC7B4260B10E2005C33A5 /* SignInValidationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BDC7B3260B10E2005C33A5 /* SignInValidationService.swift */; };
 		A4BDC7B9260B3E0A005C33A5 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BDC7B8260B3E0A005C33A5 /* KeychainHelper.swift */; };
 		A4BDC7BE260B418E005C33A5 /* SignInAccountInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BDC7BD260B418E005C33A5 /* SignInAccountInfo.swift */; };
+		BA024BA4A6305FD2FA0ADE0D /* Pods_MyMind_MyMindUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49082C5B628793B947583BE8 /* Pods_MyMind_MyMindUITests.framework */; };
+		E92DA73D2A572707BC1E6314 /* Pods_MyMindTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C35ECDE517A2C6A01C3E7141 /* Pods_MyMindTests.framework */; };
+		EC3F7DEF08CFEC10C2124121 /* Pods_MyMind.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F231C5BAACFDBA2A1B0E19E /* Pods_MyMind.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,15 +81,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0AF0378B82A57CDF6EBF3621 /* Pods-MyMind.alpha.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMind.alpha.xcconfig"; path = "Target Support Files/Pods-MyMind/Pods-MyMind.alpha.xcconfig"; sourceTree = "<group>"; };
-		134E37E4F16EA43954BE94DF /* Pods-MyMindTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMindTests.release.xcconfig"; path = "Target Support Files/Pods-MyMindTests/Pods-MyMindTests.release.xcconfig"; sourceTree = "<group>"; };
-		1B3C32F18D3A714EFDC0B22E /* Pods-MyMindTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMindTests.debug.xcconfig"; path = "Target Support Files/Pods-MyMindTests/Pods-MyMindTests.debug.xcconfig"; sourceTree = "<group>"; };
-		20E97C84258EA1B1937DA48F /* Pods_MyMind_MyMindUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyMind_MyMindUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		36D22F503087EEC031CF0D02 /* Pods-MyMind-MyMindUITests.alpha.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMind-MyMindUITests.alpha.xcconfig"; path = "Target Support Files/Pods-MyMind-MyMindUITests/Pods-MyMind-MyMindUITests.alpha.xcconfig"; sourceTree = "<group>"; };
-		3B6D7B8475F284AB766B490C /* Pods-MyMindTests.alpha.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMindTests.alpha.xcconfig"; path = "Target Support Files/Pods-MyMindTests/Pods-MyMindTests.alpha.xcconfig"; sourceTree = "<group>"; };
-		56E343FC883B3C7BBFB9A075 /* Pods_MyMindTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyMindTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5DE023121A8831DEABDA0767 /* Pods-MyMind-MyMindUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMind-MyMindUITests.debug.xcconfig"; path = "Target Support Files/Pods-MyMind-MyMindUITests/Pods-MyMind-MyMindUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		8A105A1720C2E5FCBADB8898 /* Pods-MyMind.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMind.debug.xcconfig"; path = "Target Support Files/Pods-MyMind/Pods-MyMind.debug.xcconfig"; sourceTree = "<group>"; };
+		0234BB16C580C46052C9A518 /* Pods-MyMind.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMind.release.xcconfig"; path = "Target Support Files/Pods-MyMind/Pods-MyMind.release.xcconfig"; sourceTree = "<group>"; };
+		13CCE330B89D7786D5D97F51 /* Pods-MyMindTests.alpha.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMindTests.alpha.xcconfig"; path = "Target Support Files/Pods-MyMindTests/Pods-MyMindTests.alpha.xcconfig"; sourceTree = "<group>"; };
+		342A86D10E509DC8A0C0719F /* Pods-MyMind-MyMindUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMind-MyMindUITests.debug.xcconfig"; path = "Target Support Files/Pods-MyMind-MyMindUITests/Pods-MyMind-MyMindUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		49082C5B628793B947583BE8 /* Pods_MyMind_MyMindUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyMind_MyMindUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		613512D2AB702F9C1AA2BCC5 /* Pods-MyMindTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMindTests.debug.xcconfig"; path = "Target Support Files/Pods-MyMindTests/Pods-MyMindTests.debug.xcconfig"; sourceTree = "<group>"; };
+		6F231C5BAACFDBA2A1B0E19E /* Pods_MyMind.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyMind.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		813AE979B8E28B1A22020AB9 /* Pods-MyMind-MyMindUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMind-MyMindUITests.release.xcconfig"; path = "Target Support Files/Pods-MyMind-MyMindUITests/Pods-MyMind-MyMindUITests.release.xcconfig"; sourceTree = "<group>"; };
+		8B6F179AE4CEBCE17B89AC68 /* Pods-MyMind-MyMindUITests.alpha.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMind-MyMindUITests.alpha.xcconfig"; path = "Target Support Files/Pods-MyMind-MyMindUITests/Pods-MyMind-MyMindUITests.alpha.xcconfig"; sourceTree = "<group>"; };
+		8C4BA9CA7A7E7BD1C9712E01 /* Pods-MyMind.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMind.debug.xcconfig"; path = "Target Support Files/Pods-MyMind/Pods-MyMind.debug.xcconfig"; sourceTree = "<group>"; };
 		A40A1FF12611791000553207 /* ForgotPasswordViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewModelTests.swift; sourceTree = "<group>"; };
 		A4159203260C394F00FD3989 /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
 		A4159208260C603B00FD3989 /* ForgotPasswordInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordInfo.swift; sourceTree = "<group>"; };
@@ -147,9 +147,9 @@
 		A4BDC7B3260B10E2005C33A5 /* SignInValidationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInValidationService.swift; sourceTree = "<group>"; };
 		A4BDC7B8260B3E0A005C33A5 /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
 		A4BDC7BD260B418E005C33A5 /* SignInAccountInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInAccountInfo.swift; sourceTree = "<group>"; };
-		A64D73FCB71924FE21D7799F /* Pods-MyMind.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMind.release.xcconfig"; path = "Target Support Files/Pods-MyMind/Pods-MyMind.release.xcconfig"; sourceTree = "<group>"; };
-		BE0100A79B8C832CE91F6186 /* Pods_MyMind.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyMind.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		EB6BB17D55B5E80D4362936C /* Pods-MyMind-MyMindUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMind-MyMindUITests.release.xcconfig"; path = "Target Support Files/Pods-MyMind-MyMindUITests/Pods-MyMind-MyMindUITests.release.xcconfig"; sourceTree = "<group>"; };
+		C001C85B3856800C20B59128 /* Pods-MyMindTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMindTests.release.xcconfig"; path = "Target Support Files/Pods-MyMindTests/Pods-MyMindTests.release.xcconfig"; sourceTree = "<group>"; };
+		C35ECDE517A2C6A01C3E7141 /* Pods_MyMindTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyMindTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E8BDB686048E1E4C810DE722 /* Pods-MyMind.alpha.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMind.alpha.xcconfig"; path = "Target Support Files/Pods-MyMind/Pods-MyMind.alpha.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,7 +157,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2E5069A60BD231A8689574B6 /* Pods_MyMind.framework in Frameworks */,
+				EC3F7DEF08CFEC10C2124121 /* Pods_MyMind.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -165,7 +165,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9660C0DF9C9E4D5B23E221A7 /* Pods_MyMindTests.framework in Frameworks */,
+				E92DA73D2A572707BC1E6314 /* Pods_MyMindTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -173,23 +173,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				01CF6195FA67834B4B66F5E3 /* Pods_MyMind_MyMindUITests.framework in Frameworks */,
+				BA024BA4A6305FD2FA0ADE0D /* Pods_MyMind_MyMindUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		99DF18E649B1BAAECF6252D2 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				BE0100A79B8C832CE91F6186 /* Pods_MyMind.framework */,
-				20E97C84258EA1B1937DA48F /* Pods_MyMind_MyMindUITests.framework */,
-				56E343FC883B3C7BBFB9A075 /* Pods_MyMindTests.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		A415920D260C794700FD3989 /* ForgotPassword */ = {
 			isa = PBXGroup;
 			children = (
@@ -208,7 +198,7 @@
 				A44A5A8E25F9B0D300995823 /* MyMindUITests */,
 				A44A5A6B25F9B0D200995823 /* Products */,
 				FE90B85D82B6B4639CD1A164 /* Pods */,
-				99DF18E649B1BAAECF6252D2 /* Frameworks */,
+				E7E3945A97ADB2DD58A2DA48 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -351,18 +341,28 @@
 			path = UILayer;
 			sourceTree = "<group>";
 		};
+		E7E3945A97ADB2DD58A2DA48 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6F231C5BAACFDBA2A1B0E19E /* Pods_MyMind.framework */,
+				49082C5B628793B947583BE8 /* Pods_MyMind_MyMindUITests.framework */,
+				C35ECDE517A2C6A01C3E7141 /* Pods_MyMindTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		FE90B85D82B6B4639CD1A164 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				8A105A1720C2E5FCBADB8898 /* Pods-MyMind.debug.xcconfig */,
-				0AF0378B82A57CDF6EBF3621 /* Pods-MyMind.alpha.xcconfig */,
-				A64D73FCB71924FE21D7799F /* Pods-MyMind.release.xcconfig */,
-				5DE023121A8831DEABDA0767 /* Pods-MyMind-MyMindUITests.debug.xcconfig */,
-				36D22F503087EEC031CF0D02 /* Pods-MyMind-MyMindUITests.alpha.xcconfig */,
-				EB6BB17D55B5E80D4362936C /* Pods-MyMind-MyMindUITests.release.xcconfig */,
-				1B3C32F18D3A714EFDC0B22E /* Pods-MyMindTests.debug.xcconfig */,
-				3B6D7B8475F284AB766B490C /* Pods-MyMindTests.alpha.xcconfig */,
-				134E37E4F16EA43954BE94DF /* Pods-MyMindTests.release.xcconfig */,
+				8C4BA9CA7A7E7BD1C9712E01 /* Pods-MyMind.debug.xcconfig */,
+				E8BDB686048E1E4C810DE722 /* Pods-MyMind.alpha.xcconfig */,
+				0234BB16C580C46052C9A518 /* Pods-MyMind.release.xcconfig */,
+				342A86D10E509DC8A0C0719F /* Pods-MyMind-MyMindUITests.debug.xcconfig */,
+				8B6F179AE4CEBCE17B89AC68 /* Pods-MyMind-MyMindUITests.alpha.xcconfig */,
+				813AE979B8E28B1A22020AB9 /* Pods-MyMind-MyMindUITests.release.xcconfig */,
+				613512D2AB702F9C1AA2BCC5 /* Pods-MyMindTests.debug.xcconfig */,
+				13CCE330B89D7786D5D97F51 /* Pods-MyMindTests.alpha.xcconfig */,
+				C001C85B3856800C20B59128 /* Pods-MyMindTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -374,11 +374,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A44A5A9425F9B0D300995823 /* Build configuration list for PBXNativeTarget "MyMind" */;
 			buildPhases = (
-				28331022F70DEA26F0C2484F /* [CP] Check Pods Manifest.lock */,
+				88881F8015AC096340BA4CA0 /* [CP] Check Pods Manifest.lock */,
 				A44A5A6625F9B0D200995823 /* Sources */,
 				A44A5A6725F9B0D200995823 /* Frameworks */,
 				A44A5A6825F9B0D200995823 /* Resources */,
-				E7E644337FF60CF92A16E4A4 /* [CP] Embed Pods Frameworks */,
+				E51B057EE87CB516D0017E0A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -393,11 +393,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A44A5A9725F9B0D300995823 /* Build configuration list for PBXNativeTarget "MyMindTests" */;
 			buildPhases = (
-				B7DA1CB1CCCF9026970FF5AB /* [CP] Check Pods Manifest.lock */,
+				7193E3825CC6FAD2274E5955 /* [CP] Check Pods Manifest.lock */,
 				A44A5A7C25F9B0D300995823 /* Sources */,
 				A44A5A7D25F9B0D300995823 /* Frameworks */,
 				A44A5A7E25F9B0D300995823 /* Resources */,
-				75F4A5022B25211776205A55 /* [CP] Embed Pods Frameworks */,
+				F4A5080B72293B16E08CC3F0 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -413,11 +413,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A44A5A9A25F9B0D300995823 /* Build configuration list for PBXNativeTarget "MyMindUITests" */;
 			buildPhases = (
-				15F551ED0AB8E9CD1085CB52 /* [CP] Check Pods Manifest.lock */,
+				318D242A915BF25E8A0DCE51 /* [CP] Check Pods Manifest.lock */,
 				A44A5A8725F9B0D300995823 /* Sources */,
 				A44A5A8825F9B0D300995823 /* Frameworks */,
 				A44A5A8925F9B0D300995823 /* Resources */,
-				5A633D295713D14FFC1D929A /* [CP] Embed Pods Frameworks */,
+				27D10C4FDA1824B15AFB0D64 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -502,7 +502,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		15F551ED0AB8E9CD1085CB52 /* [CP] Check Pods Manifest.lock */ = {
+		27D10C4FDA1824B15AFB0D64 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MyMind-MyMindUITests/Pods-MyMind-MyMindUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MyMind-MyMindUITests/Pods-MyMind-MyMindUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MyMind-MyMindUITests/Pods-MyMind-MyMindUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		318D242A915BF25E8A0DCE51 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -524,63 +541,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		28331022F70DEA26F0C2484F /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-MyMind-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		5A633D295713D14FFC1D929A /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MyMind-MyMindUITests/Pods-MyMind-MyMindUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MyMind-MyMindUITests/Pods-MyMind-MyMindUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MyMind-MyMindUITests/Pods-MyMind-MyMindUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		75F4A5022B25211776205A55 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MyMindTests/Pods-MyMindTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MyMindTests/Pods-MyMindTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MyMindTests/Pods-MyMindTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B7DA1CB1CCCF9026970FF5AB /* [CP] Check Pods Manifest.lock */ = {
+		7193E3825CC6FAD2274E5955 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -602,7 +563,29 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E7E644337FF60CF92A16E4A4 /* [CP] Embed Pods Frameworks */ = {
+		88881F8015AC096340BA4CA0 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MyMind-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E51B057EE87CB516D0017E0A /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -617,6 +600,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MyMind/Pods-MyMind-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F4A5080B72293B16E08CC3F0 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MyMindTests/Pods-MyMindTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MyMindTests/Pods-MyMindTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MyMindTests/Pods-MyMindTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -842,8 +842,9 @@
 		};
 		A44A5A9525F9B0D300995823 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8A105A1720C2E5FCBADB8898 /* Pods-MyMind.debug.xcconfig */;
+			baseConfigurationReference = 8C4BA9CA7A7E7BD1C9712E01 /* Pods-MyMind.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				APP_DISPLAY_NAME = "MyMind Debug";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -868,8 +869,9 @@
 		};
 		A44A5A9625F9B0D300995823 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A64D73FCB71924FE21D7799F /* Pods-MyMind.release.xcconfig */;
+			baseConfigurationReference = 0234BB16C580C46052C9A518 /* Pods-MyMind.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				APP_DISPLAY_NAME = MyMind;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -894,9 +896,9 @@
 		};
 		A44A5A9825F9B0D300995823 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1B3C32F18D3A714EFDC0B22E /* Pods-MyMindTests.debug.xcconfig */;
+			baseConfigurationReference = 613512D2AB702F9C1AA2BCC5 /* Pods-MyMindTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = NCP4JUG36Z;
@@ -917,9 +919,9 @@
 		};
 		A44A5A9925F9B0D300995823 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 134E37E4F16EA43954BE94DF /* Pods-MyMindTests.release.xcconfig */;
+			baseConfigurationReference = C001C85B3856800C20B59128 /* Pods-MyMindTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = NCP4JUG36Z;
@@ -940,9 +942,9 @@
 		};
 		A44A5A9B25F9B0D300995823 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5DE023121A8831DEABDA0767 /* Pods-MyMind-MyMindUITests.debug.xcconfig */;
+			baseConfigurationReference = 342A86D10E509DC8A0C0719F /* Pods-MyMind-MyMindUITests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = NCP4JUG36Z;
 				INFOPLIST_FILE = MyMindUITests/Info.plist;
@@ -961,9 +963,9 @@
 		};
 		A44A5A9C25F9B0D300995823 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EB6BB17D55B5E80D4362936C /* Pods-MyMind-MyMindUITests.release.xcconfig */;
+			baseConfigurationReference = 813AE979B8E28B1A22020AB9 /* Pods-MyMind-MyMindUITests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = NCP4JUG36Z;
 				INFOPLIST_FILE = MyMindUITests/Info.plist;
@@ -1043,8 +1045,9 @@
 		};
 		A49CF8CA2603248600AFC170 /* Alpha */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0AF0378B82A57CDF6EBF3621 /* Pods-MyMind.alpha.xcconfig */;
+			baseConfigurationReference = E8BDB686048E1E4C810DE722 /* Pods-MyMind.alpha.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				APP_DISPLAY_NAME = "MyMind Alpha";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1069,9 +1072,9 @@
 		};
 		A49CF8CB2603248600AFC170 /* Alpha */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3B6D7B8475F284AB766B490C /* Pods-MyMindTests.alpha.xcconfig */;
+			baseConfigurationReference = 13CCE330B89D7786D5D97F51 /* Pods-MyMindTests.alpha.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = NCP4JUG36Z;
@@ -1092,9 +1095,9 @@
 		};
 		A49CF8CC2603248600AFC170 /* Alpha */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 36D22F503087EEC031CF0D02 /* Pods-MyMind-MyMindUITests.alpha.xcconfig */;
+			baseConfigurationReference = 8B6F179AE4CEBCE17B89AC68 /* Pods-MyMind-MyMindUITests.alpha.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = NCP4JUG36Z;
 				INFOPLIST_FILE = MyMindUITests/Info.plist;

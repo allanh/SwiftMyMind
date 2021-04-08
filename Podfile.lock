@@ -1,4 +1,10 @@
 PODS:
+  - Charts (3.6.0):
+    - Charts/Core (= 3.6.0)
+  - Charts/Core (3.6.0)
+  - CoreXLSX (0.14.0):
+    - XMLCoder (~> 0.11.1)
+    - ZIPFoundation (~> 0.9.11)
   - LookinServer (1.0.0)
   - NVActivityIndicatorView (5.1.1):
     - NVActivityIndicatorView/Base (= 5.1.1)
@@ -11,8 +17,12 @@ PODS:
   - RxRelay (6.1.0):
     - RxSwift (= 6.1.0)
   - RxSwift (6.1.0)
+  - XMLCoder (0.11.1)
+  - ZIPFoundation (0.9.12)
 
 DEPENDENCIES:
+  - Charts
+  - CoreXLSX (~> 0.14.0)
   - LookinServer
   - NVActivityIndicatorView
   - RxBlocking
@@ -21,21 +31,29 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - Charts
+    - CoreXLSX
     - LookinServer
     - NVActivityIndicatorView
     - RxBlocking
     - RxCocoa
     - RxRelay
     - RxSwift
+    - XMLCoder
+    - ZIPFoundation
 
 SPEC CHECKSUMS:
+  Charts: b1e3a1f5a1c9ba5394438ca3b91bd8c9076310af
+  CoreXLSX: 341fab0a6e87ec6c3e0c7df0e91a346a79ad7503
   LookinServer: 0002891cd3cec5e082a910e897dfe71b4f06b89e
   NVActivityIndicatorView: 1f6c5687f1171810aa27a3296814dc2d7dec3667
   RxBlocking: 602095fba0bce7b16b56ccec89edf780c248b7d9
   RxCocoa: 5c51f02d562cbd94629f6c26cf0c80fe4ab8d343
   RxRelay: 483e1a19fad961b41f0b0c0bee506f46c1ae14fe
   RxSwift: a834e5c538e89eca0cae86f403f4fbf0336786ce
+  XMLCoder: c4638336674de7ba279cd23f2005817d69f538e0
+  ZIPFoundation: e27423c004a5a1410c15933407747374e7c6cb6e
 
-PODFILE CHECKSUM: a6fab9cd892a84b883c503877512694ffecd615b
+PODFILE CHECKSUM: 3b803f59c432b3ef82e5ed349e134be87508663a
 
-COCOAPODS: 1.10.0
+COCOAPODS: 1.10.1
