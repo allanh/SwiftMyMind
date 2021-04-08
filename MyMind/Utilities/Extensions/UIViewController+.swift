@@ -57,11 +57,15 @@ extension UIViewController {
                 color: UIColor(hex: "043458")
             )
         }
+        let size = CGSize(width: 50, height: 50)
+
+        let x = view.frame.width / 2.0 - size.width / 2.0
+        let y = view.frame.height / 2.0 - size.height / 2.0
+
         activityIndicator?.frame = CGRect(
-            origin: .zero,
-            size: CGSize(width: 50, height: 50)
+            origin: CGPoint(x: x, y: y),
+            size: size
         )
-        activityIndicator?.center = view.center
         view.addSubview(activityIndicator!)
         activityIndicator?.startAnimating()
     }
