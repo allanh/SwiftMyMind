@@ -12,16 +12,13 @@ import RxCocoa
 protocol APIService { }
 
 extension APIService {
-    func request(urlComponents: URLComponents,
+    func request(endPoint: Endpoint,
                  httpMethod: String = "GET",
                  httpHeader: [String: String]? = nil,
                  httpBody: Data? = nil,
-                 timeoutInterval: TimeInterval = 5) -> URLRequest? {
+                 timeoutInterval: TimeInterval = 5) -> URLRequest {
+        let url = endPoint.url
 
-        guard let url = urlComponents.url else {
-            print("Invalid url.")
-            return nil
-        }
         var request = URLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: timeoutInterval)
         request.httpMethod = httpMethod
 
@@ -94,23 +91,12 @@ extension APIService {
         task.resume()
     }
 
-    func dataRequest(urlComponents: URLComponents,
-                 httpMethod: String = "GET",
-                 httpHeader: [String: String]? = nil,
-                 httpBody: Data? = nil,
-                 timeoutInterval: TimeInterval = 5) -> Observable<(response: HTTPURLResponse, data: Data)> {
-
-        do {
-            guard let request = request(urlComponents: urlComponents, httpMethod: httpMethod, httpHeader: httpHeader, httpBody: httpBody, timeoutInterval: timeoutInterval) else {
-                throw APIError.urlError
-            }
-            return URLSession.shared.rx.response(request: request)
-        } catch let error {
-            return Observable<(response: HTTPURLResponse, data: Data)>.create { observer in
-                observer.onError(error)
-                return Disposables.create()
-            }
-        }
-
+    func dataTask(endPoint: Endpoint,
+                  httpMethod: String = "GET",
+                  httpHeader: [String: String]? = nil,
+                  httpBody: Data? = nil,
+                  timeoutInterval: TimeInterval = 5) -> Observable<(response: HTTPURLResponse, data: Data)> {
+        let request: URLRequest = self.request(endPoint: endPoint, httpMethod: httpMethod, httpHeader: httpHeader, httpBody: httpBody, timeoutInterval: timeoutInterval)
+        return URLSession.shared.rx.response(request: request)
     }
 }

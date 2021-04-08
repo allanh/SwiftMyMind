@@ -9,23 +9,9 @@ import Foundation
 import RxSwift
 
 class MyMindAuthService: APIService, AuthService {
-    private let baseURL: String = {
-        if let url = Bundle.main.infoDictionary?["SignInServerURL"] as? String {
-            return url
-        }
-        return ""
-    }()
-
-    private lazy var urlComponents: URLComponents = {
-        var components: URLComponents = URLComponents(string: baseURL) ?? URLComponents()
-        return components
-    }()
-
     func captcha() -> Single<CaptchaSession> {
-        var urlComponents = self.urlComponents
-        urlComponents.path = Endpoint().captcha
-        let request = dataRequest(urlComponents: urlComponents)
-        return request.map {
+        let task = dataTask(endPoint: Endpoint.captcha)
+        return task.map {
             let response = try JSONDecoder().decode(Response<CaptchaSession>.self, from: $0.1)
             guard let session = response.data else {
                 throw APIError.serviceError(response.message ?? "")
@@ -36,13 +22,11 @@ class MyMindAuthService: APIService, AuthService {
     }
 
     func signIn(info: SignInInfo) -> Single<UserSession> {
-        var urlComponents = self.urlComponents
-        urlComponents.path = Endpoint().signIn
         guard let body = try? JSONEncoder().encode(info) else {
             return Single.error(APIError.parseError)
         }
-        let request = dataRequest(urlComponents: urlComponents, httpMethod: "POST", httpBody: body)
-        return request.map {
+        let task = dataTask(endPoint: Endpoint.signIn, httpMethod: "POST", httpBody: body)
+        return task.map {
             let response = try JSONDecoder().decode(Response<UserSession>.self, from: $0.1)
             guard let session = response.data else {
                 throw APIError.serviceError(response.message ?? "")
@@ -53,13 +37,11 @@ class MyMindAuthService: APIService, AuthService {
     }
 
     func forgotPasswordMail(info: ForgotPasswordInfo) -> Completable {
-        var urlComponents = self.urlComponents
-        urlComponents.path = Endpoint().forgotPassword
         guard let body = try? JSONEncoder().encode(info) else {
             return Completable.error(APIError.parseError)
         }
-        let request = dataRequest(urlComponents: urlComponents, httpMethod: "POST", httpBody: body)
-        let response = request.map { (_, data) -> Response<Int> in
+        let task = dataTask(endPoint: Endpoint.forgotPassword, httpMethod: "POST", httpBody: body)
+        let response = task.map { (_, data) -> Response<Int> in
             let response = try JSONDecoder().decode(Response<Int>.self, from: data)
             guard response.status == .SUCCESS else {
                 throw APIError.serviceError(response.message ?? "")
