@@ -1,5 +1,5 @@
 //
-//  SignInServiceTest.swift
+//  AuthServiceTest.swift
 //  MyMindTests
 //
 //  Created by Barry Chen on 2021/3/19.
@@ -9,7 +9,7 @@ import XCTest
 import RxBlocking
 @testable import MyMind
 
-class SignInServiceTest: XCTestCase {
+class AuthServiceTest: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.

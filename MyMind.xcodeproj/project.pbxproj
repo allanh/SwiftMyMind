@@ -36,7 +36,7 @@
 		A44A5A7A25F9B0D300995823 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A44A5A7825F9B0D300995823 /* LaunchScreen.storyboard */; };
 		A44A5A8525F9B0D300995823 /* MyMindTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44A5A8425F9B0D300995823 /* MyMindTests.swift */; };
 		A4705B9126020E5700B30CE6 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4705B9026020E5700B30CE6 /* Response.swift */; };
-		A4793C682604423800AD280C /* SignInServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4793C672604423700AD280C /* SignInServiceTest.swift */; };
+		A4793C682604423800AD280C /* AuthServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4793C672604423700AD280C /* AuthServiceTest.swift */; };
 		A4793C7A2604534100AD280C /* SignInInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4793C792604534100AD280C /* SignInInfo.swift */; };
 		A4793C7F2604573700AD280C /* UserSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4793C7E2604573700AD280C /* UserSession.swift */; };
 		A4793C9626047C8000AD280C /* NibOwnerLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4793C9526047C8000AD280C /* NibOwnerLoadable.swift */; };
@@ -121,7 +121,7 @@
 		A44A5A8F25F9B0D300995823 /* MyMindUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMindUITests.swift; sourceTree = "<group>"; };
 		A44A5A9125F9B0D300995823 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A4705B9026020E5700B30CE6 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
-		A4793C672604423700AD280C /* SignInServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInServiceTest.swift; sourceTree = "<group>"; };
+		A4793C672604423700AD280C /* AuthServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthServiceTest.swift; sourceTree = "<group>"; };
 		A4793C792604534100AD280C /* SignInInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInInfo.swift; sourceTree = "<group>"; };
 		A4793C7E2604573700AD280C /* UserSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSession.swift; sourceTree = "<group>"; };
 		A4793C832604592000AD280C /* captcha_session.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = captcha_session.json; sourceTree = "<group>"; };
@@ -247,7 +247,7 @@
 				A44A5A8425F9B0D300995823 /* MyMindTests.swift */,
 				A44A5A8625F9B0D300995823 /* Info.plist */,
 				A49CF92F2603518A00AFC170 /* CodableTests.swift */,
-				A4793C672604423700AD280C /* SignInServiceTest.swift */,
+				A4793C672604423700AD280C /* AuthServiceTest.swift */,
 				A43E0B73260DC944005FC6CE /* SignInValidationServiceTests.swift */,
 				A43E0B78260DD598005FC6CE /* SignInViewModelTests.swift */,
 				A40A1FF12611791000553207 /* ForgotPasswordViewModelTests.swift */,
@@ -675,7 +675,7 @@
 				A43E0B74260DC944005FC6CE /* SignInValidationServiceTests.swift in Sources */,
 				A49CF9302603518A00AFC170 /* CodableTests.swift in Sources */,
 				A43E0B79260DD598005FC6CE /* SignInViewModelTests.swift in Sources */,
-				A4793C682604423800AD280C /* SignInServiceTest.swift in Sources */,
+				A4793C682604423800AD280C /* AuthServiceTest.swift in Sources */,
 				A40A1FF22611791000553207 /* ForgotPasswordViewModelTests.swift in Sources */,
 				A44A5A8525F9B0D300995823 /* MyMindTests.swift in Sources */,
 			);
