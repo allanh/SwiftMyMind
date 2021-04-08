@@ -12,7 +12,7 @@ import RxRelay
 
 class ForgotPasswordViewModel {
     let bag: DisposeBag = DisposeBag()
-    let signInService: SignInService
+    let authService: AuthService
     let signInValidationService: SignInValidatoinService
     var forgotPasswordInfo: ForgotPasswordInfo = .empty()
 
@@ -34,9 +34,9 @@ class ForgotPasswordViewModel {
 
     let unexpectedErrorMessage: String = "未知的錯誤發生"
 
-    init(signInService: SignInService,
+    init(authService: AuthService,
          signInValidationService: SignInValidatoinService) {
-        self.signInService = signInService
+        self.authService = authService
         self.signInValidationService = signInValidationService
     }
 
@@ -68,7 +68,7 @@ class ForgotPasswordViewModel {
             indicateSendingEmail(false)
             return
         }
-        signInService.forgotPasswordMail(info: forgotPasswordInfo)
+        authService.forgotPasswordMail(info: forgotPasswordInfo)
             .subscribe { [unowned self] in
                 self.successMessage.accept("重設密碼連結已寄出！")
             } onError: { [unowned self] (error) in
@@ -87,7 +87,7 @@ class ForgotPasswordViewModel {
     @objc
     func captcha() {
         indicateUpdatingCaptcha(true)
-        signInService.captcha()
+        authService.captcha()
             .do(onDispose: { [weak self] in
                 self?.indicateUpdatingCaptcha(false)
             })

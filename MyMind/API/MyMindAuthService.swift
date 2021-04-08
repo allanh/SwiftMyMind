@@ -8,7 +8,7 @@
 import Foundation
 import RxSwift
 
-class MyMindSignInService: APIService, SignInService {
+class MyMindAuthService: APIService, AuthService {
     private let baseURL: String = {
         if let url = Bundle.main.infoDictionary?["SignInServerURL"] as? String {
             return url

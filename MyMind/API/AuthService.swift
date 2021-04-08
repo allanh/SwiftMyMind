@@ -1,5 +1,5 @@
 //
-//  SignInService.swift
+//  AuthService.swift
 //  MyMind
 //
 //  Created by Barry Chen on 2021/3/22.
@@ -9,7 +9,7 @@
 import Foundation
 import RxSwift
 
-protocol SignInService {
+protocol AuthService {
     func captcha() -> Single<CaptchaSession>
     func signIn(info: SignInInfo) -> Single<UserSession>
     func forgotPasswordMail(info: ForgotPasswordInfo) -> Completable

@@ -93,7 +93,7 @@ class SignInViewController: NiblessViewController {
 
     func showForgotPasswordViewController() {
         let viewModel = ForgotPasswordViewModel(
-            signInService: MyMindSignInService(),
+            authService: MyMindAuthService(),
             signInValidationService: SignInValidatoinService()
         )
         let viewController = ForgotPasswordViewController(viewModel: viewModel)

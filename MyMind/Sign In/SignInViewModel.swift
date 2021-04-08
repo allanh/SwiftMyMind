@@ -13,7 +13,7 @@ import RxRelay
 class SignInViewModel {
 
     let bag: DisposeBag = DisposeBag()
-    let signInService: SignInService
+    let authService: AuthService
     let signInValidationService: SignInValidatoinService
     var signInInfo: SignInInfo = SignInInfo()
     let userDefault: UserDefaults = UserDefaults.standard
@@ -39,9 +39,9 @@ class SignInViewModel {
     let unexpectedErrorMessage: String = "未知的錯誤發生"
     private let shouldRememberAccountKey: String = "shouldRememberAccount"
     // MARK: - Methods
-    init(signInService: SignInService,
+    init(authService: AuthService,
          signInValidationService: SignInValidatoinService) {
-        self.signInService = signInService
+        self.authService = authService
         self.signInValidationService = signInValidationService
 
         if let shouldRememberAccount = userDefault.value(forKey: shouldRememberAccountKey) as? Bool {
@@ -83,7 +83,7 @@ class SignInViewModel {
             indicateSigningIn(false)
             return
         }
-        signInService.signIn(info: signInInfo)
+        authService.signIn(info: signInInfo)
             .do(onSuccess: { [unowned self] _ in
                 guard shouldRememberAccount.value else {
                     try? self.keychainHelper.removeItem(key: .lastSignInAccountInfo)
@@ -115,7 +115,7 @@ class SignInViewModel {
     @objc
     func captcha() {
         indicateUpdatingCaptcha(true)
-        signInService.captcha()
+        authService.captcha()
             .do(onDispose: { [weak self] in
                 self?.indicateUpdatingCaptcha(false)
             })
