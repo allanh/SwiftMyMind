@@ -27,7 +27,7 @@
 		A43E0B79260DD598005FC6CE /* SignInViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43E0B78260DD598005FC6CE /* SignInViewModelTests.swift */; };
 		A44A5A6E25F9B0D200995823 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44A5A6D25F9B0D200995823 /* AppDelegate.swift */; };
 		A44A5A7025F9B0D200995823 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44A5A6F25F9B0D200995823 /* SceneDelegate.swift */; };
-		A44A5A7225F9B0D200995823 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44A5A7125F9B0D200995823 /* ViewController.swift */; };
+		A44A5A7225F9B0D200995823 /* MainFunctionEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44A5A7125F9B0D200995823 /* MainFunctionEntryViewController.swift */; };
 		A44A5A7525F9B0D200995823 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A44A5A7325F9B0D200995823 /* Main.storyboard */; };
 		A44A5A7725F9B0D300995823 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A44A5A7625F9B0D300995823 /* Assets.xcassets */; };
 		A44A5A7A25F9B0D300995823 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A44A5A7825F9B0D300995823 /* LaunchScreen.storyboard */; };
@@ -54,10 +54,12 @@
 		A49CF92A26034BEA00AFC170 /* CaptchaSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49CF92926034BEA00AFC170 /* CaptchaSession.swift */; };
 		A49CF9302603518A00AFC170 /* CodableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49CF92F2603518A00AFC170 /* CodableTests.swift */; };
 		A49CF93C2603527500AFC170 /* user_session.json in Resources */ = {isa = PBXBuildFile; fileRef = A49CF9372603523100AFC170 /* user_session.json */; };
+		A4AF79F72637B13B002B04F6 /* MainFunctionControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4AF79F62637B13B002B04F6 /* MainFunctionControl.swift */; };
 		A4BDC79E260ADFC5005C33A5 /* UIViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BDC79D260ADFC5005C33A5 /* UIViewController+Rx.swift */; };
 		A4BDC7B4260B10E2005C33A5 /* SignInValidationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BDC7B3260B10E2005C33A5 /* SignInValidationService.swift */; };
 		A4BDC7B9260B3E0A005C33A5 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BDC7B8260B3E0A005C33A5 /* KeychainHelper.swift */; };
 		A4BDC7BE260B418E005C33A5 /* SignInAccountInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BDC7BD260B418E005C33A5 /* SignInAccountInfo.swift */; };
+		A4CF09B32636C36800439D5F /* UIView+shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CF09B22636C36800439D5F /* UIView+shadow.swift */; };
 		BA024BA4A6305FD2FA0ADE0D /* Pods_MyMind_MyMindUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49082C5B628793B947583BE8 /* Pods_MyMind_MyMindUITests.framework */; };
 		E92DA73D2A572707BC1E6314 /* Pods_MyMindTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C35ECDE517A2C6A01C3E7141 /* Pods_MyMindTests.framework */; };
 		EC3F7DEF08CFEC10C2124121 /* Pods_MyMind.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F231C5BAACFDBA2A1B0E19E /* Pods_MyMind.framework */; };
@@ -109,7 +111,7 @@
 		A44A5A6A25F9B0D200995823 /* MyMind.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyMind.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A44A5A6D25F9B0D200995823 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A44A5A6F25F9B0D200995823 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		A44A5A7125F9B0D200995823 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		A44A5A7125F9B0D200995823 /* MainFunctionEntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFunctionEntryViewController.swift; sourceTree = "<group>"; };
 		A44A5A7425F9B0D200995823 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A44A5A7625F9B0D300995823 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A44A5A7925F9B0D300995823 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -143,10 +145,12 @@
 		A49CF92926034BEA00AFC170 /* CaptchaSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptchaSession.swift; sourceTree = "<group>"; };
 		A49CF92F2603518A00AFC170 /* CodableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableTests.swift; sourceTree = "<group>"; };
 		A49CF9372603523100AFC170 /* user_session.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = user_session.json; sourceTree = "<group>"; };
+		A4AF79F62637B13B002B04F6 /* MainFunctionControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFunctionControl.swift; sourceTree = "<group>"; };
 		A4BDC79D260ADFC5005C33A5 /* UIViewController+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Rx.swift"; sourceTree = "<group>"; };
 		A4BDC7B3260B10E2005C33A5 /* SignInValidationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInValidationService.swift; sourceTree = "<group>"; };
 		A4BDC7B8260B3E0A005C33A5 /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
 		A4BDC7BD260B418E005C33A5 /* SignInAccountInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInAccountInfo.swift; sourceTree = "<group>"; };
+		A4CF09B22636C36800439D5F /* UIView+shadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+shadow.swift"; sourceTree = "<group>"; };
 		C001C85B3856800C20B59128 /* Pods-MyMindTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMindTests.release.xcconfig"; path = "Target Support Files/Pods-MyMindTests/Pods-MyMindTests.release.xcconfig"; sourceTree = "<group>"; };
 		C35ECDE517A2C6A01C3E7141 /* Pods_MyMindTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyMindTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8BDB686048E1E4C810DE722 /* Pods-MyMind.alpha.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMind.alpha.xcconfig"; path = "Target Support Files/Pods-MyMind/Pods-MyMind.alpha.xcconfig"; sourceTree = "<group>"; };
@@ -215,6 +219,7 @@
 		A44A5A6C25F9B0D200995823 /* MyMind */ = {
 			isa = PBXGroup;
 			children = (
+				A4AF79F52637B110002B04F6 /* MainFunctionEntry */,
 				A4793C9426047C6500AD280C /* Utilities */,
 				A49CF92E26034D1900AFC170 /* APICache */,
 				A49CF8AC2602FEB100AFC170 /* API */,
@@ -222,7 +227,7 @@
 				A4793C932604768200AD280C /* Sign In */,
 				A44A5A6D25F9B0D200995823 /* AppDelegate.swift */,
 				A44A5A6F25F9B0D200995823 /* SceneDelegate.swift */,
-				A44A5A7125F9B0D200995823 /* ViewController.swift */,
+				A44A5A7125F9B0D200995823 /* MainFunctionEntryViewController.swift */,
 				A44A5A7325F9B0D200995823 /* Main.storyboard */,
 				A44A5A7625F9B0D300995823 /* Assets.xcassets */,
 				A44A5A7825F9B0D300995823 /* LaunchScreen.storyboard */,
@@ -303,6 +308,7 @@
 				A4159203260C394F00FD3989 /* UIButton+.swift */,
 				A43E0B69260D84FB005FC6CE /* NVActivityIndicatorView+Rx.swift */,
 				A43E0B6E260DC66D005FC6CE /* UIControl+.swift */,
+				A4CF09B22636C36800439D5F /* UIView+shadow.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -326,6 +332,14 @@
 				A49CF9372603523100AFC170 /* user_session.json */,
 			);
 			path = APICache;
+			sourceTree = "<group>";
+		};
+		A4AF79F52637B110002B04F6 /* MainFunctionEntry */ = {
+			isa = PBXGroup;
+			children = (
+				A4AF79F62637B13B002B04F6 /* MainFunctionControl.swift */,
+			);
+			path = MainFunctionEntry;
 			sourceTree = "<group>";
 		};
 		A4BDC7B2260B0F34005C33A5 /* UILayer */ = {
@@ -634,6 +648,7 @@
 				A4705B9126020E5700B30CE6 /* Response.swift in Sources */,
 				A4793C9F26047DB900AD280C /* UIStoryboard+.swift in Sources */,
 				A4BDC79E260ADFC5005C33A5 /* UIViewController+Rx.swift in Sources */,
+				A4CF09B32636C36800439D5F /* UIView+shadow.swift in Sources */,
 				A4793CAC260488E800AD280C /* Declarative.swift in Sources */,
 				A49CF92A26034BEA00AFC170 /* CaptchaSession.swift in Sources */,
 				A4BDC7B4260B10E2005C33A5 /* SignInValidationService.swift in Sources */,
@@ -649,12 +664,13 @@
 				A439B5412609D61C002352C2 /* String+.swift in Sources */,
 				A43E0B65260D7CA4005FC6CE /* NiblessView.swift in Sources */,
 				A4793CB126048BB600AD280C /* UIFont+.swift in Sources */,
-				A44A5A7225F9B0D200995823 /* ViewController.swift in Sources */,
+				A44A5A7225F9B0D200995823 /* MainFunctionEntryViewController.swift in Sources */,
 				A4159204260C394F00FD3989 /* UIButton+.swift in Sources */,
 				A439B52C26099AA1002352C2 /* UIViewController+.swift in Sources */,
 				A4793C7F2604573700AD280C /* UserSession.swift in Sources */,
 				A439B53C2609CDC3002352C2 /* ToastView.swift in Sources */,
 				A44A5A6E25F9B0D200995823 /* AppDelegate.swift in Sources */,
+				A4AF79F72637B13B002B04F6 /* MainFunctionControl.swift in Sources */,
 				A4793CA72604873B00AD280C /* SignInRootView.swift in Sources */,
 				A43E0B6F260DC66D005FC6CE /* UIControl+.swift in Sources */,
 				A43E0B63260D7CA4005FC6CE /* NiblessViewController.swift in Sources */,
