@@ -12,10 +12,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        setUpNavigationBarAppearance()
+        return true
+    }
+
+    private func setUpNavigationBarAppearance() {
         UINavigationBar.appearance().tintColor = .white
         UINavigationBar.appearance().barTintColor = UIColor(hex: "004477")
         UINavigationBar.appearance().isTranslucent = false
-        return true
+        UINavigationBar.appearance().titleTextAttributes = [
+            .foregroundColor: UIColor.white,
+            .font: UIFont.pingFangTCSemibold(ofSize: 18)
+        ]
     }
 
     // MARK: UISceneSession Lifecycle
