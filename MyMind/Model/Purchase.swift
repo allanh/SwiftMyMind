@@ -147,7 +147,23 @@ struct PurchaseBrief: Codable {
 }
 
 struct PurchaseList {
+    struct StatusAmount: Codable {
+        let pending: String
+        let review: String
+        let approved: String
+        let purchasing: String
+        let putInStorage: String
+        let unusual: String
+        let closed: String
+        let rejected: String
+        let void: String
+
+        private enum CodingKeys: String, CodingKey {
+            case pending, review, approved, purchasing, putInStorage = "put_in_storage", unusual, closed, rejected = "review_reject", void
+        }
+    }
     let items: [PurchaseBrief]
+    let statusAmount: StatusAmount
     let totalAmountOfItems: Int
     let totalAmountOfPages: Int
     let currentPageNumber: Int
@@ -155,16 +171,19 @@ struct PurchaseList {
 
     enum CodingKeys: String, CodingKey {
         case items = "detail"
+        case statusAmount = "status_amount"
         case totalAmountOfItems = "total"
         case totalAmountOfPages = "total_page"
         case currentPageNumber = "current_page"
         case itemsPerPage = "limit"
     }
 }
+
 extension PurchaseList: Decodable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         items = try container.decode([PurchaseBrief].self, forKey: .items)
+        statusAmount = try container.decode(StatusAmount.self, forKey: .statusAmount)
         var string = try container.decode(String.self, forKey: .totalAmountOfItems)
         totalAmountOfItems = Int(string) ?? 0
         string = try container.decode(String.self, forKey: .totalAmountOfPages)
