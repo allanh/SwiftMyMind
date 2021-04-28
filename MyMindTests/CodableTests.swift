@@ -64,11 +64,9 @@ class CodableTests: XCTestCase {
         do {
             let purchaseList = try JSONDecoder().decode(Response<PurchaseList>.self, from: data).data
             XCTAssertNotNil(purchaseList)
-
         } catch let error {
             print(error)
             XCTFail()
         }
-
     }
 }
