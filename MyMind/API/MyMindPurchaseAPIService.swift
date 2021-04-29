@@ -14,8 +14,13 @@ protocol PurchaseAPIService {
 
 class MyMindPurchaseAPIService: APIService {
     func fetchPurchaseList(with partnerID: String, purchaseListQueryInfo: PurchaseListQueryInfo? = nil, completionHandler: @escaping (Result<PurchaseList, Error>) -> Void) {
+        guard let token = try? KeychainHelper().readItem(key: .accessToken, valueType: String.self) else {
+            completionHandler(Result.failure(APIError.noAccessTokenError))
+            return
+        }
         let endPoint = Endpoint.purchaseList(with: partnerID, purchaseListQueryInfo: purchaseListQueryInfo)
-        sendRequest(request(endPoint: endPoint), completionHandler: completionHandler)
+        let request = request(endPoint: endPoint, httpHeader: ["Authorization": "Bearer \(token)"])
+        sendRequest(request, completionHandler: completionHandler)
     }
 }
 

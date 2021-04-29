@@ -22,7 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             signInValidationService: SignInValidatoinService()
         )
         let signInViewController = SignInViewController(viewModel: viewModel)
-        let navigationController = UINavigationController(rootViewController: signInViewController)
+        let navigationController = UINavigationController(rootViewController: PurchaseListViewController(purchaseAPIService: MyMindPurchaseAPIService()))
 
         self.window?.makeKeyAndVisible()
         self.window?.rootViewController = navigationController

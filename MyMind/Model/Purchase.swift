@@ -20,6 +20,24 @@ enum PurchaseStatus: String, Codable {
     case void = "VOID"
     case revoked = "REVOKED"
 }
+extension PurchaseStatus: CustomStringConvertible {
+    var description: String {
+        switch self {
+        case .pending: return "待送審"
+        case .review: return "審核中"
+        case .approved: return "審核通過"
+        case .purchasing: return "採購作業中"
+        case .putInStorage: return "待結案"
+        case .closed: return "已結案"
+        case .unusual: return "異常入庫"
+        case .rejected: return "退回"
+        case .void: return "作廢"
+        case .revoked: return ""
+        }
+    }
+
+
+}
 
 enum SortOrder: String {
     case ascending = "ASC"
@@ -48,6 +66,10 @@ struct PurchaseListQueryInfo {
     var itemsPerPage: Int = 20
     var sortOrder: SortOrder?
     var orderReference: OrderReference?
+
+    static func defaultQueryInfo(for partnerID: String) -> PurchaseListQueryInfo {
+        return PurchaseListQueryInfo.init(partnerID: partnerID)
+    }
 
     var queryItems: [URLQueryItem] {
         var queryItems: [URLQueryItem] = [
