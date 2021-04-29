@@ -17,6 +17,8 @@ final class PurchaseListRootView: NiblessView {
         return tableView
     }()
 
+    let organizeOptionView: OrganizeOptionView = OrganizeOptionView()
+
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -31,10 +33,12 @@ final class PurchaseListRootView: NiblessView {
 
     func constructViewHierarchy() {
         addSubview(tableView)
+        addSubview(organizeOptionView)
     }
 
     func activateConstraints() {
         activateConstraintsTableView()
+        activateConstraintsOrganizeOptionView()
     }
 }
 // MARK: - Layouts
@@ -52,6 +56,22 @@ private extension PurchaseListRootView {
 
         NSLayoutConstraint.activate([
             top, leading, bottom, trailing
+        ])
+    }
+
+    private func activateConstraintsOrganizeOptionView() {
+        organizeOptionView.translatesAutoresizingMaskIntoConstraints = false
+        let leading = organizeOptionView.leadingAnchor
+            .constraint(equalTo: leadingAnchor)
+        let bottom = organizeOptionView.bottomAnchor
+            .constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
+        let trailing = organizeOptionView.trailingAnchor
+            .constraint(equalTo: trailingAnchor)
+        let height = organizeOptionView.heightAnchor
+            .constraint(equalToConstant: 40)
+
+        NSLayoutConstraint.activate([
+            leading, bottom, trailing, height
         ])
     }
 }

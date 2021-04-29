@@ -35,6 +35,7 @@
 		A44A5A7725F9B0D300995823 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A44A5A7625F9B0D300995823 /* Assets.xcassets */; };
 		A44A5A7A25F9B0D300995823 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A44A5A7825F9B0D300995823 /* LaunchScreen.storyboard */; };
 		A44A5A8525F9B0D300995823 /* MyMindTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44A5A8425F9B0D300995823 /* MyMindTests.swift */; };
+		A46BA1DD263AAD2A0075E8C8 /* OrganizeOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A46BA1DC263AAD290075E8C8 /* OrganizeOptionView.swift */; };
 		A4705B9126020E5700B30CE6 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4705B9026020E5700B30CE6 /* Response.swift */; };
 		A4793C682604423800AD280C /* AuthServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4793C672604423700AD280C /* AuthServiceTest.swift */; };
 		A4793C7A2604534100AD280C /* SignInInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4793C792604534100AD280C /* SignInInfo.swift */; };
@@ -132,6 +133,7 @@
 		A44A5A8B25F9B0D300995823 /* MyMindUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyMindUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A44A5A8F25F9B0D300995823 /* MyMindUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMindUITests.swift; sourceTree = "<group>"; };
 		A44A5A9125F9B0D300995823 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A46BA1DC263AAD290075E8C8 /* OrganizeOptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizeOptionView.swift; sourceTree = "<group>"; };
 		A4705B9026020E5700B30CE6 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		A4793C672604423700AD280C /* AuthServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthServiceTest.swift; sourceTree = "<group>"; };
 		A4793C792604534100AD280C /* SignInInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInInfo.swift; sourceTree = "<group>"; };
@@ -336,6 +338,7 @@
 				A47F39CC263A58F700A3097C /* PurChaseListViewController.swift */,
 				A47F39D4263A5A9B00A3097C /* PurchaseBriefTableViewCell.swift */,
 				A47F39D9263A64CD00A3097C /* PurchaseListRootView.swift */,
+				A46BA1DC263AAD290075E8C8 /* OrganizeOptionView.swift */,
 			);
 			path = Purchase;
 			sourceTree = "<group>";
@@ -708,6 +711,7 @@
 				A4AF79F72637B13B002B04F6 /* MainFunctionControl.swift in Sources */,
 				A4793CA72604873B00AD280C /* SignInRootView.swift in Sources */,
 				A43E0B6F260DC66D005FC6CE /* UIControl+.swift in Sources */,
+				A46BA1DD263AAD2A0075E8C8 /* OrganizeOptionView.swift in Sources */,
 				A43E0B63260D7CA4005FC6CE /* NiblessViewController.swift in Sources */,
 				A49CF8C0260306D200AFC170 /* APIError.swift in Sources */,
 				A415920F260C796500FD3989 /* ForgotPasswordRootView.swift in Sources */,
