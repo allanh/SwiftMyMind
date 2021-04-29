@@ -18,7 +18,7 @@
 		A439B52C26099AA1002352C2 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A439B52B26099AA1002352C2 /* UIViewController+.swift */; };
 		A439B53C2609CDC3002352C2 /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A439B53B2609CDC3002352C2 /* ToastView.swift */; };
 		A439B5412609D61C002352C2 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A439B5402609D61C002352C2 /* String+.swift */; };
-		A439BD372637E42F004F47C8 /* PurchaseAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A439BD362637E42F004F47C8 /* PurchaseAPIService.swift */; };
+		A439BD372637E42F004F47C8 /* MyMindPurchaseAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A439BD362637E42F004F47C8 /* MyMindPurchaseAPIService.swift */; };
 		A439BD3C2637EC51004F47C8 /* Purchase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A439BD3B2637EC51004F47C8 /* Purchase.swift */; };
 		A439BD4426380E2F004F47C8 /* purchase_list.json in Resources */ = {isa = PBXBuildFile; fileRef = A439BD4026380BF9004F47C8 /* purchase_list.json */; };
 		A43E0B63260D7CA4005FC6CE /* NiblessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43E0B60260D7CA4005FC6CE /* NiblessViewController.swift */; };
@@ -104,7 +104,7 @@
 		A439B52B26099AA1002352C2 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		A439B53B2609CDC3002352C2 /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
 		A439B5402609D61C002352C2 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
-		A439BD362637E42F004F47C8 /* PurchaseAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseAPIService.swift; sourceTree = "<group>"; };
+		A439BD362637E42F004F47C8 /* MyMindPurchaseAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMindPurchaseAPIService.swift; sourceTree = "<group>"; };
 		A439BD3B2637EC51004F47C8 /* Purchase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Purchase.swift; sourceTree = "<group>"; };
 		A439BD4026380BF9004F47C8 /* purchase_list.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = purchase_list.json; sourceTree = "<group>"; };
 		A43E0B60260D7CA4005FC6CE /* NiblessViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NiblessViewController.swift; path = "../../../../arch-materials/05-architecture-mvvm/projects/final/KooberApp/KooberUIKit/Reusable/UIKit/NiblessComponents/NiblessViewController.swift"; sourceTree = "<group>"; };
@@ -328,7 +328,7 @@
 				A49CF8BF260306D200AFC170 /* APIError.swift */,
 				A49CF8C426030CEE00AFC170 /* MyMindAuthService.swift */,
 				A48389BD260876770044C09E /* AuthService.swift */,
-				A439BD362637E42F004F47C8 /* PurchaseAPIService.swift */,
+				A439BD362637E42F004F47C8 /* MyMindPurchaseAPIService.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -672,7 +672,7 @@
 				A49CF8BB2603028C00AFC170 /* APIService.swift in Sources */,
 				A48389BE260876770044C09E /* AuthService.swift in Sources */,
 				A4BDC7BE260B418E005C33A5 /* SignInAccountInfo.swift in Sources */,
-				A439BD372637E42F004F47C8 /* PurchaseAPIService.swift in Sources */,
+				A439BD372637E42F004F47C8 /* MyMindPurchaseAPIService.swift in Sources */,
 				A439B5412609D61C002352C2 /* String+.swift in Sources */,
 				A43E0B65260D7CA4005FC6CE /* NiblessView.swift in Sources */,
 				A4793CB126048BB600AD280C /* UIFont+.swift in Sources */,
