@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import NVActivityIndicatorView
 
 final class PurchaseListViewController: NiblessViewController {
 
@@ -15,6 +16,16 @@ final class PurchaseListViewController: NiblessViewController {
     let purchaseAPIService: PurchaseAPIService
     var purchaseList: PurchaseList?
     var purchaseListQueryInfo: PurchaseListQueryInfo =  .defaultQueryInfo(for: "3")
+
+    /// Must set on main thread
+    private var isNetworkProcessing: Bool = false {
+        didSet {
+            switch isNetworkProcessing {
+            case true: startAnimatingActivityIndicator()
+            case false: stopAnimatinActivityIndicator()
+            }
+        }
+    }
 
     init(purchaseAPIService: PurchaseAPIService) {
         self.purchaseAPIService = purchaseAPIService
@@ -42,17 +53,44 @@ final class PurchaseListViewController: NiblessViewController {
     private func fetchPurchaseList(
         with partherID: String,
         purchaseListQueryInfo: PurchaseListQueryInfo? = nil) {
+        isNetworkProcessing = true
         purchaseAPIService.fetchPurchaseList(with: partherID, purchaseListQueryInfo: purchaseListQueryInfo) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let purchaseList):
-                self.purchaseList = purchaseList
+                if self.purchaseList != nil {
+                    self.purchaseList?.updateWithNextPageList(purchaseList: purchaseList)
+                } else {
+                    self.purchaseList = purchaseList
+                }
+                self.purchaseListQueryInfo.updateCurrentPageInfo(with: purchaseList)
                 DispatchQueue.main.async {
                     self.rootView.tableView.reloadData()
+                    self.isNetworkProcessing = false
                 }
             case .failure(let error):
                 print(error.localizedDescription)
+                DispatchQueue.main.async {
+                    self.isNetworkProcessing = false
+                }
             }
+        }
+    }
+}
+
+extension PurchaseListViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard isNetworkProcessing == false,
+              let purchaseList = purchaseList
+        else { return }
+
+        let currentScrolledHeight = scrollView.frame.height + scrollView.contentOffset.y
+        let currentScrolledPercentage = currentScrolledHeight / scrollView.contentSize.height
+        let threshold: CGFloat = 0.7
+
+        if currentScrolledPercentage > threshold,
+           purchaseListQueryInfo.updatePageNumberForNextPage(with: purchaseList) {
+            fetchPurchaseList(with: purchaseListQueryInfo.partnerID, purchaseListQueryInfo: purchaseListQueryInfo)
         }
     }
 }

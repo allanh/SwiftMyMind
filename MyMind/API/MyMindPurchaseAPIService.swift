@@ -13,7 +13,11 @@ protocol PurchaseAPIService {
 }
 
 class MyMindPurchaseAPIService: APIService {
-    func fetchPurchaseList(with partnerID: String, purchaseListQueryInfo: PurchaseListQueryInfo? = nil, completionHandler: @escaping (Result<PurchaseList, Error>) -> Void) {
+    func fetchPurchaseList(
+        with partnerID: String,
+        purchaseListQueryInfo: PurchaseListQueryInfo? = nil,
+        completionHandler: @escaping (Result<PurchaseList, Error>) -> Void
+    ) {
         guard let token = try? KeychainHelper().readItem(key: .accessToken, valueType: String.self) else {
             completionHandler(Result.failure(APIError.noAccessTokenError))
             return

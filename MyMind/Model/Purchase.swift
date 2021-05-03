@@ -71,6 +71,17 @@ struct PurchaseListQueryInfo {
         return PurchaseListQueryInfo.init(partnerID: partnerID)
     }
 
+    mutating func updateCurrentPageInfo(with purchaseList: PurchaseList) {
+        self.pageNumber = purchaseList.currentPageNumber
+        self.itemsPerPage = purchaseList.itemsPerPage
+    }
+
+    mutating func updatePageNumberForNextPage(with purchaseList: PurchaseList) -> Bool {
+        guard purchaseList.totalAmountOfPages > purchaseList.currentPageNumber else { return false }
+        self.pageNumber += 1
+        return true
+    }
+
     var queryItems: [URLQueryItem] {
         var queryItems: [URLQueryItem] = [
             URLQueryItem(name: "partner_id", value: partnerID),
@@ -184,12 +195,17 @@ struct PurchaseList {
             case pending, review, approved, purchasing, putInStorage = "put_in_storage", unusual, closed, rejected = "review_reject", void
         }
     }
-    let items: [PurchaseBrief]
+    var items: [PurchaseBrief]
     let statusAmount: StatusAmount
     let totalAmountOfItems: Int
     let totalAmountOfPages: Int
-    let currentPageNumber: Int
+    var currentPageNumber: Int
     let itemsPerPage: Int
+
+    mutating func updateWithNextPageList(purchaseList: PurchaseList) {
+        self.items.append(contentsOf: purchaseList.items)
+        self.currentPageNumber = purchaseList.currentPageNumber
+    }
 
     enum CodingKeys: String, CodingKey {
         case items = "detail"
