@@ -17,6 +17,17 @@ final class PurchaseListRootView: NiblessView {
         return tableView
     }()
 
+    let collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.minimumLineSpacing = 20
+        layout.minimumInteritemSpacing = 20
+        layout.sectionInset = .init(top: 15, left: 10, bottom: 15, right: 10)
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.isHidden = true
+        collectionView.backgroundColor = .white
+        return collectionView
+    }()
+
     let organizeOptionView: OrganizeOptionView = OrganizeOptionView()
 
     override init(frame: CGRect) {
@@ -32,17 +43,35 @@ final class PurchaseListRootView: NiblessView {
     }
 
     func constructViewHierarchy() {
+        addSubview(collectionView)
         addSubview(tableView)
         addSubview(organizeOptionView)
     }
 
     func activateConstraints() {
+        activateConstraintsCollecitonView()
         activateConstraintsTableView()
         activateConstraintsOrganizeOptionView()
     }
 }
 // MARK: - Layouts
 private extension PurchaseListRootView {
+    private func activateConstraintsCollecitonView() {
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        let top = collectionView.topAnchor
+            .constraint(equalTo: safeAreaLayoutGuide.topAnchor)
+        let leading = collectionView.leadingAnchor
+            .constraint(equalTo: leadingAnchor)
+        let bottom = collectionView.bottomAnchor
+            .constraint(equalTo: organizeOptionView.topAnchor)
+        let trailing = collectionView.trailingAnchor
+            .constraint(equalTo: trailingAnchor)
+
+        NSLayoutConstraint.activate([
+            top, leading, bottom, trailing
+        ])
+    }
+
     private func activateConstraintsTableView() {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         let top = tableView.topAnchor
@@ -50,7 +79,7 @@ private extension PurchaseListRootView {
         let leading = tableView.leadingAnchor
             .constraint(equalTo: leadingAnchor)
         let bottom = tableView.bottomAnchor
-            .constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
+            .constraint(equalTo: organizeOptionView.topAnchor)
         let trailing = tableView.trailingAnchor
             .constraint(equalTo: trailingAnchor)
 

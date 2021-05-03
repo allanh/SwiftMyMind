@@ -8,6 +8,29 @@
 
 import UIKit
 
+protocol PurchaseStatusColorProvider {
+    func colorForStatus(status: PurchaseStatus) -> (UIColor, UIColor)
+}
+extension PurchaseStatusColorProvider {
+    func colorForStatus(status: PurchaseStatus) -> (UIColor, UIColor) {
+        let mainColor: UIColor
+        let secondColor: UIColor
+        switch status {
+        case .approved, .closed, .purchasing:
+            mainColor = UIColor(hex: "1ab643")
+            secondColor = UIColor(hex: "10732a")
+        case .review, .putInStorage, .pending:
+            mainColor = UIColor(hex: "ff8500")
+            secondColor = UIColor(hex: "b45d00")
+        case .rejected, .void, .revoked, .unusual:
+            mainColor = UIColor(hex: "f23f44")
+            secondColor = UIColor(hex: "d50f15")
+        }
+        return (mainColor, secondColor)
+    }
+
+}
+
 class PurchaseBriefTableViewCell: UITableViewCell {
     // MARK: - Properties
     let titleLabel: UILabel = UILabel {
@@ -60,12 +83,7 @@ class PurchaseBriefTableViewCell: UITableViewCell {
 
     private func configStatusLabel(with status: PurchaseStatus) {
         statusLabel.text = status.description
-        var color: UIColor = .black
-        switch status {
-        case .approved, .closed, .purchasing: color = .green
-        case .review, .putInStorage, .pending: color = .orange
-        case .rejected, .void, .revoked, .unusual: color = .red
-        }
+        let color: UIColor = colorForStatus(status: status).0
         statusLabel.layer.borderColor = color.cgColor
         statusLabel.textColor = color
     }
@@ -112,3 +130,4 @@ extension PurchaseBriefTableViewCell {
         ])
     }
 }
+extension PurchaseBriefTableViewCell: PurchaseStatusColorProvider { }

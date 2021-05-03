@@ -55,6 +55,10 @@
 		A48389AF2608360A0044C09E /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48389AE2608360A0044C09E /* SignInViewController.swift */; };
 		A48389B4260869940044C09E /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48389B3260869940044C09E /* SignInViewModel.swift */; };
 		A48389BE260876770044C09E /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48389BD260876770044C09E /* AuthService.swift */; };
+		A489A1AC263FA7C900832679 /* TriangleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A489A1AB263FA7C900832679 /* TriangleView.swift */; };
+		A489A1B1263FAA7D00832679 /* PurchaseBriefCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A489A1AF263FAA7D00832679 /* PurchaseBriefCollectionViewCell.swift */; };
+		A489A1B2263FAA7D00832679 /* PurchaseBriefCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A489A1B0263FAA7D00832679 /* PurchaseBriefCollectionViewCell.xib */; };
+		A489A1B4263FC9D600832679 /* UICollectionView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A489A1B3263FC9D600832679 /* UICollectionView+.swift */; };
 		A49CF8B6260301DE00AFC170 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49CF8B5260301DE00AFC170 /* Endpoint.swift */; };
 		A49CF8BB2603028C00AFC170 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49CF8BA2603028C00AFC170 /* APIService.swift */; };
 		A49CF8C0260306D200AFC170 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49CF8BF260306D200AFC170 /* APIError.swift */; };
@@ -154,6 +158,10 @@
 		A48389AE2608360A0044C09E /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		A48389B3260869940044C09E /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
 		A48389BD260876770044C09E /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		A489A1AB263FA7C900832679 /* TriangleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriangleView.swift; sourceTree = "<group>"; };
+		A489A1AF263FAA7D00832679 /* PurchaseBriefCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseBriefCollectionViewCell.swift; sourceTree = "<group>"; };
+		A489A1B0263FAA7D00832679 /* PurchaseBriefCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PurchaseBriefCollectionViewCell.xib; sourceTree = "<group>"; };
+		A489A1B3263FC9D600832679 /* UICollectionView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+.swift"; sourceTree = "<group>"; };
 		A49CF8B5260301DE00AFC170 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		A49CF8BA2603028C00AFC170 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		A49CF8BF260306D200AFC170 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
@@ -328,6 +336,7 @@
 				A43E0B6E260DC66D005FC6CE /* UIControl+.swift */,
 				A4CF09B22636C36800439D5F /* UIView+shadow.swift */,
 				A47F39DE263A67E200A3097C /* UITableView+.swift */,
+				A489A1B3263FC9D600832679 /* UICollectionView+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -339,6 +348,9 @@
 				A47F39D4263A5A9B00A3097C /* PurchaseBriefTableViewCell.swift */,
 				A47F39D9263A64CD00A3097C /* PurchaseListRootView.swift */,
 				A46BA1DC263AAD290075E8C8 /* OrganizeOptionView.swift */,
+				A489A1AB263FA7C900832679 /* TriangleView.swift */,
+				A489A1AF263FAA7D00832679 /* PurchaseBriefCollectionViewCell.swift */,
+				A489A1B0263FAA7D00832679 /* PurchaseBriefCollectionViewCell.xib */,
 			);
 			path = Purchase;
 			sourceTree = "<group>";
@@ -525,6 +537,7 @@
 			files = (
 				A44A5A7A25F9B0D300995823 /* LaunchScreen.storyboard in Resources */,
 				A44A5A7725F9B0D300995823 /* Assets.xcassets in Resources */,
+				A489A1B2263FAA7D00832679 /* PurchaseBriefCollectionViewCell.xib in Resources */,
 				A44A5A7525F9B0D200995823 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -715,7 +728,10 @@
 				A43E0B63260D7CA4005FC6CE /* NiblessViewController.swift in Sources */,
 				A49CF8C0260306D200AFC170 /* APIError.swift in Sources */,
 				A415920F260C796500FD3989 /* ForgotPasswordRootView.swift in Sources */,
+				A489A1AC263FA7C900832679 /* TriangleView.swift in Sources */,
+				A489A1B4263FC9D600832679 /* UICollectionView+.swift in Sources */,
 				A47F39D5263A5A9B00A3097C /* PurchaseBriefTableViewCell.swift in Sources */,
+				A489A1B1263FAA7D00832679 /* PurchaseBriefCollectionViewCell.swift in Sources */,
 				A49CF8B6260301DE00AFC170 /* Endpoint.swift in Sources */,
 				A4793CB626048EBA00AD280C /* ValidatableInputView.swift in Sources */,
 				A4159209260C603B00FD3989 /* ForgotPasswordInfo.swift in Sources */,

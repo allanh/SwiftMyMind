@@ -10,7 +10,7 @@ import UIKit
 import NVActivityIndicatorView
 
 final class PurchaseListViewController: NiblessViewController {
-
+    // MARK: - Properties
     var rootView: PurchaseListRootView { view as! PurchaseListRootView }
 
     let purchaseAPIService: PurchaseAPIService
@@ -26,12 +26,7 @@ final class PurchaseListViewController: NiblessViewController {
             }
         }
     }
-
-    init(purchaseAPIService: PurchaseAPIService) {
-        self.purchaseAPIService = purchaseAPIService
-        super.init()
-    }
-
+    // MARK: - View life cycle
     override func loadView() {
         super.loadView()
         view = PurchaseListRootView()
@@ -40,14 +35,28 @@ final class PurchaseListViewController: NiblessViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        try? KeychainHelper().saveItem("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9hcGktYWxwaGEtYXV0aC51ZG5zaG9wcGluZy5jb21cL2xvZ2luIiwiaWF0IjoxNjIwMDA3NzA3LCJleHAiOjE2MjAwNTgxMDcsIm5iZiI6MTYyMDAwNzcwNywianRpIjoiQ3FvUGQxcW9DQXp1VTg2ZyIsInN1YiI6MTU1LCJwcnYiOiIyMTY5YjU2YmNiOTZlYzY0ZjBjMWI1MDNjMDJlYWViMjhiYjk0NzI3IiwicGFydG5lcl9pZCI6MywicHJvamVjdF90eXBlIjoiRE9TIiwiYnVzaW5lc3NfdW5pdF9pZCI6M30.mYwDBpy67xUUhHfxc3_WSbUdL47VdqlPSbIr8LwT8tA", for: .accessToken)
         configTableView()
+        configCollectionView()
         fetchPurchaseList(with: "3")
+        rootView.organizeOptionView.layoutButton.addTarget(self, action: #selector(layoutButtonDidTapped(_:)), for: .touchUpInside)
+    }
+    // MARK: - Methods
+    init(purchaseAPIService: PurchaseAPIService) {
+        self.purchaseAPIService = purchaseAPIService
+        super.init()
     }
 
     private func configTableView() {
         rootView.tableView.delegate = self
         rootView.tableView.dataSource = self
         rootView.tableView.registerCell(PurchaseBriefTableViewCell.self)
+    }
+
+    private func configCollectionView() {
+        rootView.collectionView.delegate = self
+        rootView.collectionView.dataSource = self
+        rootView.collectionView.registerCellFormNib(for: PurchaseBriefCollectionViewCell.self)
     }
 
     private func fetchPurchaseList(
@@ -66,6 +75,7 @@ final class PurchaseListViewController: NiblessViewController {
                 self.purchaseListQueryInfo.updateCurrentPageInfo(with: purchaseList)
                 DispatchQueue.main.async {
                     self.rootView.tableView.reloadData()
+                    self.rootView.collectionView.reloadData()
                     self.isNetworkProcessing = false
                 }
             case .failure(let error):
@@ -76,8 +86,16 @@ final class PurchaseListViewController: NiblessViewController {
             }
         }
     }
-}
 
+    @objc
+    private func layoutButtonDidTapped(_ sender: UIButton) {
+        rootView.collectionView.isHidden.toggle()
+        rootView.tableView.isHidden.toggle()
+        let imageName = rootView.collectionView.isHidden ? "list" : "grid"
+        sender.setImage(UIImage(named: imageName), for: .normal)
+    }
+}
+// MARK: - Scroll view delegate
 extension PurchaseListViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         guard isNetworkProcessing == false,
@@ -86,7 +104,7 @@ extension PurchaseListViewController: UIScrollViewDelegate {
 
         let currentScrolledHeight = scrollView.frame.height + scrollView.contentOffset.y
         let currentScrolledPercentage = currentScrolledHeight / scrollView.contentSize.height
-        let threshold: CGFloat = 0.7
+        let threshold: CGFloat = 0.8
 
         if currentScrolledPercentage > threshold,
            purchaseListQueryInfo.updatePageNumberForNextPage(with: purchaseList) {
@@ -94,7 +112,7 @@ extension PurchaseListViewController: UIScrollViewDelegate {
         }
     }
 }
-
+// MARK: - Table view delegate
 extension PurchaseListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return purchaseList?.items.count ?? 0
@@ -128,5 +146,32 @@ extension PurchaseListViewController: UITableViewDelegate, UITableViewDataSource
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
+    }
+}
+// MARK: - Collection view delegate
+extension PurchaseListViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return purchaseList?.items.count ?? 0
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(PurchaseBriefCollectionViewCell.self, for: indexPath) as? PurchaseBriefCollectionViewCell else {
+            fatalError("Please register cell first or wrong identifier")
+        }
+        if let purchaseBrief = purchaseList?.items[indexPath.item] {
+            cell.config(with: purchaseBrief)
+        }
+        return cell
+    }
+}
+// MARK: - Collection view flow layout
+extension PurchaseListViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        var horizontalSpace: CGFloat = 0
+        if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
+            horizontalSpace = layout.minimumLineSpacing + layout.sectionInset.left + layout.sectionInset.right
+        }
+        let width = (collectionView.frame.width - horizontalSpace) / 2
+        return CGSize(width: width, height: 280)
     }
 }
