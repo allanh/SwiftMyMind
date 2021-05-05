@@ -73,6 +73,8 @@
 		A4BDC7BE260B418E005C33A5 /* SignInAccountInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BDC7BD260B418E005C33A5 /* SignInAccountInfo.swift */; };
 		A4CF09B32636C36800439D5F /* UIView+shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CF09B22636C36800439D5F /* UIView+shadow.swift */; };
 		A4DD410726425496007B2A41 /* PromiseKitAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DD410626425496007B2A41 /* PromiseKitAPIService.swift */; };
+		A4DD410926427DD5007B2A41 /* MyMindAutoCompleteAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DD410826427DD5007B2A41 /* MyMindAutoCompleteAPIService.swift */; };
+		A4DD410B26428927007B2A41 /* AutoCompleteInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DD410A26428927007B2A41 /* AutoCompleteInfo.swift */; };
 		BA024BA4A6305FD2FA0ADE0D /* Pods_MyMind_MyMindUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49082C5B628793B947583BE8 /* Pods_MyMind_MyMindUITests.framework */; };
 		E92DA73D2A572707BC1E6314 /* Pods_MyMindTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C35ECDE517A2C6A01C3E7141 /* Pods_MyMindTests.framework */; };
 		EC3F7DEF08CFEC10C2124121 /* Pods_MyMind.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F231C5BAACFDBA2A1B0E19E /* Pods_MyMind.framework */; };
@@ -177,6 +179,8 @@
 		A4BDC7BD260B418E005C33A5 /* SignInAccountInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInAccountInfo.swift; sourceTree = "<group>"; };
 		A4CF09B22636C36800439D5F /* UIView+shadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+shadow.swift"; sourceTree = "<group>"; };
 		A4DD410626425496007B2A41 /* PromiseKitAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromiseKitAPIService.swift; sourceTree = "<group>"; };
+		A4DD410826427DD5007B2A41 /* MyMindAutoCompleteAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMindAutoCompleteAPIService.swift; sourceTree = "<group>"; };
+		A4DD410A26428927007B2A41 /* AutoCompleteInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoCompleteInfo.swift; sourceTree = "<group>"; };
 		C001C85B3856800C20B59128 /* Pods-MyMindTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMindTests.release.xcconfig"; path = "Target Support Files/Pods-MyMindTests/Pods-MyMindTests.release.xcconfig"; sourceTree = "<group>"; };
 		C35ECDE517A2C6A01C3E7141 /* Pods_MyMindTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyMindTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8BDB686048E1E4C810DE722 /* Pods-MyMind.alpha.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMind.alpha.xcconfig"; path = "Target Support Files/Pods-MyMind/Pods-MyMind.alpha.xcconfig"; sourceTree = "<group>"; };
@@ -296,6 +300,7 @@
 				A4BDC7BD260B418E005C33A5 /* SignInAccountInfo.swift */,
 				A4159208260C603B00FD3989 /* ForgotPasswordInfo.swift */,
 				A439BD3B2637EC51004F47C8 /* Purchase.swift */,
+				A4DD410A26428927007B2A41 /* AutoCompleteInfo.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -367,6 +372,7 @@
 				A48389BD260876770044C09E /* AuthService.swift */,
 				A439BD362637E42F004F47C8 /* MyMindPurchaseAPIService.swift */,
 				A4DD410626425496007B2A41 /* PromiseKitAPIService.swift */,
+				A4DD410826427DD5007B2A41 /* MyMindAutoCompleteAPIService.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -695,8 +701,10 @@
 				A4159214260C861F00FD3989 /* ForgotPasswordViewController.swift in Sources */,
 				A47F39DA263A64CD00A3097C /* PurchaseListRootView.swift in Sources */,
 				A4793C9626047C8000AD280C /* NibOwnerLoadable.swift in Sources */,
+				A4DD410926427DD5007B2A41 /* MyMindAutoCompleteAPIService.swift in Sources */,
 				A4793C7A2604534100AD280C /* SignInInfo.swift in Sources */,
 				A4705B9126020E5700B30CE6 /* Response.swift in Sources */,
+				A4DD410B26428927007B2A41 /* AutoCompleteInfo.swift in Sources */,
 				A439BD3C2637EC51004F47C8 /* Purchase.swift in Sources */,
 				A4793C9F26047DB900AD280C /* UIStoryboard+.swift in Sources */,
 				A4BDC79E260ADFC5005C33A5 /* UIViewController+Rx.swift in Sources */,

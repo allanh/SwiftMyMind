@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum PurchaseStatus: String, Codable {
+enum PurchaseStatus: String, Codable, CaseIterable {
     case pending = "PENDING"
     case review = "REVIEW"
     case approved = "APPROVED"

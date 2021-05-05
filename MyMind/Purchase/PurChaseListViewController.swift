@@ -42,7 +42,7 @@ final class PurchaseListViewController: NiblessViewController {
         view.backgroundColor = .white
         configTableView()
         configCollectionView()
-        fetchPurchaseList(with: "3")
+        fetchPurchaseList()
         rootView.organizeOptionView.layoutButton.addTarget(self, action: #selector(layoutButtonDidTapped(_:)), for: .touchUpInside)
     }
     // MARK: - Methods
@@ -63,9 +63,7 @@ final class PurchaseListViewController: NiblessViewController {
         rootView.collectionView.registerCellFormNib(for: PurchaseBriefCollectionViewCell.self)
     }
 
-    private func fetchPurchaseList(
-        with partherID: String,
-        purchaseListQueryInfo: PurchaseListQueryInfo? = nil) {
+    private func fetchPurchaseList(purchaseListQueryInfo: PurchaseListQueryInfo? = nil) {
         isNetworkProcessing = true
         purchaseAPIService.fetchPurchaseList(purchaseListQueryInfo: purchaseListQueryInfo)
             .done { purchaseList in
@@ -113,7 +111,7 @@ extension PurchaseListViewController: UIScrollViewDelegate {
 
         if currentScrolledPercentage > threshold,
            purchaseListQueryInfo.updatePageNumberForNextPage(with: purchaseList) {
-            fetchPurchaseList(with: purchaseListQueryInfo.partnerID, purchaseListQueryInfo: purchaseListQueryInfo)
+            fetchPurchaseList(purchaseListQueryInfo: purchaseListQueryInfo)
         }
     }
 }
