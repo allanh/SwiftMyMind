@@ -9,12 +9,18 @@
 import Foundation
 
 protocol PurchaseAPIService {
-    func fetchPurchaseList(with partnerID: String, purchaseListQueryInfo: PurchaseListQueryInfo?, completionHandler: @escaping (Result<PurchaseList, Error>) -> Void)
+    var userSession: UserSession { get }
+    func fetchPurchaseList(purchaseListQueryInfo: PurchaseListQueryInfo?, completionHandler: @escaping (Result<PurchaseList, Error>) -> Void)
 }
 
 class MyMindPurchaseAPIService: APIService {
+    let userSession: UserSession
+
+    init(userSession: UserSession) {
+        self.userSession = userSession
+    }
+
     func fetchPurchaseList(
-        with partnerID: String,
         purchaseListQueryInfo: PurchaseListQueryInfo? = nil,
         completionHandler: @escaping (Result<PurchaseList, Error>) -> Void
     ) {
@@ -22,6 +28,7 @@ class MyMindPurchaseAPIService: APIService {
             completionHandler(Result.failure(APIError.noAccessTokenError))
             return
         }
+        let partnerID = String(userSession.partnerInfo.id)
         let endPoint = Endpoint.purchaseList(with: partnerID, purchaseListQueryInfo: purchaseListQueryInfo)
         let request = request(endPoint: endPoint, httpHeader: ["Authorization": "Bearer \(token)"])
         sendRequest(request, completionHandler: completionHandler)

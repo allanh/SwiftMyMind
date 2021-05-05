@@ -14,8 +14,13 @@ final class PurchaseListViewController: NiblessViewController {
     var rootView: PurchaseListRootView { view as! PurchaseListRootView }
 
     let purchaseAPIService: PurchaseAPIService
+
     var purchaseList: PurchaseList?
-    var purchaseListQueryInfo: PurchaseListQueryInfo =  .defaultQueryInfo(for: "3")
+
+    lazy var purchaseListQueryInfo: PurchaseListQueryInfo = {
+        let partnerID = String(purchaseAPIService.userSession.partnerInfo.id)
+        return .defaultQueryInfo(for: partnerID)
+    }()
 
     /// Must set on main thread
     private var isNetworkProcessing: Bool = false {
@@ -35,7 +40,6 @@ final class PurchaseListViewController: NiblessViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        try? KeychainHelper().saveItem("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9hcGktYWxwaGEtYXV0aC51ZG5zaG9wcGluZy5jb21cL2xvZ2luIiwiaWF0IjoxNjIwMDA3NzA3LCJleHAiOjE2MjAwNTgxMDcsIm5iZiI6MTYyMDAwNzcwNywianRpIjoiQ3FvUGQxcW9DQXp1VTg2ZyIsInN1YiI6MTU1LCJwcnYiOiIyMTY5YjU2YmNiOTZlYzY0ZjBjMWI1MDNjMDJlYWViMjhiYjk0NzI3IiwicGFydG5lcl9pZCI6MywicHJvamVjdF90eXBlIjoiRE9TIiwiYnVzaW5lc3NfdW5pdF9pZCI6M30.mYwDBpy67xUUhHfxc3_WSbUdL47VdqlPSbIr8LwT8tA", for: .accessToken)
         configTableView()
         configCollectionView()
         fetchPurchaseList(with: "3")

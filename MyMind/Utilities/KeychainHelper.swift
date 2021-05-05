@@ -25,7 +25,6 @@ extension KeychainError: LocalizedError {
             return NSLocalizedString(message, comment: "")
         }
     }
-
 }
 
 public enum KeychainKeys: String {
