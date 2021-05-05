@@ -67,28 +67,29 @@ final class PurchaseListViewController: NiblessViewController {
         with partherID: String,
         purchaseListQueryInfo: PurchaseListQueryInfo? = nil) {
         isNetworkProcessing = true
-        purchaseAPIService.fetchPurchaseList(with: partherID, purchaseListQueryInfo: purchaseListQueryInfo) { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let purchaseList):
-                if self.purchaseList != nil {
-                    self.purchaseList?.updateWithNextPageList(purchaseList: purchaseList)
-                } else {
-                    self.purchaseList = purchaseList
-                }
-                self.purchaseListQueryInfo.updateCurrentPageInfo(with: purchaseList)
-                DispatchQueue.main.async {
-                    self.rootView.tableView.reloadData()
-                    self.rootView.collectionView.reloadData()
-                    self.isNetworkProcessing = false
-                }
-            case .failure(let error):
-                print(error.localizedDescription)
-                DispatchQueue.main.async {
-                    self.isNetworkProcessing = false
-                }
+        purchaseAPIService.fetchPurchaseList(purchaseListQueryInfo: purchaseListQueryInfo)
+            .done { purchaseList in
+                self.handleSuccessFetchPurchaseList(purchaseList)
             }
+            .ensure {
+                self.isNetworkProcessing = false
+            }
+            .catch(handleErrorForFetchPurchaseList(_:))
+    }
+
+    private func handleSuccessFetchPurchaseList(_ purchaseList: PurchaseList) {
+        if self.purchaseList != nil {
+            self.purchaseList?.updateWithNextPageList(purchaseList: purchaseList)
+        } else {
+            self.purchaseList = purchaseList
         }
+        purchaseListQueryInfo.updateCurrentPageInfo(with: purchaseList)
+        rootView.tableView.reloadData()
+        rootView.collectionView.reloadData()
+    }
+
+    private func handleErrorForFetchPurchaseList(_ error: Error) {
+        print(error.localizedDescription)
     }
 
     @objc

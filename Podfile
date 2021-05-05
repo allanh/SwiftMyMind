@@ -20,6 +20,7 @@ target 'MyMind' do
     pod 'LookinServer', :configurations => ['Debug']
     pod 'Charts'
     pod 'CoreXLSX', '~> 0.14.0'
+    pod 'PromiseKit', '~> 6.8'
 
   target 'MyMindTests' do
     inherit! :search_paths

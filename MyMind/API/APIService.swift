@@ -9,9 +9,9 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-protocol APIService { }
+protocol RequestCreatable { }
 
-extension APIService {
+extension RequestCreatable {
     func request(endPoint: Endpoint,
                  httpMethod: String = "GET",
                  httpHeader: [String: String]? = nil,
@@ -34,7 +34,11 @@ extension APIService {
         }
         return request
     }
+}
 
+protocol APIService: RequestCreatable { }
+
+extension APIService {
     func sendRequest<T: Decodable>(_ request: URLRequest, completionHandler: @escaping (Result<T, Error>) -> Void) {
 
         let task = URLSession.shared.dataTask(with: request) { data, _, error in

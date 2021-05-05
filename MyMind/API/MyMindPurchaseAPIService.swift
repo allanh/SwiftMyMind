@@ -7,13 +7,14 @@
 //
 
 import Foundation
+import PromiseKit
 
 protocol PurchaseAPIService {
     var userSession: UserSession { get }
-    func fetchPurchaseList(purchaseListQueryInfo: PurchaseListQueryInfo?, completionHandler: @escaping (Result<PurchaseList, Error>) -> Void)
+    func fetchPurchaseList(purchaseListQueryInfo: PurchaseListQueryInfo?) -> Promise<PurchaseList>
 }
 
-class MyMindPurchaseAPIService: APIService {
+class MyMindPurchaseAPIService: PromiseKitAPIService {
     let userSession: UserSession
 
     init(userSession: UserSession) {
@@ -21,17 +22,13 @@ class MyMindPurchaseAPIService: APIService {
     }
 
     func fetchPurchaseList(
-        purchaseListQueryInfo: PurchaseListQueryInfo? = nil,
-        completionHandler: @escaping (Result<PurchaseList, Error>) -> Void
-    ) {
-        guard let token = try? KeychainHelper().readItem(key: .accessToken, valueType: String.self) else {
-            completionHandler(Result.failure(APIError.noAccessTokenError))
-            return
-        }
+        purchaseListQueryInfo: PurchaseListQueryInfo? = nil
+    ) -> Promise<PurchaseList> {
+
         let partnerID = String(userSession.partnerInfo.id)
         let endPoint = Endpoint.purchaseList(with: partnerID, purchaseListQueryInfo: purchaseListQueryInfo)
-        let request = request(endPoint: endPoint, httpHeader: ["Authorization": "Bearer \(token)"])
-        sendRequest(request, completionHandler: completionHandler)
+        let request = request(endPoint: endPoint, httpHeader: ["Authorization": "Bearer \(userSession.token)"])
+        return sendRequest(request: request)
     }
 }
 

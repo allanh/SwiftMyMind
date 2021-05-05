@@ -72,6 +72,7 @@
 		A4BDC7B9260B3E0A005C33A5 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BDC7B8260B3E0A005C33A5 /* KeychainHelper.swift */; };
 		A4BDC7BE260B418E005C33A5 /* SignInAccountInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BDC7BD260B418E005C33A5 /* SignInAccountInfo.swift */; };
 		A4CF09B32636C36800439D5F /* UIView+shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CF09B22636C36800439D5F /* UIView+shadow.swift */; };
+		A4DD410726425496007B2A41 /* PromiseKitAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DD410626425496007B2A41 /* PromiseKitAPIService.swift */; };
 		BA024BA4A6305FD2FA0ADE0D /* Pods_MyMind_MyMindUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49082C5B628793B947583BE8 /* Pods_MyMind_MyMindUITests.framework */; };
 		E92DA73D2A572707BC1E6314 /* Pods_MyMindTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C35ECDE517A2C6A01C3E7141 /* Pods_MyMindTests.framework */; };
 		EC3F7DEF08CFEC10C2124121 /* Pods_MyMind.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F231C5BAACFDBA2A1B0E19E /* Pods_MyMind.framework */; };
@@ -175,6 +176,7 @@
 		A4BDC7B8260B3E0A005C33A5 /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
 		A4BDC7BD260B418E005C33A5 /* SignInAccountInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInAccountInfo.swift; sourceTree = "<group>"; };
 		A4CF09B22636C36800439D5F /* UIView+shadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+shadow.swift"; sourceTree = "<group>"; };
+		A4DD410626425496007B2A41 /* PromiseKitAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromiseKitAPIService.swift; sourceTree = "<group>"; };
 		C001C85B3856800C20B59128 /* Pods-MyMindTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMindTests.release.xcconfig"; path = "Target Support Files/Pods-MyMindTests/Pods-MyMindTests.release.xcconfig"; sourceTree = "<group>"; };
 		C35ECDE517A2C6A01C3E7141 /* Pods_MyMindTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyMindTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8BDB686048E1E4C810DE722 /* Pods-MyMind.alpha.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMind.alpha.xcconfig"; path = "Target Support Files/Pods-MyMind/Pods-MyMind.alpha.xcconfig"; sourceTree = "<group>"; };
@@ -364,6 +366,7 @@
 				A49CF8C426030CEE00AFC170 /* MyMindAuthService.swift */,
 				A48389BD260876770044C09E /* AuthService.swift */,
 				A439BD362637E42F004F47C8 /* MyMindPurchaseAPIService.swift */,
+				A4DD410626425496007B2A41 /* PromiseKitAPIService.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -713,6 +716,7 @@
 				A439BD372637E42F004F47C8 /* MyMindPurchaseAPIService.swift in Sources */,
 				A439B5412609D61C002352C2 /* String+.swift in Sources */,
 				A43E0B65260D7CA4005FC6CE /* NiblessView.swift in Sources */,
+				A4DD410726425496007B2A41 /* PromiseKitAPIService.swift in Sources */,
 				A4793CB126048BB600AD280C /* UIFont+.swift in Sources */,
 				A44A5A7225F9B0D200995823 /* MainFunctionEntryViewController.swift in Sources */,
 				A4159204260C394F00FD3989 /* UIButton+.swift in Sources */,
