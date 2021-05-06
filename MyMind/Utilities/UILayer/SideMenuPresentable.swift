@@ -43,6 +43,7 @@ extension SideMenuPresentable where Self: UIViewController {
             }
             animateSideMenu(to: targetXPoint) { [weak self] in
                 self?.sideMenuViewController?.view.removeFromSuperview()
+                self?.sideMenuViewController?.removeFromParent()
                 self?.sideMenuViewController = nil
             }
         } else {
@@ -70,6 +71,8 @@ extension SideMenuPresentable where Self: UIViewController {
 
         sideMenuViewController.view.frame = frame
         window.addSubview(sideMenuViewController.view)
+        addChild(sideMenuViewController)
+        sideMenuViewController.didMove(toParent: self)
     }
 
     func animateSideMenu(to xPosition: CGFloat, completion: (() -> Void)?) {

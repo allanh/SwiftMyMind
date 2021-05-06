@@ -211,6 +211,6 @@ extension PurchaseListViewController: SideMenuPresentable {
     }
 
     func initialSideMenuViewController() -> PurchaseFilterViewController {
-        return PurchaseFilterViewController()
+        return PurchaseFilterViewController(visibleWidth: sideMenuWidth)
     }
 }
