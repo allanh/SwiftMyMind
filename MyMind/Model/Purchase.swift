@@ -20,6 +20,7 @@ enum PurchaseStatus: String, Codable, CaseIterable {
     case void = "VOID"
     case revoked = "REVOKED"
 }
+
 extension PurchaseStatus: CustomStringConvertible {
     var description: String {
         switch self {
@@ -35,8 +36,6 @@ extension PurchaseStatus: CustomStringConvertible {
         case .revoked: return ""
         }
     }
-
-
 }
 
 enum SortOrder: String {

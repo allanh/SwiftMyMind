@@ -1,5 +1,5 @@
 //
-//  PurChaseListViewController.swift
+//  PurchaseListViewController.swift
 //  MyMind
 //
 //  Created by Barry Chen on 2021/4/29.
@@ -31,6 +31,11 @@ final class PurchaseListViewController: NiblessViewController {
             }
         }
     }
+
+    var filterViewController: PurchaseFilterViewController?
+    var backgroundMaskView: UIView?
+    var isSideMenuShowing: Bool = false
+    var isSideMenuAnimating: Bool = false
     // MARK: - View life cycle
     override func loadView() {
         super.loadView()
@@ -44,6 +49,7 @@ final class PurchaseListViewController: NiblessViewController {
         configCollectionView()
         fetchPurchaseList()
         rootView.organizeOptionView.layoutButton.addTarget(self, action: #selector(layoutButtonDidTapped(_:)), for: .touchUpInside)
+        rootView.organizeOptionView.filterButton.addTarget(self, action: #selector(filterButtonDidTapped(_:)), for: .touchUpInside)
     }
     // MARK: - Methods
     init(purchaseAPIService: PurchaseAPIService) {
@@ -96,6 +102,11 @@ final class PurchaseListViewController: NiblessViewController {
         rootView.tableView.isHidden.toggle()
         let imageName = rootView.collectionView.isHidden ? "list" : "grid"
         sender.setImage(UIImage(named: imageName), for: .normal)
+    }
+
+    @objc
+    private func filterButtonDidTapped(_ sender: UIButton) {
+        toggleSideMenu()
     }
 }
 // MARK: - Scroll view delegate
@@ -176,5 +187,30 @@ extension PurchaseListViewController: UICollectionViewDelegateFlowLayout {
         }
         let width = (collectionView.frame.width - horizontalSpace) / 2
         return CGSize(width: width, height: 280)
+    }
+}
+// MARK: - Side menu presentalbe
+extension PurchaseListViewController: SideMenuPresentable {
+    typealias SideMenuViewController = PurchaseFilterViewController
+
+    var sideMenuViewController: PurchaseFilterViewController? {
+        get {
+            filterViewController
+        }
+        set {
+            filterViewController = newValue
+        }
+    }
+
+    var sideMenuWidth: CGFloat {
+        view.frame.width * 0.8
+    }
+
+    var sideMenuInitialDirection: SideMenuInitialDirection {
+        .right
+    }
+
+    func initialSideMenuViewController() -> PurchaseFilterViewController {
+        return PurchaseFilterViewController()
     }
 }
