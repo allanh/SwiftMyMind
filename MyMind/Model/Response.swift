@@ -28,11 +28,13 @@ extension Response: Decodable {
         id = try container.decode(String.self, forKey: .id)
         data = try container.decodeIfPresent(T.self, forKey: .data)
         
-        var message = try container.decodeIfPresent(String.self, forKey: .message)
+//        var message = try container.decodeIfPresent(String.self, forKey: .message)
         if let errorContainer = try? container.nestedContainer(keyedBy: ResponseKeys.self, forKey: .error) {
             message = try errorContainer.decodeIfPresent(String.self, forKey: .message)
+        } else {
+            message = nil
         }
-        self.message = message
+//        self.message = message
     }
 }
 extension Response: Encodable {
