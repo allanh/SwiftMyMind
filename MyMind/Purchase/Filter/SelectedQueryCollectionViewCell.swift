@@ -14,7 +14,7 @@ class SelectedQueryCollectionViewCell: UICollectionViewCell {
         $0.textColor = UIColor(hex: "4c4c4c")
     }
 
-    private let closeButton: UIButton = UIButton {
+    let deleteButton: UIButton = UIButton {
         $0.setImage(UIImage(named: "filled_close"), for: .normal)
     }
 
@@ -38,12 +38,12 @@ class SelectedQueryCollectionViewCell: UICollectionViewCell {
 
     private func constructViewHierarchy() {
         contentView.addSubview(contentLabel)
-        contentView.addSubview(closeButton)
+        contentView.addSubview(deleteButton)
     }
 
     private func activateConstraints() {
         activateConstraintsContentLabel()
-        activateConstraintsCloseButton()
+        activateConstraintsDeleteButton()
     }
 
     func config(with content: String) {
@@ -63,16 +63,16 @@ extension SelectedQueryCollectionViewCell {
         ])
     }
 
-    private func activateConstraintsCloseButton() {
-        closeButton.translatesAutoresizingMaskIntoConstraints = false
-        let centerY = closeButton.centerYAnchor
+    private func activateConstraintsDeleteButton() {
+        deleteButton.translatesAutoresizingMaskIntoConstraints = false
+        let centerY = deleteButton.centerYAnchor
             .constraint(equalTo: contentLabel.centerYAnchor)
-        let leading = closeButton.leadingAnchor
+        let leading = deleteButton.leadingAnchor
             .constraint(equalTo: contentLabel.trailingAnchor, constant: 10)
-        let width = closeButton.widthAnchor
+        let width = deleteButton.widthAnchor
             .constraint(equalToConstant: 20)
-        let height = closeButton.heightAnchor
-            .constraint(equalTo: closeButton.widthAnchor)
+        let height = deleteButton.heightAnchor
+            .constraint(equalTo: deleteButton.widthAnchor)
 
         NSLayoutConstraint.activate([
             centerY, leading, width, height

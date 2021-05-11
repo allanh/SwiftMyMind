@@ -67,6 +67,8 @@ class DropDownView<T, Cell: UITableViewCell>: NiblessView, UITableViewDelegate, 
         configTableView()
         backgroundColor = .clear
         dismissableView.backgroundColor = .clear
+        self.dataSource = dataSource
+        self.isHidden = true
     }
 
     func constructViewHierarchy() {
@@ -141,6 +143,7 @@ extension DropDownView {
     }
 
     func show() {
+        guard self.isHidden == true else { return }
         guard let window = UIWindow.keyWindow else { return }
         window.addSubview(self)
 
@@ -166,6 +169,7 @@ extension DropDownView {
     }
 
     func hide() {
+        guard self.isHidden == false else { return }
         UIView.animate(withDuration: 0.1) { [weak self] in
             guard let self = self else { return }
             self.heightConstraint.constant = 0

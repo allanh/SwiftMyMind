@@ -99,9 +99,7 @@ class PurchaseAutoCompleteSearchViewController: NiblessViewController {
             )
         default: break
         }
-        rootView.collectionView.reloadData()
-        rootView.layoutIfNeeded()
-        rootView.collectionViewHeightAnchor.constant = rootView.collectionView.contentSize.height
+        updateCollectionView()
     }
 
     private func getDropDownDataSource(with searchTerm: String) -> [AutoCompleteInfo] {
@@ -146,6 +144,23 @@ class PurchaseAutoCompleteSearchViewController: NiblessViewController {
             })
             .disposed(by: bag)
     }
+
+    private func updateCollectionView() {
+        rootView.collectionView.reloadData()
+        rootView.layoutIfNeeded()
+        rootView.collectionViewHeightAnchor.constant = rootView.collectionView.contentSize.height
+    }
+
+    @objc
+    private func deleteButtonDidTapped(_ sender: UIButton) {
+        guard
+            let pointInCollectionView = sender.superview?.convert(sender.frame.origin, to: rootView.collectionView),
+            let index = rootView.collectionView.indexPathForItem(at: pointInCollectionView)?.item else {
+            return
+        }
+        purchaseQueryRepository.removeAutoCompleteQueryInfo(for: purchaseQueryType, at: index)
+        updateCollectionView()
+    }
 }
 // MARK: - Collection view data source
 extension PurchaseAutoCompleteSearchViewController: UICollectionViewDataSource {
@@ -183,6 +198,7 @@ extension PurchaseAutoCompleteSearchViewController: UICollectionViewDataSource {
             cell.config(with: number)
         default: break
         }
+        cell.deleteButton.addTarget(self, action: #selector(deleteButtonDidTapped(_:)), for: .touchUpInside)
         return cell
     }
 }
