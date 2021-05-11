@@ -50,24 +50,40 @@ class PurchaseQueryRepository {
     }
 
     func updateAutoCompleteQueryInfo(for queryType: PurchaseQueryType, with info: AutoCompleteInfo) {
-        info.isSelect = true
         switch queryType {
         case .purchaseNumber:
-            if currentQueryInfo.purchaseNumbers.contains(info) == false {
+            let index = currentQueryInfo.purchaseNumbers.firstIndex(where: { $0 === info })
+            if let index = index {
+                currentQueryInfo.purchaseNumbers.remove(at: index)
+            } else {
                 currentQueryInfo.purchaseNumbers.append(info)
             }
+            info.isSelect = index == nil
         case .vendorID:
-            if currentQueryInfo.vendorIDs.contains(info) == false {
+            let index = currentQueryInfo.vendorIDs.firstIndex(where: { $0 === info })
+            if let index = index {
+                currentQueryInfo.vendorIDs.remove(at: index)
+            } else {
                 currentQueryInfo.vendorIDs.append(info)
             }
+            info.isSelect = index == nil
         case .applicant:
-            if currentQueryInfo.employeeIDs.contains(info) == false {
+            let index = currentQueryInfo.employeeIDs.firstIndex(where: { $0 === info })
+            if let index = index {
+                currentQueryInfo.employeeIDs.remove(at: index)
+            } else {
                 currentQueryInfo.employeeIDs.append(info)
             }
+            info.isSelect = index == nil
+
         case .productNumbers:
-            if currentQueryInfo.productNumbers.contains(info) == false {
+            let index = currentQueryInfo.productNumbers.firstIndex(where: { $0 === info })
+            if let index = index {
+                currentQueryInfo.productNumbers.remove(at: index)
+            } else {
                 currentQueryInfo.productNumbers.append(info)
             }
+            info.isSelect = index == nil
         default:
             return
         }

@@ -52,6 +52,7 @@ class DropDownView<T, Cell: UITableViewCell>: NiblessView, UITableViewDelegate, 
         }
     }
 
+    var shouldReloadItemWhenSelect: Bool = false
     var cellConfigure: (Cell, T) -> Void
     var selectHandler: (T) -> Void
 
@@ -122,6 +123,9 @@ class DropDownView<T, Cell: UITableViewCell>: NiblessView, UITableViewDelegate, 
         tableView.deselectRow(at: indexPath, animated: false)
         let item = dataSource[indexPath.row]
         selectHandler(item)
+        if shouldReloadItemWhenSelect {
+            tableView.reloadRows(at: [indexPath], with: .automatic)
+        }
     }
 }
 // MARK: - Actions

@@ -17,13 +17,14 @@ class PurchaseAutoCompleteSearchViewController: NiblessViewController {
         return view as! AutoCompleteSearchRootView
     }
 
-    lazy var dropDownView: DropDownView<AutoCompleteInfo, DropDownListTableViewCell> = {
-        let dropDownView = DropDownView(dataSource: self.currentQueryList) { (cell: DropDownListTableViewCell, item) in
+    lazy var dropDownView: DropDownView<AutoCompleteInfo, MultiSelectableDropDownTableViewCell> = {
+        let dropDownView = DropDownView(dataSource: self.currentQueryList) { (cell: MultiSelectableDropDownTableViewCell, item) in
             self.configCell(cell: cell, with: item)
         } selectHandler: { item in
             self.selectItem(item: item)
         }
         dropDownView.topInset = 5
+        dropDownView.shouldReloadItemWhenSelect = true
         return dropDownView
     }()
 
@@ -59,7 +60,8 @@ class PurchaseAutoCompleteSearchViewController: NiblessViewController {
         rootView.collectionView.registerCell(SelectedQueryCollectionViewCell.self)
     }
 
-    private func configCell(cell: DropDownListTableViewCell, with item: AutoCompleteInfo) {
+    private func configCell(cell: MultiSelectableDropDownTableViewCell, with item: AutoCompleteInfo) {
+        cell.checkBoxButton.isSelected = item.isSelect
         switch purchaseQueryType {
         case .purchaseNumber:
             cell.titleLabel.text = item.number

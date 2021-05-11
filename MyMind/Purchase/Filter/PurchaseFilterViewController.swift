@@ -13,7 +13,7 @@ protocol PurchaseFilterViewControllerDelegate: AnyObject {
     func purchaseFilterViewController(_ purchaseFilterViewController: PurchaseFilterViewController, didConfirm queryInfo: PurchaseListQueryInfo)
 }
 
-enum PurchaseQueryType: String, CustomStringConvertible {
+enum PurchaseQueryType: String, CustomStringConvertible, CaseIterable {
     case purchaseNumber, vendorID, purchaseStatus, applicant, productNumbers, expectPutInStoragePeriod, createdPeriod
     var description: String {
         switch self {
@@ -29,11 +29,6 @@ enum PurchaseQueryType: String, CustomStringConvertible {
 }
 
 class PurchaseFilterViewController: NiblessViewController {
-
-//    private let topBarView: SideMenuTopBarView = SideMenuTopBarView {
-//        $0.backgroundColor = .white
-//    }
-
     private let scrollView: UIScrollView = UIScrollView {
         $0.backgroundColor = .white
         $0.showsHorizontalScrollIndicator = false
@@ -48,10 +43,6 @@ class PurchaseFilterViewController: NiblessViewController {
     }
 
     weak var delegate: PurchaseFilterViewControllerDelegate?
-
-    let purchaseAutoCompleteAPIService: PurchaseAutoCompleteAPIService = MyMindAutoCompleteAPIService(userSession: .testUserSession)
-
-    var autoCompleteSource: [PurchaseQueryType: [AutoCompleteInfo]] = [:]
 
     let purchaseQueryRepository: PurchaseQueryRepository
 
@@ -69,28 +60,55 @@ class PurchaseFilterViewController: NiblessViewController {
         configNavigtaionBar()
         purchaseQueryRepository.updateAutoCompleteSourceFromRemote()
 
-        let vc = PurchaseAutoCompleteSearchViewController(purchaseQueryType: .purchaseNumber, purchaseQueryRepository: purchaseQueryRepository)
-        contentView.addSubview(vc.view)
-        addChild(vc)
-        vc.didMove(toParent: self)
-        vc.view.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            vc.view.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 15),
-            vc.view.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            vc.view.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            vc.view.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
-        ])
+        addChildViewControllers()
+        configViewForChildViewControllers()
+    }
+
+    private func configViewForChildViewControllers() {
+        var lastChildView: UIView?
+        for index in 0..<children.count {
+            guard let childView = children[index].view else { return }
+            childView.translatesAutoresizingMaskIntoConstraints = false
+            childView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+            childView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+            if index == 0 {
+                childView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 15).isActive = true
+            }
+            if let lastView = lastChildView {
+                childView.topAnchor.constraint(equalTo: lastView.bottomAnchor).isActive = true
+            }
+            if index == children.count - 1 {
+               childView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+            }
+            lastChildView = childView
+        }
+    }
+
+    private func addChildViewControllers() {
+        let allCases = PurchaseQueryType.allCases
+        allCases.forEach {
+            switch $0 {
+            case .purchaseStatus, .createdPeriod, .expectPutInStoragePeriod: break
+            default:
+                generateAutoCompleteSearchViewController(with: $0)
+            }
+        }
+    }
+
+    private func generateAutoCompleteSearchViewController(with purchaseQueryType: PurchaseQueryType) {
+        let viewController = PurchaseAutoCompleteSearchViewController(purchaseQueryType: purchaseQueryType, purchaseQueryRepository: purchaseQueryRepository)
+        contentView.addSubview(viewController.view)
+        addChild(viewController)
+        viewController.didMove(toParent: self)
     }
 
     private func constructViewHierarchy() {
-//        view.addSubview(topBarView)
         scrollView.addSubview(contentView)
         view.addSubview(scrollView)
         view.addSubview(bottomView)
     }
 
     private func activateConstraints() {
-        activateConstraintsTopBarView()
         activateConstraintsBottomView()
         activateConstraintsScrollView()
         activateConstraintsContentView()
@@ -109,30 +127,9 @@ class PurchaseFilterViewController: NiblessViewController {
     private func closeButtonDidTapped(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }
-
-    private func fetchAllAutoCompleteList() {
-
-    }
 }
 // MARK: - Layouts
 extension PurchaseFilterViewController {
-    private func activateConstraintsTopBarView() {
-//        topBarView.translatesAutoresizingMaskIntoConstraints = false
-//
-//        let leading = topBarView.leadingAnchor
-//            .constraint(equalTo: view.leadingAnchor)
-//        let top = topBarView.topAnchor
-//            .constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
-//        let trailing = topBarView.trailingAnchor
-//            .constraint(equalTo: view.trailingAnchor)
-//        let height = topBarView.heightAnchor
-//            .constraint(equalToConstant: 44)
-
-//        NSLayoutConstraint.activate([
-//            leading, top, trailing, height
-//        ])
-    }
-
     private func activateConstraintsBottomView() {
         bottomView.translatesAutoresizingMaskIntoConstraints = false
 
