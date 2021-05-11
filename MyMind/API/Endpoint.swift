@@ -85,11 +85,13 @@ extension Endpoint {
         return Endpoint(path: "/api/admin/\(version)/purchase", queryItems: urlQueryItems)
     }
 
-    static func purchaseIDAutoComplete(searchTerm: String, partnerID: String, vendorID: String? = nil) -> Self {
+    static func purchaseNumberAutoComplete(searchTerm: String, partnerID: String, vendorID: String? = nil) -> Self {
         var query: [URLQueryItem] = []
-        query.append(URLQueryItem(name: "value", value: searchTerm))
         query.append(URLQueryItem(name: "partner_id", value: partnerID))
         query.append(URLQueryItem(name: "key", value: "PURCHASE_NO"))
+        if searchTerm.isEmpty == false {
+            query.append(URLQueryItem(name: "value", value: searchTerm))
+        }
         if let vendorID = vendorID {
             query.append(URLQueryItem(name: "vendor_id", value: vendorID))
         }
@@ -98,25 +100,29 @@ extension Endpoint {
 
     static func vendorNameAutoComplete(searchTerm: String, partnerID: String) -> Self {
         var query: [URLQueryItem] = []
-        query.append(URLQueryItem(name: "word", value: searchTerm))
         query.append(URLQueryItem(name: "partner_id", value: partnerID))
         query.append(URLQueryItem(name: "key", value: "ALIAS_NAME"))
-
+        if searchTerm.isEmpty == false {
+            query.append(URLQueryItem(name: "word", value: searchTerm))
+        }
         return Endpoint(path: "/api/admin/\(version)/vendor/autocomplete", queryItems: query)
     }
 
     static func applicantAutoComplete(searchTerm: String) -> Self {
         var query: [URLQueryItem] = []
-        query.append(URLQueryItem(name: "value", value: searchTerm))
         query.append(URLQueryItem(name: "key", value: "APPLICANT"))
-
+        if searchTerm.isEmpty == false {
+            query.append(URLQueryItem(name: "value", value: searchTerm))
+        }
         return Endpoint(path: "/employee/autocomplete", queryItems: query, serviceType: .auth)
     }
 
     static func productNumberAutoComplete(searchTerm: String) -> Self {
         var query: [URLQueryItem] = []
-        query.append(URLQueryItem(name: "value", value: searchTerm))
         query.append(URLQueryItem(name: "key", value: "PRODUCT_NO"))
+        if searchTerm.isEmpty == false {
+            query.append(URLQueryItem(name: "value", value: searchTerm))
+        }
 
         return Endpoint(path: "/api/admin/\(version)/product/autocomplete", queryItems: query)
     }

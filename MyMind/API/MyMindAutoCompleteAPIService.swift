@@ -20,7 +20,7 @@ class MyMindAutoCompleteAPIService: PromiseKitAPIService {
     }
 
     func purchaseNumberAutoComplete(searchTerm: String = "") -> Promise<AutoCompleteList> {
-        let endPoint = Endpoint.purchaseIDAutoComplete(searchTerm: searchTerm, partnerID: partnerID)
+        let endPoint = Endpoint.purchaseNumberAutoComplete(searchTerm: searchTerm, partnerID: partnerID)
         let request = request(endPoint: endPoint, httpHeader: ["Authorization": "Bearer \(userSession.token)"])
 
         return sendRequest(request: request)
