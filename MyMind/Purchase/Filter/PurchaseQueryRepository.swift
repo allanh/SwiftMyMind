@@ -107,4 +107,8 @@ class PurchaseQueryRepository {
             return
         }
     }
+
+    func updatePurchaseStatus(status: PurchaseStatus?) {
+        currentQueryInfo.status = status
+    }
 }

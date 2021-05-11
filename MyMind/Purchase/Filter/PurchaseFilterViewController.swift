@@ -88,7 +88,12 @@ class PurchaseFilterViewController: NiblessViewController {
         let allCases = PurchaseQueryType.allCases
         allCases.forEach {
             switch $0 {
-            case .purchaseStatus, .createdPeriod, .expectPutInStoragePeriod: break
+            case .purchaseStatus:
+                let viewController = PurchaseStatusSelectionViewController(purchaseQueryRepository: purchaseQueryRepository)
+                contentView.addSubview(viewController.view)
+                addChild(viewController)
+                viewController.didMove(toParent: self)
+            case .createdPeriod, .expectPutInStoragePeriod: break
             default:
                 generateAutoCompleteSearchViewController(with: $0)
             }
