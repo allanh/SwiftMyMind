@@ -9,6 +9,13 @@
 import Foundation
 import PromiseKit
 
+protocol PurchaseAutoCompleteAPIService {
+    func purchaseNumberAutoComplete(searchTerm: String) -> Promise<AutoCompleteList>
+    func vendorNameAutoComplete(searchTerm: String) -> Promise<AutoCompleteList>
+    func applicantAutoComplete(searchTerm: String) -> Promise<AutoCompleteList>
+    func productNumberAutoComplete(searchTerm: String) -> Promise<AutoCompleteList>
+}
+
 class MyMindAutoCompleteAPIService: PromiseKitAPIService {
     let userSession: UserSession
     var partnerID: String {
@@ -47,3 +54,4 @@ class MyMindAutoCompleteAPIService: PromiseKitAPIService {
         return sendRequest(request: request)
     }
 }
+extension MyMindAutoCompleteAPIService: PurchaseAutoCompleteAPIService { }

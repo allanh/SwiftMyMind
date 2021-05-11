@@ -53,12 +53,12 @@ struct PurchaseListQueryInfo {
     }
     let partnerID: String
     var status: PurchaseStatus?
-    var purchaseNumbers: [String] = []
-    var vendorIDs: [String] = []
-    var productNumbers: [String] = []
-    var employeeIDs: [String] = []
+    var purchaseNumbers: [AutoCompleteInfo] = []
+    var vendorIDs: [AutoCompleteInfo] = []
+    var productNumbers: [AutoCompleteInfo] = []
+    var employeeIDs: [AutoCompleteInfo] = []
     var expectStorageStartDate: Date?
-    var expectStprageEndDate: Date?
+    var expectStorageEndDate: Date?
     var firstCreatDate: Date?
     var lastCreatDate: Date?
     var pageNumber: Int = 1
@@ -92,22 +92,22 @@ struct PurchaseListQueryInfo {
             queryItems.append(item)
         }
         if purchaseNumbers.isEmpty == false {
-            let value = purchaseNumbers.joined(separator: ",")
+            let value = purchaseNumbers.compactMap { $0.number }.joined(separator: ",")
             let item = URLQueryItem(name: "purchase_no", value: value)
             queryItems.append(item)
         }
         if vendorIDs.isEmpty == false {
-            let value = vendorIDs.joined(separator: ",")
+            let value = vendorIDs.compactMap { $0.id }.joined(separator: ",")
             let item = URLQueryItem(name: "vendor_id", value: value)
             queryItems.append(item)
         }
         if productNumbers.isEmpty == false {
-            let value = productNumbers.joined(separator: ",")
+            let value = productNumbers.compactMap { $0.number }.joined(separator: ",")
             let item = URLQueryItem(name: "product_no", value: value)
             queryItems.append(item)
         }
         if employeeIDs.isEmpty == false {
-            let value = productNumbers.joined(separator: ",")
+            let value = employeeIDs.compactMap { $0.id }.joined(separator: ",")
             let item = URLQueryItem(name: "employee_id", value: value)
             queryItems.append(item)
         }
@@ -119,7 +119,7 @@ struct PurchaseListQueryInfo {
             let item = URLQueryItem(name: "expect_storage_start_date", value: value)
             queryItems.append(item)
         }
-        if let expectStprageEndDate = expectStprageEndDate {
+        if let expectStprageEndDate = expectStorageEndDate {
             let value = dateFormatter.string(from: expectStprageEndDate)
             let item = URLQueryItem(name: "expect_storage_end_date", value: value)
             queryItems.append(item)

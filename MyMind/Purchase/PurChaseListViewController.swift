@@ -106,7 +106,11 @@ final class PurchaseListViewController: NiblessViewController {
 
     @objc
     private func filterButtonDidTapped(_ sender: UIButton) {
-        toggleSideMenu()
+        let repository = PurchaseQueryRepository(currentQueryInfo: purchaseListQueryInfo, remoteAPIService: MyMindAutoCompleteAPIService.init(userSession: .testUserSession))
+        let purchaseFilterViewController = PurchaseFilterViewController(purchaseQueryRepository: repository)
+        let navigationController = UINavigationController(rootViewController: purchaseFilterViewController)
+        navigationController.modalPresentationStyle = .fullScreen
+        present(navigationController, animated: true, completion: nil)
     }
 }
 // MARK: - Scroll view delegate
@@ -189,28 +193,9 @@ extension PurchaseListViewController: UICollectionViewDelegateFlowLayout {
         return CGSize(width: width, height: 280)
     }
 }
-// MARK: - Side menu presentalbe
-extension PurchaseListViewController: SideMenuPresentable {
-    typealias SideMenuViewController = PurchaseFilterViewController
-
-    var sideMenuViewController: PurchaseFilterViewController? {
-        get {
-            filterViewController
-        }
-        set {
-            filterViewController = newValue
-        }
-    }
-
-    var sideMenuWidth: CGFloat {
-        view.frame.width * 0.8
-    }
-
-    var sideMenuInitialDirection: SideMenuInitialDirection {
-        .right
-    }
-
-    func initialSideMenuViewController() -> PurchaseFilterViewController {
-        return PurchaseFilterViewController(visibleWidth: sideMenuWidth)
+// MARK: - Purchase filter view controller delegate
+extension PurchaseListViewController: PurchaseFilterViewControllerDelegate {
+    func purchaseFilterViewController(_ purchaseFilterViewController: PurchaseFilterViewController, didConfirm queryInfo: PurchaseListQueryInfo) {
+        fetchPurchaseList(purchaseListQueryInfo: queryInfo)
     }
 }

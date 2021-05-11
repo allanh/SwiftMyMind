@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A4054107264A1B7400E2D21B /* DropDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4054106264A1B7400E2D21B /* DropDownView.swift */; };
+		A4054109264A270C00E2D21B /* DispatchQueue+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4054108264A270C00E2D21B /* DispatchQueue+.swift */; };
+		A405410B264A575E00E2D21B /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A405410A264A575E00E2D21B /* UITextField+.swift */; };
 		A40A1FDA2611700000553207 /* captcha_session.json in Resources */ = {isa = PBXBuildFile; fileRef = A4793C832604592000AD280C /* captcha_session.json */; };
 		A40A1FF22611791000553207 /* ForgotPasswordViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40A1FF12611791000553207 /* ForgotPasswordViewModelTests.swift */; };
 		A40A1FF92611BFBD00553207 /* MyMindUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44A5A8F25F9B0D300995823 /* MyMindUITests.swift */; };
@@ -32,6 +35,8 @@
 		A43F4291264388E400A246CC /* SideMenuPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43F4290264388E400A246CC /* SideMenuPresentable.swift */; };
 		A43F42932643C26400A246CC /* SideMenuTopBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43F42922643C26400A246CC /* SideMenuTopBarView.swift */; };
 		A43F42952643C75C00A246CC /* FilterSideMenuBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43F42942643C75C00A246CC /* FilterSideMenuBottomView.swift */; };
+		A43F42982643E04100A246CC /* PurchaseAutoCompleteSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43F42972643E04100A246CC /* PurchaseAutoCompleteSearchViewController.swift */; };
+		A43F429C2643EAEF00A246CC /* UICollectionViewLeftAlignedLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43F429B2643EAEF00A246CC /* UICollectionViewLeftAlignedLayout.swift */; };
 		A44A5A6E25F9B0D200995823 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44A5A6D25F9B0D200995823 /* AppDelegate.swift */; };
 		A44A5A7025F9B0D200995823 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44A5A6F25F9B0D200995823 /* SceneDelegate.swift */; };
 		A44A5A7225F9B0D200995823 /* MainFunctionEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44A5A7125F9B0D200995823 /* MainFunctionEntryViewController.swift */; };
@@ -70,12 +75,16 @@
 		A49CF92A26034BEA00AFC170 /* CaptchaSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49CF92926034BEA00AFC170 /* CaptchaSession.swift */; };
 		A49CF9302603518A00AFC170 /* CodableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49CF92F2603518A00AFC170 /* CodableTests.swift */; };
 		A49CF93C2603527500AFC170 /* user_session.json in Resources */ = {isa = PBXBuildFile; fileRef = A49CF9372603523100AFC170 /* user_session.json */; };
+		A4ACEDC32648EA38008724E4 /* PurchaseQueryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4ACEDC22648EA38008724E4 /* PurchaseQueryRepository.swift */; };
+		A4ACEDC526490E25008724E4 /* SelectedQueryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4ACEDC426490E25008724E4 /* SelectedQueryCollectionViewCell.swift */; };
+		A4ACEDC72649374B008724E4 /* UIWindow+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4ACEDC62649374B008724E4 /* UIWindow+.swift */; };
 		A4AF79F72637B13B002B04F6 /* MainFunctionControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4AF79F62637B13B002B04F6 /* MainFunctionControl.swift */; };
 		A4BDC79E260ADFC5005C33A5 /* UIViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BDC79D260ADFC5005C33A5 /* UIViewController+Rx.swift */; };
 		A4BDC7B4260B10E2005C33A5 /* SignInValidationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BDC7B3260B10E2005C33A5 /* SignInValidationService.swift */; };
 		A4BDC7B9260B3E0A005C33A5 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BDC7B8260B3E0A005C33A5 /* KeychainHelper.swift */; };
 		A4BDC7BE260B418E005C33A5 /* SignInAccountInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BDC7BD260B418E005C33A5 /* SignInAccountInfo.swift */; };
 		A4CF09B32636C36800439D5F /* UIView+shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CF09B22636C36800439D5F /* UIView+shadow.swift */; };
+		A4D50AB02645129E007B07D6 /* AutoCompleteSearchRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D50AAF2645129E007B07D6 /* AutoCompleteSearchRootView.swift */; };
 		A4DD410726425496007B2A41 /* PromiseKitAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DD410626425496007B2A41 /* PromiseKitAPIService.swift */; };
 		A4DD410926427DD5007B2A41 /* MyMindAutoCompleteAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DD410826427DD5007B2A41 /* MyMindAutoCompleteAPIService.swift */; };
 		A4DD410B26428927007B2A41 /* AutoCompleteInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DD410A26428927007B2A41 /* AutoCompleteInfo.swift */; };
@@ -111,6 +120,9 @@
 		813AE979B8E28B1A22020AB9 /* Pods-MyMind-MyMindUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMind-MyMindUITests.release.xcconfig"; path = "Target Support Files/Pods-MyMind-MyMindUITests/Pods-MyMind-MyMindUITests.release.xcconfig"; sourceTree = "<group>"; };
 		8B6F179AE4CEBCE17B89AC68 /* Pods-MyMind-MyMindUITests.alpha.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMind-MyMindUITests.alpha.xcconfig"; path = "Target Support Files/Pods-MyMind-MyMindUITests/Pods-MyMind-MyMindUITests.alpha.xcconfig"; sourceTree = "<group>"; };
 		8C4BA9CA7A7E7BD1C9712E01 /* Pods-MyMind.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMind.debug.xcconfig"; path = "Target Support Files/Pods-MyMind/Pods-MyMind.debug.xcconfig"; sourceTree = "<group>"; };
+		A4054106264A1B7400E2D21B /* DropDownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownView.swift; sourceTree = "<group>"; };
+		A4054108264A270C00E2D21B /* DispatchQueue+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+.swift"; sourceTree = "<group>"; };
+		A405410A264A575E00E2D21B /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
 		A40A1FF12611791000553207 /* ForgotPasswordViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewModelTests.swift; sourceTree = "<group>"; };
 		A4159203260C394F00FD3989 /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
 		A4159208260C603B00FD3989 /* ForgotPasswordInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordInfo.swift; sourceTree = "<group>"; };
@@ -134,6 +146,8 @@
 		A43F4290264388E400A246CC /* SideMenuPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuPresentable.swift; sourceTree = "<group>"; };
 		A43F42922643C26400A246CC /* SideMenuTopBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuTopBarView.swift; sourceTree = "<group>"; };
 		A43F42942643C75C00A246CC /* FilterSideMenuBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSideMenuBottomView.swift; sourceTree = "<group>"; };
+		A43F42972643E04100A246CC /* PurchaseAutoCompleteSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseAutoCompleteSearchViewController.swift; sourceTree = "<group>"; };
+		A43F429B2643EAEF00A246CC /* UICollectionViewLeftAlignedLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionViewLeftAlignedLayout.swift; sourceTree = "<group>"; };
 		A44A5A6A25F9B0D200995823 /* MyMind.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyMind.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A44A5A6D25F9B0D200995823 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A44A5A6F25F9B0D200995823 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -180,12 +194,16 @@
 		A49CF92926034BEA00AFC170 /* CaptchaSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptchaSession.swift; sourceTree = "<group>"; };
 		A49CF92F2603518A00AFC170 /* CodableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableTests.swift; sourceTree = "<group>"; };
 		A49CF9372603523100AFC170 /* user_session.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = user_session.json; sourceTree = "<group>"; };
+		A4ACEDC22648EA38008724E4 /* PurchaseQueryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseQueryRepository.swift; sourceTree = "<group>"; };
+		A4ACEDC426490E25008724E4 /* SelectedQueryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedQueryCollectionViewCell.swift; sourceTree = "<group>"; };
+		A4ACEDC62649374B008724E4 /* UIWindow+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+.swift"; sourceTree = "<group>"; };
 		A4AF79F62637B13B002B04F6 /* MainFunctionControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFunctionControl.swift; sourceTree = "<group>"; };
 		A4BDC79D260ADFC5005C33A5 /* UIViewController+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Rx.swift"; sourceTree = "<group>"; };
 		A4BDC7B3260B10E2005C33A5 /* SignInValidationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInValidationService.swift; sourceTree = "<group>"; };
 		A4BDC7B8260B3E0A005C33A5 /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
 		A4BDC7BD260B418E005C33A5 /* SignInAccountInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInAccountInfo.swift; sourceTree = "<group>"; };
 		A4CF09B22636C36800439D5F /* UIView+shadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+shadow.swift"; sourceTree = "<group>"; };
+		A4D50AAF2645129E007B07D6 /* AutoCompleteSearchRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoCompleteSearchRootView.swift; sourceTree = "<group>"; };
 		A4DD410626425496007B2A41 /* PromiseKitAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromiseKitAPIService.swift; sourceTree = "<group>"; };
 		A4DD410826427DD5007B2A41 /* MyMindAutoCompleteAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMindAutoCompleteAPIService.swift; sourceTree = "<group>"; };
 		A4DD410A26428927007B2A41 /* AutoCompleteInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoCompleteInfo.swift; sourceTree = "<group>"; };
@@ -230,6 +248,20 @@
 				A4159218260C8FC600FD3989 /* ForgotPasswordViewModel.swift */,
 			);
 			path = ForgotPassword;
+			sourceTree = "<group>";
+		};
+		A43F42962643DFE100A246CC /* Filter */ = {
+			isa = PBXGroup;
+			children = (
+				A43F428E2643866F00A246CC /* PurchaseFilterViewController.swift */,
+				A43F42922643C26400A246CC /* SideMenuTopBarView.swift */,
+				A43F42942643C75C00A246CC /* FilterSideMenuBottomView.swift */,
+				A43F42972643E04100A246CC /* PurchaseAutoCompleteSearchViewController.swift */,
+				A4D50AAF2645129E007B07D6 /* AutoCompleteSearchRootView.swift */,
+				A4ACEDC22648EA38008724E4 /* PurchaseQueryRepository.swift */,
+				A4ACEDC426490E25008724E4 /* SelectedQueryCollectionViewCell.swift */,
+			);
+			path = Filter;
 			sourceTree = "<group>";
 		};
 		A44A5A6125F9B0D200995823 = {
@@ -352,6 +384,9 @@
 				A4CF09B22636C36800439D5F /* UIView+shadow.swift */,
 				A47F39DE263A67E200A3097C /* UITableView+.swift */,
 				A489A1B3263FC9D600832679 /* UICollectionView+.swift */,
+				A4ACEDC62649374B008724E4 /* UIWindow+.swift */,
+				A4054108264A270C00E2D21B /* DispatchQueue+.swift */,
+				A405410A264A575E00E2D21B /* UITextField+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -359,6 +394,7 @@
 		A47F39CB263A58DA00A3097C /* Purchase */ = {
 			isa = PBXGroup;
 			children = (
+				A43F42962643DFE100A246CC /* Filter */,
 				A47F39CC263A58F700A3097C /* PurchaseListViewController.swift */,
 				A47F39D4263A5A9B00A3097C /* PurchaseBriefTableViewCell.swift */,
 				A47F39D9263A64CD00A3097C /* PurchaseListRootView.swift */,
@@ -366,9 +402,6 @@
 				A489A1AB263FA7C900832679 /* TriangleView.swift */,
 				A489A1AF263FAA7D00832679 /* PurchaseBriefCollectionViewCell.swift */,
 				A489A1B0263FAA7D00832679 /* PurchaseBriefCollectionViewCell.xib */,
-				A43F428E2643866F00A246CC /* PurchaseFilterViewController.swift */,
-				A43F42922643C26400A246CC /* SideMenuTopBarView.swift */,
-				A43F42942643C75C00A246CC /* FilterSideMenuBottomView.swift */,
 			);
 			path = Purchase;
 			sourceTree = "<group>";
@@ -416,6 +449,8 @@
 				A4793CBF2604A59C00AD280C /* GradientView.swift */,
 				A4793C9526047C8000AD280C /* NibOwnerLoadable.swift */,
 				A43F4290264388E400A246CC /* SideMenuPresentable.swift */,
+				A43F429B2643EAEF00A246CC /* UICollectionViewLeftAlignedLayout.swift */,
+				A4054106264A1B7400E2D21B /* DropDownView.swift */,
 			);
 			path = UILayer;
 			sourceTree = "<group>";
@@ -708,6 +743,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				A43F42932643C26400A246CC /* SideMenuTopBarView.swift in Sources */,
+				A4054109264A270C00E2D21B /* DispatchQueue+.swift in Sources */,
+				A43F429C2643EAEF00A246CC /* UICollectionViewLeftAlignedLayout.swift in Sources */,
 				A4793CC02604A59C00AD280C /* GradientView.swift in Sources */,
 				A49CF8C526030CEE00AFC170 /* MyMindAuthService.swift in Sources */,
 				A47F39DF263A67E200A3097C /* UITableView+.swift in Sources */,
@@ -716,6 +753,7 @@
 				A47F39DA263A64CD00A3097C /* PurchaseListRootView.swift in Sources */,
 				A4793C9626047C8000AD280C /* NibOwnerLoadable.swift in Sources */,
 				A4DD410926427DD5007B2A41 /* MyMindAutoCompleteAPIService.swift in Sources */,
+				A4054107264A1B7400E2D21B /* DropDownView.swift in Sources */,
 				A4793C7A2604534100AD280C /* SignInInfo.swift in Sources */,
 				A4705B9126020E5700B30CE6 /* Response.swift in Sources */,
 				A4DD410B26428927007B2A41 /* AutoCompleteInfo.swift in Sources */,
@@ -729,20 +767,25 @@
 				A43F42952643C75C00A246CC /* FilterSideMenuBottomView.swift in Sources */,
 				A48389B4260869940044C09E /* SignInViewModel.swift in Sources */,
 				A43E0B6A260D84FB005FC6CE /* NVActivityIndicatorView+Rx.swift in Sources */,
+				A4ACEDC72649374B008724E4 /* UIWindow+.swift in Sources */,
 				A43E0B64260D7CA4005FC6CE /* NiblessNavigationController.swift in Sources */,
 				A4159219260C8FC600FD3989 /* ForgotPasswordViewModel.swift in Sources */,
 				A4BDC7B9260B3E0A005C33A5 /* KeychainHelper.swift in Sources */,
 				A48389AF2608360A0044C09E /* SignInViewController.swift in Sources */,
+				A4D50AB02645129E007B07D6 /* AutoCompleteSearchRootView.swift in Sources */,
 				A49CF8BB2603028C00AFC170 /* APIService.swift in Sources */,
 				A48389BE260876770044C09E /* AuthService.swift in Sources */,
 				A4BDC7BE260B418E005C33A5 /* SignInAccountInfo.swift in Sources */,
 				A439BD372637E42F004F47C8 /* MyMindPurchaseAPIService.swift in Sources */,
+				A405410B264A575E00E2D21B /* UITextField+.swift in Sources */,
 				A439B5412609D61C002352C2 /* String+.swift in Sources */,
 				A43E0B65260D7CA4005FC6CE /* NiblessView.swift in Sources */,
 				A4DD410726425496007B2A41 /* PromiseKitAPIService.swift in Sources */,
 				A4793CB126048BB600AD280C /* UIFont+.swift in Sources */,
 				A44A5A7225F9B0D200995823 /* MainFunctionEntryViewController.swift in Sources */,
+				A4ACEDC526490E25008724E4 /* SelectedQueryCollectionViewCell.swift in Sources */,
 				A4159204260C394F00FD3989 /* UIButton+.swift in Sources */,
+				A43F42982643E04100A246CC /* PurchaseAutoCompleteSearchViewController.swift in Sources */,
 				A439B52C26099AA1002352C2 /* UIViewController+.swift in Sources */,
 				A4793C7F2604573700AD280C /* UserSession.swift in Sources */,
 				A47F39CD263A58F700A3097C /* PurchaseListViewController.swift in Sources */,
@@ -760,6 +803,7 @@
 				A489A1B4263FC9D600832679 /* UICollectionView+.swift in Sources */,
 				A47F39D5263A5A9B00A3097C /* PurchaseBriefTableViewCell.swift in Sources */,
 				A489A1B1263FAA7D00832679 /* PurchaseBriefCollectionViewCell.swift in Sources */,
+				A4ACEDC32648EA38008724E4 /* PurchaseQueryRepository.swift in Sources */,
 				A49CF8B6260301DE00AFC170 /* Endpoint.swift in Sources */,
 				A4793CB626048EBA00AD280C /* ValidatableInputView.swift in Sources */,
 				A4159209260C603B00FD3989 /* ForgotPasswordInfo.swift in Sources */,
