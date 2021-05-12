@@ -14,15 +14,21 @@ class AutoCompleteSearchRootView: NiblessView {
         $0.textColor = UIColor(hex: "4c4c4c")
     }
 
-    let textField: UITextField = UITextField {
-        $0.clearButtonMode = .whileEditing
+    let textField: CustomClearButtonPositionTextField = CustomClearButtonPositionTextField {
         $0.font = .pingFangTCRegular(ofSize: 14)
         $0.textColor = UIColor(hex: "4c4c4c")
         $0.setLeftPaddingPoints(10)
-        $0.setRightPaddingPoints(10)
         $0.layer.cornerRadius = 4
         $0.layer.borderWidth = 1
         $0.layer.borderColor = UIColor.separator.cgColor
+        let containerView = UIView()
+        containerView.frame = CGRect(origin: .zero, size: .init(width: 35, height: 25))
+        let iconImageView = UIImageView(image: UIImage(named: "search"))
+        iconImageView.frame = CGRect(origin: .zero, size: .init(width: 25, height: 25))
+        containerView.addSubview(iconImageView)
+        $0.rightView = containerView
+        $0.rightViewMode = .unlessEditing
+        $0.clearButtonMode = .whileEditing
     }
 
     let collectionView: UICollectionView = {

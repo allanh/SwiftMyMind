@@ -19,7 +19,7 @@ class PurchaseQueryDateSelectionViewController: NiblessViewController {
         $0.textColor = UIColor(hex: "4c4c4c")
     }
 
-    let firstTextField: UITextField = UITextField {
+    let firstTextField: CustomClearButtonPositionTextField = CustomClearButtonPositionTextField {
         $0.clearButtonMode = .whileEditing
         $0.font = .pingFangTCRegular(ofSize: 14)
         $0.textColor = UIColor(hex: "4c4c4c")
@@ -29,9 +29,16 @@ class PurchaseQueryDateSelectionViewController: NiblessViewController {
         $0.layer.borderColor = UIColor.separator.cgColor
         $0.tintColor = .clear
         $0.clearButtonMode = .always
+        let containerView = UIView()
+        containerView.frame = CGRect(origin: .zero, size: .init(width: 35, height: 25))
+        let iconImageView = UIImageView(image: UIImage(named: "calendar_icon"))
+        iconImageView.frame = CGRect(origin: .zero, size: .init(width: 25, height: 25))
+        containerView.addSubview(iconImageView)
+        $0.rightView = containerView
+        $0.rightViewMode = .unlessEditing
     }
 
-    let secondTextField: UITextField = UITextField {
+    let secondTextField: CustomClearButtonPositionTextField = CustomClearButtonPositionTextField {
         $0.clearButtonMode = .whileEditing
         $0.font = .pingFangTCRegular(ofSize: 14)
         $0.textColor = UIColor(hex: "4c4c4c")
@@ -41,6 +48,13 @@ class PurchaseQueryDateSelectionViewController: NiblessViewController {
         $0.layer.borderColor = UIColor.separator.cgColor
         $0.tintColor = .clear
         $0.clearButtonMode = .always
+        let containerView = UIView()
+        containerView.frame = CGRect(origin: .zero, size: .init(width: 35, height: 25))
+        let iconImageView = UIImageView(image: UIImage(named: "calendar_icon"))
+        iconImageView.frame = CGRect(origin: .zero, size: .init(width: 25, height: 25))
+        containerView.addSubview(iconImageView)
+        $0.rightView = containerView
+        $0.rightViewMode = .unlessEditing
     }
 
     private let datePicker: UIDatePicker = UIDatePicker {
