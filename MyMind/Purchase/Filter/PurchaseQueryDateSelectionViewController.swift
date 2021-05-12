@@ -74,6 +74,7 @@ class PurchaseQueryDateSelectionViewController: NiblessViewController {
         constructViewHierarchy()
         activateConstraints()
         configTextFields()
+        updateContentWithCurrentData()
     }
 
     // MARK: - Methods
@@ -104,6 +105,30 @@ class PurchaseQueryDateSelectionViewController: NiblessViewController {
         firstTextField.inputView = datePicker
         secondTextField.inputView = datePicker
         datePicker.addTarget(self, action: #selector(datePickerDidPickDate(_:)), for: .valueChanged)
+    }
+
+    private func updateContentWithCurrentData() {
+        switch purchaseQueryType {
+        case .expectPutInStoragePeriod:
+            if let date = purchaseQueryRepository.currentQueryInfo.expectStorageStartDate {
+                let dateInString = dateFormatter.string(from: date)
+                firstTextField.text = dateInString
+            }
+            if let date = purchaseQueryRepository.currentQueryInfo.expectStorageEndDate {
+                let dateInString = dateFormatter.string(from: date)
+                secondTextField.text = dateInString
+            }
+        case .createdPeriod:
+            if let date = purchaseQueryRepository.currentQueryInfo.creatDateStart {
+                let dateInString = dateFormatter.string(from: date)
+                firstTextField.text = dateInString
+            }
+            if let date = purchaseQueryRepository.currentQueryInfo.creatDateEnd {
+                let dateInString = dateFormatter.string(from: date)
+                secondTextField.text = dateInString
+            }
+        default: break
+        }
     }
 
     @objc
@@ -198,5 +223,11 @@ extension PurchaseQueryDateSelectionViewController {
         NSLayoutConstraint.activate([
             top, leading, trailing, height, bottom
         ])
+    }
+}
+extension PurchaseQueryDateSelectionViewController: PurchaseFilterChildViewController {
+    func reloadData() {
+        firstTextField.text = ""
+        secondTextField.text = ""
     }
 }

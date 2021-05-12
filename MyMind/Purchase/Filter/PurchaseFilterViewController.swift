@@ -11,6 +11,11 @@ import PromiseKit
 
 protocol PurchaseFilterViewControllerDelegate: AnyObject {
     func purchaseFilterViewController(_ purchaseFilterViewController: PurchaseFilterViewController, didConfirm queryInfo: PurchaseListQueryInfo)
+    func purchaseFilterViewController(_ purchaseFilterViewController: PurchaseFilterViewController, didUpdate autoCompleteSource: [PurchaseQueryType: [AutoCompleteInfo]])
+}
+
+protocol PurchaseFilterChildViewController: UIViewController {
+    func reloadData()
 }
 
 enum PurchaseQueryType: String, CustomStringConvertible, CaseIterable {
@@ -58,10 +63,10 @@ class PurchaseFilterViewController: NiblessViewController {
         constructViewHierarchy()
         activateConstraints()
         configNavigtaionBar()
-        purchaseQueryRepository.updateAutoCompleteSourceFromRemote()
 
         addChildViewControllers()
         configViewForChildViewControllers()
+        configBottomView()
     }
 
     private func configViewForChildViewControllers() {
@@ -132,6 +137,27 @@ class PurchaseFilterViewController: NiblessViewController {
         navigationItem.setRightBarButton(barItem, animated: true)
     }
 
+    private func configBottomView() {
+        bottomView.confirmButton.addTarget(self, action: #selector(confirmButtonDidTapped(_:)), for: .touchUpInside)
+        bottomView.cancelButton.addTarget(self, action: #selector(cleanButtonDidTapped(_:)), for: .touchUpInside)
+    }
+
+    @objc
+    private func confirmButtonDidTapped(_ sender: UIButton) {
+        purchaseQueryRepository.resetPageNumber()
+        delegate?.purchaseFilterViewController(self, didConfirm: purchaseQueryRepository.currentQueryInfo)
+        delegate?.purchaseFilterViewController(self, didUpdate: purchaseQueryRepository.autoCompleteSource)
+        dismiss(animated: true, completion: nil)
+    }
+
+    @objc
+    private func cleanButtonDidTapped(_ sender: UIButton) {
+        purchaseQueryRepository.cleanQueryInfo()
+        if let childs = children as? [PurchaseFilterChildViewController] {
+            childs.forEach { $0.reloadData() }
+        }
+    }
+
     @objc
     private func closeButtonDidTapped(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
@@ -141,7 +167,6 @@ class PurchaseFilterViewController: NiblessViewController {
 extension PurchaseFilterViewController {
     private func activateConstraintsBottomView() {
         bottomView.translatesAutoresizingMaskIntoConstraints = false
-
         let leading = bottomView.leadingAnchor
             .constraint(equalTo: view.leadingAnchor)
         let bottom = bottomView.bottomAnchor

@@ -17,13 +17,19 @@ class PurchaseQueryRepository {
 
     init(
         currentQueryInfo: PurchaseListQueryInfo,
-        remoteAPIService: PurchaseAutoCompleteAPIService
+        remoteAPIService: PurchaseAutoCompleteAPIService,
+        autoCompleteSource: [PurchaseQueryType: [AutoCompleteInfo]]? = nil
     ) {
         self.currentQueryInfo = currentQueryInfo
         self.remoteAPIService = remoteAPIService
+        if let source = autoCompleteSource {
+            self.autoCompleteSource = source
+        } else {
+            updateAutoCompleteSourceFromRemote()
+        }
     }
 
-    func updateAutoCompleteSourceFromRemote() {
+    private func updateAutoCompleteSourceFromRemote() {
         remoteAPIService.purchaseNumberAutoComplete(searchTerm: "")
             .done { [weak self] list in
                 self?.autoCompleteSource[.purchaseNumber] = list.item
@@ -126,5 +132,30 @@ class PurchaseQueryRepository {
 
     func updateCreatDateEnd(date: Date?) {
         currentQueryInfo.creatDateEnd = date
+    }
+
+    func cleanQueryInfo() {
+        // Clean select status first
+        if currentQueryInfo.purchaseNumbers.isEmpty == false {
+            currentQueryInfo.purchaseNumbers.forEach { $0.isSelect = false }
+        }
+
+        if currentQueryInfo.vendorIDs.isEmpty == false {
+            currentQueryInfo.vendorIDs.forEach { $0.isSelect = false }
+        }
+
+        if currentQueryInfo.employeeIDs.isEmpty == false {
+            currentQueryInfo.employeeIDs.forEach { $0.isSelect = false }
+        }
+
+        if currentQueryInfo.productNumbers.isEmpty == false {
+            currentQueryInfo.productNumbers.forEach { $0.isSelect = false }
+        }
+
+        currentQueryInfo = PurchaseListQueryInfo.defaultQueryInfo(for: currentQueryInfo.partnerID)
+    }
+
+    func resetPageNumber() {
+        currentQueryInfo.pageNumber = 1
     }
 }

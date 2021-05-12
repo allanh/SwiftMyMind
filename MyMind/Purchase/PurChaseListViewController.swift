@@ -15,7 +15,8 @@ final class PurchaseListViewController: NiblessViewController {
 
     let purchaseAPIService: PurchaseAPIService
 
-    var purchaseList: PurchaseList?
+    private var purchaseList: PurchaseList?
+    private var cachedAutoCompleteSource: [PurchaseQueryType: [AutoCompleteInfo]]?
 
     lazy var purchaseListQueryInfo: PurchaseListQueryInfo = {
         let partnerID = String(purchaseAPIService.userSession.partnerInfo.id)
@@ -106,8 +107,13 @@ final class PurchaseListViewController: NiblessViewController {
 
     @objc
     private func filterButtonDidTapped(_ sender: UIButton) {
-        let repository = PurchaseQueryRepository(currentQueryInfo: purchaseListQueryInfo, remoteAPIService: MyMindAutoCompleteAPIService.init(userSession: .testUserSession))
+        let repository = PurchaseQueryRepository(
+            currentQueryInfo: purchaseListQueryInfo,
+            remoteAPIService: MyMindAutoCompleteAPIService.init(userSession: .testUserSession),
+            autoCompleteSource: cachedAutoCompleteSource
+        )
         let purchaseFilterViewController = PurchaseFilterViewController(purchaseQueryRepository: repository)
+        purchaseFilterViewController.delegate = self
         let navigationController = UINavigationController(rootViewController: purchaseFilterViewController)
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated: true, completion: nil)
@@ -196,6 +202,12 @@ extension PurchaseListViewController: UICollectionViewDelegateFlowLayout {
 // MARK: - Purchase filter view controller delegate
 extension PurchaseListViewController: PurchaseFilterViewControllerDelegate {
     func purchaseFilterViewController(_ purchaseFilterViewController: PurchaseFilterViewController, didConfirm queryInfo: PurchaseListQueryInfo) {
+        self.purchaseListQueryInfo = queryInfo
+        purchaseList = nil
         fetchPurchaseList(purchaseListQueryInfo: queryInfo)
+    }
+
+    func purchaseFilterViewController(_ purchaseFilterViewController: PurchaseFilterViewController, didUpdate autoCompleteSource: [PurchaseQueryType : [AutoCompleteInfo]]) {
+        self.cachedAutoCompleteSource = autoCompleteSource
     }
 }

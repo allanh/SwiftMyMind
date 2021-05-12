@@ -54,6 +54,11 @@ class PurchaseAutoCompleteSearchViewController: NiblessViewController {
         rootView.titleLabel.text = purchaseQueryType.description
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateCollectionView()
+    }
+
     private func configCollectionView() {
         rootView.collectionView.dataSource = self
         rootView.collectionView.delegate = self
@@ -226,5 +231,10 @@ extension PurchaseAutoCompleteSearchViewController: UICollectionViewDelegateFlow
         default:
             return .zero
         }
+    }
+}
+extension PurchaseAutoCompleteSearchViewController: PurchaseFilterChildViewController {
+    func reloadData() {
+        updateCollectionView()
     }
 }

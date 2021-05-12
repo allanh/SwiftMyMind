@@ -43,6 +43,11 @@ class PurchaseStatusSelectionViewController: NiblessViewController {
         configDropDownView()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateCollectionView()
+    }
+
     private func configDropDownView() {
         dropDownView.topInset = 5
         dropDownView.shouldReloadItemWhenSelect = true
@@ -65,10 +70,14 @@ class PurchaseStatusSelectionViewController: NiblessViewController {
 
     private func selectItem(item: PurchaseStatus) {
         purchaseQueryRepository.updatePurchaseStatus(status: item)
+        updateCollectionView()
+        dropDownView.hide()
+    }
+
+    private func updateCollectionView() {
         rootView.collectionView.reloadData()
         rootView.layoutIfNeeded()
         rootView.collectionViewHeightAnchor.constant = rootView.collectionView.contentSize.height
-        dropDownView.hide()
     }
 
     @objc
@@ -106,5 +115,10 @@ extension PurchaseStatusSelectionViewController: UICollectionViewDelegateFlowLay
         let status = purchaseQueryRepository.currentQueryInfo.status?.description ?? ""
         let width = status.width(withConstrainedHeight: 20, font: .pingFangTCRegular(ofSize: 14))
         return CGSize(width: width+extraSpace, height: 30)
+    }
+}
+extension PurchaseStatusSelectionViewController: PurchaseFilterChildViewController {
+    func reloadData() {
+        updateCollectionView()
     }
 }

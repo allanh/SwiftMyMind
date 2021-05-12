@@ -9,6 +9,7 @@
 import UIKit
 
 class AutoCompleteSearchRootView: NiblessView {
+    // MARK: - Properties
     let titleLabel: UILabel = UILabel {
         $0.font = .pingFangTCSemibold(ofSize: 18)
         $0.textColor = UIColor(hex: "4c4c4c")
@@ -41,7 +42,7 @@ class AutoCompleteSearchRootView: NiblessView {
     lazy var collectionViewHeightAnchor: NSLayoutConstraint = {
         return self.collectionView.heightAnchor.constraint(equalToConstant: 0)
     }()
-
+    // MARK: - Methods
     override init(frame: CGRect) {
         super.init(frame: frame)
         constructViewHierarchy()
