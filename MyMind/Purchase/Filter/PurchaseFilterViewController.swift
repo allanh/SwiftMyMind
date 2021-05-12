@@ -93,7 +93,11 @@ class PurchaseFilterViewController: NiblessViewController {
                 contentView.addSubview(viewController.view)
                 addChild(viewController)
                 viewController.didMove(toParent: self)
-            case .createdPeriod, .expectPutInStoragePeriod: break
+            case .createdPeriod, .expectPutInStoragePeriod:
+                let viewController = PurchaseQueryDateSelectionViewController(purchaseQueryRepository: purchaseQueryRepository, purchaseQueryType: $0)
+                contentView.addSubview(viewController.view)
+                addChild(viewController)
+                viewController.didMove(toParent: self)
             default:
                 generateAutoCompleteSearchViewController(with: $0)
             }

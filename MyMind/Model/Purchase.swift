@@ -59,8 +59,8 @@ struct PurchaseListQueryInfo {
     var employeeIDs: [AutoCompleteInfo] = []
     var expectStorageStartDate: Date?
     var expectStorageEndDate: Date?
-    var firstCreatDate: Date?
-    var lastCreatDate: Date?
+    var creatDateStart: Date?
+    var creatDateEnd: Date?
     var pageNumber: Int = 1
     var itemsPerPage: Int = 20
     var sortOrder: SortOrder?
@@ -124,13 +124,13 @@ struct PurchaseListQueryInfo {
             let item = URLQueryItem(name: "expect_storage_end_date", value: value)
             queryItems.append(item)
         }
-        if let firstCreatDate = firstCreatDate {
-            let value = dateFormatter.string(from: firstCreatDate)
+        if let creatDateStart = creatDateStart {
+            let value = dateFormatter.string(from: creatDateStart)
             let item = URLQueryItem(name: "create_started_at", value: value)
             queryItems.append(item)
         }
-        if let lastCreatDate = lastCreatDate {
-            let value = dateFormatter.string(from: lastCreatDate)
+        if let creatDateEnd = creatDateEnd {
+            let value = dateFormatter.string(from: creatDateEnd)
             let item = URLQueryItem(name: "create_ended_at", value: value)
             queryItems.append(item)
         }

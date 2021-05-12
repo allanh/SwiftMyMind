@@ -111,4 +111,20 @@ class PurchaseQueryRepository {
     func updatePurchaseStatus(status: PurchaseStatus?) {
         currentQueryInfo.status = status
     }
+
+    func updateExpectStorageStartDate(date: Date?) {
+        currentQueryInfo.expectStorageStartDate = date
+    }
+
+    func updateExpectStorageEndDate(date: Date?) {
+        currentQueryInfo.expectStorageEndDate = date
+    }
+
+    func updateCreatDateStart(date: Date?) {
+        currentQueryInfo.creatDateStart = date
+    }
+
+    func updateCreatDateEnd(date: Date?) {
+        currentQueryInfo.creatDateEnd = date
+    }
 }

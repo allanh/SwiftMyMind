@@ -56,7 +56,10 @@ class DropDownView<T, Cell: UITableViewCell>: NiblessView, UITableViewDelegate, 
     var cellConfigure: (Cell, T) -> Void
     var selectHandler: (T) -> Void
 
-    init(dataSource: [T], cellConfigure: @escaping (Cell, T) -> Void, selectHandler: @escaping (T) -> Void) {
+    init(dataSource: [T],
+         cellConfigure: @escaping (Cell, T) -> Void,
+         selectHandler: @escaping (T) -> Void
+    ) {
         self.cellConfigure = cellConfigure
         self.selectHandler = selectHandler
         super.init(frame: .zero)
