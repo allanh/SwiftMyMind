@@ -119,11 +119,11 @@ class PurchaseQueryDateSelectionViewController: NiblessViewController {
                 secondTextField.text = dateInString
             }
         case .createdPeriod:
-            if let date = purchaseQueryRepository.currentQueryInfo.creatDateStart {
+            if let date = purchaseQueryRepository.currentQueryInfo.createDateStart {
                 let dateInString = dateFormatter.string(from: date)
                 firstTextField.text = dateInString
             }
-            if let date = purchaseQueryRepository.currentQueryInfo.creatDateEnd {
+            if let date = purchaseQueryRepository.currentQueryInfo.createDateEnd {
                 let dateInString = dateFormatter.string(from: date)
                 secondTextField.text = dateInString
             }
@@ -148,9 +148,9 @@ class PurchaseQueryDateSelectionViewController: NiblessViewController {
             }
         case .createdPeriod:
             if firstTextField.isFirstResponder {
-                purchaseQueryRepository.updateCreatDateStart(date: date)
+                purchaseQueryRepository.updateCreateDateStart(date: date)
             } else {
-                purchaseQueryRepository.updateCreatDateEnd(date: date)
+                purchaseQueryRepository.updateCreateDateEnd(date: date)
             }
         default: return
         }

@@ -28,6 +28,13 @@ final class PurchaseListRootView: NiblessView {
         return collectionView
     }()
 
+    let createButton: UIButton = UIButton {
+        $0.setImage(UIImage(named: "plus"), for: .normal)
+        $0.backgroundColor = UIColor(hex: "004477")
+        $0.clipsToBounds = true
+        $0.layer.cornerRadius = 20
+    }
+
     let organizeOptionView: OrganizeOptionView = OrganizeOptionView()
 
     override init(frame: CGRect) {
@@ -46,12 +53,14 @@ final class PurchaseListRootView: NiblessView {
         addSubview(collectionView)
         addSubview(tableView)
         addSubview(organizeOptionView)
+        addSubview(createButton)
     }
 
     func activateConstraints() {
         activateConstraintsCollecitonView()
         activateConstraintsTableView()
         activateConstraintsOrganizeOptionView()
+        activateConstraintsCreatButton()
     }
 }
 // MARK: - Layouts
@@ -101,6 +110,22 @@ private extension PurchaseListRootView {
 
         NSLayoutConstraint.activate([
             leading, bottom, trailing, height
+        ])
+    }
+
+    private func activateConstraintsCreatButton() {
+        createButton.translatesAutoresizingMaskIntoConstraints = false
+        let trailing = createButton.trailingAnchor
+            .constraint(equalTo: trailingAnchor, constant: -15)
+        let bottom = createButton.bottomAnchor
+            .constraint(equalTo: organizeOptionView.topAnchor, constant: -15)
+        let width = createButton.widthAnchor
+            .constraint(equalToConstant: 40)
+        let height = createButton.heightAnchor
+            .constraint(equalTo: createButton.widthAnchor)
+
+        NSLayoutConstraint.activate([
+            trailing, bottom, width, height
         ])
     }
 }

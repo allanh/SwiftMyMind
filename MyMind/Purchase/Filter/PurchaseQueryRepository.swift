@@ -126,12 +126,12 @@ class PurchaseQueryRepository {
         currentQueryInfo.expectStorageEndDate = date
     }
 
-    func updateCreatDateStart(date: Date?) {
-        currentQueryInfo.creatDateStart = date
+    func updateCreateDateStart(date: Date?) {
+        currentQueryInfo.createDateStart = date
     }
 
-    func updateCreatDateEnd(date: Date?) {
-        currentQueryInfo.creatDateEnd = date
+    func updateCreateDateEnd(date: Date?) {
+        currentQueryInfo.createDateEnd = date
     }
 
     func cleanQueryInfo() {

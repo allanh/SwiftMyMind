@@ -49,8 +49,7 @@ final class PurchaseListViewController: NiblessViewController {
         configTableView()
         configCollectionView()
         fetchPurchaseList()
-        rootView.organizeOptionView.layoutButton.addTarget(self, action: #selector(layoutButtonDidTapped(_:)), for: .touchUpInside)
-        rootView.organizeOptionView.filterButton.addTarget(self, action: #selector(filterButtonDidTapped(_:)), for: .touchUpInside)
+        addButtonsActions()
     }
     // MARK: - Methods
     init(purchaseAPIService: PurchaseAPIService) {
@@ -68,6 +67,12 @@ final class PurchaseListViewController: NiblessViewController {
         rootView.collectionView.delegate = self
         rootView.collectionView.dataSource = self
         rootView.collectionView.registerCellFormNib(for: PurchaseBriefCollectionViewCell.self)
+    }
+
+    private func addButtonsActions() {
+        rootView.organizeOptionView.layoutButton.addTarget(self, action: #selector(layoutButtonDidTapped(_:)), for: .touchUpInside)
+        rootView.organizeOptionView.filterButton.addTarget(self, action: #selector(filterButtonDidTapped(_:)), for: .touchUpInside)
+        rootView.createButton.addTarget(self, action: #selector(createButtonDidTapped(_:)), for: .touchUpInside)
     }
 
     private func fetchPurchaseList(purchaseListQueryInfo: PurchaseListQueryInfo? = nil) {
@@ -117,6 +122,11 @@ final class PurchaseListViewController: NiblessViewController {
         let navigationController = UINavigationController(rootViewController: purchaseFilterViewController)
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated: true, completion: nil)
+    }
+
+    @objc
+    private func createButtonDidTapped(_ sender: UIButton) {
+
     }
 }
 // MARK: - Scroll view delegate
