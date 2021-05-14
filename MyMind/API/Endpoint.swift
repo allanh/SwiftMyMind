@@ -12,6 +12,12 @@ enum ServiceType {
     case dos
 }
 
+fileprivate enum Version: String {
+    case v1
+}
+
+fileprivate let version: Version = .v1
+
 struct Endpoint {
     let path: String
     let queryItems: [URLQueryItem]
@@ -66,5 +72,58 @@ extension Endpoint {
 
     static var forgotPassword: Self {
         Endpoint(path: "/forgot_password", serviceType: .auth)
+    }
+
+    static func purchaseList(with partnerID: String, purchaseListQueryInfo: PurchaseListQueryInfo? = nil) -> Self {
+        var urlQueryItems: [URLQueryItem] = []
+        if let query = purchaseListQueryInfo {
+            urlQueryItems = query.queryItems
+            return Endpoint(path: "/api/admin/\(version)/purchase", queryItems: urlQueryItems)
+        }
+
+        urlQueryItems.append(URLQueryItem(name: "partner_id", value: partnerID))
+        return Endpoint(path: "/api/admin/\(version)/purchase", queryItems: urlQueryItems)
+    }
+
+    static func purchaseNumberAutoComplete(searchTerm: String, partnerID: String, vendorID: String? = nil) -> Self {
+        var query: [URLQueryItem] = []
+        query.append(URLQueryItem(name: "partner_id", value: partnerID))
+        query.append(URLQueryItem(name: "key", value: "PURCHASE_NO"))
+        if searchTerm.isEmpty == false {
+            query.append(URLQueryItem(name: "value", value: searchTerm))
+        }
+        if let vendorID = vendorID {
+            query.append(URLQueryItem(name: "vendor_id", value: vendorID))
+        }
+        return Endpoint(path: "/api/admin/\(version)/purchase/autocomplete", queryItems: query)
+    }
+
+    static func vendorNameAutoComplete(searchTerm: String, partnerID: String) -> Self {
+        var query: [URLQueryItem] = []
+        query.append(URLQueryItem(name: "partner_id", value: partnerID))
+        query.append(URLQueryItem(name: "key", value: "ALIAS_NAME"))
+        if searchTerm.isEmpty == false {
+            query.append(URLQueryItem(name: "word", value: searchTerm))
+        }
+        return Endpoint(path: "/api/admin/\(version)/vendor/autocomplete", queryItems: query)
+    }
+
+    static func applicantAutoComplete(searchTerm: String) -> Self {
+        var query: [URLQueryItem] = []
+        query.append(URLQueryItem(name: "key", value: "APPLICANT"))
+        if searchTerm.isEmpty == false {
+            query.append(URLQueryItem(name: "value", value: searchTerm))
+        }
+        return Endpoint(path: "/employee/autocomplete", queryItems: query, serviceType: .auth)
+    }
+
+    static func productNumberAutoComplete(searchTerm: String) -> Self {
+        var query: [URLQueryItem] = []
+        query.append(URLQueryItem(name: "key", value: "PRODUCT_NO"))
+        if searchTerm.isEmpty == false {
+            query.append(URLQueryItem(name: "value", value: searchTerm))
+        }
+
+        return Endpoint(path: "/api/admin/\(version)/product/autocomplete", queryItems: query)
     }
 }

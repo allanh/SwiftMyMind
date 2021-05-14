@@ -9,6 +9,15 @@ PODS:
   - NVActivityIndicatorView (5.1.1):
     - NVActivityIndicatorView/Base (= 5.1.1)
   - NVActivityIndicatorView/Base (5.1.1)
+  - PromiseKit (6.13.1):
+    - PromiseKit/CorePromise (= 6.13.1)
+    - PromiseKit/Foundation (= 6.13.1)
+    - PromiseKit/UIKit (= 6.13.1)
+  - PromiseKit/CorePromise (6.13.1)
+  - PromiseKit/Foundation (6.13.1):
+    - PromiseKit/CorePromise
+  - PromiseKit/UIKit (6.13.1):
+    - PromiseKit/CorePromise
   - RxBlocking (6.1.0):
     - RxSwift (= 6.1.0)
   - RxCocoa (6.1.0):
@@ -25,6 +34,7 @@ DEPENDENCIES:
   - CoreXLSX (~> 0.14.0)
   - LookinServer
   - NVActivityIndicatorView
+  - PromiseKit (~> 6.8)
   - RxBlocking
   - RxCocoa (= 6.1.0)
   - RxSwift (= 6.1.0)
@@ -35,6 +45,7 @@ SPEC REPOS:
     - CoreXLSX
     - LookinServer
     - NVActivityIndicatorView
+    - PromiseKit
     - RxBlocking
     - RxCocoa
     - RxRelay
@@ -47,6 +58,7 @@ SPEC CHECKSUMS:
   CoreXLSX: 341fab0a6e87ec6c3e0c7df0e91a346a79ad7503
   LookinServer: 0002891cd3cec5e082a910e897dfe71b4f06b89e
   NVActivityIndicatorView: 1f6c5687f1171810aa27a3296814dc2d7dec3667
+  PromiseKit: 28fda91c973cc377875d8c0ea4f973013c05b6db
   RxBlocking: 602095fba0bce7b16b56ccec89edf780c248b7d9
   RxCocoa: 5c51f02d562cbd94629f6c26cf0c80fe4ab8d343
   RxRelay: 483e1a19fad961b41f0b0c0bee506f46c1ae14fe
@@ -54,6 +66,6 @@ SPEC CHECKSUMS:
   XMLCoder: c4638336674de7ba279cd23f2005817d69f538e0
   ZIPFoundation: e27423c004a5a1410c15933407747374e7c6cb6e
 
-PODFILE CHECKSUM: 3b803f59c432b3ef82e5ed349e134be87508663a
+PODFILE CHECKSUM: d957efa28e482d0ceda8c41c3e37dd8c21ab1ee4
 
 COCOAPODS: 1.10.1

@@ -20,7 +20,7 @@ class AuthServiceTest: XCTestCase {
     }
 
     func test_captcha_observable() {
-        let service = MyMindSignInService()
+        let service = MyMindAuthService()
         do {
             let result = try service.captcha().toBlocking(timeout: 3).first()
             XCTAssertNotNil(result)

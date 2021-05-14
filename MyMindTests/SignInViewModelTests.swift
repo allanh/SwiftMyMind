@@ -11,7 +11,7 @@ import RxBlocking
 import RxSwift
 @testable import MyMind
 
-final class MockSignInService: SignInService {
+final class MockSignInService: AuthService {
     var isSuccess: Bool = true
 
     func captcha() -> Single<CaptchaSession> {
@@ -67,7 +67,7 @@ class SignInViewModelTests: XCTestCase {
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         mockSignInService = MockSignInService()
-        sut = SignInViewModel(signInService: mockSignInService, signInValidationService: SignInValidatoinService())
+        sut = SignInViewModel(authService: mockSignInService, signInValidationService: SignInValidatoinService())
     }
 
     override func tearDownWithError() throws {

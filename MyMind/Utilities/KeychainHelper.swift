@@ -25,11 +25,10 @@ extension KeychainError: LocalizedError {
             return NSLocalizedString(message, comment: "")
         }
     }
-
 }
 
 public enum KeychainKeys: String {
-    case lastSignInAccountInfo
+    case lastSignInAccountInfo, accessToken
 }
 // MARK: - Keychain helper
 public struct KeychainHelper {

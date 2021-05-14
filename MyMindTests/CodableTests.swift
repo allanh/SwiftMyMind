@@ -55,4 +55,18 @@ class CodableTests: XCTestCase {
         let userSession = try? JSONDecoder().decode(Response<UserSession>.self, from: data).data
         XCTAssertNotNil(userSession)
     }
+
+    func test_decode_purchaseList() {
+        guard let data = cachedFileData(name: "purchase_list") else {
+            XCTFail()
+            return
+        }
+        do {
+            let purchaseList = try JSONDecoder().decode(Response<PurchaseList>.self, from: data).data
+            XCTAssertNotNil(purchaseList)
+        } catch let error {
+            print(error)
+            XCTFail()
+        }
+    }
 }
