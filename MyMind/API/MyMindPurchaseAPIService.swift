@@ -12,6 +12,7 @@ import PromiseKit
 protocol PurchaseAPIService {
     var userSession: UserSession { get }
     func fetchPurchaseList(purchaseListQueryInfo: PurchaseListQueryInfo?) -> Promise<PurchaseList>
+    func fetchProductMaterialList(with query: ProductMaterialQueryInfo) -> Promise<ProductMaterialList>
 }
 
 class MyMindPurchaseAPIService: PromiseKitAPIService {
@@ -27,6 +28,12 @@ class MyMindPurchaseAPIService: PromiseKitAPIService {
 
         let partnerID = String(userSession.partnerInfo.id)
         let endPoint = Endpoint.purchaseList(with: partnerID, purchaseListQueryInfo: purchaseListQueryInfo)
+        let request = request(endPoint: endPoint, httpHeader: ["Authorization": "Bearer \(userSession.token)"])
+        return sendRequest(request: request)
+    }
+
+    func fetchProductMaterialList(with query: ProductMaterialQueryInfo) -> Promise<ProductMaterialList> {
+        let endPoint = Endpoint.productMaterials(query: query)
         let request = request(endPoint: endPoint, httpHeader: ["Authorization": "Bearer \(userSession.token)"])
         return sendRequest(request: request)
     }
