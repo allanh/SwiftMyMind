@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		97B1172F26535B9800242428 /* ProductMaterial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B1172E26535B9800242428 /* ProductMaterial.swift */; };
+		97B117322653768F00242428 /* product_materials.json in Resources */ = {isa = PBXBuildFile; fileRef = 97B1172D26535A1000242428 /* product_materials.json */; };
 		A4054107264A1B7400E2D21B /* DropDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4054106264A1B7400E2D21B /* DropDownView.swift */; };
 		A4054109264A270C00E2D21B /* DispatchQueue+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4054108264A270C00E2D21B /* DispatchQueue+.swift */; };
 		A405410B264A575E00E2D21B /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A405410A264A575E00E2D21B /* UITextField+.swift */; };
@@ -124,6 +126,8 @@
 		813AE979B8E28B1A22020AB9 /* Pods-MyMind-MyMindUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMind-MyMindUITests.release.xcconfig"; path = "Target Support Files/Pods-MyMind-MyMindUITests/Pods-MyMind-MyMindUITests.release.xcconfig"; sourceTree = "<group>"; };
 		8B6F179AE4CEBCE17B89AC68 /* Pods-MyMind-MyMindUITests.alpha.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMind-MyMindUITests.alpha.xcconfig"; path = "Target Support Files/Pods-MyMind-MyMindUITests/Pods-MyMind-MyMindUITests.alpha.xcconfig"; sourceTree = "<group>"; };
 		8C4BA9CA7A7E7BD1C9712E01 /* Pods-MyMind.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMind.debug.xcconfig"; path = "Target Support Files/Pods-MyMind/Pods-MyMind.debug.xcconfig"; sourceTree = "<group>"; };
+		97B1172D26535A1000242428 /* product_materials.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = product_materials.json; sourceTree = "<group>"; };
+		97B1172E26535B9800242428 /* ProductMaterial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductMaterial.swift; sourceTree = "<group>"; };
 		A4054106264A1B7400E2D21B /* DropDownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownView.swift; sourceTree = "<group>"; };
 		A4054108264A270C00E2D21B /* DispatchQueue+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+.swift"; sourceTree = "<group>"; };
 		A405410A264A575E00E2D21B /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
@@ -139,12 +143,12 @@
 		A439B52B26099AA1002352C2 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		A439B53B2609CDC3002352C2 /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
 		A439B5402609D61C002352C2 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
-		A43E0B60260D7CA4005FC6CE /* NiblessViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NiblessViewController.swift; sourceTree = "<group>"; };
-		A43E0B61260D7CA4005FC6CE /* NiblessNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NiblessNavigationController.swift; sourceTree = "<group>"; };
-		A43E0B62260D7CA4005FC6CE /* NiblessView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NiblessView.swift; sourceTree = "<group>"; };
 		A439BD362637E42F004F47C8 /* MyMindPurchaseAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMindPurchaseAPIService.swift; sourceTree = "<group>"; };
 		A439BD3B2637EC51004F47C8 /* Purchase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Purchase.swift; sourceTree = "<group>"; };
 		A439BD4026380BF9004F47C8 /* purchase_list.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = purchase_list.json; sourceTree = "<group>"; };
+		A43E0B60260D7CA4005FC6CE /* NiblessViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NiblessViewController.swift; sourceTree = "<group>"; };
+		A43E0B61260D7CA4005FC6CE /* NiblessNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NiblessNavigationController.swift; sourceTree = "<group>"; };
+		A43E0B62260D7CA4005FC6CE /* NiblessView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NiblessView.swift; sourceTree = "<group>"; };
 		A43E0B69260D84FB005FC6CE /* NVActivityIndicatorView+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NVActivityIndicatorView+Rx.swift"; sourceTree = "<group>"; };
 		A43E0B6E260DC66D005FC6CE /* UIControl+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIControl+.swift"; sourceTree = "<group>"; };
 		A43E0B73260DC944005FC6CE /* SignInValidationServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInValidationServiceTests.swift; sourceTree = "<group>"; };
@@ -351,6 +355,7 @@
 				A4159208260C603B00FD3989 /* ForgotPasswordInfo.swift */,
 				A439BD3B2637EC51004F47C8 /* Purchase.swift */,
 				A4DD410A26428927007B2A41 /* AutoCompleteInfo.swift */,
+				97B1172E26535B9800242428 /* ProductMaterial.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -436,6 +441,7 @@
 			children = (
 				A4793C832604592000AD280C /* captcha_session.json */,
 				A439BD4026380BF9004F47C8 /* purchase_list.json */,
+				97B1172D26535A1000242428 /* product_materials.json */,
 				A49CF9372603523100AFC170 /* user_session.json */,
 			);
 			path = APICache;
@@ -614,6 +620,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				97B117322653768F00242428 /* product_materials.json in Resources */,
 				A439BD4426380E2F004F47C8 /* purchase_list.json in Resources */,
 				A49CF93C2603527500AFC170 /* user_session.json in Resources */,
 				A40A1FDA2611700000553207 /* captcha_session.json in Resources */,
@@ -796,6 +803,7 @@
 				A43E0B65260D7CA4005FC6CE /* NiblessView.swift in Sources */,
 				A4DD410726425496007B2A41 /* PromiseKitAPIService.swift in Sources */,
 				A4793CB126048BB600AD280C /* UIFont+.swift in Sources */,
+				97B1172F26535B9800242428 /* ProductMaterial.swift in Sources */,
 				A44A5A7225F9B0D200995823 /* MainFunctionEntryViewController.swift in Sources */,
 				A4ACEDC526490E25008724E4 /* SelectedQueryCollectionViewCell.swift in Sources */,
 				A4159204260C394F00FD3989 /* UIButton+.swift in Sources */,

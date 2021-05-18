@@ -178,7 +178,7 @@ struct PurchaseBrief: Codable {
     }
 }
 
-struct PurchaseList {
+struct PurchaseList: MultiplePageList {
     struct StatusAmount: Codable {
         let pending: String
         let review: String
@@ -230,4 +230,11 @@ extension PurchaseList: Decodable {
         string = try container.decode(String.self, forKey: .itemsPerPage)
         itemsPerPage = Int(string) ?? 0
     }
+}
+
+protocol MultiplePageList {
+    var totalAmountOfItems: Int { get }
+    var totalAmountOfPages: Int { get }
+    var itemsPerPage: Int { get }
+    var currentPageNumber: Int { get }
 }
