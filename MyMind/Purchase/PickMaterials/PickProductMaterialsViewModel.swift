@@ -37,6 +37,7 @@ class PickProductMaterialsViewModel {
                 self.currentProductMaterials.accept(list.materials)
             }
             .catch { error in
+                print(error.localizedDescription)
                 #warning("error handling")
             }
     }

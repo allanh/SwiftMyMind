@@ -19,7 +19,7 @@ class PickProductMaterialTableViewCell: UITableViewCell {
     }
 
     let titleLabel: UILabel = UILabel {
-        $0.font = .pingFangTCRegular(ofSize: 16)
+        $0.font = .pingFangTCSemibold(ofSize: 16)
         $0.textColor = UIColor(hex: "4c4c4c")
     }
 
@@ -69,6 +69,17 @@ class PickProductMaterialTableViewCell: UITableViewCell {
         activateConstraintsNumberLabel()
         activateConstraintsCheckedBoxButton()
     }
+
+    func config(with material: ProductMaterial) {
+        if let urlString = material.imageInfoList.first?.url,
+           let url = URL(string: urlString) {
+            materialImageView.kf.setImage(with: url)
+        } else {
+            materialImageView.image = nil
+        }
+        titleLabel.text = material.name
+        numberLabel.text = material.number
+    }
 }
 // MARK: Layouts
 extension PickProductMaterialTableViewCell {
@@ -77,7 +88,7 @@ extension PickProductMaterialTableViewCell {
         let top = materialImageView.topAnchor
             .constraint(equalTo: contentView.topAnchor, constant: 15)
         let bottom = materialImageView.bottomAnchor
-            .constraint(equalTo: contentView.bottomAnchor)
+            .constraint(equalTo: contentView.bottomAnchor, constant: -15)
         let leading = materialImageView.leadingAnchor
             .constraint(equalTo: contentView.leadingAnchor, constant: 15)
         let width = materialImageView.widthAnchor
@@ -130,14 +141,5 @@ extension PickProductMaterialTableViewCell {
         NSLayoutConstraint.activate([
             centerY, trailing, width, height
         ])
-    }
-
-    func config(with material: ProductMaterial) {
-        if let urlString = material.imageInfoList.first?.url,
-           let url = URL(string: urlString) {
-            materialImageView.kf.setImage(with: url)
-        }
-        titleLabel.text = material.name
-        numberLabel.text = material.number
     }
 }

@@ -70,6 +70,7 @@ class PickProductMaterialsViewController: NiblessViewController {
         else {
             return
         }
+        rootView.tableView.deselectRow(at: indexPath, animated: true)
         viewModel.selectMaterial(at: indexPath.row)
         sender.isSelected.toggle()
     }
@@ -89,12 +90,19 @@ extension PickProductMaterialsViewController: UITableViewDataSource {
         cell.config(with: material)
         let isSelected = viewModel.pickedMaterialIDs.contains(material.id)
         cell.checkBoxButton.isSelected = isSelected
+        cell.checkBoxButton.addTarget(self, action: #selector(didTapCheckBoxButton(_:)), for: .touchUpInside)
         return cell
     }
 }
 // MARK: - Table view delegate
 extension PickProductMaterialsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         viewModel.selectMaterial(at: indexPath.row)
+        tableView.reloadRows(at: [indexPath], with: .automatic)
+    }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80
     }
 }

@@ -75,7 +75,7 @@ struct ProductMaterialQueryInfo {
             let query = URLQueryItem(name: "original_product_no", value: numbers)
             items.append(query)
         }
-        let sortQuery = URLQueryItem(name: "sort", value: sortType.rawValue)
+        let sortQuery = URLQueryItem(name: "order_by", value: sortType.rawValue)
         items.append(sortQuery)
         return items
     }

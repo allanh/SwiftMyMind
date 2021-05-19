@@ -20,9 +20,12 @@ class PickProductMaterialsRootView: NiblessView {
         $0.sortButton.setTitle("SKU編號", for: .normal)
         $0.stackView.removeArrangedSubview($0.layoutButton)
         $0.stackView.removeArrangedSubview($0.secondSeparatorView)
+        $0.layoutButton.removeFromSuperview()
+        $0.secondSeparatorView.removeFromSuperview()
     }
 
     let nextStepButton: UIButton = UIButton {
+        $0.titleLabel?.font = .pingFangTCSemibold(ofSize: 16)
         $0.setTitle("下一步", for: .normal)
         $0.setTitleColor(.white, for: .normal)
         $0.backgroundColor = UIColor(hex: "004477")
@@ -33,9 +36,10 @@ class PickProductMaterialsRootView: NiblessView {
 
     private var hierarchyNotReady: Bool = true
 
-    init(viewModel: PickProductMaterialsViewModel) {
+    init(frame: CGRect = .zero, viewModel: PickProductMaterialsViewModel) {
         self.viewModel = viewModel
-        super.init()
+        super.init(frame: frame)
+        backgroundColor = .white
     }
 
     override func didMoveToWindow() {
@@ -111,7 +115,7 @@ extension PickProductMaterialsRootView {
         let trailing = nextStepButton.trailingAnchor
             .constraint(equalTo: trailingAnchor)
         let height = nextStepButton.heightAnchor
-            .constraint(equalToConstant: 40)
+            .constraint(equalToConstant: 50)
 
         NSLayoutConstraint.activate([
             leading, bottom, trailing, height
