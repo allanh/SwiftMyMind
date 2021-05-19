@@ -75,6 +75,17 @@ class PickProductMaterialsViewController: NiblessViewController {
         sender.isSelected.toggle()
     }
 }
+// MARK: - Scroll view delegate
+extension PickProductMaterialsViewController {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let scrolledHeight = scrollView.contentOffset.y + scrollView.frame.height
+        let scrolledPercentage = scrolledHeight / scrollView.contentSize.height
+        let threshold: CGFloat = 0.7
+        if scrolledPercentage > threshold {
+            viewModel.fetchMoreProductMaterials(with: &viewModel.currentQueryInfo)
+        }
+    }
+}
 // MARK: - Table view data source
 extension PickProductMaterialsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
