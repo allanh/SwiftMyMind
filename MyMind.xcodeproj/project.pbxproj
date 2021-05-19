@@ -13,6 +13,7 @@
 		97B117372653B1AF00242428 /* PickProductMaterialsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B117362653B1AF00242428 /* PickProductMaterialsViewModel.swift */; };
 		97B117392654B8FC00242428 /* PickProductMaterialsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B117382654B8FC00242428 /* PickProductMaterialsViewController.swift */; };
 		97B1173B2654B9A100242428 /* PickProductMaterialsRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B1173A2654B9A100242428 /* PickProductMaterialsRootView.swift */; };
+		97B1173F2654CBFD00242428 /* PickProductMaterialTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B1173E2654CBFD00242428 /* PickProductMaterialTableViewCell.swift */; };
 		A4054107264A1B7400E2D21B /* DropDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4054106264A1B7400E2D21B /* DropDownView.swift */; };
 		A4054109264A270C00E2D21B /* DispatchQueue+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4054108264A270C00E2D21B /* DispatchQueue+.swift */; };
 		A405410B264A575E00E2D21B /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A405410A264A575E00E2D21B /* UITextField+.swift */; };
@@ -136,6 +137,7 @@
 		97B117362653B1AF00242428 /* PickProductMaterialsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickProductMaterialsViewModel.swift; sourceTree = "<group>"; };
 		97B117382654B8FC00242428 /* PickProductMaterialsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickProductMaterialsViewController.swift; sourceTree = "<group>"; };
 		97B1173A2654B9A100242428 /* PickProductMaterialsRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickProductMaterialsRootView.swift; sourceTree = "<group>"; };
+		97B1173E2654CBFD00242428 /* PickProductMaterialTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickProductMaterialTableViewCell.swift; sourceTree = "<group>"; };
 		A4054106264A1B7400E2D21B /* DropDownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownView.swift; sourceTree = "<group>"; };
 		A4054108264A270C00E2D21B /* DispatchQueue+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+.swift"; sourceTree = "<group>"; };
 		A405410A264A575E00E2D21B /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
@@ -266,6 +268,7 @@
 				97B117362653B1AF00242428 /* PickProductMaterialsViewModel.swift */,
 				97B117382654B8FC00242428 /* PickProductMaterialsViewController.swift */,
 				97B1173A2654B9A100242428 /* PickProductMaterialsRootView.swift */,
+				97B1173E2654CBFD00242428 /* PickProductMaterialTableViewCell.swift */,
 			);
 			path = PickMaterials;
 			sourceTree = "<group>";
@@ -808,6 +811,7 @@
 				A4159214260C861F00FD3989 /* ForgotPasswordViewController.swift in Sources */,
 				A47F39DA263A64CD00A3097C /* PurchaseListRootView.swift in Sources */,
 				97B1173B2654B9A100242428 /* PickProductMaterialsRootView.swift in Sources */,
+				97B1173F2654CBFD00242428 /* PickProductMaterialTableViewCell.swift in Sources */,
 				A4793C9626047C8000AD280C /* NibOwnerLoadable.swift in Sources */,
 				A4DD410926427DD5007B2A41 /* MyMindAutoCompleteAPIService.swift in Sources */,
 				A4054107264A1B7400E2D21B /* DropDownView.swift in Sources */,

@@ -126,7 +126,9 @@ final class PurchaseListViewController: NiblessViewController {
 
     @objc
     private func createButtonDidTapped(_ sender: UIButton) {
-
+        let viewModel = PickProductMaterialsViewModel(purchaseAPIService: purchaseAPIService)
+        let viewController = PickProductMaterialsViewController(viewModel: viewModel)
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }
 // MARK: - Scroll view delegate

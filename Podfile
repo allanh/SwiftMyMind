@@ -19,8 +19,8 @@ target 'MyMind' do
     pod 'NVActivityIndicatorView'
     pod 'LookinServer', :configurations => ['Debug']
     pod 'Charts'
-    pod 'CoreXLSX', '~> 0.14.0'
     pod 'PromiseKit', '~> 6.8'
+    pod 'Kingfisher', '~> 6.0'
 
   target 'MyMindTests' do
     inherit! :search_paths

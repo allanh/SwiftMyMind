@@ -7,13 +7,94 @@
 //
 
 import UIKit
+import RxSwift
 
 class PickProductMaterialsViewController: NiblessViewController {
 
+    var rootView: PickProductMaterialsRootView {
+        view as! PickProductMaterialsRootView
+    }
     let viewModel: PickProductMaterialsViewModel
+    let bag: DisposeBag = DisposeBag()
 
+    // MARK: View Life Cycle
+    override func loadView() {
+        super.loadView()
+        view = PickProductMaterialsRootView(viewModel: viewModel)
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        configTableView()
+        observerViewModel()
+        viewModel.refreshFetchProductMaterials(with: viewModel.currentQueryInfo)
+    }
+    // MARK: Methods
     init(viewModel: PickProductMaterialsViewModel) {
         self.viewModel = viewModel
         super.init()
+    }
+
+    private func configTableView() {
+        rootView.tableView.delegate = self
+        rootView.tableView.dataSource = self
+        rootView.tableView.registerCell(PickProductMaterialTableViewCell.self)
+    }
+
+    private func observerViewModel() {
+        viewModel.currentProductMaterials
+            .subscribe(on: MainScheduler.instance)
+            .skip(1)
+            .subscribe(onNext: { [unowned self] _ in
+                self.rootView.tableView.reloadData()
+            })
+            .disposed(by: bag)
+
+        viewModel.view
+            .subscribe(onNext: { [unowned self] view in
+                self.handleNavigation(with: view)
+            })
+            .disposed(by: bag)
+
+    }
+
+    private func handleNavigation(with view: PickMaterialView) {
+
+    }
+
+    @objc
+    private func didTapCheckBoxButton(_ sender: UIButton) {
+        guard
+            let pointInTableView = sender.superview?.convert(sender.frame.origin, to: rootView.tableView),
+            let indexPath = rootView.tableView.indexPathForRow(at: pointInTableView)
+        else {
+            return
+        }
+        viewModel.selectMaterial(at: indexPath.row)
+        sender.isSelected.toggle()
+    }
+}
+// MARK: - Table view data source
+extension PickProductMaterialsViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModel.currentProductMaterials.value.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeReusableCell(PickProductMaterialTableViewCell.self, for: indexPath) as? PickProductMaterialTableViewCell else {
+            print("----Wrong cell identifier or not register cell yet---")
+            return UITableViewCell()
+        }
+        let material = viewModel.currentProductMaterials.value[indexPath.row]
+        cell.config(with: material)
+        let isSelected = viewModel.pickedMaterialIDs.contains(material.id)
+        cell.checkBoxButton.isSelected = isSelected
+        return cell
+    }
+}
+// MARK: - Table view delegate
+extension PickProductMaterialsViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        viewModel.selectMaterial(at: indexPath.row)
     }
 }

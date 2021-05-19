@@ -59,4 +59,11 @@ class PickProductMaterialsViewModel {
                 #warning("error handling")
             }
     }
+
+    func selectMaterial(at index: Int) {
+        let material = currentProductMaterials.value[index]
+        if pickedMaterialIDs.insert(material.id).inserted == false {
+            pickedMaterialIDs.remove(material.id)
+        }
+    }
 }
