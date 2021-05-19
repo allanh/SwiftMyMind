@@ -18,6 +18,9 @@ class PickProductMaterialsViewModel {
     let title: String = "請選擇SKU"
     var currentProductMaterials: BehaviorRelay<[ProductMaterial]> = .init(value: [])
     var currentQueryInfo: ProductMaterialQueryInfo = .defaultQuery()
+    var sortTypes: [ProductMaterialQueryInfo.SortType] = ProductMaterialQueryInfo.SortType.allCases
+    var pickedSortTypeIndex: Int = 0
+    var pickedMaterialIDs: Set<String> = .init()
     var currentPageInfo: MultiplePageList?
     var view: PublishRelay<PickMaterialView> = .init()
     let purchaseAPIService: PurchaseAPIService

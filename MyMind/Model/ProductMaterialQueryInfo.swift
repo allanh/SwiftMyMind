@@ -9,7 +9,7 @@
 import Foundation
 
 struct ProductMaterialQueryInfo {
-    enum SortType: String, CustomStringConvertible {
+    enum SortType: String, CustomStringConvertible, CaseIterable {
         case number = "PRODUCT_NO"
         case name = "NAME"
         case proposedPrice = "PROPOSED_PRICE"

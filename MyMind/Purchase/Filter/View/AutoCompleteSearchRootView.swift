@@ -42,11 +42,15 @@ class AutoCompleteSearchRootView: NiblessView {
     lazy var collectionViewHeightAnchor: NSLayoutConstraint = {
         return self.collectionView.heightAnchor.constraint(equalToConstant: 0)
     }()
+
+    private var hierarchyNotReady: Bool = true
     // MARK: - Methods
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    override func didMoveToWindow() {
+        super.didMoveToWindow()
+        guard hierarchyNotReady else { return }
         constructViewHierarchy()
         activateConstraints()
+        hierarchyNotReady = false
     }
 
     func constructViewHierarchy() {

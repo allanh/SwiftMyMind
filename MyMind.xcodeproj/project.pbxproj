@@ -11,6 +11,8 @@
 		97B117322653768F00242428 /* product_materials.json in Resources */ = {isa = PBXBuildFile; fileRef = 97B1172D26535A1000242428 /* product_materials.json */; };
 		97B117342653AF1E00242428 /* ProductMaterialQueryInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B117332653AF1E00242428 /* ProductMaterialQueryInfo.swift */; };
 		97B117372653B1AF00242428 /* PickProductMaterialsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B117362653B1AF00242428 /* PickProductMaterialsViewModel.swift */; };
+		97B117392654B8FC00242428 /* PickProductMaterialsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B117382654B8FC00242428 /* PickProductMaterialsViewController.swift */; };
+		97B1173B2654B9A100242428 /* PickProductMaterialsRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B1173A2654B9A100242428 /* PickProductMaterialsRootView.swift */; };
 		A4054107264A1B7400E2D21B /* DropDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4054106264A1B7400E2D21B /* DropDownView.swift */; };
 		A4054109264A270C00E2D21B /* DispatchQueue+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4054108264A270C00E2D21B /* DispatchQueue+.swift */; };
 		A405410B264A575E00E2D21B /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A405410A264A575E00E2D21B /* UITextField+.swift */; };
@@ -132,6 +134,8 @@
 		97B1172E26535B9800242428 /* ProductMaterial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductMaterial.swift; sourceTree = "<group>"; };
 		97B117332653AF1E00242428 /* ProductMaterialQueryInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductMaterialQueryInfo.swift; sourceTree = "<group>"; };
 		97B117362653B1AF00242428 /* PickProductMaterialsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickProductMaterialsViewModel.swift; sourceTree = "<group>"; };
+		97B117382654B8FC00242428 /* PickProductMaterialsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickProductMaterialsViewController.swift; sourceTree = "<group>"; };
+		97B1173A2654B9A100242428 /* PickProductMaterialsRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickProductMaterialsRootView.swift; sourceTree = "<group>"; };
 		A4054106264A1B7400E2D21B /* DropDownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownView.swift; sourceTree = "<group>"; };
 		A4054108264A270C00E2D21B /* DispatchQueue+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+.swift"; sourceTree = "<group>"; };
 		A405410A264A575E00E2D21B /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
@@ -256,12 +260,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		97B117352653B17700242428 /* BeginPurchase */ = {
+		97B117352653B17700242428 /* PickMaterials */ = {
 			isa = PBXGroup;
 			children = (
 				97B117362653B1AF00242428 /* PickProductMaterialsViewModel.swift */,
+				97B117382654B8FC00242428 /* PickProductMaterialsViewController.swift */,
+				97B1173A2654B9A100242428 /* PickProductMaterialsRootView.swift */,
 			);
-			path = BeginPurchase;
+			path = PickMaterials;
+			sourceTree = "<group>";
+		};
+		97B1173C2654C20500242428 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A4ACEDC426490E25008724E4 /* SelectedQueryCollectionViewCell.swift */,
+				A4D50AAF2645129E007B07D6 /* AutoCompleteSearchRootView.swift */,
+				A43F42922643C26400A246CC /* SideMenuTopBarView.swift */,
+				A43F42942643C75C00A246CC /* FilterSideMenuBottomView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		97B1173D2654C21D00242428 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				A43F42972643E04100A246CC /* PurchaseAutoCompleteSearchViewController.swift */,
+				A405410E264A758B00E2D21B /* PurchaseStatusSelectionViewController.swift */,
+				A4054110264A8F7600E2D21B /* PurchaseQueryDateSelectionViewController.swift */,
+				A43F428E2643866F00A246CC /* PurchaseFilterViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		A415920D260C794700FD3989 /* ForgotPassword */ = {
@@ -277,15 +305,9 @@
 		A43F42962643DFE100A246CC /* Filter */ = {
 			isa = PBXGroup;
 			children = (
-				A43F428E2643866F00A246CC /* PurchaseFilterViewController.swift */,
-				A43F42922643C26400A246CC /* SideMenuTopBarView.swift */,
-				A43F42942643C75C00A246CC /* FilterSideMenuBottomView.swift */,
-				A43F42972643E04100A246CC /* PurchaseAutoCompleteSearchViewController.swift */,
-				A4D50AAF2645129E007B07D6 /* AutoCompleteSearchRootView.swift */,
+				97B1173D2654C21D00242428 /* Controller */,
+				97B1173C2654C20500242428 /* View */,
 				A4ACEDC22648EA38008724E4 /* PurchaseQueryRepository.swift */,
-				A4ACEDC426490E25008724E4 /* SelectedQueryCollectionViewCell.swift */,
-				A405410E264A758B00E2D21B /* PurchaseStatusSelectionViewController.swift */,
-				A4054110264A8F7600E2D21B /* PurchaseQueryDateSelectionViewController.swift */,
 			);
 			path = Filter;
 			sourceTree = "<group>";
@@ -422,7 +444,7 @@
 		A47F39CB263A58DA00A3097C /* Purchase */ = {
 			isa = PBXGroup;
 			children = (
-				97B117352653B17700242428 /* BeginPurchase */,
+				97B117352653B17700242428 /* PickMaterials */,
 				A43F42962643DFE100A246CC /* Filter */,
 				A47F39CC263A58F700A3097C /* PurchaseListViewController.swift */,
 				A47F39D4263A5A9B00A3097C /* PurchaseBriefTableViewCell.swift */,
@@ -785,6 +807,7 @@
 				A43F4291264388E400A246CC /* SideMenuPresentable.swift in Sources */,
 				A4159214260C861F00FD3989 /* ForgotPasswordViewController.swift in Sources */,
 				A47F39DA263A64CD00A3097C /* PurchaseListRootView.swift in Sources */,
+				97B1173B2654B9A100242428 /* PickProductMaterialsRootView.swift in Sources */,
 				A4793C9626047C8000AD280C /* NibOwnerLoadable.swift in Sources */,
 				A4DD410926427DD5007B2A41 /* MyMindAutoCompleteAPIService.swift in Sources */,
 				A4054107264A1B7400E2D21B /* DropDownView.swift in Sources */,
@@ -841,6 +864,7 @@
 				A489A1B4263FC9D600832679 /* UICollectionView+.swift in Sources */,
 				A47F39D5263A5A9B00A3097C /* PurchaseBriefTableViewCell.swift in Sources */,
 				A489A1B1263FAA7D00832679 /* PurchaseBriefCollectionViewCell.swift in Sources */,
+				97B117392654B8FC00242428 /* PickProductMaterialsViewController.swift in Sources */,
 				A45E69C5264B89A300AADB44 /* CustomClearButtonPositionTextField.swift in Sources */,
 				A4ACEDC32648EA38008724E4 /* PurchaseQueryRepository.swift in Sources */,
 				A49CF8B6260301DE00AFC170 /* Endpoint.swift in Sources */,
