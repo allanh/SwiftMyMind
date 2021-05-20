@@ -99,7 +99,7 @@ struct ProductMaterialBrief: Codable, Equatable {
     }
 }
 // MARK: Product Material List
-struct ProductMaterialList: MultiplePageList {
+struct ProductMaterialList: MultiplePageList, Equatable {
     let totalAmountOfItems: Int
     let totalAmountOfPages: Int
     let itemsPerPage: Int

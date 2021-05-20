@@ -8,9 +8,8 @@
 import XCTest
 @testable import MyMind
 
-class CodableTests: XCTestCase {
-
-    private func cachedFileData(name: String, ext: String = "json") -> Data? {
+class CachedFileDataHelper {
+    func cachedFileData(name: String, ext: String = "json") -> Data? {
         let bundle = Bundle(for: type(of: self))
         guard let path = bundle.path(forResource: name, ofType: ext) else {
             print("File not found.")
@@ -22,7 +21,10 @@ class CodableTests: XCTestCase {
         }
         return data
     }
+}
 
+class CodableTests: XCTestCase {
+    let cachedFileDataHelper = CachedFileDataHelper()
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
@@ -32,7 +34,7 @@ class CodableTests: XCTestCase {
     }
 
     func test_decode_capchaSession() {
-        guard let data = cachedFileData(name: "captcha_session") else {
+        guard let data = cachedFileDataHelper.cachedFileData(name: "captcha_session") else {
             XCTFail()
             return
         }
@@ -47,7 +49,7 @@ class CodableTests: XCTestCase {
     }
 
     func test_decode_userSession() {
-        guard let data = cachedFileData(name: "user_session") else {
+        guard let data = cachedFileDataHelper.cachedFileData(name: "user_session") else {
             XCTFail()
             return
         }
@@ -57,7 +59,7 @@ class CodableTests: XCTestCase {
     }
 
     func test_decode_purchaseList() {
-        guard let data = cachedFileData(name: "purchase_list") else {
+        guard let data = cachedFileDataHelper.cachedFileData(name: "purchase_list") else {
             XCTFail()
             return
         }
@@ -71,14 +73,14 @@ class CodableTests: XCTestCase {
     }
 
     func test_decode_productMaterialList() {
-        guard let data = cachedFileData(name: "product_materials") else {
+        guard let data = cachedFileDataHelper.cachedFileData(name: "product_materials") else {
             XCTFail()
             return
         }
 
         do {
-            let purchaseList = try JSONDecoder().decode(Response<ProductMaterialList>.self, from: data).data
-            XCTAssertNotNil(purchaseList)
+            let productMaterialList = try JSONDecoder().decode(Response<ProductMaterialList>.self, from: data).data
+            XCTAssertNotNil(productMaterialList)
         } catch let error {
             print(error)
             XCTFail()

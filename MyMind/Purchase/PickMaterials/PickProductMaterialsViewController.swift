@@ -43,6 +43,8 @@ class PickProductMaterialsViewController: NiblessViewController {
     }
 
     private func observerViewModel() {
+        title = viewModel.title
+        
         viewModel.currentProductMaterials
             .subscribe(on: MainScheduler.instance)
             .skip(1)

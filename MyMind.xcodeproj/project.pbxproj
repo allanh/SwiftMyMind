@@ -16,6 +16,7 @@
 		97B1173F2654CBFD00242428 /* PickProductMaterialTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B1173E2654CBFD00242428 /* PickProductMaterialTableViewCell.swift */; };
 		97B1174126550C5E00242428 /* PickSortTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B1174026550C5E00242428 /* PickSortTypeView.swift */; };
 		97B117432656064300242428 /* SingleLabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B117422656064300242428 /* SingleLabelTableViewCell.swift */; };
+		97B11745265650BA00242428 /* PickProductMaterailsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B11744265650BA00242428 /* PickProductMaterailsViewModelTests.swift */; };
 		A4054107264A1B7400E2D21B /* DropDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4054106264A1B7400E2D21B /* DropDownView.swift */; };
 		A4054109264A270C00E2D21B /* DispatchQueue+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4054108264A270C00E2D21B /* DispatchQueue+.swift */; };
 		A405410B264A575E00E2D21B /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A405410A264A575E00E2D21B /* UITextField+.swift */; };
@@ -142,6 +143,7 @@
 		97B1173E2654CBFD00242428 /* PickProductMaterialTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickProductMaterialTableViewCell.swift; sourceTree = "<group>"; };
 		97B1174026550C5E00242428 /* PickSortTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickSortTypeView.swift; sourceTree = "<group>"; };
 		97B117422656064300242428 /* SingleLabelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleLabelTableViewCell.swift; sourceTree = "<group>"; };
+		97B11744265650BA00242428 /* PickProductMaterailsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickProductMaterailsViewModelTests.swift; sourceTree = "<group>"; };
 		A4054106264A1B7400E2D21B /* DropDownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownView.swift; sourceTree = "<group>"; };
 		A4054108264A270C00E2D21B /* DispatchQueue+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+.swift"; sourceTree = "<group>"; };
 		A405410A264A575E00E2D21B /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
@@ -372,6 +374,7 @@
 				A43E0B73260DC944005FC6CE /* SignInValidationServiceTests.swift */,
 				A43E0B78260DD598005FC6CE /* SignInViewModelTests.swift */,
 				A40A1FF12611791000553207 /* ForgotPasswordViewModelTests.swift */,
+				97B11744265650BA00242428 /* PickProductMaterailsViewModelTests.swift */,
 			);
 			path = MyMindTests;
 			sourceTree = "<group>";
@@ -897,6 +900,7 @@
 				A43E0B79260DD598005FC6CE /* SignInViewModelTests.swift in Sources */,
 				A4793C682604423800AD280C /* AuthServiceTest.swift in Sources */,
 				A40A1FF22611791000553207 /* ForgotPasswordViewModelTests.swift in Sources */,
+				97B11745265650BA00242428 /* PickProductMaterailsViewModelTests.swift in Sources */,
 				A44A5A8525F9B0D300995823 /* MyMindTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
