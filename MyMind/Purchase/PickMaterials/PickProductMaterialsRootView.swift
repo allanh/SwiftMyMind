@@ -33,13 +33,13 @@ class PickProductMaterialsRootView: NiblessView {
 
     lazy var pickSortTypeView: PickSortTypeView<ProductMaterialQueryInfo.SortType, SingleLabelTableViewCell> = {
         let pickSortView = PickSortTypeView<ProductMaterialQueryInfo.SortType, SingleLabelTableViewCell>.init(
-            dataSource: ProductMaterialQueryInfo.SortType.allCases) { [unowned self] item, cell in
-            cell.titleLabel.text = item.description
-            let isSelected = self.viewModel.currentQueryInfo.sortType == item
+            dataSource: ProductMaterialQueryInfo.SortType.allCases) { [unowned self] sortType, cell in
+            cell.titleLabel.text = sortType.description
+            let isSelected = self.viewModel.currentQueryInfo.sortType == sortType
             let textColor = isSelected ? UIColor(hex: "004477") : UIColor(hex: "4c4c4c")
             cell.titleLabel.textColor = textColor
-        } cellSelectHandler: { [unowned self] item in
-            self.viewModel.currentQueryInfo.sortType = item
+        } cellSelectHandler: { [unowned self] sortType in
+            self.viewModel.currentSortType.accept(sortType)
         }
         pickSortView.tableView.separatorStyle = .none
         return pickSortView
@@ -55,6 +55,7 @@ class PickProductMaterialsRootView: NiblessView {
         super.init(frame: frame)
         backgroundColor = .white
         bindToViewModel()
+        subscribeViewModel()
     }
 
     override func didMoveToWindow() {
@@ -97,6 +98,13 @@ class PickProductMaterialsRootView: NiblessView {
             .subscribe(onNext: { [unowned self] in
                 self.viewModel.pushSuggestion()
             })
+            .disposed(by: disposeBag)
+    }
+
+    private func subscribeViewModel() {
+        viewModel.currentSortType
+            .map { $0.description }
+            .bind(to: organizeOptionView.sortButton.rx.title(for: .normal))
             .disposed(by: disposeBag)
     }
 }

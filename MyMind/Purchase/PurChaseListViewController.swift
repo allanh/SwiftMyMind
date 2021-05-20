@@ -135,7 +135,8 @@ final class PurchaseListViewController: NiblessViewController {
 extension PurchaseListViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         guard isNetworkProcessing == false,
-              let purchaseList = purchaseList
+              let purchaseList = purchaseList,
+              scrollView.isDragging
         else { return }
 
         let currentScrolledHeight = scrollView.frame.height + scrollView.contentOffset.y

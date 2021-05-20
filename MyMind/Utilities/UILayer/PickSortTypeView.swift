@@ -13,6 +13,7 @@ class PickSortTypeView<T, Cell: UITableViewCell>: NiblessView, UITableViewDataSo
     private let dismissableView: UIView = UIView {
         $0.backgroundColor = .clear
     }
+    
     private let tableViewContainerView: UIView = UIView {
         $0.backgroundColor = .white
     }

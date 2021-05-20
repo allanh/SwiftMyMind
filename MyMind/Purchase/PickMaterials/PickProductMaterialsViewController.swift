@@ -65,6 +65,10 @@ class PickProductMaterialsViewController: NiblessViewController {
                 }
             })
             .disposed(by: bag)
+
+        viewModel.isNetworkProcessing
+            .bind(to: rx.isActivityIndicatorAnimating)
+            .disposed(by: bag)
     }
 
     private func handleNavigation(with view: PickMaterialView) {
@@ -87,6 +91,7 @@ class PickProductMaterialsViewController: NiblessViewController {
 // MARK: - Scroll view delegate
 extension PickProductMaterialsViewController {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard scrollView.isDragging else { return }
         let scrolledHeight = scrollView.contentOffset.y + scrollView.frame.height
         let scrolledPercentage = scrolledHeight / scrollView.contentSize.height
         let threshold: CGFloat = 0.7
