@@ -10,11 +10,14 @@ import UIKit
 
 class PickSortTypeView<T, Cell: UITableViewCell>: NiblessView, UITableViewDataSource, UITableViewDelegate {
     // MARK: - Properties
+    private let dismissableView: UIView = UIView {
+        $0.backgroundColor = .clear
+    }
     private let tableViewContainerView: UIView = UIView {
         $0.backgroundColor = .white
     }
 
-    private let tableView: UITableView = UITableView {
+    let tableView: UITableView = UITableView {
         $0.backgroundColor = .white
     }
 
@@ -48,15 +51,18 @@ class PickSortTypeView<T, Cell: UITableViewCell>: NiblessView, UITableViewDataSo
         guard hierarchyNotReady else { return }
         constructViewHierarchy()
         activateConstraints()
+        addDisMissGestureToDismissableView()
         hierarchyNotReady = false
     }
 
     private func constructViewHierarchy() {
+        addSubview(dismissableView)
         tableViewContainerView.addSubview(tableView)
         addSubview(tableViewContainerView)
     }
 
     private func activateConstraints() {
+        activateConstraintsDismissableView()
         activateConstraintsTableViewContainerView()
         activateConstraintsTableView()
     }
@@ -64,10 +70,16 @@ class PickSortTypeView<T, Cell: UITableViewCell>: NiblessView, UITableViewDataSo
     private func configTableView() {
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.registerCell(Cell.self)
     }
 
     func reloadContent() {
         tableView.reloadData()
+    }
+
+    private func addDisMissGestureToDismissableView() {
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(hide))
+        dismissableView.addGestureRecognizer(gesture)
     }
 
     func show() {
@@ -75,18 +87,19 @@ class PickSortTypeView<T, Cell: UITableViewCell>: NiblessView, UITableViewDataSo
         self.isHidden = false
 
         tableViewContainerViewHeightConstraints.constant = cellHeight * CGFloat(dataSource.count)
-        UIView.animate(withDuration: 0.3) { [weak self] in
+        UIView.animate(withDuration: 0.2) { [weak self] in
             guard let self = self else { return }
             self.backgroundColor = UIColor.black.withAlphaComponent(0.7)
             self.layoutIfNeeded()
         }
     }
 
+    @objc
     func hide() {
         guard isHidden == false else { return }
 
         tableViewContainerViewHeightConstraints.constant = 0
-        UIView.animate(withDuration: 0.3) { [weak self] in
+        UIView.animate(withDuration: 0.2) { [weak self] in
             guard let self = self else { return }
             self.backgroundColor = .clear
             self.layoutIfNeeded()
@@ -114,6 +127,7 @@ class PickSortTypeView<T, Cell: UITableViewCell>: NiblessView, UITableViewDataSo
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let item = dataSource[indexPath.item]
         cellSelectHandler(item)
+        tableView.reloadData()
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -122,6 +136,21 @@ class PickSortTypeView<T, Cell: UITableViewCell>: NiblessView, UITableViewDataSo
 }
 // MARK: - Layouts
 extension PickSortTypeView {
+    private func activateConstraintsDismissableView() {
+        dismissableView.translatesAutoresizingMaskIntoConstraints = false
+        let top = dismissableView.topAnchor
+            .constraint(equalTo: topAnchor)
+        let leading = dismissableView.leadingAnchor
+            .constraint(equalTo: leadingAnchor)
+        let bottom = dismissableView.bottomAnchor
+            .constraint(equalTo: bottomAnchor)
+        let trailing = dismissableView.trailingAnchor
+            .constraint(equalTo: trailingAnchor)
+
+        NSLayoutConstraint.activate([
+            top, leading, bottom, trailing
+        ])
+    }
     private func activateConstraintsTableViewContainerView() {
         tableViewContainerView.translatesAutoresizingMaskIntoConstraints = false
         let leading = tableViewContainerView.leadingAnchor
@@ -132,7 +161,7 @@ extension PickSortTypeView {
             .constraint(equalTo: trailingAnchor)
 
         NSLayoutConstraint.activate([
-            leading, bottom, trailing
+            leading, bottom, trailing, tableViewContainerViewHeightConstraints
         ])
     }
 

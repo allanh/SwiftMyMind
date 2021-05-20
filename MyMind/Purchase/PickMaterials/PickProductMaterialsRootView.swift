@@ -31,6 +31,20 @@ class PickProductMaterialsRootView: NiblessView {
         $0.backgroundColor = UIColor(hex: "004477")
     }
 
+    lazy var pickSortTypeView: PickSortTypeView<ProductMaterialQueryInfo.SortType, SingleLabelTableViewCell> = {
+        let pickSortView = PickSortTypeView<ProductMaterialQueryInfo.SortType, SingleLabelTableViewCell>.init(
+            dataSource: ProductMaterialQueryInfo.SortType.allCases) { [unowned self] item, cell in
+            cell.titleLabel.text = item.description
+            let isSelected = self.viewModel.currentQueryInfo.sortType == item
+            let textColor = isSelected ? UIColor(hex: "004477") : UIColor(hex: "4c4c4c")
+            cell.titleLabel.textColor = textColor
+        } cellSelectHandler: { [unowned self] item in
+            self.viewModel.currentQueryInfo.sortType = item
+        }
+        pickSortView.tableView.separatorStyle = .none
+        return pickSortView
+    }()
+
     let viewModel: PickProductMaterialsViewModel
     private let disposeBag: DisposeBag = DisposeBag()
 
@@ -40,6 +54,7 @@ class PickProductMaterialsRootView: NiblessView {
         self.viewModel = viewModel
         super.init(frame: frame)
         backgroundColor = .white
+        bindToViewModel()
     }
 
     override func didMoveToWindow() {
@@ -54,18 +69,20 @@ class PickProductMaterialsRootView: NiblessView {
         addSubview(tableView)
         addSubview(organizeOptionView)
         addSubview(nextStepButton)
+        addSubview(pickSortTypeView)
     }
 
     private func activateConstraints() {
         activateConstraintsTableView()
         activateConstraintsOptionView()
         activateConstraintsNextStepButton()
+        activateConstraintsPickSortTypeView()
     }
 
     private func bindToViewModel() {
         organizeOptionView.filterButton.rx.tap
             .subscribe(onNext: { [unowned self] in
-                self.viewModel.view.accept(.filter)
+                self.viewModel.showFilter()
             })
             .disposed(by: disposeBag)
 
@@ -78,7 +95,7 @@ class PickProductMaterialsRootView: NiblessView {
 
         nextStepButton.rx.tap
             .subscribe(onNext: { [unowned self] in
-                self.viewModel.view.accept(.suggestion)
+                self.viewModel.pushSuggestion()
             })
             .disposed(by: disposeBag)
     }
@@ -128,6 +145,22 @@ extension PickProductMaterialsRootView {
 
         NSLayoutConstraint.activate([
             leading, bottom, trailing, height
+        ])
+    }
+
+    private func activateConstraintsPickSortTypeView() {
+        pickSortTypeView.translatesAutoresizingMaskIntoConstraints = false
+        let top = pickSortTypeView.topAnchor
+            .constraint(equalTo: topAnchor)
+        let leading = pickSortTypeView.leadingAnchor
+            .constraint(equalTo: leadingAnchor)
+        let trailing = pickSortTypeView.trailingAnchor
+            .constraint(equalTo: trailingAnchor)
+        let bottom = pickSortTypeView.bottomAnchor
+            .constraint(equalTo: organizeOptionView.topAnchor)
+
+        NSLayoutConstraint.activate([
+            top, leading, trailing, bottom
         ])
     }
 }

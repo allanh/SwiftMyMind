@@ -68,4 +68,12 @@ class PickProductMaterialsViewModel {
             pickedMaterialIDs.remove(material.id)
         }
     }
+
+    func showFilter() {
+        view.accept(.filter)
+    }
+
+    func pushSuggestion() {
+        view.accept(.suggestion)
+    }
 }

@@ -15,19 +15,6 @@ class PickProductMaterialsViewController: NiblessViewController {
         view as! PickProductMaterialsRootView
     }
 
-    lazy var pickSortTypeView: PickSortTypeView<ProductMaterialQueryInfo.SortType, SingleLabelTableViewCell> = {
-        let pickSortView = PickSortTypeView<ProductMaterialQueryInfo.SortType, SingleLabelTableViewCell>.init(
-            dataSource: ProductMaterialQueryInfo.SortType.allCases) { [unowned self] item, cell in
-            cell.titleLabel.text = item.description
-            let isSelected = self.viewModel.currentQueryInfo.sortType == item
-            let textColor = isSelected ? UIColor(hex: "004477") : UIColor(hex: "4c4c4c")
-            cell.titleLabel.textColor = textColor
-        } cellSelectHandler: { [unowned self] item in
-            self.viewModel.currentQueryInfo.sortType = item
-        }
-        return pickSortView
-    }()
-
     let viewModel: PickProductMaterialsViewModel
     let bag: DisposeBag = DisposeBag()
 
@@ -39,7 +26,6 @@ class PickProductMaterialsViewController: NiblessViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        configPickSortView()
         configTableView()
         observerViewModel()
         viewModel.refreshFetchProductMaterials(with: viewModel.currentQueryInfo)
@@ -48,23 +34,6 @@ class PickProductMaterialsViewController: NiblessViewController {
     init(viewModel: PickProductMaterialsViewModel) {
         self.viewModel = viewModel
         super.init()
-    }
-
-    private func configPickSortView() {
-        rootView.addSubview(pickSortTypeView)
-        pickSortTypeView.translatesAutoresizingMaskIntoConstraints = false
-        let top = pickSortTypeView.topAnchor
-            .constraint(equalTo: rootView.topAnchor)
-        let leading = pickSortTypeView.leadingAnchor
-            .constraint(equalTo: rootView.leadingAnchor)
-        let trailing = pickSortTypeView.trailingAnchor
-            .constraint(equalTo: rootView.trailingAnchor)
-        let bottom = pickSortTypeView.bottomAnchor
-            .constraint(equalTo: rootView.organizeOptionView.topAnchor)
-
-        NSLayoutConstraint.activate([
-            top, leading, trailing, bottom
-        ])
     }
 
     private func configTableView() {
@@ -91,8 +60,8 @@ class PickProductMaterialsViewController: NiblessViewController {
         viewModel.isPickSortViewVisible
             .subscribe(onNext: { [unowned self] isVisible in
                 switch isVisible {
-                case true: self.pickSortTypeView.show()
-                case false: self.pickSortTypeView.hide()
+                case true: self.rootView.pickSortTypeView.show()
+                case false: self.rootView.pickSortTypeView.hide()
                 }
             })
             .disposed(by: bag)
