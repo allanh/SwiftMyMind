@@ -19,8 +19,8 @@ class PickProductMaterialsViewModel {
     let currentProductMaterials: BehaviorRelay<[ProductMaterial]> = .init(value: [])
     var currentQueryInfo: ProductMaterialQueryInfo = .defaultQuery()
     let currentSortType: BehaviorRelay<ProductMaterialQueryInfo.SortType> = .init(value: .number)
-    var pickedSortTypeIndex: Int = 0
     var pickedMaterialIDs: Set<String> = .init()
+    var pickedMaterials: [ProductMaterial] = []
     var currentPageInfo: MultiplePageList?
     let view: PublishRelay<PickMaterialView> = .init()
     let isPickSortViewVisible: BehaviorRelay<Bool> = .init(value: false)
@@ -88,8 +88,15 @@ class PickProductMaterialsViewModel {
 
     func selectMaterial(at index: Int) {
         let material = currentProductMaterials.value[index]
-        if pickedMaterialIDs.insert(material.id).inserted == false {
+        let inserted = pickedMaterialIDs.insert(material.id).inserted
+
+        switch inserted {
+        case true:
+            pickedMaterials.append(material)
+        case false:
             pickedMaterialIDs.remove(material.id)
+            guard let indexForRemove = pickedMaterials.firstIndex(of: material) else { return }
+            pickedMaterials.remove(at: indexForRemove)
         }
     }
 

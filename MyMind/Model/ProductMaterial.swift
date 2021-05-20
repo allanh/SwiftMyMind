@@ -8,12 +8,12 @@
 
 import Foundation
 
-struct ImageInfo: Codable {
+struct ImageInfo: Codable, Equatable {
     let id: String
     let url: String
 }
 // MARK: Product Material
-struct ProductMaterial: Codable {
+struct ProductMaterial: Codable, Equatable {
     enum Action: String, Codable {
         case edit = "EDIT"
         case copy = "COPY"
@@ -86,7 +86,7 @@ struct ProductMaterial: Codable {
     }
 }
 
-struct ProductMaterialBrief: Codable {
+struct ProductMaterialBrief: Codable, Equatable {
     let id: String
     let number: String
     let name: String
@@ -114,7 +114,6 @@ struct ProductMaterialList: MultiplePageList {
         case currentPageNumber = "current_page"
         case itemsPerPage = "limit"
     }
-
 }
 extension ProductMaterialList: Decodable {
     init(from decoder: Decoder) throws {
