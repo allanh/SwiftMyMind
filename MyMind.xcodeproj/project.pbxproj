@@ -15,6 +15,7 @@
 		97B1173B2654B9A100242428 /* PickProductMaterialsRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B1173A2654B9A100242428 /* PickProductMaterialsRootView.swift */; };
 		97B1173F2654CBFD00242428 /* PickProductMaterialTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B1173E2654CBFD00242428 /* PickProductMaterialTableViewCell.swift */; };
 		97B1174126550C5E00242428 /* PickSortTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B1174026550C5E00242428 /* PickSortTypeView.swift */; };
+		97B117432656064300242428 /* SingleLabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B117422656064300242428 /* SingleLabelTableViewCell.swift */; };
 		A4054107264A1B7400E2D21B /* DropDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4054106264A1B7400E2D21B /* DropDownView.swift */; };
 		A4054109264A270C00E2D21B /* DispatchQueue+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4054108264A270C00E2D21B /* DispatchQueue+.swift */; };
 		A405410B264A575E00E2D21B /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A405410A264A575E00E2D21B /* UITextField+.swift */; };
@@ -140,6 +141,7 @@
 		97B1173A2654B9A100242428 /* PickProductMaterialsRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickProductMaterialsRootView.swift; sourceTree = "<group>"; };
 		97B1173E2654CBFD00242428 /* PickProductMaterialTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickProductMaterialTableViewCell.swift; sourceTree = "<group>"; };
 		97B1174026550C5E00242428 /* PickSortTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickSortTypeView.swift; sourceTree = "<group>"; };
+		97B117422656064300242428 /* SingleLabelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleLabelTableViewCell.swift; sourceTree = "<group>"; };
 		A4054106264A1B7400E2D21B /* DropDownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownView.swift; sourceTree = "<group>"; };
 		A4054108264A270C00E2D21B /* DispatchQueue+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+.swift"; sourceTree = "<group>"; };
 		A405410A264A575E00E2D21B /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
@@ -511,6 +513,7 @@
 				A405410C264A670100E2D21B /* MultiSelectableDropDownTableViewCell.swift */,
 				A45E69C4264B89A300AADB44 /* CustomClearButtonPositionTextField.swift */,
 				97B1174026550C5E00242428 /* PickSortTypeView.swift */,
+				97B117422656064300242428 /* SingleLabelTableViewCell.swift */,
 			);
 			path = UILayer;
 			sourceTree = "<group>";
@@ -851,6 +854,7 @@
 				A4793CB126048BB600AD280C /* UIFont+.swift in Sources */,
 				97B1172F26535B9800242428 /* ProductMaterial.swift in Sources */,
 				A44A5A7225F9B0D200995823 /* MainFunctionEntryViewController.swift in Sources */,
+				97B117432656064300242428 /* SingleLabelTableViewCell.swift in Sources */,
 				A4ACEDC526490E25008724E4 /* SelectedQueryCollectionViewCell.swift in Sources */,
 				A4159204260C394F00FD3989 /* UIButton+.swift in Sources */,
 				A43F42982643E04100A246CC /* PurchaseAutoCompleteSearchViewController.swift in Sources */,

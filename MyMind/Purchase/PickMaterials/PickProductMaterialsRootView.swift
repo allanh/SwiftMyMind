@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 
 class PickProductMaterialsRootView: NiblessView {
-
+    // MARK: - Properties
     let tableView: UITableView = UITableView {
         $0.backgroundColor = .white
     }
@@ -49,7 +49,7 @@ class PickProductMaterialsRootView: NiblessView {
         activateConstraints()
         hierarchyNotReady = false
     }
-
+    // MARK: - Methods
     private func constructViewHierarchy() {
         addSubview(tableView)
         addSubview(organizeOptionView)
@@ -68,6 +68,14 @@ class PickProductMaterialsRootView: NiblessView {
                 self.viewModel.view.accept(.filter)
             })
             .disposed(by: disposeBag)
+
+        organizeOptionView.sortButton.rx.tap
+            .scan(false, accumulator: { currentState, _ in
+                !currentState
+            })
+            .bind(to: viewModel.isPickSortViewVisible)
+            .disposed(by: disposeBag)
+
         nextStepButton.rx.tap
             .subscribe(onNext: { [unowned self] in
                 self.viewModel.view.accept(.suggestion)
@@ -75,6 +83,7 @@ class PickProductMaterialsRootView: NiblessView {
             .disposed(by: disposeBag)
     }
 }
+// MARK: - Layouts
 extension PickProductMaterialsRootView {
     private func activateConstraintsTableView() {
         tableView.translatesAutoresizingMaskIntoConstraints = false

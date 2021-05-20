@@ -10,11 +10,11 @@ import UIKit
 
 class PickSortTypeView<T, Cell: UITableViewCell>: NiblessView, UITableViewDataSource, UITableViewDelegate {
     // MARK: - Properties
-    let tableViewContainerView: UIView = UIView {
+    private let tableViewContainerView: UIView = UIView {
         $0.backgroundColor = .white
     }
 
-    let tableView: UITableView = UITableView {
+    private let tableView: UITableView = UITableView {
         $0.backgroundColor = .white
     }
 
@@ -66,6 +66,36 @@ class PickSortTypeView<T, Cell: UITableViewCell>: NiblessView, UITableViewDataSo
         tableView.dataSource = self
     }
 
+    func reloadContent() {
+        tableView.reloadData()
+    }
+
+    func show() {
+        guard isHidden else { return }
+        self.isHidden = false
+
+        tableViewContainerViewHeightConstraints.constant = cellHeight * CGFloat(dataSource.count)
+        UIView.animate(withDuration: 0.3) { [weak self] in
+            guard let self = self else { return }
+            self.backgroundColor = UIColor.black.withAlphaComponent(0.7)
+            self.layoutIfNeeded()
+        }
+    }
+
+    func hide() {
+        guard isHidden == false else { return }
+
+        tableViewContainerViewHeightConstraints.constant = 0
+        UIView.animate(withDuration: 0.3) { [weak self] in
+            guard let self = self else { return }
+            self.backgroundColor = .clear
+            self.layoutIfNeeded()
+        } completion: { [weak self] _ in
+            guard let self = self else { return }
+            self.isHidden = true
+        }
+    }
+    // MARK: - Table view data source and delegate
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataSource.count
     }
@@ -88,32 +118,6 @@ class PickSortTypeView<T, Cell: UITableViewCell>: NiblessView, UITableViewDataSo
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return cellHeight
-    }
-
-    func show() {
-        guard isHidden else { return }
-        self.isHidden = false
-        
-        tableViewContainerViewHeightConstraints.constant = cellHeight * CGFloat(dataSource.count)
-        UIView.animate(withDuration: 0.3) { [weak self] in
-            guard let self = self else { return }
-            self.backgroundColor = UIColor.black.withAlphaComponent(0.7)
-            self.layoutIfNeeded()
-        }
-    }
-
-    func hide() {
-        guard isHidden == false else { return }
-
-        tableViewContainerViewHeightConstraints.constant = 0
-        UIView.animate(withDuration: 0.3) { [weak self] in
-            guard let self = self else { return }
-            self.backgroundColor = .clear
-            self.layoutIfNeeded()
-        } completion: { [weak self] _ in
-            guard let self = self else { return }
-            self.isHidden = true
-        }
     }
 }
 // MARK: - Layouts
