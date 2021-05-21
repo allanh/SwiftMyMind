@@ -53,5 +53,19 @@ class MyMindAutoCompleteAPIService: PromiseKitAPIService {
 
         return sendRequest(request: request)
     }
+
+    func productMaterialBrandNameAutoComplete(searchTerm: String = "") -> Promise<AutoCompleteList> {
+        let endPoint = Endpoint.productMaterialBrandNameAutoComplete(searchTerm: searchTerm)
+        let request = request(endPoint: endPoint, httpHeader: ["Authorization": "Bearer \(userSession.token)"])
+
+        return sendRequest(request: request)
+    }
+
+    func productMaterailOriginalNumberAutoComplete(searchTerm: String = "") -> Promise<AutoCompleteList> {
+        let endPoint = Endpoint.productMaterialOriginalNumberAutoComplete(searchTerm: searchTerm)
+        let request = request(endPoint: endPoint, httpHeader: ["Authorization": "Bearer \(userSession.token)"])
+
+        return sendRequest(request: request)
+    }
 }
 extension MyMindAutoCompleteAPIService: PurchaseAutoCompleteAPIService { }

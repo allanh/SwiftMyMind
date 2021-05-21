@@ -119,7 +119,7 @@ extension Endpoint {
 
     static func productNumberAutoComplete(searchTerm: String) -> Self {
         var query: [URLQueryItem] = []
-        query.append(URLQueryItem(name: "key", value: "PRODUCT_NO"))
+        query.append(URLQueryItem(name: "word", value: "PRODUCT_NO"))
         if searchTerm.isEmpty == false {
             query.append(URLQueryItem(name: "value", value: searchTerm))
         }
@@ -129,5 +129,25 @@ extension Endpoint {
 
     static func productMaterials(query: ProductMaterialQueryInfo = .defaultQuery()) -> Self {
         return Endpoint(path: "/api/admin/\(version)/product", queryItems: query.queryItems)
+    }
+
+    static func productMaterialBrandNameAutoComplete(searchTerm: String) -> Self {
+        var query: [URLQueryItem] = []
+        query.append(URLQueryItem(name: "key", value: "BRAND_NAME"))
+        if searchTerm.isEmpty == false {
+            query.append(URLQueryItem(name: "word", value: searchTerm))
+        }
+
+        return Endpoint(path: "/api/admin/\(version)/product/autocomplete", queryItems: query)
+    }
+
+    static func productMaterialOriginalNumberAutoComplete(searchTerm: String) -> Self {
+        var query: [URLQueryItem] = []
+        query.append(URLQueryItem(name: "key", value: "ORIGINAL_PRODUCT_NO"))
+        if searchTerm.isEmpty == false {
+            query.append(URLQueryItem(name: "word", value: searchTerm))
+        }
+
+        return Endpoint(path: "/api/admin/\(version)/product/autocomplete", queryItems: query)
     }
 }
