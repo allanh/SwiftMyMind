@@ -101,6 +101,7 @@ class SignInViewModel {
             }
             .done { userSession in
                 self.saveSignInInfo(info: self.signInInfo)
+                self.userSession.accept(userSession)
             }
             .catch { [weak self] error in
                 guard let self = self else { return }

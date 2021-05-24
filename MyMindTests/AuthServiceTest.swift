@@ -6,7 +6,7 @@
 //
 
 import XCTest
-import RxBlocking
+import PromiseKit
 @testable import MyMind
 
 class AuthServiceTest: XCTestCase {
@@ -20,14 +20,19 @@ class AuthServiceTest: XCTestCase {
     }
 
     func test_captcha_observable() {
+        var captchaSession: CaptchaSession?
         let service = MyMindAuthService()
-        do {
-            let result = try service.captcha().toBlocking(timeout: 3).first()
-            XCTAssertNotNil(result)
-        } catch let error {
-            XCTFail(error.localizedDescription)
-        }
 
+        let exp = expectation(description: "captcha")
+        service.captcha()
+            .done { session in
+                captchaSession = session
+                exp.fulfill()
+            }
+            .cauterize()
+
+        waitForExpectations(timeout: 3, handler: nil)
+        XCTAssertNotNil(captchaSession)
     }
 
 }
