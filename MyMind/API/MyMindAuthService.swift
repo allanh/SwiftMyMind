@@ -7,48 +7,27 @@
 
 import Foundation
 import RxSwift
+import PromiseKit
 
-class MyMindAuthService: APIService, AuthService {
-    func captcha() -> Single<CaptchaSession> {
-        let task = dataTask(endPoint: Endpoint.captcha)
-        return task.map {
-            let response = try JSONDecoder().decode(Response<CaptchaSession>.self, from: $0.1)
-            guard let session = response.data else {
-                throw APIError.serviceError(response.message ?? "")
-            }
-            return session
-        }
-        .asSingle()
+class MyMindAuthService: PromiseKitAPIService, AuthService {
+    func captcha() -> Promise<CaptchaSession> {
+        let request = request(endPoint: Endpoint.captcha)
+        return sendRequest(request: request)
     }
 
-    func signIn(info: SignInInfo) -> Single<UserSession> {
+    func signIn(info: SignInInfo) -> Promise<UserSession> {
         guard let body = try? JSONEncoder().encode(info) else {
-            return Single.error(APIError.parseError)
+            return .init(error: APIError.parseError)
         }
-        let task = dataTask(endPoint: Endpoint.signIn, httpMethod: "POST", httpBody: body)
-        return task.map {
-            let response = try JSONDecoder().decode(Response<UserSession>.self, from: $0.1)
-            guard let session = response.data else {
-                throw APIError.serviceError(response.message ?? "")
-            }
-            return session
-        }
-        .asSingle()
+        let request = request(endPoint: Endpoint.signIn, httpMethod: "POST", httpBody: body)
+        return sendRequest(request: request)
     }
 
-    func forgotPasswordMail(info: ForgotPasswordInfo) -> Completable {
+    func forgotPasswordMail(info: ForgotPasswordInfo) -> Promise<Void> {
         guard let body = try? JSONEncoder().encode(info) else {
-            return Completable.error(APIError.parseError)
+            return .init(error: APIError.parseError)
         }
-        let task = dataTask(endPoint: Endpoint.forgotPassword, httpMethod: "POST", httpBody: body)
-        let response = task.map { (_, data) -> Response<Int> in
-            let response = try JSONDecoder().decode(Response<Int>.self, from: data)
-            guard response.status == .SUCCESS else {
-                throw APIError.serviceError(response.message ?? "")
-            }
-            return response
-        }
-        return response.ignoreElements()
-            .asCompletable()
+        let request = request(endPoint: Endpoint.forgotPassword, httpMethod: "POST", httpBody: body)
+        return sendRequest(request: request)
     }
 }

@@ -93,10 +93,13 @@
 		A4ACEDC526490E25008724E4 /* SelectedQueryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4ACEDC426490E25008724E4 /* SelectedQueryCollectionViewCell.swift */; };
 		A4ACEDC72649374B008724E4 /* UIWindow+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4ACEDC62649374B008724E4 /* UIWindow+.swift */; };
 		A4AF79F72637B13B002B04F6 /* MainFunctionControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4AF79F62637B13B002B04F6 /* MainFunctionControl.swift */; };
+		A4B55E4B265B4749002E1880 /* MyMindUserSessionRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B55E4A265B4749002E1880 /* MyMindUserSessionRepository.swift */; };
+		A4B55E4F265B538F002E1880 /* KeychainUserSessionDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B55E4E265B538F002E1880 /* KeychainUserSessionDataStore.swift */; };
 		A4BDC79E260ADFC5005C33A5 /* UIViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BDC79D260ADFC5005C33A5 /* UIViewController+Rx.swift */; };
 		A4BDC7B4260B10E2005C33A5 /* SignInValidationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BDC7B3260B10E2005C33A5 /* SignInValidationService.swift */; };
 		A4BDC7B9260B3E0A005C33A5 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BDC7B8260B3E0A005C33A5 /* KeychainHelper.swift */; };
 		A4BDC7BE260B418E005C33A5 /* SignInAccountInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BDC7BD260B418E005C33A5 /* SignInAccountInfo.swift */; };
+		A4C0AFF4265B7A2E00B8D0C4 /* LastSignInInfoDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C0AFF3265B7A2E00B8D0C4 /* LastSignInInfoDataStore.swift */; };
 		A4CF09B32636C36800439D5F /* UIView+shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CF09B22636C36800439D5F /* UIView+shadow.swift */; };
 		A4D50AB02645129E007B07D6 /* AutoCompleteSearchRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D50AAF2645129E007B07D6 /* AutoCompleteSearchRootView.swift */; };
 		A4DD410726425496007B2A41 /* PromiseKitAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DD410626425496007B2A41 /* PromiseKitAPIService.swift */; };
@@ -226,10 +229,13 @@
 		A4ACEDC426490E25008724E4 /* SelectedQueryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedQueryCollectionViewCell.swift; sourceTree = "<group>"; };
 		A4ACEDC62649374B008724E4 /* UIWindow+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+.swift"; sourceTree = "<group>"; };
 		A4AF79F62637B13B002B04F6 /* MainFunctionControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFunctionControl.swift; sourceTree = "<group>"; };
+		A4B55E4A265B4749002E1880 /* MyMindUserSessionRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMindUserSessionRepository.swift; sourceTree = "<group>"; };
+		A4B55E4E265B538F002E1880 /* KeychainUserSessionDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainUserSessionDataStore.swift; sourceTree = "<group>"; };
 		A4BDC79D260ADFC5005C33A5 /* UIViewController+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Rx.swift"; sourceTree = "<group>"; };
 		A4BDC7B3260B10E2005C33A5 /* SignInValidationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInValidationService.swift; sourceTree = "<group>"; };
 		A4BDC7B8260B3E0A005C33A5 /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
 		A4BDC7BD260B418E005C33A5 /* SignInAccountInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInAccountInfo.swift; sourceTree = "<group>"; };
+		A4C0AFF3265B7A2E00B8D0C4 /* LastSignInInfoDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastSignInInfoDataStore.swift; sourceTree = "<group>"; };
 		A4CF09B22636C36800439D5F /* UIView+shadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+shadow.swift"; sourceTree = "<group>"; };
 		A4D50AAF2645129E007B07D6 /* AutoCompleteSearchRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoCompleteSearchRootView.swift; sourceTree = "<group>"; };
 		A4DD410626425496007B2A41 /* PromiseKitAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromiseKitAPIService.swift; sourceTree = "<group>"; };
@@ -401,6 +407,9 @@
 				A4DD410A26428927007B2A41 /* AutoCompleteInfo.swift */,
 				97B1172E26535B9800242428 /* ProductMaterial.swift */,
 				97B117332653AF1E00242428 /* ProductMaterialQueryInfo.swift */,
+				A4B55E4A265B4749002E1880 /* MyMindUserSessionRepository.swift */,
+				A4B55E4E265B538F002E1880 /* KeychainUserSessionDataStore.swift */,
+				A4C0AFF3265B7A2E00B8D0C4 /* LastSignInInfoDataStore.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -859,11 +868,13 @@
 				A44A5A7225F9B0D200995823 /* MainFunctionEntryViewController.swift in Sources */,
 				97B117432656064300242428 /* SingleLabelTableViewCell.swift in Sources */,
 				A4ACEDC526490E25008724E4 /* SelectedQueryCollectionViewCell.swift in Sources */,
+				A4B55E4F265B538F002E1880 /* KeychainUserSessionDataStore.swift in Sources */,
 				A4159204260C394F00FD3989 /* UIButton+.swift in Sources */,
 				A43F42982643E04100A246CC /* PurchaseAutoCompleteSearchViewController.swift in Sources */,
 				A439B52C26099AA1002352C2 /* UIViewController+.swift in Sources */,
 				A4793C7F2604573700AD280C /* UserSession.swift in Sources */,
 				A47F39CD263A58F700A3097C /* PurchaseListViewController.swift in Sources */,
+				A4B55E4B265B4749002E1880 /* MyMindUserSessionRepository.swift in Sources */,
 				A439B53C2609CDC3002352C2 /* ToastView.swift in Sources */,
 				A44A5A6E25F9B0D200995823 /* AppDelegate.swift in Sources */,
 				A4AF79F72637B13B002B04F6 /* MainFunctionControl.swift in Sources */,
@@ -886,6 +897,7 @@
 				A4159209260C603B00FD3989 /* ForgotPasswordInfo.swift in Sources */,
 				A4054111264A8F7600E2D21B /* PurchaseQueryDateSelectionViewController.swift in Sources */,
 				97B1174126550C5E00242428 /* PickSortTypeView.swift in Sources */,
+				A4C0AFF4265B7A2E00B8D0C4 /* LastSignInInfoDataStore.swift in Sources */,
 				A44A5A7025F9B0D200995823 /* SceneDelegate.swift in Sources */,
 				A4793CBB260490A600AD280C /* UIColor+.swift in Sources */,
 			);

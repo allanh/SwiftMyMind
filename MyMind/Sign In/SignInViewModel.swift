@@ -11,13 +11,14 @@ import RxSwift
 import RxRelay
 
 class SignInViewModel {
+    let userSessionRepository: UserSessionRepository
+    let signInValidationService: SignInValidatoinService
+    let lastSignInInfoDataStore: LastSignInInfoDataStore
 
     let bag: DisposeBag = DisposeBag()
-    let authService: AuthService
-    let signInValidationService: SignInValidatoinService
     var signInInfo: SignInInfo = SignInInfo()
     let userDefault: UserDefaults = UserDefaults.standard
-    let keychainHelper: KeychainHelper = KeychainHelper()
+    let keychainHelper: KeychainHelper = KeychainHelper.default
     // MARK: - Output
     let lastSignInInfo: BehaviorRelay<SignInAccountInfo> = BehaviorRelay.init(value: .empty())
     let storeIDValidationResult: BehaviorRelay<ValidationResult> = BehaviorRelay.init(value: .valid)
@@ -39,18 +40,28 @@ class SignInViewModel {
     let unexpectedErrorMessage: String = "未知的錯誤發生"
     private let shouldRememberAccountKey: String = "shouldRememberAccount"
     // MARK: - Methods
-    init(authService: AuthService,
-         signInValidationService: SignInValidatoinService) {
-        self.authService = authService
+    init(userSessionRepository: UserSessionRepository,
+         signInValidationService: SignInValidatoinService,
+         lastSignInInfoDataStore: LastSignInInfoDataStore) {
+        self.userSessionRepository = userSessionRepository
         self.signInValidationService = signInValidationService
+        self.lastSignInInfoDataStore = lastSignInInfoDataStore
 
-        if let shouldRememberAccount = userDefault.value(forKey: shouldRememberAccountKey) as? Bool {
-            self.shouldRememberAccount.accept(shouldRememberAccount)
-        }
+        configLastSignInStatus()
+    }
 
-        if let lastSignInInfo = try? keychainHelper.readItem(key: .lastSignInAccountInfo, valueType: SignInAccountInfo.self) {
-            self.lastSignInInfo.accept(lastSignInInfo)
-        }
+    private func configLastSignInStatus() {
+        lastSignInInfoDataStore.readShouldRememberLastSignAccountFlag()
+            .done { flag in
+                self.shouldRememberAccount.accept(flag)
+            }
+            .cauterize()
+
+        lastSignInInfoDataStore.readLastSignInAccountInfo()
+            .done { lastSignInInfo in
+                self.lastSignInInfo.accept(lastSignInInfo)
+            }
+            .cauterize()
     }
 
     func validateSignInInfo() -> Bool {
@@ -83,57 +94,55 @@ class SignInViewModel {
             indicateSigningIn(false)
             return
         }
-        authService.signIn(info: signInInfo)
-            .do(onSuccess: { [unowned self] _ in
-                guard shouldRememberAccount.value else {
-                    try? self.keychainHelper.removeItem(key: .lastSignInAccountInfo)
-                    return
-                }
-                let storeID = self.signInInfo.storeID
-                let account = self.signInInfo.account
-                let accountInfo = SignInAccountInfo(storeID: storeID, account: account)
-                try? self.keychainHelper.saveItem(accountInfo, for: .lastSignInAccountInfo)
-            }, onDispose: { [weak self] in
-                self?.indicateSigningIn(false)
-            })
-            .subscribe{ [unowned self] in
-                switch $0 {
-                case .success(let userSession):
-                    self.userSession.accept(userSession)
-                case .failure(let error):
-                    switch error {
-                    case APIError.serviceError(let message):
-                        self.errorMessage.accept(message)
-                    default:
-                        self.errorMessage.accept(unexpectedErrorMessage)
-                    }
+
+        userSessionRepository.signIn(info: signInInfo)
+            .ensure {
+                self.indicateSigningIn(false)
+            }
+            .done { userSession in
+                self.saveSignInInfo(info: self.signInInfo)
+            }
+            .catch { [weak self] error in
+                guard let self = self else { return }
+                switch error {
+                case APIError.serviceError(let message):
+                    self.errorMessage.accept(message)
+                default:
+                    self.errorMessage.accept(self.unexpectedErrorMessage)
                 }
             }
-            .disposed(by: bag)
+    }
+
+    private func saveSignInInfo(info: SignInInfo) {
+        guard shouldRememberAccount.value else {
+            lastSignInInfoDataStore.removeLastSignInAccountInfo().cauterize()
+            return
+        }
+        let storeID = info.storeID
+        let account = info.account
+        let accountInfo = SignInAccountInfo(storeID: storeID, account: account)
+        lastSignInInfoDataStore.saveLastSignInAccountInfo(info: accountInfo).cauterize()
     }
 
     @objc
     func captcha() {
         indicateUpdatingCaptcha(true)
-        authService.captcha()
-            .do(onDispose: { [weak self] in
-                self?.indicateUpdatingCaptcha(false)
-            })
-            .subscribe { [unowned self] in
-                switch $0 {
-                case .success(let session):
-                    self.captchaSession.accept(session)
-                    self.signInInfo.captchaKey = session.key
-                case .failure(let error):
-                    switch error {
-                    case APIError.serviceError(let message):
-                        self.errorMessage.accept(message)
-                    default:
-                        self.errorMessage.accept(unexpectedErrorMessage)
-                    }
+        userSessionRepository.captcha()
+            .ensure {
+                self.indicateUpdatingCaptcha(false)
+            }
+            .done { session in
+                self.captchaSession.accept(session)
+                self.signInInfo.captchaKey = session.key
+            }
+            .catch { error in
+                switch error {
+                case APIError.serviceError(let message):
+                    self.errorMessage.accept(message)
+                default:
+                    self.errorMessage.accept(self.unexpectedErrorMessage)
                 }
             }
-            .disposed(by: bag)
     }
 
     private func indicateUpdatingCaptcha(_ isUpdating: Bool) {

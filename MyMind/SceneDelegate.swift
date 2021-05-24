@@ -18,8 +18,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         self.window = UIWindow(windowScene: windowScene)
         let viewModel = SignInViewModel(
-            authService: MyMindAuthService(),
-            signInValidationService: SignInValidatoinService()
+            userSessionRepository: MyMindUserSessionRepository.shared,
+            signInValidationService: SignInValidatoinService(),
+            lastSignInInfoDataStore: MyMindLastSignInInfoDataStore()
         )
         let signInViewController = SignInViewController(viewModel: viewModel)
         let navigationController = UINavigationController(rootViewController: PurchaseListViewController(purchaseAPIService: MyMindPurchaseAPIService(userSession: .testUserSession)))
