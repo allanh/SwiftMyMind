@@ -35,6 +35,7 @@ class MyMindPurchaseAPIService: PromiseKitAPIService {
     func fetchProductMaterialList(with query: ProductMaterialQueryInfo) -> Promise<ProductMaterialList> {
         let endPoint = Endpoint.productMaterials(query: query)
         let request = request(endPoint: endPoint, httpHeader: ["Authorization": "Bearer \(userSession.token)"])
+        print(request.url!)
         return sendRequest(request: request)
     }
 }

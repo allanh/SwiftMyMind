@@ -106,6 +106,11 @@
 		A4DD410926427DD5007B2A41 /* MyMindAutoCompleteAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DD410826427DD5007B2A41 /* MyMindAutoCompleteAPIService.swift */; };
 		A4DD410B26428927007B2A41 /* AutoCompleteInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DD410A26428927007B2A41 /* AutoCompleteInfo.swift */; };
 		A4F2D00A265CA771004D8D6D /* ProductMaterialsFilterViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F2D009265CA771004D8D6D /* ProductMaterialsFilterViewModelTests.swift */; };
+		A4F2D00F265D063B004D8D6D /* ProductMaterialsFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F2D00E265D063B004D8D6D /* ProductMaterialsFilterViewController.swift */; };
+		A4F2D011265D0770004D8D6D /* ProductMaterialsFilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F2D010265D0770004D8D6D /* ProductMaterialsFilterViewModel.swift */; };
+		A4F2D013265D07C7004D8D6D /* AutoCompleteSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F2D012265D07C7004D8D6D /* AutoCompleteSearchViewModel.swift */; };
+		A4F2D015265D088B004D8D6D /* Adapters.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F2D014265D088B004D8D6D /* Adapters.swift */; };
+		A4F2D017265D08D3004D8D6D /* SearchMaterialNamesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F2D016265D08D3004D8D6D /* SearchMaterialNamesViewModel.swift */; };
 		BA024BA4A6305FD2FA0ADE0D /* Pods_MyMind_MyMindUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49082C5B628793B947583BE8 /* Pods_MyMind_MyMindUITests.framework */; };
 		E92DA73D2A572707BC1E6314 /* Pods_MyMindTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C35ECDE517A2C6A01C3E7141 /* Pods_MyMindTests.framework */; };
 		EC3F7DEF08CFEC10C2124121 /* Pods_MyMind.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F231C5BAACFDBA2A1B0E19E /* Pods_MyMind.framework */; };
@@ -243,6 +248,11 @@
 		A4DD410826427DD5007B2A41 /* MyMindAutoCompleteAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMindAutoCompleteAPIService.swift; sourceTree = "<group>"; };
 		A4DD410A26428927007B2A41 /* AutoCompleteInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoCompleteInfo.swift; sourceTree = "<group>"; };
 		A4F2D009265CA771004D8D6D /* ProductMaterialsFilterViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductMaterialsFilterViewModelTests.swift; sourceTree = "<group>"; };
+		A4F2D00E265D063B004D8D6D /* ProductMaterialsFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductMaterialsFilterViewController.swift; sourceTree = "<group>"; };
+		A4F2D010265D0770004D8D6D /* ProductMaterialsFilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductMaterialsFilterViewModel.swift; sourceTree = "<group>"; };
+		A4F2D012265D07C7004D8D6D /* AutoCompleteSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoCompleteSearchViewModel.swift; sourceTree = "<group>"; };
+		A4F2D014265D088B004D8D6D /* Adapters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Adapters.swift; sourceTree = "<group>"; };
+		A4F2D016265D08D3004D8D6D /* SearchMaterialNamesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMaterialNamesViewModel.swift; sourceTree = "<group>"; };
 		C001C85B3856800C20B59128 /* Pods-MyMindTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMindTests.release.xcconfig"; path = "Target Support Files/Pods-MyMindTests/Pods-MyMindTests.release.xcconfig"; sourceTree = "<group>"; };
 		C35ECDE517A2C6A01C3E7141 /* Pods_MyMindTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyMindTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8BDB686048E1E4C810DE722 /* Pods-MyMind.alpha.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMind.alpha.xcconfig"; path = "Target Support Files/Pods-MyMind/Pods-MyMind.alpha.xcconfig"; sourceTree = "<group>"; };
@@ -279,6 +289,7 @@
 		97B117352653B17700242428 /* PickMaterials */ = {
 			isa = PBXGroup;
 			children = (
+				A4F2D00D265D061A004D8D6D /* Filter */,
 				97B117362653B1AF00242428 /* PickProductMaterialsViewModel.swift */,
 				97B117382654B8FC00242428 /* PickProductMaterialsViewController.swift */,
 				97B1173A2654B9A100242428 /* PickProductMaterialsRootView.swift */,
@@ -413,6 +424,7 @@
 				A4B55E4A265B4749002E1880 /* MyMindUserSessionRepository.swift */,
 				A4B55E4E265B538F002E1880 /* KeychainUserSessionDataStore.swift */,
 				A4C0AFF3265B7A2E00B8D0C4 /* LastSignInInfoDataStore.swift */,
+				A4F2D012265D07C7004D8D6D /* AutoCompleteSearchViewModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -531,6 +543,17 @@
 				97B117422656064300242428 /* SingleLabelTableViewCell.swift */,
 			);
 			path = UILayer;
+			sourceTree = "<group>";
+		};
+		A4F2D00D265D061A004D8D6D /* Filter */ = {
+			isa = PBXGroup;
+			children = (
+				A4F2D014265D088B004D8D6D /* Adapters.swift */,
+				A4F2D00E265D063B004D8D6D /* ProductMaterialsFilterViewController.swift */,
+				A4F2D010265D0770004D8D6D /* ProductMaterialsFilterViewModel.swift */,
+				A4F2D016265D08D3004D8D6D /* SearchMaterialNamesViewModel.swift */,
+			);
+			path = Filter;
 			sourceTree = "<group>";
 		};
 		E7E3945A97ADB2DD58A2DA48 /* Frameworks */ = {
@@ -826,6 +849,8 @@
 				A43F429C2643EAEF00A246CC /* UICollectionViewLeftAlignedLayout.swift in Sources */,
 				A4793CC02604A59C00AD280C /* GradientView.swift in Sources */,
 				A49CF8C526030CEE00AFC170 /* MyMindAuthService.swift in Sources */,
+				A4F2D011265D0770004D8D6D /* ProductMaterialsFilterViewModel.swift in Sources */,
+				A4F2D00F265D063B004D8D6D /* ProductMaterialsFilterViewController.swift in Sources */,
 				A47F39DF263A67E200A3097C /* UITableView+.swift in Sources */,
 				97B117342653AF1E00242428 /* ProductMaterialQueryInfo.swift in Sources */,
 				A43F4291264388E400A246CC /* SideMenuPresentable.swift in Sources */,
@@ -864,6 +889,7 @@
 				A405410B264A575E00E2D21B /* UITextField+.swift in Sources */,
 				A439B5412609D61C002352C2 /* String+.swift in Sources */,
 				A43E0B65260D7CA4005FC6CE /* NiblessView.swift in Sources */,
+				A4F2D015265D088B004D8D6D /* Adapters.swift in Sources */,
 				A4DD410726425496007B2A41 /* PromiseKitAPIService.swift in Sources */,
 				97B117372653B1AF00242428 /* PickProductMaterialsViewModel.swift in Sources */,
 				A4793CB126048BB600AD280C /* UIFont+.swift in Sources */,
@@ -878,6 +904,7 @@
 				A4793C7F2604573700AD280C /* UserSession.swift in Sources */,
 				A47F39CD263A58F700A3097C /* PurchaseListViewController.swift in Sources */,
 				A4B55E4B265B4749002E1880 /* MyMindUserSessionRepository.swift in Sources */,
+				A4F2D013265D07C7004D8D6D /* AutoCompleteSearchViewModel.swift in Sources */,
 				A439B53C2609CDC3002352C2 /* ToastView.swift in Sources */,
 				A44A5A6E25F9B0D200995823 /* AppDelegate.swift in Sources */,
 				A4AF79F72637B13B002B04F6 /* MainFunctionControl.swift in Sources */,
@@ -886,6 +913,7 @@
 				A43E0B6F260DC66D005FC6CE /* UIControl+.swift in Sources */,
 				A46BA1DD263AAD2A0075E8C8 /* OrganizeOptionView.swift in Sources */,
 				A43E0B63260D7CA4005FC6CE /* NiblessViewController.swift in Sources */,
+				A4F2D017265D08D3004D8D6D /* SearchMaterialNamesViewModel.swift in Sources */,
 				A49CF8C0260306D200AFC170 /* APIError.swift in Sources */,
 				A415920F260C796500FD3989 /* ForgotPasswordRootView.swift in Sources */,
 				A489A1AC263FA7C900832679 /* TriangleView.swift in Sources */,

@@ -22,6 +22,13 @@ final class AutoCompleteInfo: Decodable {
     let name: String?
     var isSelect: Bool = false
 
+    init(id: String?, number: String?, name: String?, isSelect: Bool = false) {
+        self.id = id
+        self.number = number
+        self.name = name
+        self.isSelect = isSelect
+    }
+
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         number = try container.decodeIfPresent(String.self, forKey: .number)
