@@ -39,13 +39,14 @@ struct ProductMaterialQueryInfo {
     var vendorIDs: [String]
     var brandNames: [String]
     var materialNumbers: [String]
+    var materailSetNumbers: [String]
     var originalMaterialNumbers: [String]
     var materailNames: [String]
     var sortType: SortType = .number
     var pageNumber: Int = 1
 
     static func defaultQuery() -> Self {
-        return ProductMaterialQueryInfo(vendorIDs: [], brandNames: [], materialNumbers: [], originalMaterialNumbers: [], materailNames: [])
+        return ProductMaterialQueryInfo(vendorIDs: [], brandNames: [], materialNumbers: [], materailSetNumbers: [], originalMaterialNumbers: [], materailNames: [])
     }
 
     var queryItems: [URLQueryItem] {
@@ -63,6 +64,14 @@ struct ProductMaterialQueryInfo {
         if materialNumbers.isEmpty == false {
             let numbers = materialNumbers.joined(separator: ",")
             let query = URLQueryItem(name: "fuzzy_no", value: numbers)
+            items.append(query)
+        }
+        if materailSetNumbers.isEmpty == false {
+            let numbers = materialNumbers.joined(separator: ",")
+            let query = URLQueryItem(name: "product_set_no", value: numbers)
+            items.append(query)
+        } else {
+            let query = URLQueryItem(name: "is_set", value: "false")
             items.append(query)
         }
         if materailNames.isEmpty == false {

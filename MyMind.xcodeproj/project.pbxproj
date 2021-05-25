@@ -105,6 +105,7 @@
 		A4DD410726425496007B2A41 /* PromiseKitAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DD410626425496007B2A41 /* PromiseKitAPIService.swift */; };
 		A4DD410926427DD5007B2A41 /* MyMindAutoCompleteAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DD410826427DD5007B2A41 /* MyMindAutoCompleteAPIService.swift */; };
 		A4DD410B26428927007B2A41 /* AutoCompleteInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DD410A26428927007B2A41 /* AutoCompleteInfo.swift */; };
+		A4F2D00A265CA771004D8D6D /* ProductMaterialsFilterViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F2D009265CA771004D8D6D /* ProductMaterialsFilterViewModelTests.swift */; };
 		BA024BA4A6305FD2FA0ADE0D /* Pods_MyMind_MyMindUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49082C5B628793B947583BE8 /* Pods_MyMind_MyMindUITests.framework */; };
 		E92DA73D2A572707BC1E6314 /* Pods_MyMindTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C35ECDE517A2C6A01C3E7141 /* Pods_MyMindTests.framework */; };
 		EC3F7DEF08CFEC10C2124121 /* Pods_MyMind.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F231C5BAACFDBA2A1B0E19E /* Pods_MyMind.framework */; };
@@ -241,6 +242,7 @@
 		A4DD410626425496007B2A41 /* PromiseKitAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromiseKitAPIService.swift; sourceTree = "<group>"; };
 		A4DD410826427DD5007B2A41 /* MyMindAutoCompleteAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMindAutoCompleteAPIService.swift; sourceTree = "<group>"; };
 		A4DD410A26428927007B2A41 /* AutoCompleteInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoCompleteInfo.swift; sourceTree = "<group>"; };
+		A4F2D009265CA771004D8D6D /* ProductMaterialsFilterViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductMaterialsFilterViewModelTests.swift; sourceTree = "<group>"; };
 		C001C85B3856800C20B59128 /* Pods-MyMindTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMindTests.release.xcconfig"; path = "Target Support Files/Pods-MyMindTests/Pods-MyMindTests.release.xcconfig"; sourceTree = "<group>"; };
 		C35ECDE517A2C6A01C3E7141 /* Pods_MyMindTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyMindTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8BDB686048E1E4C810DE722 /* Pods-MyMind.alpha.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMind.alpha.xcconfig"; path = "Target Support Files/Pods-MyMind/Pods-MyMind.alpha.xcconfig"; sourceTree = "<group>"; };
@@ -381,6 +383,7 @@
 				A43E0B78260DD598005FC6CE /* SignInViewModelTests.swift */,
 				A40A1FF12611791000553207 /* ForgotPasswordViewModelTests.swift */,
 				97B11744265650BA00242428 /* PickProductMaterailsViewModelTests.swift */,
+				A4F2D009265CA771004D8D6D /* ProductMaterialsFilterViewModelTests.swift */,
 			);
 			path = MyMindTests;
 			sourceTree = "<group>";
@@ -912,6 +915,7 @@
 				A43E0B79260DD598005FC6CE /* SignInViewModelTests.swift in Sources */,
 				A4793C682604423800AD280C /* AuthServiceTest.swift in Sources */,
 				A40A1FF22611791000553207 /* ForgotPasswordViewModelTests.swift in Sources */,
+				A4F2D00A265CA771004D8D6D /* ProductMaterialsFilterViewModelTests.swift in Sources */,
 				97B11745265650BA00242428 /* PickProductMaterailsViewModelTests.swift in Sources */,
 				A44A5A8525F9B0D300995823 /* MyMindTests.swift in Sources */,
 			);

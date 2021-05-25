@@ -22,7 +22,6 @@ class ForgotPasswordViewModel {
     let emailValidationResult: BehaviorRelay<ValidationResult> = BehaviorRelay.init(value: .valid)
     let captchaValueValidationResult: BehaviorRelay<ValidationResult> = BehaviorRelay.init(value: .valid)
 
-
     let confirmButtonEnabled: BehaviorRelay<Bool> = BehaviorRelay.init(value: true)
     let reloadButtonEnabled: BehaviorRelay<Bool> = BehaviorRelay.init(value: true)
     let activityIndicatorAnimating: BehaviorRelay<Bool> = BehaviorRelay.init(value: false)

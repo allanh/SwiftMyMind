@@ -59,8 +59,8 @@ final class MockAuthService: AuthService {
 class MockUserSessionDataStore: UserSessionDataStore {
     var userSession: UserSession?
 
-    func readUserSession() -> Promise<UserSession?> {
-        .value(userSession)
+    func readUserSession() -> UserSession? {
+        userSession
     }
 
     func saveUserSession(userSession: UserSession) -> Promise<UserSession> {
