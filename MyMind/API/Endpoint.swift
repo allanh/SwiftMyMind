@@ -119,9 +119,20 @@ extension Endpoint {
 
     static func productNumberAutoComplete(searchTerm: String) -> Self {
         var query: [URLQueryItem] = []
-        query.append(URLQueryItem(name: "word", value: "PRODUCT_NO"))
+        query.append(URLQueryItem(name: "key", value: "PRODUCT_NO"))
         if searchTerm.isEmpty == false {
-            query.append(URLQueryItem(name: "value", value: searchTerm))
+            query.append(URLQueryItem(name: "word", value: searchTerm))
+        }
+
+        return Endpoint(path: "/api/admin/\(version)/product/autocomplete", queryItems: query)
+    }
+
+    static func productNumberSetAutoComplete(searchTerm: String) -> Self {
+        var query: [URLQueryItem] = []
+        query.append(URLQueryItem(name: "key", value: "PRODUCT_NO"))
+        query.append(URLQueryItem(name: "is_set", value: "true"))
+        if searchTerm.isEmpty == false {
+            query.append(URLQueryItem(name: "word", value: searchTerm))
         }
 
         return Endpoint(path: "/api/admin/\(version)/product/autocomplete", queryItems: query)
