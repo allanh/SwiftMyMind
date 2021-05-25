@@ -14,9 +14,13 @@ protocol PurchaseAutoCompleteAPIService {
     func vendorNameAutoComplete(searchTerm: String) -> Promise<AutoCompleteList>
     func applicantAutoComplete(searchTerm: String) -> Promise<AutoCompleteList>
     func productNumberAutoComplete(searchTerm: String) -> Promise<AutoCompleteList>
+    func productMaterialBrandNameAutoComplete(searchTerm: String) -> Promise<AutoCompleteList>
+    func productMaterailOriginalNumberAutoComplete(searchTerm: String) -> Promise<AutoCompleteList>
+    func productNumberSetAutoComplete(searchTerm: String) -> Promise<AutoCompleteList>
 }
 
 class MyMindAutoCompleteAPIService: PromiseKitAPIService {
+
     let userSession: UserSession
     var partnerID: String {
         String(userSession.partnerInfo.id)
@@ -49,6 +53,13 @@ class MyMindAutoCompleteAPIService: PromiseKitAPIService {
 
     func productNumberAutoComplete(searchTerm: String = "") -> Promise<AutoCompleteList> {
         let endPoint = Endpoint.productNumberAutoComplete(searchTerm: searchTerm)
+        let request = request(endPoint: endPoint, httpHeader: ["Authorization": "Bearer \(userSession.token)"])
+
+        return sendRequest(request: request)
+    }
+
+    func productNumberSetAutoComplete(searchTerm: String = "") -> Promise<AutoCompleteList> {
+        let endPoint = Endpoint.productNumberSetAutoComplete(searchTerm: searchTerm)
         let request = request(endPoint: endPoint, httpHeader: ["Authorization": "Bearer \(userSession.token)"])
 
         return sendRequest(request: request)

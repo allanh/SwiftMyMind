@@ -16,15 +16,13 @@ struct KeychainUserSessionDataStore: UserSessionDataStore {
         self.keychainHelper = keychainHelper
     }
 
-    func readUserSession() -> Promise<UserSession?> {
-        return Promise<UserSession?> { seal in
-            do {
-                let userSession = try keychainHelper.readItem(key: .userSession, valueType: UserSession.self)
-                seal.fulfill(userSession)
-            } catch let error {
-                print(error.localizedDescription)
-                seal.fulfill(nil)
-            }
+    func readUserSession() -> UserSession? {
+        do {
+            let userSession = try keychainHelper.readItem(key: .userSession, valueType: UserSession.self)
+            return userSession
+        } catch let error {
+            print(error.localizedDescription)
+            return nil
         }
     }
 

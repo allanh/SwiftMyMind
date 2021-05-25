@@ -10,13 +10,13 @@ import Foundation
 import PromiseKit
 
 protocol UserSessionDataStore {
-    func readUserSession() -> Promise<UserSession?>
+    func readUserSession() -> UserSession?
     func saveUserSession(userSession: UserSession) -> Promise<UserSession>
     func deleteUserSession() -> Promise<Void>
 }
 
 protocol UserSessionRepository {
-    func readUserssion() -> Promise<UserSession?>
+    func readUserssion() -> UserSession?
     func signIn(info: SignInInfo) -> Promise<UserSession>
     func signOut() -> Promise<Void>
     func captcha() -> Promise<CaptchaSession>
@@ -33,7 +33,7 @@ class MyMindUserSessionRepository: UserSessionRepository {
         self.authService = authService
     }
 
-    func readUserssion() -> Promise<UserSession?> {
+    func readUserssion() -> UserSession? {
         dataStore.readUserSession()
     }
 
