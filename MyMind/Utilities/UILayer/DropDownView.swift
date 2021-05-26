@@ -23,7 +23,12 @@ class DropDownView<T, Cell: UITableViewCell>: NiblessView, UITableViewDelegate, 
     }
 
     var height: CGFloat = 226
-
+    var heightForRow: CGFloat = 44 {
+        didSet {
+            tableView.rowHeight = heightForRow
+            tableView.reloadData()
+        }
+    }
     var topInset: CGFloat? {
         didSet {
             setNeedsUpdateConstraints()
@@ -97,6 +102,7 @@ class DropDownView<T, Cell: UITableViewCell>: NiblessView, UITableViewDelegate, 
     private func configTableView() {
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.rowHeight = heightForRow
         tableView.register(DropDownListTableViewCell.self, forCellReuseIdentifier: String(describing: DropDownListTableViewCell.self))
     }
 

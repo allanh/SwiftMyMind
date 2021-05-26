@@ -32,7 +32,7 @@ class ProductMaterialsFilterViewModel {
         makeViewModelForProductNumberSet()
     }()
 
-    lazy var originalNumberSetViewModel: AutoCompleteSearchViewModel = {
+    lazy var originalNumberViewModel: AutoCompleteSearchViewModel = {
         makeViewModelForOriginalNumber()
     }()
 
@@ -72,7 +72,7 @@ class ProductMaterialsFilterViewModel {
             })
             .disposed(by: bag)
 
-        originalNumberSetViewModel.pickedItemViewModels
+        originalNumberViewModel.pickedItemViewModels
             .subscribe(onNext: { [unowned self] viewModels in
                 self.queryInfo.originalMaterialNumbers = viewModels.map { $0.identifier }
             })
@@ -83,8 +83,17 @@ class ProductMaterialsFilterViewModel {
                 self.queryInfo.materailNames = names
             })
             .disposed(by: bag)
-    }
 
+//        BehaviorRelay<Void>.merge([
+//            vendorViewModel.didUpdateContent.asObservable(),
+//            brandNameViewModel.didUpdateContent.asObservable(),
+//            productNumberViewModel.didUpdateContent.asObservable(),
+//            productNumberSetViewModel.didUpdateContent.asObservable(),
+//            originalNumberViewModel.didUpdateContent.asObservable()
+//        ])
+//        .bind(to: updateContent)
+//        .disposed(by: bag)
+    }
 
     func confirmSearch() {
         didUpdateQueryInfo(queryInfo)
@@ -95,7 +104,8 @@ class ProductMaterialsFilterViewModel {
         brandNameViewModel.pickedItemViewModels.accept([])
         productNumberViewModel.pickedItemViewModels.accept([])
         productNumberSetViewModel.pickedItemViewModels.accept([])
-        originalNumberSetViewModel.pickedItemViewModels.accept([])
+        originalNumberViewModel.pickedItemViewModels.accept([])
+        searchMaterialNameViewModel.addedSearchTerms.accept([])
     }
 
     func makeViewModelForVendor() -> AutoCompleteSearchViewModel {

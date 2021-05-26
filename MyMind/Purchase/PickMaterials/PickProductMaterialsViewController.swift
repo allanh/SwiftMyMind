@@ -74,7 +74,22 @@ class PickProductMaterialsViewController: NiblessViewController {
     }
 
     private func handleNavigation(with view: PickMaterialView) {
+        switch view {
+        case .filter:
+            let service = MyMindAutoCompleteAPIService(userSession: viewModel.purchaseAPIService.userSession)
+            let viewModel = ProductMaterialsFilterViewModel(
+                service: service) { [unowned self] info in
+                self.viewModel.currentQueryInfo = info
+            }
 
+            let viewController = ProductMaterialsFilterViewController(viewModel: viewModel)
+            let navigationController = UINavigationController(rootViewController: viewController)
+            navigationController.modalPresentationStyle = .fullScreen
+            present(navigationController, animated: true, completion: nil)
+        case .suggestion:
+            #warning("show suggestion page")
+            break
+        }
     }
 
     @objc

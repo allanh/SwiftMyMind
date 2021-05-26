@@ -70,12 +70,14 @@ extension AutoCompleteSearchRootView {
     private func activateConstraintsTitleLabel() {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         let top = titleLabel.topAnchor
-            .constraint(equalTo: topAnchor, constant: 15)
+            .constraint(equalTo: topAnchor, constant: 10)
         let leading = titleLabel.leadingAnchor
             .constraint(equalTo: leadingAnchor, constant: 20)
+        let height = titleLabel.heightAnchor
+            .constraint(greaterThanOrEqualToConstant: 25)
 
         NSLayoutConstraint.activate([
-            top, leading
+            top, leading, height
         ])
     }
 
@@ -104,7 +106,8 @@ extension AutoCompleteSearchRootView {
         let trailing = collectionView.trailingAnchor
             .constraint(equalTo: textField.trailingAnchor)
         let bottom = collectionView.bottomAnchor
-            .constraint(equalTo: bottomAnchor, constant: -15)
+            .constraint(equalTo: bottomAnchor, constant: -5)
+//        bottom.priority = .init(999)
 
         NSLayoutConstraint.activate([
             top, leading, trailing, collectionViewHeightAnchor, bottom

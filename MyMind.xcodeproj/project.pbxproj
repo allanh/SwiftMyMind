@@ -71,6 +71,9 @@
 		A4793CB626048EBA00AD280C /* ValidatableInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4793CB526048EBA00AD280C /* ValidatableInputView.swift */; };
 		A4793CBB260490A600AD280C /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4793CBA260490A600AD280C /* UIColor+.swift */; };
 		A4793CC02604A59C00AD280C /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4793CBF2604A59C00AD280C /* GradientView.swift */; };
+		A47AB496265DF53200FE3CFA /* ContainerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47AB495265DF53200FE3CFA /* ContainerTableViewCell.swift */; };
+		A47AB498265E00B300FE3CFA /* AutoCompleteSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47AB497265E00B300FE3CFA /* AutoCompleteSearchViewController.swift */; };
+		A47AB49A265E4DA400FE3CFA /* SearchMaterialNamesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47AB499265E4DA400FE3CFA /* SearchMaterialNamesViewController.swift */; };
 		A47F39CD263A58F700A3097C /* PurchaseListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47F39CC263A58F700A3097C /* PurchaseListViewController.swift */; };
 		A47F39D5263A5A9B00A3097C /* PurchaseBriefTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47F39D4263A5A9B00A3097C /* PurchaseBriefTableViewCell.swift */; };
 		A47F39DA263A64CD00A3097C /* PurchaseListRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47F39D9263A64CD00A3097C /* PurchaseListRootView.swift */; };
@@ -213,6 +216,9 @@
 		A4793CB526048EBA00AD280C /* ValidatableInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatableInputView.swift; sourceTree = "<group>"; };
 		A4793CBA260490A600AD280C /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		A4793CBF2604A59C00AD280C /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		A47AB495265DF53200FE3CFA /* ContainerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerTableViewCell.swift; sourceTree = "<group>"; };
+		A47AB497265E00B300FE3CFA /* AutoCompleteSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoCompleteSearchViewController.swift; sourceTree = "<group>"; };
+		A47AB499265E4DA400FE3CFA /* SearchMaterialNamesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMaterialNamesViewController.swift; sourceTree = "<group>"; };
 		A47F39CC263A58F700A3097C /* PurchaseListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseListViewController.swift; sourceTree = "<group>"; };
 		A47F39D4263A5A9B00A3097C /* PurchaseBriefTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseBriefTableViewCell.swift; sourceTree = "<group>"; };
 		A47F39D9263A64CD00A3097C /* PurchaseListRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseListRootView.swift; sourceTree = "<group>"; };
@@ -424,7 +430,6 @@
 				A4B55E4A265B4749002E1880 /* MyMindUserSessionRepository.swift */,
 				A4B55E4E265B538F002E1880 /* KeychainUserSessionDataStore.swift */,
 				A4C0AFF3265B7A2E00B8D0C4 /* LastSignInInfoDataStore.swift */,
-				A4F2D012265D07C7004D8D6D /* AutoCompleteSearchViewModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -487,6 +492,8 @@
 				A489A1AB263FA7C900832679 /* TriangleView.swift */,
 				A489A1AF263FAA7D00832679 /* PurchaseBriefCollectionViewCell.swift */,
 				A489A1B0263FAA7D00832679 /* PurchaseBriefCollectionViewCell.xib */,
+				A4F2D012265D07C7004D8D6D /* AutoCompleteSearchViewModel.swift */,
+				A47AB497265E00B300FE3CFA /* AutoCompleteSearchViewController.swift */,
 			);
 			path = Purchase;
 			sourceTree = "<group>";
@@ -541,6 +548,7 @@
 				A45E69C4264B89A300AADB44 /* CustomClearButtonPositionTextField.swift */,
 				97B1174026550C5E00242428 /* PickSortTypeView.swift */,
 				97B117422656064300242428 /* SingleLabelTableViewCell.swift */,
+				A47AB495265DF53200FE3CFA /* ContainerTableViewCell.swift */,
 			);
 			path = UILayer;
 			sourceTree = "<group>";
@@ -552,6 +560,7 @@
 				A4F2D00E265D063B004D8D6D /* ProductMaterialsFilterViewController.swift */,
 				A4F2D010265D0770004D8D6D /* ProductMaterialsFilterViewModel.swift */,
 				A4F2D016265D08D3004D8D6D /* SearchMaterialNamesViewModel.swift */,
+				A47AB499265E4DA400FE3CFA /* SearchMaterialNamesViewController.swift */,
 			);
 			path = Filter;
 			sourceTree = "<group>";
@@ -875,6 +884,7 @@
 				A43F42952643C75C00A246CC /* FilterSideMenuBottomView.swift in Sources */,
 				A48389B4260869940044C09E /* SignInViewModel.swift in Sources */,
 				A43E0B6A260D84FB005FC6CE /* NVActivityIndicatorView+Rx.swift in Sources */,
+				A47AB498265E00B300FE3CFA /* AutoCompleteSearchViewController.swift in Sources */,
 				A4ACEDC72649374B008724E4 /* UIWindow+.swift in Sources */,
 				A43E0B64260D7CA4005FC6CE /* NiblessNavigationController.swift in Sources */,
 				A4159219260C8FC600FD3989 /* ForgotPasswordViewModel.swift in Sources */,
@@ -895,6 +905,7 @@
 				A4793CB126048BB600AD280C /* UIFont+.swift in Sources */,
 				97B1172F26535B9800242428 /* ProductMaterial.swift in Sources */,
 				A44A5A7225F9B0D200995823 /* MainFunctionEntryViewController.swift in Sources */,
+				A47AB49A265E4DA400FE3CFA /* SearchMaterialNamesViewController.swift in Sources */,
 				97B117432656064300242428 /* SingleLabelTableViewCell.swift in Sources */,
 				A4ACEDC526490E25008724E4 /* SelectedQueryCollectionViewCell.swift in Sources */,
 				A4B55E4F265B538F002E1880 /* KeychainUserSessionDataStore.swift in Sources */,
@@ -921,6 +932,7 @@
 				A47F39D5263A5A9B00A3097C /* PurchaseBriefTableViewCell.swift in Sources */,
 				A489A1B1263FAA7D00832679 /* PurchaseBriefCollectionViewCell.swift in Sources */,
 				97B117392654B8FC00242428 /* PickProductMaterialsViewController.swift in Sources */,
+				A47AB496265DF53200FE3CFA /* ContainerTableViewCell.swift in Sources */,
 				A45E69C5264B89A300AADB44 /* CustomClearButtonPositionTextField.swift in Sources */,
 				A4ACEDC32648EA38008724E4 /* PurchaseQueryRepository.swift in Sources */,
 				A49CF8B6260301DE00AFC170 /* Endpoint.swift in Sources */,

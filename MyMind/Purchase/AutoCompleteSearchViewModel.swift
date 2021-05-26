@@ -10,17 +10,13 @@ import Foundation
 import RxSwift
 import RxRelay
 
-struct AutoCompleteItemViewModel: Equatable {
-    let representTitle: String
-    let identifier: String
-}
-
 struct AutoCompleteSearchViewModel {
     let title: String
     let searchTerm: BehaviorRelay<String> = .init(value: "")
     let service: RxAutoCompleteItemViewModelService
     let autoCompleteItemViewModels: BehaviorRelay<[AutoCompleteItemViewModel]> = .init(value: [])
     let pickedItemViewModels: BehaviorRelay<[AutoCompleteItemViewModel]> = .init(value: [])
+    let isDropDownViewPresenting: BehaviorRelay<Bool> = .init(value: false)
     let bag: DisposeBag = DisposeBag()
 
     init(title: String,
@@ -50,4 +46,9 @@ struct AutoCompleteSearchViewModel {
     func cleanPickedItemViewModel() {
         pickedItemViewModels.accept([])
     }
+}
+
+struct AutoCompleteItemViewModel: Equatable {
+    let representTitle: String
+    let identifier: String
 }
