@@ -29,7 +29,9 @@ struct AutoCompleteSearchViewModel {
     func bindSearchTerm() {
         searchTerm
             .flatMap(service.getAutoCompleteItemViewModel(searchTerm:))
-            .bind(to: autoCompleteItemViewModels)
+            .subscribe(onNext: { items in
+                autoCompleteItemViewModels.accept(items)
+            })
             .disposed(by: bag)
     }
 

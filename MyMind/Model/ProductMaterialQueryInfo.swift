@@ -36,11 +36,11 @@ struct ProductMaterialQueryInfo {
             }
         }
     }
-    var vendorIDs: [String]
-    var brandNames: [String]
-    var materialNumbers: [String]
-    var materailSetNumbers: [String]
-    var originalMaterialNumbers: [String]
+    var vendorIDs: [AutoCompleteInfo]
+    var brandNames: [AutoCompleteInfo]
+    var materialNumbers: [AutoCompleteInfo]
+    var materailSetNumbers: [AutoCompleteInfo]
+    var originalMaterialNumbers: [AutoCompleteInfo]
     var materailNames: [String]
     var sortType: SortType = .number
     var pageNumber: Int = 1
@@ -52,22 +52,22 @@ struct ProductMaterialQueryInfo {
     var queryItems: [URLQueryItem] {
         var items: [URLQueryItem] = []
         if vendorIDs.isEmpty == false {
-            let ids = vendorIDs.joined(separator: ",")
+            let ids = vendorIDs.compactMap { $0.id }.joined(separator: ",")
             let query = URLQueryItem(name: "vendor_id", value: ids)
             items.append(query)
         }
         if brandNames.isEmpty == false {
-            let names = brandNames.joined(separator: ",")
+            let names = brandNames.compactMap { $0.name }.joined(separator: ",")
             let query = URLQueryItem(name: "brand_name", value: names)
             items.append(query)
         }
         if materialNumbers.isEmpty == false {
-            let numbers = materialNumbers.joined(separator: ",")
+            let numbers = materialNumbers.compactMap { $0.number }.joined(separator: ",")
             let query = URLQueryItem(name: "fuzzy_no", value: numbers)
             items.append(query)
         }
         if materailSetNumbers.isEmpty == false {
-            let numbers = materialNumbers.joined(separator: ",")
+            let numbers = materialNumbers.compactMap { $0.number }.joined(separator: ",")
             let query = URLQueryItem(name: "product_set_no", value: numbers)
             items.append(query)
         } else {
@@ -80,7 +80,7 @@ struct ProductMaterialQueryInfo {
             items.append(query)
         }
         if originalMaterialNumbers.isEmpty == false {
-            let numbers = originalMaterialNumbers.joined(separator: ",")
+            let numbers = originalMaterialNumbers.compactMap { $0.name }.joined(separator: ",")
             let query = URLQueryItem(name: "original_product_no", value: numbers)
             items.append(query)
         }

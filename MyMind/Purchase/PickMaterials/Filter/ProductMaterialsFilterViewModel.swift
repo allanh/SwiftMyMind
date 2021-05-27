@@ -41,8 +41,10 @@ class ProductMaterialsFilterViewModel {
     let bag: DisposeBag = DisposeBag()
 
     init(service: PurchaseAutoCompleteAPIService,
+         currentQueryInfo: ProductMaterialQueryInfo,
          didUpdateQueryInfo: @escaping (ProductMaterialQueryInfo) -> Void) {
         self.service = service
+        self.queryInfo = currentQueryInfo
         self.didUpdateQueryInfo = didUpdateQueryInfo
         observerChildViewModels()
     }
@@ -50,31 +52,41 @@ class ProductMaterialsFilterViewModel {
     func observerChildViewModels() {
         vendorViewModel.pickedItemViewModels
             .subscribe(onNext: { [unowned self] viewModels in
-                self.queryInfo.vendorIDs = viewModels.map { $0.identifier }
+                self.queryInfo.vendorIDs = viewModels.map {
+                    AutoCompleteInfo(id: $0.identifier, number: nil, name: $0.representTitle)
+                }
             })
             .disposed(by: bag)
 
         brandNameViewModel.pickedItemViewModels
             .subscribe(onNext: { [unowned self] viewModels in
-                self.queryInfo.brandNames = viewModels.map { $0.identifier }
+                self.queryInfo.brandNames = viewModels.map {
+                    AutoCompleteInfo(id: nil, number: nil, name: $0.identifier)
+                }
             })
             .disposed(by: bag)
 
         productNumberViewModel.pickedItemViewModels
             .subscribe(onNext: { [unowned self] viewModels in
-                self.queryInfo.materialNumbers = viewModels.map { $0.identifier }
+                self.queryInfo.materialNumbers = viewModels.map {
+                    AutoCompleteInfo(id: nil, number: $0.identifier, name: nil)
+                }
             })
             .disposed(by: bag)
 
         productNumberSetViewModel.pickedItemViewModels
             .subscribe(onNext: { [unowned self] viewModels in
-                self.queryInfo.materailSetNumbers = viewModels.map { $0.identifier }
+                self.queryInfo.materialNumbers = viewModels.map {
+                    AutoCompleteInfo(id: nil, number: $0.identifier, name: $0.identifier)
+                }
             })
             .disposed(by: bag)
 
         originalNumberViewModel.pickedItemViewModels
             .subscribe(onNext: { [unowned self] viewModels in
-                self.queryInfo.originalMaterialNumbers = viewModels.map { $0.identifier }
+                self.queryInfo.originalMaterialNumbers = viewModels.map {
+                    AutoCompleteInfo(id: nil, number: nil, name: $0.identifier)
+                }
             })
             .disposed(by: bag)
 
@@ -83,16 +95,6 @@ class ProductMaterialsFilterViewModel {
                 self.queryInfo.materailNames = names
             })
             .disposed(by: bag)
-
-//        BehaviorRelay<Void>.merge([
-//            vendorViewModel.didUpdateContent.asObservable(),
-//            brandNameViewModel.didUpdateContent.asObservable(),
-//            productNumberViewModel.didUpdateContent.asObservable(),
-//            productNumberSetViewModel.didUpdateContent.asObservable(),
-//            originalNumberViewModel.didUpdateContent.asObservable()
-//        ])
-//        .bind(to: updateContent)
-//        .disposed(by: bag)
     }
 
     func confirmSearch() {
@@ -111,30 +113,40 @@ class ProductMaterialsFilterViewModel {
     func makeViewModelForVendor() -> AutoCompleteSearchViewModel {
         let adapter = RxVendorAutoCompleteItemViewModelAdapter(service: service)
         let viewModel = AutoCompleteSearchViewModel.init(title: "供應商", service: adapter)
+        let items = queryInfo.vendorIDs.map { AutoCompleteItemViewModel(representTitle: $0.name ?? "", identifier: $0.id ?? "")}
+        viewModel.pickedItemViewModels.accept(items)
         return viewModel
     }
 
     func makeViewModelForBrandName() -> AutoCompleteSearchViewModel {
         let adapter = RxBrandNameAutoCompleteItemViewModelAdapter(service: service)
         let viewModel = AutoCompleteSearchViewModel.init(title: "品牌名稱", service: adapter)
+        let items = queryInfo.brandNames.map { AutoCompleteItemViewModel(representTitle: $0.name ?? "", identifier: $0.name ?? "")}
+        viewModel.pickedItemViewModels.accept(items)
         return viewModel
     }
 
     func makeViewModelForProductNumber() -> AutoCompleteSearchViewModel {
         let adapter = RxProductNumberAutoCompleteItemViewModelAdapter(service: service)
         let viewModel = AutoCompleteSearchViewModel.init(title: "SKU編號", service: adapter)
+        let items = queryInfo.materialNumbers.map { AutoCompleteItemViewModel(representTitle: $0.number ?? "", identifier: $0.number ?? "")}
+        viewModel.pickedItemViewModels.accept(items)
         return viewModel
     }
 
     func makeViewModelForProductNumberSet() -> AutoCompleteSearchViewModel {
         let adapter = RxProductNumberSetAutoCompleteItemViewModelAdapter(service: service)
         let viewModel = AutoCompleteSearchViewModel.init(title: "組合編號", service: adapter)
+        let items = queryInfo.materailSetNumbers.map { AutoCompleteItemViewModel(representTitle: $0.number ?? "", identifier: $0.number ?? "")}
+        viewModel.pickedItemViewModels.accept(items)
         return viewModel
     }
 
     func makeViewModelForOriginalNumber() -> AutoCompleteSearchViewModel {
         let adapter = RxOriginalNumberAutoCompleteItemViewModelAdapter(service: service)
         let viewModel = AutoCompleteSearchViewModel.init(title: "原廠料號", service: adapter)
+        let items = queryInfo.originalMaterialNumbers.map { AutoCompleteItemViewModel(representTitle: $0.name ?? "", identifier: $0.name ?? "")}
+        viewModel.pickedItemViewModels.accept(items)
         return viewModel
     }
 }

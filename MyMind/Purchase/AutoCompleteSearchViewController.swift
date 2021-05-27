@@ -41,6 +41,11 @@ class AutoCompleteSearchViewController: NiblessViewController {
         subscribeToViewModel()
         dropDownView.anchorView = rootView.textField
     }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        updateCollectionView()
+    }
     // MARK: - Methods
     init(viewModel: AutoCompleteSearchViewModel) {
         self.viewModel = viewModel

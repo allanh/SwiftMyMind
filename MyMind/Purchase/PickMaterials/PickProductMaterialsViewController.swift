@@ -78,8 +78,10 @@ class PickProductMaterialsViewController: NiblessViewController {
         case .filter:
             let service = MyMindAutoCompleteAPIService(userSession: viewModel.purchaseAPIService.userSession)
             let viewModel = ProductMaterialsFilterViewModel(
-                service: service) { [unowned self] info in
+                service: service,
+                currentQueryInfo: viewModel.currentQueryInfo) { [unowned self] info in
                 self.viewModel.currentQueryInfo = info
+                self.viewModel.refreshFetchProductMaterials(with: info)
             }
 
             let viewController = ProductMaterialsFilterViewController(viewModel: viewModel)
