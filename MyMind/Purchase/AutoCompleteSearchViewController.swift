@@ -65,10 +65,16 @@ class AutoCompleteSearchViewController: NiblessViewController {
             .bind(to: viewModel.searchTerm)
             .disposed(by: bag)
 
-        rootView.textField.rx.controlEvent(.editingDidBegin)
-            .map { true }
+        rootView.textField.rx.controlEvent(.editingChanged)
+            .map{ _ in true }
             .bind(to: viewModel.isDropDownViewPresenting)
             .disposed(by: bag)
+
+//        rootView.textField.rx.controlEvent(.editingDidBegin)
+//            .map { true }
+//            .debug()
+//            .bind(to: viewModel.isDropDownViewPresenting)
+//            .disposed(by: bag)
 
         rootView.textField.rx.controlEvent(.editingDidEnd)
             .map { false }
@@ -105,6 +111,15 @@ class AutoCompleteSearchViewController: NiblessViewController {
         let isSelected = viewModel.pickedItemViewModels.value.contains(item)
         cell.checkBoxButton.isSelected = isSelected
     }
+
+    @objc
+    private func didTapDeleteButtonInCell(_ sender: UIButton) {
+        guard let point = sender.superview?.convert(sender.frame.origin, to: rootView.collectionView),
+              let indexPath = rootView.collectionView.indexPathForItem(at: point)
+        else { return }
+        let item = viewModel.pickedItemViewModels.value[indexPath.item]
+        viewModel.pickItemViewModel(itemViewModel: item)
+    }
 }
 extension AutoCompleteSearchViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -117,6 +132,7 @@ extension AutoCompleteSearchViewController: UICollectionViewDataSource {
         }
         let item = viewModel.pickedItemViewModels.value[indexPath.item]
         cell.config(with: item.representTitle)
+        cell.deleteButton.addTarget(self, action: #selector(didTapDeleteButtonInCell(_:)), for: .touchUpInside)
         return cell
     }
 }

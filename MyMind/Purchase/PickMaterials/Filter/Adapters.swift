@@ -88,7 +88,7 @@ struct RxOriginalNumberAutoCompleteItemViewModelAdapter: RxAutoCompleteItemViewM
         return Single<[AutoCompleteItemViewModel]>.create { single in
             service.productMaterailOriginalNumberAutoComplete(searchTerm: searchTerm)
                 .done { list in
-                    let viewModels = list.item.map { AutoCompleteItemViewModel(representTitle: $0.number ?? "", identifier: $0.number ?? "")}
+                    let viewModels = list.item.map { AutoCompleteItemViewModel(representTitle: $0.name ?? "", identifier: $0.name ?? "")}
                     single(.success(viewModels))
                 }.catch { error in
                     single(.failure(error))

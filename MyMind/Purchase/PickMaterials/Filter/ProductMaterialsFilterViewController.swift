@@ -41,6 +41,17 @@ class ProductMaterialsFilterViewController: NiblessViewController {
         makeContentViewControlellers()
         activateConstraintsForChildViews()
         configBottomView()
+        scrollView.delegate = self
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        addKeyboardObservers()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        removeObservers()
     }
     // MARK: - Methods
     private func makeContentViewControlellers() {
@@ -89,6 +100,15 @@ class ProductMaterialsFilterViewController: NiblessViewController {
                 self.viewModel.cleanToDefaultStatus()
             })
             .disposed(by: bag)
+    }
+}
+// MARK: - Scroll view delegate
+extension ProductMaterialsFilterViewController: UIScrollViewDelegate {
+    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+        // adjust drop down view position when keyboard show
+        if let dropDownView = UIWindow.keyWindow?.subviews.first(where: { $0.accessibilityIdentifier == "DropDownView" }) {
+            dropDownView.layoutSubviews()
+        }
     }
 }
 // MARK: - Layouts
@@ -160,6 +180,33 @@ extension ProductMaterialsFilterViewController {
                childView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
             }
             lastChildView = childView
+        }
+    }
+}
+// MARK: - Keyboard handle
+extension ProductMaterialsFilterViewController {
+    func addKeyboardObservers() {
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(handleContentUnderKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(handleContentUnderKeyboard), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+    }
+
+    func removeObservers() {
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.removeObserver(self)
+    }
+
+    @objc func handleContentUnderKeyboard(notification: Notification) {
+        if let userInfo = notification.userInfo,
+           let keyboardEndFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let convertedKeyboardEndFrame = view.convert(keyboardEndFrame.cgRectValue, from: view.window)
+            if notification.name == UIResponder.keyboardWillHideNotification {
+                scrollView.contentInset.bottom = .zero
+            } else {
+                var insets = scrollView.contentInset
+                insets.bottom = convertedKeyboardEndFrame.height + 150
+                scrollView.contentInset = insets
+            }
         }
     }
 }

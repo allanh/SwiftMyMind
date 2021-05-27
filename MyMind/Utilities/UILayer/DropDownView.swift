@@ -61,6 +61,12 @@ class DropDownView<T, Cell: UITableViewCell>: NiblessView, UITableViewDelegate, 
     var cellConfigure: (Cell, T) -> Void
     var selectHandler: (T) -> Void
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        let layout = computeLayout()
+        updateContainerLayout(layout: layout)
+    }
+
     init(dataSource: [T],
          cellConfigure: @escaping (Cell, T) -> Void,
          selectHandler: @escaping (T) -> Void
@@ -77,6 +83,7 @@ class DropDownView<T, Cell: UITableViewCell>: NiblessView, UITableViewDelegate, 
         dismissableView.backgroundColor = .clear
         self.dataSource = dataSource
         self.isHidden = true
+        self.accessibilityIdentifier = "DropDownView"
     }
 
     func constructViewHierarchy() {
@@ -151,6 +158,14 @@ extension DropDownView {
         return (x, y, width, height)
     }
 
+    func updateContainerLayout(layout: Layout) {
+        let layout = computeLayout()
+        xConstraint.constant = layout.x
+        yConstraint.constant = layout.y
+        widthConstraint.constant = layout.width
+        self.layoutIfNeeded()
+    }
+
     func show() {
         guard self.isHidden == true else { return }
         guard let window = UIWindow.keyWindow else { return }
@@ -163,10 +178,7 @@ extension DropDownView {
         trailingAnchor.constraint(equalTo: window.trailingAnchor).isActive = true
 
         let layout = computeLayout()
-        xConstraint.constant = layout.x
-        yConstraint.constant = layout.y
-        widthConstraint.constant = layout.width
-        self.layoutIfNeeded()
+        updateContainerLayout(layout: layout)
 
         self.isHidden = false
         UIView.animate(withDuration: 0.1) { [weak self] in
