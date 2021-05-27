@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RxSwift
 
 class PurchaseStatusSelectionViewController: NiblessViewController {
 
@@ -23,10 +24,11 @@ class PurchaseStatusSelectionViewController: NiblessViewController {
         return dropDownView
     }()
 
-    let purchaseQueryRepository: PurchaseQueryRepository
+    let viewModel: PickPurchaseStatusViewModel
+    let bag: DisposeBag = DisposeBag()
 
-    init(purchaseQueryRepository: PurchaseQueryRepository) {
-        self.purchaseQueryRepository = purchaseQueryRepository
+    init(viewModel: PickPurchaseStatusViewModel) {
+        self.viewModel = viewModel
         super.init()
     }
 
@@ -37,7 +39,7 @@ class PurchaseStatusSelectionViewController: NiblessViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        rootView.titleLabel.text = PurchaseQueryType.purchaseStatus.description
+        rootView.titleLabel.text = viewModel.title
         configCollectionView()
         configTextField()
         configDropDownView()
@@ -46,6 +48,13 @@ class PurchaseStatusSelectionViewController: NiblessViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         updateCollectionView()
+    }
+
+    private func subscribeViewModel() {
+        viewModel.pickedStatus
+            .map { $0?.description }
+            .bind(to: rootView.textField.rx.text)
+            .disposed(by: bag)
     }
 
     private func configDropDownView() {
@@ -69,7 +78,7 @@ class PurchaseStatusSelectionViewController: NiblessViewController {
     }
 
     private func selectItem(item: PurchaseStatus) {
-        purchaseQueryRepository.updatePurchaseStatus(status: item)
+        viewModel.pickedStatus.accept(item)
         updateCollectionView()
         dropDownView.hide()
     }
@@ -82,8 +91,8 @@ class PurchaseStatusSelectionViewController: NiblessViewController {
 
     @objc
     private func deleteButtonDidTapped(_ sender: UIButton) {
-        purchaseQueryRepository.updatePurchaseStatus(status: nil)
-        rootView.collectionView.reloadData()
+        viewModel.pickedStatus.accept(nil)
+        updateCollectionView()
     }
 }
 // MARK: - Text field delegate
@@ -96,14 +105,14 @@ extension PurchaseStatusSelectionViewController: UITextFieldDelegate {
 // MARK: - Collection view data source
 extension PurchaseStatusSelectionViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return purchaseQueryRepository.currentQueryInfo.status != nil ? 1 : 0
+        return viewModel.pickedStatus.value != nil ? 1 : 0
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(SelectedQueryCollectionViewCell.self, for: indexPath) as? SelectedQueryCollectionViewCell else {
             fatalError("Wrong cell identifier or not registered yet")
         }
-        cell.config(with: purchaseQueryRepository.currentQueryInfo.status?.description ?? "")
+        cell.config(with: viewModel.pickedStatus.value?.description ?? "")
         cell.deleteButton.addTarget(self, action: #selector(deleteButtonDidTapped(_:)), for: .touchUpInside)
         return cell
     }
@@ -112,7 +121,7 @@ extension PurchaseStatusSelectionViewController: UICollectionViewDataSource {
 extension PurchaseStatusSelectionViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let extraSpace: CGFloat = 20 + 10 + 10 + 10
-        let status = purchaseQueryRepository.currentQueryInfo.status?.description ?? ""
+        let status = viewModel.pickedStatus.value?.description ?? ""
         let width = status.width(withConstrainedHeight: 20, font: .pingFangTCRegular(ofSize: 14))
         return CGSize(width: width+extraSpace, height: 30)
     }

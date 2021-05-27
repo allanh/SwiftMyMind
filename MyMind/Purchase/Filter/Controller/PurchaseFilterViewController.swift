@@ -8,6 +8,8 @@
 
 import UIKit
 import PromiseKit
+import RxSwift
+import RxRelay
 
 protocol PurchaseFilterViewControllerDelegate: AnyObject {
     func purchaseFilterViewController(_ purchaseFilterViewController: PurchaseFilterViewController, didConfirm queryInfo: PurchaseListQueryInfo)
@@ -32,6 +34,133 @@ enum PurchaseQueryType: String, CustomStringConvertible, CaseIterable {
         }
     }
 }
+struct PickPurchaseStatusViewModel {
+    let title: String = "採購單狀態"
+    let allStatus: [PurchaseStatus] = PurchaseStatus.allCases
+    let pickedStatus: BehaviorRelay<PurchaseStatus?> = .init(value: nil)
+}
+
+struct PickDatesViewModel {
+    let title: String
+    let startDate: BehaviorRelay<Date?> = .init(value: nil)
+    let endDate: BehaviorRelay<Date?> = .init(value: nil)
+}
+
+class PurchaseFilterViewModel {
+    let title: String = "篩選條件"
+    var queryInfo: PurchaseListQueryInfo
+    let didUpdateQueryInfo: (PurchaseListQueryInfo) -> Void
+    let service: AutoCompleteAPIService
+
+    lazy var purchaseNumberViewModel: AutoCompleteSearchViewModel = {
+        makeViewModelForPurchaseNumber()
+    }()
+
+    lazy var vendorViewModel: AutoCompleteSearchViewModel = {
+        makeViewModelForVendor()
+    }()
+
+    lazy var applicantViewModel: AutoCompleteSearchViewModel = {
+        makeViewModelForApplicant()
+    }()
+
+    lazy var productNumberViewModel: AutoCompleteSearchViewModel = {
+        makeViewModelForProductNumber()
+    }()
+
+    let purchaseStatusViewModel: PickPurchaseStatusViewModel = PickPurchaseStatusViewModel()
+
+    let expectPutInStoragePeriodViewModel: PickDatesViewModel = PickDatesViewModel(title: "預計入庫日")
+
+    let creatPeriodViewModel: PickDatesViewModel = PickDatesViewModel(title: "填單日期")
+
+    init(service: AutoCompleteAPIService,
+         queryInfo: PurchaseListQueryInfo,
+         didUpdateQueryInfo: @escaping (PurchaseListQueryInfo) -> Void) {
+        self.service = service
+        self.queryInfo = queryInfo
+        self.didUpdateQueryInfo = didUpdateQueryInfo
+
+        updateWithCurrentQuery()
+    }
+
+    private func updateWithCurrentQuery() {
+        purchaseStatusViewModel.pickedStatus.accept(queryInfo.status)
+        updateCurrentQueryForPurchaseNumber()
+        updateCurrentQueryForVendor()
+        updateCurrentQueryForApplicant()
+        updateCurrentQueryForProductNumber()
+        updateCurrentQueryForStoragePeriod()
+        updateCurrentQueryForCreatPeriod()
+    }
+
+    private func updateCurrentQueryForPurchaseNumber() {
+        let items = queryInfo.purchaseNumbers.map { AutoCompleteItemViewModel(representTitle: $0.number ?? "", identifier: $0.number ?? "")}
+        purchaseNumberViewModel.pickedItemViewModels.accept(items)
+    }
+
+    private func updateCurrentQueryForVendor() {
+        let items = queryInfo.vendorIDs.map { AutoCompleteItemViewModel(representTitle: $0.name ?? "", identifier: $0.id ?? "")}
+        vendorViewModel.pickedItemViewModels.accept(items)
+    }
+
+    private func updateCurrentQueryForApplicant() {
+        let items = queryInfo.applicants.map { AutoCompleteItemViewModel(representTitle: $0.name ?? "", identifier: $0.id ?? "")}
+        applicantViewModel.pickedItemViewModels.accept(items)
+    }
+
+    private func updateCurrentQueryForProductNumber() {
+        let items = queryInfo.productNumbers.map { AutoCompleteItemViewModel(representTitle: $0.number ?? "", identifier: $0.number ?? "")}
+        productNumberViewModel.pickedItemViewModels.accept(items)
+    }
+
+    private func updateCurrentQueryForStoragePeriod() {
+        expectPutInStoragePeriodViewModel.startDate.accept(queryInfo.expectStorageStartDate)
+        expectPutInStoragePeriodViewModel.endDate.accept(queryInfo.expectStorageEndDate)
+    }
+
+    private func updateCurrentQueryForCreatPeriod() {
+        creatPeriodViewModel.startDate.accept(queryInfo.createDateStart)
+        creatPeriodViewModel.endDate.accept(queryInfo.createDateEnd)
+    }
+
+    func cleanQueryInfo() {
+        queryInfo = .defaultQuery()
+        purchaseNumberViewModel.pickedItemViewModels.accept([])
+        vendorViewModel.pickedItemViewModels.accept([])
+        productNumberViewModel.pickedItemViewModels.accept([])
+        applicantViewModel.pickedItemViewModels.accept([])
+        purchaseStatusViewModel.pickedStatus.accept(nil)
+        expectPutInStoragePeriodViewModel.startDate.accept(nil)
+        expectPutInStoragePeriodViewModel.endDate.accept(nil)
+        creatPeriodViewModel.startDate.accept(nil)
+        creatPeriodViewModel.endDate.accept(nil)
+    }
+
+    func makeViewModelForPurchaseNumber() -> AutoCompleteSearchViewModel {
+        let adapter = RxPurchaseNumberAutoCompleteItemViewModelAdapter(service: service)
+        let viewModel = AutoCompleteSearchViewModel(title: "採購單編號", service: adapter)
+        return viewModel
+    }
+
+    func makeViewModelForVendor() -> AutoCompleteSearchViewModel {
+        let adapter = RxVendorAutoCompleteItemViewModelAdapter(service: service)
+        let viewModel = AutoCompleteSearchViewModel.init(title: "供應商", service: adapter)
+        return viewModel
+    }
+
+    func makeViewModelForApplicant() -> AutoCompleteSearchViewModel {
+        let adapter = RxVendorAutoCompleteItemViewModelAdapter(service: service)
+        let viewModel = AutoCompleteSearchViewModel.init(title: "申請人", service: adapter)
+        return viewModel
+    }
+
+    func makeViewModelForProductNumber() -> AutoCompleteSearchViewModel {
+        let adapter = RxProductNumberAutoCompleteItemViewModelAdapter(service: service)
+        let viewModel = AutoCompleteSearchViewModel.init(title: "SKU編號", service: adapter)
+        return viewModel
+    }
+}
 
 class PurchaseFilterViewController: NiblessViewController {
     private let scrollView: UIScrollView = UIScrollView {
@@ -49,15 +178,16 @@ class PurchaseFilterViewController: NiblessViewController {
 
     weak var delegate: PurchaseFilterViewControllerDelegate?
 
-    let purchaseQueryRepository: PurchaseQueryRepository
+    let viewModel: PurchaseFilterViewModel
 
-    init(purchaseQueryRepository: PurchaseQueryRepository) {
-        self.purchaseQueryRepository = purchaseQueryRepository
+    init(viewModel: PurchaseFilterViewModel) {
+        self.viewModel = viewModel
         super.init()
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = viewModel.title
         view.backgroundColor = .white
         addTapToResignKeyboardGesture()
         constructViewHierarchy()
@@ -93,27 +223,36 @@ class PurchaseFilterViewController: NiblessViewController {
         let allCases = PurchaseQueryType.allCases
         allCases.forEach {
             switch $0 {
+            case .purchaseNumber:
+                addAutoSearchViewCotrollerAsChild(with: viewModel.purchaseNumberViewModel)
+            case .vendorID:
+                addAutoSearchViewCotrollerAsChild(with: viewModel.vendorViewModel)
+            case .applicant:
+                addAutoSearchViewCotrollerAsChild(with: viewModel.applicantViewModel)
+            case .productNumbers:
+                addAutoSearchViewCotrollerAsChild(with: viewModel.productNumberViewModel)
             case .purchaseStatus:
-                let viewController = PurchaseStatusSelectionViewController(purchaseQueryRepository: purchaseQueryRepository)
-                contentView.addSubview(viewController.view)
-                addChild(viewController)
-                viewController.didMove(toParent: self)
-            case .createdPeriod, .expectPutInStoragePeriod:
-                let viewController = PurchaseQueryDateSelectionViewController(purchaseQueryRepository: purchaseQueryRepository, purchaseQueryType: $0)
-                contentView.addSubview(viewController.view)
-                addChild(viewController)
-                viewController.didMove(toParent: self)
-            default:
-                generateAutoCompleteSearchViewController(with: $0)
+                let viewController = PurchaseStatusSelectionViewController(viewModel: viewModel.purchaseStatusViewModel)
+                addViewControllerAsChild(viewController)
+            case .createdPeriod:
+                let viewController = PurchaseQueryDateSelectionViewController(viewModel: viewModel.expectPutInStoragePeriodViewModel)
+                addViewControllerAsChild(viewController)
+            case .expectPutInStoragePeriod:
+                let viewController = PurchaseQueryDateSelectionViewController(viewModel: viewModel.creatPeriodViewModel)
+                addViewControllerAsChild(viewController)
             }
         }
     }
 
-    private func generateAutoCompleteSearchViewController(with purchaseQueryType: PurchaseQueryType) {
-        let viewController = PurchaseAutoCompleteSearchViewController(purchaseQueryType: purchaseQueryType, purchaseQueryRepository: purchaseQueryRepository)
+    private func addViewControllerAsChild(_ viewController: UIViewController) {
         contentView.addSubview(viewController.view)
         addChild(viewController)
         viewController.didMove(toParent: self)
+    }
+
+    private func addAutoSearchViewCotrollerAsChild(with viewModel: AutoCompleteSearchViewModel) {
+        let viewController = AutoCompleteSearchViewController(viewModel: viewModel)
+        addViewControllerAsChild(viewController)
     }
 
     private func constructViewHierarchy() {
@@ -144,18 +283,13 @@ class PurchaseFilterViewController: NiblessViewController {
 
     @objc
     private func confirmButtonDidTapped(_ sender: UIButton) {
-        purchaseQueryRepository.resetPageNumber()
-        delegate?.purchaseFilterViewController(self, didConfirm: purchaseQueryRepository.currentQueryInfo)
-        delegate?.purchaseFilterViewController(self, didUpdate: purchaseQueryRepository.autoCompleteSource)
+        viewModel.didUpdateQueryInfo(viewModel.queryInfo)
         dismiss(animated: true, completion: nil)
     }
 
     @objc
     private func cleanButtonDidTapped(_ sender: UIButton) {
-        purchaseQueryRepository.cleanQueryInfo()
-        if let childs = children as? [PurchaseFilterChildViewController] {
-            childs.forEach { $0.reloadData() }
-        }
+        viewModel.cleanQueryInfo()
     }
 
     @objc

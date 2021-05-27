@@ -9,7 +9,7 @@
 import Foundation
 import PromiseKit
 
-protocol PurchaseAutoCompleteAPIService {
+protocol AutoCompleteAPIService {
     func purchaseNumberAutoComplete(searchTerm: String) -> Promise<AutoCompleteList>
     func vendorNameAutoComplete(searchTerm: String) -> Promise<AutoCompleteList>
     func applicantAutoComplete(searchTerm: String) -> Promise<AutoCompleteList>
@@ -79,4 +79,4 @@ class MyMindAutoCompleteAPIService: PromiseKitAPIService {
         return sendRequest(request: request)
     }
 }
-extension MyMindAutoCompleteAPIService: PurchaseAutoCompleteAPIService { }
+extension MyMindAutoCompleteAPIService: AutoCompleteAPIService { }

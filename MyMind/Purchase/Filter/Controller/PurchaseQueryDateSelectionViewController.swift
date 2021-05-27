@@ -7,12 +7,9 @@
 //
 
 import UIKit
+import RxSwift
 
 class PurchaseQueryDateSelectionViewController: NiblessViewController {
-    // MARK: - Properties
-    let purchaseQueryRepository: PurchaseQueryRepository
-    let purchaseQueryType: PurchaseQueryType
-
     // MARK: UI
     private let titleLabel: UILabel = UILabel {
         $0.font = .pingFangTCSemibold(ofSize: 18)
@@ -67,23 +64,23 @@ class PurchaseQueryDateSelectionViewController: NiblessViewController {
     private let dateFormatter: DateFormatter = DateFormatter {
         $0.dateFormat = "yyyy-MM-dd"
     }
+
+    let viewModel: PickDatesViewModel
+    let bag: DisposeBag = DisposeBag()
     // MARK: - View life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        titleLabel.text = purchaseQueryType.description
+        titleLabel.text = viewModel.title
         constructViewHierarchy()
         activateConstraints()
         configTextFields()
-        updateContentWithCurrentData()
+        bindToViewModel()
+        subscribeViewModel()
     }
 
     // MARK: - Methods
-    init(
-        purchaseQueryRepository: PurchaseQueryRepository,
-        purchaseQueryType: PurchaseQueryType
-    ) {
-        self.purchaseQueryType = purchaseQueryType
-        self.purchaseQueryRepository = purchaseQueryRepository
+    init(viewModel: PickDatesViewModel) {
+        self.viewModel = viewModel
         super.init()
     }
 
@@ -104,64 +101,45 @@ class PurchaseQueryDateSelectionViewController: NiblessViewController {
         secondTextField.delegate = self
         firstTextField.inputView = datePicker
         secondTextField.inputView = datePicker
-        datePicker.addTarget(self, action: #selector(datePickerDidPickDate(_:)), for: .valueChanged)
     }
 
-    private func updateContentWithCurrentData() {
-        switch purchaseQueryType {
-        case .expectPutInStoragePeriod:
-            if let date = purchaseQueryRepository.currentQueryInfo.expectStorageStartDate {
-                let dateInString = dateFormatter.string(from: date)
-                firstTextField.text = dateInString
-            }
-            if let date = purchaseQueryRepository.currentQueryInfo.expectStorageEndDate {
-                let dateInString = dateFormatter.string(from: date)
-                secondTextField.text = dateInString
-            }
-        case .createdPeriod:
-            if let date = purchaseQueryRepository.currentQueryInfo.createDateStart {
-                let dateInString = dateFormatter.string(from: date)
-                firstTextField.text = dateInString
-            }
-            if let date = purchaseQueryRepository.currentQueryInfo.createDateEnd {
-                let dateInString = dateFormatter.string(from: date)
-                secondTextField.text = dateInString
-            }
-        default: break
-        }
+    private func bindToViewModel() {
+        datePicker.rx.date
+            .subscribe(onNext: { [unowned self] date in
+                self.updateDate(date)
+            })
+            .disposed(by: bag)
     }
 
-    @objc
-    private func datePickerDidPickDate(_ sender: UIDatePicker) {
-        let date = sender.date
-        updateDate(with: date)
-        updateTextFieldContent(with: date)
+    private func subscribeViewModel() {
+        viewModel.startDate
+            .map { [unowned self] date in
+                if let startDate = date {
+                    return self.dateFormatter.string(from: startDate)
+                } else {
+                    return ""
+                }
+            }
+            .bind(to: firstTextField.rx.text)
+            .disposed(by: bag)
+
+        viewModel.endDate
+            .map { [unowned self] date in
+                if let endDate = date {
+                    return self.dateFormatter.string(from: endDate)
+                } else {
+                    return ""
+                }
+            }
+            .bind(to: secondTextField.rx.text)
+            .disposed(by: bag)
     }
 
-    private func updateDate(with date: Date?) {
-        switch purchaseQueryType {
-        case .expectPutInStoragePeriod:
-            if firstTextField.isFirstResponder {
-                purchaseQueryRepository.updateExpectStorageStartDate(date: date)
-            } else {
-                purchaseQueryRepository.updateExpectStorageEndDate(date: date)
-            }
-        case .createdPeriod:
-            if firstTextField.isFirstResponder {
-                purchaseQueryRepository.updateCreateDateStart(date: date)
-            } else {
-                purchaseQueryRepository.updateCreateDateEnd(date: date)
-            }
-        default: return
-        }
-    }
-
-    private func updateTextFieldContent(with date: Date) {
-        let dateInString = dateFormatter.string(from: date)
+    private func updateDate(_ date: Date?) {
         if firstTextField.isFirstResponder {
-            firstTextField.text = dateInString
+            viewModel.startDate.accept(date)
         } else {
-            secondTextField.text = dateInString
+            viewModel.endDate.accept(date)
         }
     }
 }
@@ -172,7 +150,7 @@ extension PurchaseQueryDateSelectionViewController: UITextFieldDelegate {
     }
 
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
-        updateDate(with: nil)
+        updateDate(nil)
         textField.text = ""
         return false
     }

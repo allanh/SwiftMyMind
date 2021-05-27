@@ -76,12 +76,11 @@ extension Endpoint {
 
     static func purchaseList(with partnerID: String, purchaseListQueryInfo: PurchaseListQueryInfo? = nil) -> Self {
         var urlQueryItems: [URLQueryItem] = []
+        urlQueryItems.append(URLQueryItem(name: "partner_id", value: partnerID))
         if let query = purchaseListQueryInfo {
-            urlQueryItems = query.queryItems
+            urlQueryItems.append(contentsOf: query.queryItems)
             return Endpoint(path: "/api/admin/\(version)/purchase", queryItems: urlQueryItems)
         }
-
-        urlQueryItems.append(URLQueryItem(name: "partner_id", value: partnerID))
         return Endpoint(path: "/api/admin/\(version)/purchase", queryItems: urlQueryItems)
     }
 

@@ -18,10 +18,7 @@ final class PurchaseListViewController: NiblessViewController {
     private var purchaseList: PurchaseList?
     private var cachedAutoCompleteSource: [PurchaseQueryType: [AutoCompleteInfo]]?
 
-    lazy var purchaseListQueryInfo: PurchaseListQueryInfo = {
-        let partnerID = String(purchaseAPIService.userSession.partnerInfo.id)
-        return .defaultQueryInfo(for: partnerID)
-    }()
+    lazy var purchaseListQueryInfo: PurchaseListQueryInfo = .defaultQuery()
 
     /// Must set on main thread
     private var isNetworkProcessing: Bool = false {
@@ -112,13 +109,16 @@ final class PurchaseListViewController: NiblessViewController {
 
     @objc
     private func filterButtonDidTapped(_ sender: UIButton) {
-        let repository = PurchaseQueryRepository(
-            currentQueryInfo: purchaseListQueryInfo,
-            remoteAPIService: MyMindAutoCompleteAPIService.init(userSession: .testUserSession),
-            autoCompleteSource: cachedAutoCompleteSource
-        )
-        let purchaseFilterViewController = PurchaseFilterViewController(purchaseQueryRepository: repository)
-        purchaseFilterViewController.delegate = self
+//        guard let userSession = MyMindUserSessionRepository.shared.readUserssion() else {
+//            #warning("Error handle")
+//            return
+//        }
+        let viewModel = PurchaseFilterViewModel(service: MyMindAutoCompleteAPIService(userSession: .testUserSession), queryInfo: purchaseListQueryInfo) { [weak self] queryInfo in
+            self?.purchaseListQueryInfo = queryInfo
+            self?.fetchPurchaseList(purchaseListQueryInfo: queryInfo)
+        }
+        let purchaseFilterViewController = PurchaseFilterViewController(viewModel: viewModel)
+
         let navigationController = UINavigationController(rootViewController: purchaseFilterViewController)
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated: true, completion: nil)

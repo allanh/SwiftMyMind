@@ -14,7 +14,7 @@ class ProductMaterialsFilterViewModel {
     let title: String = "篩選條件"
     var queryInfo: ProductMaterialQueryInfo = .defaultQuery()
     let didUpdateQueryInfo: (ProductMaterialQueryInfo) -> Void
-    let service: PurchaseAutoCompleteAPIService
+    let service: AutoCompleteAPIService
 
     lazy var vendorViewModel: AutoCompleteSearchViewModel = {
         makeViewModelForVendor()
@@ -40,11 +40,11 @@ class ProductMaterialsFilterViewModel {
 
     let bag: DisposeBag = DisposeBag()
 
-    init(service: PurchaseAutoCompleteAPIService,
-         currentQueryInfo: ProductMaterialQueryInfo,
+    init(service: AutoCompleteAPIService,
+         queryInfo: ProductMaterialQueryInfo,
          didUpdateQueryInfo: @escaping (ProductMaterialQueryInfo) -> Void) {
         self.service = service
-        self.queryInfo = currentQueryInfo
+        self.queryInfo = queryInfo
         self.didUpdateQueryInfo = didUpdateQueryInfo
         observerChildViewModels()
     }
@@ -87,7 +87,7 @@ class ProductMaterialsFilterViewModel {
                 self.queryInfo.originalMaterialNumbers = viewModels.map {
                     AutoCompleteInfo(id: nil, number: nil, name: $0.identifier)
                 }
-            })
+            }) 
             .disposed(by: bag)
 
         searchMaterialNameViewModel.addedSearchTerms
