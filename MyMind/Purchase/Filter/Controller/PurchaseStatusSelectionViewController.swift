@@ -127,8 +127,3 @@ extension PurchaseStatusSelectionViewController: UICollectionViewDelegateFlowLay
         return CGSize(width: width+extraSpace, height: 30)
     }
 }
-extension PurchaseStatusSelectionViewController: PurchaseFilterChildViewController {
-    func reloadData() {
-        updateCollectionView()
-    }
-}

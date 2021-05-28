@@ -204,9 +204,3 @@ extension PurchaseQueryDateSelectionViewController {
         ])
     }
 }
-extension PurchaseQueryDateSelectionViewController: PurchaseFilterChildViewController {
-    func reloadData() {
-        firstTextField.text = ""
-        secondTextField.text = ""
-    }
-}
