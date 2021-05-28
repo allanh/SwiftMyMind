@@ -48,7 +48,6 @@
 		A43F4291264388E400A246CC /* SideMenuPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43F4290264388E400A246CC /* SideMenuPresentable.swift */; };
 		A43F42932643C26400A246CC /* SideMenuTopBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43F42922643C26400A246CC /* SideMenuTopBarView.swift */; };
 		A43F42952643C75C00A246CC /* FilterSideMenuBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43F42942643C75C00A246CC /* FilterSideMenuBottomView.swift */; };
-		A43F42982643E04100A246CC /* PurchaseAutoCompleteSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43F42972643E04100A246CC /* PurchaseAutoCompleteSearchViewController.swift */; };
 		A43F429C2643EAEF00A246CC /* UICollectionViewLeftAlignedLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43F429B2643EAEF00A246CC /* UICollectionViewLeftAlignedLayout.swift */; };
 		A44A5A6E25F9B0D200995823 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44A5A6D25F9B0D200995823 /* AppDelegate.swift */; };
 		A44A5A7025F9B0D200995823 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44A5A6F25F9B0D200995823 /* SceneDelegate.swift */; };
@@ -93,7 +92,6 @@
 		A49CF92A26034BEA00AFC170 /* CaptchaSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49CF92926034BEA00AFC170 /* CaptchaSession.swift */; };
 		A49CF9302603518A00AFC170 /* CodableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49CF92F2603518A00AFC170 /* CodableTests.swift */; };
 		A49CF93C2603527500AFC170 /* user_session.json in Resources */ = {isa = PBXBuildFile; fileRef = A49CF9372603523100AFC170 /* user_session.json */; };
-		A4ACEDC32648EA38008724E4 /* PurchaseQueryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4ACEDC22648EA38008724E4 /* PurchaseQueryRepository.swift */; };
 		A4ACEDC526490E25008724E4 /* SelectedQueryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4ACEDC426490E25008724E4 /* SelectedQueryCollectionViewCell.swift */; };
 		A4ACEDC72649374B008724E4 /* UIWindow+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4ACEDC62649374B008724E4 /* UIWindow+.swift */; };
 		A4AF79F72637B13B002B04F6 /* MainFunctionControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4AF79F62637B13B002B04F6 /* MainFunctionControl.swift */; };
@@ -186,7 +184,6 @@
 		A43F4290264388E400A246CC /* SideMenuPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuPresentable.swift; sourceTree = "<group>"; };
 		A43F42922643C26400A246CC /* SideMenuTopBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuTopBarView.swift; sourceTree = "<group>"; };
 		A43F42942643C75C00A246CC /* FilterSideMenuBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSideMenuBottomView.swift; sourceTree = "<group>"; };
-		A43F42972643E04100A246CC /* PurchaseAutoCompleteSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseAutoCompleteSearchViewController.swift; sourceTree = "<group>"; };
 		A43F429B2643EAEF00A246CC /* UICollectionViewLeftAlignedLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionViewLeftAlignedLayout.swift; sourceTree = "<group>"; };
 		A44A5A6A25F9B0D200995823 /* MyMind.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyMind.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A44A5A6D25F9B0D200995823 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -239,7 +236,6 @@
 		A49CF92926034BEA00AFC170 /* CaptchaSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptchaSession.swift; sourceTree = "<group>"; };
 		A49CF92F2603518A00AFC170 /* CodableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableTests.swift; sourceTree = "<group>"; };
 		A49CF9372603523100AFC170 /* user_session.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = user_session.json; sourceTree = "<group>"; };
-		A4ACEDC22648EA38008724E4 /* PurchaseQueryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseQueryRepository.swift; sourceTree = "<group>"; };
 		A4ACEDC426490E25008724E4 /* SelectedQueryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedQueryCollectionViewCell.swift; sourceTree = "<group>"; };
 		A4ACEDC62649374B008724E4 /* UIWindow+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+.swift"; sourceTree = "<group>"; };
 		A4AF79F62637B13B002B04F6 /* MainFunctionControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFunctionControl.swift; sourceTree = "<group>"; };
@@ -320,7 +316,6 @@
 		97B1173D2654C21D00242428 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				A43F42972643E04100A246CC /* PurchaseAutoCompleteSearchViewController.swift */,
 				A405410E264A758B00E2D21B /* PurchaseStatusSelectionViewController.swift */,
 				A4054110264A8F7600E2D21B /* PurchaseQueryDateSelectionViewController.swift */,
 				A43F428E2643866F00A246CC /* PurchaseFilterViewController.swift */,
@@ -343,7 +338,6 @@
 			children = (
 				97B1173D2654C21D00242428 /* Controller */,
 				97B1173C2654C20500242428 /* View */,
-				A4ACEDC22648EA38008724E4 /* PurchaseQueryRepository.swift */,
 				A44E8FDA265F82F80090D467 /* PurchaseAutoCompleteAdapters.swift */,
 			);
 			path = Filter;
@@ -914,7 +908,6 @@
 				A4ACEDC526490E25008724E4 /* SelectedQueryCollectionViewCell.swift in Sources */,
 				A4B55E4F265B538F002E1880 /* KeychainUserSessionDataStore.swift in Sources */,
 				A4159204260C394F00FD3989 /* UIButton+.swift in Sources */,
-				A43F42982643E04100A246CC /* PurchaseAutoCompleteSearchViewController.swift in Sources */,
 				A439B52C26099AA1002352C2 /* UIViewController+.swift in Sources */,
 				A4793C7F2604573700AD280C /* UserSession.swift in Sources */,
 				A47F39CD263A58F700A3097C /* PurchaseListViewController.swift in Sources */,
@@ -938,7 +931,6 @@
 				97B117392654B8FC00242428 /* PickProductMaterialsViewController.swift in Sources */,
 				A47AB496265DF53200FE3CFA /* ContainerTableViewCell.swift in Sources */,
 				A45E69C5264B89A300AADB44 /* CustomClearButtonPositionTextField.swift in Sources */,
-				A4ACEDC32648EA38008724E4 /* PurchaseQueryRepository.swift in Sources */,
 				A49CF8B6260301DE00AFC170 /* Endpoint.swift in Sources */,
 				A4793CB626048EBA00AD280C /* ValidatableInputView.swift in Sources */,
 				A4159209260C603B00FD3989 /* ForgotPasswordInfo.swift in Sources */,
