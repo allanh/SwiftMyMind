@@ -41,6 +41,7 @@ class ProductMaterialsFilterViewController: NiblessViewController {
         makeContentViewControlellers()
         activateConstraintsForChildViews()
         configBottomView()
+        configNavigtaionBar()
         scrollView.delegate = self
     }
 
@@ -54,6 +55,20 @@ class ProductMaterialsFilterViewController: NiblessViewController {
         removeObservers()
     }
     // MARK: - Methods
+    private func configNavigtaionBar() {
+        navigationItem.title = viewModel.title
+        let closeButton = UIButton()
+        closeButton.setImage(UIImage(named: "close"), for: .normal)
+        closeButton.addTarget(self, action: #selector(closeButtonDidTapped(_:)), for: .touchUpInside)
+        let barItem = UIBarButtonItem(customView: closeButton)
+        navigationItem.setRightBarButton(barItem, animated: true)
+    }
+
+    @objc
+    private func closeButtonDidTapped(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
+    }
+
     private func makeContentViewControlellers() {
         [
             viewModel.vendorViewModel,
