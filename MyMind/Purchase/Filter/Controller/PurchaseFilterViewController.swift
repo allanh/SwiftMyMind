@@ -61,6 +61,16 @@ class PurchaseFilterViewController: NiblessViewController {
         configBottomView()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        addKeyboardObservers()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        removeObservers()
+    }
+
     private func configViewForChildViewControllers() {
         var lastChildView: UIView?
         for index in 0..<children.count {
@@ -209,5 +219,32 @@ extension PurchaseFilterViewController {
         NSLayoutConstraint.activate([
             top, leading, bottom, trailing, width
         ])
+    }
+}
+// MARK: - Keyboard handle
+extension PurchaseFilterViewController {
+    func addKeyboardObservers() {
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(handleContentUnderKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(handleContentUnderKeyboard), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+    }
+
+    func removeObservers() {
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.removeObserver(self)
+    }
+
+    @objc func handleContentUnderKeyboard(notification: Notification) {
+        if let userInfo = notification.userInfo,
+           let keyboardEndFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let convertedKeyboardEndFrame = view.convert(keyboardEndFrame.cgRectValue, from: view.window)
+            if notification.name == UIResponder.keyboardWillHideNotification {
+                scrollView.contentInset.bottom = .zero
+            } else {
+                var insets = scrollView.contentInset
+                insets.bottom = convertedKeyboardEndFrame.height + 150
+                scrollView.contentInset = insets
+            }
+        }
     }
 }
