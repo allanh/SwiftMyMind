@@ -111,7 +111,7 @@ extension Endpoint {
         var query: [URLQueryItem] = []
         query.append(URLQueryItem(name: "key", value: "APPLICANT"))
         if searchTerm.isEmpty == false {
-            query.append(URLQueryItem(name: "value", value: searchTerm))
+            query.append(URLQueryItem(name: "word", value: searchTerm))
         }
         return Endpoint(path: "/employee/autocomplete", queryItems: query, serviceType: .auth)
     }
