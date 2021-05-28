@@ -13,12 +13,22 @@ final class PurchaseListViewController: NiblessViewController {
     // MARK: - Properties
     var rootView: PurchaseListRootView { view as! PurchaseListRootView }
 
+    lazy var pickSortTypeView: PickSortTypeView<PurchaseListQueryInfo.OrderReference, SingleLabelTableViewCell> = {
+        let pickSortView = PickSortTypeView<PurchaseListQueryInfo.OrderReference, SingleLabelTableViewCell>.init(
+            dataSource: PurchaseListQueryInfo.OrderReference.allCases) { [unowned self] sortType, cell in
+            self.configSortCell(cell, item: sortType)
+        } cellSelectHandler: { [unowned self] sortType in
+            self.didPickSortType(sortType: sortType)
+        }
+        pickSortView.tableView.separatorStyle = .none
+        return pickSortView
+    }()
+
     let purchaseAPIService: PurchaseAPIService
 
     private var purchaseList: PurchaseList?
-    private var cachedAutoCompleteSource: [PurchaseQueryType: [AutoCompleteInfo]]?
 
-    lazy var purchaseListQueryInfo: PurchaseListQueryInfo = .defaultQuery()
+    var purchaseListQueryInfo: PurchaseListQueryInfo = .defaultQuery()
 
     /// Must set on main thread
     private var isNetworkProcessing: Bool = false {
@@ -29,11 +39,6 @@ final class PurchaseListViewController: NiblessViewController {
             }
         }
     }
-
-    var filterViewController: PurchaseFilterViewController?
-    var backgroundMaskView: UIView?
-    var isSideMenuShowing: Bool = false
-    var isSideMenuAnimating: Bool = false
     // MARK: - View life cycle
     override func loadView() {
         super.loadView()
@@ -43,6 +48,7 @@ final class PurchaseListViewController: NiblessViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        configPickSortTypeView()
         configTableView()
         configCollectionView()
         fetchPurchaseList()
@@ -52,6 +58,23 @@ final class PurchaseListViewController: NiblessViewController {
     init(purchaseAPIService: PurchaseAPIService) {
         self.purchaseAPIService = purchaseAPIService
         super.init()
+    }
+
+    private func configPickSortTypeView() {
+        rootView.addSubview(pickSortTypeView)
+        pickSortTypeView.translatesAutoresizingMaskIntoConstraints = false
+        let top = pickSortTypeView.topAnchor
+            .constraint(equalTo: rootView.topAnchor)
+        let leading = pickSortTypeView.leadingAnchor
+            .constraint(equalTo: rootView.leadingAnchor)
+        let bottom = pickSortTypeView.bottomAnchor
+            .constraint(equalTo: rootView.organizeOptionView.topAnchor)
+        let trailing = pickSortTypeView.trailingAnchor
+            .constraint(equalTo: rootView.trailingAnchor)
+
+        NSLayoutConstraint.activate([
+            top, leading, bottom, trailing
+        ])
     }
 
     private func configTableView() {
@@ -67,6 +90,7 @@ final class PurchaseListViewController: NiblessViewController {
     }
 
     private func addButtonsActions() {
+        rootView.organizeOptionView.sortButton.addTarget(self, action: #selector(sortButtonDidTapped(_:)), for: .touchUpInside)
         rootView.organizeOptionView.layoutButton.addTarget(self, action: #selector(layoutButtonDidTapped(_:)), for: .touchUpInside)
         rootView.organizeOptionView.filterButton.addTarget(self, action: #selector(filterButtonDidTapped(_:)), for: .touchUpInside)
         rootView.createButton.addTarget(self, action: #selector(createButtonDidTapped(_:)), for: .touchUpInside)
@@ -84,6 +108,13 @@ final class PurchaseListViewController: NiblessViewController {
             .catch(handleErrorForFetchPurchaseList(_:))
     }
 
+    private func refreshFetchPurchaseList(query: PurchaseListQueryInfo?) {
+        var refreshQuery = query
+        refreshQuery?.pageNumber = 1
+        purchaseList = nil
+        fetchPurchaseList(purchaseListQueryInfo: refreshQuery)
+    }
+
     private func handleSuccessFetchPurchaseList(_ purchaseList: PurchaseList) {
         if self.purchaseList != nil {
             self.purchaseList?.updateWithNextPageList(purchaseList: purchaseList)
@@ -97,6 +128,28 @@ final class PurchaseListViewController: NiblessViewController {
 
     private func handleErrorForFetchPurchaseList(_ error: Error) {
         print(error.localizedDescription)
+    }
+
+    private func configSortCell(_ cell: SingleLabelTableViewCell, item: PurchaseListQueryInfo.OrderReference) {
+        cell.titleLabel.text = item.description
+        let isSelected = self.purchaseListQueryInfo.orderReference == item
+        let textColor = isSelected ? UIColor(hex: "004477") : UIColor(hex: "4c4c4c")
+        cell.titleLabel.textColor = textColor
+    }
+
+    private func didPickSortType(sortType: PurchaseListQueryInfo.OrderReference) {
+        purchaseListQueryInfo.orderReference = sortType
+        refreshFetchPurchaseList(query: purchaseListQueryInfo)
+        rootView.organizeOptionView.sortButton.setTitle(sortType.description, for: .normal)
+        pickSortTypeView.hide()
+    }
+
+    @objc
+    private func sortButtonDidTapped(_ sender: UIButton) {
+        switch pickSortTypeView.isHidden {
+        case true: pickSortTypeView.show()
+        case false: pickSortTypeView.hide()
+        }
     }
 
     @objc
@@ -113,9 +166,11 @@ final class PurchaseListViewController: NiblessViewController {
 //            #warning("Error handle")
 //            return
 //        }
-        let viewModel = PurchaseFilterViewModel(service: MyMindAutoCompleteAPIService(userSession: .testUserSession), queryInfo: purchaseListQueryInfo) { [weak self] queryInfo in
+        let viewModel = PurchaseFilterViewModel(
+            service: MyMindAutoCompleteAPIService(userSession: .testUserSession),
+            queryInfo: purchaseListQueryInfo) { [weak self] queryInfo in
             self?.purchaseListQueryInfo = queryInfo
-            self?.fetchPurchaseList(purchaseListQueryInfo: queryInfo)
+            self?.refreshFetchPurchaseList(query: queryInfo)
         }
         let purchaseFilterViewController = PurchaseFilterViewController(viewModel: viewModel)
 
@@ -210,17 +265,5 @@ extension PurchaseListViewController: UICollectionViewDelegateFlowLayout {
         }
         let width = (collectionView.frame.width - horizontalSpace) / 2
         return CGSize(width: width, height: 280)
-    }
-}
-// MARK: - Purchase filter view controller delegate
-extension PurchaseListViewController: PurchaseFilterViewControllerDelegate {
-    func purchaseFilterViewController(_ purchaseFilterViewController: PurchaseFilterViewController, didConfirm queryInfo: PurchaseListQueryInfo) {
-        self.purchaseListQueryInfo = queryInfo
-        purchaseList = nil
-        fetchPurchaseList(purchaseListQueryInfo: queryInfo)
-    }
-
-    func purchaseFilterViewController(_ purchaseFilterViewController: PurchaseFilterViewController, didUpdate autoCompleteSource: [PurchaseQueryType : [AutoCompleteInfo]]) {
-        self.cachedAutoCompleteSource = autoCompleteSource
     }
 }

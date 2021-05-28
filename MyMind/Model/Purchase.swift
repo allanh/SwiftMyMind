@@ -44,12 +44,22 @@ enum SortOrder: String {
 }
 
 struct PurchaseListQueryInfo {
-    enum OrderReference: String {
+    enum OrderReference: String, CaseIterable, CustomStringConvertible {
         case purchaseNumber = "PURCHASE_NO"
         case status = "STATUS"
         case totalAmount = "TOTAL_AMOUNT"
         case createdDate = "CREATED_AT"
         case expectStorageDate = "EXPECT_STORAGE_DATE"
+
+        var description: String {
+            switch self {
+            case .purchaseNumber: return "採購單編號"
+            case .status: return "狀態"
+            case .totalAmount: return "採購金額"
+            case .createdDate: return "填單日期"
+            case .expectStorageDate: return "預計入庫日"
+            }
+        }
     }
     var status: PurchaseStatus?
     var purchaseNumbers: [AutoCompleteInfo] = []

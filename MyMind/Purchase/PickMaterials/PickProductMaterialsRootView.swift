@@ -40,6 +40,7 @@ class PickProductMaterialsRootView: NiblessView {
             cell.titleLabel.textColor = textColor
         } cellSelectHandler: { [unowned self] sortType in
             self.viewModel.currentSortType.accept(sortType)
+            self.pickSortTypeView.hide()
         }
         pickSortView.tableView.separatorStyle = .none
         return pickSortView
@@ -88,10 +89,12 @@ class PickProductMaterialsRootView: NiblessView {
             .disposed(by: disposeBag)
 
         organizeOptionView.sortButton.rx.tap
-            .scan(false, accumulator: { currentState, _ in
-                !currentState
+            .subscribe(onNext: { [unowned self] in
+                switch self.pickSortTypeView.isHidden {
+                case true: self.pickSortTypeView.show()
+                case false: self.pickSortTypeView.hide()
+                }
             })
-            .bind(to: viewModel.isPickSortViewVisible)
             .disposed(by: disposeBag)
 
         nextStepButton.rx.tap

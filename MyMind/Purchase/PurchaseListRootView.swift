@@ -9,7 +9,6 @@
 import UIKit
 
 final class PurchaseListRootView: NiblessView {
-    private var hierarchyNotReady: Bool = true
 
     let tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
@@ -39,14 +38,8 @@ final class PurchaseListRootView: NiblessView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-    }
-
-    override func didMoveToWindow() {
-        super.didMoveToWindow()
-        guard hierarchyNotReady else { return }
         constructViewHierarchy()
         activateConstraints()
-        hierarchyNotReady = false
     }
 
     func constructViewHierarchy() {

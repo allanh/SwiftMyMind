@@ -27,7 +27,7 @@ class PickProductMaterialsViewController: NiblessViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configTableView()
-        observerViewModel()
+        subscribeViewModel()
         viewModel.refreshFetchProductMaterials(with: viewModel.currentQueryInfo)
     }
     // MARK: - Methods
@@ -42,7 +42,7 @@ class PickProductMaterialsViewController: NiblessViewController {
         rootView.tableView.registerCell(PickProductMaterialTableViewCell.self)
     }
 
-    private func observerViewModel() {
+    private func subscribeViewModel() {
         title = viewModel.title
         
         viewModel.currentProductMaterials
@@ -56,15 +56,6 @@ class PickProductMaterialsViewController: NiblessViewController {
         viewModel.view
             .subscribe(onNext: { [unowned self] view in
                 self.handleNavigation(with: view)
-            })
-            .disposed(by: bag)
-
-        viewModel.isPickSortViewVisible
-            .subscribe(onNext: { [unowned self] isVisible in
-                switch isVisible {
-                case true: self.rootView.pickSortTypeView.show()
-                case false: self.rootView.pickSortTypeView.hide()
-                }
             })
             .disposed(by: bag)
 

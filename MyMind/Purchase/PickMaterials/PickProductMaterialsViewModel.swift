@@ -23,7 +23,6 @@ class PickProductMaterialsViewModel {
     var pickedMaterials: [ProductMaterial] = []
     var currentPageInfo: MultiplePageList?
     let view: PublishRelay<PickMaterialView> = .init()
-    let isPickSortViewVisible: BehaviorRelay<Bool> = .init(value: false)
     let isNetworkProcessing: BehaviorRelay<Bool> = .init(value: false)
     let purchaseAPIService: PurchaseAPIService
 
