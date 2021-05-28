@@ -105,6 +105,7 @@ class PurchaseQueryDateSelectionViewController: NiblessViewController {
 
     private func bindToViewModel() {
         datePicker.rx.date
+            .skip(1)
             .subscribe(onNext: { [unowned self] date in
                 self.updateDate(date)
             })

@@ -16,20 +16,17 @@ struct AutoCompleteList: Decodable {
     }
 }
 
-final class AutoCompleteInfo: Decodable {
+struct AutoCompleteInfo: Equatable {
     let id: String?
     let number: String?
     let name: String?
-    var isSelect: Bool = false
 
-    init(id: String?, number: String?, name: String?, isSelect: Bool = false) {
-        self.id = id
-        self.number = number
-        self.name = name
-        self.isSelect = isSelect
+    private enum CodingKeys: String, CodingKey {
+        case id, number = "no", name
     }
-
-    required init(from decoder: Decoder) throws {
+}
+extension AutoCompleteInfo: Decodable {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         number = try container.decodeIfPresent(String.self, forKey: .number)
         if let idNumber = try? container.decodeIfPresent(Int.self, forKey: .id) {
@@ -41,15 +38,4 @@ final class AutoCompleteInfo: Decodable {
         }
         name = try container.decodeIfPresent(String.self, forKey: .name)
     }
-
-    private enum CodingKeys: String, CodingKey {
-        case id, number = "no", name
-    }
-}
-
-extension AutoCompleteInfo: Equatable {
-    static func == (lhs: AutoCompleteInfo, rhs: AutoCompleteInfo) -> Bool {
-        return lhs.id == rhs.id && lhs.number == rhs.number && lhs.name == rhs.name && lhs.isSelect == rhs.isSelect
-    }
-
 }

@@ -43,17 +43,18 @@ class PurchaseStatusSelectionViewController: NiblessViewController {
         configCollectionView()
         configTextField()
         configDropDownView()
+        subscribeViewModel()
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidLayoutSubviews() {
         updateCollectionView()
     }
 
     private func subscribeViewModel() {
         viewModel.pickedStatus
-            .map { $0?.description }
-            .bind(to: rootView.textField.rx.text)
+            .subscribe(onNext: { [unowned self] _ in
+                self.updateCollectionView()
+            })
             .disposed(by: bag)
     }
 

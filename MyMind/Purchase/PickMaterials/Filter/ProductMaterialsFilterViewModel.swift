@@ -46,10 +46,10 @@ class ProductMaterialsFilterViewModel {
         self.service = service
         self.queryInfo = queryInfo
         self.didUpdateQueryInfo = didUpdateQueryInfo
-        observerChildViewModels()
+        subscribeChildViewModels()
     }
 
-    func observerChildViewModels() {
+    func subscribeChildViewModels() {
         vendorViewModel.pickedItemViewModels
             .subscribe(onNext: { [unowned self] viewModels in
                 self.queryInfo.vendorIDs = viewModels.map {

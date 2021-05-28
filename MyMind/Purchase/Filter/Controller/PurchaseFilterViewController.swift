@@ -38,12 +38,21 @@ struct PickPurchaseStatusViewModel {
     let title: String = "採購單狀態"
     let allStatus: [PurchaseStatus] = PurchaseStatus.allCases
     let pickedStatus: BehaviorRelay<PurchaseStatus?> = .init(value: nil)
+
+    func cleanPickedStatus() {
+        pickedStatus.accept(nil)
+    }
 }
 
 struct PickDatesViewModel {
     let title: String
     let startDate: BehaviorRelay<Date?> = .init(value: nil)
     let endDate: BehaviorRelay<Date?> = .init(value: nil)
+
+    func cleanPickedDates() {
+        startDate.accept(nil)
+        endDate.accept(nil)
+    }
 }
 
 class PurchaseFilterViewModel {
@@ -74,14 +83,82 @@ class PurchaseFilterViewModel {
 
     let creatPeriodViewModel: PickDatesViewModel = PickDatesViewModel(title: "填單日期")
 
+    let bag: DisposeBag = DisposeBag()
+
     init(service: AutoCompleteAPIService,
          queryInfo: PurchaseListQueryInfo,
          didUpdateQueryInfo: @escaping (PurchaseListQueryInfo) -> Void) {
         self.service = service
         self.queryInfo = queryInfo
+        self.queryInfo.pageNumber = 1
         self.didUpdateQueryInfo = didUpdateQueryInfo
 
         updateWithCurrentQuery()
+        subscribeChildViewModels()
+    }
+
+    private func subscribeChildViewModels() {
+        purchaseNumberViewModel.pickedItemViewModels
+            .subscribe(onNext: { [unowned self] items in
+                self.queryInfo.purchaseNumbers = items.map({ item in
+                    AutoCompleteInfo(id: nil, number: item.identifier, name: nil)
+                })
+            })
+            .disposed(by: bag)
+
+        vendorViewModel.pickedItemViewModels
+            .subscribe(onNext: { [unowned self] items in
+                self.queryInfo.vendorIDs = items.map({ item in
+                    AutoCompleteInfo(id: item.identifier, number: nil, name: item.representTitle)
+                })
+            })
+            .disposed(by: bag)
+
+        applicantViewModel.pickedItemViewModels
+            .subscribe(onNext: { [unowned self] items in
+                self.queryInfo.applicants = items.map({ item in
+                    AutoCompleteInfo(id: item.identifier, number: nil, name: item.representTitle)
+                })
+            })
+            .disposed(by: bag)
+
+        productNumberViewModel.pickedItemViewModels
+            .subscribe(onNext: { [unowned self] items in
+                self.queryInfo.productNumbers = items.map({ item in
+                    AutoCompleteInfo(id: nil, number: item.identifier, name: item.identifier)
+                })
+            })
+            .disposed(by: bag)
+
+        purchaseStatusViewModel.pickedStatus
+            .subscribe(onNext: { [unowned self] status in
+                self.queryInfo.status = status
+            })
+            .disposed(by: bag)
+
+        expectPutInStoragePeriodViewModel.startDate
+            .subscribe(onNext: { [unowned self] date in
+                self.queryInfo.expectStorageStartDate = date
+            })
+            .disposed(by: bag)
+
+        expectPutInStoragePeriodViewModel.endDate
+            .subscribe(onNext: { [unowned self] date in
+                self.queryInfo.expectStorageEndDate = date
+            })
+            .disposed(by: bag)
+
+        creatPeriodViewModel.startDate
+            .subscribe(onNext: { [unowned self] date in
+                self.queryInfo.createDateStart = date
+            })
+            .disposed(by: bag)
+
+        creatPeriodViewModel.endDate
+            .subscribe(onNext: { [unowned self] date in
+                self.queryInfo.createDateEnd = date
+            })
+            .disposed(by: bag)
     }
 
     private func updateWithCurrentQuery() {
@@ -126,15 +203,14 @@ class PurchaseFilterViewModel {
 
     func cleanQueryInfo() {
         queryInfo = .defaultQuery()
-        purchaseNumberViewModel.pickedItemViewModels.accept([])
-        vendorViewModel.pickedItemViewModels.accept([])
-        productNumberViewModel.pickedItemViewModels.accept([])
-        applicantViewModel.pickedItemViewModels.accept([])
-        purchaseStatusViewModel.pickedStatus.accept(nil)
-        expectPutInStoragePeriodViewModel.startDate.accept(nil)
-        expectPutInStoragePeriodViewModel.endDate.accept(nil)
-        creatPeriodViewModel.startDate.accept(nil)
-        creatPeriodViewModel.endDate.accept(nil)
+
+        purchaseNumberViewModel.cleanPickedItemViewModel()
+        vendorViewModel.cleanPickedItemViewModel()
+        productNumberViewModel.cleanPickedItemViewModel()
+        applicantViewModel.cleanPickedItemViewModel()
+        purchaseStatusViewModel.cleanPickedStatus()
+        expectPutInStoragePeriodViewModel.cleanPickedDates()
+        creatPeriodViewModel.cleanPickedDates()
     }
 
     func makeViewModelForPurchaseNumber() -> AutoCompleteSearchViewModel {
@@ -150,7 +226,7 @@ class PurchaseFilterViewModel {
     }
 
     func makeViewModelForApplicant() -> AutoCompleteSearchViewModel {
-        let adapter = RxVendorAutoCompleteItemViewModelAdapter(service: service)
+        let adapter = RxApplicantAutoCompleteItemViewModelAdapter(service: service)
         let viewModel = AutoCompleteSearchViewModel.init(title: "申請人", service: adapter)
         return viewModel
     }
