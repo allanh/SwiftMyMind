@@ -15,27 +15,6 @@ struct VendorInfo {
     let name: String
 }
 
-protocol VendorInfoService {
-    func fetchVendorInfos(with name: String) -> Promise<[VendorInfo]>
-}
-
-struct VendorInfoAdapter: VendorInfoService {
-    let service: AutoCompleteAPIService
-
-    func fetchVendorInfos(with name: String) -> Promise<[VendorInfo]> {
-        service.vendorNameAutoComplete(searchTerm: name)
-            .map { list in
-                let items = list.item
-                return items.compactMap { autoCompleteInfo in
-                    guard let id = autoCompleteInfo.id,
-                          let name = autoCompleteInfo.name
-                    else { return nil }
-                    return VendorInfo(id: id, name: name)
-                }
-            }
-    }
-}
-
 final class PickVendorViewController: UITableViewController {
     // MARK: - Properties
     let searchTextFieldView: AutoCompleteSearchRootView = AutoCompleteSearchRootView {

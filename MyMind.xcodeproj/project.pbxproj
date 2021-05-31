@@ -108,6 +108,7 @@
 		A4C0AFF4265B7A2E00B8D0C4 /* LastSignInInfoDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C0AFF3265B7A2E00B8D0C4 /* LastSignInInfoDataStore.swift */; };
 		A4CBD8A32664900100B19119 /* PickVendorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CBD8A22664900100B19119 /* PickVendorViewController.swift */; };
 		A4CBD8A52664E10800B19119 /* VendorSelectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CBD8A42664E10800B19119 /* VendorSelectionTableViewCell.swift */; };
+		A4CBD8A72664E1E800B19119 /* VendorInfoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CBD8A62664E1E800B19119 /* VendorInfoService.swift */; };
 		A4CF09B32636C36800439D5F /* UIView+shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CF09B22636C36800439D5F /* UIView+shadow.swift */; };
 		A4D50AB02645129E007B07D6 /* AutoCompleteSearchRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D50AAF2645129E007B07D6 /* AutoCompleteSearchRootView.swift */; };
 		A4DD410726425496007B2A41 /* PromiseKitAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DD410626425496007B2A41 /* PromiseKitAPIService.swift */; };
@@ -258,6 +259,7 @@
 		A4C0AFF3265B7A2E00B8D0C4 /* LastSignInInfoDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastSignInInfoDataStore.swift; sourceTree = "<group>"; };
 		A4CBD8A22664900100B19119 /* PickVendorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickVendorViewController.swift; sourceTree = "<group>"; };
 		A4CBD8A42664E10800B19119 /* VendorSelectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendorSelectionTableViewCell.swift; sourceTree = "<group>"; };
+		A4CBD8A62664E1E800B19119 /* VendorInfoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendorInfoService.swift; sourceTree = "<group>"; };
 		A4CF09B22636C36800439D5F /* UIView+shadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+shadow.swift"; sourceTree = "<group>"; };
 		A4D50AAF2645129E007B07D6 /* AutoCompleteSearchRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoCompleteSearchRootView.swift; sourceTree = "<group>"; };
 		A4DD410626425496007B2A41 /* PromiseKitAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromiseKitAPIService.swift; sourceTree = "<group>"; };
@@ -572,6 +574,7 @@
 			children = (
 				A4CBD8A22664900100B19119 /* PickVendorViewController.swift */,
 				A4CBD8A42664E10800B19119 /* VendorSelectionTableViewCell.swift */,
+				A4CBD8A62664E1E800B19119 /* VendorInfoService.swift */,
 			);
 			path = PickVendor;
 			sourceTree = "<group>";
@@ -937,6 +940,7 @@
 				97B117432656064300242428 /* SingleLabelTableViewCell.swift in Sources */,
 				A4ACEDC526490E25008724E4 /* SelectedQueryCollectionViewCell.swift in Sources */,
 				A4B55E4F265B538F002E1880 /* KeychainUserSessionDataStore.swift in Sources */,
+				A4CBD8A72664E1E800B19119 /* VendorInfoService.swift in Sources */,
 				A4159204260C394F00FD3989 /* UIButton+.swift in Sources */,
 				A4CBD8A32664900100B19119 /* PickVendorViewController.swift in Sources */,
 				A439B52C26099AA1002352C2 /* UIViewController+.swift in Sources */,
