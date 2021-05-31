@@ -109,6 +109,7 @@
 		A4CBD8A32664900100B19119 /* PickVendorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CBD8A22664900100B19119 /* PickVendorViewController.swift */; };
 		A4CBD8A52664E10800B19119 /* VendorSelectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CBD8A42664E10800B19119 /* VendorSelectionTableViewCell.swift */; };
 		A4CBD8A72664E1E800B19119 /* VendorInfoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CBD8A62664E1E800B19119 /* VendorInfoService.swift */; };
+		A4CBD8A92664E2AF00B19119 /* VendorInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CBD8A82664E2AF00B19119 /* VendorInfo.swift */; };
 		A4CF09B32636C36800439D5F /* UIView+shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CF09B22636C36800439D5F /* UIView+shadow.swift */; };
 		A4D50AB02645129E007B07D6 /* AutoCompleteSearchRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D50AAF2645129E007B07D6 /* AutoCompleteSearchRootView.swift */; };
 		A4DD410726425496007B2A41 /* PromiseKitAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DD410626425496007B2A41 /* PromiseKitAPIService.swift */; };
@@ -260,6 +261,7 @@
 		A4CBD8A22664900100B19119 /* PickVendorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickVendorViewController.swift; sourceTree = "<group>"; };
 		A4CBD8A42664E10800B19119 /* VendorSelectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendorSelectionTableViewCell.swift; sourceTree = "<group>"; };
 		A4CBD8A62664E1E800B19119 /* VendorInfoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendorInfoService.swift; sourceTree = "<group>"; };
+		A4CBD8A82664E2AF00B19119 /* VendorInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendorInfo.swift; sourceTree = "<group>"; };
 		A4CF09B22636C36800439D5F /* UIView+shadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+shadow.swift"; sourceTree = "<group>"; };
 		A4D50AAF2645129E007B07D6 /* AutoCompleteSearchRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoCompleteSearchRootView.swift; sourceTree = "<group>"; };
 		A4DD410626425496007B2A41 /* PromiseKitAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromiseKitAPIService.swift; sourceTree = "<group>"; };
@@ -444,6 +446,7 @@
 				A4B55E4A265B4749002E1880 /* MyMindUserSessionRepository.swift */,
 				A4B55E4E265B538F002E1880 /* KeychainUserSessionDataStore.swift */,
 				A4C0AFF3265B7A2E00B8D0C4 /* LastSignInInfoDataStore.swift */,
+				A4CBD8A82664E2AF00B19119 /* VendorInfo.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -912,6 +915,7 @@
 				A43F42952643C75C00A246CC /* FilterSideMenuBottomView.swift in Sources */,
 				A48389B4260869940044C09E /* SignInViewModel.swift in Sources */,
 				A43E0B6A260D84FB005FC6CE /* NVActivityIndicatorView+Rx.swift in Sources */,
+				A4CBD8A92664E2AF00B19119 /* VendorInfo.swift in Sources */,
 				A47AB498265E00B300FE3CFA /* AutoCompleteSearchViewController.swift in Sources */,
 				A4ACEDC72649374B008724E4 /* UIWindow+.swift in Sources */,
 				A43E0B64260D7CA4005FC6CE /* NiblessNavigationController.swift in Sources */,

@@ -10,11 +10,6 @@ import UIKit
 import PromiseKit
 import RxSwift
 
-struct VendorInfo {
-    let id: String
-    let name: String
-}
-
 final class PickVendorViewController: UITableViewController {
     // MARK: - Properties
     let searchTextFieldView: AutoCompleteSearchRootView = AutoCompleteSearchRootView {
