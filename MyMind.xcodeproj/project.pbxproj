@@ -107,6 +107,7 @@
 		A4BDC7BE260B418E005C33A5 /* SignInAccountInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BDC7BD260B418E005C33A5 /* SignInAccountInfo.swift */; };
 		A4C0AFF4265B7A2E00B8D0C4 /* LastSignInInfoDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C0AFF3265B7A2E00B8D0C4 /* LastSignInInfoDataStore.swift */; };
 		A4CBD8A32664900100B19119 /* PickVendorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CBD8A22664900100B19119 /* PickVendorViewController.swift */; };
+		A4CBD8A52664E10800B19119 /* VendorSelectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CBD8A42664E10800B19119 /* VendorSelectionTableViewCell.swift */; };
 		A4CF09B32636C36800439D5F /* UIView+shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CF09B22636C36800439D5F /* UIView+shadow.swift */; };
 		A4D50AB02645129E007B07D6 /* AutoCompleteSearchRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D50AAF2645129E007B07D6 /* AutoCompleteSearchRootView.swift */; };
 		A4DD410726425496007B2A41 /* PromiseKitAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DD410626425496007B2A41 /* PromiseKitAPIService.swift */; };
@@ -256,6 +257,7 @@
 		A4BDC7BD260B418E005C33A5 /* SignInAccountInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInAccountInfo.swift; sourceTree = "<group>"; };
 		A4C0AFF3265B7A2E00B8D0C4 /* LastSignInInfoDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastSignInInfoDataStore.swift; sourceTree = "<group>"; };
 		A4CBD8A22664900100B19119 /* PickVendorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickVendorViewController.swift; sourceTree = "<group>"; };
+		A4CBD8A42664E10800B19119 /* VendorSelectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendorSelectionTableViewCell.swift; sourceTree = "<group>"; };
 		A4CF09B22636C36800439D5F /* UIView+shadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+shadow.swift"; sourceTree = "<group>"; };
 		A4D50AAF2645129E007B07D6 /* AutoCompleteSearchRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoCompleteSearchRootView.swift; sourceTree = "<group>"; };
 		A4DD410626425496007B2A41 /* PromiseKitAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromiseKitAPIService.swift; sourceTree = "<group>"; };
@@ -569,6 +571,7 @@
 			isa = PBXGroup;
 			children = (
 				A4CBD8A22664900100B19119 /* PickVendorViewController.swift */,
+				A4CBD8A42664E10800B19119 /* VendorSelectionTableViewCell.swift */,
 			);
 			path = PickVendor;
 			sourceTree = "<group>";
@@ -917,6 +920,7 @@
 				A4D50AB02645129E007B07D6 /* AutoCompleteSearchRootView.swift in Sources */,
 				A49CF8BB2603028C00AFC170 /* APIService.swift in Sources */,
 				A48389BE260876770044C09E /* AuthService.swift in Sources */,
+				A4CBD8A52664E10800B19119 /* VendorSelectionTableViewCell.swift in Sources */,
 				A457AEB02660A31F0029DDBB /* PickDatesViewModel.swift in Sources */,
 				A4BDC7BE260B418E005C33A5 /* SignInAccountInfo.swift in Sources */,
 				A439BD372637E42F004F47C8 /* MyMindPurchaseAPIService.swift in Sources */,
