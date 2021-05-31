@@ -181,8 +181,10 @@ final class PurchaseListViewController: NiblessViewController {
 
     @objc
     private func createButtonDidTapped(_ sender: UIButton) {
-        let viewModel = PickProductMaterialsViewModel(purchaseAPIService: purchaseAPIService)
-        let viewController = PickProductMaterialsViewController(viewModel: viewModel)
+//        let viewModel = PickProductMaterialsViewModel(purchaseAPIService: purchaseAPIService)
+//        let viewController = PickProductMaterialsViewController(viewModel: viewModel)
+        let adapter = VendorInfoAdapter(service: MyMindAutoCompleteAPIService(userSession: .testUserSession))
+        let viewController = PickVendorViewController(service: adapter)
         navigationController?.pushViewController(viewController, animated: true)
     }
 }

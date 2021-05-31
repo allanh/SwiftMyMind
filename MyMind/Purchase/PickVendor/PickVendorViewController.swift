@@ -8,6 +8,7 @@
 
 import UIKit
 import PromiseKit
+import RxSwift
 
 struct VendorInfo {
     let id: String
@@ -36,17 +37,24 @@ struct VendorInfoAdapter: VendorInfoService {
 }
 
 class PickVendorViewController: UITableViewController {
-    let searchTextFieldView: AutoCompleteSearchRootView = AutoCompleteSearchRootView()
+    // MARK: - Properties
+    let searchTextFieldView: AutoCompleteSearchRootView = AutoCompleteSearchRootView {
+        $0.backgroundColor = .white
+        $0.titleLabel.text = "搜尋供應商"
+    }
 
     let service: VendorInfoService
     var vendorInfos: [VendorInfo] = []
+    let bag: DisposeBag = DisposeBag()
 
+    // MARK: - View life cycles
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchVendors()
+        configTableView()
+        subscribeTextField()
     }
-
-    init(service: VendorInfoService, style: UITableView.Style = .grouped) {
+    // MARK: - Methods
+    init(service: VendorInfoService, style: UITableView.Style = .plain) {
         self.service = service
         super.init(style: style)
     }
@@ -57,11 +65,12 @@ class PickVendorViewController: UITableViewController {
 
     private func configTableView() {
         tableView.rowHeight = 44
-        tableView.sectionHeaderHeight = 80
+        tableView.sectionHeaderHeight = 100
+        tableView.registerCell(VendorSelectionTableViewCell.self)
+        tableView.separatorInset = .init(top: 0, left: 20, bottom: 0, right: 20)
     }
 
-    private func fetchVendors() {
-        guard let searchTerm = searchTextFieldView.textField.text else { return }
+    private func fetchVendors(with searchTerm: String) {
         service.fetchVendorInfos(with: searchTerm)
             .done({ [weak self] infos in
                 guard let self = self else { return }
@@ -72,8 +81,17 @@ class PickVendorViewController: UITableViewController {
                 print(error.localizedDescription)
             }
     }
-}
 
+    private func subscribeTextField() {
+        searchTextFieldView.textField.rx.text.orEmpty
+            .throttle(.milliseconds(200), scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] text in
+                self.fetchVendors(with: text)
+            })
+            .disposed(by: bag)
+    }
+}
+// MARK: - Table view data source
 extension PickVendorViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return vendorInfos.count
@@ -88,7 +106,7 @@ extension PickVendorViewController {
         return cell
     }
 }
-
+// MARK: - Table view delegate
 extension PickVendorViewController {
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         searchTextFieldView.collectionView.removeFromSuperview()
