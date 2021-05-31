@@ -20,6 +20,13 @@ class ProductMaterialsFilterViewController: NiblessViewController {
         $0.backgroundColor = .white
     }
 
+    lazy var vendorInfoView: AutoCompleteSearchRootView = AutoCompleteSearchRootView {
+        $0.backgroundColor = .white
+        $0.textField.text = viewModel.queryInfo.vendorInfo.name
+        $0.textField.isUserInteractionEnabled = false
+        $0.titleLabel.text = "供應商"
+    }
+
     private let bottomView: FilterSideMenuBottomView = FilterSideMenuBottomView {
         $0.backgroundColor = .white
     }
@@ -71,7 +78,6 @@ class ProductMaterialsFilterViewController: NiblessViewController {
 
     private func makeContentViewControlellers() {
         [
-            viewModel.vendorViewModel,
             viewModel.brandNameViewModel,
             viewModel.productNumberViewModel,
             viewModel.productNumberSetViewModel,
@@ -178,7 +184,23 @@ extension ProductMaterialsFilterViewController {
         ])
     }
 
+    private func addVendorInfoView() {
+        vendorInfoView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(vendorInfoView)
+        let top = vendorInfoView.topAnchor
+            .constraint(equalTo: contentView.topAnchor)
+        let leading = vendorInfoView.leadingAnchor
+            .constraint(equalTo: contentView.leadingAnchor)
+        let trailing = vendorInfoView.trailingAnchor
+            .constraint(equalTo: contentView.trailingAnchor)
+
+        NSLayoutConstraint.activate([
+            top, leading, trailing
+        ])
+    }
+
     private func activateConstraintsForChildViews() {
+        addVendorInfoView()
         var lastChildView: UIView?
         for index in 0..<children.count {
             guard let childView = children[index].view else { return }
@@ -186,7 +208,7 @@ extension ProductMaterialsFilterViewController {
             childView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
             childView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
             if index == 0 {
-                childView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 15).isActive = true
+                childView.topAnchor.constraint(equalTo: vendorInfoView.bottomAnchor, constant: 15).isActive = true
             }
             if let lastView = lastChildView {
                 childView.topAnchor.constraint(equalTo: lastView.bottomAnchor).isActive = true

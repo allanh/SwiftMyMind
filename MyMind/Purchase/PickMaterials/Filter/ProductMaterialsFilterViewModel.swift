@@ -12,13 +12,9 @@ import RxRelay
 
 class ProductMaterialsFilterViewModel {
     let title: String = "篩選條件"
-    var queryInfo: ProductMaterialQueryInfo = .defaultQuery()
+    var queryInfo: ProductMaterialQueryInfo
     let didUpdateQueryInfo: (ProductMaterialQueryInfo) -> Void
     let service: AutoCompleteAPIService
-
-    lazy var vendorViewModel: AutoCompleteSearchViewModel = {
-        makeViewModelForVendor()
-    }()
 
     lazy var brandNameViewModel: AutoCompleteSearchViewModel = {
         makeViewModelForBrandName()
@@ -50,14 +46,6 @@ class ProductMaterialsFilterViewModel {
     }
 
     func subscribeChildViewModels() {
-        vendorViewModel.pickedItemViewModels
-            .subscribe(onNext: { [unowned self] viewModels in
-                self.queryInfo.vendorIDs = viewModels.map {
-                    AutoCompleteInfo(id: $0.identifier, number: nil, name: $0.representTitle)
-                }
-            })
-            .disposed(by: bag)
-
         brandNameViewModel.pickedItemViewModels
             .subscribe(onNext: { [unowned self] viewModels in
                 self.queryInfo.brandNames = viewModels.map {
@@ -102,20 +90,11 @@ class ProductMaterialsFilterViewModel {
     }
 
     func cleanToDefaultStatus() {
-        vendorViewModel.pickedItemViewModels.accept([])
         brandNameViewModel.pickedItemViewModels.accept([])
         productNumberViewModel.pickedItemViewModels.accept([])
         productNumberSetViewModel.pickedItemViewModels.accept([])
         originalNumberViewModel.pickedItemViewModels.accept([])
         searchMaterialNameViewModel.addedSearchTerms.accept([])
-    }
-
-    func makeViewModelForVendor() -> AutoCompleteSearchViewModel {
-        let adapter = RxVendorAutoCompleteItemViewModelAdapter(service: service)
-        let viewModel = AutoCompleteSearchViewModel.init(title: "供應商", service: adapter)
-        let items = queryInfo.vendorIDs.map { AutoCompleteItemViewModel(representTitle: $0.name ?? "", identifier: $0.id ?? "")}
-        viewModel.pickedItemViewModels.accept(items)
-        return viewModel
     }
 
     func makeViewModelForBrandName() -> AutoCompleteSearchViewModel {

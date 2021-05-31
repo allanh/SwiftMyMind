@@ -17,7 +17,7 @@ class PickProductMaterialsViewModel {
     // MARK: - Properties
     let title: String = "請選擇SKU"
     let currentProductMaterials: BehaviorRelay<[ProductMaterial]> = .init(value: [])
-    var currentQueryInfo: ProductMaterialQueryInfo = .defaultQuery()
+    var currentQueryInfo: ProductMaterialQueryInfo
     let currentSortType: BehaviorRelay<ProductMaterialQueryInfo.SortType> = .init(value: .number)
     var pickedMaterialIDs: Set<String> = .init()
     var pickedMaterials: [ProductMaterial] = []
@@ -28,8 +28,9 @@ class PickProductMaterialsViewModel {
 
     private let bag: DisposeBag = DisposeBag()
     // MARK: - Methods
-    init(purchaseAPIService: PurchaseAPIService) {
+    init(vendorInfo: VendorInfo, purchaseAPIService: PurchaseAPIService) {
         self.purchaseAPIService = purchaseAPIService
+        self.currentQueryInfo = ProductMaterialQueryInfo(vendorInfo: vendorInfo)
         subscribeSortType()
     }
 
