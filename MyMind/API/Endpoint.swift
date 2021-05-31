@@ -137,7 +137,7 @@ extension Endpoint {
         return Endpoint(path: "/api/admin/\(version)/product/autocomplete", queryItems: query)
     }
 
-    static func productMaterials(query: ProductMaterialQueryInfo = .defaultQuery()) -> Self {
+    static func productMaterials(query: ProductMaterialQueryInfo) -> Self {
         return Endpoint(path: "/api/admin/\(version)/product", queryItems: query.queryItems)
     }
 

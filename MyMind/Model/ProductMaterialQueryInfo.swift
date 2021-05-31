@@ -36,26 +36,20 @@ struct ProductMaterialQueryInfo {
             }
         }
     }
-    var vendorIDs: [AutoCompleteInfo]
-    var brandNames: [AutoCompleteInfo]
-    var materialNumbers: [AutoCompleteInfo]
-    var materailSetNumbers: [AutoCompleteInfo]
-    var originalMaterialNumbers: [AutoCompleteInfo]
-    var materailNames: [String]
+    let vendorInfo: VendorInfo
+    var brandNames: [AutoCompleteInfo] = []
+    var materialNumbers: [AutoCompleteInfo] = []
+    var materailSetNumbers: [AutoCompleteInfo] = []
+    var originalMaterialNumbers: [AutoCompleteInfo] = []
+    var materailNames: [String] = []
     var sortType: SortType = .number
     var pageNumber: Int = 1
 
-    static func defaultQuery() -> Self {
-        return ProductMaterialQueryInfo(vendorIDs: [], brandNames: [], materialNumbers: [], materailSetNumbers: [], originalMaterialNumbers: [], materailNames: [])
-    }
-
     var queryItems: [URLQueryItem] {
         var items: [URLQueryItem] = []
-        if vendorIDs.isEmpty == false {
-            let ids = vendorIDs.compactMap { $0.id }.joined(separator: ",")
-            let query = URLQueryItem(name: "vendor_id", value: ids)
-            items.append(query)
-        }
+        let vendorID = vendorInfo.id
+        let query = URLQueryItem(name: "vendor_id", value: vendorID)
+        items.append(query)
         if brandNames.isEmpty == false {
             let names = brandNames.compactMap { $0.name }.joined(separator: ",")
             let query = URLQueryItem(name: "brand_name", value: names)
