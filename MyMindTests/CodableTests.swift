@@ -101,4 +101,20 @@ class CodableTests: XCTestCase {
             XCTFail()
         }
     }
+
+    func test_decode_purchaseSuggestionInfos() {
+        guard let data = cachedFileDataHelper.cachedFileData(name: "purchase_suggestion_list") else {
+            XCTFail()
+            return
+        }
+
+        do {
+            let purchaseSuggstionInfoList = try JSONDecoder().decode(Response<PurchaseSuggestionInfoList>.self, from: data).data
+            XCTAssertNotNil(purchaseSuggstionInfoList)
+            XCTAssert(purchaseSuggstionInfoList?.items.isEmpty == false)
+        } catch let error {
+            print(error)
+            XCTFail()
+        }
+    }
 }

@@ -1,0 +1,31 @@
+{
+  "data": {
+    "detail": [
+      {
+        "product_id": "766",
+        "product_no": "T_001_005_007_002_HD",
+        "original_product_no": "",
+        "product_name": "TIGER虎牌 北歐風提倒式不鏽鋼保冷保溫壺2.0L(PWO-A200)",
+        "box_quantity": "1",
+        "channel_stock_quantity": "0",
+        "fine_stock_quantity": "0",
+        "total_stock_quantity": "0",
+        "month_sale_quantity": "0",
+        "proposed_quantity": "0",
+        "days_sales_of_inventory": "0",
+        "cost": "900",
+        "untaxed_cost": "857.14",
+        "moving_average_cost": "900",
+        "untaxed_moving_average_cost": "857.14",
+        "stock_unit_name": "個",
+        "box_stock_unit_name": "個"
+      }
+    ],
+    "vendor_id": "209",
+    "vendor_no": "stest01",
+    "alias_name": "測試供應商01"
+  },
+  "id": "8fc9fbc4c1103a1d8eb5c8f9bc46cacf",
+  "status": "SUCCESS",
+  "message": []
+}

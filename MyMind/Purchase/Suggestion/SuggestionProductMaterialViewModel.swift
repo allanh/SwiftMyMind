@@ -18,14 +18,13 @@ struct SuggestionProductMaterialViewModel {
     let purchaseSuggestionQuantity: String
     let stockUnitName: String
     let quantityPerBox: Int
-    let purchaseSuggestionInfo: ProductMaterialPurchaseSuggestionInfo
+    let purchaseSuggestionInfo: PurchaseSuggestionInfo
     let purchaseCostPerItem: BehaviorRelay<Float>
     let purchaseQuantity: BehaviorRelay<Int> = .init(value: 0)
     let puchaseCost: BehaviorRelay<Float> = .init(value: 0)
 }
 
-
-struct ProductMaterialPurchaseSuggestionInfo: Codable {
+struct PurchaseSuggestionInfo: Codable {
     let id, number, originalProductNumber, name: String
     let quantityPerBox, channelStockQuantity, fineStockQuantity, totalStockQuantity: String
     let monthSaleQuantity, proposedQuantity, daysSalesOfInventory, cost: String
@@ -47,5 +46,13 @@ struct ProductMaterialPurchaseSuggestionInfo: Codable {
         case movingAverageCost = "moving_average_cost"
         case stockUnitName = "stock_unit_name"
         case boxStockUnitName = "box_stock_unit_name"
+    }
+}
+
+struct PurchaseSuggestionInfoList: Codable {
+    let items: [PurchaseSuggestionInfo]
+
+    enum CodingKeys: String, CodingKey {
+        case items = "detail"
     }
 }
