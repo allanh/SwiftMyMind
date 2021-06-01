@@ -86,4 +86,19 @@ class CodableTests: XCTestCase {
             XCTFail()
         }
     }
+
+    func test_decode_productMaterialDetail() {
+        guard let data = cachedFileDataHelper.cachedFileData(name: "product_material_detail") else {
+            XCTFail()
+            return
+        }
+
+        do {
+            let productMaterialDetail = try JSONDecoder().decode(Response<ProductMaterialDetail>.self, from: data).data
+            XCTAssertNotNil(productMaterialDetail)
+        } catch let error {
+            print(error)
+            XCTFail()
+        }
+    }
 }
