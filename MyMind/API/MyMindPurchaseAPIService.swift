@@ -13,6 +13,8 @@ protocol PurchaseAPIService {
     var userSession: UserSession { get }
     func fetchPurchaseList(purchaseListQueryInfo: PurchaseListQueryInfo?) -> Promise<PurchaseList>
     func fetchProductMaterialList(with query: ProductMaterialQueryInfo) -> Promise<ProductMaterialList>
+    func fetchProductMaterialDetail(with id: String) -> Promise<ProductMaterialDetail>
+    func fetchPurchaseSeggestionInfos(with productIDs: [String]) -> Promise<PurchaseSuggestionInfoList>
 }
 
 class MyMindPurchaseAPIService: PromiseKitAPIService {
@@ -27,15 +29,26 @@ class MyMindPurchaseAPIService: PromiseKitAPIService {
     ) -> Promise<PurchaseList> {
 
         let partnerID = String(userSession.partnerInfo.id)
-        let endPoint = Endpoint.purchaseList(with: partnerID, purchaseListQueryInfo: purchaseListQueryInfo)
-        let request = request(endPoint: endPoint, httpHeader: ["Authorization": "Bearer \(userSession.token)"])
+        let endpoint = Endpoint.purchaseList(with: partnerID, purchaseListQueryInfo: purchaseListQueryInfo)
+        let request = request(endPoint: endpoint, httpHeader: ["Authorization": "Bearer \(userSession.token)"])
         return sendRequest(request: request)
     }
 
     func fetchProductMaterialList(with query: ProductMaterialQueryInfo) -> Promise<ProductMaterialList> {
-        let endPoint = Endpoint.productMaterials(query: query)
-        let request = request(endPoint: endPoint, httpHeader: ["Authorization": "Bearer \(userSession.token)"])
-        print(request.url!)
+        let endpoint = Endpoint.productMaterials(query: query)
+        let request = request(endPoint: endpoint, httpHeader: ["Authorization": "Bearer \(userSession.token)"])
+        return sendRequest(request: request)
+    }
+
+    func fetchProductMaterialDetail(with id: String) -> Promise<ProductMaterialDetail> {
+        let endpoint = Endpoint.productMaterial(id: id)
+        let request = request(endPoint: endpoint, httpHeader: ["Authorization": "Bearer \(userSession.token)"])
+        return sendRequest(request: request)
+    }
+
+    func fetchPurchaseSeggestionInfos(with productIDs: [String]) -> Promise<PurchaseSuggestionInfoList> {
+        let endpoint = Endpoint.purchaseSuggestionInfos(productIDs: productIDs)
+        let request = request(endPoint: endpoint, httpHeader: ["Authorization": "Bearer \(userSession.token)"])
         return sendRequest(request: request)
     }
 }

@@ -145,6 +145,12 @@ extension Endpoint {
         return Endpoint(path: "/api/admin/\(version)/product/\(id)")
     }
 
+    static func purchaseSuggestionInfos(productIDs: [String]) -> Self {
+        let queryValue = productIDs.joined(separator: ",")
+        let query = URLQueryItem(name: "product_id", value: queryValue)
+        return Endpoint(path: "/api/admin/\(version)/purchase/product", queryItems: [query])
+    }
+
     static func productMaterialBrandNameAutoComplete(searchTerm: String) -> Self {
         var query: [URLQueryItem] = []
         query.append(URLQueryItem(name: "key", value: "BRAND_NAME"))

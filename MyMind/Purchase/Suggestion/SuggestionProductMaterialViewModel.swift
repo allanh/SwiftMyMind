@@ -27,7 +27,7 @@ struct SuggestionProductMaterialViewModel {
 struct PurchaseSuggestionInfo: Codable {
     let id, number, originalProductNumber, name: String
     let quantityPerBox, channelStockQuantity, fineStockQuantity, totalStockQuantity: String
-    let monthSaleQuantity, proposedQuantity, daysSalesOfInventory, cost: String
+    let monthSaleQuantity, suggestedQuantity, daysSalesOfInventory, cost: String
     let movingAverageCost, stockUnitName, boxStockUnitName: String
 
     enum CodingKeys: String, CodingKey {
@@ -40,7 +40,7 @@ struct PurchaseSuggestionInfo: Codable {
         case fineStockQuantity = "fine_stock_quantity"
         case totalStockQuantity = "total_stock_quantity"
         case monthSaleQuantity = "month_sale_quantity"
-        case proposedQuantity = "proposed_quantity"
+        case suggestedQuantity = "proposed_quantity"
         case daysSalesOfInventory = "days_sales_of_inventory"
         case cost
         case movingAverageCost = "moving_average_cost"
