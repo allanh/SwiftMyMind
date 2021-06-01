@@ -141,6 +141,10 @@ extension Endpoint {
         return Endpoint(path: "/api/admin/\(version)/product", queryItems: query.queryItems)
     }
 
+    static func productMaterial(id: String) -> Self {
+        return Endpoint(path: "/api/admin/\(version)/product/\(id)")
+    }
+
     static func productMaterialBrandNameAutoComplete(searchTerm: String) -> Self {
         var query: [URLQueryItem] = []
         query.append(URLQueryItem(name: "key", value: "BRAND_NAME"))
