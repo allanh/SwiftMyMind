@@ -11,6 +11,18 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PurchaseProductSuggestionViewController" customModule="MyMind" customModuleProvider="target">
             <connections>
+                <outlet property="boxCounterLabel" destination="moV-vS-z2d" id="uN9-Rw-0tx"/>
+                <outlet property="deleteButton" destination="r0C-VI-1un" id="JIg-AD-FgY"/>
+                <outlet property="nameLabel" destination="YTX-VN-BYc" id="ieu-Oh-Ybc"/>
+                <outlet property="numberLabel" destination="e61-rk-2e0" id="qZQ-am-ZPR"/>
+                <outlet property="originalNumberLabel" destination="0fV-f7-nMR" id="KRM-EQ-ExP"/>
+                <outlet property="productImageView" destination="7JP-DM-V3Y" id="lW3-66-CAr"/>
+                <outlet property="purchaseCostTextField" destination="RvK-10-DW7" id="MqY-ec-tTG"/>
+                <outlet property="purchaseQuantityTextField" destination="92H-xz-6BO" id="07k-pD-aC4"/>
+                <outlet property="suggestedQuantityButton" destination="jDe-Zr-ELf" id="JA6-rf-TEr"/>
+                <outlet property="suggestedQuantityLabel" destination="Za7-AN-p2C" id="rqg-ZS-Bdu"/>
+                <outlet property="totalPurchaseCostTextField" destination="Vzd-1K-AQx" id="kdJ-nP-u2w"/>
+                <outlet property="unitLabel" destination="NK6-jK-Acf" id="v9k-uy-9Ch"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -103,7 +115,7 @@
                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RvK-10-DW7" customClass="CustomClearButtonPositionTextField" customModule="MyMind" customModuleProvider="target">
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RvK-10-DW7">
                     <rect key="frame" x="137" y="230" width="231" height="40"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="vYR-NS-gNh"/>
@@ -117,7 +129,7 @@
                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="請輸入" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="92H-xz-6BO" customClass="CustomClearButtonPositionTextField" customModule="MyMind" customModuleProvider="target">
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="請輸入" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="92H-xz-6BO">
                     <rect key="frame" x="78" y="302" width="182" height="40"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="rYk-N9-yBf"/>
@@ -149,7 +161,7 @@
                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="請輸入" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Vzd-1K-AQx" customClass="CustomClearButtonPositionTextField" customModule="MyMind" customModuleProvider="target">
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="請輸入" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Vzd-1K-AQx">
                     <rect key="frame" x="169" y="369" width="199" height="40"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="awv-oE-3sJ"/>
