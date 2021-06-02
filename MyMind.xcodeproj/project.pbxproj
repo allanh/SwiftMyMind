@@ -13,6 +13,8 @@
 		97AFE36D266631AC002CBE01 /* purchase_suggestion_list.json in Resources */ = {isa = PBXBuildFile; fileRef = 97AFE36C26663194002CBE01 /* purchase_suggestion_list.json */; };
 		97AFE3702667246B002CBE01 /* PurchaseProductSuggestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97AFE36E2667246B002CBE01 /* PurchaseProductSuggestionViewController.swift */; };
 		97AFE3712667246B002CBE01 /* PurchaseProductSuggestionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97AFE36F2667246B002CBE01 /* PurchaseProductSuggestionViewController.xib */; };
+		97AFE37326673535002CBE01 /* PurchaseSuggestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97AFE37226673535002CBE01 /* PurchaseSuggestionViewController.swift */; };
+		97AFE37526676F83002CBE01 /* ContainerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97AFE37426676F83002CBE01 /* ContainerCollectionViewCell.swift */; };
 		97B1172F26535B9800242428 /* ProductMaterial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B1172E26535B9800242428 /* ProductMaterial.swift */; };
 		97B117322653768F00242428 /* product_materials.json in Resources */ = {isa = PBXBuildFile; fileRef = 97B1172D26535A1000242428 /* product_materials.json */; };
 		97B117342653AF1E00242428 /* ProductMaterialQueryInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B117332653AF1E00242428 /* ProductMaterialQueryInfo.swift */; };
@@ -165,6 +167,8 @@
 		97AFE36C26663194002CBE01 /* purchase_suggestion_list.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = purchase_suggestion_list.json; sourceTree = "<group>"; };
 		97AFE36E2667246B002CBE01 /* PurchaseProductSuggestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseProductSuggestionViewController.swift; sourceTree = "<group>"; };
 		97AFE36F2667246B002CBE01 /* PurchaseProductSuggestionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PurchaseProductSuggestionViewController.xib; sourceTree = "<group>"; };
+		97AFE37226673535002CBE01 /* PurchaseSuggestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseSuggestionViewController.swift; sourceTree = "<group>"; };
+		97AFE37426676F83002CBE01 /* ContainerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerCollectionViewCell.swift; sourceTree = "<group>"; };
 		97B1172D26535A1000242428 /* product_materials.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = product_materials.json; sourceTree = "<group>"; };
 		97B1172E26535B9800242428 /* ProductMaterial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductMaterial.swift; sourceTree = "<group>"; };
 		97B117332653AF1E00242428 /* ProductMaterialQueryInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductMaterialQueryInfo.swift; sourceTree = "<group>"; };
@@ -324,6 +328,7 @@
 				97AFE36826661750002CBE01 /* SuggestionProductMaterialViewModel.swift */,
 				97AFE36E2667246B002CBE01 /* PurchaseProductSuggestionViewController.swift */,
 				97AFE36F2667246B002CBE01 /* PurchaseProductSuggestionViewController.xib */,
+				97AFE37226673535002CBE01 /* PurchaseSuggestionViewController.swift */,
 			);
 			path = Suggestion;
 			sourceTree = "<group>";
@@ -594,6 +599,7 @@
 				97B117422656064300242428 /* SingleLabelTableViewCell.swift */,
 				A47AB495265DF53200FE3CFA /* ContainerTableViewCell.swift */,
 				A457AEB32660F5F80029DDBB /* StageProgressView.swift */,
+				97AFE37426676F83002CBE01 /* ContainerCollectionViewCell.swift */,
 			);
 			path = UILayer;
 			sourceTree = "<group>";
@@ -915,6 +921,7 @@
 				A4054109264A270C00E2D21B /* DispatchQueue+.swift in Sources */,
 				A43F429C2643EAEF00A246CC /* UICollectionViewLeftAlignedLayout.swift in Sources */,
 				A4793CC02604A59C00AD280C /* GradientView.swift in Sources */,
+				97AFE37526676F83002CBE01 /* ContainerCollectionViewCell.swift in Sources */,
 				A49CF8C526030CEE00AFC170 /* MyMindAuthService.swift in Sources */,
 				A4F2D011265D0770004D8D6D /* ProductMaterialsFilterViewModel.swift in Sources */,
 				A457AEB22660A34A0029DDBB /* PickPurchaseStatusViewModel.swift in Sources */,
@@ -952,6 +959,7 @@
 				97AFE36926661750002CBE01 /* SuggestionProductMaterialViewModel.swift in Sources */,
 				A4BDC7B9260B3E0A005C33A5 /* KeychainHelper.swift in Sources */,
 				A405410D264A670100E2D21B /* MultiSelectableDropDownTableViewCell.swift in Sources */,
+				97AFE37326673535002CBE01 /* PurchaseSuggestionViewController.swift in Sources */,
 				A457AEB42660F5F80029DDBB /* StageProgressView.swift in Sources */,
 				A48389AF2608360A0044C09E /* SignInViewController.swift in Sources */,
 				A4D50AB02645129E007B07D6 /* AutoCompleteSearchRootView.swift in Sources */,

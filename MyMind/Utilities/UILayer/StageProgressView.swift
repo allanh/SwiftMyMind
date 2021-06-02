@@ -8,7 +8,7 @@
 
 import UIKit
 
-class StageProgressView: UIView {
+class StageProgressView: NiblessView {
 
     var numberOfStages: Int = 3
     var stageDescriptionList: [String] = ["採購建議", "採購申請", "送出審核"]
@@ -18,10 +18,17 @@ class StageProgressView: UIView {
     var lineHieght: CGFloat = 8
     var textFont: UIFont = .systemFont(ofSize: 14)
     var textHeight: CGFloat = 20
-    var isProgressedColor: UIColor = .blue
+    var isProgressedColor: UIColor = UIColor(hex: "004477")
     var isNotProgressedColor: UIColor = .gray
 
     private var indicators: [CALayer] = []
+
+    convenience init(numberOfStage: Int, stageNameList: [String], currentStageIndex: Int) {
+        self.init(frame: .zero)
+        self.numberOfStages = numberOfStage
+        self.stageDescriptionList = stageNameList
+        self.currentStageIndex = currentStageIndex
+    }
 
     override func layoutSubviews() {
         super.layoutSubviews()
