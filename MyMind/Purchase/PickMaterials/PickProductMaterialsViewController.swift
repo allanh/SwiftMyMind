@@ -67,7 +67,11 @@ class PickProductMaterialsViewController: NiblessViewController {
     private func handleNavigation(with view: PickMaterialView) {
         switch view {
         case .filter:
-            let service = MyMindAutoCompleteAPIService(userSession: viewModel.purchaseAPIService.userSession)
+            guard let userSession = MyMindUserSessionRepository.shared.readUserssion() else {
+                #warning("Handle not sign in")
+                return
+            }
+            let service = MyMindAutoCompleteAPIService(userSession: userSession)
             let viewModel = ProductMaterialsFilterViewModel(
                 service: service,
                 queryInfo: viewModel.currentQueryInfo) { [unowned self] info in

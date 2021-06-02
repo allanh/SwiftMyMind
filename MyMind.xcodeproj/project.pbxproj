@@ -11,6 +11,8 @@
 		97AFE36926661750002CBE01 /* SuggestionProductMaterialViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97AFE36826661750002CBE01 /* SuggestionProductMaterialViewModel.swift */; };
 		97AFE36B266629FD002CBE01 /* product_material_detail.json in Resources */ = {isa = PBXBuildFile; fileRef = 97AFE36A26662918002CBE01 /* product_material_detail.json */; };
 		97AFE36D266631AC002CBE01 /* purchase_suggestion_list.json in Resources */ = {isa = PBXBuildFile; fileRef = 97AFE36C26663194002CBE01 /* purchase_suggestion_list.json */; };
+		97AFE3702667246B002CBE01 /* PurchaseProductSuggestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97AFE36E2667246B002CBE01 /* PurchaseProductSuggestionViewController.swift */; };
+		97AFE3712667246B002CBE01 /* PurchaseProductSuggestionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97AFE36F2667246B002CBE01 /* PurchaseProductSuggestionViewController.xib */; };
 		97B1172F26535B9800242428 /* ProductMaterial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B1172E26535B9800242428 /* ProductMaterial.swift */; };
 		97B117322653768F00242428 /* product_materials.json in Resources */ = {isa = PBXBuildFile; fileRef = 97B1172D26535A1000242428 /* product_materials.json */; };
 		97B117342653AF1E00242428 /* ProductMaterialQueryInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B117332653AF1E00242428 /* ProductMaterialQueryInfo.swift */; };
@@ -161,6 +163,8 @@
 		97AFE36826661750002CBE01 /* SuggestionProductMaterialViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionProductMaterialViewModel.swift; sourceTree = "<group>"; };
 		97AFE36A26662918002CBE01 /* product_material_detail.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = product_material_detail.json; sourceTree = "<group>"; };
 		97AFE36C26663194002CBE01 /* purchase_suggestion_list.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = purchase_suggestion_list.json; sourceTree = "<group>"; };
+		97AFE36E2667246B002CBE01 /* PurchaseProductSuggestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseProductSuggestionViewController.swift; sourceTree = "<group>"; };
+		97AFE36F2667246B002CBE01 /* PurchaseProductSuggestionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PurchaseProductSuggestionViewController.xib; sourceTree = "<group>"; };
 		97B1172D26535A1000242428 /* product_materials.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = product_materials.json; sourceTree = "<group>"; };
 		97B1172E26535B9800242428 /* ProductMaterial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductMaterial.swift; sourceTree = "<group>"; };
 		97B117332653AF1E00242428 /* ProductMaterialQueryInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductMaterialQueryInfo.swift; sourceTree = "<group>"; };
@@ -318,6 +322,8 @@
 			isa = PBXGroup;
 			children = (
 				97AFE36826661750002CBE01 /* SuggestionProductMaterialViewModel.swift */,
+				97AFE36E2667246B002CBE01 /* PurchaseProductSuggestionViewController.swift */,
+				97AFE36F2667246B002CBE01 /* PurchaseProductSuggestionViewController.xib */,
 			);
 			path = Suggestion;
 			sourceTree = "<group>";
@@ -752,6 +758,7 @@
 			files = (
 				A44A5A7A25F9B0D300995823 /* LaunchScreen.storyboard in Resources */,
 				A44A5A7725F9B0D300995823 /* Assets.xcassets in Resources */,
+				97AFE3712667246B002CBE01 /* PurchaseProductSuggestionViewController.xib in Resources */,
 				A489A1B2263FAA7D00832679 /* PurchaseBriefCollectionViewCell.xib in Resources */,
 				A44A5A7525F9B0D200995823 /* Main.storyboard in Resources */,
 			);
@@ -975,6 +982,7 @@
 				A4793C7F2604573700AD280C /* UserSession.swift in Sources */,
 				A47F39CD263A58F700A3097C /* PurchaseListViewController.swift in Sources */,
 				A4B55E4B265B4749002E1880 /* MyMindUserSessionRepository.swift in Sources */,
+				97AFE3702667246B002CBE01 /* PurchaseProductSuggestionViewController.swift in Sources */,
 				A4F2D013265D07C7004D8D6D /* AutoCompleteSearchViewModel.swift in Sources */,
 				A439B53C2609CDC3002352C2 /* ToastView.swift in Sources */,
 				A44A5A6E25F9B0D200995823 /* AppDelegate.swift in Sources */,

@@ -10,7 +10,7 @@ import Foundation
 import PromiseKit
 
 protocol PurchaseAPIService {
-    var userSession: UserSession { get }
+//    var userSession: UserSession { get }
     func fetchPurchaseList(purchaseListQueryInfo: PurchaseListQueryInfo?) -> Promise<PurchaseList>
     func fetchProductMaterialList(with query: ProductMaterialQueryInfo) -> Promise<ProductMaterialList>
     func fetchProductMaterialDetail(with id: String) -> Promise<ProductMaterialDetail>
@@ -18,7 +18,7 @@ protocol PurchaseAPIService {
 }
 
 class MyMindPurchaseAPIService: PromiseKitAPIService {
-    let userSession: UserSession
+    private let userSession: UserSession
 
     init(userSession: UserSession) {
         self.userSession = userSession
