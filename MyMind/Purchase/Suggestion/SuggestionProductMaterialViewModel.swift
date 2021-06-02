@@ -19,9 +19,69 @@ struct SuggestionProductMaterialViewModel {
     let stockUnitName: String
     let quantityPerBox: Int
     let purchaseSuggestionInfo: PurchaseSuggestionInfo
+
+    let purchaseCostPerItemInput: PublishRelay<String> = .init()
     let purchaseCostPerItem: BehaviorRelay<Float>
+    let validationStatusForpurchaseCostPerItem: BehaviorRelay<ValidationResult> = .init(value: .invalid(""))
+
+    let purchaseQuantityInput: PublishRelay<String> = .init()
     let purchaseQuantity: BehaviorRelay<Int> = .init(value: 0)
-    let puchaseCost: BehaviorRelay<Float> = .init(value: 0)
+    let validationStatusForPurchaseQuantity: BehaviorRelay<ValidationResult> = .init(value: .invalid(""))
+
+    let purchaseCostInput: PublishRelay<String> = .init()
+    let purchaseCost: BehaviorRelay<Float> = .init(value: 0)
+    let validationStatusForPurchaseCost: BehaviorRelay<ValidationResult> = .init(value: .invalid(""))
+
+    let bag: DisposeBag = DisposeBag()
+
+    init(imageURL: URL?, number: String, originalProductNumber: String, name: String, purchaseSuggestionQuantity: String, stockUnitName: String, quantityPerBox: Int, purchaseSuggestionInfo: PurchaseSuggestionInfo, purchaseCostPerItem: BehaviorRelay<Float>) {
+        self.imageURL = imageURL
+        self.number = number
+        self.originalProductNumber = originalProductNumber
+        self.name = name
+        self.purchaseSuggestionQuantity = purchaseSuggestionQuantity
+        self.stockUnitName = stockUnitName
+        self.quantityPerBox = quantityPerBox
+        self.purchaseSuggestionInfo = purchaseSuggestionInfo
+        self.purchaseCostPerItem = purchaseCostPerItem
+
+        bindInput()
+    }
+
+    func bindInput() {
+        purchaseCostPerItemInput
+            .map({ Float($0) ?? 0 })
+            .bind(to: purchaseCostPerItem)
+            .disposed(by: bag)
+
+        purchaseCostPerItem
+            .map { cost in
+                cost > 0 ? .valid : .invalid("此欄位必填")
+            }
+            .bind(to: validationStatusForpurchaseCostPerItem)
+            .disposed(by: bag)
+
+
+        purchaseQuantityInput
+            .map({ Int($0) ?? 0})
+            .bind(to: purchaseQuantity)
+            .disposed(by: bag)
+
+        purchaseQuantity
+            .map { quantity in
+                quantity > 0 ? .valid : .invalid("請輸入大於0的數量")
+            }
+            .skip(1)
+            .bind(to: validationStatusForPurchaseQuantity)
+            .disposed(by: bag)
+
+        Observable.combineLatest(purchaseCostPerItem, purchaseQuantity)
+            .map { (cost, quantity) in
+                cost * Float(quantity)
+            }
+            .bind(to: purchaseCost)
+            .disposed(by: bag)
+    }
 }
 
 struct PurchaseSuggestionInfo: Codable {
