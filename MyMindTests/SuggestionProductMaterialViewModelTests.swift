@@ -78,6 +78,14 @@ class SuggestionProductMaterialViewModelTests: XCTestCase {
         XCTAssertEqual(sut.totalBox.value, expectedResult)
     }
 
+    func test_inputValidPurchaseCostPerItemAndValidQuantity_returnCorrespondingPurchaseCost() {
+        sut.purchaseCostPerItemInput.accept("1234.1")
+        sut.purchaseQuantityInput.accept("123")
+
+        let expectedResult = Float(1234.1 * 123)
+        XCTAssertEqual(sut.purchaseCost.value, expectedResult)
+    }
+
     private func makeSUT() -> SuggestionProductMaterialViewModel {
         let sut = SuggestionProductMaterialViewModel(
             imageURL: nil,
