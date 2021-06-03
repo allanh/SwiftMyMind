@@ -16,6 +16,7 @@
 		97AFE37326673535002CBE01 /* PurchaseSuggestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97AFE37226673535002CBE01 /* PurchaseSuggestionViewController.swift */; };
 		97AFE37526676F83002CBE01 /* ContainerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97AFE37426676F83002CBE01 /* ContainerCollectionViewCell.swift */; };
 		97AFE37726687320002CBE01 /* SuggestionProductMaterialViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97AFE3762668731F002CBE01 /* SuggestionProductMaterialViewModelTests.swift */; };
+		97AFE3792668D727002CBE01 /* UIViewController+loadNib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97AFE3782668D727002CBE01 /* UIViewController+loadNib.swift */; };
 		97B1172F26535B9800242428 /* ProductMaterial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B1172E26535B9800242428 /* ProductMaterial.swift */; };
 		97B117322653768F00242428 /* product_materials.json in Resources */ = {isa = PBXBuildFile; fileRef = 97B1172D26535A1000242428 /* product_materials.json */; };
 		97B117342653AF1E00242428 /* ProductMaterialQueryInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B117332653AF1E00242428 /* ProductMaterialQueryInfo.swift */; };
@@ -171,6 +172,7 @@
 		97AFE37226673535002CBE01 /* PurchaseSuggestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseSuggestionViewController.swift; sourceTree = "<group>"; };
 		97AFE37426676F83002CBE01 /* ContainerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerCollectionViewCell.swift; sourceTree = "<group>"; };
 		97AFE3762668731F002CBE01 /* SuggestionProductMaterialViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionProductMaterialViewModelTests.swift; sourceTree = "<group>"; };
+		97AFE3782668D727002CBE01 /* UIViewController+loadNib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+loadNib.swift"; sourceTree = "<group>"; };
 		97B1172D26535A1000242428 /* product_materials.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = product_materials.json; sourceTree = "<group>"; };
 		97B1172E26535B9800242428 /* ProductMaterial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductMaterial.swift; sourceTree = "<group>"; };
 		97B117332653AF1E00242428 /* ProductMaterialQueryInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductMaterialQueryInfo.swift; sourceTree = "<group>"; };
@@ -524,6 +526,7 @@
 				A4ACEDC62649374B008724E4 /* UIWindow+.swift */,
 				A4054108264A270C00E2D21B /* DispatchQueue+.swift */,
 				A405410A264A575E00E2D21B /* UITextField+.swift */,
+				97AFE3782668D727002CBE01 /* UIViewController+loadNib.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -977,6 +980,7 @@
 				A43E0B65260D7CA4005FC6CE /* NiblessView.swift in Sources */,
 				A4F2D015265D088B004D8D6D /* ProductMaterialAutoCompleteAdapters.swift in Sources */,
 				A4DD410726425496007B2A41 /* PromiseKitAPIService.swift in Sources */,
+				97AFE3792668D727002CBE01 /* UIViewController+loadNib.swift in Sources */,
 				97B117372653B1AF00242428 /* PickProductMaterialsViewModel.swift in Sources */,
 				A4793CB126048BB600AD280C /* UIFont+.swift in Sources */,
 				97B1172F26535B9800242428 /* ProductMaterial.swift in Sources */,
