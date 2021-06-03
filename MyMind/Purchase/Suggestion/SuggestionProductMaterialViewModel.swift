@@ -22,17 +22,18 @@ struct SuggestionProductMaterialViewModel {
 
     let purchaseCostPerItemInput: PublishRelay<String> = .init()
     let purchaseCostPerItem: BehaviorRelay<Float>
-    let validationStatusForpurchaseCostPerItem: BehaviorRelay<ValidationResult> = .init(value: .invalid(""))
+    let validationStatusForpurchaseCostPerItem: BehaviorRelay<ValidationResult> = .init(value: .valid)
 
     let purchaseQuantityInput: PublishRelay<String> = .init()
     let purchaseQuantity: BehaviorRelay<Int> = .init(value: 0)
-    let validationStatusForPurchaseQuantity: BehaviorRelay<ValidationResult> = .init(value: .invalid(""))
+    let validationStatusForPurchaseQuantity: BehaviorRelay<ValidationResult> = .init(value: .valid)
 
     let purchaseCostInput: PublishRelay<String> = .init()
     let purchaseCost: BehaviorRelay<Float> = .init(value: 0)
-    let validationStatusForPurchaseCost: BehaviorRelay<ValidationResult> = .init(value: .invalid(""))
+    let validationStatusForPurchaseCost: BehaviorRelay<ValidationResult> = .init(value: .valid)
 
     let totalBox: BehaviorRelay<Float> = .init(value: 0)
+    let centralizedValidationStatus: BehaviorRelay<ValidationResult> = .init(value: .invalid(""))
 
     let bag: DisposeBag = DisposeBag()
 
@@ -102,6 +103,14 @@ struct SuggestionProductMaterialViewModel {
             .map({ Float($0) ?? 0 })
             .map(validatePurchaseCostInput(input:))
             .bind(to: validationStatusForPurchaseCost)
+            .disposed(by: bag)
+
+        Observable.combineLatest(validationStatusForpurchaseCostPerItem, validationStatusForPurchaseQuantity, validationStatusForPurchaseCost)
+            .map {
+                [$0.0 == .valid, $0.1 == .valid, $0.2 == .valid]
+            }
+            .map { $0.contains(false) ? ValidationResult.invalid("") : ValidationResult.valid }
+            .bind(to: centralizedValidationStatus)
             .disposed(by: bag)
     }
 
