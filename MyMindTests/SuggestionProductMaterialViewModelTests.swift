@@ -86,6 +86,38 @@ class SuggestionProductMaterialViewModelTests: XCTestCase {
         XCTAssertEqual(sut.purchaseCost.value, expectedResult)
     }
 
+    func test_inputInvalidPurchaseCost_returnInvalidResult() {
+        sut.purchaseCostPerItemInput.accept("10")
+        sut.purchaseQuantityInput.accept("2")
+        sut.purchaseCostInput.accept("30")
+        XCTAssertEqual(sut.validationStatusForPurchaseCost.value, .invalid("進貨成本小計(未稅) 1-30 元修正不得大於 1 元"))
+
+        sut.purchaseCostPerItemInput.accept("10")
+        sut.purchaseQuantityInput.accept("4")
+        sut.purchaseCostInput.accept("30")
+        XCTAssertEqual(sut.validationStatusForPurchaseCost.value, .invalid("進貨成本小計(未稅) 31-100 元修正不得大於 2 元"))
+
+        sut.purchaseCostPerItemInput.accept("100")
+        sut.purchaseQuantityInput.accept("2")
+        sut.purchaseCostInput.accept("30")
+        XCTAssertEqual(sut.validationStatusForPurchaseCost.value, .invalid("進貨成本小計(未稅) 101-300 元修正不得大於 3 元"))
+
+        sut.purchaseCostPerItemInput.accept("100")
+        sut.purchaseQuantityInput.accept("4")
+        sut.purchaseCostInput.accept("30")
+        XCTAssertEqual(sut.validationStatusForPurchaseCost.value, .invalid("進貨成本小計(未稅) 301-1000 元修正不得大於 10 元"))
+
+        sut.purchaseCostPerItemInput.accept("1000")
+        sut.purchaseQuantityInput.accept("4")
+        sut.purchaseCostInput.accept("30")
+        XCTAssertEqual(sut.validationStatusForPurchaseCost.value, .invalid("進貨成本小計(未稅) 301-1000 元修正不得大於 20 元"))
+
+        sut.purchaseCostPerItemInput.accept("1000")
+        sut.purchaseQuantityInput.accept("11")
+        sut.purchaseCostInput.accept("20000")
+        XCTAssertEqual(sut.validationStatusForPurchaseCost.value, .invalid("進貨成本小計(未稅) 10,001 元以上修正不得大於 30 元"))
+    }
+
     private func makeSUT() -> SuggestionProductMaterialViewModel {
         let sut = SuggestionProductMaterialViewModel(
             imageURL: nil,

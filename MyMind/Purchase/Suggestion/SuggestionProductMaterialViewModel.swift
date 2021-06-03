@@ -92,6 +92,37 @@ struct SuggestionProductMaterialViewModel {
             }
             .bind(to: purchaseCost)
             .disposed(by: bag)
+
+        purchaseCostInput
+            .map({ Float($0) ?? 0 })
+            .bind(to: purchaseCost)
+            .disposed(by: bag)
+
+        purchaseCostInput
+            .map({ Float($0) ?? 0 })
+            .map(validatePurchaseCostInput(input:))
+            .bind(to: validationStatusForPurchaseCost)
+            .disposed(by: bag)
+    }
+
+    func validatePurchaseCostInput(input: Float) -> ValidationResult {
+        let standardPurchaseCost = purchaseCostPerItem.value * Float(purchaseQuantity.value)
+        let adjustedValue = abs(input - standardPurchaseCost)
+        switch standardPurchaseCost {
+        case 0: return .valid
+        case 1...30:
+             return adjustedValue > 1 ? .invalid("進貨成本小計(未稅) 1-30 元修正不得大於 1 元") : .valid
+        case 31...100:
+            return adjustedValue > 2 ? .invalid("進貨成本小計(未稅) 31-100 元修正不得大於 2 元") : .valid
+        case 101...300:
+            return adjustedValue > 3 ? .invalid("進貨成本小計(未稅) 101-300 元修正不得大於 3 元") : .valid
+        case 301...1000:
+            return adjustedValue > 10 ? .invalid("進貨成本小計(未稅) 301-1000 元修正不得大於 10 元") : .valid
+        case 1001...10000:
+            return adjustedValue > 20 ? .invalid("進貨成本小計(未稅) 301-1000 元修正不得大於 20 元") : .valid
+        default:
+            return adjustedValue > 30 ? .invalid("進貨成本小計(未稅) 10,001 元以上修正不得大於 30 元") : .valid
+        }
     }
 }
 
