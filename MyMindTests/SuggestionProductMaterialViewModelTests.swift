@@ -118,6 +118,44 @@ class SuggestionProductMaterialViewModelTests: XCTestCase {
         XCTAssertEqual(sut.validationStatusForPurchaseCost.value, .invalid("進貨成本小計(未稅) 10,001 元以上修正不得大於 30 元"))
     }
 
+    func test_inputValidPurchaseCost_returnValidResult() {
+        sut.purchaseCostPerItemInput.accept("10")
+        sut.purchaseQuantityInput.accept("1")
+        sut.purchaseCostInput.accept("11")
+
+        XCTAssertEqual(sut.validationStatusForPurchaseCost.value, .valid)
+
+        sut.purchaseCostPerItemInput.accept("10")
+        sut.purchaseQuantityInput.accept("4")
+        sut.purchaseCostInput.accept("42")
+
+        XCTAssertEqual(sut.validationStatusForPurchaseCost.value, .valid)
+
+        sut.purchaseCostPerItemInput.accept("100")
+        sut.purchaseQuantityInput.accept("2")
+        sut.purchaseCostInput.accept("198")
+
+        XCTAssertEqual(sut.validationStatusForPurchaseCost.value, .valid)
+
+        sut.purchaseCostPerItemInput.accept("100")
+        sut.purchaseQuantityInput.accept("4")
+        sut.purchaseCostInput.accept("410")
+
+        XCTAssertEqual(sut.validationStatusForPurchaseCost.value, .valid)
+
+        sut.purchaseCostPerItemInput.accept("1000")
+        sut.purchaseQuantityInput.accept("4")
+        sut.purchaseCostInput.accept("3980")
+
+        XCTAssertEqual(sut.validationStatusForPurchaseCost.value, .valid)
+
+        sut.purchaseCostPerItemInput.accept("1000")
+        sut.purchaseQuantityInput.accept("11")
+        sut.purchaseCostInput.accept("11030")
+
+        XCTAssertEqual(sut.validationStatusForPurchaseCost.value, .valid)
+    }
+
     private func makeSUT() -> SuggestionProductMaterialViewModel {
         let sut = SuggestionProductMaterialViewModel(
             imageURL: nil,
