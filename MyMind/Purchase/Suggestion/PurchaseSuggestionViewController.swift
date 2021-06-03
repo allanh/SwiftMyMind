@@ -7,6 +7,10 @@
 //
 
 import UIKit
+import RxSwift
+import RxRelay
+import PromiseKit
+
 struct PurchaseServiceToSuggestionProductMaterialViewModelAdapter: SuggestionProductMaterialViewModeService {
     let service: PurchaseAPIService
     let imageDictionary: [String: URL?]
@@ -28,6 +32,7 @@ struct PurchaseServiceToSuggestionProductMaterialViewModelAdapter: SuggestionPro
         }
     }
 }
+
 protocol SuggestionProductMaterialViewModeService {
     func fetchSuggestionProductMaterialViewModels(with productIDs: [String]) -> Promise<[SuggestionProductMaterialViewModel]>
 }
@@ -128,10 +133,57 @@ class PurchaseSuggestionViewController: NiblessViewController {
         $0.setTitleColor(.white, for: .normal)
     }
 
+    var contentViewControllers: [PurchaseProductSuggestionViewController] = []
+
+    let viewModel: PurchaseSuggestionViewModel
+
+    let bag: DisposeBag = DisposeBag()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         constructViewHierarchy()
         activateConstraints()
+        viewModel.fetchSuggstionProductMaterialViewModels()
+
+        wireToViewModel()
+        subscribeViewModel()
+    }
+
+    init(viewModel: PurchaseSuggestionViewModel) {
+        self.viewModel = viewModel
+        super.init()
+    }
+
+    private func wireToViewModel() {
+        nextStepButton.addTarget(viewModel, action: #selector(PurchaseSuggestionViewModel.performNextStep), for: .touchUpInside)
+    }
+
+    private func subscribeViewModel() {
+        viewModel.view
+            .subscribe(onNext: { [unowned self] in
+                self.handleNavigation(view: $0)
+            })
+            .disposed(by: bag)
+
+        viewModel.didReceiveContent
+            .subscribe(on: MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] viewModels in
+                self.generateChildViewController(childViewModels: viewModels)
+                self.collectionView.reloadData()
+            })
+            .disposed(by: bag)
+    }
+
+    private func generateChildViewController(childViewModels: [SuggestionProductMaterialViewModel]) {
+        for viewModel in childViewModels {
+            let viewController = PurchaseProductSuggestionViewController.loadFormNib()
+            viewController.viewModel = viewModel
+            contentViewControllers.append(viewController)
+        }
+    }
+
+    private func removeChildViewController(at index: Int) {
+        contentViewControllers.remove(at: index)
     }
 
     func constructViewHierarchy() {
@@ -143,11 +195,31 @@ class PurchaseSuggestionViewController: NiblessViewController {
         activateConstraintsCollecitonView()
         activateConstraintsNextStepButton()
     }
+
+    private func handleNavigation(view: PurchaseSuggestionViewModel.View) {
+        switch view {
+        case .suggestionInfo:
+            break
+        case .purchaseApply:
+            break
+        }
+    }
+
+    @objc
+    private func deleteButtonDidTapped(_ sender: UIButton) {
+        guard
+            let point = sender.superview?.convert(sender.frame.origin, to: collectionView),
+            let indexPath = collectionView.indexPathForItem(at: point)
+        else { return }
+
+        viewModel.removeSuggestionProductMaterialViewModel(at: indexPath.item)
+        removeChildViewController(at: indexPath.item)
+    }
 }
 // MARK: - Collection view data source
 extension PurchaseSuggestionViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 0
+        return contentViewControllers.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -155,10 +227,11 @@ extension PurchaseSuggestionViewController: UICollectionViewDataSource {
             print("Wrong cell identifier or not register yet")
             return UICollectionViewCell()
         }
+        let viewController = contentViewControllers[indexPath.item]
+        viewController.deleteButton.addTarget(self, action: #selector(deleteButtonDidTapped(_:)), for: .touchUpInside)
+        cell.hostedView = viewController.view
         return cell
     }
-
-
 }
 // MARK: - Layouts
 extension PurchaseSuggestionViewController {
