@@ -32,9 +32,11 @@ struct SuggestionProductMaterialViewModel {
     let purchaseCost: BehaviorRelay<Float> = .init(value: 0)
     let validationStatusForPurchaseCost: BehaviorRelay<ValidationResult> = .init(value: .invalid(""))
 
+    let totalBox: BehaviorRelay<Float> = .init(value: 0)
+
     let bag: DisposeBag = DisposeBag()
 
-    init(imageURL: URL?, number: String, originalProductNumber: String, name: String, purchaseSuggestionQuantity: String, stockUnitName: String, quantityPerBox: Int, purchaseSuggestionInfo: PurchaseSuggestionInfo, purchaseCostPerItem: BehaviorRelay<Float>) {
+    init(imageURL: URL?, number: String, originalProductNumber: String, name: String, purchaseSuggestionQuantity: String, stockUnitName: String, quantityPerBox: Int, purchaseSuggestionInfo: PurchaseSuggestionInfo, purchaseCostPerItem: Float) {
         self.imageURL = imageURL
         self.number = number
         self.originalProductNumber = originalProductNumber
@@ -43,7 +45,7 @@ struct SuggestionProductMaterialViewModel {
         self.stockUnitName = stockUnitName
         self.quantityPerBox = quantityPerBox
         self.purchaseSuggestionInfo = purchaseSuggestionInfo
-        self.purchaseCostPerItem = purchaseCostPerItem
+        self.purchaseCostPerItem = .init(value: purchaseCostPerItem)
 
         bindInput()
     }
@@ -73,6 +75,15 @@ struct SuggestionProductMaterialViewModel {
             }
             .skip(1)
             .bind(to: validationStatusForPurchaseQuantity)
+            .disposed(by: bag)
+
+        purchaseQuantity
+            .map { quantity -> Float in
+                let result = Float(quantity / quantityPerBox)
+                let roundedResult = (result*100).rounded() / 100
+                return roundedResult
+            }
+            .bind(to: totalBox)
             .disposed(by: bag)
 
         Observable.combineLatest(purchaseCostPerItem, purchaseQuantity)
