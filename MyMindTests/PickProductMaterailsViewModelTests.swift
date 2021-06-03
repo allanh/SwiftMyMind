@@ -12,7 +12,15 @@ import PromiseKit
 
 @testable import MyMind
 
-class MockPuchaseAPIService: PurchaseAPIService {
+class MockPurchaseAPIService: PurchaseAPIService {
+    func fetchProductMaterialDetail(with id: String) -> Promise<ProductMaterialDetail> {
+        .init(error: APIError.dataNotFoundError)
+    }
+
+    func fetchPurchaseSeggestionInfos(with productIDs: [String]) -> Promise<PurchaseSuggestionInfoList> {
+        .init(error: APIError.dataNotFoundError)
+    }
+
     let userSession: UserSession
     var shouldSuccess: Bool = true
     let cachedFileDataHelper = CachedFileDataHelper()
@@ -63,12 +71,12 @@ class MockPuchaseAPIService: PurchaseAPIService {
 class PickProductMaterailsViewModelTests: XCTestCase {
 
     var sut: PickProductMaterialsViewModel!
-    var mockAPIService: MockPuchaseAPIService!
+    var mockAPIService: MockPurchaseAPIService!
     let cachedFileDataHelper = CachedFileDataHelper()
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        mockAPIService = MockPuchaseAPIService()
+        mockAPIService = MockPurchaseAPIService()
         sut = PickProductMaterialsViewModel(vendorInfo: .init(id: "", name: ""), purchaseAPIService: mockAPIService)
     }
 
