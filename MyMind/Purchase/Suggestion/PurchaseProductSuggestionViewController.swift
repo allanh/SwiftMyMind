@@ -21,12 +21,13 @@ class PurchaseProductSuggestionViewController: UIViewController {
     @IBOutlet private weak var unitLabel: UILabel!
     @IBOutlet private weak var boxCounterLabel: UILabel!
     @IBOutlet private weak var totalPurchaseCostTextField: UITextField!
-    @IBOutlet private weak var deleteButton: UIButton!
+    @IBOutlet weak var deleteButton: UIButton!
+
+    var viewModel: SuggestionProductMaterialViewModel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
-
 }
