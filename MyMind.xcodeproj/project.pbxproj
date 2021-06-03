@@ -15,6 +15,7 @@
 		97AFE3712667246B002CBE01 /* PurchaseProductSuggestionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97AFE36F2667246B002CBE01 /* PurchaseProductSuggestionViewController.xib */; };
 		97AFE37326673535002CBE01 /* PurchaseSuggestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97AFE37226673535002CBE01 /* PurchaseSuggestionViewController.swift */; };
 		97AFE37526676F83002CBE01 /* ContainerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97AFE37426676F83002CBE01 /* ContainerCollectionViewCell.swift */; };
+		97AFE37726687320002CBE01 /* SuggestionProductMaterialViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97AFE3762668731F002CBE01 /* SuggestionProductMaterialViewModelTests.swift */; };
 		97B1172F26535B9800242428 /* ProductMaterial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B1172E26535B9800242428 /* ProductMaterial.swift */; };
 		97B117322653768F00242428 /* product_materials.json in Resources */ = {isa = PBXBuildFile; fileRef = 97B1172D26535A1000242428 /* product_materials.json */; };
 		97B117342653AF1E00242428 /* ProductMaterialQueryInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B117332653AF1E00242428 /* ProductMaterialQueryInfo.swift */; };
@@ -169,6 +170,7 @@
 		97AFE36F2667246B002CBE01 /* PurchaseProductSuggestionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PurchaseProductSuggestionViewController.xib; sourceTree = "<group>"; };
 		97AFE37226673535002CBE01 /* PurchaseSuggestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseSuggestionViewController.swift; sourceTree = "<group>"; };
 		97AFE37426676F83002CBE01 /* ContainerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerCollectionViewCell.swift; sourceTree = "<group>"; };
+		97AFE3762668731F002CBE01 /* SuggestionProductMaterialViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionProductMaterialViewModelTests.swift; sourceTree = "<group>"; };
 		97B1172D26535A1000242428 /* product_materials.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = product_materials.json; sourceTree = "<group>"; };
 		97B1172E26535B9800242428 /* ProductMaterial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductMaterial.swift; sourceTree = "<group>"; };
 		97B117332653AF1E00242428 /* ProductMaterialQueryInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductMaterialQueryInfo.swift; sourceTree = "<group>"; };
@@ -444,6 +446,7 @@
 				A40A1FF12611791000553207 /* ForgotPasswordViewModelTests.swift */,
 				97B11744265650BA00242428 /* PickProductMaterailsViewModelTests.swift */,
 				A4F2D009265CA771004D8D6D /* ProductMaterialsFilterViewModelTests.swift */,
+				97AFE3762668731F002CBE01 /* SuggestionProductMaterialViewModelTests.swift */,
 			);
 			path = MyMindTests;
 			sourceTree = "<group>";
@@ -1028,6 +1031,7 @@
 			files = (
 				A43E0B74260DC944005FC6CE /* SignInValidationServiceTests.swift in Sources */,
 				A49CF9302603518A00AFC170 /* CodableTests.swift in Sources */,
+				97AFE37726687320002CBE01 /* SuggestionProductMaterialViewModelTests.swift in Sources */,
 				A43E0B79260DD598005FC6CE /* SignInViewModelTests.swift in Sources */,
 				A4793C682604423800AD280C /* AuthServiceTest.swift in Sources */,
 				A40A1FF22611791000553207 /* ForgotPasswordViewModelTests.swift in Sources */,
