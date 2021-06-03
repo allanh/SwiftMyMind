@@ -46,6 +46,30 @@ class SuggestionProductMaterialViewModelTests: XCTestCase {
         XCTAssertEqual(sut.validationStatusForpurchaseCostPerItem.value, .valid)
     }
 
+    func test_inputInvalidQuantity_returnInvalidResult() {
+        sut.purchaseQuantityInput.accept("000")
+        XCTAssertEqual(sut.purchaseQuantity.value, 0)
+        XCTAssertEqual(sut.validationStatusForPurchaseQuantity.value, .invalid("請輸入大於0的數量"))
+
+        sut.purchaseQuantityInput.accept("1..01")
+        XCTAssertEqual(sut.purchaseQuantity.value, 0)
+        XCTAssertEqual(sut.validationStatusForPurchaseQuantity.value, .invalid("請輸入大於0的數量"))
+
+        sut.purchaseQuantityInput.accept("")
+        XCTAssertEqual(sut.purchaseQuantity.value, 0)
+        XCTAssertEqual(sut.validationStatusForPurchaseQuantity.value, .invalid("請輸入大於0的數量"))
+    }
+
+    func test_inputValidQuantity_returnValidResult() {
+        sut.purchaseQuantityInput.accept("012")
+
+        XCTAssertEqual(sut.purchaseQuantity.value, 12)
+        XCTAssertEqual(sut.validationStatusForPurchaseQuantity.value, .valid)
+
+        sut.purchaseQuantityInput.accept("333")
+        XCTAssertEqual(sut.purchaseQuantity.value, 333)
+        XCTAssertEqual(sut.validationStatusForPurchaseQuantity.value, .valid)
+    }
 
     private func makeSUT() -> SuggestionProductMaterialViewModel {
         let sut = SuggestionProductMaterialViewModel(
