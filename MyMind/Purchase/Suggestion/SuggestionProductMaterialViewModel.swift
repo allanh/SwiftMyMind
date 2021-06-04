@@ -17,6 +17,7 @@ struct SuggestionProductMaterialViewModel {
     let name: String
     let purchaseSuggestionQuantity: String
     let stockUnitName: String
+    let boxStockUnitName: String
     let quantityPerBox: Int
     let purchaseSuggestionInfo: PurchaseSuggestionInfo
 
@@ -37,13 +38,14 @@ struct SuggestionProductMaterialViewModel {
 
     let bag: DisposeBag = DisposeBag()
 
-    init(imageURL: URL?, number: String, originalProductNumber: String, name: String, purchaseSuggestionQuantity: String, stockUnitName: String, quantityPerBox: Int, purchaseSuggestionInfo: PurchaseSuggestionInfo, purchaseCostPerItem: Float) {
+    init(imageURL: URL?, number: String, originalProductNumber: String, name: String, purchaseSuggestionQuantity: String, stockUnitName: String, boxStockUnitName: String, quantityPerBox: Int, purchaseSuggestionInfo: PurchaseSuggestionInfo, purchaseCostPerItem: Double) {
         self.imageURL = imageURL
         self.number = number
         self.originalProductNumber = originalProductNumber
         self.name = name
         self.purchaseSuggestionQuantity = purchaseSuggestionQuantity
         self.stockUnitName = stockUnitName
+        self.boxStockUnitName = boxStockUnitName
         self.quantityPerBox = quantityPerBox
         self.purchaseSuggestionInfo = purchaseSuggestionInfo
         self.purchaseCostPerItem = .init(value: purchaseCostPerItem)
