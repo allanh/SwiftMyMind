@@ -22,7 +22,7 @@ struct PurchaseServiceToSuggestionProductMaterialViewModelAdapter: SuggestionPro
                     let suggestionInfos = list.items
                     let viewModels = suggestionInfos.map { info -> SuggestionProductMaterialViewModel in
                         let imageURL = imageDictionary[info.number, default: nil]
-                        return SuggestionProductMaterialViewModel.init(imageURL: imageURL, number: info.number, originalProductNumber: info.originalProductNumber, name: info.name, purchaseSuggestionQuantity: info.suggestedQuantity, stockUnitName: info.stockUnitName, quantityPerBox: Int(info.quantityPerBox) ?? 0, purchaseSuggestionInfo: info, purchaseCostPerItem: Float(info.cost) ?? 0)
+                        return SuggestionProductMaterialViewModel.init(imageURL: imageURL, number: info.number, originalProductNumber: info.originalProductNumber, name: info.name, purchaseSuggestionQuantity: info.suggestedQuantity, stockUnitName: info.stockUnitName, boxStockUnitName: info.stockUnitName, quantityPerBox: Int(info.quantityPerBox) ?? 0, purchaseSuggestionInfo: info, purchaseCostPerItem: Double(info.cost) ?? 0)
                     }
                     seal.fulfill(viewModels)
                 }
