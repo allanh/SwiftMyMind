@@ -55,6 +55,8 @@ class PurchaseSuggestionViewController: NiblessViewController {
     let nextStepButton: UIButton = UIButton {
         $0.backgroundColor = UIColor(hex: "004477")
         $0.setTitleColor(.white, for: .normal)
+        $0.setTitle("下一步", for: .normal)
+        $0.titleLabel?.font = .pingFangTCSemibold(ofSize: 16)
     }
 
     var contentViewControllers: [PurchaseProductSuggestionViewController] = []
@@ -65,6 +67,7 @@ class PurchaseSuggestionViewController: NiblessViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .white
         constructViewHierarchy()
         activateConstraints()
         configCollectionView()
@@ -204,9 +207,9 @@ extension PurchaseSuggestionViewController {
         let trailing = nextStepButton.trailingAnchor
             .constraint(equalTo: view.trailingAnchor)
         let bottom = nextStepButton.bottomAnchor
-            .constraint(equalTo: view.bottomAnchor)
+            .constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         let height = nextStepButton.heightAnchor
-            .constraint(equalToConstant: 40)
+            .constraint(equalToConstant: 50)
 
         NSLayoutConstraint.activate([
             leading, trailing, bottom, height
