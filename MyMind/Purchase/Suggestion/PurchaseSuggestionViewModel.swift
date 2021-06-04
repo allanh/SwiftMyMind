@@ -20,7 +20,6 @@ class PurchaseSuggestionViewModel {
     var suggestionProductMaterialViewModels: [SuggestionProductMaterialViewModel] = []
 
     let didReceiveContent: PublishRelay<[SuggestionProductMaterialViewModel]> = .init()
-    let didRemoveViewModelAtIndex: PublishRelay<Int> = .init()
 
     let view: PublishRelay<View> = .init()
     let errorMessage: PublishRelay<String> = .init()
@@ -46,7 +45,6 @@ class PurchaseSuggestionViewModel {
 
     func removeSuggestionProductMaterialViewModel(at index: Int) {
         suggestionProductMaterialViewModels.remove(at: index)
-        didRemoveViewModelAtIndex.accept(index)
     }
 
     @objc
