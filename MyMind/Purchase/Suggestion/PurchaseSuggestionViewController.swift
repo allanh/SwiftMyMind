@@ -46,7 +46,7 @@ class PurchaseSuggestionViewController: NiblessViewController {
         layout.headerReferenceSize = CGSize(width: screenWidth, height: 120)
         let horizontalInset: CGFloat = 20
         layout.sectionInset = UIEdgeInsets(top: 15, left: horizontalInset, bottom: 15, right: horizontalInset)
-        layout.itemSize = CGSize(width: screenWidth-horizontalInset*2, height: 469)
+        layout.itemSize = CGSize(width: screenWidth-horizontalInset*2, height: 495)
         let collecitonView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collecitonView.backgroundColor = .white
         return collecitonView
@@ -163,6 +163,7 @@ class PurchaseSuggestionViewController: NiblessViewController {
 
         viewModel.removeSuggestionProductMaterialViewModel(at: indexPath.item)
         removeChildViewController(at: indexPath.item)
+        collectionView.reloadData()
     }
 }
 // MARK: - Collection view data source
