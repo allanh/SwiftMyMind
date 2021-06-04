@@ -67,7 +67,9 @@ class PurchaseSuggestionViewController: NiblessViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         view.backgroundColor = .white
+        addTapToResignKeyboardGesture()
         constructViewHierarchy()
         activateConstraints()
         configCollectionView()
@@ -75,6 +77,18 @@ class PurchaseSuggestionViewController: NiblessViewController {
 
         wireToViewModel()
         subscribeViewModel()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        addKeyboardObservers()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        removeObservers()
     }
 
     init(viewModel: PurchaseSuggestionViewModel) {
@@ -217,5 +231,32 @@ extension PurchaseSuggestionViewController {
         NSLayoutConstraint.activate([
             leading, trailing, bottom, height
         ])
+    }
+}
+// MARK: - Keyboard handle
+extension PurchaseSuggestionViewController {
+    func addKeyboardObservers() {
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(handleContentUnderKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(handleContentUnderKeyboard), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+    }
+
+    func removeObservers() {
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.removeObserver(self)
+    }
+
+    @objc func handleContentUnderKeyboard(notification: Notification) {
+        if let userInfo = notification.userInfo,
+           let keyboardEndFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let convertedKeyboardEndFrame = view.convert(keyboardEndFrame.cgRectValue, from: view.window)
+            if notification.name == UIResponder.keyboardWillHideNotification {
+                collectionView.contentInset.bottom = .zero
+            } else {
+                var insets = collectionView.contentInset
+                insets.bottom = convertedKeyboardEndFrame.height
+                collectionView.contentInset = insets
+            }
+        }
     }
 }
