@@ -21,7 +21,7 @@ struct SuggestionProductMaterialViewModel {
     let purchaseSuggestionInfo: PurchaseSuggestionInfo
 
     let purchaseCostPerItemInput: PublishRelay<String> = .init()
-    let purchaseCostPerItem: BehaviorRelay<Float>
+    let purchaseCostPerItem: BehaviorRelay<Double>
     let validationStatusForpurchaseCostPerItem: BehaviorRelay<ValidationResult> = .init(value: .valid)
 
     let purchaseQuantityInput: PublishRelay<String> = .init()
@@ -29,10 +29,10 @@ struct SuggestionProductMaterialViewModel {
     let validationStatusForPurchaseQuantity: BehaviorRelay<ValidationResult> = .init(value: .valid)
 
     let purchaseCostInput: PublishRelay<String> = .init()
-    let purchaseCost: BehaviorRelay<Float> = .init(value: 0)
+    let purchaseCost: BehaviorRelay<Double> = .init(value: 0)
     let validationStatusForPurchaseCost: BehaviorRelay<ValidationResult> = .init(value: .valid)
 
-    let totalBox: BehaviorRelay<Float> = .init(value: 0)
+    let totalBox: BehaviorRelay<Double> = .init(value: 0)
     let centralizedValidationStatus: BehaviorRelay<ValidationResult> = .init(value: .invalid(""))
 
     let bag: DisposeBag = DisposeBag()
@@ -53,7 +53,7 @@ struct SuggestionProductMaterialViewModel {
 
     func bindInput() {
         purchaseCostPerItemInput
-            .map({ Float($0) ?? 0 })
+            .map({ Double($0) ?? 0 })
             .bind(to: purchaseCostPerItem)
             .disposed(by: bag)
 
@@ -79,8 +79,8 @@ struct SuggestionProductMaterialViewModel {
             .disposed(by: bag)
 
         purchaseQuantity
-            .map { quantity -> Float in
-                let result = Float(quantity / quantityPerBox)
+            .map { quantity -> Double in
+                let result = Double(quantity / quantityPerBox)
                 let roundedResult = (result*100).rounded() / 100
                 return roundedResult
             }
@@ -89,18 +89,18 @@ struct SuggestionProductMaterialViewModel {
 
         Observable.combineLatest(purchaseCostPerItem, purchaseQuantity)
             .map { (cost, quantity) in
-                cost * Float(quantity)
+                cost * Double(quantity)
             }
             .bind(to: purchaseCost)
             .disposed(by: bag)
 
         purchaseCostInput
-            .map({ Float($0) ?? 0 })
+            .map({ Double($0) ?? 0 })
             .bind(to: purchaseCost)
             .disposed(by: bag)
 
         purchaseCostInput
-            .map({ Float($0) ?? 0 })
+            .map({ Double($0) ?? 0 })
             .map(validatePurchaseCostInput(input:))
             .bind(to: validationStatusForPurchaseCost)
             .disposed(by: bag)
@@ -114,8 +114,8 @@ struct SuggestionProductMaterialViewModel {
             .disposed(by: bag)
     }
 
-    func validatePurchaseCostInput(input: Float) -> ValidationResult {
-        let standardPurchaseCost = purchaseCostPerItem.value * Float(purchaseQuantity.value)
+    func validatePurchaseCostInput(input: Double) -> ValidationResult {
+        let standardPurchaseCost = purchaseCostPerItem.value * Double(purchaseQuantity.value)
         let adjustedValue = abs(input - standardPurchaseCost)
         switch standardPurchaseCost {
         case 0: return .valid

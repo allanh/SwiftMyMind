@@ -74,7 +74,7 @@ class SuggestionProductMaterialViewModelTests: XCTestCase {
     func test_inputValidQuantity_returnValidTotalBox() {
         sut.purchaseQuantityInput.accept("333")
 
-        let expectedResult = (Float(333/sut.quantityPerBox)*100).rounded() / 100
+        let expectedResult = (Double(333/sut.quantityPerBox)*100).rounded() / 100
         XCTAssertEqual(sut.totalBox.value, expectedResult)
     }
 
@@ -82,7 +82,7 @@ class SuggestionProductMaterialViewModelTests: XCTestCase {
         sut.purchaseCostPerItemInput.accept("1234.1")
         sut.purchaseQuantityInput.accept("123")
 
-        let expectedResult = Float(1234.1 * 123)
+        let expectedResult = Double(1234.1 * 123)
         XCTAssertEqual(sut.purchaseCost.value, expectedResult)
     }
 
