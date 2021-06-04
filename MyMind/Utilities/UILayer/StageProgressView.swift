@@ -11,9 +11,9 @@ import UIKit
 class StageProgressView: NiblessView {
 
     var numberOfStages: Int = 3
-    var stageDescriptionList: [String] = ["採購建議", "採購申請", "送出審核"]
+    var stageDescriptionList: [String] = []
     var currentStageIndex: Int = 1
-    var horizontalSpace: CGFloat = 40
+    var horizontalSpace: CGFloat = 80
     var indicatorDiameter: CGFloat = 20
     var lineHieght: CGFloat = 8
     var textFont: UIFont = .systemFont(ofSize: 14)
@@ -37,13 +37,14 @@ class StageProgressView: NiblessView {
 
     func layout() {
         layer.sublayers?.forEach { $0.removeFromSuperlayer() }
+        indicators.removeAll()
         drawLines()
         drawIndicators()
         drawTexts()
-        setNeedsLayout()
     }
 
     private func drawTexts() {
+        guard stageDescriptionList.count == indicators.count else { return }
         for index in 0..<stageDescriptionList.count {
             let label = CATextLayer()
             let text = stageDescriptionList[index]
@@ -53,6 +54,7 @@ class StageProgressView: NiblessView {
             let textWidth = text.width(withConstrainedHeight: textHeight, font: textFont)
             let frame = CGRect(x: pairedIndicatorFrame.midX - textWidth/2, y: pairedIndicatorFrame.maxY+10, width: textWidth, height: 20)
             label.frame = frame
+            label.contentsScale = UIScreen.main.scale
             layer.addSublayer(label)
         }
     }
@@ -71,6 +73,7 @@ class StageProgressView: NiblessView {
             indicator.cornerRadius = indicatorDiameter / 2
             indicator.borderWidth = indicatorDiameter / 4
             layer.addSublayer(indicator)
+            indicator.contentsScale = UIScreen.main.scale
             xPosition += (singleLineWidth)
             indicators.append(indicator)
         }
@@ -92,12 +95,13 @@ class StageProgressView: NiblessView {
             if index < currentStageIndex {
                 lineLayer.backgroundColor = isProgressedColor.cgColor
             }
+            lineLayer.contentsScale = UIScreen.main.scale
         }
     }
 
     private func calculateSingleLineWidth() -> CGFloat {
         let numberOfLines = max(numberOfStages-1, 0)
-        let totalLineWidth: CGFloat = frame.width - horizontalSpace - indicatorDiameter*2
+        let totalLineWidth: CGFloat = frame.width - horizontalSpace - indicatorDiameter
         let singleLineWidth = totalLineWidth / CGFloat(numberOfLines)
         return singleLineWidth
     }

@@ -120,6 +120,7 @@
 		A4CBD8A52664E10800B19119 /* VendorSelectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CBD8A42664E10800B19119 /* VendorSelectionTableViewCell.swift */; };
 		A4CBD8A72664E1E800B19119 /* VendorInfoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CBD8A62664E1E800B19119 /* VendorInfoService.swift */; };
 		A4CBD8A92664E2AF00B19119 /* VendorInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CBD8A82664E2AF00B19119 /* VendorInfo.swift */; };
+		A4CBD8AD2669C50A00B19119 /* StageProgressCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CBD8AC2669C50A00B19119 /* StageProgressCollectionReusableView.swift */; };
 		A4CF09B32636C36800439D5F /* UIView+shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CF09B22636C36800439D5F /* UIView+shadow.swift */; };
 		A4D50AB02645129E007B07D6 /* AutoCompleteSearchRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D50AAF2645129E007B07D6 /* AutoCompleteSearchRootView.swift */; };
 		A4DD410726425496007B2A41 /* PromiseKitAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DD410626425496007B2A41 /* PromiseKitAPIService.swift */; };
@@ -282,6 +283,7 @@
 		A4CBD8A42664E10800B19119 /* VendorSelectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendorSelectionTableViewCell.swift; sourceTree = "<group>"; };
 		A4CBD8A62664E1E800B19119 /* VendorInfoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendorInfoService.swift; sourceTree = "<group>"; };
 		A4CBD8A82664E2AF00B19119 /* VendorInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendorInfo.swift; sourceTree = "<group>"; };
+		A4CBD8AC2669C50A00B19119 /* StageProgressCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageProgressCollectionReusableView.swift; sourceTree = "<group>"; };
 		A4CF09B22636C36800439D5F /* UIView+shadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+shadow.swift"; sourceTree = "<group>"; };
 		A4D50AAF2645129E007B07D6 /* AutoCompleteSearchRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoCompleteSearchRootView.swift; sourceTree = "<group>"; };
 		A4DD410626425496007B2A41 /* PromiseKitAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromiseKitAPIService.swift; sourceTree = "<group>"; };
@@ -333,6 +335,7 @@
 				97AFE36E2667246B002CBE01 /* PurchaseProductSuggestionViewController.swift */,
 				97AFE36F2667246B002CBE01 /* PurchaseProductSuggestionViewController.xib */,
 				97AFE37226673535002CBE01 /* PurchaseSuggestionViewController.swift */,
+				A4CBD8AC2669C50A00B19119 /* StageProgressCollectionReusableView.swift */,
 			);
 			path = Suggestion;
 			sourceTree = "<group>";
@@ -970,6 +973,7 @@
 				A48389AF2608360A0044C09E /* SignInViewController.swift in Sources */,
 				A4D50AB02645129E007B07D6 /* AutoCompleteSearchRootView.swift in Sources */,
 				A49CF8BB2603028C00AFC170 /* APIService.swift in Sources */,
+				A4CBD8AD2669C50A00B19119 /* StageProgressCollectionReusableView.swift in Sources */,
 				A48389BE260876770044C09E /* AuthService.swift in Sources */,
 				A4CBD8A52664E10800B19119 /* VendorSelectionTableViewCell.swift in Sources */,
 				A457AEB02660A31F0029DDBB /* PickDatesViewModel.swift in Sources */,

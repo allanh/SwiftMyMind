@@ -106,7 +106,7 @@ class PurchaseSuggestionViewModel {
 
 class PurchaseSuggestionViewController: NiblessViewController {
 
-    let collectionView: UICollectionView = UICollectionView {
+    let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.sectionHeadersPinToVisibleBounds = true
         let screenWidth = UIScreen.main.bounds.width
@@ -114,19 +114,10 @@ class PurchaseSuggestionViewController: NiblessViewController {
         let horizontalInset: CGFloat = 20
         layout.sectionInset = UIEdgeInsets(top: 15, left: horizontalInset, bottom: 15, right: horizontalInset)
         layout.itemSize = CGSize(width: screenWidth-horizontalInset*2, height: 469)
-        $0.collectionViewLayout = layout
-    }
-
-    let headerView: UIView = UIView {
-        $0.backgroundColor = .white
-        let progressView = StageProgressView(numberOfStage: 3, stageNameList: ["採購建議", "採購申請", "送出審核"], currentStageIndex: 0)
-        progressView.translatesAutoresizingMaskIntoConstraints = false
-        $0.addSubview(progressView)
-        progressView.topAnchor.constraint(equalTo: $0.topAnchor).isActive = true
-        progressView.bottomAnchor.constraint(equalTo: $0.bottomAnchor).isActive = true
-        progressView.leadingAnchor.constraint(equalTo: $0.leadingAnchor).isActive = true
-        progressView.trailingAnchor.constraint(equalTo: $0.trailingAnchor).isActive = true
-    }
+        let collecitonView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collecitonView.backgroundColor = .white
+        return collecitonView
+    }()
 
     let nextStepButton: UIButton = UIButton {
         $0.backgroundColor = UIColor(hex: "004477")
@@ -143,6 +134,7 @@ class PurchaseSuggestionViewController: NiblessViewController {
         super.viewDidLoad()
         constructViewHierarchy()
         activateConstraints()
+        configCollectionView()
         viewModel.fetchSuggstionProductMaterialViewModels()
 
         wireToViewModel()
@@ -152,6 +144,13 @@ class PurchaseSuggestionViewController: NiblessViewController {
     init(viewModel: PurchaseSuggestionViewModel) {
         self.viewModel = viewModel
         super.init()
+    }
+
+    private func configCollectionView() {
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.registerCell(ContainerCollectionViewCell.self)
+        collectionView.register(StageProgressCollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: String(describing: StageProgressCollectionReusableView.self))
     }
 
     private func wireToViewModel() {
@@ -228,11 +227,25 @@ extension PurchaseSuggestionViewController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         let viewController = contentViewControllers[indexPath.item]
-        viewController.deleteButton.addTarget(self, action: #selector(deleteButtonDidTapped(_:)), for: .touchUpInside)
         cell.hostedView = viewController.view
+        viewController.deleteButton.addTarget(self, action: #selector(deleteButtonDidTapped(_:)), for: .touchUpInside)
         return cell
     }
 }
+// MARK: - Collection view delegate flow layout
+extension PurchaseSuggestionViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let view = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: String(describing: StageProgressCollectionReusableView.self), for: indexPath)
+        view.backgroundColor = .white
+        (view as? StageProgressCollectionReusableView)?.configProgressView(numberOfStage: 3, stageTitleList: ["採購建議", "採購申請", "送出審核"], currentStageIndex: 0)
+        return view
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: view.frame.width, height: 125)
+    }
+}
+
 // MARK: - Layouts
 extension PurchaseSuggestionViewController {
     private func activateConstraintsCollecitonView() {
