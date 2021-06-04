@@ -121,6 +121,7 @@
 		A4CBD8A72664E1E800B19119 /* VendorInfoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CBD8A62664E1E800B19119 /* VendorInfoService.swift */; };
 		A4CBD8A92664E2AF00B19119 /* VendorInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CBD8A82664E2AF00B19119 /* VendorInfo.swift */; };
 		A4CBD8AD2669C50A00B19119 /* StageProgressCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CBD8AC2669C50A00B19119 /* StageProgressCollectionReusableView.swift */; };
+		A4CBD8AF2669D18F00B19119 /* PurchaseSuggestionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CBD8AE2669D18F00B19119 /* PurchaseSuggestionViewModel.swift */; };
 		A4CF09B32636C36800439D5F /* UIView+shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CF09B22636C36800439D5F /* UIView+shadow.swift */; };
 		A4D50AB02645129E007B07D6 /* AutoCompleteSearchRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D50AAF2645129E007B07D6 /* AutoCompleteSearchRootView.swift */; };
 		A4DD410726425496007B2A41 /* PromiseKitAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DD410626425496007B2A41 /* PromiseKitAPIService.swift */; };
@@ -284,6 +285,7 @@
 		A4CBD8A62664E1E800B19119 /* VendorInfoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendorInfoService.swift; sourceTree = "<group>"; };
 		A4CBD8A82664E2AF00B19119 /* VendorInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendorInfo.swift; sourceTree = "<group>"; };
 		A4CBD8AC2669C50A00B19119 /* StageProgressCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageProgressCollectionReusableView.swift; sourceTree = "<group>"; };
+		A4CBD8AE2669D18F00B19119 /* PurchaseSuggestionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseSuggestionViewModel.swift; sourceTree = "<group>"; };
 		A4CF09B22636C36800439D5F /* UIView+shadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+shadow.swift"; sourceTree = "<group>"; };
 		A4D50AAF2645129E007B07D6 /* AutoCompleteSearchRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoCompleteSearchRootView.swift; sourceTree = "<group>"; };
 		A4DD410626425496007B2A41 /* PromiseKitAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromiseKitAPIService.swift; sourceTree = "<group>"; };
@@ -336,6 +338,7 @@
 				97AFE36F2667246B002CBE01 /* PurchaseProductSuggestionViewController.xib */,
 				97AFE37226673535002CBE01 /* PurchaseSuggestionViewController.swift */,
 				A4CBD8AC2669C50A00B19119 /* StageProgressCollectionReusableView.swift */,
+				A4CBD8AE2669D18F00B19119 /* PurchaseSuggestionViewModel.swift */,
 			);
 			path = Suggestion;
 			sourceTree = "<group>";
@@ -981,6 +984,7 @@
 				A439BD372637E42F004F47C8 /* MyMindPurchaseAPIService.swift in Sources */,
 				A405410B264A575E00E2D21B /* UITextField+.swift in Sources */,
 				A439B5412609D61C002352C2 /* String+.swift in Sources */,
+				A4CBD8AF2669D18F00B19119 /* PurchaseSuggestionViewModel.swift in Sources */,
 				A43E0B65260D7CA4005FC6CE /* NiblessView.swift in Sources */,
 				A4F2D015265D088B004D8D6D /* ProductMaterialAutoCompleteAdapters.swift in Sources */,
 				A4DD410726425496007B2A41 /* PromiseKitAPIService.swift in Sources */,
