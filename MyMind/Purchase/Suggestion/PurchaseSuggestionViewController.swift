@@ -121,6 +121,12 @@ class PurchaseSuggestionViewController: NiblessViewController {
                 self.collectionView.reloadData()
             })
             .disposed(by: bag)
+
+        viewModel.view
+            .subscribe(onNext: { [unowned self] view in
+                self.handleNavigation(view: view)
+            })
+            .disposed(by: bag)
     }
 
     private func generateChildViewController(childViewModels: [SuggestionProductMaterialViewModel]) {
