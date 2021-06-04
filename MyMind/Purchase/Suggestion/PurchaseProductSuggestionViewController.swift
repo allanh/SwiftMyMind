@@ -16,11 +16,14 @@ class PurchaseProductSuggestionViewController: UIViewController {
     @IBOutlet private weak var originalNumberLabel: UILabel!
     @IBOutlet private weak var suggestedQuantityButton: UIButton!
     @IBOutlet private weak var suggestedQuantityLabel: UILabel!
-    @IBOutlet private weak var purchaseCostTextField: UITextField!
-    @IBOutlet private weak var purchaseQuantityTextField: UITextField!
+    @IBOutlet private weak var purchaseCostPerItemTextField: CustomClearButtonPositionTextField!
+    @IBOutlet private weak var purchaseCostPerItemErrorLabel: UILabel!
+    @IBOutlet private weak var purchaseQuantityTextField: CustomClearButtonPositionTextField!
+    @IBOutlet private weak var purchaseQuantityErrorLabel: UILabel!
     @IBOutlet private weak var unitLabel: UILabel!
     @IBOutlet private weak var boxCounterLabel: UILabel!
-    @IBOutlet private weak var totalPurchaseCostTextField: UITextField!
+    @IBOutlet private weak var totalPurchaseCostTextField: CustomClearButtonPositionTextField!
+    @IBOutlet private weak var totalPurchaseCostErrorLabel: UILabel!
     @IBOutlet weak var deleteButton: UIButton!
 
     var viewModel: SuggestionProductMaterialViewModel!
