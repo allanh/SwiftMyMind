@@ -20,6 +20,7 @@ class StageProgressView: NiblessView {
     var textHeight: CGFloat = 20
     var isProgressedColor: UIColor = UIColor(hex: "004477")
     var isNotProgressedColor: UIColor = .gray
+    private let adjustedMidYSpace: CGFloat = 10
 
     private var indicators: [CALayer] = []
 
@@ -65,7 +66,12 @@ class StageProgressView: NiblessView {
 
         for index in 0..<numberOfStages {
             let indicator = CALayer()
-            indicator.frame = CGRect(x: xPosition, y: frame.midY - indicatorDiameter/2, width: indicatorDiameter, height: indicatorDiameter)
+            indicator.frame = CGRect(
+                x: xPosition,
+                y: frame.midY - indicatorDiameter/2 - adjustedMidYSpace,
+                width: indicatorDiameter,
+                height: indicatorDiameter)
+            
             let isProgressed = index <= currentStageIndex
             indicator.borderColor = isProgressed ? isProgressedColor.cgColor : isNotProgressedColor.cgColor
 
@@ -83,7 +89,7 @@ class StageProgressView: NiblessView {
         let numberOfLines = max(numberOfStages-1, 0)
         let singleLineWidth = calculateSingleLineWidth()
         var xPosition: CGFloat = horizontalSpace/2 + indicatorDiameter/2
-        let yPosition = frame.midY - lineHieght/2
+        let yPosition = frame.midY - lineHieght/2 - adjustedMidYSpace
 
         for index in 0..<numberOfLines {
             let lineLayer = CALayer()

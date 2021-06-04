@@ -10,10 +10,13 @@ import UIKit
 
 class StageProgressCollectionReusableView: UICollectionReusableView {
     let progressView: StageProgressView = StageProgressView()
+    let bottomSeperatorView: UIView = UIView {
+        $0.backgroundColor = .separator
+    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        addSubview(progressView)
+        constructViewHierarchy()
         activateConstraints()
     }
 
@@ -21,7 +24,17 @@ class StageProgressCollectionReusableView: UICollectionReusableView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    private func constructViewHierarchy() {
+        addSubview(progressView)
+        addSubview(bottomSeperatorView)
+    }
+
     private func activateConstraints() {
+        activateConstraintsProgressView()
+        activateConstraintsBottomSeperatorView()
+    }
+
+    private func activateConstraintsProgressView() {
         progressView.translatesAutoresizingMaskIntoConstraints = false
         let top = progressView.topAnchor
             .constraint(equalTo: topAnchor)
@@ -37,10 +50,25 @@ class StageProgressCollectionReusableView: UICollectionReusableView {
         ])
     }
 
+    private func activateConstraintsBottomSeperatorView() {
+        bottomSeperatorView.translatesAutoresizingMaskIntoConstraints = false
+        let leading = bottomSeperatorView.leadingAnchor
+            .constraint(equalTo: leadingAnchor)
+        let bottom = bottomSeperatorView.bottomAnchor
+            .constraint(equalTo: bottomAnchor)
+        let trailing = bottomSeperatorView.trailingAnchor
+            .constraint(equalTo: trailingAnchor)
+        let height = bottomSeperatorView.heightAnchor
+            .constraint(equalToConstant: 1)
+
+        NSLayoutConstraint.activate([
+            leading, bottom, trailing, height
+        ])
+    }
+
     func configProgressView(numberOfStage: Int, stageTitleList: [String], currentStageIndex: Int) {
         progressView.numberOfStages = numberOfStage
         progressView.stageDescriptionList = stageTitleList
         progressView.currentStageIndex = currentStageIndex
-//        progressView.layout()
     }
 }

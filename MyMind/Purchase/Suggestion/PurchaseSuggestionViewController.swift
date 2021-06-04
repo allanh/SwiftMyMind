@@ -164,6 +164,9 @@ extension PurchaseSuggestionViewController: UICollectionViewDataSource {
         }
         let viewController = contentViewControllers[indexPath.item]
         cell.hostedView = viewController.view
+        viewController.view.layer.cornerRadius = 4
+        viewController.view.layer.borderWidth = 1
+        viewController.view.layer.borderColor = UIColor.separator.cgColor
         viewController.deleteButton.addTarget(self, action: #selector(deleteButtonDidTapped(_:)), for: .touchUpInside)
         return cell
     }
@@ -191,7 +194,7 @@ extension PurchaseSuggestionViewController {
         let leading = collectionView.leadingAnchor
             .constraint(equalTo: view.leadingAnchor)
         let bottom = collectionView.bottomAnchor
-            .constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            .constraint(equalTo: nextStepButton.topAnchor)
         let trailing = collectionView.trailingAnchor
             .constraint(equalTo: view.trailingAnchor)
 
