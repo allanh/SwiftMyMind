@@ -164,8 +164,14 @@ struct PurchaseSuggestionInfo: Codable {
 
 struct PurchaseSuggestionInfoList: Codable {
     let items: [PurchaseSuggestionInfo]
+    let vendorID: String
+    let vendorNumber: String
+    let vendorName: String
 
     enum CodingKeys: String, CodingKey {
         case items = "detail"
+        case vendorID = "vendor_id"
+        case vendorNumber = "vendor_no"
+        case vendorName = "alias_name"
     }
 }
