@@ -21,6 +21,9 @@ protocol PurchaseAPIService {
 class MyMindPurchaseAPIService: PromiseKitAPIService {
     private let userSession: UserSession
 
+    private var partnerID: String {
+        String(userSession.partnerInfo.id)
+    }
     init(userSession: UserSession) {
         self.userSession = userSession
     }
@@ -28,8 +31,6 @@ class MyMindPurchaseAPIService: PromiseKitAPIService {
     func fetchPurchaseList(
         purchaseListQueryInfo: PurchaseListQueryInfo? = nil
     ) -> Promise<PurchaseList> {
-
-        let partnerID = String(userSession.partnerInfo.id)
         let endpoint = Endpoint.purchaseList(with: partnerID, purchaseListQueryInfo: purchaseListQueryInfo)
         let request = request(endPoint: endpoint, httpHeader: ["Authorization": "Bearer \(userSession.token)"])
         return sendRequest(request: request)
@@ -57,12 +58,21 @@ class MyMindPurchaseAPIService: PromiseKitAPIService {
         struct Root: Codable {
             let detail: [Warehouse]
         }
-        let endpoint = Endpoint.purchaseWarehouseList(partnerID: String(userSession.partnerInfo.id))
+        let endpoint = Endpoint.purchaseWarehouseList(partnerID: partnerID)
         let request = request(endPoint: endpoint, httpHeader: ["Authorization": "Bearer \(userSession.token)"])
         let rootResult: Promise<Root> = sendRequest(request: request)
         return rootResult.map({ $0.detail })
     }
 
+    func fetchPurchaseReviewerList(with level: Int) -> Promise<[Reviewer]> {
+        struct Root: Codable {
+            let detail: [Reviewer]
+        }
+        let endpoint = Endpoint.purchaseReviewerList(partnerID: partnerID, level: String(level))
+        let request = request(endPoint: endpoint, httpHeader: ["Authorization": "Bearer \(userSession.token)"])
+        let rootRsult: Promise<Root> = sendRequest(request: request)
+        return rootRsult.map({ $0.detail })
+    }
 }
 
 extension MyMindPurchaseAPIService: PurchaseAPIService { }
