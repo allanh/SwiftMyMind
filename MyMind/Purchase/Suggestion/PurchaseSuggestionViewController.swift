@@ -17,7 +17,7 @@ struct PurchaseServiceToSuggestionProductMaterialViewModelAdapter: SuggestionPro
 
     func fetchSuggestionProductMaterialViewModels(with productIDs: [String]) -> Promise<[SuggestionProductMaterialViewModel]> {
         return Promise<[SuggestionProductMaterialViewModel]> { seal in
-            service.fetchPurchaseSeggestionInfos(with: productIDs)
+            service.fetchPurchaseSuggestionInfos(with: productIDs)
                 .done { list in
                     let suggestionInfos = list.items
                     let viewModels = suggestionInfos.map { info -> SuggestionProductMaterialViewModel in

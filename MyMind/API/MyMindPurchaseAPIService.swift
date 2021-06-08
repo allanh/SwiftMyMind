@@ -14,7 +14,8 @@ protocol PurchaseAPIService {
     func fetchPurchaseList(purchaseListQueryInfo: PurchaseListQueryInfo?) -> Promise<PurchaseList>
     func fetchProductMaterialList(with query: ProductMaterialQueryInfo) -> Promise<ProductMaterialList>
     func fetchProductMaterialDetail(with id: String) -> Promise<ProductMaterialDetail>
-    func fetchPurchaseSeggestionInfos(with productIDs: [String]) -> Promise<PurchaseSuggestionInfoList>
+    func fetchPurchaseSuggestionInfos(with productIDs: [String]) -> Promise<PurchaseSuggestionInfoList>
+    func fetchPurchaseWarehouseList() -> Promise<[Warehouse]>
 }
 
 class MyMindPurchaseAPIService: PromiseKitAPIService {
@@ -46,11 +47,46 @@ class MyMindPurchaseAPIService: PromiseKitAPIService {
         return sendRequest(request: request)
     }
 
-    func fetchPurchaseSeggestionInfos(with productIDs: [String]) -> Promise<PurchaseSuggestionInfoList> {
+    func fetchPurchaseSuggestionInfos(with productIDs: [String]) -> Promise<PurchaseSuggestionInfoList> {
         let endpoint = Endpoint.purchaseSuggestionInfos(productIDs: productIDs)
         let request = request(endPoint: endpoint, httpHeader: ["Authorization": "Bearer \(userSession.token)"])
         return sendRequest(request: request)
     }
+
+    func fetchPurchaseWarehouseList() -> Promise<[Warehouse]> {
+        struct Root: Codable {
+            let detail: [Warehouse]
+        }
+        let endpoint = Endpoint.purchaseWarehouseList(partnerID: String(userSession.partnerInfo.id))
+        let request = request(endPoint: endpoint, httpHeader: ["Authorization": "Bearer \(userSession.token)"])
+        let rootResult: Promise<Root> = sendRequest(request: request)
+        return rootResult.map({ $0.detail })
+    }
+
 }
 
 extension MyMindPurchaseAPIService: PurchaseAPIService { }
+
+struct Warehouse: Codable {
+    struct RecipientInfo: Codable {
+        let name, phone: String
+        let address: Address
+    }
+
+    struct Address: Codable {
+        let county, district, zipcode, address: String
+    }
+
+    let name, type, id, number: String
+    let channelWareroomID: String
+    let recipientInfo: RecipientInfo
+
+    enum CodingKeys: String, CodingKey {
+        case name
+        case type = "warehouse_type"
+        case id = "warehouse_id"
+        case number = "warehouse_no"
+        case channelWareroomID = "channel_wareroom_id"
+        case recipientInfo = "recipient_info"
+    }
+}
