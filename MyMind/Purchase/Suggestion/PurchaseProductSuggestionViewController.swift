@@ -16,7 +16,7 @@ class PurchaseProductSuggestionViewController: UIViewController {
     @IBOutlet private weak var nameLabel: UILabel!
     @IBOutlet private weak var numberLabel: UILabel!
     @IBOutlet private weak var originalNumberLabel: UILabel!
-    @IBOutlet private weak var suggestedQuantityButton: UIButton!
+    @IBOutlet weak var suggestedQuantityButton: UIButton!
     @IBOutlet private weak var suggestedQuantityLabel: UILabel!
     @IBOutlet private weak var purchaseCostPerItemTextField: CustomClearButtonPositionTextField!
     @IBOutlet private weak var purchaseCostPerItemErrorLabel: UILabel!
@@ -76,7 +76,6 @@ class PurchaseProductSuggestionViewController: UIViewController {
             .orEmpty
             .skip(1)
             .filter({ $0.count < 7 })
-            .debug()
             .bind(to: viewModel.purchaseQuantityInput)
             .disposed(by: bag)
 

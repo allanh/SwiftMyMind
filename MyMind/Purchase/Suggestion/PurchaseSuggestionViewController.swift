@@ -108,12 +108,6 @@ class PurchaseSuggestionViewController: NiblessViewController {
     }
 
     private func subscribeViewModel() {
-        viewModel.view
-            .subscribe(onNext: { [unowned self] in
-                self.handleNavigation(view: $0)
-            })
-            .disposed(by: bag)
-
         viewModel.didReceiveContent
             .subscribe(on: MainScheduler.instance)
             .subscribe(onNext: { [unowned self] viewModels in
@@ -153,8 +147,10 @@ class PurchaseSuggestionViewController: NiblessViewController {
 
     private func handleNavigation(view: PurchaseSuggestionViewModel.View) {
         switch view {
-        case .suggestionInfo:
-            break
+        case .suggestionInfo(let info):
+            let viewController = ProductMaterialSuggestionInfoTableViewController(style: .grouped)
+            viewController.purchaseSuggestionInfo = info
+            show(viewController, sender: nil)
         case .purchaseApply:
             break
         }
@@ -170,6 +166,15 @@ class PurchaseSuggestionViewController: NiblessViewController {
         viewModel.removeSuggestionProductMaterialViewModel(at: indexPath.item)
         removeChildViewController(at: indexPath.item)
         collectionView.reloadData()
+    }
+
+    @objc
+    private func suggestedQuantityButtonDidTapped(_ sender: UIButton) {
+        guard
+            let point = sender.superview?.convert(sender.frame.origin, to: collectionView),
+            let indexPath = collectionView.indexPathForItem(at: point)
+        else { return }
+        viewModel.performSuggestionInfo(for: indexPath.item)
     }
 }
 // MARK: - Collection view data source
@@ -189,6 +194,7 @@ extension PurchaseSuggestionViewController: UICollectionViewDataSource {
         viewController.view.layer.borderWidth = 1
         viewController.view.layer.borderColor = UIColor.separator.cgColor
         viewController.deleteButton.addTarget(self, action: #selector(deleteButtonDidTapped(_:)), for: .touchUpInside)
+        viewController.suggestedQuantityButton.addTarget(self, action: #selector(suggestedQuantityButtonDidTapped(_:)), for: .touchUpInside)
         return cell
     }
 }
