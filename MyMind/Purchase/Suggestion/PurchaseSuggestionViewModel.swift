@@ -16,7 +16,7 @@ class PurchaseSuggestionViewModel {
         case purchaseApply
     }
     let pickedProductIDList: [String]
-    let service: SuggestionProductMaterialViewModeService
+    let service: SuggestionProductMaterialViewModelService
 
     var suggestionProductMaterialViewModels: [SuggestionProductMaterialViewModel] = []
 
@@ -26,7 +26,7 @@ class PurchaseSuggestionViewModel {
     let errorMessage: PublishRelay<String> = .init()
 
     init(pickedProductIDList: [String],
-         service: SuggestionProductMaterialViewModeService) {
+         service: SuggestionProductMaterialViewModelService) {
         self.pickedProductIDList = pickedProductIDList
         self.service = service
     }
