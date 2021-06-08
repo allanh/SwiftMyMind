@@ -167,7 +167,9 @@ class SuggestionProductMaterialViewModelTests: XCTestCase {
             boxStockUnitName: "箱",
             quantityPerBox: 22,
             purchaseSuggestionInfo: .init(id: "00", number: "test", originalProductNumber: "123", name: "", quantityPerBox: "", channelStockQuantity: "", fineStockQuantity: "", totalStockQuantity: "", monthSaleQuantity: "", suggestedQuantity: "100", daysSalesOfInventory: "", cost: "", movingAverageCost: "", stockUnitName: "", boxStockUnitName: ""),
-            purchaseCostPerItem: 200.0)
+            purchaseCostPerItem: 200.0,
+            vendorName: "test",
+            vendorID: "123")
         return sut
     }
 }

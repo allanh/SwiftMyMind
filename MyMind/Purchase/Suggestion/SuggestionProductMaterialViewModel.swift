@@ -20,6 +20,8 @@ struct SuggestionProductMaterialViewModel {
     let boxStockUnitName: String
     let quantityPerBox: Int
     let purchaseSuggestionInfo: PurchaseSuggestionInfo
+    let vendorName: String
+    let vendorID: String
 
     let purchaseCostPerItemInput: PublishRelay<String> = .init()
     let purchaseCostPerItem: BehaviorRelay<Double>
@@ -38,7 +40,18 @@ struct SuggestionProductMaterialViewModel {
 
     let bag: DisposeBag = DisposeBag()
 
-    init(imageURL: URL?, number: String, originalProductNumber: String, name: String, purchaseSuggestionQuantity: String, stockUnitName: String, boxStockUnitName: String, quantityPerBox: Int, purchaseSuggestionInfo: PurchaseSuggestionInfo, purchaseCostPerItem: Double) {
+    init(imageURL: URL?,
+         number: String,
+         originalProductNumber: String,
+         name: String,
+         purchaseSuggestionQuantity: String,
+         stockUnitName: String,
+         boxStockUnitName: String,
+         quantityPerBox: Int,
+         purchaseSuggestionInfo: PurchaseSuggestionInfo,
+         purchaseCostPerItem: Double,
+         vendorName: String,
+         vendorID: String) {
         self.imageURL = imageURL
         self.number = number
         self.originalProductNumber = originalProductNumber
@@ -49,7 +62,8 @@ struct SuggestionProductMaterialViewModel {
         self.quantityPerBox = quantityPerBox
         self.purchaseSuggestionInfo = purchaseSuggestionInfo
         self.purchaseCostPerItem = .init(value: purchaseCostPerItem)
-
+        self.vendorID = vendorID
+        self.vendorName = vendorName
         bindInput()
     }
 

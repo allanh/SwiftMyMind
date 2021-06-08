@@ -34,7 +34,9 @@ struct PurchaseServiceToSuggestionProductMaterialViewModelAdapter: SuggestionPro
                             boxStockUnitName: info.stockUnitName,
                             quantityPerBox: Int(info.quantityPerBox) ?? 0,
                             purchaseSuggestionInfo: info,
-                            purchaseCostPerItem: Double(info.cost) ?? 0
+                            purchaseCostPerItem: Double(info.cost) ?? 0,
+                            vendorName: list.vendorName,
+                            vendorID: list.vendorID
                         )
                     }
                     seal.fulfill(viewModels)
