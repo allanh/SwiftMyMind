@@ -122,6 +122,9 @@
 		A4CBD8A92664E2AF00B19119 /* VendorInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CBD8A82664E2AF00B19119 /* VendorInfo.swift */; };
 		A4CBD8AD2669C50A00B19119 /* StageProgressCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CBD8AC2669C50A00B19119 /* StageProgressCollectionReusableView.swift */; };
 		A4CBD8AF2669D18F00B19119 /* PurchaseSuggestionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CBD8AE2669D18F00B19119 /* PurchaseSuggestionViewModel.swift */; };
+		A4CBD8B1266A2ABA00B19119 /* ProductMaterialSuggestionInfoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CBD8B0266A2ABA00B19119 /* ProductMaterialSuggestionInfoTableViewController.swift */; };
+		A4CBD8B6266A2CF200B19119 /* ProductMaterialSuggestionInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CBD8B4266A2CF200B19119 /* ProductMaterialSuggestionInfoTableViewCell.swift */; };
+		A4CBD8B7266A2CF200B19119 /* ProductMaterialSuggestionInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4CBD8B5266A2CF200B19119 /* ProductMaterialSuggestionInfoTableViewCell.xib */; };
 		A4CF09B32636C36800439D5F /* UIView+shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CF09B22636C36800439D5F /* UIView+shadow.swift */; };
 		A4D50AB02645129E007B07D6 /* AutoCompleteSearchRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D50AAF2645129E007B07D6 /* AutoCompleteSearchRootView.swift */; };
 		A4DD410726425496007B2A41 /* PromiseKitAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DD410626425496007B2A41 /* PromiseKitAPIService.swift */; };
@@ -286,6 +289,9 @@
 		A4CBD8A82664E2AF00B19119 /* VendorInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendorInfo.swift; sourceTree = "<group>"; };
 		A4CBD8AC2669C50A00B19119 /* StageProgressCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageProgressCollectionReusableView.swift; sourceTree = "<group>"; };
 		A4CBD8AE2669D18F00B19119 /* PurchaseSuggestionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseSuggestionViewModel.swift; sourceTree = "<group>"; };
+		A4CBD8B0266A2ABA00B19119 /* ProductMaterialSuggestionInfoTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductMaterialSuggestionInfoTableViewController.swift; sourceTree = "<group>"; };
+		A4CBD8B4266A2CF200B19119 /* ProductMaterialSuggestionInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductMaterialSuggestionInfoTableViewCell.swift; sourceTree = "<group>"; };
+		A4CBD8B5266A2CF200B19119 /* ProductMaterialSuggestionInfoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductMaterialSuggestionInfoTableViewCell.xib; sourceTree = "<group>"; };
 		A4CF09B22636C36800439D5F /* UIView+shadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+shadow.swift"; sourceTree = "<group>"; };
 		A4D50AAF2645129E007B07D6 /* AutoCompleteSearchRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoCompleteSearchRootView.swift; sourceTree = "<group>"; };
 		A4DD410626425496007B2A41 /* PromiseKitAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromiseKitAPIService.swift; sourceTree = "<group>"; };
@@ -339,6 +345,9 @@
 				97AFE37226673535002CBE01 /* PurchaseSuggestionViewController.swift */,
 				A4CBD8AC2669C50A00B19119 /* StageProgressCollectionReusableView.swift */,
 				A4CBD8AE2669D18F00B19119 /* PurchaseSuggestionViewModel.swift */,
+				A4CBD8B0266A2ABA00B19119 /* ProductMaterialSuggestionInfoTableViewController.swift */,
+				A4CBD8B4266A2CF200B19119 /* ProductMaterialSuggestionInfoTableViewCell.swift */,
+				A4CBD8B5266A2CF200B19119 /* ProductMaterialSuggestionInfoTableViewCell.xib */,
 			);
 			path = Suggestion;
 			sourceTree = "<group>";
@@ -778,6 +787,7 @@
 				A44A5A7725F9B0D300995823 /* Assets.xcassets in Resources */,
 				97AFE3712667246B002CBE01 /* PurchaseProductSuggestionViewController.xib in Resources */,
 				A489A1B2263FAA7D00832679 /* PurchaseBriefCollectionViewCell.xib in Resources */,
+				A4CBD8B7266A2CF200B19119 /* ProductMaterialSuggestionInfoTableViewCell.xib in Resources */,
 				A44A5A7525F9B0D200995823 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -939,6 +949,7 @@
 				A457AEB22660A34A0029DDBB /* PickPurchaseStatusViewModel.swift in Sources */,
 				A4F2D00F265D063B004D8D6D /* ProductMaterialsFilterViewController.swift in Sources */,
 				A47F39DF263A67E200A3097C /* UITableView+.swift in Sources */,
+				A4CBD8B6266A2CF200B19119 /* ProductMaterialSuggestionInfoTableViewCell.swift in Sources */,
 				97B117342653AF1E00242428 /* ProductMaterialQueryInfo.swift in Sources */,
 				A44E8FDB265F82F80090D467 /* PurchaseAutoCompleteAdapters.swift in Sources */,
 				A43F4291264388E400A246CC /* SideMenuPresentable.swift in Sources */,
@@ -1021,6 +1032,7 @@
 				A415920F260C796500FD3989 /* ForgotPasswordRootView.swift in Sources */,
 				A489A1AC263FA7C900832679 /* TriangleView.swift in Sources */,
 				A489A1B4263FC9D600832679 /* UICollectionView+.swift in Sources */,
+				A4CBD8B1266A2ABA00B19119 /* ProductMaterialSuggestionInfoTableViewController.swift in Sources */,
 				A47F39D5263A5A9B00A3097C /* PurchaseBriefTableViewCell.swift in Sources */,
 				A489A1B1263FAA7D00832679 /* PurchaseBriefCollectionViewCell.swift in Sources */,
 				97B117392654B8FC00242428 /* PickProductMaterialsViewController.swift in Sources */,

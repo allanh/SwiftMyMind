@@ -12,7 +12,8 @@ import RxRelay
 
 class PurchaseSuggestionViewModel {
     enum View {
-        case suggestionInfo, purchaseApply
+        case suggestionInfo(PurchaseSuggestionInfo)
+        case purchaseApply
     }
     let pickedProductIDList: [String]
     let service: SuggestionProductMaterialViewModeService
@@ -55,6 +56,11 @@ class PurchaseSuggestionViewModel {
         }
 
         view.accept(.purchaseApply)
+    }
+
+    func performSuggestionInfo(for index: Int) {
+        let viewModel = suggestionProductMaterialViewModels[index]
+        view.accept(.suggestionInfo(viewModel.purchaseSuggestionInfo))
     }
 
     func validateAllProductMaterailsInfo() -> Bool {
