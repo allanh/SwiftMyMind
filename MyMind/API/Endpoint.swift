@@ -84,6 +84,11 @@ extension Endpoint {
         return Endpoint(path: "/api/admin/\(version)/purchase", queryItems: urlQueryItems)
     }
 
+    static func purchaseWarehouseList(partnerID: String) -> Self {
+        let item = URLQueryItem(name: "partner_id", value: partnerID)
+        return Endpoint(path: "/api/admin/\(version)/purchase/warehouse", queryItems: [item])
+    }
+
     static func purchaseNumberAutoComplete(searchTerm: String, partnerID: String, vendorID: String? = nil) -> Self {
         var query: [URLQueryItem] = []
         query.append(URLQueryItem(name: "partner_id", value: partnerID))
