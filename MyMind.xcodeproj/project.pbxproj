@@ -62,6 +62,7 @@
 		A442A164266F547300AAB1ED /* SuggestionProductMaterialViewModelService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A442A163266F547300AAB1ED /* SuggestionProductMaterialViewModelService.swift */; };
 		A442A168266F599A00AAB1ED /* PurchaseSuggestionInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A442A167266F599A00AAB1ED /* PurchaseSuggestionInfo.swift */; };
 		A442A16D266F780C00AAB1ED /* Warehouse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A442A16C266F780C00AAB1ED /* Warehouse.swift */; };
+		A442A16F266F797500AAB1ED /* Reviewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A442A16E266F797500AAB1ED /* Reviewer.swift */; };
 		A44A5A6E25F9B0D200995823 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44A5A6D25F9B0D200995823 /* AppDelegate.swift */; };
 		A44A5A7025F9B0D200995823 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44A5A6F25F9B0D200995823 /* SceneDelegate.swift */; };
 		A44A5A7225F9B0D200995823 /* MainFunctionEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44A5A7125F9B0D200995823 /* MainFunctionEntryViewController.swift */; };
@@ -224,6 +225,7 @@
 		A442A163266F547300AAB1ED /* SuggestionProductMaterialViewModelService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionProductMaterialViewModelService.swift; sourceTree = "<group>"; };
 		A442A167266F599A00AAB1ED /* PurchaseSuggestionInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseSuggestionInfo.swift; sourceTree = "<group>"; };
 		A442A16C266F780C00AAB1ED /* Warehouse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Warehouse.swift; sourceTree = "<group>"; };
+		A442A16E266F797500AAB1ED /* Reviewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reviewer.swift; sourceTree = "<group>"; };
 		A44A5A6A25F9B0D200995823 /* MyMind.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyMind.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A44A5A6D25F9B0D200995823 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A44A5A6F25F9B0D200995823 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -512,6 +514,7 @@
 				97AFE3652665E7DD002CBE01 /* ProductMaterialDetail.swift */,
 				A442A167266F599A00AAB1ED /* PurchaseSuggestionInfo.swift */,
 				A442A16C266F780C00AAB1ED /* Warehouse.swift */,
+				A442A16E266F797500AAB1ED /* Reviewer.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -990,6 +993,7 @@
 				A49CF92A26034BEA00AFC170 /* CaptchaSession.swift in Sources */,
 				A4BDC7B4260B10E2005C33A5 /* SignInValidationService.swift in Sources */,
 				A43F42952643C75C00A246CC /* FilterSideMenuBottomView.swift in Sources */,
+				A442A16F266F797500AAB1ED /* Reviewer.swift in Sources */,
 				A48389B4260869940044C09E /* SignInViewModel.swift in Sources */,
 				A43E0B6A260D84FB005FC6CE /* NVActivityIndicatorView+Rx.swift in Sources */,
 				A4CBD8A92664E2AF00B19119 /* VendorInfo.swift in Sources */,
