@@ -13,6 +13,14 @@ import PromiseKit
 @testable import MyMind
 
 class MockPurchaseAPIService: PurchaseAPIService {
+    func fetchPurchaseSuggestionInfos(with productIDs: [String]) -> Promise<PurchaseSuggestionInfoList> {
+        .init(error: APIError.dataNotFoundError)
+    }
+
+    func fetchPurchaseWarehouseList() -> Promise<[Warehouse]> {
+        .init(error: APIError.dataNotFoundError)
+    }
+
     func fetchProductMaterialDetail(with id: String) -> Promise<ProductMaterialDetail> {
         .init(error: APIError.dataNotFoundError)
     }
