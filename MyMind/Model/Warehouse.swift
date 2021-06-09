@@ -18,7 +18,13 @@ struct Warehouse: Codable {
         let county, district, zipcode, address: String
     }
 
-    let name, type, id, number: String
+    enum WarehouseType: String, Codable {
+        case own = "OWN"
+        case channel = "CHANNEL"
+    }
+
+    let name, id, number: String
+    let type: WarehouseType
     let channelWareroomID: String
     let recipientInfo: RecipientInfo
 
