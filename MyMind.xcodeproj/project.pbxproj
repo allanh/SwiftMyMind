@@ -105,6 +105,7 @@
 		A489A1B2263FAA7D00832679 /* PurchaseBriefCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A489A1B0263FAA7D00832679 /* PurchaseBriefCollectionViewCell.xib */; };
 		A489A1B4263FC9D600832679 /* UICollectionView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A489A1B3263FC9D600832679 /* UICollectionView+.swift */; };
 		A494D9C426706587008658F8 /* PickReviewerViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A494D9C326706587008658F8 /* PickReviewerViewModelTests.swift */; };
+		A494D9C82670CC75008658F8 /* PurchaseApplyViewMoedl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A494D9C72670CC75008658F8 /* PurchaseApplyViewMoedl.swift */; };
 		A49CF8B6260301DE00AFC170 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49CF8B5260301DE00AFC170 /* Endpoint.swift */; };
 		A49CF8BB2603028C00AFC170 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49CF8BA2603028C00AFC170 /* APIService.swift */; };
 		A49CF8C0260306D200AFC170 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49CF8BF260306D200AFC170 /* APIError.swift */; };
@@ -278,6 +279,7 @@
 		A489A1B0263FAA7D00832679 /* PurchaseBriefCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PurchaseBriefCollectionViewCell.xib; sourceTree = "<group>"; };
 		A489A1B3263FC9D600832679 /* UICollectionView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+.swift"; sourceTree = "<group>"; };
 		A494D9C326706587008658F8 /* PickReviewerViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickReviewerViewModelTests.swift; sourceTree = "<group>"; };
+		A494D9C72670CC75008658F8 /* PurchaseApplyViewMoedl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseApplyViewMoedl.swift; sourceTree = "<group>"; };
 		A49CF8B5260301DE00AFC170 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		A49CF8BA2603028C00AFC170 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		A49CF8BF260306D200AFC170 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
@@ -433,6 +435,7 @@
 			isa = PBXGroup;
 			children = (
 				A442A16A266F692600AAB1ED /* PurchaseInfoViewModel.swift */,
+				A494D9C72670CC75008658F8 /* PurchaseApplyViewMoedl.swift */,
 			);
 			path = Apply;
 			sourceTree = "<group>";
@@ -1010,6 +1013,7 @@
 				A442A16F266F797500AAB1ED /* Reviewer.swift in Sources */,
 				A48389B4260869940044C09E /* SignInViewModel.swift in Sources */,
 				A43E0B6A260D84FB005FC6CE /* NVActivityIndicatorView+Rx.swift in Sources */,
+				A494D9C82670CC75008658F8 /* PurchaseApplyViewMoedl.swift in Sources */,
 				A4CBD8A92664E2AF00B19119 /* VendorInfo.swift in Sources */,
 				A47AB498265E00B300FE3CFA /* AutoCompleteSearchViewController.swift in Sources */,
 				A4ACEDC72649374B008724E4 /* UIWindow+.swift in Sources */,
