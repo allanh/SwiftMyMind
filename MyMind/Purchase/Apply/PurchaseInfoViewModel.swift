@@ -79,7 +79,7 @@ struct PurchaseInfoViewModel {
 }
 
 protocol PurchaseReviewerListService {
-    func fetchPurchaseReviewer() -> Promise<[Reviewer]>
+    func fetchPurchaseReviewerList(level: Int) -> Promise<[Reviewer]>
 }
 
 struct PickReviewerViewModel {
@@ -109,7 +109,7 @@ struct PickReviewerViewModel {
     }
 
     func fetchPurchaseReviewerList() {
-        service.fetchPurchaseReviewer()
+        service.fetchPurchaseReviewerList(level: 1)
             .done { list in
                 reviewerList.accept(list)
             }
