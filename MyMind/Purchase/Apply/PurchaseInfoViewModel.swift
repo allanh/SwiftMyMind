@@ -151,3 +151,68 @@ struct ApplyPurchaseParameterInfo: Codable {
         case productInfo = "product_info"
     }
 }
+
+struct PurchaseApplyViewModel {
+    let userSession: UserSession
+    let purchaseInfoViewModel: PurchaseInfoViewModel
+    let pickReviewerViewModel: PickReviewerViewModel
+
+    let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter
+    }()
+
+    func mapCurrentInfoToApplyPurchaseParameterInfo() -> ApplyPurchaseParameterInfo? {
+        let partnerID = String(userSession.partnerInfo.id)
+        let vendorID = purchaseInfoViewModel.vandorID
+
+        guard let date = purchaseInfoViewModel.expectedStorageDate.value else { return nil }
+        let expectStorageDate = dateFormatter.string(from: date)
+
+        guard let reviewer = pickReviewerViewModel.pickedReviewer.value else { return nil }
+
+        let note = pickReviewerViewModel.note.value
+
+        guard let pickedWarehouse = purchaseInfoViewModel.pickedWarehouse.value else { return nil }
+        let warehouseID = pickedWarehouse.id
+        let warehouseType = pickedWarehouse.type
+
+        let infos: [ApplyPurchaseParameterInfo.ProductInfo] = mapSuggestionProductMaterialViewModelsToProductInfos()
+
+        let applyPurchaseParameterInfo: ApplyPurchaseParameterInfo = .init(
+            partnerID: partnerID,
+            vendorID: vendorID,
+            expectStorageDate: expectStorageDate,
+            reviewBy: reviewer.id,
+            remark: note,
+            expectWarehouseID: warehouseID,
+            expectWarehouseType: warehouseType,
+            productInfo: infos)
+        return applyPurchaseParameterInfo
+    }
+
+    func mapSuggestionProductMaterialViewModelsToProductInfos() -> [ApplyPurchaseParameterInfo.ProductInfo] {
+        let viewModels = purchaseInfoViewModel.suggestionProductMaterialViewModels
+        let infos: [ApplyPurchaseParameterInfo.ProductInfo] = viewModels.map { viewModel in
+            let id = viewModel.purchaseSuggestionInfo.id
+            let quantity = String(viewModel.purchaseQuantity.value)
+            let suggestedPurchaseQuantity = viewModel.purchaseSuggestionInfo.suggestedQuantity
+            let channelStockQuantity = viewModel.purchaseSuggestionInfo.channelStockQuantity
+            let fineStockQuantity = viewModel.purchaseSuggestionInfo.fineStockQuantity
+            let purchaseCost = String(viewModel.purchaseCostPerItem.value)
+            let totalCost = String(viewModel.purchaseCost.value)
+
+            let info: ApplyPurchaseParameterInfo.ProductInfo = .init(
+                productID: id,
+                purchaseQuantity: quantity,
+                proposedQuantity: suggestedPurchaseQuantity,
+                channelStockQuantity: channelStockQuantity,
+                fineStockQuantity: fineStockQuantity,
+                purchaseCost: purchaseCost,
+                totalPrice: totalCost)
+            return info
+        }
+        return infos
+    }
+}
