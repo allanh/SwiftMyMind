@@ -16,6 +16,10 @@ struct Warehouse: Codable {
 
     struct Address: Codable {
         let county, district, zipcode, address: String
+
+        var fullAddressString: String {
+            "\(zipcode) \(county)\(district)\(address)"
+        }
     }
 
     enum WarehouseType: String, Codable {
