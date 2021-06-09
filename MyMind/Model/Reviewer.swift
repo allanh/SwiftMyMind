@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Reviewer: Codable {
+struct Reviewer: Codable, Equatable {
     let id: String
     let account: String
 
