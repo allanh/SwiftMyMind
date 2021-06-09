@@ -96,7 +96,3 @@ struct PurchaseInfoViewModel {
             }
     }
 }
-
-protocol PurchaseReviewerListService {
-    func fetchPurchaseReviewerList(level: Int) -> Promise<[Reviewer]>
-}

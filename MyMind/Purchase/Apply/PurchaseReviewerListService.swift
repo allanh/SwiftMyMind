@@ -1,5 +1,5 @@
 //
-//  ApplyPuchaseService.swift
+//  PurchaseReviewerListService.swift
 //  MyMind
 //
 //  Created by Barry Chen on 2021/6/9.
@@ -9,6 +9,6 @@
 import Foundation
 import PromiseKit
 
-protocol ApplyPuchaseService {
-    func applyPuchase(purchaseInfo: ApplyPurchaseParameterInfo) -> Promise<String>
+protocol PurchaseReviewerListService {
+    func fetchPurchaseReviewerList(level: Int) -> Promise<[Reviewer]>
 }
