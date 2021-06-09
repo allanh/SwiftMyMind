@@ -107,6 +107,7 @@
 		A494D9C426706587008658F8 /* PickReviewerViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A494D9C326706587008658F8 /* PickReviewerViewModelTests.swift */; };
 		A494D9C82670CC75008658F8 /* PurchaseApplyViewMoedl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A494D9C72670CC75008658F8 /* PurchaseApplyViewMoedl.swift */; };
 		A494D9CA2670CCFC008658F8 /* ApplyPuchaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A494D9C92670CCFC008658F8 /* ApplyPuchaseService.swift */; };
+		A494D9CC2670CD68008658F8 /* ApplyPurchaseParameterInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A494D9CB2670CD68008658F8 /* ApplyPurchaseParameterInfo.swift */; };
 		A49CF8B6260301DE00AFC170 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49CF8B5260301DE00AFC170 /* Endpoint.swift */; };
 		A49CF8BB2603028C00AFC170 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49CF8BA2603028C00AFC170 /* APIService.swift */; };
 		A49CF8C0260306D200AFC170 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49CF8BF260306D200AFC170 /* APIError.swift */; };
@@ -282,6 +283,7 @@
 		A494D9C326706587008658F8 /* PickReviewerViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickReviewerViewModelTests.swift; sourceTree = "<group>"; };
 		A494D9C72670CC75008658F8 /* PurchaseApplyViewMoedl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseApplyViewMoedl.swift; sourceTree = "<group>"; };
 		A494D9C92670CCFC008658F8 /* ApplyPuchaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyPuchaseService.swift; sourceTree = "<group>"; };
+		A494D9CB2670CD68008658F8 /* ApplyPurchaseParameterInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyPurchaseParameterInfo.swift; sourceTree = "<group>"; };
 		A49CF8B5260301DE00AFC170 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		A49CF8BA2603028C00AFC170 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		A49CF8BF260306D200AFC170 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
@@ -439,6 +441,7 @@
 				A442A16A266F692600AAB1ED /* PurchaseInfoViewModel.swift */,
 				A494D9C72670CC75008658F8 /* PurchaseApplyViewMoedl.swift */,
 				A494D9C92670CCFC008658F8 /* ApplyPuchaseService.swift */,
+				A494D9CB2670CD68008658F8 /* ApplyPurchaseParameterInfo.swift */,
 			);
 			path = Apply;
 			sourceTree = "<group>";
@@ -1054,6 +1057,7 @@
 				A4ACEDC526490E25008724E4 /* SelectedQueryCollectionViewCell.swift in Sources */,
 				A4B55E4F265B538F002E1880 /* KeychainUserSessionDataStore.swift in Sources */,
 				A4CBD8A72664E1E800B19119 /* VendorInfoService.swift in Sources */,
+				A494D9CC2670CD68008658F8 /* ApplyPurchaseParameterInfo.swift in Sources */,
 				97AFE3662665E7DD002CBE01 /* ProductMaterialDetail.swift in Sources */,
 				A4159204260C394F00FD3989 /* UIButton+.swift in Sources */,
 				A4CBD8A32664900100B19119 /* PickVendorViewController.swift in Sources */,
