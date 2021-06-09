@@ -169,6 +169,9 @@ struct ApplyPurchaseParameterInfo: Codable {
     }
 }
 
+protocol ApplyPuchaseService {
+    func applyPuchase(purchaseInfo: ApplyPurchaseParameterInfo) -> Promise<String>
+}
 struct PurchaseApplyViewModel {
     let userSession: UserSession
     let purchaseInfoViewModel: PurchaseInfoViewModel
@@ -180,6 +183,24 @@ struct PurchaseApplyViewModel {
         return formatter
     }()
 
+    let service: ApplyPuchaseService
+    func applyPurchase() {
+        guard let purchaseInfo = mapCurrentInfoToApplyPurchaseParameterInfo() else {
+            return
+        }
+        isNetworkProcessing.accept(true)
+        service.applyPuchase(purchaseInfo: purchaseInfo)
+            .ensure {
+                isNetworkProcessing.accept(true)
+            }
+            .done { purchaseID in
+                let view: View = .finish(purchaseID: purchaseID)
+                navigation(with: view)
+            }
+            .catch { error in
+                print(error.localizedDescription)
+            }
+    }
     func mapCurrentInfoToApplyPurchaseParameterInfo() -> ApplyPurchaseParameterInfo? {
         let partnerID = String(userSession.partnerInfo.id)
         let vendorID = purchaseInfoViewModel.vandorID
