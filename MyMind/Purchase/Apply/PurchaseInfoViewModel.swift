@@ -32,6 +32,10 @@ struct PurchaseInfoViewModel {
     let warehouseList: BehaviorRelay<[Warehouse]> = .init(value: [])
     let pickedWarehouse: BehaviorRelay<Warehouse?> = .init(value: nil)
 
+    let recipientName: PublishRelay<String> = .init()
+    let recipientPhone: PublishRelay<String> = .init()
+    let recipientAddress: PublishRelay<String> = .init()
+
     let expectedStorageDateValidationStatus: BehaviorRelay<ValidationResult> = .init(value: .invalid("此欄位必填"))
     let pickedWarehouseValidationStatus: BehaviorRelay<ValidationResult> = .init(value: .invalid("此欄位必填"))
 
@@ -41,7 +45,8 @@ struct PurchaseInfoViewModel {
     init(suggestionProductMaterialViewModels: [SuggestionProductMaterialViewModel], service: PurchaseWarehouseListService) {
         self.suggestionProductMaterialViewModels = suggestionProductMaterialViewModels
         self.service = service
-        self.bindStatus()
+        bindStatus()
+        bindRecipientInfo()
     }
 
     func bindStatus() {
@@ -64,6 +69,17 @@ struct PurchaseInfoViewModel {
                 warehouse != nil ? .valid : .invalid("此欄位必填")
             }
             .bind(to: pickedWarehouseValidationStatus)
+            .disposed(by: bag)
+    }
+
+    func bindRecipientInfo() {
+        pickedWarehouse
+            .compactMap({ $0 })
+            .subscribe(onNext: { warehouse in
+                recipientName.accept(warehouse.recipientInfo.name)
+                recipientPhone.accept(warehouse.recipientInfo.phone)
+                recipientAddress.accept(warehouse.recipientInfo.address.fullAddressString)
+            })
             .disposed(by: bag)
     }
 
@@ -118,6 +134,7 @@ struct PickReviewerViewModel {
             }
     }
 }
+
 struct ApplyPurchaseParameterInfo: Codable {
     // MARK: - ProductInfo
     struct ProductInfo: Codable {
