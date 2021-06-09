@@ -7,14 +7,16 @@
 //
 
 import Foundation
+import PromiseKit
 import RxRelay
 import RxSwift
 
-protocol RxPurchaseWarehouseListService {
-    func fetchPurchaseWarehouseList() -> Single<[Warehouse]>
+protocol PurchaseWarehouseListService {
+    func fetchPurchaseWarehouseList() -> Promise<[Warehouse]>
 }
 
 struct PurchaseInfoViewModel {
+    // MARK: - Properties
     let title: String = "採購單資訊"
     let suggestionProductMaterialViewModels: [SuggestionProductMaterialViewModel]
 
@@ -30,29 +32,52 @@ struct PurchaseInfoViewModel {
     let warehouseList: BehaviorRelay<[Warehouse]> = .init(value: [])
     let pickedWarehouse: BehaviorRelay<Warehouse?> = .init(value: nil)
 
-    let expectedStorageDateValidationStatus: BehaviorRelay<ValidationResult> = .init(value: .invalid(""))
-    let pickedWarehouseValidationStatus: BehaviorRelay<ValidationResult> = .init(value: .invalid(""))
+    let expectedStorageDateValidationStatus: BehaviorRelay<ValidationResult> = .init(value: .invalid("此欄位必填"))
+    let pickedWarehouseValidationStatus: BehaviorRelay<ValidationResult> = .init(value: .invalid("此欄位必填"))
 
-    let service: RxPurchaseWarehouseListService
+    let service: PurchaseWarehouseListService
     let bag: DisposeBag = DisposeBag()
-
-    init(suggestionProductMaterialViewModels: [SuggestionProductMaterialViewModel], service: RxPurchaseWarehouseListService) {
+    // MARK: - Methods
+    init(suggestionProductMaterialViewModels: [SuggestionProductMaterialViewModel], service: PurchaseWarehouseListService) {
         self.suggestionProductMaterialViewModels = suggestionProductMaterialViewModels
         self.service = service
+        self.bindStatus()
+    }
+
+    func bindStatus() {
+        expectedStorageDate
+            .skip(1)
+            .map { date -> ValidationResult in
+                guard let date = date else { return .invalid("此欄位必填") }
+                if date < Date() {
+                    return .invalid("入庫日最快只能選擇今天的日期")
+                } else {
+                    return .valid
+                }
+            }
+            .bind(to: expectedStorageDateValidationStatus)
+            .disposed(by: bag)
+
+        pickedWarehouse
+            .skip(1)
+            .map { warehouse -> ValidationResult in
+                warehouse != nil ? .valid : .invalid("此欄位必填")
+            }
+            .bind(to: pickedWarehouseValidationStatus)
+            .disposed(by: bag)
     }
 
     func fetchWarehouseList() {
         service.fetchPurchaseWarehouseList()
-            .subscribe({ result in
-                switch result {
-                case .success(let list):
-                    warehouseList.accept(list)
-                case .failure(let error):
-                    print(error.localizedDescription)
-                }
-            })
-            .disposed(by: bag)
+            .done { warehouses in
+                warehouseList.accept(warehouses)
+            }
+            .catch { error in
+                print(error.localizedDescription)
+            }
     }
+}
+
 protocol PurchaseReviewerListService {
     func fetchPurchaseReviewer() -> Promise<[Reviewer]>
 }
