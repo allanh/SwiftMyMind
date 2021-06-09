@@ -39,10 +39,13 @@ struct PurchaseInfoViewModel {
     let expectedStorageDateValidationStatus: BehaviorRelay<ValidationResult> = .init(value: .invalid("此欄位必填"))
     let pickedWarehouseValidationStatus: BehaviorRelay<ValidationResult> = .init(value: .invalid("此欄位必填"))
 
+    let showSuggestionInfo: PublishRelay<Void> = .init()
+
     let service: PurchaseWarehouseListService
     let bag: DisposeBag = DisposeBag()
     // MARK: - Methods
-    init(suggestionProductMaterialViewModels: [SuggestionProductMaterialViewModel], service: PurchaseWarehouseListService) {
+    init(suggestionProductMaterialViewModels: [SuggestionProductMaterialViewModel],
+         service: PurchaseWarehouseListService) {
         self.suggestionProductMaterialViewModels = suggestionProductMaterialViewModels
         self.service = service
         bindStatus()
@@ -172,18 +175,27 @@ struct ApplyPurchaseParameterInfo: Codable {
 protocol ApplyPuchaseService {
     func applyPuchase(purchaseInfo: ApplyPurchaseParameterInfo) -> Promise<String>
 }
+
 struct PurchaseApplyViewModel {
+    enum View {
+        case suggestion(viewModels: [SuggestionProductMaterialViewModel])
+        case finish(purchaseID: String)
+    }
     let userSession: UserSession
     let purchaseInfoViewModel: PurchaseInfoViewModel
     let pickReviewerViewModel: PickReviewerViewModel
+    let view: PublishRelay<View> = .init()
+    let isNetworkProcessing: BehaviorRelay<Bool> = .init(value: false)
 
-    let dateFormatter: DateFormatter = {
+    private let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
         return formatter
     }()
 
     let service: ApplyPuchaseService
+    let bag: DisposeBag = DisposeBag()
+
     func applyPurchase() {
         guard let purchaseInfo = mapCurrentInfoToApplyPurchaseParameterInfo() else {
             return
@@ -201,6 +213,19 @@ struct PurchaseApplyViewModel {
                 print(error.localizedDescription)
             }
     }
+
+    func subscribeChildViewModel() {
+        purchaseInfoViewModel.showSuggestionInfo
+            .subscribe(onNext: { _ in
+                navigation(with: .suggestion(viewModels: purchaseInfoViewModel.suggestionProductMaterialViewModels))
+            })
+            .disposed(by: bag)
+    }
+
+    func navigation(with view: View) {
+        self.view.accept(view)
+    }
+
     func mapCurrentInfoToApplyPurchaseParameterInfo() -> ApplyPurchaseParameterInfo? {
         let partnerID = String(userSession.partnerInfo.id)
         let vendorID = purchaseInfoViewModel.vandorID
