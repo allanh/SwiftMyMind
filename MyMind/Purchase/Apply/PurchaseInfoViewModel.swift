@@ -171,7 +171,3 @@ struct ApplyPurchaseParameterInfo: Codable {
         case productInfo = "product_info"
     }
 }
-
-protocol ApplyPuchaseService {
-    func applyPuchase(purchaseInfo: ApplyPurchaseParameterInfo) -> Promise<String>
-}
