@@ -53,5 +53,43 @@ struct PurchaseInfoViewModel {
             })
             .disposed(by: bag)
     }
+protocol PurchaseReviewerListService {
+    func fetchPurchaseReviewer() -> Promise<[Reviewer]>
 }
 
+struct PickReviewerViewModel {
+    // MARK: - Properties
+    let reviewerList: BehaviorRelay<[Reviewer]> = .init(value: [])
+    let pickedReviewer: BehaviorRelay<Reviewer?> = .init(value: nil)
+    let pickedReviewerValidationStatus: BehaviorRelay<ValidationResult> = .init(value: .invalid("此欄位必填"))
+    let note: BehaviorRelay<String> = .init(value: "")
+
+    let service: PurchaseReviewerListService
+
+    let bag: DisposeBag = DisposeBag()
+    // MARK: - Methods
+    init(service: PurchaseReviewerListService) {
+        self.service = service
+        bindStatus()
+    }
+
+    func bindStatus() {
+        pickedReviewer
+            .skip(1)
+            .map { reviewer -> ValidationResult in
+                reviewer != nil ? .valid : .invalid("此欄位必填")
+            }
+            .bind(to: pickedReviewerValidationStatus)
+            .disposed(by: bag)
+    }
+
+    func fetchPurchaseReviewerList() {
+        service.fetchPurchaseReviewer()
+            .done { list in
+                reviewerList.accept(list)
+            }
+            .catch { error in
+                print(error.localizedDescription)
+            }
+    }
+}
