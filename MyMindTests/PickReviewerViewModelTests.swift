@@ -19,7 +19,7 @@ struct MockPurchaseReviewerListService: PurchaseReviewerListService {
 
     var shouldSuccess: Bool = true
 
-    func fetchPurchaseReviewer() -> Promise<[Reviewer]> {
+    func fetchPurchaseReviewerList() -> Promise<[Reviewer]> {
         return Promise<[Reviewer]>.init { seal in
             if shouldSuccess {
                 seal.fulfill(mockReviewerList)
