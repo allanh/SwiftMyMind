@@ -16,6 +16,7 @@ struct PickReviewerViewModel {
     let pickedReviewer: BehaviorRelay<Reviewer?> = .init(value: nil)
     let pickedReviewerValidationStatus: BehaviorRelay<ValidationResult> = .init(value: .invalid("此欄位必填"))
     let note: BehaviorRelay<String> = .init(value: "")
+    let noteValidationStatus: BehaviorRelay<ValidationResult> = .init(value: .valid)
 
     let service: PurchaseReviewerListService
 
@@ -33,6 +34,14 @@ struct PickReviewerViewModel {
                 reviewer != nil ? .valid : .invalid("此欄位必填")
             }
             .bind(to: pickedReviewerValidationStatus)
+            .disposed(by: bag)
+
+        note
+            .map { text -> ValidationResult in
+                let count = text.count
+                return count <= 200 ? .valid : .invalid("最多 200 個字元")
+            }
+            .bind(to: noteValidationStatus)
             .disposed(by: bag)
     }
 
