@@ -51,7 +51,7 @@ struct PurchaseApplyViewModel {
     func subscribeChildViewModel() {
         purchaseInfoViewModel.showSuggestionInfo
             .subscribe(onNext: { _ in
-                navigation(with: .suggestion(viewModels: purchaseInfoViewModel.suggestionProductMaterialViewModels))
+                navigation(with: .suggestion(viewModels: purchaseInfoViewModel.suggestionProductMaterialViewModels.value))
             })
             .disposed(by: bag)
     }
@@ -90,7 +90,7 @@ struct PurchaseApplyViewModel {
     }
 
     func mapSuggestionProductMaterialViewModelsToProductInfos() -> [ApplyPurchaseParameterInfo.ProductInfo] {
-        let viewModels = purchaseInfoViewModel.suggestionProductMaterialViewModels
+        let viewModels = purchaseInfoViewModel.suggestionProductMaterialViewModels.value
         let infos: [ApplyPurchaseParameterInfo.ProductInfo] = viewModels.map { viewModel in
             let id = viewModel.purchaseSuggestionInfo.id
             let quantity = String(viewModel.purchaseQuantity.value)

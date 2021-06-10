@@ -38,6 +38,8 @@ struct PurchaseInfoViewModel {
     let expectedStorageDateValidationStatus: BehaviorRelay<ValidationResult> = .init(value: .invalid("此欄位必填"))
     let pickedWarehouseValidationStatus: BehaviorRelay<ValidationResult> = .init(value: .invalid("此欄位必填"))
 
+    let showSuggestionInfo: PublishRelay<Void> = .init()
+
     let service: PurchaseWarehouseListService
     let bag: DisposeBag = DisposeBag()
     // MARK: - Methods
