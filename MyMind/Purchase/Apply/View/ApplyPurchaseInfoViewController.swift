@@ -21,19 +21,33 @@ final class ApplyPurchaseInfoViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        configTextFields()
         // Do any additional setup after loading the view.
     }
 
+    private func configTextFields() {
+        [expectStorageDateTextField, warehouseTextField].forEach {
+            guard let textField = $0 else { return }
+            textField.layer.borderWidth = 1
+            textField.layer.borderColor = UIColor.separator.cgColor
+            textField.layer.cornerRadius = 4
+            textField.setLeftPaddingPoints(10)
+            textField.font = .pingFangTCRegular(ofSize: 14)
+            textField.textColor = UIColor(hex: "4c4c4c")
 
-    /*
-    // MARK: - Navigation
+            let imageName: String = textField == expectStorageDateTextField ? "calendar_icon" : "search"
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+            configRightIconForTextField(textField, imageName: imageName)
+        }
     }
-    */
+
+    private func configRightIconForTextField(_ textField: UITextField, imageName: String) {
+        let containerView = UIView()
+        containerView.frame = CGRect(origin: .zero, size: .init(width: 35, height: 25))
+        let iconImageView = UIImageView(image: UIImage(named: imageName))
+        iconImageView.frame = CGRect(origin: .zero, size: .init(width: 25, height: 25))
+        containerView.addSubview(iconImageView)
+        expectStorageDateTextField.rightView = containerView
+    }
 
 }

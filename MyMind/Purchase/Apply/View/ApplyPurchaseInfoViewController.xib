@@ -18,6 +18,7 @@
                 <outlet property="statusLabel" destination="6sW-TB-Pbb" id="C9f-PM-TJm"/>
                 <outlet property="vendorNameLabel" destination="FR3-af-VFA" id="Yqf-eO-ndh"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="warehouseTextField" destination="7YJ-8t-XYk" id="RKx-fq-g7L"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
