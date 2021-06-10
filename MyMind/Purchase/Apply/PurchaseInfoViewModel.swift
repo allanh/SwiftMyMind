@@ -17,15 +17,14 @@ protocol PurchaseWarehouseListService {
 
 struct PurchaseInfoViewModel {
     // MARK: - Properties
-    let title: String = "採購單資訊"
-    let suggestionProductMaterialViewModels: [SuggestionProductMaterialViewModel]
+    let suggestionProductMaterialViewModels: BehaviorRelay<[SuggestionProductMaterialViewModel]>
 
-    var vandorName: String {
-        suggestionProductMaterialViewModels.first?.vendorName ?? ""
+    var venderName: String {
+        suggestionProductMaterialViewModels.value.first?.vendorName ?? ""
     }
 
-    var vandorID: String {
-        suggestionProductMaterialViewModels.first?.vendorID ?? ""
+    var vendorID: String {
+        suggestionProductMaterialViewModels.value.first?.vendorID ?? ""
     }
 
     let expectedStorageDate: BehaviorRelay<Date?> = .init(value: nil)
@@ -39,14 +38,12 @@ struct PurchaseInfoViewModel {
     let expectedStorageDateValidationStatus: BehaviorRelay<ValidationResult> = .init(value: .invalid("此欄位必填"))
     let pickedWarehouseValidationStatus: BehaviorRelay<ValidationResult> = .init(value: .invalid("此欄位必填"))
 
-    let showSuggestionInfo: PublishRelay<Void> = .init()
-
     let service: PurchaseWarehouseListService
     let bag: DisposeBag = DisposeBag()
     // MARK: - Methods
     init(suggestionProductMaterialViewModels: [SuggestionProductMaterialViewModel],
          service: PurchaseWarehouseListService) {
-        self.suggestionProductMaterialViewModels = suggestionProductMaterialViewModels
+        self.suggestionProductMaterialViewModels = .init(value: suggestionProductMaterialViewModels)
         self.service = service
         bindStatus()
         bindRecipientInfo()

@@ -62,7 +62,7 @@ struct PurchaseApplyViewModel {
 
     func mapCurrentInfoToApplyPurchaseParameterInfo() -> ApplyPurchaseParameterInfo? {
         let partnerID = String(userSession.partnerInfo.id)
-        let vendorID = purchaseInfoViewModel.vandorID
+        let vendorID = purchaseInfoViewModel.vendorID
 
         guard let date = purchaseInfoViewModel.expectedStorageDate.value else { return nil }
         let expectStorageDate = dateFormatter.string(from: date)
