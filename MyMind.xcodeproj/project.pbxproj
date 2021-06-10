@@ -40,6 +40,7 @@
 		A40EBFDA2671AD4900A4863D /* PurchaseApplyInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A40EBFD82671AD4900A4863D /* PurchaseApplyInfoViewController.xib */; };
 		A40EBFDE2671F7A100A4863D /* PickPurchaseReviewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40EBFDC2671F7A100A4863D /* PickPurchaseReviewerViewController.swift */; };
 		A40EBFDF2671F7A100A4863D /* PickPurchaseReviewerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A40EBFDD2671F7A100A4863D /* PickPurchaseReviewerViewController.xib */; };
+		A40EBFE1267216C100A4863D /* PurchaseApplyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40EBFE0267216C100A4863D /* PurchaseApplyViewController.swift */; };
 		A4159204260C394F00FD3989 /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4159203260C394F00FD3989 /* UIButton+.swift */; };
 		A4159209260C603B00FD3989 /* ForgotPasswordInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4159208260C603B00FD3989 /* ForgotPasswordInfo.swift */; };
 		A415920F260C796500FD3989 /* ForgotPasswordRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A415920E260C796500FD3989 /* ForgotPasswordRootView.swift */; };
@@ -214,6 +215,7 @@
 		A40EBFD82671AD4900A4863D /* PurchaseApplyInfoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PurchaseApplyInfoViewController.xib; sourceTree = "<group>"; };
 		A40EBFDC2671F7A100A4863D /* PickPurchaseReviewerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickPurchaseReviewerViewController.swift; sourceTree = "<group>"; };
 		A40EBFDD2671F7A100A4863D /* PickPurchaseReviewerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PickPurchaseReviewerViewController.xib; sourceTree = "<group>"; };
+		A40EBFE0267216C100A4863D /* PurchaseApplyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseApplyViewController.swift; sourceTree = "<group>"; };
 		A4159203260C394F00FD3989 /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
 		A4159208260C603B00FD3989 /* ForgotPasswordInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordInfo.swift; sourceTree = "<group>"; };
 		A415920E260C796500FD3989 /* ForgotPasswordRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordRootView.swift; sourceTree = "<group>"; };
@@ -421,6 +423,7 @@
 				A40EBFD82671AD4900A4863D /* PurchaseApplyInfoViewController.xib */,
 				A40EBFDC2671F7A100A4863D /* PickPurchaseReviewerViewController.swift */,
 				A40EBFDD2671F7A100A4863D /* PickPurchaseReviewerViewController.xib */,
+				A40EBFE0267216C100A4863D /* PurchaseApplyViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1078,6 +1081,7 @@
 				97AFE3792668D727002CBE01 /* UIViewController+loadNib.swift in Sources */,
 				97B117372653B1AF00242428 /* PickProductMaterialsViewModel.swift in Sources */,
 				A4793CB126048BB600AD280C /* UIFont+.swift in Sources */,
+				A40EBFE1267216C100A4863D /* PurchaseApplyViewController.swift in Sources */,
 				97B1172F26535B9800242428 /* ProductMaterial.swift in Sources */,
 				A44A5A7225F9B0D200995823 /* MainFunctionEntryViewController.swift in Sources */,
 				A47AB49A265E4DA400FE3CFA /* SearchMaterialNamesViewController.swift in Sources */,
