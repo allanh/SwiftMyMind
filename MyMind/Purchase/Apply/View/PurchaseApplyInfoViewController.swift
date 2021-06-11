@@ -156,7 +156,8 @@ final class PurchaseApplyInfoViewController: UIViewController {
         let iconImageView = UIImageView(image: UIImage(named: imageName))
         iconImageView.frame = CGRect(origin: .zero, size: .init(width: 25, height: 25))
         containerView.addSubview(iconImageView)
-        expectStorageDateTextField.rightView = containerView
+        textField.rightView = containerView
+        textField.rightViewMode = .always
     }
 
     private func showSuggestionInfoViewController() {
@@ -174,7 +175,7 @@ final class PurchaseApplyInfoViewController: UIViewController {
     private func updateExpectStorageDateTextFieldLayout(validationStatus: ValidationResult) {
         switch validationStatus {
         case .valid:
-            expectStorageDateTextField.layer.borderColor = UIColor.init(hex: "ff8500").cgColor
+            expectStorageDateTextField.layer.borderColor = UIColor.init(hex: "cccccc").cgColor
             expectStorageDateErrorLabel.isHidden = true
         case .invalid(let message):
             expectStorageDateTextField.layer.borderColor = UIColor.systemRed.cgColor
@@ -186,7 +187,7 @@ final class PurchaseApplyInfoViewController: UIViewController {
     private func updateWarehoseTextFieldLayout(validationStatus: ValidationResult) {
         switch validationStatus {
         case .valid:
-            warehouseTextField.layer.borderColor = UIColor.init(hex: "ff8500").cgColor
+            warehouseTextField.layer.borderColor = UIColor.init(hex: "cccccc").cgColor
             warehouseErrorLabel.isHidden = true
         case .invalid(let message):
             warehouseTextField.layer.borderColor = UIColor.systemRed.cgColor
