@@ -84,7 +84,7 @@ final class PickPurchaseReviewerViewController: UIViewController {
     private func updatePickReviewerTextFieldLayout(with validationStatus: ValidationResult) {
         switch validationStatus {
         case .valid:
-            pickReviewerTextField.layer.borderColor = UIColor.init(hex: "ff8500").cgColor
+            pickReviewerTextField.layer.borderColor = UIColor.init(hex: "cccccc").cgColor
             pickReviewerErrorLabel.isHidden = true
         case .invalid(let message):
             pickReviewerTextField.layer.borderColor = UIColor.systemRed.cgColor
@@ -96,7 +96,7 @@ final class PickPurchaseReviewerViewController: UIViewController {
     private func updateNoteTextViewLayout(with validationStatus: ValidationResult) {
         switch validationStatus {
         case .valid:
-            noteTextView.layer.borderColor = UIColor.init(hex: "ff8500").cgColor
+            noteTextView.layer.borderColor = UIColor.init(hex: "cccccc").cgColor
             noteErrorLabel.isHidden = true
         case .invalid(let message):
             noteTextView.layer.borderColor = UIColor.systemRed.cgColor
