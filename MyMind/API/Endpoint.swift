@@ -74,6 +74,10 @@ extension Endpoint {
         Endpoint(path: "/forgot_password", serviceType: .auth)
     }
 
+    static var purchaseApply: Self {
+        Endpoint(path: "/api/admin/\(version)/purchase")
+    }
+
     static func purchaseList(with partnerID: String, purchaseListQueryInfo: PurchaseListQueryInfo? = nil) -> Self {
         var urlQueryItems: [URLQueryItem] = []
         urlQueryItems.append(URLQueryItem(name: "partner_id", value: partnerID))

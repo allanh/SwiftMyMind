@@ -24,6 +24,7 @@ class MyMindPurchaseAPIService: PromiseKitAPIService {
     private var partnerID: String {
         String(userSession.partnerInfo.id)
     }
+
     init(userSession: UserSession) {
         self.userSession = userSession
     }
@@ -73,6 +74,23 @@ class MyMindPurchaseAPIService: PromiseKitAPIService {
         let rootRsult: Promise<Root> = sendRequest(request: request)
         return rootRsult.map({ $0.detail })
     }
+
+    func applyPuchase(purchaseInfo: ApplyPurchaseParameterInfo) -> Promise<String> {
+        let endpoint = Endpoint.purchaseApply
+
+        guard let body = try? JSONEncoder().encode(purchaseInfo) else {
+            return .init(error: APIError.parseError)
+        }
+
+        let request = request(
+            endPoint: endpoint,
+            httpHeader: [
+                "Authorization": "Bearer \(userSession.token)",
+                "Content-Type": "application/json"
+            ], httpBody: body)
+        
+        return sendRequest(request: request)
+    }
 }
 
 extension MyMindPurchaseAPIService: PurchaseAPIService { }
@@ -80,3 +98,5 @@ extension MyMindPurchaseAPIService: PurchaseAPIService { }
 extension MyMindPurchaseAPIService: PurchaseWarehouseListService { }
 
 extension MyMindPurchaseAPIService: PurchaseReviewerListService { }
+
+extension MyMindPurchaseAPIService: ApplyPuchaseService { }
