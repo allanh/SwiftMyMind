@@ -30,7 +30,7 @@ struct Warehouse: Codable {
     let name, id, number: String
     let type: WarehouseType
     let channelWareroomID: String
-    let recipientInfo: RecipientInfo
+    let recipientInfo: RecipientInfo?
 
     enum CodingKeys: String, CodingKey {
         case name

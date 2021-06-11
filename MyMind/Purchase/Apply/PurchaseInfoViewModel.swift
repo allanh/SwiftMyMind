@@ -76,11 +76,11 @@ struct PurchaseInfoViewModel {
 
     func bindRecipientInfo() {
         pickedWarehouse
-            .compactMap({ $0 })
-            .subscribe(onNext: { warehouse in
-                recipientName.accept(warehouse.recipientInfo.name)
-                recipientPhone.accept(warehouse.recipientInfo.phone)
-                recipientAddress.accept(warehouse.recipientInfo.address.fullAddressString)
+            .compactMap({ $0?.recipientInfo })
+            .subscribe(onNext: { recipientInfo in
+                recipientName.accept(recipientInfo.name)
+                recipientPhone.accept(recipientInfo.phone)
+                recipientAddress.accept(recipientInfo.address.fullAddressString)
             })
             .disposed(by: bag)
     }
