@@ -58,6 +58,7 @@ final class PickPurchaseReviewerViewController: UIViewController {
             .disposed(by: bag)
 
         viewModel.pickedReviewerValidationStatus
+            .skip(1)
             .subscribe(onNext: { [unowned self] status in
                 self.updatePickReviewerTextFieldLayout(with: status)
             })
