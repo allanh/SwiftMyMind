@@ -37,7 +37,7 @@ struct PurchaseApplyViewModel {
         isNetworkProcessing.accept(true)
         service.applyPuchase(purchaseInfo: purchaseInfo)
             .ensure {
-                isNetworkProcessing.accept(true)
+                isNetworkProcessing.accept(false)
             }
             .done { purchaseID in
                 let view: View = .finish(purchaseID: purchaseID)
