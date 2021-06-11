@@ -42,6 +42,8 @@ final class PurchaseApplyViewController: NiblessViewController {
         super.viewDidLoad()
 
         view.backgroundColor = .white
+        subscribeViewModel()
+        configSaveButton()
         addTapToResignKeyboardGesture()
         constructViewHierarchy()
         activateConstraints()
@@ -77,6 +79,21 @@ final class PurchaseApplyViewController: NiblessViewController {
         activateConstraintsSaveButton()
     }
 
+    private func configSaveButton() {
+        saveButton.addTarget(self, action: #selector(saveButtonDidTapped(_:)), for: .touchUpInside)
+    }
+
+    private func subscribeViewModel() {
+        viewModel.isNetworkProcessing
+            .skip(1)
+            .bind(to: rx.isActivityIndicatorAnimating)
+            .disposed(by: bag)
+
+        viewModel.view
+            .subscribe(onNext: navigation(with:))
+            .disposed(by: bag)
+    }
+
     private func configCollectionView() {
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -92,6 +109,20 @@ final class PurchaseApplyViewController: NiblessViewController {
         let pickPurchaseReviewerViewController = PickPurchaseReviewerViewController.loadFormNib()
         pickPurchaseReviewerViewController.viewModel = viewModel.pickReviewerViewModel
         contentViewControllers.append(pickPurchaseReviewerViewController)
+    }
+
+    @objc
+    private func saveButtonDidTapped(_ sender: UIButton) {
+        viewModel.applyPurchase()
+    }
+
+    private func navigation(with view: PurchaseApplyViewModel.View) {
+        switch view {
+        case .finish(let purchaseID):
+            break
+        case .suggestion(let viewModels):
+            break
+        }
     }
 }
 // MARK: - Collection view data source
