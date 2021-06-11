@@ -126,6 +126,18 @@ class PurchaseSuggestionViewController: NiblessViewController {
             viewController.purchaseSuggestionInfo = info
             show(viewController, sender: nil)
         case .purchaseApply:
+            let userSession: UserSession = .testUserSession
+            let service = MyMindPurchaseAPIService(userSession: userSession)
+            let purchaseInfoViewModel = PurchaseInfoViewModel(suggestionProductMaterialViewModels: viewModel.suggestionProductMaterialViewModels, service: service)
+            let pickReviewerViewModel = PickReviewerViewModel(service: service)
+            let purchaseApplyViewModel = PurchaseApplyViewModel(
+                userSession: userSession,
+                purchaseInfoViewModel: purchaseInfoViewModel,
+                pickReviewerViewModel: pickReviewerViewModel,
+                service: service)
+
+            let viewController = PurchaseApplyViewController(viewModel: purchaseApplyViewModel)
+            show(viewController, sender: nil)
             break
         }
     }

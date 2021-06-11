@@ -373,11 +373,7 @@
 			children = (
 				A442A165266F55D200AAB1ED /* View */,
 				97AFE36826661750002CBE01 /* SuggestionProductMaterialViewModel.swift */,
-				97AFE36E2667246B002CBE01 /* PurchaseProductSuggestionViewController.swift */,
-				97AFE36F2667246B002CBE01 /* PurchaseProductSuggestionViewController.xib */,
-				97AFE37226673535002CBE01 /* PurchaseSuggestionViewController.swift */,
 				A4CBD8AE2669D18F00B19119 /* PurchaseSuggestionViewModel.swift */,
-				A4CBD8B0266A2ABA00B19119 /* ProductMaterialSuggestionInfoTableViewController.swift */,
 				A442A163266F547300AAB1ED /* SuggestionProductMaterialViewModelService.swift */,
 			);
 			path = Suggestion;
@@ -454,6 +450,10 @@
 		A442A165266F55D200AAB1ED /* View */ = {
 			isa = PBXGroup;
 			children = (
+				A4CBD8B0266A2ABA00B19119 /* ProductMaterialSuggestionInfoTableViewController.swift */,
+				97AFE37226673535002CBE01 /* PurchaseSuggestionViewController.swift */,
+				97AFE36E2667246B002CBE01 /* PurchaseProductSuggestionViewController.swift */,
+				97AFE36F2667246B002CBE01 /* PurchaseProductSuggestionViewController.xib */,
 				A4CBD8AC2669C50A00B19119 /* StageProgressCollectionReusableView.swift */,
 				A4CBD8B4266A2CF200B19119 /* ProductMaterialSuggestionInfoTableViewCell.swift */,
 				A4CBD8B5266A2CF200B19119 /* ProductMaterialSuggestionInfoTableViewCell.xib */,
