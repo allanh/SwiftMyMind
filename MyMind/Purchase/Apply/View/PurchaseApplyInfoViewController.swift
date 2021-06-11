@@ -27,13 +27,13 @@ final class PurchaseApplyInfoViewController: UIViewController {
             self.configDropDownCell(cell: cell, with: item)
         } selectHandler: { item in
             self.selectedWarehouse(item)
+            self.dropDownView.hide()
         }
         return dropDownView
     }()
 
     private let datePicker: UIDatePicker = UIDatePicker {
         $0.datePickerMode = .date
-        $0.minimumDate = Date()
         if #available(iOS 14.0, *) {
             $0.preferredDatePickerStyle = .wheels
         }
@@ -49,7 +49,10 @@ final class PurchaseApplyInfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        bindToViewModel()
+        subscribeViewModel()
         viewModel.fetchWarehouseList()
+
         configDropDownView()
         configTextFields()
         configStatusLabel()
