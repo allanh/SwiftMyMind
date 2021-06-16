@@ -19,6 +19,7 @@ struct PurchaseApplyViewModel {
     let purchaseInfoViewModel: PurchaseInfoViewModel
     let pickReviewerViewModel: PickReviewerViewModel
     let view: PublishRelay<View> = .init()
+    let centralizedValidationStatus: BehaviorRelay<Bool> = .init(value: false)
     let isNetworkProcessing: BehaviorRelay<Bool> = .init(value: false)
 
     private let dateFormatter: DateFormatter = {
@@ -31,9 +32,21 @@ struct PurchaseApplyViewModel {
     let bag: DisposeBag = DisposeBag()
 
     func applyPurchase() {
+        guard centralizedValidationStatus.value else {
+            // Emit current element to update UI in case user didn't do anything before apply
+            purchaseInfoViewModel.expectedStorageDateValidationStatus
+                .accept(purchaseInfoViewModel.expectedStorageDateValidationStatus.value)
+            purchaseInfoViewModel.pickedWarehouseValidationStatus
+                .accept(purchaseInfoViewModel.pickedWarehouseValidationStatus.value)
+            pickReviewerViewModel.pickedReviewerValidationStatus
+                .accept(pickReviewerViewModel.pickedReviewerValidationStatus.value)
+            return
+        }
+
         guard let purchaseInfo = mapCurrentInfoToApplyPurchaseParameterInfo() else {
             return
         }
+
         isNetworkProcessing.accept(true)
         service.applyPuchase(purchaseInfo: purchaseInfo)
             .ensure {
@@ -54,6 +67,19 @@ struct PurchaseApplyViewModel {
                 navigation(with: .suggestion(viewModels: purchaseInfoViewModel.suggestionProductMaterialViewModels.value))
             })
             .disposed(by: bag)
+
+        Observable.combineLatest([
+            purchaseInfoViewModel.expectedStorageDateValidationStatus,
+            purchaseInfoViewModel.pickedWarehouseValidationStatus,
+            pickReviewerViewModel.pickedReviewerValidationStatus,
+            pickReviewerViewModel.noteValidationStatus
+        ])
+        .map({ validationStatus in
+            validationStatus.filter({ $0 != .valid}).isEmpty
+        })
+        .bind(to: centralizedValidationStatus)
+        .disposed(by: bag)
+
     }
 
     func navigation(with view: View) {
