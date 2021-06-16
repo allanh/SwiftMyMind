@@ -71,6 +71,11 @@ final class PurchaseApplyInfoViewController: UIViewController {
             .skip(1)
             .bind(to: viewModel.expectedStorageDate)
             .disposed(by: bag)
+
+        checkPurchasedProductsButton.rx.tap
+            .map({ () })
+            .bind(to: viewModel.showSuggestionInfo)
+            .disposed(by: bag)
     }
 
     private func subscribeViewModel() {

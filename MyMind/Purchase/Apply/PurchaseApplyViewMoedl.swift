@@ -12,7 +12,7 @@ import RxRelay
 
 struct PurchaseApplyViewModel {
     enum View {
-        case suggestion(viewModels: [SuggestionProductMaterialViewModel])
+        case suggestion(viewModels: BehaviorRelay<[SuggestionProductMaterialViewModel]>)
         case finish(purchaseID: String)
     }
     let userSession: UserSession
@@ -30,6 +30,15 @@ struct PurchaseApplyViewModel {
 
     let service: ApplyPuchaseService
     let bag: DisposeBag = DisposeBag()
+
+    init(userSession: UserSession, purchaseInfoViewModel: PurchaseInfoViewModel, pickReviewerViewModel: PickReviewerViewModel, service: ApplyPuchaseService) {
+        self.userSession = userSession
+        self.purchaseInfoViewModel = purchaseInfoViewModel
+        self.pickReviewerViewModel = pickReviewerViewModel
+        self.service = service
+
+        subscribeChildViewModel()
+    }
 
     func applyPurchase() {
         guard centralizedValidationStatus.value else {
@@ -64,7 +73,7 @@ struct PurchaseApplyViewModel {
     func subscribeChildViewModel() {
         purchaseInfoViewModel.showSuggestionInfo
             .subscribe(onNext: { _ in
-                navigation(with: .suggestion(viewModels: purchaseInfoViewModel.suggestionProductMaterialViewModels.value))
+                navigation(with: .suggestion(viewModels: purchaseInfoViewModel.suggestionProductMaterialViewModels))
             })
             .disposed(by: bag)
 

@@ -119,8 +119,12 @@ final class PurchaseApplyViewController: NiblessViewController {
     private func navigation(with view: PurchaseApplyViewModel.View) {
         switch view {
         case .finish(let purchaseID):
+
             break
         case .suggestion(let viewModels):
+            let viewModel = EditablePickedProductsInfoViewModel(pickedProductMaterialViewModels: viewModels)
+            let viewController = EditablePickedProductsInfoViewController(viewModel: viewModel)
+            show(viewController, sender: nil)
             break
         }
     }
