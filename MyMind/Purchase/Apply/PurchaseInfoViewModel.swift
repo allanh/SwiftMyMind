@@ -56,7 +56,9 @@ struct PurchaseInfoViewModel {
             .skip(1)
             .map { date -> ValidationResult in
                 guard let date = date else { return .invalid("此欄位必填") }
-                if date < Date() {
+                var yesterday = Calendar.current.dateComponents([.year, .month, .day], from: Date()).date ?? Date()
+                yesterday.addTimeInterval(-(24*60*60))
+                if date < yesterday {
                     return .invalid("入庫日最快只能選擇今天的日期")
                 } else {
                     return .valid
