@@ -34,11 +34,18 @@ class PurchaseProductSuggestionViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureRootView()
         configTextFields()
         configWithSuggestionInfo()
         bindInputToViewModel()
         subscribeViewModel()
         // Do any additional setup after loading the view.
+    }
+
+    private func configureRootView() {
+        view.layer.cornerRadius = 4
+        view.layer.borderWidth = 1
+        view.layer.borderColor = UIColor.separator.cgColor
     }
 
     private func configWithSuggestionInfo() {
