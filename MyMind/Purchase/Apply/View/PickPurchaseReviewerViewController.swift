@@ -47,6 +47,12 @@ final class PickPurchaseReviewerViewController: UIViewController {
     }
 
     private func subscribeViewModel() {
+        viewModel.reviewerList
+            .subscribe(onNext: { [unowned self] reviewers in
+                self.dropDownView.dataSource = reviewers
+            })
+            .disposed(by: bag)
+
         viewModel.pickedReviewer
             .map({ $0?.account })
             .bind(to: pickReviewerTextField.rx.text)
@@ -116,6 +122,7 @@ final class PickPurchaseReviewerViewController: UIViewController {
 
     private func selectedReviewer(_ reviewer: Reviewer) {
         viewModel.pickedReviewer.accept(reviewer)
+        dropDownView.hide()
     }
 }
 
