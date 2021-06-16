@@ -58,7 +58,7 @@ class PurchaseSuggestionViewModel {
         view.accept(.purchaseApply)
     }
 
-    func performSuggestionInfo(for index: Int) {
+    func showSuggestionInfo(for index: Int) {
         let viewModel = suggestionProductMaterialViewModels[index]
         view.accept(.suggestionInfo(viewModel.purchaseSuggestionInfo))
     }

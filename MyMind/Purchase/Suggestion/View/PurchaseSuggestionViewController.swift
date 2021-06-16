@@ -160,7 +160,7 @@ class PurchaseSuggestionViewController: NiblessViewController {
             let point = sender.superview?.convert(sender.frame.origin, to: collectionView),
             let indexPath = collectionView.indexPathForItem(at: point)
         else { return }
-        viewModel.performSuggestionInfo(for: indexPath.item)
+        viewModel.showSuggestionInfo(for: indexPath.item)
     }
 }
 // MARK: - Collection view data source
