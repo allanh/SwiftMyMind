@@ -127,6 +127,8 @@
 		A4AF79F72637B13B002B04F6 /* MainFunctionControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4AF79F62637B13B002B04F6 /* MainFunctionControl.swift */; };
 		A4B55E4B265B4749002E1880 /* MyMindUserSessionRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B55E4A265B4749002E1880 /* MyMindUserSessionRepository.swift */; };
 		A4B55E4F265B538F002E1880 /* KeychainUserSessionDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B55E4E265B538F002E1880 /* KeychainUserSessionDataStore.swift */; };
+		A4BC88C52679CB8100956B95 /* EditablePickedProductsInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BC88C42679CB8100956B95 /* EditablePickedProductsInfoViewModel.swift */; };
+		A4BC88C72679DDC700956B95 /* EditablePickedProductsInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BC88C62679DDC700956B95 /* EditablePickedProductsInfoViewController.swift */; };
 		A4BDC79E260ADFC5005C33A5 /* UIViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BDC79D260ADFC5005C33A5 /* UIViewController+Rx.swift */; };
 		A4BDC7B4260B10E2005C33A5 /* SignInValidationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BDC7B3260B10E2005C33A5 /* SignInValidationService.swift */; };
 		A4BDC7B9260B3E0A005C33A5 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BDC7B8260B3E0A005C33A5 /* KeychainHelper.swift */; };
@@ -310,6 +312,8 @@
 		A4AF79F62637B13B002B04F6 /* MainFunctionControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFunctionControl.swift; sourceTree = "<group>"; };
 		A4B55E4A265B4749002E1880 /* MyMindUserSessionRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMindUserSessionRepository.swift; sourceTree = "<group>"; };
 		A4B55E4E265B538F002E1880 /* KeychainUserSessionDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainUserSessionDataStore.swift; sourceTree = "<group>"; };
+		A4BC88C42679CB8100956B95 /* EditablePickedProductsInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditablePickedProductsInfoViewModel.swift; sourceTree = "<group>"; };
+		A4BC88C62679DDC700956B95 /* EditablePickedProductsInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditablePickedProductsInfoViewController.swift; sourceTree = "<group>"; };
 		A4BDC79D260ADFC5005C33A5 /* UIViewController+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Rx.swift"; sourceTree = "<group>"; };
 		A4BDC7B3260B10E2005C33A5 /* SignInValidationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInValidationService.swift; sourceTree = "<group>"; };
 		A4BDC7B8260B3E0A005C33A5 /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
@@ -420,6 +424,7 @@
 				A40EBFDC2671F7A100A4863D /* PickPurchaseReviewerViewController.swift */,
 				A40EBFDD2671F7A100A4863D /* PickPurchaseReviewerViewController.xib */,
 				A40EBFE0267216C100A4863D /* PurchaseApplyViewController.swift */,
+				A4BC88C62679DDC700956B95 /* EditablePickedProductsInfoViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -471,6 +476,7 @@
 				A494D9CB2670CD68008658F8 /* ApplyPurchaseParameterInfo.swift */,
 				A494D9CD2670CDC1008658F8 /* PickReviewerViewModel.swift */,
 				A494D9CF2670CE0E008658F8 /* PurchaseReviewerListService.swift */,
+				A4BC88C42679CB8100956B95 /* EditablePickedProductsInfoViewModel.swift */,
 			);
 			path = Apply;
 			sourceTree = "<group>";
@@ -1115,6 +1121,7 @@
 				A415920F260C796500FD3989 /* ForgotPasswordRootView.swift in Sources */,
 				A489A1AC263FA7C900832679 /* TriangleView.swift in Sources */,
 				A489A1B4263FC9D600832679 /* UICollectionView+.swift in Sources */,
+				A4BC88C52679CB8100956B95 /* EditablePickedProductsInfoViewModel.swift in Sources */,
 				A40EBFDE2671F7A100A4863D /* PickPurchaseReviewerViewController.swift in Sources */,
 				A4CBD8B1266A2ABA00B19119 /* ProductMaterialSuggestionInfoTableViewController.swift in Sources */,
 				A40EBFD92671AD4900A4863D /* PurchaseApplyInfoViewController.swift in Sources */,
@@ -1124,6 +1131,7 @@
 				A47AB496265DF53200FE3CFA /* ContainerTableViewCell.swift in Sources */,
 				A45E69C5264B89A300AADB44 /* CustomClearButtonPositionTextField.swift in Sources */,
 				A49CF8B6260301DE00AFC170 /* Endpoint.swift in Sources */,
+				A4BC88C72679DDC700956B95 /* EditablePickedProductsInfoViewController.swift in Sources */,
 				A4793CB626048EBA00AD280C /* ValidatableInputView.swift in Sources */,
 				A4159209260C603B00FD3989 /* ForgotPasswordInfo.swift in Sources */,
 				A4054111264A8F7600E2D21B /* PurchaseQueryDateSelectionViewController.swift in Sources */,
