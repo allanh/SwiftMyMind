@@ -53,10 +53,17 @@ final class PurchaseApplyInfoViewController: UIViewController {
         subscribeViewModel()
         viewModel.fetchWarehouseList()
 
-        configDropDownView()
-        configTextFields()
-        configStatusLabel()
-        configContentWithViewModel()
+        configureRootView()
+        configureDropDownView()
+        configureTextFields()
+        configureStatusLabel()
+        configureContentWithViewModel()
+    }
+
+    private func configureRootView() {
+        view.layer.cornerRadius = 4
+        view.layer.borderWidth = 1
+        view.layer.borderColor = UIColor.separator.cgColor
     }
 
     private func bindToViewModel() {
@@ -118,16 +125,16 @@ final class PurchaseApplyInfoViewController: UIViewController {
             .disposed(by: bag)
     }
 
-    private func configContentWithViewModel() {
+    private func configureContentWithViewModel() {
         vendorNameLabel.text = viewModel.venderName
     }
 
-    private func configDropDownView() {
+    private func configureDropDownView() {
         dropDownView.topInset = 5
         dropDownView.anchorView = warehouseTextField
     }
 
-    private func configStatusLabel() {
+    private func configureStatusLabel() {
         statusLabel.layer.borderWidth = 1
         statusLabel.layer.borderColor = UIColor.init(hex: "ff8500").cgColor
         statusLabel.layer.cornerRadius = 4
@@ -135,7 +142,7 @@ final class PurchaseApplyInfoViewController: UIViewController {
         statusLabel.textColor = UIColor.init(hex: "ff8500")
     }
 
-    private func configTextFields() {
+    private func configureTextFields() {
         [expectStorageDateTextField, warehouseTextField].forEach {
             guard let textField = $0 else { return }
             textField.layer.borderWidth = 1

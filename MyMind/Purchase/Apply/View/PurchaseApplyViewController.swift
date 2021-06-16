@@ -138,9 +138,6 @@ extension PurchaseApplyViewController: UICollectionViewDataSource {
         }
         let viewController = contentViewControllers[indexPath.item]
         cell.hostedView = viewController.view
-        viewController.view.layer.cornerRadius = 4
-        viewController.view.layer.borderWidth = 1
-        viewController.view.layer.borderColor = UIColor.separator.cgColor
 
         return cell
     }

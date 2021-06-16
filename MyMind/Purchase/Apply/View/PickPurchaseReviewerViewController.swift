@@ -32,8 +32,9 @@ final class PickPurchaseReviewerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        configPickReviewerTextField()
-        configDropDownView()
+        configureRootView()
+        configurePickReviewerTextField()
+        configureDropDownView()
         viewModel.fetchPurchaseReviewerList()
         bindToViewModel()
         subscribeViewModel()
@@ -77,7 +78,13 @@ final class PickPurchaseReviewerViewController: UIViewController {
             .disposed(by: bag)
     }
 
-    private func configPickReviewerTextField() {
+    private func configureRootView() {
+        view.layer.cornerRadius = 4
+        view.layer.borderWidth = 1
+        view.layer.borderColor = UIColor.separator.cgColor
+    }
+
+    private func configurePickReviewerTextField() {
         pickReviewerTextField.delegate = self
         pickReviewerTextField.layer.borderWidth = 1
         pickReviewerTextField.layer.borderColor = UIColor.separator.cgColor
@@ -111,7 +118,7 @@ final class PickPurchaseReviewerViewController: UIViewController {
         }
     }
 
-    private func configDropDownView() {
+    private func configureDropDownView() {
         dropDownView.topInset = 5
         dropDownView.anchorView = pickReviewerTextField
     }
