@@ -70,42 +70,46 @@ class PurchaseProductSuggestionViewController: UIViewController {
             $0?.layer.borderColor = UIColor.separator.cgColor
             $0?.delegate = self
         })
+
+        purchaseCostPerItemTextField.text = String(viewModel.purchaseCost.value)
     }
 
     private func bindInputToViewModel() {
-        purchaseCostPerItemTextField.rx.text
-            .orEmpty
-            .skip(1)
+        purchaseCostPerItemTextField.rx.controlEvent(.editingChanged)
+            .map({ [unowned self] in
+                self.purchaseCostPerItemTextField.text ?? ""
+            })
             .bind(to: viewModel.purchaseCostPerItemInput)
             .disposed(by: bag)
 
-        purchaseQuantityTextField.rx.text
-            .orEmpty
-            .skip(1)
+        purchaseQuantityTextField.rx.controlEvent(.editingChanged)
+            .map({ [unowned self] in
+                self.purchaseQuantityTextField.text ?? ""
+            })
             .filter({ $0.count < 7 })
             .bind(to: viewModel.purchaseQuantityInput)
             .disposed(by: bag)
 
-        totalPurchaseCostTextField.rx.text
-            .orEmpty
-            .skip(1)
+        totalPurchaseCostTextField.rx.controlEvent(.editingChanged)
+            .map({ [unowned self] in
+                self.totalPurchaseCostTextField.text ?? ""
+            })
             .bind(to: viewModel.purchaseCostInput)
             .disposed(by: bag)
     }
 
     private func subscribeViewModel() {
-        viewModel.purchaseCostPerItem
-            .map({ String($0) })
-            .bind(to: purchaseCostPerItemTextField.rx.text)
-            .disposed(by: bag)
-
         viewModel.purchaseQuantity
             .map({ String($0) })
             .bind(to: purchaseQuantityTextField.rx.text)
             .disposed(by: bag)
 
         viewModel.purchaseCost
-            .map({ String($0) })
+            .filter({ [unowned self] _ in
+                !totalPurchaseCostTextField.isFirstResponder
+            })
+            .map({ String(format: "%.2f", $0) })
+            .debug()
             .bind(to: totalPurchaseCostTextField.rx.text)
             .disposed(by: bag)
 
@@ -179,13 +183,52 @@ class PurchaseProductSuggestionViewController: UIViewController {
 // MARK: - Text field delegate
 extension PurchaseProductSuggestionViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        guard let textField = purchaseQuantityTextField else { return true }
         let currentText = textField.text ?? ""
         guard let replaceRange = Range(range, in: currentText) else {
             print("Can't find range in text field")
             return true
         }
         let newText = currentText.replacingCharacters(in: replaceRange, with: string)
-        return newText.count < 7
+
+        switch textField {
+        case purchaseQuantityTextField:
+            return newText.count < 7
+        default:
+
+            let invalidCharacters = CharacterSet(charactersIn: "1234567890.").inverted
+            guard string.rangeOfCharacter(from: invalidCharacters) == nil else {
+                return false
+            }
+
+            if newText.isEmpty {
+                textField.text = "0"
+                textField.sendActions(for: .editingChanged)
+                return false
+            }
+
+            if currentText.count == 1, currentText == "0", string != "." {
+                textField.text = string
+                textField.sendActions(for: .editingChanged)
+                return false
+            }
+
+            if Double(newText) ?? 0 >= 1 {
+                let regex = "^(?!(0))(?:(?:[0-9]){1,9}[.][0-9]{0,2}|(?:[0-9]){1,9})$"
+                let regexRange = newText.range(of: regex, options: .regularExpression)
+
+                if regexRange == nil {
+                    return false
+                }
+            } else {
+                let regex = "^(?:(?:[0]{1})[.][0-9]{0,2}|(?:[0-9]){1,9})$"
+                let regexRange = newText.range(of: regex, options: .regularExpression)
+
+                if regexRange == nil {
+                    return false
+                }
+            }
+
+            return true
+        }
     }
 }
