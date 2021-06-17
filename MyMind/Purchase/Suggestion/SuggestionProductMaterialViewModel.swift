@@ -80,6 +80,11 @@ struct SuggestionProductMaterialViewModel {
             .bind(to: validationStatusForpurchaseCostPerItem)
             .disposed(by: bag)
 
+        purchaseCostPerItem
+            .map({ _ in ValidationResult.valid })
+            .bind(to: validationStatusForPurchaseCost)
+            .disposed(by: bag)
+
 
         purchaseQuantityInput
             .map({ Int($0) ?? 0})
@@ -101,6 +106,11 @@ struct SuggestionProductMaterialViewModel {
                 return roundedResult
             }
             .bind(to: totalBox)
+            .disposed(by: bag)
+
+        purchaseQuantity
+            .map({ _ in ValidationResult.valid })
+            .bind(to: validationStatusForPurchaseCost)
             .disposed(by: bag)
 
         Observable.combineLatest(purchaseCostPerItem, purchaseQuantity)
