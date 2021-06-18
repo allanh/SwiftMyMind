@@ -109,7 +109,6 @@ class PurchaseProductSuggestionViewController: UIViewController {
                 !totalPurchaseCostTextField.isFirstResponder
             })
             .map({ String(format: "%.2f", $0) })
-            .debug()
             .bind(to: totalPurchaseCostTextField.rx.text)
             .disposed(by: bag)
 

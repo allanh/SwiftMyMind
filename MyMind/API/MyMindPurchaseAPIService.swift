@@ -76,6 +76,14 @@ class MyMindPurchaseAPIService: PromiseKitAPIService {
     }
 
     func applyPuchase(purchaseInfo: ApplyPurchaseParameterInfo) -> Promise<String> {
+        struct Root: Codable {
+            let purchaseID: String
+
+            enum CodingKeys: String, CodingKey {
+                case purchaseID = "purchase_id"
+            }
+        }
+
         let endpoint = Endpoint.purchaseApply
 
         guard let body = try? JSONEncoder().encode(purchaseInfo) else {
@@ -84,12 +92,14 @@ class MyMindPurchaseAPIService: PromiseKitAPIService {
 
         let request = request(
             endPoint: endpoint,
+            httpMethod: "POST",
             httpHeader: [
                 "Authorization": "Bearer \(userSession.token)",
                 "Content-Type": "application/json"
             ], httpBody: body)
         
-        return sendRequest(request: request)
+        let rootRsult: Promise<Root> = sendRequest(request: request)
+        return rootRsult.map({ $0.purchaseID })
     }
 }
 
