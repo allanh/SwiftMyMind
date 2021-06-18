@@ -97,9 +97,15 @@ class MyMindPurchaseAPIService: PromiseKitAPIService {
                 "Authorization": "Bearer \(userSession.token)",
                 "Content-Type": "application/json"
             ], httpBody: body)
-        
+
         let rootRsult: Promise<Root> = sendRequest(request: request)
         return rootRsult.map({ $0.purchaseID })
+    }
+
+    func fetchPurchaseOrder(with purchaseID: String) -> Promise<PurchaseOrder> {
+        let endpoint = Endpoint.purchaseOrder(purchaseID: purchaseID)
+        let request = request(endPoint: endpoint)
+        return sendRequest(request: request)
     }
 }
 
@@ -110,3 +116,5 @@ extension MyMindPurchaseAPIService: PurchaseWarehouseListService { }
 extension MyMindPurchaseAPIService: PurchaseReviewerListService { }
 
 extension MyMindPurchaseAPIService: ApplyPuchaseService { }
+
+extension MyMindPurchaseAPIService: PurchaseOrderService { }
