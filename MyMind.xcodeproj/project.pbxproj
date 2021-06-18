@@ -132,6 +132,8 @@
 		A4BCA0C6267C70FD00E3B274 /* PurchaseOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BCA0C5267C70FD00E3B274 /* PurchaseOrder.swift */; };
 		A4BCA0C8267C73DF00E3B274 /* RecipientInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BCA0C7267C73DF00E3B274 /* RecipientInfo.swift */; };
 		A4BCA0CA267C802B00E3B274 /* PurchaseOrderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BCA0C9267C802B00E3B274 /* PurchaseOrderService.swift */; };
+		A4BCA0CE267C98B500E3B274 /* PurchaseOrderInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BCA0CC267C98B500E3B274 /* PurchaseOrderInfoViewController.swift */; };
+		A4BCA0CF267C98B500E3B274 /* PurchaseOrderInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4BCA0CD267C98B500E3B274 /* PurchaseOrderInfoViewController.xib */; };
 		A4BDC79E260ADFC5005C33A5 /* UIViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BDC79D260ADFC5005C33A5 /* UIViewController+Rx.swift */; };
 		A4BDC7B4260B10E2005C33A5 /* SignInValidationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BDC7B3260B10E2005C33A5 /* SignInValidationService.swift */; };
 		A4BDC7B9260B3E0A005C33A5 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BDC7B8260B3E0A005C33A5 /* KeychainHelper.swift */; };
@@ -320,6 +322,8 @@
 		A4BCA0C5267C70FD00E3B274 /* PurchaseOrder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseOrder.swift; sourceTree = "<group>"; };
 		A4BCA0C7267C73DF00E3B274 /* RecipientInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipientInfo.swift; sourceTree = "<group>"; };
 		A4BCA0C9267C802B00E3B274 /* PurchaseOrderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseOrderService.swift; sourceTree = "<group>"; };
+		A4BCA0CC267C98B500E3B274 /* PurchaseOrderInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseOrderInfoViewController.swift; sourceTree = "<group>"; };
+		A4BCA0CD267C98B500E3B274 /* PurchaseOrderInfoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PurchaseOrderInfoViewController.xib; sourceTree = "<group>"; };
 		A4BDC79D260ADFC5005C33A5 /* UIViewController+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Rx.swift"; sourceTree = "<group>"; };
 		A4BDC7B3260B10E2005C33A5 /* SignInValidationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInValidationService.swift; sourceTree = "<group>"; };
 		A4BDC7B8260B3E0A005C33A5 /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
@@ -689,6 +693,7 @@
 		A4BCA0C1267C446300E3B274 /* CompletedApply */ = {
 			isa = PBXGroup;
 			children = (
+				A4BCA0CB267C986600E3B274 /* View */,
 				A4BCA0C9267C802B00E3B274 /* PurchaseOrderService.swift */,
 			);
 			path = CompletedApply;
@@ -701,6 +706,15 @@
 				A489A1AF263FAA7D00832679 /* PurchaseBriefCollectionViewCell.swift */,
 				A489A1B0263FAA7D00832679 /* PurchaseBriefCollectionViewCell.xib */,
 				A47F39D4263A5A9B00A3097C /* PurchaseBriefTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A4BCA0CB267C986600E3B274 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A4BCA0CC267C98B500E3B274 /* PurchaseOrderInfoViewController.swift */,
+				A4BCA0CD267C98B500E3B274 /* PurchaseOrderInfoViewController.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -886,6 +900,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4BCA0CF267C98B500E3B274 /* PurchaseOrderInfoViewController.xib in Resources */,
 				A44A5A7A25F9B0D300995823 /* LaunchScreen.storyboard in Resources */,
 				A40EBFDF2671F7A100A4863D /* PickPurchaseReviewerViewController.xib in Resources */,
 				A44A5A7725F9B0D300995823 /* Assets.xcassets in Resources */,
@@ -1046,6 +1061,7 @@
 			files = (
 				A43F42932643C26400A246CC /* SideMenuTopBarView.swift in Sources */,
 				A4054109264A270C00E2D21B /* DispatchQueue+.swift in Sources */,
+				A4BCA0CE267C98B500E3B274 /* PurchaseOrderInfoViewController.swift in Sources */,
 				A43F429C2643EAEF00A246CC /* UICollectionViewLeftAlignedLayout.swift in Sources */,
 				A4793CC02604A59C00AD280C /* GradientView.swift in Sources */,
 				97AFE37526676F83002CBE01 /* ContainerCollectionViewCell.swift in Sources */,
