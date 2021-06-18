@@ -39,7 +39,7 @@ final class PickVendorViewController: UITableViewController {
 
     private func configTableView() {
         tableView.rowHeight = 44
-        tableView.sectionHeaderHeight = 100
+        tableView.sectionHeaderHeight = 115
         tableView.registerCell(VendorSelectionTableViewCell.self)
         tableView.separatorInset = .init(top: 0, left: 20, bottom: 0, right: 20)
     }
@@ -89,6 +89,7 @@ extension PickVendorViewController {
         let viewController = PickProductMaterialsViewController(viewModel: viewModel)
         show(viewController, sender: nil)
     }
+
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         searchTextFieldView.collectionView.removeFromSuperview()
         return searchTextFieldView

@@ -646,7 +646,6 @@
 				A4BCA0C2267C584E00E3B274 /* View */,
 				A47F39CC263A58F700A3097C /* PurchaseListViewController.swift */,
 				A46BA1DC263AAD290075E8C8 /* OrganizeOptionView.swift */,
-				A489A1AB263FA7C900832679 /* TriangleView.swift */,
 				A4F2D012265D07C7004D8D6D /* AutoCompleteSearchViewModel.swift */,
 				A47AB497265E00B300FE3CFA /* AutoCompleteSearchViewController.swift */,
 			);
@@ -702,6 +701,7 @@
 		A4BCA0C2267C584E00E3B274 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				A489A1AB263FA7C900832679 /* TriangleView.swift */,
 				A47F39D9263A64CD00A3097C /* PurchaseListRootView.swift */,
 				A489A1AF263FAA7D00832679 /* PurchaseBriefCollectionViewCell.swift */,
 				A489A1B0263FAA7D00832679 /* PurchaseBriefCollectionViewCell.xib */,
