@@ -129,6 +129,8 @@
 		A4B55E4F265B538F002E1880 /* KeychainUserSessionDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B55E4E265B538F002E1880 /* KeychainUserSessionDataStore.swift */; };
 		A4BC88C52679CB8100956B95 /* EditablePickedProductsInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BC88C42679CB8100956B95 /* EditablePickedProductsInfoViewModel.swift */; };
 		A4BC88C72679DDC700956B95 /* EditablePickedProductsInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BC88C62679DDC700956B95 /* EditablePickedProductsInfoViewController.swift */; };
+		A4BCA0C6267C70FD00E3B274 /* PurchaseOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BCA0C5267C70FD00E3B274 /* PurchaseOrder.swift */; };
+		A4BCA0C8267C73DF00E3B274 /* RecipientInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BCA0C7267C73DF00E3B274 /* RecipientInfo.swift */; };
 		A4BDC79E260ADFC5005C33A5 /* UIViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BDC79D260ADFC5005C33A5 /* UIViewController+Rx.swift */; };
 		A4BDC7B4260B10E2005C33A5 /* SignInValidationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BDC7B3260B10E2005C33A5 /* SignInValidationService.swift */; };
 		A4BDC7B9260B3E0A005C33A5 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BDC7B8260B3E0A005C33A5 /* KeychainHelper.swift */; };
@@ -314,6 +316,8 @@
 		A4B55E4E265B538F002E1880 /* KeychainUserSessionDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainUserSessionDataStore.swift; sourceTree = "<group>"; };
 		A4BC88C42679CB8100956B95 /* EditablePickedProductsInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditablePickedProductsInfoViewModel.swift; sourceTree = "<group>"; };
 		A4BC88C62679DDC700956B95 /* EditablePickedProductsInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditablePickedProductsInfoViewController.swift; sourceTree = "<group>"; };
+		A4BCA0C5267C70FD00E3B274 /* PurchaseOrder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseOrder.swift; sourceTree = "<group>"; };
+		A4BCA0C7267C73DF00E3B274 /* RecipientInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipientInfo.swift; sourceTree = "<group>"; };
 		A4BDC79D260ADFC5005C33A5 /* UIViewController+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Rx.swift"; sourceTree = "<group>"; };
 		A4BDC7B3260B10E2005C33A5 /* SignInValidationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInValidationService.swift; sourceTree = "<group>"; };
 		A4BDC7B8260B3E0A005C33A5 /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
@@ -515,7 +519,6 @@
 				A4705B8C26020E4400B30CE6 /* Model */,
 				A44A5A6D25F9B0D200995823 /* AppDelegate.swift */,
 				A44A5A6F25F9B0D200995823 /* SceneDelegate.swift */,
-				A44A5A7125F9B0D200995823 /* MainFunctionEntryViewController.swift */,
 				A44A5A7325F9B0D200995823 /* Main.storyboard */,
 				A44A5A7625F9B0D300995823 /* Assets.xcassets */,
 				A44A5A7825F9B0D300995823 /* LaunchScreen.storyboard */,
@@ -572,6 +575,8 @@
 				A442A167266F599A00AAB1ED /* PurchaseSuggestionInfo.swift */,
 				A442A16C266F780C00AAB1ED /* Warehouse.swift */,
 				A442A16E266F797500AAB1ED /* Reviewer.swift */,
+				A4BCA0C5267C70FD00E3B274 /* PurchaseOrder.swift */,
+				A4BCA0C7267C73DF00E3B274 /* RecipientInfo.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -626,18 +631,16 @@
 		A47F39CB263A58DA00A3097C /* Purchase */ = {
 			isa = PBXGroup;
 			children = (
+				A4BCA0C1267C446300E3B274 /* CompletedApply */,
 				A442A169266F68F200AAB1ED /* Apply */,
 				97AFE367266616FB002CBE01 /* Suggestion */,
 				A4CBD8A126648FC400B19119 /* PickVendor */,
 				97B117352653B17700242428 /* PickMaterials */,
 				A43F42962643DFE100A246CC /* Filter */,
+				A4BCA0C2267C584E00E3B274 /* View */,
 				A47F39CC263A58F700A3097C /* PurchaseListViewController.swift */,
-				A47F39D4263A5A9B00A3097C /* PurchaseBriefTableViewCell.swift */,
-				A47F39D9263A64CD00A3097C /* PurchaseListRootView.swift */,
 				A46BA1DC263AAD290075E8C8 /* OrganizeOptionView.swift */,
 				A489A1AB263FA7C900832679 /* TriangleView.swift */,
-				A489A1AF263FAA7D00832679 /* PurchaseBriefCollectionViewCell.swift */,
-				A489A1B0263FAA7D00832679 /* PurchaseBriefCollectionViewCell.xib */,
 				A4F2D012265D07C7004D8D6D /* AutoCompleteSearchViewModel.swift */,
 				A47AB497265E00B300FE3CFA /* AutoCompleteSearchViewController.swift */,
 			);
@@ -676,8 +679,27 @@
 			isa = PBXGroup;
 			children = (
 				A4AF79F62637B13B002B04F6 /* MainFunctionControl.swift */,
+				A44A5A7125F9B0D200995823 /* MainFunctionEntryViewController.swift */,
 			);
 			path = MainFunctionEntry;
+			sourceTree = "<group>";
+		};
+		A4BCA0C1267C446300E3B274 /* CompletedApply */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CompletedApply;
+			sourceTree = "<group>";
+		};
+		A4BCA0C2267C584E00E3B274 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A47F39D9263A64CD00A3097C /* PurchaseListRootView.swift */,
+				A489A1AF263FAA7D00832679 /* PurchaseBriefCollectionViewCell.swift */,
+				A489A1B0263FAA7D00832679 /* PurchaseBriefCollectionViewCell.xib */,
+				A47F39D4263A5A9B00A3097C /* PurchaseBriefTableViewCell.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		A4BDC7B2260B0F34005C33A5 /* UILayer */ = {
@@ -1080,6 +1102,7 @@
 				A439BD372637E42F004F47C8 /* MyMindPurchaseAPIService.swift in Sources */,
 				A405410B264A575E00E2D21B /* UITextField+.swift in Sources */,
 				A439B5412609D61C002352C2 /* String+.swift in Sources */,
+				A4BCA0C8267C73DF00E3B274 /* RecipientInfo.swift in Sources */,
 				A4CBD8AF2669D18F00B19119 /* PurchaseSuggestionViewModel.swift in Sources */,
 				A43E0B65260D7CA4005FC6CE /* NiblessView.swift in Sources */,
 				A4F2D015265D088B004D8D6D /* ProductMaterialAutoCompleteAdapters.swift in Sources */,
@@ -1137,6 +1160,7 @@
 				A4054111264A8F7600E2D21B /* PurchaseQueryDateSelectionViewController.swift in Sources */,
 				97B1174126550C5E00242428 /* PickSortTypeView.swift in Sources */,
 				A4C0AFF4265B7A2E00B8D0C4 /* LastSignInInfoDataStore.swift in Sources */,
+				A4BCA0C6267C70FD00E3B274 /* PurchaseOrder.swift in Sources */,
 				A44A5A7025F9B0D200995823 /* SceneDelegate.swift in Sources */,
 				A4793CBB260490A600AD280C /* UIColor+.swift in Sources */,
 				A494D9CE2670CDC1008658F8 /* PickReviewerViewModel.swift in Sources */,

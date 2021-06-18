@@ -9,19 +9,6 @@
 import Foundation
 
 struct Warehouse: Codable {
-    struct RecipientInfo: Codable {
-        let name, phone: String
-        let address: Address
-    }
-
-    struct Address: Codable {
-        let county, district, zipcode, address: String
-
-        var fullAddressString: String {
-            "\(zipcode) \(county)\(district)\(address)"
-        }
-    }
-
     enum WarehouseType: String, Codable {
         case own = "OWN"
         case channel = "CHANNEL"
