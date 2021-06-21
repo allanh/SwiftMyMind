@@ -24,12 +24,12 @@ class PickProductMaterialsViewModel {
     var currentPageInfo: MultiplePageList?
     let view: PublishRelay<PickMaterialView> = .init()
     let isNetworkProcessing: BehaviorRelay<Bool> = .init(value: false)
-    let purchaseAPIService: PurchaseAPIService
+    let loader: ProductMaterialListLoader
 
     private let bag: DisposeBag = DisposeBag()
     // MARK: - Methods
-    init(vendorInfo: VendorInfo, purchaseAPIService: PurchaseAPIService) {
-        self.purchaseAPIService = purchaseAPIService
+    init(vendorInfo: VendorInfo, loader: ProductMaterialListLoader) {
+        self.loader = loader
         self.currentQueryInfo = ProductMaterialQueryInfo(vendorInfo: vendorInfo)
         subscribeSortType()
     }
@@ -47,7 +47,7 @@ class PickProductMaterialsViewModel {
     func refreshFetchProductMaterials(with query: ProductMaterialQueryInfo) {
         guard isNetworkProcessing.value == false else { return }
         isNetworkProcessing.accept(true)
-        purchaseAPIService.fetchProductMaterialList(with: query)
+        loader.loadProductMaterialList(with: query)
             .ensure {
                 self.isNetworkProcessing.accept(false)
             }
@@ -71,7 +71,7 @@ class PickProductMaterialsViewModel {
         isNetworkProcessing.accept(true)
         currentQuery.pageNumber += 1
 
-        purchaseAPIService.fetchProductMaterialList(with: currentQuery)
+        loader.loadProductMaterialList(with: currentQuery)
             .ensure {
                 self.isNetworkProcessing.accept(false)
             }

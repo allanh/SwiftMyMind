@@ -10,7 +10,6 @@ import Foundation
 import PromiseKit
 
 protocol PurchaseAPIService {
-    func fetchProductMaterialList(with query: ProductMaterialQueryInfo) -> Promise<ProductMaterialList>
     func fetchProductMaterialDetail(with id: String) -> Promise<ProductMaterialDetail>
     func fetchPurchaseSuggestionInfos(with productIDs: [String]) -> Promise<PurchaseSuggestionInfoList>
     func fetchPurchaseWarehouseList() -> Promise<[Warehouse]>
@@ -33,7 +32,7 @@ class MyMindPurchaseAPIService: PromiseKitAPIService {
         return sendRequest(request: request)
     }
 
-    func fetchProductMaterialList(with query: ProductMaterialQueryInfo) -> Promise<ProductMaterialList> {
+    func loadProductMaterialList(with query: ProductMaterialQueryInfo) -> Promise<ProductMaterialList> {
         let endpoint = Endpoint.productMaterials(query: query)
         let request = request(endPoint: endpoint, httpHeader: ["Authorization": "Bearer \(userSession.token)"])
         return sendRequest(request: request)
@@ -108,6 +107,8 @@ class MyMindPurchaseAPIService: PromiseKitAPIService {
 extension MyMindPurchaseAPIService: PurchaseListLoader { }
 
 extension MyMindPurchaseAPIService: PurchaseAPIService { }
+
+extension MyMindPurchaseAPIService: ProductMaterialListLoader { }
 
 extension MyMindPurchaseAPIService: PurchaseWarehouseListService { }
 
