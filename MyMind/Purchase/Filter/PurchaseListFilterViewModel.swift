@@ -1,5 +1,5 @@
 //
-//  PurchaseFilterViewModel.swift
+//  PurchaseListFilterViewModel.swift
 //  MyMind
 //
 //  Created by Barry Chen on 2021/5/28.
@@ -9,7 +9,7 @@
 import Foundation
 import RxSwift
 
-class PurchaseFilterViewModel {
+class PurchaseListFilterViewModel {
     let title: String = "篩選條件"
     var queryInfo: PurchaseListQueryInfo
     let didUpdateQueryInfo: (PurchaseListQueryInfo) -> Void
@@ -168,7 +168,7 @@ class PurchaseFilterViewModel {
     }
 }
 // MARK: - Child view models factory mehods
-extension PurchaseFilterViewModel {
+extension PurchaseListFilterViewModel {
     private func makeViewModelForPurchaseNumber() -> AutoCompleteSearchViewModel {
         let adapter = RxPurchaseNumberAutoCompleteItemViewModelAdapter(service: service)
         let viewModel = AutoCompleteSearchViewModel(title: "採購單編號", service: adapter)

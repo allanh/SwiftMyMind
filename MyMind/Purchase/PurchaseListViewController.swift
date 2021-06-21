@@ -24,7 +24,7 @@ final class PurchaseListViewController: NiblessViewController {
         return pickSortView
     }()
 
-    let purchaseAPIService: PurchaseAPIService
+    let purchaseListLoader: PurchaseListLoader
 
     private var purchaseList: PurchaseList?
 
@@ -51,12 +51,12 @@ final class PurchaseListViewController: NiblessViewController {
         configPickSortTypeView()
         configTableView()
         configCollectionView()
-        fetchPurchaseList()
+        loadPurchaseList()
         addButtonsActions()
     }
     // MARK: - Methods
-    init(purchaseAPIService: PurchaseAPIService) {
-        self.purchaseAPIService = purchaseAPIService
+    init(purchaseListLoader: PurchaseListLoader) {
+        self.purchaseListLoader = purchaseListLoader
         super.init()
     }
 
@@ -96,9 +96,9 @@ final class PurchaseListViewController: NiblessViewController {
         rootView.createButton.addTarget(self, action: #selector(createButtonDidTapped(_:)), for: .touchUpInside)
     }
 
-    private func fetchPurchaseList(purchaseListQueryInfo: PurchaseListQueryInfo? = nil) {
+    private func loadPurchaseList(purchaseListQueryInfo: PurchaseListQueryInfo? = nil) {
         isNetworkProcessing = true
-        purchaseAPIService.fetchPurchaseList(purchaseListQueryInfo: purchaseListQueryInfo)
+        purchaseListLoader.loadPurchaseList(with: purchaseListQueryInfo)
             .done { purchaseList in
                 self.handleSuccessFetchPurchaseList(purchaseList)
             }
@@ -112,7 +112,7 @@ final class PurchaseListViewController: NiblessViewController {
         var refreshQuery = query
         refreshQuery?.pageNumber = 1
         purchaseList = nil
-        fetchPurchaseList(purchaseListQueryInfo: refreshQuery)
+        loadPurchaseList(purchaseListQueryInfo: refreshQuery)
     }
 
     private func handleSuccessFetchPurchaseList(_ purchaseList: PurchaseList) {
@@ -166,13 +166,13 @@ final class PurchaseListViewController: NiblessViewController {
 //            #warning("Error handle")
 //            return
 //        }
-        let viewModel = PurchaseFilterViewModel(
+        let viewModel = PurchaseListFilterViewModel(
             service: MyMindAutoCompleteAPIService(userSession: .testUserSession),
             queryInfo: purchaseListQueryInfo) { [weak self] queryInfo in
             self?.purchaseListQueryInfo = queryInfo
             self?.refreshFetchPurchaseList(query: queryInfo)
         }
-        let purchaseFilterViewController = PurchaseFilterViewController(viewModel: viewModel)
+        let purchaseFilterViewController = PurchaseListFilterViewController(viewModel: viewModel)
 
         let navigationController = UINavigationController(rootViewController: purchaseFilterViewController)
         navigationController.modalPresentationStyle = .fullScreen
@@ -202,7 +202,7 @@ extension PurchaseListViewController: UIScrollViewDelegate {
 
         if currentScrolledPercentage > threshold,
            purchaseListQueryInfo.updatePageNumberForNextPage(with: purchaseList) {
-            fetchPurchaseList(purchaseListQueryInfo: purchaseListQueryInfo)
+            loadPurchaseList(purchaseListQueryInfo: purchaseListQueryInfo)
         }
     }
 }

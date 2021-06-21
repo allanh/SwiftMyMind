@@ -1,5 +1,5 @@
 //
-//  PurchaseFilterViewController.swift
+//  PurchaseListFilterViewController.swift
 //  MyMind
 //
 //  Created by Barry Chen on 2021/5/6.
@@ -26,7 +26,7 @@ enum PurchaseQueryType: String, CustomStringConvertible, CaseIterable {
     }
 }
 
-class PurchaseFilterViewController: NiblessViewController {
+class PurchaseListFilterViewController: NiblessViewController {
     private let scrollView: UIScrollView = UIScrollView {
         $0.backgroundColor = .white
         $0.showsHorizontalScrollIndicator = false
@@ -40,9 +40,9 @@ class PurchaseFilterViewController: NiblessViewController {
         $0.backgroundColor = .white
     }
 
-    let viewModel: PurchaseFilterViewModel
+    let viewModel: PurchaseListFilterViewModel
 
-    init(viewModel: PurchaseFilterViewModel) {
+    init(viewModel: PurchaseListFilterViewModel) {
         self.viewModel = viewModel
         super.init()
     }
@@ -170,7 +170,7 @@ class PurchaseFilterViewController: NiblessViewController {
     }
 }
 // MARK: - Layouts
-extension PurchaseFilterViewController {
+extension PurchaseListFilterViewController {
     private func activateConstraintsBottomView() {
         bottomView.translatesAutoresizingMaskIntoConstraints = false
         let leading = bottomView.leadingAnchor
@@ -222,7 +222,7 @@ extension PurchaseFilterViewController {
     }
 }
 // MARK: - Keyboard handle
-extension PurchaseFilterViewController {
+extension PurchaseListFilterViewController {
     func addKeyboardObservers() {
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(handleContentUnderKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)

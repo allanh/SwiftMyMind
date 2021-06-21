@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		97547CB8268039C6001859A8 /* PurchaseListLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97547CB7268039C6001859A8 /* PurchaseListLoader.swift */; };
 		97AFE3662665E7DD002CBE01 /* ProductMaterialDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97AFE3652665E7DD002CBE01 /* ProductMaterialDetail.swift */; };
 		97AFE36926661750002CBE01 /* SuggestionProductMaterialViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97AFE36826661750002CBE01 /* SuggestionProductMaterialViewModel.swift */; };
 		97AFE36B266629FD002CBE01 /* product_material_detail.json in Resources */ = {isa = PBXBuildFile; fileRef = 97AFE36A26662918002CBE01 /* product_material_detail.json */; };
@@ -59,7 +60,7 @@
 		A43E0B6F260DC66D005FC6CE /* UIControl+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43E0B6E260DC66D005FC6CE /* UIControl+.swift */; };
 		A43E0B74260DC944005FC6CE /* SignInValidationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43E0B73260DC944005FC6CE /* SignInValidationServiceTests.swift */; };
 		A43E0B79260DD598005FC6CE /* SignInViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43E0B78260DD598005FC6CE /* SignInViewModelTests.swift */; };
-		A43F428F2643866F00A246CC /* PurchaseFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43F428E2643866F00A246CC /* PurchaseFilterViewController.swift */; };
+		A43F428F2643866F00A246CC /* PurchaseListFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43F428E2643866F00A246CC /* PurchaseListFilterViewController.swift */; };
 		A43F4291264388E400A246CC /* SideMenuPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43F4290264388E400A246CC /* SideMenuPresentable.swift */; };
 		A43F42932643C26400A246CC /* SideMenuTopBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43F42922643C26400A246CC /* SideMenuTopBarView.swift */; };
 		A43F42952643C75C00A246CC /* FilterSideMenuBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43F42942643C75C00A246CC /* FilterSideMenuBottomView.swift */; };
@@ -77,7 +78,7 @@
 		A44A5A7A25F9B0D300995823 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A44A5A7825F9B0D300995823 /* LaunchScreen.storyboard */; };
 		A44A5A8525F9B0D300995823 /* MyMindTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44A5A8425F9B0D300995823 /* MyMindTests.swift */; };
 		A44E8FDB265F82F80090D467 /* PurchaseAutoCompleteAdapters.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44E8FDA265F82F80090D467 /* PurchaseAutoCompleteAdapters.swift */; };
-		A457AEAE2660A2230029DDBB /* PurchaseFilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A457AEAD2660A2230029DDBB /* PurchaseFilterViewModel.swift */; };
+		A457AEAE2660A2230029DDBB /* PurchaseListFilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A457AEAD2660A2230029DDBB /* PurchaseListFilterViewModel.swift */; };
 		A457AEB02660A31F0029DDBB /* PickDatesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A457AEAF2660A31F0029DDBB /* PickDatesViewModel.swift */; };
 		A457AEB22660A34A0029DDBB /* PickPurchaseStatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A457AEB12660A34A0029DDBB /* PickPurchaseStatusViewModel.swift */; };
 		A457AEB42660F5F80029DDBB /* StageProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A457AEB32660F5F80029DDBB /* StageProgressView.swift */; };
@@ -191,6 +192,7 @@
 		813AE979B8E28B1A22020AB9 /* Pods-MyMind-MyMindUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMind-MyMindUITests.release.xcconfig"; path = "Target Support Files/Pods-MyMind-MyMindUITests/Pods-MyMind-MyMindUITests.release.xcconfig"; sourceTree = "<group>"; };
 		8B6F179AE4CEBCE17B89AC68 /* Pods-MyMind-MyMindUITests.alpha.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMind-MyMindUITests.alpha.xcconfig"; path = "Target Support Files/Pods-MyMind-MyMindUITests/Pods-MyMind-MyMindUITests.alpha.xcconfig"; sourceTree = "<group>"; };
 		8C4BA9CA7A7E7BD1C9712E01 /* Pods-MyMind.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMind.debug.xcconfig"; path = "Target Support Files/Pods-MyMind/Pods-MyMind.debug.xcconfig"; sourceTree = "<group>"; };
+		97547CB7268039C6001859A8 /* PurchaseListLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseListLoader.swift; sourceTree = "<group>"; };
 		97AFE3652665E7DD002CBE01 /* ProductMaterialDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductMaterialDetail.swift; sourceTree = "<group>"; };
 		97AFE36826661750002CBE01 /* SuggestionProductMaterialViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionProductMaterialViewModel.swift; sourceTree = "<group>"; };
 		97AFE36A26662918002CBE01 /* product_material_detail.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = product_material_detail.json; sourceTree = "<group>"; };
@@ -241,7 +243,7 @@
 		A43E0B6E260DC66D005FC6CE /* UIControl+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIControl+.swift"; sourceTree = "<group>"; };
 		A43E0B73260DC944005FC6CE /* SignInValidationServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInValidationServiceTests.swift; sourceTree = "<group>"; };
 		A43E0B78260DD598005FC6CE /* SignInViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModelTests.swift; sourceTree = "<group>"; };
-		A43F428E2643866F00A246CC /* PurchaseFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseFilterViewController.swift; sourceTree = "<group>"; };
+		A43F428E2643866F00A246CC /* PurchaseListFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseListFilterViewController.swift; sourceTree = "<group>"; };
 		A43F4290264388E400A246CC /* SideMenuPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuPresentable.swift; sourceTree = "<group>"; };
 		A43F42922643C26400A246CC /* SideMenuTopBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuTopBarView.swift; sourceTree = "<group>"; };
 		A43F42942643C75C00A246CC /* FilterSideMenuBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSideMenuBottomView.swift; sourceTree = "<group>"; };
@@ -266,7 +268,7 @@
 		A44A5A8F25F9B0D300995823 /* MyMindUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMindUITests.swift; sourceTree = "<group>"; };
 		A44A5A9125F9B0D300995823 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A44E8FDA265F82F80090D467 /* PurchaseAutoCompleteAdapters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseAutoCompleteAdapters.swift; sourceTree = "<group>"; };
-		A457AEAD2660A2230029DDBB /* PurchaseFilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseFilterViewModel.swift; sourceTree = "<group>"; };
+		A457AEAD2660A2230029DDBB /* PurchaseListFilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseListFilterViewModel.swift; sourceTree = "<group>"; };
 		A457AEAF2660A31F0029DDBB /* PickDatesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickDatesViewModel.swift; sourceTree = "<group>"; };
 		A457AEB12660A34A0029DDBB /* PickPurchaseStatusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickPurchaseStatusViewModel.swift; sourceTree = "<group>"; };
 		A457AEB32660F5F80029DDBB /* StageProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageProgressView.swift; sourceTree = "<group>"; };
@@ -421,7 +423,7 @@
 			children = (
 				A405410E264A758B00E2D21B /* PurchaseStatusSelectionViewController.swift */,
 				A4054110264A8F7600E2D21B /* PurchaseQueryDateSelectionViewController.swift */,
-				A43F428E2643866F00A246CC /* PurchaseFilterViewController.swift */,
+				A43F428E2643866F00A246CC /* PurchaseListFilterViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -455,7 +457,7 @@
 				97B1173D2654C21D00242428 /* Controller */,
 				97B1173C2654C20500242428 /* View */,
 				A44E8FDA265F82F80090D467 /* PurchaseAutoCompleteAdapters.swift */,
-				A457AEAD2660A2230029DDBB /* PurchaseFilterViewModel.swift */,
+				A457AEAD2660A2230029DDBB /* PurchaseListFilterViewModel.swift */,
 				A457AEAF2660A31F0029DDBB /* PickDatesViewModel.swift */,
 				A457AEB12660A34A0029DDBB /* PickPurchaseStatusViewModel.swift */,
 			);
@@ -648,6 +650,7 @@
 				A46BA1DC263AAD290075E8C8 /* OrganizeOptionView.swift */,
 				A4F2D012265D07C7004D8D6D /* AutoCompleteSearchViewModel.swift */,
 				A47AB497265E00B300FE3CFA /* AutoCompleteSearchViewController.swift */,
+				97547CB7268039C6001859A8 /* PurchaseListLoader.swift */,
 			);
 			path = Purchase;
 			sourceTree = "<group>";
@@ -1152,12 +1155,12 @@
 				A439B53C2609CDC3002352C2 /* ToastView.swift in Sources */,
 				A44A5A6E25F9B0D200995823 /* AppDelegate.swift in Sources */,
 				A4AF79F72637B13B002B04F6 /* MainFunctionControl.swift in Sources */,
-				A43F428F2643866F00A246CC /* PurchaseFilterViewController.swift in Sources */,
+				A43F428F2643866F00A246CC /* PurchaseListFilterViewController.swift in Sources */,
 				A4793CA72604873B00AD280C /* SignInRootView.swift in Sources */,
 				A43E0B6F260DC66D005FC6CE /* UIControl+.swift in Sources */,
 				A46BA1DD263AAD2A0075E8C8 /* OrganizeOptionView.swift in Sources */,
 				A43E0B63260D7CA4005FC6CE /* NiblessViewController.swift in Sources */,
-				A457AEAE2660A2230029DDBB /* PurchaseFilterViewModel.swift in Sources */,
+				A457AEAE2660A2230029DDBB /* PurchaseListFilterViewModel.swift in Sources */,
 				A4F2D017265D08D3004D8D6D /* SearchMaterialNamesViewModel.swift in Sources */,
 				A49CF8C0260306D200AFC170 /* APIError.swift in Sources */,
 				A442A16B266F692600AAB1ED /* PurchaseInfoViewModel.swift in Sources */,
@@ -1185,6 +1188,7 @@
 				A4793CBB260490A600AD280C /* UIColor+.swift in Sources */,
 				A494D9CE2670CDC1008658F8 /* PickReviewerViewModel.swift in Sources */,
 				A442A168266F599A00AAB1ED /* PurchaseSuggestionInfo.swift in Sources */,
+				97547CB8268039C6001859A8 /* PurchaseListLoader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
