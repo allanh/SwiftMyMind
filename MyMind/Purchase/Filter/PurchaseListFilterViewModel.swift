@@ -171,25 +171,25 @@ class PurchaseListFilterViewModel {
 extension PurchaseListFilterViewModel {
     private func makeViewModelForPurchaseNumber() -> AutoCompleteSearchViewModel {
         let adapter = RxPurchaseNumberAutoCompleteItemViewModelAdapter(service: service)
-        let viewModel = AutoCompleteSearchViewModel(title: "採購單編號", service: adapter)
+        let viewModel = AutoCompleteSearchViewModel(title: "採購單編號", loader: adapter)
         return viewModel
     }
 
     private func makeViewModelForVendor() -> AutoCompleteSearchViewModel {
         let adapter = RxVendorAutoCompleteItemViewModelAdapter(service: service)
-        let viewModel = AutoCompleteSearchViewModel.init(title: "供應商", service: adapter)
+        let viewModel = AutoCompleteSearchViewModel.init(title: "供應商", loader: adapter)
         return viewModel
     }
 
     private func makeViewModelForApplicant() -> AutoCompleteSearchViewModel {
         let adapter = RxApplicantAutoCompleteItemViewModelAdapter(service: service)
-        let viewModel = AutoCompleteSearchViewModel.init(title: "申請人", service: adapter)
+        let viewModel = AutoCompleteSearchViewModel.init(title: "申請人", loader: adapter)
         return viewModel
     }
 
     private func makeViewModelForProductNumber() -> AutoCompleteSearchViewModel {
         let adapter = RxProductNumberAutoCompleteItemViewModelAdapter(service: service)
-        let viewModel = AutoCompleteSearchViewModel.init(title: "SKU編號", service: adapter)
+        let viewModel = AutoCompleteSearchViewModel.init(title: "SKU編號", loader: adapter)
         return viewModel
     }
 }

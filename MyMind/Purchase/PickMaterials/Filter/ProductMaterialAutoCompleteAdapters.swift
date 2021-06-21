@@ -9,10 +9,10 @@
 import Foundation
 import RxSwift
 
-struct RxBrandNameAutoCompleteItemViewModelAdapter: RxAutoCompleteItemViewModelService {
+struct RxBrandNameAutoCompleteItemViewModelAdapter: RxAutoCompleteItemViewModelLoader {
     let service: AutoCompleteAPIService
 
-    func getAutoCompleteItemViewModel(searchTerm: String) -> Single<[AutoCompleteItemViewModel]> {
+    func loadAutoCompleteItemViewModel(with searchTerm: String) -> Single<[AutoCompleteItemViewModel]> {
         return Single<[AutoCompleteItemViewModel]>.create { single in
             service.productMaterialBrandNameAutoComplete(searchTerm: searchTerm)
                 .done { list in
@@ -26,10 +26,10 @@ struct RxBrandNameAutoCompleteItemViewModelAdapter: RxAutoCompleteItemViewModelS
     }
 }
 
-struct RxProductNumberSetAutoCompleteItemViewModelAdapter: RxAutoCompleteItemViewModelService {
+struct RxProductNumberSetAutoCompleteItemViewModelAdapter: RxAutoCompleteItemViewModelLoader {
     let service: AutoCompleteAPIService
 
-    func getAutoCompleteItemViewModel(searchTerm: String) -> Single<[AutoCompleteItemViewModel]> {
+    func loadAutoCompleteItemViewModel(with searchTerm: String) -> Single<[AutoCompleteItemViewModel]> {
         return Single<[AutoCompleteItemViewModel]>.create { single in
             service.productNumberSetAutoComplete(searchTerm: searchTerm)
                 .done { list in
@@ -43,10 +43,10 @@ struct RxProductNumberSetAutoCompleteItemViewModelAdapter: RxAutoCompleteItemVie
     }
 }
 
-struct RxOriginalNumberAutoCompleteItemViewModelAdapter: RxAutoCompleteItemViewModelService {
+struct RxOriginalNumberAutoCompleteItemViewModelAdapter: RxAutoCompleteItemViewModelLoader {
     let service: AutoCompleteAPIService
 
-    func getAutoCompleteItemViewModel(searchTerm: String) -> Single<[AutoCompleteItemViewModel]> {
+    func loadAutoCompleteItemViewModel(with searchTerm: String) -> Single<[AutoCompleteItemViewModel]> {
         return Single<[AutoCompleteItemViewModel]>.create { single in
             service.productMaterailOriginalNumberAutoComplete(searchTerm: searchTerm)
                 .done { list in

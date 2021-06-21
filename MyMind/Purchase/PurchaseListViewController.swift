@@ -172,9 +172,9 @@ final class PurchaseListViewController: NiblessViewController {
             self?.purchaseListQueryInfo = queryInfo
             self?.refreshFetchPurchaseList(query: queryInfo)
         }
-        let purchaseFilterViewController = PurchaseListFilterViewController(viewModel: viewModel)
+        let viewController = PurchaseListFilterViewController(viewModel: viewModel)
 
-        let navigationController = UINavigationController(rootViewController: purchaseFilterViewController)
+        let navigationController = UINavigationController(rootViewController: viewController)
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated: true, completion: nil)
     }

@@ -13,22 +13,22 @@ import RxRelay
 struct AutoCompleteSearchViewModel {
     let title: String
     let searchTerm: BehaviorRelay<String> = .init(value: "")
-    let service: RxAutoCompleteItemViewModelService
+    let loader: RxAutoCompleteItemViewModelLoader
     let autoCompleteItemViewModels: BehaviorRelay<[AutoCompleteItemViewModel]> = .init(value: [])
     let pickedItemViewModels: BehaviorRelay<[AutoCompleteItemViewModel]> = .init(value: [])
     let isDropDownViewPresenting: BehaviorRelay<Bool> = .init(value: false)
     let bag: DisposeBag = DisposeBag()
 
     init(title: String,
-         service: RxAutoCompleteItemViewModelService) {
+         loader: RxAutoCompleteItemViewModelLoader) {
         self.title = title
-        self.service = service
+        self.loader = loader
         bindSearchTerm()
     }
 
     func bindSearchTerm() {
         searchTerm
-            .flatMap(service.getAutoCompleteItemViewModel(searchTerm:))
+            .flatMap(loader.loadAutoCompleteItemViewModel(with:))
             .subscribe(onNext: { items in
                 autoCompleteItemViewModels.accept(items)
             })

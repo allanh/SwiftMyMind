@@ -9,14 +9,14 @@
 import Foundation
 import RxSwift
 
-protocol RxAutoCompleteItemViewModelService {
-    func getAutoCompleteItemViewModel(searchTerm: String) -> Single<[AutoCompleteItemViewModel]>
+protocol RxAutoCompleteItemViewModelLoader {
+    func loadAutoCompleteItemViewModel(with searchTerm: String) -> Single<[AutoCompleteItemViewModel]>
 }
 
-struct RxPurchaseNumberAutoCompleteItemViewModelAdapter: RxAutoCompleteItemViewModelService {
+struct RxPurchaseNumberAutoCompleteItemViewModelAdapter: RxAutoCompleteItemViewModelLoader {
     let service: AutoCompleteAPIService
 
-    func getAutoCompleteItemViewModel(searchTerm: String) -> Single<[AutoCompleteItemViewModel]> {
+    func loadAutoCompleteItemViewModel(with searchTerm: String) -> Single<[AutoCompleteItemViewModel]> {
         return Single<[AutoCompleteItemViewModel]>.create { single in
             service.purchaseNumberAutoComplete(searchTerm: searchTerm)
                 .done { list in
@@ -31,10 +31,10 @@ struct RxPurchaseNumberAutoCompleteItemViewModelAdapter: RxAutoCompleteItemViewM
     }
 }
 
-struct RxVendorAutoCompleteItemViewModelAdapter: RxAutoCompleteItemViewModelService {
+struct RxVendorAutoCompleteItemViewModelAdapter: RxAutoCompleteItemViewModelLoader {
     let service: AutoCompleteAPIService
 
-    func getAutoCompleteItemViewModel(searchTerm: String) -> Single<[AutoCompleteItemViewModel]> {
+    func loadAutoCompleteItemViewModel(with searchTerm: String) -> Single<[AutoCompleteItemViewModel]> {
         return Single<[AutoCompleteItemViewModel]>.create { single in
             service.vendorNameAutoComplete(searchTerm: searchTerm)
                 .done { list in
@@ -48,10 +48,10 @@ struct RxVendorAutoCompleteItemViewModelAdapter: RxAutoCompleteItemViewModelServ
     }
 }
 
-struct RxApplicantAutoCompleteItemViewModelAdapter: RxAutoCompleteItemViewModelService {
+struct RxApplicantAutoCompleteItemViewModelAdapter: RxAutoCompleteItemViewModelLoader {
     let service: AutoCompleteAPIService
 
-    func getAutoCompleteItemViewModel(searchTerm: String) -> Single<[AutoCompleteItemViewModel]> {
+    func loadAutoCompleteItemViewModel(with searchTerm: String) -> Single<[AutoCompleteItemViewModel]> {
         return Single<[AutoCompleteItemViewModel]>.create { single in
             service.applicantAutoComplete(searchTerm: searchTerm)
                 .done { list in
@@ -66,10 +66,10 @@ struct RxApplicantAutoCompleteItemViewModelAdapter: RxAutoCompleteItemViewModelS
     }
 }
 
-struct RxProductNumberAutoCompleteItemViewModelAdapter: RxAutoCompleteItemViewModelService {
+struct RxProductNumberAutoCompleteItemViewModelAdapter: RxAutoCompleteItemViewModelLoader {
     let service: AutoCompleteAPIService
 
-    func getAutoCompleteItemViewModel(searchTerm: String) -> Single<[AutoCompleteItemViewModel]> {
+    func loadAutoCompleteItemViewModel(with searchTerm: String) -> Single<[AutoCompleteItemViewModel]> {
         return Single<[AutoCompleteItemViewModel]>.create { single in
             service.productNumberAutoComplete(searchTerm: searchTerm)
                 .done { list in
