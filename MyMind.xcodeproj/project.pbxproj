@@ -417,6 +417,7 @@
 				97B1173A2654B9A100242428 /* PickProductMaterialsRootView.swift */,
 				97B1173E2654CBFD00242428 /* PickProductMaterialTableViewCell.swift */,
 				97547CBA2680787E001859A8 /* ProductMaterialListLoader.swift */,
+				97B117332653AF1E00242428 /* ProductMaterialQueryInfo.swift */,
 			);
 			path = PickProductMaterials;
 			sourceTree = "<group>";
@@ -588,7 +589,6 @@
 				A439BD3B2637EC51004F47C8 /* Purchase.swift */,
 				A4DD410A26428927007B2A41 /* AutoCompleteInfo.swift */,
 				97B1172E26535B9800242428 /* ProductMaterial.swift */,
-				97B117332653AF1E00242428 /* ProductMaterialQueryInfo.swift */,
 				A4B55E4A265B4749002E1880 /* MyMindUserSessionRepository.swift */,
 				A4B55E4E265B538F002E1880 /* KeychainUserSessionDataStore.swift */,
 				A4C0AFF3265B7A2E00B8D0C4 /* LastSignInInfoDataStore.swift */,
