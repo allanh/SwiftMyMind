@@ -1,5 +1,5 @@
 //
-//  VendorInfoService.swift
+//  VendorInfoLoader.swift
 //  MyMind
 //
 //  Created by Barry Chen on 2021/5/31.
@@ -9,14 +9,14 @@
 import Foundation
 import PromiseKit
 
-protocol VendorInfoService {
-    func fetchVendorInfos(with name: String) -> Promise<[VendorInfo]>
+protocol VendorInfoLoader {
+    func loadVendorInfos(with name: String) -> Promise<[VendorInfo]>
 }
 
-struct VendorInfoAdapter: VendorInfoService {
+struct VendorInfoAdapter: VendorInfoLoader {
     let service: AutoCompleteAPIService
 
-    func fetchVendorInfos(with name: String) -> Promise<[VendorInfo]> {
+    func loadVendorInfos(with name: String) -> Promise<[VendorInfo]> {
         service.vendorNameAutoComplete(searchTerm: name)
             .map { list in
                 let items = list.item

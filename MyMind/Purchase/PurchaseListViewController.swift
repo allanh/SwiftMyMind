@@ -184,7 +184,7 @@ final class PurchaseListViewController: NiblessViewController {
 //        let viewModel = PickProductMaterialsViewModel(purchaseAPIService: purchaseAPIService)
 //        let viewController = PickProductMaterialsViewController(viewModel: viewModel)
         let adapter = VendorInfoAdapter(service: MyMindAutoCompleteAPIService(userSession: .testUserSession))
-        let viewController = PickVendorViewController(service: adapter)
+        let viewController = PickVendorViewController(loader: adapter)
         navigationController?.pushViewController(viewController, animated: true)
     }
 }

@@ -17,7 +17,7 @@ final class PickVendorViewController: UITableViewController {
         $0.titleLabel.text = "搜尋供應商"
     }
 
-    let service: VendorInfoService
+    let loader: VendorInfoLoader
     var vendorInfos: [VendorInfo] = []
     let bag: DisposeBag = DisposeBag()
 
@@ -28,8 +28,8 @@ final class PickVendorViewController: UITableViewController {
         subscribeTextField()
     }
     // MARK: - Methods
-    init(service: VendorInfoService, style: UITableView.Style = .plain) {
-        self.service = service
+    init(loader: VendorInfoLoader, style: UITableView.Style = .plain) {
+        self.loader = loader
         super.init(style: style)
     }
 
@@ -45,7 +45,7 @@ final class PickVendorViewController: UITableViewController {
     }
 
     private func fetchVendors(with searchTerm: String) {
-        service.fetchVendorInfos(with: searchTerm)
+        loader.loadVendorInfos(with: searchTerm)
             .done({ [weak self] infos in
                 guard let self = self else { return }
                 self.vendorInfos = infos
