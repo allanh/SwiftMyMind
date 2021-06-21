@@ -47,7 +47,7 @@ class PurchaseSuggestionViewController: NiblessViewController {
         constructViewHierarchy()
         activateConstraints()
         configCollectionView()
-        viewModel.fetchSuggstionProductMaterialViewModels()
+        viewModel.loadSuggstionProductMaterialViewModels()
 
         wireToViewModel()
         subscribeViewModel()

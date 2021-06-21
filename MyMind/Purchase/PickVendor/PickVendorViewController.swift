@@ -85,7 +85,7 @@ extension PickVendorViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vendor = vendorInfos[indexPath.row]
         let service = MyMindPurchaseAPIService(userSession: .testUserSession)
-        let viewModel = PickProductMaterialsViewModel(vendorInfo: vendor, purchaseAPIService: service)
+        let viewModel = PickProductMaterialsViewModel(vendorInfo: vendor, loader: service)
         let viewController = PickProductMaterialsViewController(viewModel: viewModel)
         show(viewController, sender: nil)
     }

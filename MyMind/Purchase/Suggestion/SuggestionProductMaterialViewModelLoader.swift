@@ -1,5 +1,5 @@
 //
-//  SuggestionProductMaterialViewModelService.swift
+//  SuggestionProductMaterialViewModelLoader.swift
 //  MyMind
 //
 //  Created by Barry Chen on 2021/6/8.
@@ -9,17 +9,17 @@
 import Foundation
 import PromiseKit
 
-protocol SuggestionProductMaterialViewModelService {
-    func fetchSuggestionProductMaterialViewModels(with productIDs: [String]) -> Promise<[SuggestionProductMaterialViewModel]>
+protocol SuggestionProductMaterialViewModelLoader {
+    func loadSuggestionProductMaterialViewModels(with productIDs: [String]) -> Promise<[SuggestionProductMaterialViewModel]>
 }
 
-struct PurchaseServiceToSuggestionProductMaterialViewModelAdapter: SuggestionProductMaterialViewModelService {
-    let service: PurchaseAPIService
+struct PurchaseServiceToSuggestionProductMaterialViewModelAdapter: SuggestionProductMaterialViewModelLoader {
+    let loader: PurchaseSuggestionInfosLoader
     let imageDictionary: [String: URL?]
 
-    func fetchSuggestionProductMaterialViewModels(with productIDs: [String]) -> Promise<[SuggestionProductMaterialViewModel]> {
+    func loadSuggestionProductMaterialViewModels(with productIDs: [String]) -> Promise<[SuggestionProductMaterialViewModel]> {
         return Promise<[SuggestionProductMaterialViewModel]> { seal in
-            service.fetchPurchaseSuggestionInfos(with: productIDs)
+            loader.loadPurchaseSuggestionInfos(with: productIDs)
                 .done { list in
                     let suggestionInfos = list.items
                     let viewModels = suggestionInfos.map { info -> SuggestionProductMaterialViewModel in

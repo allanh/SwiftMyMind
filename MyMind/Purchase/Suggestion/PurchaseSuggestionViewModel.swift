@@ -16,7 +16,7 @@ class PurchaseSuggestionViewModel {
         case purchaseApply
     }
     let pickedProductIDList: [String]
-    let service: SuggestionProductMaterialViewModelService
+    let loader: SuggestionProductMaterialViewModelLoader
 
     var suggestionProductMaterialViewModels: [SuggestionProductMaterialViewModel] = []
 
@@ -26,13 +26,13 @@ class PurchaseSuggestionViewModel {
     let errorMessage: PublishRelay<String> = .init()
 
     init(pickedProductIDList: [String],
-         service: SuggestionProductMaterialViewModelService) {
+         loader: SuggestionProductMaterialViewModelLoader) {
         self.pickedProductIDList = pickedProductIDList
-        self.service = service
+        self.loader = loader
     }
 
-    func fetchSuggstionProductMaterialViewModels() {
-        service.fetchSuggestionProductMaterialViewModels(with: pickedProductIDList)
+    func loadSuggstionProductMaterialViewModels() {
+        loader.loadSuggestionProductMaterialViewModels(with: pickedProductIDList)
             .done { [weak self] viewModels in
                 guard let self = self else { return }
                 self.suggestionProductMaterialViewModels = viewModels
