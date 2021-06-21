@@ -384,6 +384,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		97547CB92680756E001859A8 /* PurchaseList */ = {
+			isa = PBXGroup;
+			children = (
+				A4BCA0C2267C584E00E3B274 /* View */,
+				A43F42962643DFE100A246CC /* Filter */,
+				A47F39CC263A58F700A3097C /* PurchaseListViewController.swift */,
+				97547CB7268039C6001859A8 /* PurchaseListLoader.swift */,
+			);
+			path = PurchaseList;
+			sourceTree = "<group>";
+		};
 		97AFE367266616FB002CBE01 /* Suggestion */ = {
 			isa = PBXGroup;
 			children = (
@@ -395,7 +406,7 @@
 			path = Suggestion;
 			sourceTree = "<group>";
 		};
-		97B117352653B17700242428 /* PickMaterials */ = {
+		97B117352653B17700242428 /* PickProductMaterials */ = {
 			isa = PBXGroup;
 			children = (
 				A4F2D00D265D061A004D8D6D /* Filter */,
@@ -404,7 +415,7 @@
 				97B1173A2654B9A100242428 /* PickProductMaterialsRootView.swift */,
 				97B1173E2654CBFD00242428 /* PickProductMaterialTableViewCell.swift */,
 			);
-			path = PickMaterials;
+			path = PickProductMaterials;
 			sourceTree = "<group>";
 		};
 		97B1173C2654C20500242428 /* View */ = {
@@ -639,18 +650,15 @@
 		A47F39CB263A58DA00A3097C /* Purchase */ = {
 			isa = PBXGroup;
 			children = (
-				A4BCA0C1267C446300E3B274 /* CompletedApply */,
-				A442A169266F68F200AAB1ED /* Apply */,
-				97AFE367266616FB002CBE01 /* Suggestion */,
+				97547CB92680756E001859A8 /* PurchaseList */,
 				A4CBD8A126648FC400B19119 /* PickVendor */,
-				97B117352653B17700242428 /* PickMaterials */,
-				A43F42962643DFE100A246CC /* Filter */,
-				A4BCA0C2267C584E00E3B274 /* View */,
-				A47F39CC263A58F700A3097C /* PurchaseListViewController.swift */,
+				97B117352653B17700242428 /* PickProductMaterials */,
+				97AFE367266616FB002CBE01 /* Suggestion */,
+				A442A169266F68F200AAB1ED /* Apply */,
+				A4BCA0C1267C446300E3B274 /* CompletedApply */,
 				A46BA1DC263AAD290075E8C8 /* OrganizeOptionView.swift */,
 				A4F2D012265D07C7004D8D6D /* AutoCompleteSearchViewModel.swift */,
 				A47AB497265E00B300FE3CFA /* AutoCompleteSearchViewController.swift */,
-				97547CB7268039C6001859A8 /* PurchaseListLoader.swift */,
 			);
 			path = Purchase;
 			sourceTree = "<group>";
