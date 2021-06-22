@@ -11,6 +11,8 @@
 		97547CBB2680787E001859A8 /* ProductMaterialListLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97547CBA2680787E001859A8 /* ProductMaterialListLoader.swift */; };
 		97547CBD2680957D001859A8 /* PurchaseSuggestionInfosLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97547CBC2680957D001859A8 /* PurchaseSuggestionInfosLoader.swift */; };
 		97547CBF2681C5B6001859A8 /* LogInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97547CBE2681C5B6001859A8 /* LogInfoView.swift */; };
+		97547CC22681D8FF001859A8 /* PurchaseLogInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97547CC02681D8FF001859A8 /* PurchaseLogInfoViewController.swift */; };
+		97547CC32681D8FF001859A8 /* PurchaseLogInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97547CC12681D8FF001859A8 /* PurchaseLogInfoViewController.xib */; };
 		97AFE3662665E7DD002CBE01 /* ProductMaterialDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97AFE3652665E7DD002CBE01 /* ProductMaterialDetail.swift */; };
 		97AFE36926661750002CBE01 /* SuggestionProductMaterialViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97AFE36826661750002CBE01 /* SuggestionProductMaterialViewModel.swift */; };
 		97AFE36B266629FD002CBE01 /* product_material_detail.json in Resources */ = {isa = PBXBuildFile; fileRef = 97AFE36A26662918002CBE01 /* product_material_detail.json */; };
@@ -199,6 +201,8 @@
 		97547CBA2680787E001859A8 /* ProductMaterialListLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductMaterialListLoader.swift; sourceTree = "<group>"; };
 		97547CBC2680957D001859A8 /* PurchaseSuggestionInfosLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseSuggestionInfosLoader.swift; sourceTree = "<group>"; };
 		97547CBE2681C5B6001859A8 /* LogInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInfoView.swift; sourceTree = "<group>"; };
+		97547CC02681D8FF001859A8 /* PurchaseLogInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseLogInfoViewController.swift; sourceTree = "<group>"; };
+		97547CC12681D8FF001859A8 /* PurchaseLogInfoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PurchaseLogInfoViewController.xib; sourceTree = "<group>"; };
 		97AFE3652665E7DD002CBE01 /* ProductMaterialDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductMaterialDetail.swift; sourceTree = "<group>"; };
 		97AFE36826661750002CBE01 /* SuggestionProductMaterialViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionProductMaterialViewModel.swift; sourceTree = "<group>"; };
 		97AFE36A26662918002CBE01 /* product_material_detail.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = product_material_detail.json; sourceTree = "<group>"; };
@@ -735,6 +739,8 @@
 			children = (
 				A4BCA0CC267C98B500E3B274 /* PurchaseOrderInfoViewController.swift */,
 				A4BCA0CD267C98B500E3B274 /* PurchaseOrderInfoViewController.xib */,
+				97547CC02681D8FF001859A8 /* PurchaseLogInfoViewController.swift */,
+				97547CC12681D8FF001859A8 /* PurchaseLogInfoViewController.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -920,6 +926,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				97547CC32681D8FF001859A8 /* PurchaseLogInfoViewController.xib in Resources */,
 				A4BCA0CF267C98B500E3B274 /* PurchaseOrderInfoViewController.xib in Resources */,
 				A44A5A7A25F9B0D300995823 /* LaunchScreen.storyboard in Resources */,
 				A40EBFDF2671F7A100A4863D /* PickPurchaseReviewerViewController.xib in Resources */,
@@ -1202,6 +1209,7 @@
 				A4054111264A8F7600E2D21B /* PurchaseQueryDateSelectionViewController.swift in Sources */,
 				97B1174126550C5E00242428 /* PickSortTypeView.swift in Sources */,
 				A4C0AFF4265B7A2E00B8D0C4 /* LastSignInInfoDataStore.swift in Sources */,
+				97547CC22681D8FF001859A8 /* PurchaseLogInfoViewController.swift in Sources */,
 				A4BCA0C6267C70FD00E3B274 /* PurchaseOrder.swift in Sources */,
 				A44A5A7025F9B0D200995823 /* SceneDelegate.swift in Sources */,
 				A4793CBB260490A600AD280C /* UIColor+.swift in Sources */,
