@@ -1,5 +1,5 @@
 //
-//  LogInfoTableViewCell.swift
+//  LogInfoView.swift
 //  MyMind
 //
 //  Created by Chen Yi-Wei on 2021/6/22.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LogInfoTableViewCell: UITableViewCell {
+class LogInfoView: NiblessView {
     private let dotView: UIView = UIView {
         $0.layer.cornerRadius = 10
         $0.layer.borderWidth = 5
@@ -41,23 +41,20 @@ class LogInfoTableViewCell: UITableViewCell {
         $0.textAlignment = .left
     }
 
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+
         constructViewHierarchy()
         activateConstraints()
     }
 
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
     private func constructViewHierarchy() {
-        contentView.addSubview(progressLineView)
-        contentView.addSubview(dotView)
-        contentView.addSubview(timeStampLabel)
-        contentView.addSubview(createrLabel)
-        contentView.addSubview(createrNameLabel)
-        contentView.addSubview(noteLabel)
+        addSubview(progressLineView)
+        addSubview(dotView)
+        addSubview(timeStampLabel)
+        addSubview(createrLabel)
+        addSubview(createrNameLabel)
+        addSubview(noteLabel)
     }
 
     private func activateConstraints() {
@@ -70,13 +67,13 @@ class LogInfoTableViewCell: UITableViewCell {
     }
 }
 // MARK: - Layouts
-extension LogInfoTableViewCell {
+extension LogInfoView {
     private func activateConstraintsDotView() {
         dotView.translatesAutoresizingMaskIntoConstraints = false
         let top = dotView.topAnchor
-            .constraint(equalTo: contentView.topAnchor, constant: 10)
+            .constraint(equalTo: topAnchor, constant: 10)
         let leading = dotView.leadingAnchor
-            .constraint(equalTo: contentView.leadingAnchor, constant: 10)
+            .constraint(equalTo: leadingAnchor, constant: 10)
         let width = dotView.widthAnchor
             .constraint(equalToConstant: 20)
         let height = dotView.heightAnchor
@@ -96,7 +93,7 @@ extension LogInfoTableViewCell {
         let width = progressLineView.widthAnchor
             .constraint(equalToConstant: 1)
         let bottom = progressLineView.bottomAnchor
-            .constraint(equalTo: contentView.bottomAnchor, constant: 10)
+            .constraint(equalTo: bottomAnchor, constant: 10)
 
         NSLayoutConstraint.activate([
             top, centerX, width, bottom
@@ -148,10 +145,12 @@ extension LogInfoTableViewCell {
         let height = noteLabel.heightAnchor
             .constraint(greaterThanOrEqualToConstant: 150)
         let trailing = noteLabel.trailingAnchor
-            .constraint(equalTo: contentView.trailingAnchor, constant: -10)
+            .constraint(equalTo: trailingAnchor, constant: -10)
+        let bottom = noteLabel.bottomAnchor
+            .constraint(equalTo: bottomAnchor)
 
         NSLayoutConstraint.activate([
-            top, leading, height, trailing
+            top, leading, height, trailing, bottom
         ])
     }
 }
