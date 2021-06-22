@@ -134,7 +134,7 @@
 		A4BC88C72679DDC700956B95 /* EditablePickedProductsInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BC88C62679DDC700956B95 /* EditablePickedProductsInfoViewController.swift */; };
 		A4BCA0C6267C70FD00E3B274 /* PurchaseOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BCA0C5267C70FD00E3B274 /* PurchaseOrder.swift */; };
 		A4BCA0C8267C73DF00E3B274 /* RecipientInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BCA0C7267C73DF00E3B274 /* RecipientInfo.swift */; };
-		A4BCA0CA267C802B00E3B274 /* PurchaseOrderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BCA0C9267C802B00E3B274 /* PurchaseOrderService.swift */; };
+		A4BCA0CA267C802B00E3B274 /* PurchaseOrderLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BCA0C9267C802B00E3B274 /* PurchaseOrderLoader.swift */; };
 		A4BCA0CE267C98B500E3B274 /* PurchaseOrderInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BCA0CC267C98B500E3B274 /* PurchaseOrderInfoViewController.swift */; };
 		A4BCA0CF267C98B500E3B274 /* PurchaseOrderInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4BCA0CD267C98B500E3B274 /* PurchaseOrderInfoViewController.xib */; };
 		A4BDC79E260ADFC5005C33A5 /* UIViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BDC79D260ADFC5005C33A5 /* UIViewController+Rx.swift */; };
@@ -327,7 +327,7 @@
 		A4BC88C62679DDC700956B95 /* EditablePickedProductsInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditablePickedProductsInfoViewController.swift; sourceTree = "<group>"; };
 		A4BCA0C5267C70FD00E3B274 /* PurchaseOrder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseOrder.swift; sourceTree = "<group>"; };
 		A4BCA0C7267C73DF00E3B274 /* RecipientInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipientInfo.swift; sourceTree = "<group>"; };
-		A4BCA0C9267C802B00E3B274 /* PurchaseOrderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseOrderService.swift; sourceTree = "<group>"; };
+		A4BCA0C9267C802B00E3B274 /* PurchaseOrderLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseOrderLoader.swift; sourceTree = "<group>"; };
 		A4BCA0CC267C98B500E3B274 /* PurchaseOrderInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseOrderInfoViewController.swift; sourceTree = "<group>"; };
 		A4BCA0CD267C98B500E3B274 /* PurchaseOrderInfoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PurchaseOrderInfoViewController.xib; sourceTree = "<group>"; };
 		A4BDC79D260ADFC5005C33A5 /* UIViewController+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Rx.swift"; sourceTree = "<group>"; };
@@ -710,7 +710,7 @@
 			isa = PBXGroup;
 			children = (
 				A4BCA0CB267C986600E3B274 /* View */,
-				A4BCA0C9267C802B00E3B274 /* PurchaseOrderService.swift */,
+				A4BCA0C9267C802B00E3B274 /* PurchaseOrderLoader.swift */,
 			);
 			path = CompletedApply;
 			sourceTree = "<group>";
@@ -1087,7 +1087,7 @@
 				A457AEB22660A34A0029DDBB /* PickPurchaseStatusViewModel.swift in Sources */,
 				A4F2D00F265D063B004D8D6D /* ProductMaterialsFilterViewController.swift in Sources */,
 				A47F39DF263A67E200A3097C /* UITableView+.swift in Sources */,
-				A4BCA0CA267C802B00E3B274 /* PurchaseOrderService.swift in Sources */,
+				A4BCA0CA267C802B00E3B274 /* PurchaseOrderLoader.swift in Sources */,
 				A4CBD8B6266A2CF200B19119 /* ProductMaterialSuggestionInfoTableViewCell.swift in Sources */,
 				97B117342653AF1E00242428 /* ProductMaterialQueryInfo.swift in Sources */,
 				A44E8FDB265F82F80090D467 /* PurchaseAutoCompleteAdapters.swift in Sources */,

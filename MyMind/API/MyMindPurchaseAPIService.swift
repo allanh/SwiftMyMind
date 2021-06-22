@@ -96,7 +96,7 @@ class MyMindPurchaseAPIService: PromiseKitAPIService {
         return rootRsult.map({ $0.purchaseID })
     }
 
-    func fetchPurchaseOrder(with purchaseID: String) -> Promise<PurchaseOrder> {
+    func loadPurchaseOrder(with purchaseID: String) -> Promise<PurchaseOrder> {
         let endpoint = Endpoint.purchaseOrder(purchaseID: purchaseID)
         let request = request(endPoint: endpoint)
         return sendRequest(request: request)
@@ -117,4 +117,4 @@ extension MyMindPurchaseAPIService: PurchaseReviewerListService { }
 
 extension MyMindPurchaseAPIService: ApplyPuchaseService { }
 
-extension MyMindPurchaseAPIService: PurchaseOrderService { }
+extension MyMindPurchaseAPIService: PurchaseOrderLoader { }

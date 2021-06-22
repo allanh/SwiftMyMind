@@ -1,5 +1,5 @@
 //
-//  PurchaseOrderService.swift
+//  PurchaseOrderLoader.swift
 //  MyMind
 //
 //  Created by Barry Chen on 2021/6/18.
@@ -9,6 +9,6 @@
 import Foundation
 import PromiseKit
 
-protocol PurchaseOrderService {
-    func fetchPurchaseOrder(with purchaseID: String) -> Promise<PurchaseOrder>
+protocol PurchaseOrderLoader {
+    func loadPurchaseOrder(with purchaseID: String) -> Promise<PurchaseOrder>
 }
