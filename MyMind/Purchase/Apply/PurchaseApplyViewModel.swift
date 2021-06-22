@@ -1,5 +1,5 @@
 //
-//  PurchaseApplyViewMoedl.swift
+//  PurchaseApplyViewModel.swift
 //  MyMind
 //
 //  Created by Barry Chen on 2021/6/9.
@@ -16,7 +16,7 @@ struct PurchaseApplyViewModel {
         case finish(purchaseID: String)
     }
     let userSession: UserSession
-    let purchaseInfoViewModel: PurchaseInfoViewModel
+    let purchaseInfoViewModel: PurchaseApplyInfoViewModel
     let pickReviewerViewModel: PickReviewerViewModel
     let view: PublishRelay<View> = .init()
     let centralizedValidationStatus: BehaviorRelay<Bool> = .init(value: false)
@@ -31,7 +31,7 @@ struct PurchaseApplyViewModel {
     let service: ApplyPuchaseService
     let bag: DisposeBag = DisposeBag()
 
-    init(userSession: UserSession, purchaseInfoViewModel: PurchaseInfoViewModel, pickReviewerViewModel: PickReviewerViewModel, service: ApplyPuchaseService) {
+    init(userSession: UserSession, purchaseInfoViewModel: PurchaseApplyInfoViewModel, pickReviewerViewModel: PickReviewerViewModel, service: ApplyPuchaseService) {
         self.userSession = userSession
         self.purchaseInfoViewModel = purchaseInfoViewModel
         self.pickReviewerViewModel = pickReviewerViewModel

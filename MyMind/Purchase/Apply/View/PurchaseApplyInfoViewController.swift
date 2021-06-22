@@ -43,7 +43,7 @@ final class PurchaseApplyInfoViewController: UIViewController {
         $0.dateFormat = "yyyy-MM-dd"
     }
 
-    var viewModel: PurchaseInfoViewModel!
+    var viewModel: PurchaseApplyInfoViewModel!
     let bag: DisposeBag = DisposeBag()
 
     override func viewDidLoad() {

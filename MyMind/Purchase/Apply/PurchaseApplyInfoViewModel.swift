@@ -1,5 +1,5 @@
 //
-//  PurchaseInfoViewModel.swift
+//  PurchaseApplyInfoViewModel.swift
 //  MyMind
 //
 //  Created by Barry Chen on 2021/6/8.
@@ -15,7 +15,7 @@ protocol PurchaseWarehouseListService {
     func fetchPurchaseWarehouseList() -> Promise<[Warehouse]>
 }
 
-struct PurchaseInfoViewModel {
+struct PurchaseApplyInfoViewModel {
     // MARK: - Properties
     let suggestionProductMaterialViewModels: BehaviorRelay<[SuggestionProductMaterialViewModel]>
 
