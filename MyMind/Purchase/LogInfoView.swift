@@ -65,6 +65,13 @@ class LogInfoView: NiblessView {
         activateConstriantsCreaterNameLabel()
         activateConstraintsNoteLabel()
     }
+
+    func configure(with logInfo: PurchaseOrder.LogInfo) {
+        timeStampLabel.text = logInfo.createdDateString
+        createrLabel.text = logInfo.creater
+        createrNameLabel.text = logInfo.createrName
+        noteLabel.text = logInfo.note
+    }
 }
 // MARK: - Layouts
 extension LogInfoView {
