@@ -65,7 +65,7 @@ struct PurchaseOrder: Codable {
     let recipientInfo: RecipientInfo
     let reviewLevel: String
     let lastReview: Bool
-    let totalAmount, amount, tax, aliasName: String
+    let totalAmount, amount, tax, vendorName: String
     let vendorNumber, vendorID, expectStorageDate: String
     let productInfos: [ProductInfo]
     let logInfos: [LogInfo]
@@ -86,7 +86,7 @@ struct PurchaseOrder: Codable {
         case lastReview = "last_review"
         case totalAmount = "total_amount"
         case amount, tax
-        case aliasName = "alias_name"
+        case vendorName = "alias_name"
         case vendorNumber = "vendor_no"
         case vendorID = "vendor_id"
         case expectStorageDate = "expect_storage_date"
