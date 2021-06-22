@@ -1,5 +1,5 @@
 //
-//  PickReviewerViewModel.swift
+//  PickPurchaseReviewerViewModel.swift
 //  MyMind
 //
 //  Created by Barry Chen on 2021/6/9.
@@ -10,7 +10,7 @@ import Foundation
 import RxRelay
 import RxSwift
 
-struct PickReviewerViewModel {
+struct PickPurchaseReviewerViewModel {
     // MARK: - Properties
     let reviewerList: BehaviorRelay<[Reviewer]> = .init(value: [])
     let pickedReviewer: BehaviorRelay<Reviewer?> = .init(value: nil)

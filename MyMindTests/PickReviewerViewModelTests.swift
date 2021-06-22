@@ -32,12 +32,12 @@ struct MockPurchaseReviewerListService: PurchaseReviewerListService {
 
 class PickReviewerViewModelTests: XCTestCase {
 
-    var sut: PickReviewerViewModel!
+    var sut: PickPurchaseReviewerViewModel!
     var mockService: MockPurchaseReviewerListService!
 
     override func setUpWithError() throws {
         mockService = MockPurchaseReviewerListService()
-        sut = PickReviewerViewModel(service: mockService)
+        sut = PickPurchaseReviewerViewModel(service: mockService)
 
     }
 

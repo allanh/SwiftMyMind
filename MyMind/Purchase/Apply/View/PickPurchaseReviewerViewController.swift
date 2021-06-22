@@ -26,7 +26,7 @@ final class PickPurchaseReviewerViewController: UIViewController {
         return dropDownView
     }()
 
-    var viewModel: PickReviewerViewModel!
+    var viewModel: PickPurchaseReviewerViewModel!
     let bag: DisposeBag = DisposeBag()
 
     override func viewDidLoad() {

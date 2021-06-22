@@ -116,7 +116,7 @@
 		A494D9C82670CC75008658F8 /* PurchaseApplyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A494D9C72670CC75008658F8 /* PurchaseApplyViewModel.swift */; };
 		A494D9CA2670CCFC008658F8 /* ApplyPuchaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A494D9C92670CCFC008658F8 /* ApplyPuchaseService.swift */; };
 		A494D9CC2670CD68008658F8 /* ApplyPurchaseParameterInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A494D9CB2670CD68008658F8 /* ApplyPurchaseParameterInfo.swift */; };
-		A494D9CE2670CDC1008658F8 /* PickReviewerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A494D9CD2670CDC1008658F8 /* PickReviewerViewModel.swift */; };
+		A494D9CE2670CDC1008658F8 /* PickPurchaseReviewerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A494D9CD2670CDC1008658F8 /* PickPurchaseReviewerViewModel.swift */; };
 		A494D9D02670CE0E008658F8 /* PurchaseReviewerListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A494D9CF2670CE0E008658F8 /* PurchaseReviewerListService.swift */; };
 		A49CF8B6260301DE00AFC170 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49CF8B5260301DE00AFC170 /* Endpoint.swift */; };
 		A49CF8BB2603028C00AFC170 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49CF8BA2603028C00AFC170 /* APIService.swift */; };
@@ -309,7 +309,7 @@
 		A494D9C72670CC75008658F8 /* PurchaseApplyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseApplyViewModel.swift; sourceTree = "<group>"; };
 		A494D9C92670CCFC008658F8 /* ApplyPuchaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyPuchaseService.swift; sourceTree = "<group>"; };
 		A494D9CB2670CD68008658F8 /* ApplyPurchaseParameterInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyPurchaseParameterInfo.swift; sourceTree = "<group>"; };
-		A494D9CD2670CDC1008658F8 /* PickReviewerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickReviewerViewModel.swift; sourceTree = "<group>"; };
+		A494D9CD2670CDC1008658F8 /* PickPurchaseReviewerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickPurchaseReviewerViewModel.swift; sourceTree = "<group>"; };
 		A494D9CF2670CE0E008658F8 /* PurchaseReviewerListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseReviewerListService.swift; sourceTree = "<group>"; };
 		A49CF8B5260301DE00AFC170 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		A49CF8BA2603028C00AFC170 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
@@ -504,7 +504,7 @@
 				A494D9C72670CC75008658F8 /* PurchaseApplyViewModel.swift */,
 				A494D9C92670CCFC008658F8 /* ApplyPuchaseService.swift */,
 				A494D9CB2670CD68008658F8 /* ApplyPurchaseParameterInfo.swift */,
-				A494D9CD2670CDC1008658F8 /* PickReviewerViewModel.swift */,
+				A494D9CD2670CDC1008658F8 /* PickPurchaseReviewerViewModel.swift */,
 				A494D9CF2670CE0E008658F8 /* PurchaseReviewerListService.swift */,
 				A4BC88C42679CB8100956B95 /* EditablePickedProductsInfoViewModel.swift */,
 			);
@@ -1201,7 +1201,7 @@
 				A4BCA0C6267C70FD00E3B274 /* PurchaseOrder.swift in Sources */,
 				A44A5A7025F9B0D200995823 /* SceneDelegate.swift in Sources */,
 				A4793CBB260490A600AD280C /* UIColor+.swift in Sources */,
-				A494D9CE2670CDC1008658F8 /* PickReviewerViewModel.swift in Sources */,
+				A494D9CE2670CDC1008658F8 /* PickPurchaseReviewerViewModel.swift in Sources */,
 				97547CBB2680787E001859A8 /* ProductMaterialListLoader.swift in Sources */,
 				A442A168266F599A00AAB1ED /* PurchaseSuggestionInfo.swift in Sources */,
 				97547CB8268039C6001859A8 /* PurchaseListLoader.swift in Sources */,

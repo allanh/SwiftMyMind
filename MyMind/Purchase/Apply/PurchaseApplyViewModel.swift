@@ -17,7 +17,7 @@ struct PurchaseApplyViewModel {
     }
     let userSession: UserSession
     let purchaseInfoViewModel: PurchaseApplyInfoViewModel
-    let pickReviewerViewModel: PickReviewerViewModel
+    let pickReviewerViewModel: PickPurchaseReviewerViewModel
     let view: PublishRelay<View> = .init()
     let centralizedValidationStatus: BehaviorRelay<Bool> = .init(value: false)
     let isNetworkProcessing: BehaviorRelay<Bool> = .init(value: false)
@@ -31,7 +31,7 @@ struct PurchaseApplyViewModel {
     let service: ApplyPuchaseService
     let bag: DisposeBag = DisposeBag()
 
-    init(userSession: UserSession, purchaseInfoViewModel: PurchaseApplyInfoViewModel, pickReviewerViewModel: PickReviewerViewModel, service: ApplyPuchaseService) {
+    init(userSession: UserSession, purchaseInfoViewModel: PurchaseApplyInfoViewModel, pickReviewerViewModel: PickPurchaseReviewerViewModel, service: ApplyPuchaseService) {
         self.userSession = userSession
         self.purchaseInfoViewModel = purchaseInfoViewModel
         self.pickReviewerViewModel = pickReviewerViewModel
