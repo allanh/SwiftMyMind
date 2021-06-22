@@ -11,16 +11,16 @@ import Foundation
 struct PurchaseOrder: Codable {
     // MARK: - LogInfo
     struct LogInfo: Codable {
-        let createdAt, status, reviewLevel, createdBy: String
-        let createdByName, remark: String
+        let createdDateString, status, reviewLevel, creater: String
+        let createrName, note: String
 
         enum CodingKeys: String, CodingKey {
-            case createdAt = "created_at"
+            case createdDateString = "created_at"
             case status
             case reviewLevel = "review_level"
-            case createdBy = "created_by"
-            case createdByName = "created_by_name"
-            case remark
+            case creater = "created_by"
+            case createrName = "created_by_name"
+            case note = "remark"
         }
     }
 
