@@ -20,21 +20,41 @@ class PurchaseOrderInfoViewController: UIViewController {
     @IBOutlet private weak var recipientAddressLabel: UILabel!
     @IBOutlet private weak var checkPurchasedProductsButton: UIButton!
 
+    var purchaseOrder: PurchaseOrder?
+
+    var didTapCheckPurchasedProductButton: (() -> Void)?
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        configureContentWithPurchaseOrder()
+        checkPurchasedProductsButton.addTarget(self, action: #selector(checkPurchasedProductsButtonDidTapped(_:)), for: .touchUpInside)
     }
 
+    private func configureContentWithPurchaseOrder() {
+        guard let order = purchaseOrder else { return }
+        purchaseIDLabel.text = order.id
+        vendorNameLabel.text = order.vendorName
 
-    /*
-    // MARK: - Navigation
+        statusLabel.text = order.status.description
+        let color: UIColor = colorForStatus(status: order.status).0
+        statusLabel.layer.borderColor = color.cgColor
+        statusLabel.textColor = color
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        expectStorageDateLabel.text = order.expectStorageDate
+        warehouseLabel.text = order.expectStorageName
+
+        recipientNameLabel.text = order.recipientInfo.name
+        recipientPhoneLabel.text = order.recipientInfo.phone
+        recipientAddressLabel.text = order.recipientInfo.address.fullAddressString
+
+        checkPurchasedProductsButton.setTitle("共 \(order.productInfos.count) 件SKU", for: .normal)
     }
-    */
 
+    @objc
+    private func checkPurchasedProductsButtonDidTapped(_ sender: UIButton) {
+        didTapCheckPurchasedProductButton?()
+    }
 }
+
+extension PurchaseOrderInfoViewController: PurchaseStatusColorProvider { }
