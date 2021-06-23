@@ -15,7 +15,7 @@ struct PurchaseApplyViewModel {
         case suggestion(viewModels: BehaviorRelay<[SuggestionProductMaterialViewModel]>)
         case finish(purchaseID: String)
     }
-    let userSession: UserSession
+    let userSessionDataStore: UserSessionDataStore
     let purchaseInfoViewModel: PurchaseApplyInfoViewModel
     let pickReviewerViewModel: PickPurchaseReviewerViewModel
     let view: PublishRelay<View> = .init()
@@ -31,8 +31,8 @@ struct PurchaseApplyViewModel {
     let service: ApplyPuchaseService
     let bag: DisposeBag = DisposeBag()
 
-    init(userSession: UserSession, purchaseInfoViewModel: PurchaseApplyInfoViewModel, pickReviewerViewModel: PickPurchaseReviewerViewModel, service: ApplyPuchaseService) {
-        self.userSession = userSession
+    init(userSessionDataStore: UserSessionDataStore, purchaseInfoViewModel: PurchaseApplyInfoViewModel, pickReviewerViewModel: PickPurchaseReviewerViewModel, service: ApplyPuchaseService) {
+        self.userSessionDataStore = userSessionDataStore
         self.purchaseInfoViewModel = purchaseInfoViewModel
         self.pickReviewerViewModel = pickReviewerViewModel
         self.service = service
@@ -96,7 +96,12 @@ struct PurchaseApplyViewModel {
     }
 
     func mapCurrentInfoToApplyPurchaseParameterInfo() -> ApplyPurchaseParameterInfo? {
+        guard let userSession = userSessionDataStore.readUserSession() else {
+            return nil
+        }
+
         let partnerID = String(userSession.partnerInfo.id)
+
         let vendorID = purchaseInfoViewModel.vendorID
 
         guard let date = purchaseInfoViewModel.expectedStorageDate.value else { return nil }
