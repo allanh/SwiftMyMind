@@ -72,6 +72,7 @@ class PurchaseProductSuggestionViewController: UIViewController {
         })
 
         purchaseCostPerItemTextField.text = String(viewModel.purchaseCost.value)
+        purchaseCostPerItemTextField.text = String(viewModel.purchaseCostPerItem.value)
     }
 
     private func bindInputToViewModel() {
