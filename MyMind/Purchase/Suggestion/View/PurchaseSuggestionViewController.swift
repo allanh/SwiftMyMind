@@ -122,8 +122,7 @@ class PurchaseSuggestionViewController: NiblessViewController {
     private func handleNavigation(view: PurchaseSuggestionViewModel.View) {
         switch view {
         case .suggestionInfo(let info):
-            let viewController = ProductMaterialSuggestionInfoTableViewController(style: .grouped)
-            viewController.purchaseSuggestionInfo = info
+            let viewController = ProductMaterialSuggestionInfoTableViewController(viewModel: info.productSuggestionInfoViewModel)
             show(viewController, sender: nil)
         case .purchaseApply:
             let service = MyMindPurchaseAPIService.shared

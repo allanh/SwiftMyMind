@@ -29,7 +29,7 @@ struct PurchaseOrder: Codable {
         let id, number, originalProductNumber, name: String
         let quantityPerBox, purchaseQuantity, purchaseBoxQuantity, stockUnitName: String
         let boxStockUnitName, purchaseCost, channelStockQuantity, fineStockQuantity: String
-        let totalStockQuantity, monthSaleQuantity, proposedQuantity, daysSalesOfInventory: String
+        let totalStockQuantity, monthSaleQuantity, suggestedQuantity, daysSalesOfInventory: String
         let cost, movingAverageCost, totalPrice, realPurchaseQuantity: String
         let realTotalPrice: String
 
@@ -48,7 +48,7 @@ struct PurchaseOrder: Codable {
             case fineStockQuantity = "fine_stock_quantity"
             case totalStockQuantity = "total_stock_quantity"
             case monthSaleQuantity = "month_sale_quantity"
-            case proposedQuantity = "proposed_quantity"
+            case suggestedQuantity = "proposed_quantity"
             case daysSalesOfInventory = "days_sales_of_inventory"
             case cost
             case movingAverageCost = "moving_average_cost"

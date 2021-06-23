@@ -12,27 +12,21 @@ class ProductMaterialSuggestionInfoTableViewController: UITableViewController {
 
     typealias PurchaseSuggestionInfoItem = (title: String, content: String)
 
-    var purchaseSuggestionInfo: PurchaseSuggestionInfo?
+    let viewModel: ProductSuggestionInfoViewModel
 
-    lazy var itemList: [PurchaseSuggestionInfoItem] = {
-        if let info = self.purchaseSuggestionInfo {
-            return [
-                ("SKU編號", info.number),
-                ("原廠料號", info.originalProductNumber),
-                ("SKU名稱", info.name),
-                ("通路倉庫存量", info.channelStockQuantity),
-                ("良品倉庫存量", info.fineStockQuantity),
-                ("月平鈞銷售量\n(庫存單位)", info.monthSaleQuantity),
-                ("迴轉天數", info.daysSalesOfInventory),
-                ("建議採購量", info.suggestedQuantity),
-                ("箱入數", "\(info.number)\(info.stockUnitName)/\(info.boxStockUnitName)"),
-                ("最新採購成本", info.cost),
-                ("移動平均成本", info.movingAverageCost),
-            ]
-        } else {
-            return []
-        }
-    }()
+    lazy var itemList: [PurchaseSuggestionInfoItem] = [
+        ("SKU編號", viewModel.number),
+        ("原廠料號", viewModel.originalProductNumber),
+        ("SKU名稱", viewModel.name),
+        ("通路倉庫存量", viewModel.channelStockQuantity),
+        ("良品倉庫存量", viewModel.fineStockQuantity),
+        ("月平鈞銷售量\n(庫存單位)", viewModel.monthSaleQuantity),
+        ("迴轉天數", viewModel.daysSalesOfInventory),
+        ("建議採購量", viewModel.suggestedQuantity),
+        ("箱入數", "\(viewModel.quantityPerBox)\(viewModel.stockUnitName)/\(viewModel.boxStockUnitName)"),
+        ("最新採購成本", viewModel.cost),
+        ("移動平均成本", viewModel.movingAverageCost),
+    ]
 
     
     override func viewDidLoad() {
@@ -42,6 +36,15 @@ class ProductMaterialSuggestionInfoTableViewController: UITableViewController {
         tableView.rowHeight = 44
         tableView.separatorStyle = .none
         tableView.backgroundColor = .white
+    }
+
+    init(viewModel: ProductSuggestionInfoViewModel) {
+        self.viewModel = viewModel
+        super.init(style: .grouped)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 
     // MARK: - Table view data source

@@ -139,8 +139,7 @@ class EditablePickedProductsInfoViewController: NiblessViewController {
         case .purchaseApply:
             navigationController?.popViewController(animated: true)
         case .suggestionInfo(let info):
-            let viewController = ProductMaterialSuggestionInfoTableViewController(style: .grouped)
-            viewController.purchaseSuggestionInfo = info
+            let viewController = ProductMaterialSuggestionInfoTableViewController(viewModel: info.productSuggestionInfoViewModel)
             show(viewController, sender: nil)
         }
     }
