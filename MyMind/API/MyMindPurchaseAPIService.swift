@@ -118,8 +118,12 @@ final class MyMindPurchaseAPIService: PromiseKitAPIService {
     }
 
     func loadPurchaseOrder(with purchaseID: String) -> Promise<PurchaseOrder> {
+        guard let userSession = userSessionDataStore.readUserSession() else {
+            return .init(error: APIError.noAccessTokenError)
+        }
+
         let endpoint = Endpoint.purchaseOrder(purchaseID: purchaseID)
-        let request = request(endPoint: endpoint)
+        let request = request(endPoint: endpoint, httpHeader: ["Authorization": "Bearer \(userSession.token)"])
         return sendRequest(request: request)
     }
 }
