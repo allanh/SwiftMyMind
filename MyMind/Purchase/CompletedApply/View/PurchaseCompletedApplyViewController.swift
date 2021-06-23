@@ -51,6 +51,10 @@ final class PurchaseCompletedApplyViewController: NiblessViewController {
         $0.distribution = .fillEqually
     }
 
+    let bottomBorderView: UIView = UIView {
+        $0.backgroundColor = .separator
+    }
+
     // MARK: - View life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,11 +77,13 @@ final class PurchaseCompletedApplyViewController: NiblessViewController {
         buttonsStackView.addArrangedSubview(backToHomeButton)
         buttonsStackView.addArrangedSubview(backToListButton)
         view.addSubview(buttonsStackView)
+        view.addSubview(bottomBorderView)
     }
 
     private func activateConstraints() {
         activateConstraintsCollecitonView()
         activateConstraintsStackView()
+        activateConstraintsBottomBorderView()
     }
 
     private func configCollectionView() {
@@ -189,6 +195,22 @@ extension PurchaseCompletedApplyViewController {
             .constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         let height = buttonsStackView.heightAnchor
             .constraint(equalToConstant: 50)
+
+        NSLayoutConstraint.activate([
+            leading, trailing, bottom, height
+        ])
+    }
+
+    private func activateConstraintsBottomBorderView() {
+        bottomBorderView.translatesAutoresizingMaskIntoConstraints = false
+        let leading = bottomBorderView.leadingAnchor
+            .constraint(equalTo: view.leadingAnchor)
+        let trailing = bottomBorderView.trailingAnchor
+            .constraint(equalTo: view.trailingAnchor)
+        let bottom = bottomBorderView.bottomAnchor
+            .constraint(equalTo: buttonsStackView.topAnchor)
+        let height = bottomBorderView.heightAnchor
+            .constraint(equalToConstant: 1)
 
         NSLayoutConstraint.activate([
             leading, trailing, bottom, height
