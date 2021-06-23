@@ -87,6 +87,7 @@
 		A4567006268307DD009598AE /* PurchasedProductsInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4567005268307DD009598AE /* PurchasedProductsInfoViewController.swift */; };
 		A456700926830BAB009598AE /* PurchasedProductInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A456700726830BAB009598AE /* PurchasedProductInfoTableViewCell.swift */; };
 		A456700A26830BAB009598AE /* PurchasedProductInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A456700826830BAB009598AE /* PurchasedProductInfoTableViewCell.xib */; };
+		A4567010268330F8009598AE /* ProductSuggestionInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A456700F268330F8009598AE /* ProductSuggestionInfoViewModel.swift */; };
 		A457AEAE2660A2230029DDBB /* PurchaseListFilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A457AEAD2660A2230029DDBB /* PurchaseListFilterViewModel.swift */; };
 		A457AEB02660A31F0029DDBB /* PickDatesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A457AEAF2660A31F0029DDBB /* PickDatesViewModel.swift */; };
 		A457AEB22660A34A0029DDBB /* PickPurchaseStatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A457AEB12660A34A0029DDBB /* PickPurchaseStatusViewModel.swift */; };
@@ -286,6 +287,7 @@
 		A4567005268307DD009598AE /* PurchasedProductsInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasedProductsInfoViewController.swift; sourceTree = "<group>"; };
 		A456700726830BAB009598AE /* PurchasedProductInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasedProductInfoTableViewCell.swift; sourceTree = "<group>"; };
 		A456700826830BAB009598AE /* PurchasedProductInfoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PurchasedProductInfoTableViewCell.xib; sourceTree = "<group>"; };
+		A456700F268330F8009598AE /* ProductSuggestionInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductSuggestionInfoViewModel.swift; sourceTree = "<group>"; };
 		A457AEAD2660A2230029DDBB /* PurchaseListFilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseListFilterViewModel.swift; sourceTree = "<group>"; };
 		A457AEAF2660A31F0029DDBB /* PickDatesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickDatesViewModel.swift; sourceTree = "<group>"; };
 		A457AEB12660A34A0029DDBB /* PickPurchaseStatusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickPurchaseStatusViewModel.swift; sourceTree = "<group>"; };
@@ -421,6 +423,7 @@
 				A4CBD8AE2669D18F00B19119 /* PurchaseSuggestionViewModel.swift */,
 				A442A163266F547300AAB1ED /* SuggestionProductMaterialViewModelLoader.swift */,
 				97547CBC2680957D001859A8 /* PurchaseSuggestionInfosLoader.swift */,
+				A456700F268330F8009598AE /* ProductSuggestionInfoViewModel.swift */,
 			);
 			path = Suggestion;
 			sourceTree = "<group>";
@@ -1099,6 +1102,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4567010268330F8009598AE /* ProductSuggestionInfoViewModel.swift in Sources */,
 				A43F42932643C26400A246CC /* SideMenuTopBarView.swift in Sources */,
 				A4054109264A270C00E2D21B /* DispatchQueue+.swift in Sources */,
 				A4BCA0CE267C98B500E3B274 /* PurchaseOrderInfoViewController.swift in Sources */,
