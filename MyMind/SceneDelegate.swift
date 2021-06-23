@@ -23,7 +23,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             lastSignInInfoDataStore: MyMindLastSignInInfoDataStore()
         )
         let signInViewController = SignInViewController(viewModel: viewModel)
-        let navigationController = UINavigationController(rootViewController: PurchaseListViewController(purchaseListLoader: MyMindPurchaseAPIService(userSession: .testUserSession)))
+        let navigationController = UINavigationController(rootViewController: PurchaseListViewController(purchaseListLoader: MyMindPurchaseAPIService.shared))
 
         self.window?.makeKeyAndVisible()
         self.window?.rootViewController = navigationController

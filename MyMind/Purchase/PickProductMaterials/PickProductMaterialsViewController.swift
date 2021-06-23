@@ -90,7 +90,7 @@ class PickProductMaterialsViewController: NiblessViewController {
                     imageDictionary[productMaterail.number] = url
                 }
             }
-            let productMaterialListLoader = MyMindPurchaseAPIService(userSession: .testUserSession)
+            let productMaterialListLoader = MyMindPurchaseAPIService.shared
             let adapter = PurchaseServiceToSuggestionProductMaterialViewModelAdapter(loader: productMaterialListLoader, imageDictionary: imageDictionary)
             let pickedOrderedIDs = viewModel.pickedMaterials.map { $0.id }
             let purchaseSuggestionViewModel = PurchaseSuggestionViewModel(pickedProductIDList: pickedOrderedIDs , loader: adapter)

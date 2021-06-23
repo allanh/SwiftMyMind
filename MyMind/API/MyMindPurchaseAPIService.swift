@@ -14,36 +14,46 @@ protocol PurchaseAPIService {
     func fetchPurchaseWarehouseList() -> Promise<[Warehouse]>
 }
 
-class MyMindPurchaseAPIService: PromiseKitAPIService {
-    private let userSession: UserSession
+final class MyMindPurchaseAPIService: PromiseKitAPIService {
+    let userSessionDataStore: UserSessionDataStore
 
-    private var partnerID: String {
-        String(userSession.partnerInfo.id)
-    }
+    static let shared: MyMindPurchaseAPIService = .init(userSessionDataStore: KeychainUserSessionDataStore())
 
-    init(userSession: UserSession) {
-        self.userSession = userSession
+    init(userSessionDataStore: UserSessionDataStore) {
+        self.userSessionDataStore = userSessionDataStore
     }
 
     func loadPurchaseList(with purchaseListQueryInfo: PurchaseListQueryInfo?) -> Promise<PurchaseList> {
-        let endpoint = Endpoint.purchaseList(with: partnerID, purchaseListQueryInfo: purchaseListQueryInfo)
+        guard let userSession = userSessionDataStore.readUserSession() else {
+            return .init(error: APIError.noAccessTokenError)
+        }
+        let endpoint = Endpoint.purchaseList(with: "\(userSession.partnerInfo.id)", purchaseListQueryInfo: purchaseListQueryInfo)
         let request = request(endPoint: endpoint, httpHeader: ["Authorization": "Bearer \(userSession.token)"])
         return sendRequest(request: request)
     }
 
     func loadProductMaterialList(with query: ProductMaterialQueryInfo) -> Promise<ProductMaterialList> {
+        guard let userSession = userSessionDataStore.readUserSession() else {
+            return .init(error: APIError.noAccessTokenError)
+        }
         let endpoint = Endpoint.productMaterials(query: query)
         let request = request(endPoint: endpoint, httpHeader: ["Authorization": "Bearer \(userSession.token)"])
         return sendRequest(request: request)
     }
 
     func fetchProductMaterialDetail(with id: String) -> Promise<ProductMaterialDetail> {
+        guard let userSession = userSessionDataStore.readUserSession() else {
+            return .init(error: APIError.noAccessTokenError)
+        }
         let endpoint = Endpoint.productMaterial(id: id)
         let request = request(endPoint: endpoint, httpHeader: ["Authorization": "Bearer \(userSession.token)"])
         return sendRequest(request: request)
     }
 
     func loadPurchaseSuggestionInfos(with productIDs: [String]) -> Promise<PurchaseSuggestionInfoList> {
+        guard let userSession = userSessionDataStore.readUserSession() else {
+            return .init(error: APIError.noAccessTokenError)
+        }
         let endpoint = Endpoint.purchaseSuggestionInfos(productIDs: productIDs)
         let request = request(endPoint: endpoint, httpHeader: ["Authorization": "Bearer \(userSession.token)"])
         return sendRequest(request: request)
@@ -53,7 +63,10 @@ class MyMindPurchaseAPIService: PromiseKitAPIService {
         struct Root: Codable {
             let detail: [Warehouse]
         }
-        let endpoint = Endpoint.purchaseWarehouseList(partnerID: partnerID)
+        guard let userSession = userSessionDataStore.readUserSession() else {
+            return .init(error: APIError.noAccessTokenError)
+        }
+        let endpoint = Endpoint.purchaseWarehouseList(partnerID: "\(userSession.partnerInfo.id)")
         let request = request(endPoint: endpoint, httpHeader: ["Authorization": "Bearer \(userSession.token)"])
         let rootResult: Promise<Root> = sendRequest(request: request)
         return rootResult.map({ $0.detail })
@@ -63,7 +76,11 @@ class MyMindPurchaseAPIService: PromiseKitAPIService {
         struct Root: Codable {
             let detail: [Reviewer]
         }
-        let endpoint = Endpoint.purchaseReviewerList(partnerID: partnerID, level: String(level))
+
+        guard let userSession = userSessionDataStore.readUserSession() else {
+            return .init(error: APIError.noAccessTokenError)
+        }
+        let endpoint = Endpoint.purchaseReviewerList(partnerID: "\(userSession.partnerInfo.id)", level: String(level))
         let request = request(endPoint: endpoint, httpHeader: ["Authorization": "Bearer \(userSession.token)"])
         let rootRsult: Promise<Root> = sendRequest(request: request)
         return rootRsult.map({ $0.detail })
@@ -76,6 +93,10 @@ class MyMindPurchaseAPIService: PromiseKitAPIService {
             enum CodingKeys: String, CodingKey {
                 case purchaseID = "purchase_id"
             }
+        }
+
+        guard let userSession = userSessionDataStore.readUserSession() else {
+            return .init(error: APIError.noAccessTokenError)
         }
 
         let endpoint = Endpoint.purchaseApply
