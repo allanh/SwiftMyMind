@@ -113,8 +113,10 @@ final class PurchaseCompletedApplyViewController: NiblessViewController {
     private func generateContentViewControllers(with purchaseOrder: PurchaseOrder) {
         let purchaseOrderInfoViewController = PurchaseOrderInfoViewController.loadFormNib()
         purchaseOrderInfoViewController.purchaseOrder = purchaseOrder
-        purchaseOrderInfoViewController.didTapCheckPurchasedProductButton = {
-            #warning("show product details view controller")
+        purchaseOrderInfoViewController.didTapCheckPurchasedProductButton = { [weak self] in
+            let viewController = PurchasedProductsInfoViewController(style: .plain)
+            viewController.productInfos = purchaseOrder.productInfos
+            self?.show(viewController, sender: nil)
         }
         contentViewControllers.append(purchaseOrderInfoViewController)
 
