@@ -25,6 +25,21 @@ class PurchasedProductsInfoViewController: UITableViewController {
         tableView.separatorStyle = .none
     }
 
+    @objc
+    private func detailButtonDidTapped(_ sender: UIButton) {
+        guard
+            let point = sender.superview?.convert(sender.frame.origin, to: tableView),
+            let indexPath = tableView.indexPathForRow(at: point)
+        else {
+            return
+        }
+
+        let info = productInfos[indexPath.item]
+        let viewController = ProductMaterialSuggestionInfoTableViewController(viewModel: info.productSuggestionInfoViewModel)
+        viewController.title = "SKU詳細資訊"
+        show(viewController, sender: nil)
+    }
+
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return productInfos.count
     }
@@ -37,6 +52,7 @@ class PurchasedProductsInfoViewController: UITableViewController {
         let info = productInfos[indexPath.row]
         cell.configure(with: info)
 
+        cell.detailButton.addTarget(self, action: #selector(detailButtonDidTapped(_:)), for: .touchUpInside)
         return cell
     }
 

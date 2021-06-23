@@ -19,6 +19,7 @@ class PurchasedProductInfoTableViewCell: UITableViewCell {
     @IBOutlet private weak var quantityLabel: UILabel!
     @IBOutlet private weak var boxQuantityLabel: UILabel!
     @IBOutlet private weak var totalCostLabel: UILabel!
+    @IBOutlet weak var detailButton: UIButton!
 
 
     override func awakeFromNib() {

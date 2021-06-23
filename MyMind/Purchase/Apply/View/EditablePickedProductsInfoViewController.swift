@@ -140,6 +140,7 @@ class EditablePickedProductsInfoViewController: NiblessViewController {
             navigationController?.popViewController(animated: true)
         case .suggestionInfo(let info):
             let viewController = ProductMaterialSuggestionInfoTableViewController(viewModel: info.productSuggestionInfoViewModel)
+            viewController.title = "建議採購資訊"
             show(viewController, sender: nil)
         }
     }

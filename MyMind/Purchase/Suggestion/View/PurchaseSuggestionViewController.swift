@@ -123,6 +123,7 @@ class PurchaseSuggestionViewController: NiblessViewController {
         switch view {
         case .suggestionInfo(let info):
             let viewController = ProductMaterialSuggestionInfoTableViewController(viewModel: info.productSuggestionInfoViewModel)
+            viewController.title = "建議採購資訊"
             show(viewController, sender: nil)
         case .purchaseApply:
             let service = MyMindPurchaseAPIService.shared

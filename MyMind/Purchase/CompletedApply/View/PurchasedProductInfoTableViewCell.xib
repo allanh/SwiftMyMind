@@ -181,6 +181,7 @@
             <connections>
                 <outlet property="boxQuantityLabel" destination="uDj-WJ-1wa" id="F8u-EX-gsn"/>
                 <outlet property="containerView" destination="Enl-Lj-08S" id="bJd-AU-oFW"/>
+                <outlet property="detailButton" destination="r0b-0B-qoJ" id="nCs-ax-JXq"/>
                 <outlet property="nameLabel" destination="1xe-sc-1eJ" id="IkF-OO-6xS"/>
                 <outlet property="numberLabel" destination="D6d-iO-bHP" id="Zqe-Cy-yg7"/>
                 <outlet property="originalNumberLabel" destination="cFO-63-b21" id="J4Z-bc-EbP"/>
