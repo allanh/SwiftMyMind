@@ -41,6 +41,16 @@ class LogInfoView: NiblessView {
         $0.textAlignment = .left
     }
 
+    private lazy var progressLineBottomConstraint: NSLayoutConstraint = progressLineView.bottomAnchor
+        .constraint(equalTo: bottomAnchor, constant: 10)
+
+    var isFirstLog: Bool = false {
+        didSet {
+            let constant: CGFloat = isFirstLog ? 0 : 10
+            progressLineBottomConstraint.constant = constant
+        }
+    }
+
     override init(frame: CGRect) {
         super.init(frame: frame)
 
@@ -99,11 +109,9 @@ extension LogInfoView {
             .constraint(equalTo: dotView.centerXAnchor)
         let width = progressLineView.widthAnchor
             .constraint(equalToConstant: 1)
-        let bottom = progressLineView.bottomAnchor
-            .constraint(equalTo: bottomAnchor, constant: 10)
 
         NSLayoutConstraint.activate([
-            top, centerX, width, bottom
+            top, centerX, width, progressLineBottomConstraint
         ])
     }
 

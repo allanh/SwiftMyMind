@@ -22,10 +22,13 @@ final class PurchaseCompletedApplyViewController: NiblessViewController {
         layout.sectionHeadersPinToVisibleBounds = true
         let screenWidth = UIScreen.main.bounds.width
         layout.headerReferenceSize = CGSize(width: screenWidth, height: 120)
+
         let horizontalInset: CGFloat = 20
         layout.sectionInset = UIEdgeInsets(top: 15, left: horizontalInset, bottom: 15, right: horizontalInset)
+
         let collecitonView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collecitonView.backgroundColor = .white
+
         return collecitonView
     }()
 
@@ -52,9 +55,11 @@ final class PurchaseCompletedApplyViewController: NiblessViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        view.backgroundColor = .white
         constructViewHierarchy()
-        activateConstraintsStackView()
+        activateConstraints()
         configCollectionView()
+        loadPurchaseOrder()
     }
     // MARK: - Methods
     init(purchaseID: String, loader: PurchaseOrderLoader) {
@@ -148,12 +153,12 @@ extension PurchaseCompletedApplyViewController: UICollectionViewDelegateFlowLayo
         if let flowLayout = collectionViewLayout as? UICollectionViewFlowLayout {
             horizontalInsets = flowLayout.sectionInset.left + flowLayout.sectionInset.right
         }
-        let width = screenWidth - horizontalInsets
 
-        switch indexPath.item {
-        case 0: return CGSize(width: width, height: 575)
-        default: return CGSize(width: width, height: 400)
-        }
+        let width = screenWidth - horizontalInsets
+        let viewController = contentViewControllers[indexPath.item]
+        let height = viewController.view.systemLayoutSizeFitting(CGSize(width: width, height: 0), withHorizontalFittingPriority: .required, verticalFittingPriority: .fittingSizeLevel).height
+
+        return CGSize(width: width, height: height)
     }
 }
 // MARK: - Layouts

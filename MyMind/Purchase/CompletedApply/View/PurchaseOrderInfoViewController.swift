@@ -27,8 +27,15 @@ class PurchaseOrderInfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        configureRootView()
         configureContentWithPurchaseOrder()
         checkPurchasedProductsButton.addTarget(self, action: #selector(checkPurchasedProductsButtonDidTapped(_:)), for: .touchUpInside)
+    }
+
+    private func configureRootView() {
+        view.layer.cornerRadius = 4
+        view.layer.borderWidth = 1
+        view.layer.borderColor = UIColor.separator.cgColor
     }
 
     private func configureContentWithPurchaseOrder() {

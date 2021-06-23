@@ -54,8 +54,9 @@
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="採購單編號" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Uy-VS-2oE">
-                    <rect key="frame" x="20" y="76" width="80" height="25"/>
+                    <rect key="frame" x="20" y="76" width="85" height="25"/>
                     <constraints>
+                        <constraint firstAttribute="width" constant="85" id="DTU-ZE-p1x"/>
                         <constraint firstAttribute="height" constant="25" id="MVg-ZP-XHQ"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="16"/>
@@ -126,7 +127,7 @@
                     <color key="highlightedColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="{系統產生}" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="etj-lm-r57">
-                    <rect key="frame" x="150" y="76" width="75" height="25"/>
+                    <rect key="frame" x="155" y="76" width="75" height="25"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="25" id="Vtd-pf-FVa"/>
                     </constraints>
@@ -135,25 +136,25 @@
                     <color key="highlightedColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TA13 美科" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bxv-OO-SmH">
-                    <rect key="frame" x="150" y="117" width="74" height="23"/>
+                    <rect key="frame" x="155" y="117" width="74" height="23"/>
                     <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
                     <color key="textColor" red="0.70588235290000001" green="0.70588235290000001" blue="0.70588235290000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <color key="highlightedColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JwF-1u-fEc">
-                    <rect key="frame" x="150" y="288.5" width="0.0" height="0.0"/>
+                    <rect key="frame" x="155" y="288.5" width="0.0" height="0.0"/>
                     <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
                     <color key="textColor" red="0.70588235290000001" green="0.70588235290000001" blue="0.70588235290000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <color key="highlightedColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NWS-dB-1ab">
-                    <rect key="frame" x="150" y="328.5" width="0.0" height="0.0"/>
+                    <rect key="frame" x="155" y="328.5" width="0.0" height="0.0"/>
                     <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
                     <color key="textColor" red="0.70588235290000001" green="0.70588235290000001" blue="0.70588235290000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <color key="highlightedColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2lv-o1-dxb">
-                    <rect key="frame" x="150" y="357" width="0.0" height="0.0"/>
+                    <rect key="frame" x="155" y="357" width="0.0" height="0.0"/>
                     <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
                     <color key="textColor" red="0.70588235290000001" green="0.70588235290000001" blue="0.70588235290000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <color key="highlightedColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -176,7 +177,7 @@
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="審核中" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h5H-oP-vQh">
-                    <rect key="frame" x="150" y="157" width="80" height="23"/>
+                    <rect key="frame" x="155" y="157" width="80" height="23"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="80" id="Owh-bJ-80q"/>
                     </constraints>
@@ -192,31 +193,31 @@
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2021-05-13" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mac-lc-Muf">
-                    <rect key="frame" x="150" y="197" width="90" height="23"/>
+                    <rect key="frame" x="155" y="197" width="90" height="23"/>
                     <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
                     <color key="textColor" red="0.70588235290000001" green="0.70588235290000001" blue="0.70588235290000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <color key="highlightedColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="test1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lse-Tf-L7h">
-                    <rect key="frame" x="150" y="237" width="35" height="23"/>
+                    <rect key="frame" x="155" y="237" width="35" height="23"/>
                     <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
                     <color key="textColor" red="0.70588235290000001" green="0.70588235290000001" blue="0.70588235290000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <color key="highlightedColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="張小茜" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dJP-cr-BVb">
-                    <rect key="frame" x="150" y="277" width="48" height="23"/>
+                    <rect key="frame" x="155" y="277" width="48" height="23"/>
                     <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
                     <color key="textColor" red="0.70588235290000001" green="0.70588235290000001" blue="0.70588235290000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <color key="highlightedColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="02-21125412" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pgY-cl-t8w">
-                    <rect key="frame" x="150" y="317" width="96.5" height="23"/>
+                    <rect key="frame" x="155" y="317" width="96.5" height="23"/>
                     <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
                     <color key="textColor" red="0.70588235290000001" green="0.70588235290000001" blue="0.70588235290000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <color key="highlightedColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="221 新北市汐止區大同路100號" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Yp-wi-ced">
-                    <rect key="frame" x="150" y="357" width="217" height="22.5"/>
+                    <rect key="frame" x="155" y="357" width="230" height="22.5"/>
                     <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
                     <color key="textColor" red="0.70588235290000001" green="0.70588235290000001" blue="0.70588235290000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <color key="highlightedColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -240,6 +241,7 @@
                 <constraint firstItem="Bxv-OO-SmH" firstAttribute="centerY" secondItem="vPc-DJ-Ofy" secondAttribute="centerY" id="LsT-PH-Rby"/>
                 <constraint firstItem="9Kq-b3-03X" firstAttribute="top" secondItem="feV-ab-0Ou" secondAttribute="bottom" priority="750" constant="40" id="MIs-GF-HfP"/>
                 <constraint firstItem="0Yp-wi-ced" firstAttribute="leading" secondItem="etj-lm-r57" secondAttribute="leading" id="Mt7-g4-7Ed"/>
+                <constraint firstItem="XYB-CK-PPG" firstAttribute="trailing" secondItem="0Yp-wi-ced" secondAttribute="trailing" constant="10" id="P8s-ad-ox9"/>
                 <constraint firstAttribute="trailing" secondItem="Wef-GE-ffm" secondAttribute="trailing" id="QS9-0l-IWj"/>
                 <constraint firstItem="feV-ab-0Ou" firstAttribute="top" secondItem="jAv-GR-aE6" secondAttribute="bottom" constant="15" id="QwN-p0-bVE"/>
                 <constraint firstItem="DLW-LO-0AV" firstAttribute="top" secondItem="vPc-DJ-Ofy" secondAttribute="bottom" constant="15" id="RT4-X4-YfF"/>
