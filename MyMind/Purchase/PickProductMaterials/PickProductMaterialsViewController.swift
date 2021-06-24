@@ -72,7 +72,7 @@ class PickProductMaterialsViewController: NiblessViewController {
                 #warning("Handle not sign in")
                 return
             }
-            let service = MyMindAutoCompleteAPIService(userSession: userSession)
+            let service = MyMindAutoCompleteAPIService(userSessionDataStore: KeychainUserSessionDataStore())
             let viewModel = ProductMaterialsFilterViewModel(
                 service: service,
                 queryInfo: viewModel.currentQueryInfo) { [unowned self] info in

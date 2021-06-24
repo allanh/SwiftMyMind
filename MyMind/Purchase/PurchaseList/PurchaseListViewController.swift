@@ -139,6 +139,7 @@ final class PurchaseListViewController: NiblessViewController {
     }
 
     private func handleErrorForFetchPurchaseList(_ error: Error) {
+        #warning("Error handling")
         print(error.localizedDescription)
     }
 
@@ -179,7 +180,7 @@ final class PurchaseListViewController: NiblessViewController {
 //            return
 //        }
         let viewModel = PurchaseListFilterViewModel(
-            service: MyMindAutoCompleteAPIService(userSession: .testUserSession),
+            service: MyMindAutoCompleteAPIService(userSessionDataStore: KeychainUserSessionDataStore()),
             queryInfo: purchaseListQueryInfo) { [weak self] queryInfo in
             self?.purchaseListQueryInfo = queryInfo
             self?.refreshFetchPurchaseList(query: queryInfo)
@@ -195,7 +196,7 @@ final class PurchaseListViewController: NiblessViewController {
     private func createButtonDidTapped(_ sender: UIButton) {
 //        let viewModel = PickProductMaterialsViewModel(purchaseAPIService: purchaseAPIService)
 //        let viewController = PickProductMaterialsViewController(viewModel: viewModel)
-        let adapter = VendorInfoAdapter(service: MyMindAutoCompleteAPIService(userSession: .testUserSession))
+        let adapter = VendorInfoAdapter(service: MyMindAutoCompleteAPIService(userSessionDataStore: KeychainUserSessionDataStore()))
         let viewController = PickVendorViewController(loader: adapter)
         navigationController?.pushViewController(viewController, animated: true)
     }

@@ -54,6 +54,7 @@ final class PickVendorViewController: UITableViewController {
                 self.tableView.reloadData()
             })
             .catch { error in
+                #warning("Error handling")
                 print(error.localizedDescription)
             }
     }
