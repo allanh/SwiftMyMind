@@ -17,16 +17,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let windowScene = (scene as? UIWindowScene) else { return }
         self.window = UIWindow(windowScene: windowScene)
+
         let viewModel = SignInViewModel(
             userSessionRepository: MyMindUserSessionRepository.shared,
             signInValidationService: SignInValidatoinService(),
             lastSignInInfoDataStore: MyMindLastSignInInfoDataStore()
         )
         let signInViewController = SignInViewController(viewModel: viewModel)
-        let navigationController = UINavigationController(rootViewController: PurchaseListViewController(purchaseListLoader: MyMindPurchaseAPIService.shared))
 
         self.window?.makeKeyAndVisible()
-        self.window?.rootViewController = navigationController
+        self.window?.rootViewController = RootTabBarController()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

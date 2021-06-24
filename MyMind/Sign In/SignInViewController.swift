@@ -87,6 +87,7 @@ class SignInViewController: NiblessViewController {
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [unowned self] _ in
                 ToastView.showIn(self, message: "登入成功", iconName: "success")
+                dismiss(animated: true, completion: nil)
             })
             .disposed(by: bag)
     }

@@ -517,8 +517,8 @@ extension SignInRootView {
                         duration: 0.3,
                         options: .transitionCrossDissolve) {
                         self.rememberAccountButton.setImage(UIImage(named: "checked"), for: .normal)
-                    } completion: { _ in
-                        self.rememberAccountButton.isEnabled = true
+                    } completion: { [weak self] _ in
+                        self?.rememberAccountButton.isEnabled = true
                     }
                 case false:
                     self.rememberAccountButton.isSelected = false
