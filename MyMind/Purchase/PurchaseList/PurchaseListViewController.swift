@@ -42,6 +42,7 @@ final class PurchaseListViewController: NiblessViewController {
     // MARK: - View life cycle
     override func loadView() {
         super.loadView()
+
         view = PurchaseListRootView()
     }
 
@@ -49,6 +50,8 @@ final class PurchaseListViewController: NiblessViewController {
         super.viewDidLoad()
 
         view.backgroundColor = .white
+        title = "採購申請單列表"
+        addCloseButton()
         configPickSortTypeView()
         configTableView()
         configCollectionView()
@@ -59,6 +62,14 @@ final class PurchaseListViewController: NiblessViewController {
     init(purchaseListLoader: PurchaseListLoader) {
         self.purchaseListLoader = purchaseListLoader
         super.init()
+    }
+
+    private func addCloseButton() {
+        let button = UIButton(type: .custom)
+        button.setImage(UIImage(named: "close"), for: .normal)
+        button.addTarget(self, action: #selector(closeButtonDidTapped(_:)), for: .touchUpInside)
+        let barButton = UIBarButtonItem(customView: button)
+        navigationItem.rightBarButtonItem = barButton
     }
 
     private func configPickSortTypeView() {
@@ -187,6 +198,11 @@ final class PurchaseListViewController: NiblessViewController {
         let adapter = VendorInfoAdapter(service: MyMindAutoCompleteAPIService(userSession: .testUserSession))
         let viewController = PickVendorViewController(loader: adapter)
         navigationController?.pushViewController(viewController, animated: true)
+    }
+
+    @objc
+    private func closeButtonDidTapped(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
     }
 }
 // MARK: - Scroll view delegate
