@@ -16,6 +16,7 @@ final class MainFunctionControl: UIControl {
         $0.layer.cornerRadius = 8
         $0.layer.masksToBounds = true
         $0.backgroundColor = .clear
+        $0.isUserInteractionEnabled = false
     }
 
     let imageContainerView: UIView = UIView {
@@ -32,6 +33,7 @@ final class MainFunctionControl: UIControl {
 
     let imageView: UIImageView = UIImageView {
         $0.contentMode = .scaleAspectFit
+        $0.isUserInteractionEnabled = false
     }
 
     let titleLabel: UILabel = UILabel {
@@ -39,6 +41,7 @@ final class MainFunctionControl: UIControl {
         $0.textColor = UIColor(hex: "545454")
         $0.backgroundColor = .white
         $0.textAlignment = .center
+        $0.isUserInteractionEnabled = false
     }
     // MARK: - Methods
     init(frame: CGRect = .zero, mainFunctionType: MainFunctoinType) {

@@ -16,7 +16,7 @@ enum MainFunctoinType: String {
     case accountSetting = "帳號設定"
 }
 
-final class MainFunctionEntryViewController: UIViewController {
+final class MainFunctionEntryViewController: NiblessViewController {
     typealias FunctionControlInfo = (type: MainFunctoinType, imageName: String)
     private var functionControls: [MainFunctionControl] = []
 
@@ -97,14 +97,21 @@ final class MainFunctionEntryViewController: UIViewController {
         for item in functionControlInfos {
             let functionControl = MainFunctionControl(mainFunctionType: item.type)
             functionControl.imageView.image = UIImage(named: item.imageName)
-            functionControl.addTarget(self, action: #selector(didTapFunctionControl(sender:)), for: .touchUpInside)
+            functionControl.addTarget(self, action: #selector(didTapFunctionControl(_:)), for: .touchUpInside)
             functionControls.append(functionControl)
         }
     }
 
     @objc
-    private func didTapFunctionControl(sender: MainFunctionControl) {
-        print(sender.functionType)
+    private func didTapFunctionControl(_ sender: MainFunctionControl) {
+        switch sender.functionType {
+        case .purchaseApply:
+            let navigationController = UINavigationController(rootViewController: PurchaseListViewController(purchaseListLoader: MyMindPurchaseAPIService.shared))
+            navigationController.modalPresentationStyle = .fullScreen
+            show(navigationController, sender: nil)
+        default:
+            print(sender.functionType)
+        }
     }
 
 }
