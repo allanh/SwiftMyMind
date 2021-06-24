@@ -59,6 +59,7 @@ final class PurchaseCompletedApplyViewController: NiblessViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        title = "完成申請"
         view.backgroundColor = .white
         constructViewHierarchy()
         activateConstraints()

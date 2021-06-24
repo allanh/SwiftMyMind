@@ -24,6 +24,8 @@ final class PickVendorViewController: UITableViewController {
     // MARK: - View life cycles
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        title = "請選擇供應商"
         configTableView()
         subscribeTextField()
     }

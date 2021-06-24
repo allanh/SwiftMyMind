@@ -26,6 +26,7 @@ class PickProductMaterialsViewController: NiblessViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         configTableView()
         subscribeViewModel()
         viewModel.refreshFetchProductMaterials(with: viewModel.currentQueryInfo)

@@ -41,6 +41,7 @@ final class PurchaseApplyViewController: NiblessViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        title = "採購申請"
         view.backgroundColor = .white
         subscribeViewModel()
         configSaveButton()

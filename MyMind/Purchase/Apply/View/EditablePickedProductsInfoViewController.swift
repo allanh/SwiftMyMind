@@ -47,6 +47,7 @@ class EditablePickedProductsInfoViewController: NiblessViewController {
 
         view.backgroundColor = .white
 
+        title = "採購SKU資訊"
         wireToViewModel()
         subscribeViewModel()
         addTapToResignKeyboardGesture()
