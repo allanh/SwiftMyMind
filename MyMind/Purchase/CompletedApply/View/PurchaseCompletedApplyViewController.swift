@@ -35,7 +35,7 @@ final class PurchaseCompletedApplyViewController: NiblessViewController {
     let backToHomeButton: UIButton = UIButton {
         $0.backgroundColor = .white
         $0.setTitleColor(UIColor(hex: "004477"), for: .normal)
-        $0.setTitle("儲存", for: .normal)
+        $0.setTitle("回首頁", for: .normal)
         $0.titleLabel?.font = .pingFangTCSemibold(ofSize: 16)
     }
 
@@ -64,6 +64,7 @@ final class PurchaseCompletedApplyViewController: NiblessViewController {
         constructViewHierarchy()
         activateConstraints()
         configCollectionView()
+        configureButtons()
         loadPurchaseOrder()
     }
     // MARK: - Methods
@@ -92,6 +93,11 @@ final class PurchaseCompletedApplyViewController: NiblessViewController {
         collectionView.delegate = self
         collectionView.registerCell(ContainerCollectionViewCell.self)
         collectionView.register(StageProgressCollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: String(describing: StageProgressCollectionReusableView.self))
+    }
+
+    private func configureButtons() {
+        backToHomeButton.addTarget(self, action: #selector(backToHomeButtonDidTapped(_:)), for: .touchUpInside)
+        backToListButton.addTarget(self, action: #selector(backToListButtonDidTapped(_:)), for: .touchUpInside)
     }
 
     private func loadPurchaseOrder() {
@@ -124,6 +130,16 @@ final class PurchaseCompletedApplyViewController: NiblessViewController {
         let purchaseLogInfoViewController = PurchaseLogInfoViewController.loadFormNib()
         purchaseLogInfoViewController.logInfos = purchaseOrder.logInfos
         contentViewControllers.append(purchaseLogInfoViewController)
+    }
+
+    @objc
+    private func backToHomeButtonDidTapped(_ sender: UIButton) {
+
+    }
+
+    @objc
+    private func backToListButtonDidTapped(_ sender: UIButton) {
+        navigationController?.popToRootViewController(animated: true)
     }
 }
 // MARK: - Collection view data source
