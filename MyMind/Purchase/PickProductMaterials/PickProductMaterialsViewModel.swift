@@ -105,6 +105,10 @@ class PickProductMaterialsViewModel {
     }
 
     func pushSuggestion() {
+        guard pickedMaterials.isEmpty == false else {
+            #warning("Show hint to user")
+            return
+        }
         view.accept(.suggestion)
     }
 }
