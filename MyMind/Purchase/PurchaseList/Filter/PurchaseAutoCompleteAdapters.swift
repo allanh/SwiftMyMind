@@ -38,7 +38,7 @@ struct RxVendorAutoCompleteItemViewModelAdapter: RxAutoCompleteItemViewModelLoad
         return Single<[AutoCompleteItemViewModel]>.create { single in
             service.vendorNameAutoComplete(searchTerm: searchTerm)
                 .done { list in
-                    let viewModels = list.item.map { AutoCompleteItemViewModel(representTitle: $0.name ?? "", identifier: $0.number ?? "")}
+                    let viewModels = list.item.map { AutoCompleteItemViewModel(representTitle: $0.name ?? "", identifier: $0.id ?? "")}
                     single(.success(viewModels))
                 }.catch { error in
                     single(.failure(error))
