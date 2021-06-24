@@ -47,6 +47,7 @@ final class PurchaseListViewController: NiblessViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         view.backgroundColor = .white
         configPickSortTypeView()
         configTableView()

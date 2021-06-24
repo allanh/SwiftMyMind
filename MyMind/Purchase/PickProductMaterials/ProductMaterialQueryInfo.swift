@@ -39,7 +39,7 @@ struct ProductMaterialQueryInfo {
     let vendorInfo: VendorInfo
     var brandNames: [AutoCompleteInfo] = []
     var materialNumbers: [AutoCompleteInfo] = []
-    var materailSetNumbers: [AutoCompleteInfo] = []
+    var materialSetNumbers: [AutoCompleteInfo] = []
     var originalMaterialNumbers: [AutoCompleteInfo] = []
     var materailNames: [String] = []
     var sortType: SortType = .number
@@ -60,8 +60,8 @@ struct ProductMaterialQueryInfo {
             let query = URLQueryItem(name: "fuzzy_no", value: numbers)
             items.append(query)
         }
-        if materailSetNumbers.isEmpty == false {
-            let numbers = materialNumbers.compactMap { $0.number }.joined(separator: ",")
+        if materialSetNumbers.isEmpty == false {
+            let numbers = materialSetNumbers.compactMap { $0.number }.joined(separator: ",")
             let query = URLQueryItem(name: "product_set_no", value: numbers)
             items.append(query)
         } else {

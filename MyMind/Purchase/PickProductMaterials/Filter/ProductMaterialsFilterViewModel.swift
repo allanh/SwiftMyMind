@@ -64,7 +64,7 @@ class ProductMaterialsFilterViewModel {
 
         productNumberSetViewModel.pickedItemViewModels
             .subscribe(onNext: { [unowned self] viewModels in
-                self.queryInfo.materialNumbers = viewModels.map {
+                self.queryInfo.materialSetNumbers = viewModels.map {
                     AutoCompleteInfo(id: nil, number: $0.identifier, name: $0.identifier)
                 }
             })
@@ -116,7 +116,7 @@ class ProductMaterialsFilterViewModel {
     func makeViewModelForProductNumberSet() -> AutoCompleteSearchViewModel {
         let adapter = RxProductNumberSetAutoCompleteItemViewModelAdapter(service: service)
         let viewModel = AutoCompleteSearchViewModel.init(title: "組合編號", loader: adapter)
-        let items = queryInfo.materailSetNumbers.map { AutoCompleteItemViewModel(representTitle: $0.number ?? "", identifier: $0.number ?? "")}
+        let items = queryInfo.materialSetNumbers.map { AutoCompleteItemViewModel(representTitle: $0.number ?? "", identifier: $0.number ?? "")}
         viewModel.pickedItemViewModels.accept(items)
         return viewModel
     }
