@@ -98,7 +98,7 @@ class ProductMaterialsFilterViewModel {
     }
 
     func makeViewModelForBrandName() -> AutoCompleteSearchViewModel {
-        let adapter = RxBrandNameAutoCompleteItemViewModelAdapter(service: service)
+        let adapter = RxBrandNameAutoCompleteItemViewModelAdapter(service: service, vendorID: queryInfo.vendorInfo.id)
         let viewModel = AutoCompleteSearchViewModel.init(title: "品牌名稱", loader: adapter)
         let items = queryInfo.brandNames.map { AutoCompleteItemViewModel(representTitle: $0.name ?? "", identifier: $0.name ?? "")}
         viewModel.pickedItemViewModels.accept(items)

@@ -11,10 +11,11 @@ import RxSwift
 
 struct RxBrandNameAutoCompleteItemViewModelAdapter: RxAutoCompleteItemViewModelLoader {
     let service: AutoCompleteAPIService
+    let vendorID: String
 
     func loadAutoCompleteItemViewModel(with searchTerm: String) -> Single<[AutoCompleteItemViewModel]> {
         return Single<[AutoCompleteItemViewModel]>.create { single in
-            service.productMaterialBrandNameAutoComplete(searchTerm: searchTerm)
+            service.productMaterialBrandNameAutoComplete(searchTerm: searchTerm, vendorID: vendorID)
                 .done { list in
                     let viewModels = list.item.map { AutoCompleteItemViewModel(representTitle: $0.name ?? "", identifier: $0.name ?? "")}
                     single(.success(viewModels))
