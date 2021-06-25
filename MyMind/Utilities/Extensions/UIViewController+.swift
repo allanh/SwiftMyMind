@@ -57,16 +57,18 @@ extension UIViewController {
                 color: UIColor(hex: "043458")
             )
         }
-        let size = CGSize(width: 50, height: 50)
 
-        let x = view.frame.width / 2.0 - size.width / 2.0
-        let y = view.frame.height / 2.0 - size.height / 2.0
-
-        activityIndicator?.frame = CGRect(
-            origin: CGPoint(x: x, y: y),
-            size: size
-        )
         view.addSubview(activityIndicator!)
+
+        activityIndicator?.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            activityIndicator!.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            activityIndicator!.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            activityIndicator!.widthAnchor.constraint(equalToConstant: 50),
+            activityIndicator!.heightAnchor.constraint(equalToConstant: 50)
+        ])
+
         activityIndicator?.startAnimating()
     }
 
