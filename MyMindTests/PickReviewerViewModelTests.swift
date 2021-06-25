@@ -8,37 +8,25 @@
 
 import XCTest
 import PromiseKit
+import RxSwift
 @testable import MyMind
 
-struct MockPurchaseReviewerListService: PurchaseReviewerListService {
-    let mockReviewerList: [Reviewer] = [
-        Reviewer(id: "136", account: "test1"),
-        Reviewer(id: "138", account: "test2")
+struct MockPurchaseReviewerListLoader: PurchaseReviewerListLoader {
+    let deferred = Promise<[Reviewer]>.pending()
 
-    ]
-
-    var shouldSuccess: Bool = true
-
-    func fetchPurchaseReviewerList() -> Promise<[Reviewer]> {
-        return Promise<[Reviewer]>.init { seal in
-            if shouldSuccess {
-                seal.fulfill(mockReviewerList)
-            } else {
-                seal.reject(APIError.dataNotFoundError)
-            }
-        }
+    func loadPurchaseReviewerList(level: Int) -> Promise<[Reviewer]> {
+        return deferred.promise
     }
 }
 
 class PickReviewerViewModelTests: XCTestCase {
 
     var sut: PickPurchaseReviewerViewModel!
-    var mockService: MockPurchaseReviewerListService!
+    var mockLoader: MockPurchaseReviewerListLoader!
 
     override func setUpWithError() throws {
-        mockService = MockPurchaseReviewerListService()
-        sut = PickPurchaseReviewerViewModel(service: mockService)
-
+        mockLoader = MockPurchaseReviewerListLoader()
+        sut = PickPurchaseReviewerViewModel(loader: mockLoader)
     }
 
     override func tearDownWithError() throws {
@@ -50,13 +38,22 @@ class PickReviewerViewModelTests: XCTestCase {
         XCTAssertEqual(sut.pickedReviewerValidationStatus.value, .valid)
     }
 
-    func test_fetchReviewerList_success() {
-        let expectation = expectation(description: "fetch reviewer list finish")
-        sut.fetchPurchaseReviewerList()
-        DispatchQueue.global().asyncAfter(deadline: .now() + 0.5) {
-            expectation.fulfill()
-        }
-        wait(for: [expectation], timeout: 1.0)
-        XCTAssertEqual(mockService.mockReviewerList, sut.reviewerList.value)
+    func test_fetchReviewerList_success() throws {
+        let mockReviewerList: [Reviewer] = [
+            Reviewer(id: "136", account: "test1"),
+            Reviewer(id: "138", account: "test2")
+        ]
+
+
+        let reviewerList = sut.reviewerList
+            .asObservable()
+            .observe(on: MainScheduler.instance)
+            .skip(1)
+
+        sut.loadPurchaseReviewerList()
+        mockLoader.deferred.resolver.fulfill(mockReviewerList)
+
+        let result = try reviewerList.toBlocking(timeout: 1).first()
+        XCTAssertEqual(mockReviewerList, result)
     }
 }
