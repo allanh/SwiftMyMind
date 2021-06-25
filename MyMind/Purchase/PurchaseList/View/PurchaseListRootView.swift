@@ -36,10 +36,16 @@ final class PurchaseListRootView: NiblessView {
 
     let organizeOptionView: OrganizeOptionView = OrganizeOptionView()
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    private var hierarchyNotReady: Bool = true
+
+    override func didMoveToWindow() {
+        super.didMoveToWindow()
+
+        guard hierarchyNotReady else { return }
+
         constructViewHierarchy()
         activateConstraints()
+        hierarchyNotReady = false
     }
 
     func constructViewHierarchy() {

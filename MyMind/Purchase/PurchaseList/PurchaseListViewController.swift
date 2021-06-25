@@ -23,6 +23,7 @@ final class PurchaseListViewController: NiblessViewController {
         pickSortView.tableView.separatorStyle = .none
         return pickSortView
     }()
+    private var isPickSortTypeViewViewHierarchyNotReady: Bool = true
 
     let purchaseListLoader: PurchaseListLoader
 
@@ -52,7 +53,6 @@ final class PurchaseListViewController: NiblessViewController {
         view.backgroundColor = .white
         title = "採購申請單列表"
         addCloseButton()
-        configPickSortTypeView()
         configTableView()
         configCollectionView()
         loadPurchaseList()
@@ -159,6 +159,11 @@ final class PurchaseListViewController: NiblessViewController {
 
     @objc
     private func sortButtonDidTapped(_ sender: UIButton) {
+        if isPickSortTypeViewViewHierarchyNotReady {
+            configPickSortTypeView()
+            view.layoutIfNeeded()
+            isPickSortTypeViewViewHierarchyNotReady = false
+        }
         switch pickSortTypeView.isHidden {
         case true: pickSortTypeView.show()
         case false: pickSortTypeView.hide()
@@ -175,10 +180,6 @@ final class PurchaseListViewController: NiblessViewController {
 
     @objc
     private func filterButtonDidTapped(_ sender: UIButton) {
-//        guard let userSession = MyMindUserSessionRepository.shared.readUserssion() else {
-//            #warning("Error handle")
-//            return
-//        }
         let viewModel = PurchaseListFilterViewModel(
             service: MyMindAutoCompleteAPIService(userSessionDataStore: KeychainUserSessionDataStore()),
             queryInfo: purchaseListQueryInfo) { [weak self] queryInfo in
@@ -194,8 +195,6 @@ final class PurchaseListViewController: NiblessViewController {
 
     @objc
     private func createButtonDidTapped(_ sender: UIButton) {
-//        let viewModel = PickProductMaterialsViewModel(purchaseAPIService: purchaseAPIService)
-//        let viewController = PickProductMaterialsViewController(viewModel: viewModel)
         let adapter = VendorInfoAdapter(service: MyMindAutoCompleteAPIService(userSessionDataStore: KeychainUserSessionDataStore()))
         let viewController = PickVendorViewController(loader: adapter)
         navigationController?.pushViewController(viewController, animated: true)
