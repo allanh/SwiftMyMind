@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct ProductMaterialQueryInfo {
+struct ProductMaterialQueryInfo: Equatable {
     enum SortType: String, CustomStringConvertible, CaseIterable {
         case number = "PRODUCT_NO"
         case name = "NAME"

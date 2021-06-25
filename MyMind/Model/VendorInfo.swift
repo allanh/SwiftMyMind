@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct VendorInfo {
+struct VendorInfo: Equatable {
     let id: String
     let name: String
 }
