@@ -26,7 +26,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let signInViewController = SignInViewController(viewModel: viewModel)
 
         self.window?.makeKeyAndVisible()
-        self.window?.rootViewController = RootTabBarController()
+        self.window?.rootViewController = signInViewController
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
