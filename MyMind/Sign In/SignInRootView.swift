@@ -507,6 +507,11 @@ extension SignInRootView {
     private func bindViewModelToRememberAccountButton() {
         viewModel.shouldRememberAccount
             .asDriver()
+            .do(onNext: { [unowned self] flag in
+                viewModel.lastSignInInfoDataStore
+                    .saveShouldRememberLastSignAccountFlag(flag)
+                    .cauterize()
+            })
             .drive(onNext: { [unowned self] in
                 switch $0 {
                 case true:
