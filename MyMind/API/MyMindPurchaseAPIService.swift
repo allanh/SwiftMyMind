@@ -72,7 +72,7 @@ final class MyMindPurchaseAPIService: PromiseKitAPIService {
         return rootResult.map({ $0.detail })
     }
 
-    func fetchPurchaseReviewerList(level: Int) -> Promise<[Reviewer]> {
+    func loadPurchaseReviewerList(level: Int) -> Promise<[Reviewer]> {
         struct Root: Codable {
             let detail: [Reviewer]
         }
@@ -138,7 +138,7 @@ extension MyMindPurchaseAPIService: PurchaseSuggestionInfosLoader { }
 
 extension MyMindPurchaseAPIService: PurchaseWarehouseListService { }
 
-extension MyMindPurchaseAPIService: PurchaseReviewerListService { }
+extension MyMindPurchaseAPIService: PurchaseReviewerListLoader { }
 
 extension MyMindPurchaseAPIService: ApplyPuchaseService { }
 

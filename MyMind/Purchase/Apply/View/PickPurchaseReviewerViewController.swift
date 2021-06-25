@@ -35,7 +35,7 @@ final class PickPurchaseReviewerViewController: UIViewController {
         configureRootView()
         configurePickReviewerTextField()
         configureDropDownView()
-        viewModel.fetchPurchaseReviewerList()
+        viewModel.loadPurchaseReviewerList()
         bindToViewModel()
         subscribeViewModel()
     }

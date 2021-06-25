@@ -18,12 +18,12 @@ struct PickPurchaseReviewerViewModel {
     let note: BehaviorRelay<String> = .init(value: "")
     let noteValidationStatus: BehaviorRelay<ValidationResult> = .init(value: .valid)
 
-    let service: PurchaseReviewerListService
+    let loader: PurchaseReviewerListLoader
 
     let bag: DisposeBag = DisposeBag()
     // MARK: - Methods
-    init(service: PurchaseReviewerListService) {
-        self.service = service
+    init(loader: PurchaseReviewerListLoader) {
+        self.loader = loader
         bindStatus()
     }
 
@@ -45,13 +45,14 @@ struct PickPurchaseReviewerViewModel {
             .disposed(by: bag)
     }
 
-    func fetchPurchaseReviewerList() {
-        service.fetchPurchaseReviewerList(level: 1)
+    func loadPurchaseReviewerList() {
+        loader.loadPurchaseReviewerList(level: 1)
             .done { list in
                 reviewerList.accept(list)
             }
             .catch { error in
                 print(error.localizedDescription)
+                #warning("Error handling")
             }
     }
 }

@@ -1,5 +1,5 @@
 //
-//  PurchaseReviewerListService.swift
+//  PurchaseReviewerListLoader.swift
 //  MyMind
 //
 //  Created by Barry Chen on 2021/6/9.
@@ -9,6 +9,6 @@
 import Foundation
 import PromiseKit
 
-protocol PurchaseReviewerListService {
-    func fetchPurchaseReviewerList(level: Int) -> Promise<[Reviewer]>
+protocol PurchaseReviewerListLoader {
+    func loadPurchaseReviewerList(level: Int) -> Promise<[Reviewer]>
 }
