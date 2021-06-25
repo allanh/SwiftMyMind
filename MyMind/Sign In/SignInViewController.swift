@@ -87,6 +87,9 @@ class SignInViewController: NiblessViewController {
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [unowned self] _ in
                 ToastView.showIn(self, message: "登入成功", iconName: "success")
+                let rootViewController = RootTabBarController()
+                rootViewController.modalPresentationStyle = .overFullScreen
+                present(rootViewController, animated: false, completion: nil)
             })
             .disposed(by: bag)
     }

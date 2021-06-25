@@ -28,11 +28,13 @@ extension KeychainError: LocalizedError {
 }
 
 public enum KeychainKeys: String {
-    case lastSignInAccountInfo, accessToken
+    case lastSignInAccountInfo, userSession
 }
 // MARK: - Keychain helper
 public struct KeychainHelper {
-    let service: String = Bundle.main.bundleIdentifier ?? "com.shopping.udi.Brand-Store-Shopping"
+    let service: String
+
+    static let `default`: KeychainHelper = KeychainHelper(service: "MyMind")
 
     public func saveItem<T: Codable>(_ value: T, for key: KeychainKeys) throws {
         guard let encodedData = try? JSONEncoder().encode([value]) else {

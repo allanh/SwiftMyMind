@@ -22,7 +22,6 @@ class ForgotPasswordViewModel {
     let emailValidationResult: BehaviorRelay<ValidationResult> = BehaviorRelay.init(value: .valid)
     let captchaValueValidationResult: BehaviorRelay<ValidationResult> = BehaviorRelay.init(value: .valid)
 
-
     let confirmButtonEnabled: BehaviorRelay<Bool> = BehaviorRelay.init(value: true)
     let reloadButtonEnabled: BehaviorRelay<Bool> = BehaviorRelay.init(value: true)
     let activityIndicatorAnimating: BehaviorRelay<Bool> = BehaviorRelay.init(value: false)
@@ -68,44 +67,37 @@ class ForgotPasswordViewModel {
             indicateSendingEmail(false)
             return
         }
+
         authService.forgotPasswordMail(info: forgotPasswordInfo)
-            .subscribe { [unowned self] in
-                self.successMessage.accept("重設密碼連結已寄出！")
-            } onError: { [unowned self] (error) in
+            .ensure { self.indicateUpdatingCaptcha(false) }
+            .done { self.successMessage.accept("重設密碼連結已寄出！") }
+            .catch { error in
                 switch error {
                 case APIError.serviceError(let message):
                     self.errorMessage.accept(message)
                 default:
-                    self.errorMessage.accept(unexpectedErrorMessage)
+                    self.errorMessage.accept(self.unexpectedErrorMessage)
                 }
-            } onDisposed: { [weak self] in
-                self?.indicateSendingEmail(false)
             }
-            .disposed(by: bag)
     }
 
     @objc
     func captcha() {
         indicateUpdatingCaptcha(true)
         authService.captcha()
-            .do(onDispose: { [weak self] in
-                self?.indicateUpdatingCaptcha(false)
-            })
-            .subscribe { [unowned self] in
-                switch $0 {
-                case .success(let session):
-                    self.captchaSession.accept(session)
-                    self.forgotPasswordInfo.captchaKey = session.key
-                case .failure(let error):
-                    switch error {
-                    case APIError.serviceError(let message):
-                        self.errorMessage.accept(message)
-                    default:
-                        self.errorMessage.accept(unexpectedErrorMessage)
-                    }
+            .ensure { self.indicateUpdatingCaptcha(false) }
+            .done { session in
+                self.captchaSession.accept(session)
+                self.forgotPasswordInfo.captchaKey = session.key
+            }
+            .catch { error in
+                switch error {
+                case APIError.serviceError(let message):
+                    self.errorMessage.accept(message)
+                default:
+                    self.errorMessage.accept(self.unexpectedErrorMessage)
                 }
             }
-            .disposed(by: bag)
     }
 
     private func indicateUpdatingCaptcha(_ isUpdating: Bool) {

@@ -14,12 +14,12 @@ import RxSwift
 class ForgotPasswordViewModelTests: XCTestCase {
 
     var sut: ForgotPasswordViewModel!
-    var mockSignInService: MockSignInService!
+    var mockSignInService: MockAuthService!
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        mockSignInService = MockSignInService()
-        sut = ForgotPasswordViewModel(authService: mockSignInService as! AuthService, signInValidationService: SignInValidatoinService())
+        mockSignInService = MockAuthService()
+        sut = ForgotPasswordViewModel(authService: mockSignInService, signInValidationService: SignInValidatoinService())
     }
 
     override func tearDownWithError() throws {

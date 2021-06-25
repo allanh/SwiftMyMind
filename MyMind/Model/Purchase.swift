@@ -44,19 +44,28 @@ enum SortOrder: String {
 }
 
 struct PurchaseListQueryInfo {
-    enum OrderReference: String {
+    enum OrderReference: String, CaseIterable, CustomStringConvertible {
         case purchaseNumber = "PURCHASE_NO"
         case status = "STATUS"
         case totalAmount = "TOTAL_AMOUNT"
         case createdDate = "CREATED_AT"
         case expectStorageDate = "EXPECT_STORAGE_DATE"
+
+        var description: String {
+            switch self {
+            case .purchaseNumber: return "採購單編號"
+            case .status: return "狀態"
+            case .totalAmount: return "採購金額"
+            case .createdDate: return "填單日期"
+            case .expectStorageDate: return "預計入庫日"
+            }
+        }
     }
-    let partnerID: String
     var status: PurchaseStatus?
     var purchaseNumbers: [AutoCompleteInfo] = []
     var vendorIDs: [AutoCompleteInfo] = []
     var productNumbers: [AutoCompleteInfo] = []
-    var employeeIDs: [AutoCompleteInfo] = []
+    var applicants: [AutoCompleteInfo] = []
     var expectStorageStartDate: Date?
     var expectStorageEndDate: Date?
     var createDateStart: Date?
@@ -64,10 +73,10 @@ struct PurchaseListQueryInfo {
     var pageNumber: Int = 1
     var itemsPerPage: Int = 20
     var sortOrder: SortOrder?
-    var orderReference: OrderReference?
+    var orderReference: OrderReference = .purchaseNumber
 
-    static func defaultQueryInfo(for partnerID: String) -> PurchaseListQueryInfo {
-        return PurchaseListQueryInfo.init(partnerID: partnerID)
+    static func defaultQuery() -> PurchaseListQueryInfo {
+        return PurchaseListQueryInfo()
     }
 
     mutating func updateCurrentPageInfo(with purchaseList: PurchaseList) {
@@ -83,7 +92,6 @@ struct PurchaseListQueryInfo {
 
     var queryItems: [URLQueryItem] {
         var queryItems: [URLQueryItem] = [
-            URLQueryItem(name: "partner_id", value: partnerID),
             URLQueryItem(name: "limit", value: String(itemsPerPage)),
             URLQueryItem(name: "current_page", value: String(pageNumber))
         ]
@@ -106,8 +114,8 @@ struct PurchaseListQueryInfo {
             let item = URLQueryItem(name: "product_no", value: value)
             queryItems.append(item)
         }
-        if employeeIDs.isEmpty == false {
-            let value = employeeIDs.compactMap { $0.id }.joined(separator: ",")
+        if applicants.isEmpty == false {
+            let value = applicants.compactMap { $0.id }.joined(separator: ",")
             let item = URLQueryItem(name: "employee_id", value: value)
             queryItems.append(item)
         }
@@ -138,10 +146,9 @@ struct PurchaseListQueryInfo {
             let item = URLQueryItem(name: "sort", value: sortOrder.rawValue)
             queryItems.append(item)
         }
-        if let orderReference = orderReference {
-            let item = URLQueryItem(name: "order_by", value: orderReference.rawValue)
-            queryItems.append(item)
-        }
+        let item = URLQueryItem(name: "order_by", value: orderReference.rawValue)
+        queryItems.append(item)
+        
         return queryItems
     }
 }
@@ -178,7 +185,7 @@ struct PurchaseBrief: Codable {
     }
 }
 
-struct PurchaseList {
+struct PurchaseList: MultiplePageList {
     struct StatusAmount: Codable {
         let pending: String
         let review: String
@@ -230,4 +237,11 @@ extension PurchaseList: Decodable {
         string = try container.decode(String.self, forKey: .itemsPerPage)
         itemsPerPage = Int(string) ?? 0
     }
+}
+
+protocol MultiplePageList {
+    var totalAmountOfItems: Int { get }
+    var totalAmountOfPages: Int { get }
+    var itemsPerPage: Int { get }
+    var currentPageNumber: Int { get }
 }

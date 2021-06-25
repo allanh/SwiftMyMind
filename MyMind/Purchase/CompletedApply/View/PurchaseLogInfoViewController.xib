@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PurchaseLogInfoViewController" customModule="MyMind" customModuleProvider="target">
+            <connections>
+                <outlet property="stackView" destination="zav-PW-i3A" id="z7j-Ea-3tF"/>
+                <outlet property="view" destination="gWc-4D-60a" id="wDz-D4-t7X"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="gWc-4D-60a">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="400"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jee-Ca-Wf5">
+                    <rect key="frame" x="15" y="15" width="5" height="25"/>
+                    <color key="backgroundColor" red="0.0" green="0.2666666667" blue="0.46666666670000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="5" id="evF-GO-oGa"/>
+                        <constraint firstAttribute="height" constant="25" id="xs1-Nb-EEZ"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <real key="value" value="2.5"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="動作與歷程" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oql-FN-dxM">
+                    <rect key="frame" x="35" y="14.5" width="90" height="26"/>
+                    <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="18"/>
+                    <color key="textColor" red="0.0" green="0.2666666667" blue="0.46666666670000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Qd-Ka-z7V" userLabel="Separator View">
+                    <rect key="frame" x="0.0" y="55" width="414" height="1"/>
+                    <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="Ucg-qd-W0s"/>
+                    </constraints>
+                </view>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="zav-PW-i3A">
+                    <rect key="frame" x="10" y="66" width="394" height="324"/>
+                </stackView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="kLH-pe-Ne1"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="zav-PW-i3A" firstAttribute="leading" secondItem="kLH-pe-Ne1" secondAttribute="leading" constant="10" id="3VF-BV-1JN"/>
+                <constraint firstItem="oql-FN-dxM" firstAttribute="leading" secondItem="Jee-Ca-Wf5" secondAttribute="trailing" constant="15" id="4cd-6D-KTJ"/>
+                <constraint firstItem="kLH-pe-Ne1" firstAttribute="trailing" secondItem="zav-PW-i3A" secondAttribute="trailing" constant="10" id="8Fe-kO-hZr"/>
+                <constraint firstItem="oql-FN-dxM" firstAttribute="centerY" secondItem="Jee-Ca-Wf5" secondAttribute="centerY" id="942-el-VG7"/>
+                <constraint firstItem="zav-PW-i3A" firstAttribute="top" secondItem="4Qd-Ka-z7V" secondAttribute="bottom" constant="10" id="GSX-9d-mdL"/>
+                <constraint firstItem="4Qd-Ka-z7V" firstAttribute="top" secondItem="Jee-Ca-Wf5" secondAttribute="bottom" constant="15" id="KoE-ic-xYi"/>
+                <constraint firstItem="kLH-pe-Ne1" firstAttribute="bottom" secondItem="zav-PW-i3A" secondAttribute="bottom" constant="10" id="PnZ-da-eDF"/>
+                <constraint firstItem="Jee-Ca-Wf5" firstAttribute="leading" secondItem="gWc-4D-60a" secondAttribute="leading" constant="15" id="Uq7-gU-tvu"/>
+                <constraint firstItem="Jee-Ca-Wf5" firstAttribute="top" secondItem="gWc-4D-60a" secondAttribute="top" constant="15" id="Zme-mf-MT5"/>
+                <constraint firstItem="4Qd-Ka-z7V" firstAttribute="leading" secondItem="gWc-4D-60a" secondAttribute="leading" id="juO-uD-LEj"/>
+                <constraint firstAttribute="trailing" secondItem="4Qd-Ka-z7V" secondAttribute="trailing" id="x28-Hu-lng"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="137.68115942028987" y="-39.174107142857139"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

@@ -7,10 +7,10 @@
 //
 
 import Foundation
-import RxSwift
+import PromiseKit
 
 protocol AuthService {
-    func captcha() -> Single<CaptchaSession>
-    func signIn(info: SignInInfo) -> Single<UserSession>
-    func forgotPasswordMail(info: ForgotPasswordInfo) -> Completable
+    func captcha() -> Promise<CaptchaSession>
+    func signIn(info: SignInInfo) -> Promise<UserSession>
+    func forgotPasswordMail(info: ForgotPasswordInfo) -> Promise<Void>
 }

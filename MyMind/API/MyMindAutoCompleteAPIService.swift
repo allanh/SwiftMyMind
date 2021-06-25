@@ -9,38 +9,48 @@
 import Foundation
 import PromiseKit
 
-protocol PurchaseAutoCompleteAPIService {
+protocol AutoCompleteAPIService {
     func purchaseNumberAutoComplete(searchTerm: String) -> Promise<AutoCompleteList>
     func vendorNameAutoComplete(searchTerm: String) -> Promise<AutoCompleteList>
     func applicantAutoComplete(searchTerm: String) -> Promise<AutoCompleteList>
     func productNumberAutoComplete(searchTerm: String) -> Promise<AutoCompleteList>
+    func productMaterialBrandNameAutoComplete(searchTerm: String, vendorID: String) -> Promise<AutoCompleteList>
+    func productMaterailOriginalNumberAutoComplete(searchTerm: String) -> Promise<AutoCompleteList>
+    func productNumberSetAutoComplete(searchTerm: String) -> Promise<AutoCompleteList>
 }
 
 class MyMindAutoCompleteAPIService: PromiseKitAPIService {
-    let userSession: UserSession
-    var partnerID: String {
-        String(userSession.partnerInfo.id)
-    }
 
-    init(userSession: UserSession) {
-        self.userSession = userSession
+    let userSessionDataStore: UserSessionDataStore
+
+    init(userSessionDataStore: UserSessionDataStore) {
+        self.userSessionDataStore = userSessionDataStore
     }
 
     func purchaseNumberAutoComplete(searchTerm: String = "") -> Promise<AutoCompleteList> {
-        let endPoint = Endpoint.purchaseNumberAutoComplete(searchTerm: searchTerm, partnerID: partnerID)
+        guard let userSession = userSessionDataStore.readUserSession() else {
+            return .init(error: APIError.noAccessTokenError)
+        }
+        let endPoint = Endpoint.purchaseNumberAutoComplete(searchTerm: searchTerm, partnerID: String(userSession.partnerInfo.id))
         let request = request(endPoint: endPoint, httpHeader: ["Authorization": "Bearer \(userSession.token)"])
 
         return sendRequest(request: request)
     }
 
     func vendorNameAutoComplete(searchTerm: String = "") -> Promise<AutoCompleteList> {
-        let endPoint = Endpoint.vendorNameAutoComplete(searchTerm: searchTerm, partnerID: partnerID)
+        guard let userSession = userSessionDataStore.readUserSession() else {
+            return .init(error: APIError.noAccessTokenError)
+        }
+        let endPoint = Endpoint.vendorNameAutoComplete(searchTerm: searchTerm, partnerID: String(userSession.partnerInfo.id))
         let request = request(endPoint: endPoint, httpHeader: ["Authorization": "Bearer \(userSession.token)"])
 
         return sendRequest(request: request)
     }
 
     func applicantAutoComplete(searchTerm: String = "") -> Promise<AutoCompleteList> {
+        guard let userSession = userSessionDataStore.readUserSession() else {
+            return .init(error: APIError.noAccessTokenError)
+        }
         let endPoint = Endpoint.applicantAutoComplete(searchTerm: searchTerm)
         let request = request(endPoint: endPoint, httpHeader: ["Authorization": "Bearer \(userSession.token)"])
 
@@ -48,10 +58,43 @@ class MyMindAutoCompleteAPIService: PromiseKitAPIService {
     }
 
     func productNumberAutoComplete(searchTerm: String = "") -> Promise<AutoCompleteList> {
+        guard let userSession = userSessionDataStore.readUserSession() else {
+            return .init(error: APIError.noAccessTokenError)
+        }
         let endPoint = Endpoint.productNumberAutoComplete(searchTerm: searchTerm)
         let request = request(endPoint: endPoint, httpHeader: ["Authorization": "Bearer \(userSession.token)"])
 
         return sendRequest(request: request)
     }
+
+    func productNumberSetAutoComplete(searchTerm: String = "") -> Promise<AutoCompleteList> {
+        guard let userSession = userSessionDataStore.readUserSession() else {
+            return .init(error: APIError.noAccessTokenError)
+        }
+        let endPoint = Endpoint.productNumberSetAutoComplete(searchTerm: searchTerm)
+        let request = request(endPoint: endPoint, httpHeader: ["Authorization": "Bearer \(userSession.token)"])
+
+        return sendRequest(request: request)
+    }
+
+    func productMaterialBrandNameAutoComplete(searchTerm: String = "", vendorID: String) -> Promise<AutoCompleteList> {
+        guard let userSession = userSessionDataStore.readUserSession() else {
+            return .init(error: APIError.noAccessTokenError)
+        }
+        let endPoint = Endpoint.productMaterialBrandNameAutoComplete(searchTerm: searchTerm, vendorID: vendorID)
+        let request = request(endPoint: endPoint, httpHeader: ["Authorization": "Bearer \(userSession.token)"])
+
+        return sendRequest(request: request)
+    }
+
+    func productMaterailOriginalNumberAutoComplete(searchTerm: String = "") -> Promise<AutoCompleteList> {
+        guard let userSession = userSessionDataStore.readUserSession() else {
+            return .init(error: APIError.noAccessTokenError)
+        }
+        let endPoint = Endpoint.productMaterialOriginalNumberAutoComplete(searchTerm: searchTerm)
+        let request = request(endPoint: endPoint, httpHeader: ["Authorization": "Bearer \(userSession.token)"])
+
+        return sendRequest(request: request)
+    }
 }
-extension MyMindAutoCompleteAPIService: PurchaseAutoCompleteAPIService { }
+extension MyMindAutoCompleteAPIService: AutoCompleteAPIService { }

@@ -64,12 +64,13 @@ final class OrganizeOptionView: NiblessView {
         activateConstraintsTopSeparatorView()
         activateConstraintsStackView()
         activateConstraintsSortButton()
+        activateConstraintsFilterButton()
         activateConstraintsSeparatorViews()
         activateConstraintsLayoutButton()
     }
 }
 extension OrganizeOptionView {
-    func activateConstraintsTopSeparatorView() {
+    private func activateConstraintsTopSeparatorView() {
         topSeparatorView.translatesAutoresizingMaskIntoConstraints = false
         let top = topSeparatorView.topAnchor
             .constraint(equalTo: topAnchor)
@@ -85,7 +86,7 @@ extension OrganizeOptionView {
         ])
     }
 
-    func activateConstraintsStackView() {
+    private func activateConstraintsStackView() {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         let top = stackView.topAnchor
             .constraint(equalTo: topAnchor)
@@ -101,13 +102,21 @@ extension OrganizeOptionView {
         ])
     }
 
-    func activateConstraintsSortButton() {
+    private func activateConstraintsSortButton() {
         sortButton.translatesAutoresizingMaskIntoConstraints = false
         sortButton.widthAnchor
             .constraint(equalTo: filterButton.widthAnchor).isActive = true
+        sortButton.heightAnchor
+            .constraint(equalTo: stackView.heightAnchor).isActive = true
     }
 
-    func activateConstraintsSeparatorViews() {
+    private func activateConstraintsFilterButton() {
+        filterButton.translatesAutoresizingMaskIntoConstraints = false
+        filterButton.heightAnchor
+            .constraint(equalTo: stackView.heightAnchor).isActive = true
+    }
+
+    private func activateConstraintsSeparatorViews() {
         firstSeparatorView.translatesAutoresizingMaskIntoConstraints = false
         secondSeparatorView.translatesAutoresizingMaskIntoConstraints = false
         let firstWidth = firstSeparatorView.widthAnchor
@@ -124,7 +133,7 @@ extension OrganizeOptionView {
         ])
     }
 
-    func activateConstraintsLayoutButton() {
+    private func activateConstraintsLayoutButton() {
         layoutButton.translatesAutoresizingMaskIntoConstraints = false
         let width = layoutButton.widthAnchor
             .constraint(equalToConstant: 40)

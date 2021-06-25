@@ -44,11 +44,11 @@ open class UICollectionViewLeftAlignedLayout: UICollectionViewFlowLayout {
         return currentItemAttributes
     }
 
-    private func evaluatedMinimumInteritemSpacingForSection(at section: NSInteger) -> CGFloat {
+    private func evaluatedMinimumInteritemSpacingForSection(at section: Int) -> CGFloat {
         return (collectionView?.delegate as? UICollectionViewDelegateFlowLayout)?.collectionView?(collectionView!, layout: self, minimumInteritemSpacingForSectionAt: section) ?? minimumInteritemSpacing
     }
 
-    private func evaluatedSectionInsetForSection(at index: NSInteger) -> UIEdgeInsets {
+    private func evaluatedSectionInsetForSection(at index: Int) -> UIEdgeInsets {
         return (collectionView?.delegate as? UICollectionViewDelegateFlowLayout)?.collectionView?(collectionView!, layout: self, insetForSectionAt: index) ?? sectionInset
     }
 

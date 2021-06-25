@@ -507,6 +507,11 @@ extension SignInRootView {
     private func bindViewModelToRememberAccountButton() {
         viewModel.shouldRememberAccount
             .asDriver()
+            .do(onNext: { [unowned self] flag in
+                viewModel.lastSignInInfoDataStore
+                    .saveShouldRememberLastSignAccountFlag(flag)
+                    .cauterize()
+            })
             .drive(onNext: { [unowned self] in
                 switch $0 {
                 case true:
@@ -517,8 +522,8 @@ extension SignInRootView {
                         duration: 0.3,
                         options: .transitionCrossDissolve) {
                         self.rememberAccountButton.setImage(UIImage(named: "checked"), for: .normal)
-                    } completion: { _ in
-                        self.rememberAccountButton.isEnabled = true
+                    } completion: { [weak self] _ in
+                        self?.rememberAccountButton.isEnabled = true
                     }
                 case false:
                     self.rememberAccountButton.isSelected = false
