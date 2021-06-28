@@ -9,11 +9,6 @@
 import Foundation
 import PromiseKit
 
-protocol PurchaseAPIService {
-    func fetchProductMaterialDetail(with id: String) -> Promise<ProductMaterialDetail>
-    func fetchPurchaseWarehouseList() -> Promise<[Warehouse]>
-}
-
 final class MyMindPurchaseAPIService: PromiseKitAPIService {
     let userSessionDataStore: UserSessionDataStore
 
@@ -41,7 +36,7 @@ final class MyMindPurchaseAPIService: PromiseKitAPIService {
         return sendRequest(request: request)
     }
 
-    func fetchProductMaterialDetail(with id: String) -> Promise<ProductMaterialDetail> {
+    func loadProductMaterialDetail(with id: String) -> Promise<ProductMaterialDetail> {
         guard let userSession = userSessionDataStore.readUserSession() else {
             return .init(error: APIError.noAccessTokenError)
         }
@@ -59,7 +54,7 @@ final class MyMindPurchaseAPIService: PromiseKitAPIService {
         return sendRequest(request: request)
     }
 
-    func fetchPurchaseWarehouseList() -> Promise<[Warehouse]> {
+    func loadPurchaseWarehouseList() -> Promise<[Warehouse]> {
         struct Root: Codable {
             let detail: [Warehouse]
         }
@@ -129,8 +124,6 @@ final class MyMindPurchaseAPIService: PromiseKitAPIService {
 }
 
 extension MyMindPurchaseAPIService: PurchaseListLoader { }
-
-extension MyMindPurchaseAPIService: PurchaseAPIService { }
 
 extension MyMindPurchaseAPIService: ProductMaterialListLoader { }
 
