@@ -31,9 +31,9 @@ struct PurchaseApplyInfoViewModel {
     let warehouseList: BehaviorRelay<[Warehouse]> = .init(value: [])
     let pickedWarehouse: BehaviorRelay<Warehouse?> = .init(value: nil)
 
-    let recipientName: PublishRelay<String> = .init()
-    let recipientPhone: PublishRelay<String> = .init()
-    let recipientAddress: PublishRelay<String> = .init()
+    let recipientName: BehaviorRelay<String> = .init(value: "")
+    let recipientPhone: BehaviorRelay<String> = .init(value: "")
+    let recipientAddress: BehaviorRelay<String> = .init(value: "")
 
     let expectedStorageDateValidationStatus: BehaviorRelay<ValidationResult> = .init(value: .invalid("此欄位必填"))
     let pickedWarehouseValidationStatus: BehaviorRelay<ValidationResult> = .init(value: .invalid("此欄位必填"))
