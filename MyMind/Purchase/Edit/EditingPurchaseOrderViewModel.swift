@@ -12,7 +12,7 @@ import RxSwift
 import RxRelay
 
 protocol EditingPurchaseOrderService {
-    func editPurchaseOrder(with info: EditingPurchaseOrderParameterInfo) -> Promise<Void>
+    func editPurchaseOrder(for id: String, with info: EditingPurchaseOrderParameterInfo) -> Promise<Void>
 }
 
 class EditingPurchaseOrderViewModel {
@@ -83,7 +83,7 @@ class EditingPurchaseOrderViewModel {
         }
 
         isNetworkProcessing.accept(true)
-        service.editPurchaseOrder(with: info)
+        service.editPurchaseOrder(for: purchaseID, with: info)
             .ensure { [weak self] in
                 self?.isNetworkProcessing.accept(false)
             }
@@ -127,7 +127,8 @@ class EditingPurchaseOrderViewModel {
                     boxStockUnitName: info.boxStockUnitName),
                 purchaseCostPerItem: Double(info.purchaseCost) ?? 0,
                 vendorName: order.vendorName,
-                vendorID: order.vendorID)
+                vendorID: order.vendorID,
+                purchasedQuantity: Int(info.purchaseQuantity) ?? 0)
 
             return viewModel
         }

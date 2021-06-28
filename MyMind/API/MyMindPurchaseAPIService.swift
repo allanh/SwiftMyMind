@@ -121,6 +121,16 @@ final class MyMindPurchaseAPIService: PromiseKitAPIService {
         let request = request(endPoint: endpoint, httpHeader: ["Authorization": "Bearer \(userSession.token)"])
         return sendRequest(request: request)
     }
+
+    func editPurchaseOrder(for id: String, with info: EditingPurchaseOrderParameterInfo) -> Promise<Void> {
+        guard let userSession = userSessionDataStore.readUserSession() else {
+            return .init(error: APIError.noAccessTokenError)
+        }
+
+        let endpoint = Endpoint.editingAndReviewPurchaseOrder(purchaseID: id)
+        let request = request(endPoint: endpoint, httpHeader: ["Authorization": "Bearer \(userSession.token)"])
+        return sendRequest(request: request)
+    }
 }
 
 extension MyMindPurchaseAPIService: PurchaseListLoader { }
@@ -136,3 +146,5 @@ extension MyMindPurchaseAPIService: PurchaseReviewerListLoader { }
 extension MyMindPurchaseAPIService: ApplyPuchaseService { }
 
 extension MyMindPurchaseAPIService: PurchaseOrderLoader { }
+
+extension MyMindPurchaseAPIService: EditingPurchaseOrderService { }
