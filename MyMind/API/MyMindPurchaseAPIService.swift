@@ -128,7 +128,17 @@ final class MyMindPurchaseAPIService: PromiseKitAPIService {
         }
 
         let endpoint = Endpoint.editingAndReviewPurchaseOrder(purchaseID: id)
-        let request = request(endPoint: endpoint, httpHeader: ["Authorization": "Bearer \(userSession.token)"])
+
+        guard let body = try? JSONEncoder().encode(info) else {
+            return .init(error: APIError.parseError)
+        }
+
+        let request = request(
+            endPoint: endpoint,
+            httpMethod: "PUT",
+            httpHeader: ["Authorization": "Bearer \(userSession.token)"],
+            httpBody: body
+        )
         return sendRequest(request: request)
     }
 }
