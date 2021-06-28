@@ -11,8 +11,8 @@ import PromiseKit
 import RxRelay
 import RxSwift
 
-protocol PurchaseWarehouseListService {
-    func fetchPurchaseWarehouseList() -> Promise<[Warehouse]>
+protocol PurchaseWarehouseListLoader {
+    func loadPurchaseWarehouseList() -> Promise<[Warehouse]>
 }
 
 struct PurchaseApplyInfoViewModel {
@@ -40,13 +40,13 @@ struct PurchaseApplyInfoViewModel {
 
     let showSuggestionInfo: PublishRelay<Void> = .init()
 
-    let service: PurchaseWarehouseListService
+    let warehouseLoader: PurchaseWarehouseListLoader
     let bag: DisposeBag = DisposeBag()
     // MARK: - Methods
     init(suggestionProductMaterialViewModels: [SuggestionProductMaterialViewModel],
-         service: PurchaseWarehouseListService) {
+         warehouseLoader: PurchaseWarehouseListLoader) {
         self.suggestionProductMaterialViewModels = .init(value: suggestionProductMaterialViewModels)
-        self.service = service
+        self.warehouseLoader = warehouseLoader
         bindStatus()
         bindRecipientInfo()
     }
@@ -87,8 +87,8 @@ struct PurchaseApplyInfoViewModel {
             .disposed(by: bag)
     }
 
-    func fetchWarehouseList() {
-        service.fetchPurchaseWarehouseList()
+    func loadWarehouseList() {
+        warehouseLoader.loadPurchaseWarehouseList()
             .done { warehouses in
                 warehouseList.accept(warehouses)
             }

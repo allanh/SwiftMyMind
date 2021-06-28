@@ -136,7 +136,7 @@ extension MyMindPurchaseAPIService: ProductMaterialListLoader { }
 
 extension MyMindPurchaseAPIService: PurchaseSuggestionInfosLoader { }
 
-extension MyMindPurchaseAPIService: PurchaseWarehouseListService { }
+extension MyMindPurchaseAPIService: PurchaseWarehouseListLoader { }
 
 extension MyMindPurchaseAPIService: PurchaseReviewerListLoader { }
 
