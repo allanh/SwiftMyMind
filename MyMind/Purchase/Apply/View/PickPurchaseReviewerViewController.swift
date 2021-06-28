@@ -142,11 +142,8 @@ final class PickPurchaseReviewerViewController: UIViewController {
 
     private func configureLogInfosViews() {
         guard let logInfos = viewModel.logInfos else { return }
-        logInfos.enumerated().forEach {
-            let logInfoView = makeLogInfoView(with: $0.element)
-            if $0.offset == 0 {
-                logInfoView.isFirstLog = true
-            }
+        logInfos.forEach {
+            let logInfoView = makeLogInfoView(with: $0)
             logInfosStackView.addArrangedSubview(logInfoView)
         }
     }
