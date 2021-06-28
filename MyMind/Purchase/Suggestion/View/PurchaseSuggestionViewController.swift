@@ -128,9 +128,9 @@ class PurchaseSuggestionViewController: NiblessViewController {
             show(viewController, sender: nil)
         case .purchaseApply:
             let service = MyMindPurchaseAPIService.shared
-            let cachedLoader = CachedSuggestionProductMaterialViewModelsLoader(viewModels: viewModel.suggestionProductMaterialViewModels)
             
-            let purchaseInfoViewModel = PurchaseApplyInfoViewModel(suggestionProductMaterialViewModelsLoader: cachedLoader, warehouseLoader: service)
+            let purchaseInfoViewModel = PurchaseApplyInfoViewModel(suggestionProductMaterialViewModels: viewModel.suggestionProductMaterialViewModels, warehouseLoader: service)
+
             let pickReviewerViewModel = PickPurchaseReviewerViewModel(loader: service)
             let purchaseApplyViewModel = PurchaseApplyViewModel(
                 userSessionDataStore: KeychainUserSessionDataStore(),

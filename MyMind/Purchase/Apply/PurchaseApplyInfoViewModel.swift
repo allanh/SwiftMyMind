@@ -40,14 +40,17 @@ struct PurchaseApplyInfoViewModel {
 
     let showSuggestionInfo: PublishRelay<Void> = .init()
 
-    let suggestionProductMaterialViewModelsLoader: SuggestionProductMaterialViewModelsLoader
     let warehouseLoader: PurchaseWarehouseListLoader
     let bag: DisposeBag = DisposeBag()
     // MARK: - Methods
-    init(suggestionProductMaterialViewModelsLoader: SuggestionProductMaterialViewModelsLoader,
-         warehouseLoader: PurchaseWarehouseListLoader) {
-        self.suggestionProductMaterialViewModelsLoader = suggestionProductMaterialViewModelsLoader
+    init(suggestionProductMaterialViewModels: [SuggestionProductMaterialViewModel],
+         warehouseLoader: PurchaseWarehouseListLoader,
+         expectedStorageDate: Date? = nil,
+         pickedWarehouse: Warehouse? = nil) {
+
+        self.suggestionProductMaterialViewModels = .init(value: suggestionProductMaterialViewModels)
         self.warehouseLoader = warehouseLoader
+
         bindStatus()
         bindRecipientInfo()
     }
