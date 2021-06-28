@@ -73,6 +73,10 @@ class EditingPurchaseOrderViewModel {
 
     func sendEditedRequest() {
         guard centralizedValidationStatus.value else {
+            // Emit current element to update UI in case user didn't do anything before apply
+            if let status = pickPurchaseReviewerViewModel?.pickedReviewerValidationStatus {
+                status.accept(status.value)
+            }
             #warning("Error handling")
             return
         }
