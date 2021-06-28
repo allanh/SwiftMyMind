@@ -15,20 +15,6 @@ protocol PurchaseWarehouseListLoader {
     func loadPurchaseWarehouseList() -> Promise<[Warehouse]>
 }
 
-protocol SuggestionProductMaterialViewModelsLoader {
-    func loadSuggestionProductMaterialViewModels() -> Promise<[SuggestionProductMaterialViewModel]>
-}
-
-struct CachedSuggestionProductMaterialViewModelsLoader: SuggestionProductMaterialViewModelsLoader {
-    let viewModels: [SuggestionProductMaterialViewModel]
-
-    func loadSuggestionProductMaterialViewModels() -> Promise<[SuggestionProductMaterialViewModel]> {
-        return .init { seal in
-            seal.fulfill(viewModels)
-        }
-    }
-}
-
 struct PurchaseApplyInfoViewModel {
     // MARK: - Properties
     let suggestionProductMaterialViewModels: BehaviorRelay<[SuggestionProductMaterialViewModel]> = .init(value: [])
