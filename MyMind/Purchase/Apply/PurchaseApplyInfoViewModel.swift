@@ -17,7 +17,7 @@ protocol PurchaseWarehouseListLoader {
 
 struct PurchaseApplyInfoViewModel {
     // MARK: - Properties
-    let suggestionProductMaterialViewModels: BehaviorRelay<[SuggestionProductMaterialViewModel]> = .init(value: [])
+    let suggestionProductMaterialViewModels: BehaviorRelay<[SuggestionProductMaterialViewModel]>
 
     var venderName: String {
         suggestionProductMaterialViewModels.value.first?.vendorName ?? ""
@@ -53,6 +53,15 @@ struct PurchaseApplyInfoViewModel {
 
         bindStatus()
         bindRecipientInfo()
+        
+        if let expectedStorageDate = expectedStorageDate {
+            self.expectedStorageDate.accept(expectedStorageDate)
+        }
+
+        if let pickedWarehouse = pickedWarehouse {
+            self.pickedWarehouse.accept(pickedWarehouse)
+        }
+
     }
 
     func bindStatus() {
@@ -89,17 +98,6 @@ struct PurchaseApplyInfoViewModel {
                 recipientAddress.accept(recipientInfo.address.fullAddressString)
             })
             .disposed(by: bag)
-    }
-
-    func loadSuggestionProductMaterialViewModels() {
-        suggestionProductMaterialViewModelsLoader.loadSuggestionProductMaterialViewModels()
-            .done { viewModels in
-                suggestionProductMaterialViewModels.accept(viewModels)
-            }
-            .catch { error in
-                print(error.localizedDescription)
-                #warning("Error handling")
-            }
     }
 
     func loadWarehouseList() {

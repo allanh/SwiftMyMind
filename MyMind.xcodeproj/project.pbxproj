@@ -101,6 +101,8 @@
 		A46487722689702B0053E6F5 /* DateFormatter+Secret.swift in Sources */ = {isa = PBXBuildFile; fileRef = A46487712689702B0053E6F5 /* DateFormatter+Secret.swift */; };
 		A4648774268970750053E6F5 /* UDI3DESCryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4648773268970750053E6F5 /* UDI3DESCryptor.swift */; };
 		A464877726897E5B0053E6F5 /* SuggestionProductMaterialViewModelsLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A464877626897E5B0053E6F5 /* SuggestionProductMaterialViewModelsLoader.swift */; };
+		A464877A26899DEF0053E6F5 /* EditingPurchaseOrderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A464877926899DEF0053E6F5 /* EditingPurchaseOrderViewModel.swift */; };
+		A464877C26899E8C0053E6F5 /* EditingPurchaseOrderInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A464877B26899E8C0053E6F5 /* EditingPurchaseOrderInfo.swift */; };
 		A46BA1DD263AAD2A0075E8C8 /* OrganizeOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A46BA1DC263AAD290075E8C8 /* OrganizeOptionView.swift */; };
 		A4705B9126020E5700B30CE6 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4705B9026020E5700B30CE6 /* Response.swift */; };
 		A4793C682604423800AD280C /* AuthServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4793C672604423700AD280C /* AuthServiceTest.swift */; };
@@ -310,6 +312,8 @@
 		A4648773268970750053E6F5 /* UDI3DESCryptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UDI3DESCryptor.swift; sourceTree = "<group>"; };
 		A46487752689718F0053E6F5 /* MyMind-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MyMind-Bridging-Header.h"; sourceTree = "<group>"; };
 		A464877626897E5B0053E6F5 /* SuggestionProductMaterialViewModelsLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionProductMaterialViewModelsLoader.swift; sourceTree = "<group>"; };
+		A464877926899DEF0053E6F5 /* EditingPurchaseOrderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingPurchaseOrderViewModel.swift; sourceTree = "<group>"; };
+		A464877B26899E8C0053E6F5 /* EditingPurchaseOrderInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingPurchaseOrderInfo.swift; sourceTree = "<group>"; };
 		A46BA1DC263AAD290075E8C8 /* OrganizeOptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizeOptionView.swift; sourceTree = "<group>"; };
 		A4705B9026020E5700B30CE6 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		A4793C672604423700AD280C /* AuthServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthServiceTest.swift; sourceTree = "<group>"; };
@@ -631,6 +635,15 @@
 			path = TOTP;
 			sourceTree = "<group>";
 		};
+		A464877826899D740053E6F5 /* Edit */ = {
+			isa = PBXGroup;
+			children = (
+				A464877926899DEF0053E6F5 /* EditingPurchaseOrderViewModel.swift */,
+				A464877B26899E8C0053E6F5 /* EditingPurchaseOrderInfo.swift */,
+			);
+			path = Edit;
+			sourceTree = "<group>";
+		};
 		A4705B8C26020E4400B30CE6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -713,6 +726,7 @@
 				97AFE367266616FB002CBE01 /* Suggestion */,
 				A442A169266F68F200AAB1ED /* Apply */,
 				A4BCA0C1267C446300E3B274 /* CompletedApply */,
+				A464877826899D740053E6F5 /* Edit */,
 				A46BA1DC263AAD290075E8C8 /* OrganizeOptionView.swift */,
 				A4F2D012265D07C7004D8D6D /* AutoCompleteSearchViewModel.swift */,
 				A47AB497265E00B300FE3CFA /* AutoCompleteSearchViewController.swift */,
@@ -1144,6 +1158,7 @@
 				A43F429C2643EAEF00A246CC /* UICollectionViewLeftAlignedLayout.swift in Sources */,
 				A4793CC02604A59C00AD280C /* GradientView.swift in Sources */,
 				97AFE37526676F83002CBE01 /* ContainerCollectionViewCell.swift in Sources */,
+				A464877C26899E8C0053E6F5 /* EditingPurchaseOrderInfo.swift in Sources */,
 				A4567006268307DD009598AE /* PurchasedProductsInfoViewController.swift in Sources */,
 				A49CF8C526030CEE00AFC170 /* MyMindAuthService.swift in Sources */,
 				A4F2D011265D0770004D8D6D /* ProductMaterialsFilterViewModel.swift in Sources */,
@@ -1213,6 +1228,7 @@
 				A4DD410726425496007B2A41 /* PromiseKitAPIService.swift in Sources */,
 				97AFE3792668D727002CBE01 /* UIViewController+loadNib.swift in Sources */,
 				A456701226845D14009598AE /* RootTabBarController.swift in Sources */,
+				A464877A26899DEF0053E6F5 /* EditingPurchaseOrderViewModel.swift in Sources */,
 				97B117372653B1AF00242428 /* PickProductMaterialsViewModel.swift in Sources */,
 				A4793CB126048BB600AD280C /* UIFont+.swift in Sources */,
 				A4648774268970750053E6F5 /* UDI3DESCryptor.swift in Sources */,
