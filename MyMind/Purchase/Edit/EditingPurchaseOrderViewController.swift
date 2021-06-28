@@ -46,6 +46,7 @@ final class EditingPurchaseOrderViewController: NiblessViewController {
         configCollectionView()
         subscribeViewModel()
         viewModel.loadPurchaseOrderThenMakeChildViewModels()
+        saveButton.addTarget(self, action: #selector(saveButtonDidTapped(_:)), for: .touchUpInside)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -122,6 +123,11 @@ final class EditingPurchaseOrderViewController: NiblessViewController {
             show(viewController, sender: nil)
             break
         }
+    }
+
+    @objc
+    private func saveButtonDidTapped(_ sender: UIButton) {
+        viewModel.sendEditedRequest()
     }
 }
 // MARK: - Collection view data source
