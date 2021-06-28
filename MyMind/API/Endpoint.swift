@@ -193,4 +193,8 @@ extension Endpoint {
 
         return Endpoint(path: "/api/admin/\(version)/product/autocomplete", queryItems: query)
     }
+
+    static func editingAndReviewPurchaseOrder(purchaseID: String) -> Self {
+        return Endpoint(path: "/api/admin/\(version)/purchase/\(purchaseID)")
+    }
 }
