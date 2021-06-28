@@ -21,6 +21,7 @@ target 'MyMind' do
     pod 'Charts'
     pod 'PromiseKit', '~> 6.8'
     pod 'Kingfisher', '~> 6.0'
+    pod 'SwiftOTP'
 
   target 'MyMindTests' do
     inherit! :search_paths

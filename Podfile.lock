@@ -24,6 +24,7 @@ PODS:
   - RxRelay (6.1.0):
     - RxSwift (= 6.1.0)
   - RxSwift (6.1.0)
+  - SwiftOTP (3.0.0)
 
 DEPENDENCIES:
   - Charts
@@ -34,6 +35,7 @@ DEPENDENCIES:
   - RxBlocking
   - RxCocoa (= 6.1.0)
   - RxSwift (= 6.1.0)
+  - SwiftOTP
 
 SPEC REPOS:
   trunk:
@@ -46,6 +48,7 @@ SPEC REPOS:
     - RxCocoa
     - RxRelay
     - RxSwift
+    - SwiftOTP
 
 SPEC CHECKSUMS:
   Charts: b1e3a1f5a1c9ba5394438ca3b91bd8c9076310af
@@ -57,7 +60,8 @@ SPEC CHECKSUMS:
   RxCocoa: 5c51f02d562cbd94629f6c26cf0c80fe4ab8d343
   RxRelay: 483e1a19fad961b41f0b0c0bee506f46c1ae14fe
   RxSwift: a834e5c538e89eca0cae86f403f4fbf0336786ce
+  SwiftOTP: ec3848f12a4541f29d96f6a0fe63dcbb8448d96f
 
-PODFILE CHECKSUM: 10836e991c5367737f9365f622adcee5d973c93b
+PODFILE CHECKSUM: 42ffafccc7fe48d85becf96d2260356ef8f69869
 
 COCOAPODS: 1.10.1
