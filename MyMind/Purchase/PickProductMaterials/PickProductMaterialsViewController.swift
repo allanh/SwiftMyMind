@@ -88,7 +88,7 @@ class PickProductMaterialsViewController: NiblessViewController {
                 }
             }
             let productMaterialListLoader = MyMindPurchaseAPIService.shared
-            let adapter = PurchaseServiceToSuggestionProductMaterialViewModelAdapter(loader: productMaterialListLoader, imageDictionary: imageDictionary)
+            let adapter = PurchaseSuggestionInfosLoaderToSuggestionProductMaterialViewModelAdapter(loader: productMaterialListLoader, imageDictionary: imageDictionary)
             let pickedOrderedIDs = viewModel.pickedMaterials.map { $0.id }
             let purchaseSuggestionViewModel = PurchaseSuggestionViewModel(pickedProductIDList: pickedOrderedIDs , loader: adapter)
             let viewController = PurchaseSuggestionViewController(viewModel: purchaseSuggestionViewModel)

@@ -13,7 +13,7 @@ protocol SuggestionProductMaterialViewModelLoader {
     func loadSuggestionProductMaterialViewModels(with productIDs: [String]) -> Promise<[SuggestionProductMaterialViewModel]>
 }
 
-struct PurchaseServiceToSuggestionProductMaterialViewModelAdapter: SuggestionProductMaterialViewModelLoader {
+struct PurchaseSuggestionInfosLoaderToSuggestionProductMaterialViewModelAdapter: SuggestionProductMaterialViewModelLoader {
     let loader: PurchaseSuggestionInfosLoader
     let imageDictionary: [String: URL?]
 
