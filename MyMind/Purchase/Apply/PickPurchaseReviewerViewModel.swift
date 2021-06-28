@@ -19,11 +19,15 @@ struct PickPurchaseReviewerViewModel {
     let noteValidationStatus: BehaviorRelay<ValidationResult> = .init(value: .valid)
 
     let loader: PurchaseReviewerListLoader
+    var logInfos: [PurchaseOrder.LogInfo]?
 
     let bag: DisposeBag = DisposeBag()
     // MARK: - Methods
-    init(loader: PurchaseReviewerListLoader) {
+    init(loader: PurchaseReviewerListLoader,
+         logInfos: [PurchaseOrder.LogInfo]? = nil) {
         self.loader = loader
+        self.logInfos = logInfos
+
         bindStatus()
     }
 

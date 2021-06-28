@@ -16,6 +16,7 @@ final class PickPurchaseReviewerViewController: UIViewController {
     @IBOutlet private weak var noteTextView: UITextView!
     @IBOutlet private weak var noteErrorLabel: UILabel!
     @IBOutlet private weak var noteTextCounterLabel: UILabel!
+    @IBOutlet private weak var logInfosStackView: UIStackView!
 
     lazy var dropDownView: DropDownView<Reviewer, DropDownListTableViewCell> = {
         let dropDownView = DropDownView(dataSource: []) { (cell: DropDownListTableViewCell, item) in
@@ -35,6 +36,7 @@ final class PickPurchaseReviewerViewController: UIViewController {
         configureRootView()
         configurePickReviewerTextField()
         configureDropDownView()
+        configureLogInfosViews()
         viewModel.loadPurchaseReviewerList()
         bindToViewModel()
         subscribeViewModel()
@@ -130,6 +132,23 @@ final class PickPurchaseReviewerViewController: UIViewController {
     private func selectedReviewer(_ reviewer: Reviewer) {
         viewModel.pickedReviewer.accept(reviewer)
         dropDownView.hide()
+    }
+
+    private func makeLogInfoView(with logInfo: PurchaseOrder.LogInfo) -> LogInfoView {
+        let logInfoView = LogInfoView()
+        logInfoView.configure(with: logInfo)
+        return logInfoView
+    }
+
+    private func configureLogInfosViews() {
+        guard let logInfos = viewModel.logInfos else { return }
+        logInfos.enumerated().forEach {
+            let logInfoView = makeLogInfoView(with: $0.element)
+            if $0.offset == 0 {
+                logInfoView.isFirstLog = true
+            }
+            logInfosStackView.addArrangedSubview(logInfoView)
+        }
     }
 }
 
