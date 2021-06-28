@@ -15,9 +15,23 @@ protocol PurchaseWarehouseListLoader {
     func loadPurchaseWarehouseList() -> Promise<[Warehouse]>
 }
 
+protocol SuggestionProductMaterialViewModelsLoader {
+    func loadSuggestionProductMaterialViewModels() -> Promise<[SuggestionProductMaterialViewModel]>
+}
+
+struct CachedSuggestionProductMaterialViewModelsLoader: SuggestionProductMaterialViewModelsLoader {
+    let viewModels: [SuggestionProductMaterialViewModel]
+
+    func loadSuggestionProductMaterialViewModels() -> Promise<[SuggestionProductMaterialViewModel]> {
+        return .init { seal in
+            seal.fulfill(viewModels)
+        }
+    }
+}
+
 struct PurchaseApplyInfoViewModel {
     // MARK: - Properties
-    let suggestionProductMaterialViewModels: BehaviorRelay<[SuggestionProductMaterialViewModel]>
+    let suggestionProductMaterialViewModels: BehaviorRelay<[SuggestionProductMaterialViewModel]> = .init(value: [])
 
     var venderName: String {
         suggestionProductMaterialViewModels.value.first?.vendorName ?? ""
@@ -40,12 +54,13 @@ struct PurchaseApplyInfoViewModel {
 
     let showSuggestionInfo: PublishRelay<Void> = .init()
 
+    let suggestionProductMaterialViewModelsLoader: SuggestionProductMaterialViewModelsLoader
     let warehouseLoader: PurchaseWarehouseListLoader
     let bag: DisposeBag = DisposeBag()
     // MARK: - Methods
-    init(suggestionProductMaterialViewModels: [SuggestionProductMaterialViewModel],
+    init(suggestionProductMaterialViewModelsLoader: SuggestionProductMaterialViewModelsLoader,
          warehouseLoader: PurchaseWarehouseListLoader) {
-        self.suggestionProductMaterialViewModels = .init(value: suggestionProductMaterialViewModels)
+        self.suggestionProductMaterialViewModelsLoader = suggestionProductMaterialViewModelsLoader
         self.warehouseLoader = warehouseLoader
         bindStatus()
         bindRecipientInfo()
@@ -87,6 +102,17 @@ struct PurchaseApplyInfoViewModel {
             .disposed(by: bag)
     }
 
+    func loadSuggestionProductMaterialViewModels() {
+        suggestionProductMaterialViewModelsLoader.loadSuggestionProductMaterialViewModels()
+            .done { viewModels in
+                suggestionProductMaterialViewModels.accept(viewModels)
+            }
+            .catch { error in
+                print(error.localizedDescription)
+                #warning("Error handling")
+            }
+    }
+
     func loadWarehouseList() {
         warehouseLoader.loadPurchaseWarehouseList()
             .done { warehouses in
@@ -94,6 +120,7 @@ struct PurchaseApplyInfoViewModel {
             }
             .catch { error in
                 print(error.localizedDescription)
+                #warning("Error handling")
             }
     }
 }

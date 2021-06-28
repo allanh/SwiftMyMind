@@ -52,6 +52,7 @@ final class PurchaseApplyInfoViewController: UIViewController {
         bindToViewModel()
         subscribeViewModel()
         viewModel.loadWarehouseList()
+        viewModel.loadSuggestionProductMaterialViewModels()
 
         configureRootView()
         configureDropDownView()
