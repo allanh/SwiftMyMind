@@ -104,8 +104,11 @@ class EditingPurchaseOrderViewModel {
         let productInfos = order.productInfos
 
         let viewModels = productInfos.map { info -> SuggestionProductMaterialViewModel in
+            let urlString = info.imageInfos.first?.url ?? ""
+            let url = URL(string: urlString)
+            
             let viewModel = SuggestionProductMaterialViewModel(
-                imageURL: nil,
+                imageURL: url,
                 number: info.number,
                 originalProductNumber: info.originalProductNumber,
                 name: info.name,
@@ -128,7 +131,8 @@ class EditingPurchaseOrderViewModel {
                     cost: info.cost,
                     movingAverageCost: info.movingAverageCost,
                     stockUnitName: info.stockUnitName,
-                    boxStockUnitName: info.boxStockUnitName),
+                    boxStockUnitName: info.boxStockUnitName,
+                    imageInfos: info.imageInfos),
                 purchaseCostPerItem: Double(info.purchaseCost) ?? 0,
                 vendorName: order.vendorName,
                 vendorID: order.vendorID,
