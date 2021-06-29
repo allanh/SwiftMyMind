@@ -121,13 +121,12 @@ final class PurchaseApplyViewController: NiblessViewController {
         switch view {
         case .finish(let purchaseID):
             let viewController = PurchaseCompletedApplyViewController(purchaseID: purchaseID, loader: MyMindPurchaseAPIService.shared)
+            viewController.title = "完成申請"
             show(viewController, sender: nil)
-            break
         case .suggestion(let viewModels):
             let viewModel = EditablePickedProductsInfoViewModel(pickedProductMaterialViewModels: viewModels)
             let viewController = EditablePickedProductsInfoViewController(viewModel: viewModel)
             show(viewController, sender: nil)
-            break
         }
     }
 }

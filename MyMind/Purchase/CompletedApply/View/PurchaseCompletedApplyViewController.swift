@@ -15,13 +15,12 @@ final class PurchaseCompletedApplyViewController: NiblessViewController {
     let purchaseID: String
     let loader: PurchaseOrderLoader
     var purchaseOrder: PurchaseOrder?
+    var isForRead: Bool = false
 
     // MARK: UI
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.sectionHeadersPinToVisibleBounds = true
-        let screenWidth = UIScreen.main.bounds.width
-        layout.headerReferenceSize = CGSize(width: screenWidth, height: 120)
 
         let horizontalInset: CGFloat = 20
         layout.sectionInset = UIEdgeInsets(top: 15, left: horizontalInset, bottom: 15, right: horizontalInset)
@@ -59,7 +58,6 @@ final class PurchaseCompletedApplyViewController: NiblessViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = "完成申請"
         view.backgroundColor = .white
         constructViewHierarchy()
         activateConstraints()
@@ -76,6 +74,8 @@ final class PurchaseCompletedApplyViewController: NiblessViewController {
 
     private func constructViewHierarchy() {
         view.addSubview(collectionView)
+        guard isForRead == false else { return }
+
         buttonsStackView.addArrangedSubview(backToHomeButton)
         buttonsStackView.addArrangedSubview(backToListButton)
         view.addSubview(buttonsStackView)
@@ -84,6 +84,8 @@ final class PurchaseCompletedApplyViewController: NiblessViewController {
 
     private func activateConstraints() {
         activateConstraintsCollecitonView()
+        guard isForRead == false else { return }
+
         activateConstraintsStackView()
         activateConstraintsBottomBorderView()
     }
@@ -96,6 +98,8 @@ final class PurchaseCompletedApplyViewController: NiblessViewController {
     }
 
     private func configureButtons() {
+        guard isForRead == false else { return }
+
         backToHomeButton.addTarget(self, action: #selector(backToHomeButtonDidTapped(_:)), for: .touchUpInside)
         backToListButton.addTarget(self, action: #selector(backToListButtonDidTapped(_:)), for: .touchUpInside)
     }
@@ -169,7 +173,11 @@ extension PurchaseCompletedApplyViewController: UICollectionViewDelegateFlowLayo
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: view.frame.width, height: 125)
+        if isForRead {
+            return .zero
+        } else {
+            return CGSize(width: view.frame.width, height: 125)
+        }
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -194,8 +202,16 @@ extension PurchaseCompletedApplyViewController {
             .constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
         let leading = collectionView.leadingAnchor
             .constraint(equalTo: view.leadingAnchor)
-        let bottom = collectionView.bottomAnchor
-            .constraint(equalTo: buttonsStackView.topAnchor)
+
+        let bottom: NSLayoutConstraint
+        if isForRead {
+            bottom = collectionView.bottomAnchor
+                .constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        } else {
+            bottom = collectionView.bottomAnchor
+                .constraint(equalTo: buttonsStackView.topAnchor)
+        }
+
         let trailing = collectionView.trailingAnchor
             .constraint(equalTo: view.trailingAnchor)
 
