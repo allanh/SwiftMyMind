@@ -258,7 +258,13 @@ extension PurchaseListViewController: UITableViewDelegate, UITableViewDataSource
         if item.availableActions.contains(.edit) {
             showPurchaseEditingPage(with: item.purchaseID)
         } else {
-
+            let viewController = PurchaseCompletedApplyViewController(
+                purchaseID: item.purchaseID,
+                loader: MyMindPurchaseAPIService.shared
+            )
+            viewController.isForRead = true
+            viewController.title = "採購單資訊"
+            show(viewController, sender: nil)
         }
     }
 
