@@ -28,6 +28,7 @@ class PurchaseOrderInfoViewController: UIViewController {
         super.viewDidLoad()
 
         configureRootView()
+        configureStatusLabel()
         configureContentWithPurchaseOrder()
         checkPurchasedProductsButton.addTarget(self, action: #selector(checkPurchasedProductsButtonDidTapped(_:)), for: .touchUpInside)
     }
@@ -36,6 +37,11 @@ class PurchaseOrderInfoViewController: UIViewController {
         view.layer.cornerRadius = 4
         view.layer.borderWidth = 1
         view.layer.borderColor = UIColor.separator.cgColor
+    }
+
+    private func configureStatusLabel() {
+        statusLabel.layer.borderWidth = 1
+        statusLabel.layer.cornerRadius = 4
     }
 
     private func configureContentWithPurchaseOrder() {

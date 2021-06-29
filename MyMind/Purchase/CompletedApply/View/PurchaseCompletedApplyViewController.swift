@@ -27,7 +27,7 @@ final class PurchaseCompletedApplyViewController: NiblessViewController {
 
         let collecitonView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collecitonView.backgroundColor = .white
-
+        collecitonView.allowsSelection = false
         return collecitonView
     }()
 
