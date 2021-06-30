@@ -204,6 +204,19 @@ final class PurchaseListViewController: NiblessViewController {
     private func closeButtonDidTapped(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }
+
+    private func showPurchaseEditingPage(with purchaseID: String) {
+        let service = MyMindPurchaseAPIService.shared
+        let viewModel = EditingPurchaseOrderViewModel(
+            purchaseID: purchaseID,
+            purchaseOrderLoader: service,
+            warehouseListLoader: service,
+            purchaseReviewerListLoader: service,
+            service: service)
+
+        let viewController = EditingPurchaseOrderViewController(viewModel: viewModel)
+        show(viewController, sender: nil)
+    }
 }
 // MARK: - Scroll view delegate
 extension PurchaseListViewController: UIScrollViewDelegate {
@@ -237,6 +250,22 @@ extension PurchaseListViewController: UITableViewDelegate, UITableViewDataSource
             cell.config(with: purchaseBrief)
         }
         return cell
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let item = purchaseList?.items[indexPath.row] else { return }
+
+        if item.availableActions.contains(.edit) {
+            showPurchaseEditingPage(with: item.purchaseID)
+        } else {
+            let viewController = PurchaseCompletedApplyViewController(
+                purchaseID: item.purchaseID,
+                loader: MyMindPurchaseAPIService.shared
+            )
+            viewController.isForRead = true
+            viewController.title = "採購單資訊"
+            show(viewController, sender: nil)
+        }
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

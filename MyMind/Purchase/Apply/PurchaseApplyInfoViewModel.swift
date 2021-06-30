@@ -11,8 +11,8 @@ import PromiseKit
 import RxRelay
 import RxSwift
 
-protocol PurchaseWarehouseListService {
-    func fetchPurchaseWarehouseList() -> Promise<[Warehouse]>
+protocol PurchaseWarehouseListLoader {
+    func loadPurchaseWarehouseList() -> Promise<[Warehouse]>
 }
 
 struct PurchaseApplyInfoViewModel {
@@ -27,28 +27,48 @@ struct PurchaseApplyInfoViewModel {
         suggestionProductMaterialViewModels.value.first?.vendorID ?? ""
     }
 
+    let purchaseID: BehaviorRelay<String?> = .init(value: nil)
+
     let expectedStorageDate: BehaviorRelay<Date?> = .init(value: nil)
     let warehouseList: BehaviorRelay<[Warehouse]> = .init(value: [])
     let pickedWarehouse: BehaviorRelay<Warehouse?> = .init(value: nil)
 
-    let recipientName: PublishRelay<String> = .init()
-    let recipientPhone: PublishRelay<String> = .init()
-    let recipientAddress: PublishRelay<String> = .init()
+    let recipientName: BehaviorRelay<String> = .init(value: "")
+    let recipientPhone: BehaviorRelay<String> = .init(value: "")
+    let recipientAddress: BehaviorRelay<String> = .init(value: "")
 
     let expectedStorageDateValidationStatus: BehaviorRelay<ValidationResult> = .init(value: .invalid("此欄位必填"))
     let pickedWarehouseValidationStatus: BehaviorRelay<ValidationResult> = .init(value: .invalid("此欄位必填"))
 
     let showSuggestionInfo: PublishRelay<Void> = .init()
 
-    let service: PurchaseWarehouseListService
+    let warehouseLoader: PurchaseWarehouseListLoader
     let bag: DisposeBag = DisposeBag()
     // MARK: - Methods
     init(suggestionProductMaterialViewModels: [SuggestionProductMaterialViewModel],
-         service: PurchaseWarehouseListService) {
+         warehouseLoader: PurchaseWarehouseListLoader,
+         purchaseID: String? = nil,
+         expectedStorageDate: Date? = nil,
+         pickedWarehouse: Warehouse? = nil) {
+
         self.suggestionProductMaterialViewModels = .init(value: suggestionProductMaterialViewModels)
-        self.service = service
+        self.warehouseLoader = warehouseLoader
+
         bindStatus()
         bindRecipientInfo()
+
+        if let purchaseID = purchaseID {
+            self.purchaseID.accept(purchaseID)
+        }
+        
+        if let expectedStorageDate = expectedStorageDate {
+            self.expectedStorageDate.accept(expectedStorageDate)
+        }
+
+        if let pickedWarehouse = pickedWarehouse {
+            self.pickedWarehouse.accept(pickedWarehouse)
+        }
+
     }
 
     func bindStatus() {
@@ -87,13 +107,14 @@ struct PurchaseApplyInfoViewModel {
             .disposed(by: bag)
     }
 
-    func fetchWarehouseList() {
-        service.fetchPurchaseWarehouseList()
+    func loadWarehouseList() {
+        warehouseLoader.loadPurchaseWarehouseList()
             .done { warehouses in
                 warehouseList.accept(warehouses)
             }
             .catch { error in
                 print(error.localizedDescription)
+                #warning("Error handling")
             }
     }
 }

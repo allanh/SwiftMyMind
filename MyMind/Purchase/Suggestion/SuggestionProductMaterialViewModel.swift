@@ -51,7 +51,8 @@ struct SuggestionProductMaterialViewModel {
          purchaseSuggestionInfo: PurchaseSuggestionInfo,
          purchaseCostPerItem: Double,
          vendorName: String,
-         vendorID: String) {
+         vendorID: String,
+         purchasedQuantity: Int? = nil) {
         self.imageURL = imageURL
         self.number = number
         self.originalProductNumber = originalProductNumber
@@ -64,6 +65,9 @@ struct SuggestionProductMaterialViewModel {
         self.purchaseCostPerItem = .init(value: purchaseCostPerItem)
         self.vendorID = vendorID
         self.vendorName = vendorName
+        if let quantity = purchasedQuantity {
+            purchaseQuantity.accept(quantity)
+        }
         bindInput()
     }
 

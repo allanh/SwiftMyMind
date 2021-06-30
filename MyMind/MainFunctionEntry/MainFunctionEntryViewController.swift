@@ -109,6 +109,10 @@ final class MainFunctionEntryViewController: NiblessViewController {
             let navigationController = UINavigationController(rootViewController: PurchaseListViewController(purchaseListLoader: MyMindPurchaseAPIService.shared))
             navigationController.modalPresentationStyle = .fullScreen
             show(navigationController, sender: nil)
+        case .paybill:
+            let storyboard: UIStoryboard = UIStoryboard(name: "TOTP", bundle: nil)
+            let viewController = storyboard.instantiateViewController(withIdentifier: "SecretListViewControllerNavi")
+            present(viewController, animated: true, completion: nil)
         default:
             print(sender.functionType)
         }

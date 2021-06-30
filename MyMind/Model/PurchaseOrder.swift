@@ -32,6 +32,7 @@ struct PurchaseOrder: Codable {
         let totalStockQuantity, monthSaleQuantity, suggestedQuantity, daysSalesOfInventory: String
         let cost, movingAverageCost, totalPrice, realPurchaseQuantity: String
         let realTotalPrice: String
+        let imageInfos: [ImageInfo]
 
         enum CodingKeys: String, CodingKey {
             case id = "product_id"
@@ -55,6 +56,7 @@ struct PurchaseOrder: Codable {
             case totalPrice = "total_price"
             case realPurchaseQuantity = "real_purchase_quantity"
             case realTotalPrice = "real_total_price"
+            case imageInfos = "image_info"
         }
     }
     let id, number: String
