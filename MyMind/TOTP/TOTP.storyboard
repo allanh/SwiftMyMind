@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="RFn-y4-AIk">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Secret List View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController storyboardIdentifier="SecretListViewController" id="BYZ-38-t0r" customClass="SecretListViewController" customModule="UDIAuthorizer" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="5" sectionFooterHeight="5" translatesAutoresizingMaskIntoConstraints="NO" id="zYc-n3-Fg2">
+                                <rect key="frame" x="15" y="88" width="384" height="774"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="DV4-za-LQL"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="Aj2-ee-qub"/>
+                                </connections>
+                            </tableView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6b3-iE-oaP">
+                                <rect key="frame" x="32.5" y="258.5" width="349" height="196"/>
+                                <string key="text">1. 點擊右上角的相機圖案，進入掃描畫面。
+
+2. 將郵件中的 QR 碼置於橘色框線中。
+
+3. 如果 QR 碼正確，會自動產生驗證碼。</string>
+                                <fontDescription key="fontDescription" name="PingFangTC-Light" family="PingFang TC" pointSize="20"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="6b3-iE-oaP" firstAttribute="centerX" secondItem="zYc-n3-Fg2" secondAttribute="centerX" id="Itg-0z-9zW"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="zYc-n3-Fg2" secondAttribute="bottom" id="X98-3z-nt0"/>
+                            <constraint firstItem="zYc-n3-Fg2" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="b7j-YH-C19"/>
+                            <constraint firstItem="zYc-n3-Fg2" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="gIF-sh-Zit"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="zYc-n3-Fg2" secondAttribute="trailing" constant="15" id="gah-hX-ZBE"/>
+                            <constraint firstItem="6b3-iE-oaP" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" multiplier="0.75" id="kNE-Ey-tdc"/>
+                            <constraint firstItem="6b3-iE-oaP" firstAttribute="width" secondItem="zYc-n3-Fg2" secondAttribute="width" multiplier="1:1.1" id="u2J-vE-QYB"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="zZZ-bs-6DS">
+                        <barButtonItem key="leftBarButtonItem" image="info" id="tj6-GR-deC">
+                            <color key="tintColor" systemColor="labelColor"/>
+                            <connections>
+                                <action selector="infoBarButtonDidTapped" destination="BYZ-38-t0r" id="Z0K-BH-ojo"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="camera" style="done" id="qc1-5x-pab">
+                            <color key="tintColor" systemColor="systemOrangeColor"/>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="cameraBarButton" destination="qc1-5x-pab" id="Te0-Nu-O92"/>
+                        <outlet property="introduceLabel" destination="6b3-iE-oaP" id="GPJ-ir-IUE"/>
+                        <outlet property="tableView" destination="zYc-n3-Fg2" id="I5U-Gi-Rpz"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1855.072463768116" y="105.80357142857143"/>
+        </scene>
+        <!--Scan View Controller-->
+        <scene sceneID="O1E-Lw-CPh">
+            <objects>
+                <viewController storyboardIdentifier="ScanViewController" modalPresentationStyle="fullScreen" id="b5Z-pc-HWN" customClass="ScanViewController" customModule="UDIAuthorizer" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ss8-6g-Xct">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gxy-ib-1qA">
+                                <rect key="frame" x="360" y="54" width="44" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="44" id="IH1-lu-gYi"/>
+                                    <constraint firstAttribute="height" constant="44" id="eFL-fD-g9U"/>
+                                </constraints>
+                                <state key="normal" image="close"/>
+                                <connections>
+                                    <action selector="closeButtonDidTapped" destination="b5Z-pc-HWN" eventType="touchUpInside" id="kxO-AI-8BX"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="mT8-BP-o7F"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="mT8-BP-o7F" firstAttribute="trailing" secondItem="Gxy-ib-1qA" secondAttribute="trailing" constant="10" id="QHp-px-kjA"/>
+                            <constraint firstItem="Gxy-ib-1qA" firstAttribute="top" secondItem="mT8-BP-o7F" secondAttribute="top" constant="10" id="RAc-0p-9Oy"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="closeButton" destination="Gxy-ib-1qA" id="5FU-IR-NGL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9qS-TI-mbn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2662" y="106"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="lyv-dO-QBK">
+            <objects>
+                <navigationController storyboardIdentifier="MainNavigation" automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="RFn-y4-AIk" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Wbr-40-u8L">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="lsg-Wz-sGy"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="91K-zt-upJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="944.92753623188412" y="105.80357142857143"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="camera" width="32" height="32"/>
+        <image name="close" width="32" height="32"/>
+        <image name="info" width="32" height="32"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemOrangeColor">
+            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

@@ -66,6 +66,14 @@
 		A43E0B6F260DC66D005FC6CE /* UIControl+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43E0B6E260DC66D005FC6CE /* UIControl+.swift */; };
 		A43E0B74260DC944005FC6CE /* SignInValidationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43E0B73260DC944005FC6CE /* SignInValidationServiceTests.swift */; };
 		A43E0B79260DD598005FC6CE /* SignInViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43E0B78260DD598005FC6CE /* SignInViewModelTests.swift */; };
+		A43E8509268C081B008C8369 /* SecretTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43E8507268C081A008C8369 /* SecretTableViewCell.swift */; };
+		A43E850A268C081B008C8369 /* SecretTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A43E8508268C081B008C8369 /* SecretTableViewCell.xib */; };
+		A43E850C268C083C008C8369 /* SecretListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43E850B268C083C008C8369 /* SecretListViewController.swift */; };
+		A43E850E268C0889008C8369 /* TOTP.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A43E850D268C0889008C8369 /* TOTP.storyboard */; };
+		A43E8510268C08B8008C8369 /* InstructionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43E850F268C08B8008C8369 /* InstructionView.swift */; };
+		A43E8513268C08FC008C8369 /* UDISecretRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43E8511268C08FC008C8369 /* UDISecretRepository.swift */; };
+		A43E8514268C08FC008C8369 /* UserDefaultSecretDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43E8512268C08FC008C8369 /* UserDefaultSecretDataStore.swift */; };
+		A43E8516268C0928008C8369 /* InformationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43E8515268C0928008C8369 /* InformationTableViewController.swift */; };
 		A43F428F2643866F00A246CC /* PurchaseListFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43F428E2643866F00A246CC /* PurchaseListFilterViewController.swift */; };
 		A43F4291264388E400A246CC /* SideMenuPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43F4290264388E400A246CC /* SideMenuPresentable.swift */; };
 		A43F42932643C26400A246CC /* SideMenuTopBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43F42922643C26400A246CC /* SideMenuTopBarView.swift */; };
@@ -269,6 +277,14 @@
 		A43E0B6E260DC66D005FC6CE /* UIControl+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIControl+.swift"; sourceTree = "<group>"; };
 		A43E0B73260DC944005FC6CE /* SignInValidationServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInValidationServiceTests.swift; sourceTree = "<group>"; };
 		A43E0B78260DD598005FC6CE /* SignInViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModelTests.swift; sourceTree = "<group>"; };
+		A43E8507268C081A008C8369 /* SecretTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecretTableViewCell.swift; sourceTree = "<group>"; };
+		A43E8508268C081B008C8369 /* SecretTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SecretTableViewCell.xib; sourceTree = "<group>"; };
+		A43E850B268C083C008C8369 /* SecretListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecretListViewController.swift; sourceTree = "<group>"; };
+		A43E850D268C0889008C8369 /* TOTP.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TOTP.storyboard; sourceTree = "<group>"; };
+		A43E850F268C08B8008C8369 /* InstructionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstructionView.swift; sourceTree = "<group>"; };
+		A43E8511268C08FC008C8369 /* UDISecretRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UDISecretRepository.swift; sourceTree = "<group>"; };
+		A43E8512268C08FC008C8369 /* UserDefaultSecretDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultSecretDataStore.swift; sourceTree = "<group>"; };
+		A43E8515268C0928008C8369 /* InformationTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformationTableViewController.swift; sourceTree = "<group>"; };
 		A43F428E2643866F00A246CC /* PurchaseListFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseListFilterViewController.swift; sourceTree = "<group>"; };
 		A43F4290264388E400A246CC /* SideMenuPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuPresentable.swift; sourceTree = "<group>"; };
 		A43F42922643C26400A246CC /* SideMenuTopBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuTopBarView.swift; sourceTree = "<group>"; };
@@ -624,6 +640,14 @@
 		A464876A2689685C0053E6F5 /* TOTP */ = {
 			isa = PBXGroup;
 			children = (
+				A43E8515268C0928008C8369 /* InformationTableViewController.swift */,
+				A43E8511268C08FC008C8369 /* UDISecretRepository.swift */,
+				A43E8512268C08FC008C8369 /* UserDefaultSecretDataStore.swift */,
+				A43E850F268C08B8008C8369 /* InstructionView.swift */,
+				A43E850D268C0889008C8369 /* TOTP.storyboard */,
+				A43E850B268C083C008C8369 /* SecretListViewController.swift */,
+				A43E8507268C081A008C8369 /* SecretTableViewCell.swift */,
+				A43E8508268C081B008C8369 /* SecretTableViewCell.xib */,
 				A46487752689718F0053E6F5 /* MyMind-Bridging-Header.h */,
 				A464876B268968920053E6F5 /* ScanViewController.swift */,
 				A464876D268969010053E6F5 /* ScannerOverlayPreviewLayer.swift */,
@@ -996,8 +1020,10 @@
 				A44A5A7725F9B0D300995823 /* Assets.xcassets in Resources */,
 				97AFE3712667246B002CBE01 /* PurchaseProductSuggestionViewController.xib in Resources */,
 				A489A1B2263FAA7D00832679 /* PurchaseBriefCollectionViewCell.xib in Resources */,
+				A43E850E268C0889008C8369 /* TOTP.storyboard in Resources */,
 				A40EBFDA2671AD4900A4863D /* PurchaseApplyInfoViewController.xib in Resources */,
 				A4CBD8B7266A2CF200B19119 /* ProductMaterialSuggestionInfoTableViewCell.xib in Resources */,
+				A43E850A268C081B008C8369 /* SecretTableViewCell.xib in Resources */,
 				A44A5A7525F9B0D200995823 /* Main.storyboard in Resources */,
 				A456700A26830BAB009598AE /* PurchasedProductInfoTableViewCell.xib in Resources */,
 			);
@@ -1159,6 +1185,7 @@
 				A4793CC02604A59C00AD280C /* GradientView.swift in Sources */,
 				97AFE37526676F83002CBE01 /* ContainerCollectionViewCell.swift in Sources */,
 				A464877C26899E8C0053E6F5 /* EditingPurchaseOrderInfo.swift in Sources */,
+				A43E8516268C0928008C8369 /* InformationTableViewController.swift in Sources */,
 				A4567006268307DD009598AE /* PurchasedProductsInfoViewController.swift in Sources */,
 				A49CF8C526030CEE00AFC170 /* MyMindAuthService.swift in Sources */,
 				A4F2D011265D0770004D8D6D /* ProductMaterialsFilterViewModel.swift in Sources */,
@@ -1202,6 +1229,7 @@
 				A43E0B64260D7CA4005FC6CE /* NiblessNavigationController.swift in Sources */,
 				A494D9CA2670CCFC008658F8 /* ApplyPuchaseService.swift in Sources */,
 				A4159219260C8FC600FD3989 /* ForgotPasswordViewModel.swift in Sources */,
+				A43E8514268C08FC008C8369 /* UserDefaultSecretDataStore.swift in Sources */,
 				97AFE36926661750002CBE01 /* SuggestionProductMaterialViewModel.swift in Sources */,
 				A4BDC7B9260B3E0A005C33A5 /* KeychainHelper.swift in Sources */,
 				A405410D264A670100E2D21B /* MultiSelectableDropDownTableViewCell.swift in Sources */,
@@ -1209,6 +1237,7 @@
 				A457AEB42660F5F80029DDBB /* StageProgressView.swift in Sources */,
 				A48389AF2608360A0044C09E /* SignInViewController.swift in Sources */,
 				A4D50AB02645129E007B07D6 /* AutoCompleteSearchRootView.swift in Sources */,
+				A43E8509268C081B008C8369 /* SecretTableViewCell.swift in Sources */,
 				A49CF8BB2603028C00AFC170 /* APIService.swift in Sources */,
 				A4CBD8AD2669C50A00B19119 /* StageProgressCollectionReusableView.swift in Sources */,
 				A48389BE260876770044C09E /* AuthService.swift in Sources */,
@@ -1226,6 +1255,7 @@
 				97547CBD2680957D001859A8 /* PurchaseSuggestionInfosLoader.swift in Sources */,
 				A4F2D015265D088B004D8D6D /* ProductMaterialAutoCompleteAdapters.swift in Sources */,
 				A4DD410726425496007B2A41 /* PromiseKitAPIService.swift in Sources */,
+				A43E8510268C08B8008C8369 /* InstructionView.swift in Sources */,
 				97AFE3792668D727002CBE01 /* UIViewController+loadNib.swift in Sources */,
 				A456701226845D14009598AE /* RootTabBarController.swift in Sources */,
 				A464877E2689BBD60053E6F5 /* EditingPurchaseOrderViewController.swift in Sources */,
@@ -1254,6 +1284,7 @@
 				97AFE3702667246B002CBE01 /* PurchaseProductSuggestionViewController.swift in Sources */,
 				A4F2D013265D07C7004D8D6D /* AutoCompleteSearchViewModel.swift in Sources */,
 				A439B53C2609CDC3002352C2 /* ToastView.swift in Sources */,
+				A43E8513268C08FC008C8369 /* UDISecretRepository.swift in Sources */,
 				A44A5A6E25F9B0D200995823 /* AppDelegate.swift in Sources */,
 				A4AF79F72637B13B002B04F6 /* MainFunctionControl.swift in Sources */,
 				A43F428F2643866F00A246CC /* PurchaseListFilterViewController.swift in Sources */,
@@ -1272,6 +1303,7 @@
 				A40EBFDE2671F7A100A4863D /* PickPurchaseReviewerViewController.swift in Sources */,
 				A4CBD8B1266A2ABA00B19119 /* ProductMaterialSuggestionInfoTableViewController.swift in Sources */,
 				97547CBF2681C5B6001859A8 /* LogInfoView.swift in Sources */,
+				A43E850C268C083C008C8369 /* SecretListViewController.swift in Sources */,
 				A40EBFD92671AD4900A4863D /* PurchaseApplyInfoViewController.swift in Sources */,
 				A47F39D5263A5A9B00A3097C /* PurchaseBriefTableViewCell.swift in Sources */,
 				A489A1B1263FAA7D00832679 /* PurchaseBriefCollectionViewCell.swift in Sources */,
