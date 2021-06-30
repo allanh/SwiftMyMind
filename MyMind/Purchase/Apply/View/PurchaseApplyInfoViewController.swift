@@ -84,7 +84,7 @@ final class PurchaseApplyInfoViewController: UIViewController {
             .compactMap({ $0 })
             .bind(to: purchaseIDLabel.rx.text)
             .disposed(by: bag)
-        
+
         viewModel.suggestionProductMaterialViewModels
             .map({ "共 \($0.count) 件SKU" })
             .bind(to: checkPurchasedProductsButton.rx.title())
@@ -179,10 +179,6 @@ final class PurchaseApplyInfoViewController: UIViewController {
         containerView.addSubview(iconImageView)
         textField.rightView = containerView
         textField.rightViewMode = .always
-    }
-
-    private func showSuggestionInfoViewController() {
-        #warning("need implement show `SuggestionInfoViewController` logic")
     }
 
     private func configDropDownCell(cell: DropDownListTableViewCell, with item: Warehouse) {
