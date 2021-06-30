@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="RFn-y4-AIk">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="RFn-y4-AIk">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -12,7 +12,7 @@
         <!--Secret List View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="SecretListViewController" id="BYZ-38-t0r" customClass="SecretListViewController" customModule="UDIAuthorizer" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SecretListViewController" id="BYZ-38-t0r" customClass="SecretListViewController" customModule="MyMind" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -72,7 +72,7 @@
         <!--Scan View Controller-->
         <scene sceneID="O1E-Lw-CPh">
             <objects>
-                <viewController storyboardIdentifier="ScanViewController" modalPresentationStyle="fullScreen" id="b5Z-pc-HWN" customClass="ScanViewController" customModule="UDIAuthorizer" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ScanViewController" modalPresentationStyle="fullScreen" id="b5Z-pc-HWN" customClass="ScanViewController" customModule="MyMind" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ss8-6g-Xct">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -107,7 +107,7 @@
         <!--Navigation Controller-->
         <scene sceneID="lyv-dO-QBK">
             <objects>
-                <navigationController storyboardIdentifier="MainNavigation" automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="RFn-y4-AIk" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="SecretListViewControllerNavi" automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="RFn-y4-AIk" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Wbr-40-u8L">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -125,7 +125,7 @@
     </scenes>
     <resources>
         <image name="camera" width="32" height="32"/>
-        <image name="close" width="32" height="32"/>
+        <image name="close" width="24" height="24"/>
         <image name="info" width="32" height="32"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
