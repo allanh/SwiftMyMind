@@ -40,6 +40,9 @@ class LogInfoView: NiblessView {
         $0.textAlignment = .left
         $0.isScrollEnabled = false
         $0.isEditable = false
+        $0.contentInsetAdjustmentBehavior = .never
+        $0.textContainer.lineFragmentPadding = .zero
+        $0.textContainerInset = .zero
     }
 
     override init(frame: CGRect) {
@@ -115,7 +118,7 @@ extension LogInfoView {
         let leading = timeStampLabel.leadingAnchor
             .constraint(equalTo: dotView.trailingAnchor, constant: 15)
         let width = timeStampLabel.widthAnchor
-            .constraint(equalToConstant: 140)
+            .constraint(equalToConstant: 142)
 
         NSLayoutConstraint.activate([
             centerY, leading, width
