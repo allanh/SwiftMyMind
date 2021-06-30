@@ -77,6 +77,10 @@ class EditingPurchaseOrderViewModel {
             if let status = pickPurchaseReviewerViewModel?.pickedReviewerValidationStatus {
                 status.accept(status.value)
             }
+
+            if let status = purchaseApplyInfoViewModel?.expectedStorageDateValidationStatus {
+                status.accept(status.value)
+            }
             #warning("Error handling")
             return
         }
