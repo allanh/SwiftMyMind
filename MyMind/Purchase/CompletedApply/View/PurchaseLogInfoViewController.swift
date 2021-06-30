@@ -34,11 +34,8 @@ final class PurchaseLogInfoViewController: UIViewController {
     }
 
     private func configureContentWithLogInfos() {
-        logInfos.enumerated().forEach {
-            let logInfoView = makeLogInfoView(with: $0.element)
-            if $0.offset == 0 {
-                logInfoView.isFirstLog = true
-            }
+        logInfos.forEach {
+            let logInfoView = makeLogInfoView(with: $0)
             stackView.addArrangedSubview(logInfoView)
         }
     }

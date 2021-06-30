@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class PurchasedProductInfoTableViewCell: UITableViewCell {
 
@@ -33,13 +34,16 @@ class PurchasedProductInfoTableViewCell: UITableViewCell {
         containerView.layer.borderColor = UIColor(hex: "cccccc").cgColor
         containerView.layer.cornerRadius = 4    }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        productImageView.kf.cancelDownloadTask()
     }
 
     func configure(with productInfo: PurchaseOrder.ProductInfo) {
+        if let imageURLString = productInfo.imageInfos.first?.url,
+           let url = URL(string: imageURLString) {
+            productImageView.kf.setImage(with: url)
+        }
         nameLabel.text = productInfo.name
         numberLabel.text = productInfo.number
         originalNumberLabel.text = productInfo.originalProductNumber

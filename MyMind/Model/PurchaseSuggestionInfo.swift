@@ -13,6 +13,7 @@ struct PurchaseSuggestionInfo: Codable {
     let quantityPerBox, channelStockQuantity, fineStockQuantity, totalStockQuantity: String
     let monthSaleQuantity, suggestedQuantity, daysSalesOfInventory, cost: String
     let movingAverageCost, stockUnitName, boxStockUnitName: String
+    let imageInfos: [ImageInfo]
 
     enum CodingKeys: String, CodingKey {
         case id = "product_id"
@@ -30,6 +31,7 @@ struct PurchaseSuggestionInfo: Codable {
         case movingAverageCost = "moving_average_cost"
         case stockUnitName = "stock_unit_name"
         case boxStockUnitName = "box_stock_unit_name"
+        case imageInfos = "image_info"
     }
 }
 

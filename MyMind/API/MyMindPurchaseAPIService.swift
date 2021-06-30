@@ -9,11 +9,6 @@
 import Foundation
 import PromiseKit
 
-protocol PurchaseAPIService {
-    func fetchProductMaterialDetail(with id: String) -> Promise<ProductMaterialDetail>
-    func fetchPurchaseWarehouseList() -> Promise<[Warehouse]>
-}
-
 final class MyMindPurchaseAPIService: PromiseKitAPIService {
     let userSessionDataStore: UserSessionDataStore
 
@@ -41,7 +36,7 @@ final class MyMindPurchaseAPIService: PromiseKitAPIService {
         return sendRequest(request: request)
     }
 
-    func fetchProductMaterialDetail(with id: String) -> Promise<ProductMaterialDetail> {
+    func loadProductMaterialDetail(with id: String) -> Promise<ProductMaterialDetail> {
         guard let userSession = userSessionDataStore.readUserSession() else {
             return .init(error: APIError.noAccessTokenError)
         }
@@ -59,7 +54,7 @@ final class MyMindPurchaseAPIService: PromiseKitAPIService {
         return sendRequest(request: request)
     }
 
-    func fetchPurchaseWarehouseList() -> Promise<[Warehouse]> {
+    func loadPurchaseWarehouseList() -> Promise<[Warehouse]> {
         struct Root: Codable {
             let detail: [Warehouse]
         }
@@ -126,20 +121,40 @@ final class MyMindPurchaseAPIService: PromiseKitAPIService {
         let request = request(endPoint: endpoint, httpHeader: ["Authorization": "Bearer \(userSession.token)"])
         return sendRequest(request: request)
     }
+
+    func editPurchaseOrder(for id: String, with info: EditingPurchaseOrderParameterInfo) -> Promise<Void> {
+        guard let userSession = userSessionDataStore.readUserSession() else {
+            return .init(error: APIError.noAccessTokenError)
+        }
+
+        let endpoint = Endpoint.editingAndReviewPurchaseOrder(purchaseID: id)
+
+        guard let body = try? JSONEncoder().encode(info) else {
+            return .init(error: APIError.parseError)
+        }
+
+        let request = request(
+            endPoint: endpoint,
+            httpMethod: "PUT",
+            httpHeader: ["Authorization": "Bearer \(userSession.token)"],
+            httpBody: body
+        )
+        return sendRequest(request: request)
+    }
 }
 
 extension MyMindPurchaseAPIService: PurchaseListLoader { }
-
-extension MyMindPurchaseAPIService: PurchaseAPIService { }
 
 extension MyMindPurchaseAPIService: ProductMaterialListLoader { }
 
 extension MyMindPurchaseAPIService: PurchaseSuggestionInfosLoader { }
 
-extension MyMindPurchaseAPIService: PurchaseWarehouseListService { }
+extension MyMindPurchaseAPIService: PurchaseWarehouseListLoader { }
 
 extension MyMindPurchaseAPIService: PurchaseReviewerListLoader { }
 
 extension MyMindPurchaseAPIService: ApplyPuchaseService { }
 
 extension MyMindPurchaseAPIService: PurchaseOrderLoader { }
+
+extension MyMindPurchaseAPIService: EditingPurchaseOrderService { }

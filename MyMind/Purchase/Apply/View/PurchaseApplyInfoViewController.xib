@@ -14,6 +14,7 @@
                 <outlet property="checkPurchasedProductsButton" destination="INo-CV-NI5" id="VUl-ly-geY"/>
                 <outlet property="expectStorageDateErrorLabel" destination="Z3S-yh-qD0" id="acA-vJ-fdV"/>
                 <outlet property="expectStorageDateTextField" destination="RWE-G0-Rxo" id="7PP-c6-Txp"/>
+                <outlet property="purchaseIDLabel" destination="Wor-oP-aR8" id="Yhq-YJ-bwP"/>
                 <outlet property="recipientAddressLabel" destination="kjs-Gl-URS" id="0Hi-KZ-pq5"/>
                 <outlet property="recipientNameLabel" destination="IQd-q2-147" id="aO8-T2-I78"/>
                 <outlet property="recipientPhoneLabel" destination="dh8-cd-ffW" id="eNU-JY-rHS"/>

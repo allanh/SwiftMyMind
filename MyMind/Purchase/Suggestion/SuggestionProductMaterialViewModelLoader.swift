@@ -13,9 +13,8 @@ protocol SuggestionProductMaterialViewModelLoader {
     func loadSuggestionProductMaterialViewModels(with productIDs: [String]) -> Promise<[SuggestionProductMaterialViewModel]>
 }
 
-struct PurchaseServiceToSuggestionProductMaterialViewModelAdapter: SuggestionProductMaterialViewModelLoader {
+struct PurchaseSuggestionInfosLoaderToSuggestionProductMaterialViewModelAdapter: SuggestionProductMaterialViewModelLoader {
     let loader: PurchaseSuggestionInfosLoader
-    let imageDictionary: [String: URL?]
 
     func loadSuggestionProductMaterialViewModels(with productIDs: [String]) -> Promise<[SuggestionProductMaterialViewModel]> {
         return Promise<[SuggestionProductMaterialViewModel]> { seal in
@@ -23,9 +22,9 @@ struct PurchaseServiceToSuggestionProductMaterialViewModelAdapter: SuggestionPro
                 .done { list in
                     let suggestionInfos = list.items
                     let viewModels = suggestionInfos.map { info -> SuggestionProductMaterialViewModel in
-                        let imageURL = imageDictionary[info.number, default: nil]
+                        let imageURLString = info.imageInfos.first?.url ?? ""
                         return SuggestionProductMaterialViewModel.init(
-                            imageURL: imageURL,
+                            imageURL: URL(string: imageURLString),
                             number: info.number,
                             originalProductNumber: info.originalProductNumber,
                             name: info.name,

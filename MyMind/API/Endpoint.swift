@@ -51,8 +51,12 @@ extension Endpoint {
         case .auth: components = URLComponents(string: Endpoint.baseAuthURL)
         case .dos: components = URLComponents(string: Endpoint.baseURL)
         }
+
         components?.path = path
-        components?.queryItems = queryItems
+
+        if queryItems.isEmpty == false {
+            components?.queryItems = queryItems
+        }
 
         guard let url = components?.url else {
             preconditionFailure("Invalid URL components: \(String(describing: components))")
@@ -192,5 +196,9 @@ extension Endpoint {
         }
 
         return Endpoint(path: "/api/admin/\(version)/product/autocomplete", queryItems: query)
+    }
+
+    static func editingAndReviewPurchaseOrder(purchaseID: String) -> Self {
+        return Endpoint(path: "/api/admin/\(version)/purchase/\(purchaseID)")
     }
 }

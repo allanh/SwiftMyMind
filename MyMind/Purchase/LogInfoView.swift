@@ -34,21 +34,15 @@ class LogInfoView: NiblessView {
         $0.font = .pingFangTCRegular(ofSize: 14)
     }
 
-    private let noteLabel: UILabel = UILabel {
+    private let noteTextView: UITextView = UITextView {
         $0.textColor = UIColor(hex: "B4B4B4")
         $0.font = .pingFangTCRegular(ofSize: 14)
-        $0.numberOfLines = 0
         $0.textAlignment = .left
-    }
-
-    private lazy var progressLineBottomConstraint: NSLayoutConstraint = progressLineView.bottomAnchor
-        .constraint(equalTo: bottomAnchor, constant: 10)
-
-    var isFirstLog: Bool = false {
-        didSet {
-            let constant: CGFloat = isFirstLog ? 0 : 10
-            progressLineBottomConstraint.constant = constant
-        }
+        $0.isScrollEnabled = false
+        $0.isEditable = false
+        $0.contentInsetAdjustmentBehavior = .never
+        $0.textContainer.lineFragmentPadding = .zero
+        $0.textContainerInset = .zero
     }
 
     override init(frame: CGRect) {
@@ -64,7 +58,7 @@ class LogInfoView: NiblessView {
         addSubview(timeStampLabel)
         addSubview(createrLabel)
         addSubview(createrNameLabel)
-        addSubview(noteLabel)
+        addSubview(noteTextView)
     }
 
     private func activateConstraints() {
@@ -80,7 +74,7 @@ class LogInfoView: NiblessView {
         timeStampLabel.text = logInfo.createdDateString
         createrLabel.text = logInfo.creater
         createrNameLabel.text = logInfo.createrName
-        noteLabel.text = logInfo.note
+        noteTextView.text = logInfo.note
     }
 }
 // MARK: - Layouts
@@ -88,7 +82,7 @@ extension LogInfoView {
     private func activateConstraintsDotView() {
         dotView.translatesAutoresizingMaskIntoConstraints = false
         let top = dotView.topAnchor
-            .constraint(equalTo: topAnchor, constant: 10)
+            .constraint(equalTo: topAnchor)
         let leading = dotView.leadingAnchor
             .constraint(equalTo: leadingAnchor, constant: 10)
         let width = dotView.widthAnchor
@@ -109,9 +103,11 @@ extension LogInfoView {
             .constraint(equalTo: dotView.centerXAnchor)
         let width = progressLineView.widthAnchor
             .constraint(equalToConstant: 1)
+        let bottom = progressLineView.bottomAnchor
+            .constraint(equalTo: bottomAnchor)
 
         NSLayoutConstraint.activate([
-            top, centerX, width, progressLineBottomConstraint
+            top, centerX, width, bottom
         ])
     }
 
@@ -121,9 +117,11 @@ extension LogInfoView {
             .constraint(equalTo: dotView.centerYAnchor)
         let leading = timeStampLabel.leadingAnchor
             .constraint(equalTo: dotView.trailingAnchor, constant: 15)
+        let width = timeStampLabel.widthAnchor
+            .constraint(equalToConstant: 142)
 
         NSLayoutConstraint.activate([
-            centerY, leading
+            centerY, leading, width
         ])
     }
 
@@ -152,20 +150,20 @@ extension LogInfoView {
     }
 
     private func activateConstraintsNoteLabel() {
-        noteLabel.translatesAutoresizingMaskIntoConstraints = false
-        let top = noteLabel.topAnchor
+        noteTextView.translatesAutoresizingMaskIntoConstraints = false
+        let top = noteTextView.topAnchor
             .constraint(equalTo: timeStampLabel.topAnchor)
-        let leading = noteLabel.leadingAnchor
-            .constraint(equalTo: timeStampLabel.trailingAnchor, constant: 25)
-        let height = noteLabel.heightAnchor
-            .constraint(greaterThanOrEqualToConstant: 150)
-        let trailing = noteLabel.trailingAnchor
+        let leading = noteTextView.leadingAnchor
+            .constraint(equalTo: timeStampLabel.trailingAnchor, constant: 20)
+        let trailing = noteTextView.trailingAnchor
             .constraint(equalTo: trailingAnchor, constant: -10)
-        let bottom = noteLabel.bottomAnchor
+        let height = noteTextView.heightAnchor
+            .constraint(greaterThanOrEqualToConstant: 150)
+        let bottom = noteTextView.bottomAnchor
             .constraint(equalTo: bottomAnchor)
 
         NSLayoutConstraint.activate([
-            top, leading, height, trailing, bottom
+            top, leading, trailing, height, bottom
         ])
     }
 }

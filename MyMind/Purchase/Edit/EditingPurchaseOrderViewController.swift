@@ -1,17 +1,17 @@
 //
-//  PurchaseApplyViewController.swift
+//  EditingPurchaseOrderViewController.swift
 //  MyMind
 //
-//  Created by Barry Chen on 2021/6/10.
+//  Created by Barry Chen on 2021/6/28.
 //  Copyright © 2021 United Digital Intelligence. All rights reserved.
 //
 
 import UIKit
 import RxSwift
 
-final class PurchaseApplyViewController: NiblessViewController {
-    // MARK: - Properties
-    let viewModel: PurchaseApplyViewModel
+final class EditingPurchaseOrderViewController: NiblessViewController {
+
+    let viewModel: EditingPurchaseOrderViewModel
 
     let bag: DisposeBag = DisposeBag()
 
@@ -20,9 +20,7 @@ final class PurchaseApplyViewController: NiblessViewController {
     // MARK: UI
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.sectionHeadersPinToVisibleBounds = true
         let screenWidth = UIScreen.main.bounds.width
-        layout.headerReferenceSize = CGSize(width: screenWidth, height: 120)
         let horizontalInset: CGFloat = 20
         layout.sectionInset = UIEdgeInsets(top: 15, left: horizontalInset, bottom: 15, right: horizontalInset)
         let collecitonView = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -36,21 +34,19 @@ final class PurchaseApplyViewController: NiblessViewController {
         $0.setTitle("儲存", for: .normal)
         $0.titleLabel?.font = .pingFangTCSemibold(ofSize: 16)
     }
-
-    // MARK: - View life cycle
+    // MARK: - View life cycles
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = "採購申請"
+        title = "編輯採購申請"
         view.backgroundColor = .white
-        subscribeViewModel()
-        configSaveButton()
         addTapToResignKeyboardGesture()
         constructViewHierarchy()
         activateConstraints()
         configCollectionView()
-        generateContentViewControllers()
-        collectionView.reloadData()
+        subscribeViewModel()
+        viewModel.loadPurchaseOrderThenMakeChildViewModels()
+        saveButton.addTarget(self, action: #selector(saveButtonDidTapped(_:)), for: .touchUpInside)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -65,9 +61,25 @@ final class PurchaseApplyViewController: NiblessViewController {
         removeObservers()
     }
     // MARK: - Methods
-    init(viewModel: PurchaseApplyViewModel) {
+    init(viewModel: EditingPurchaseOrderViewModel) {
         self.viewModel = viewModel
         super.init()
+    }
+
+    private func subscribeViewModel() {
+        viewModel.didFinishMakeChildViewModels = { [weak self] in
+            self?.generateContentViewControllers()
+            self?.collectionView.reloadData()
+        }
+
+        viewModel.isNetworkProcessing
+            .skip(1)
+            .bind(to: rx.isActivityIndicatorAnimating)
+            .disposed(by: bag)
+
+        viewModel.view
+            .subscribe(onNext: navigation(with:))
+            .disposed(by: bag)
     }
 
     private func constructViewHierarchy() {
@@ -80,58 +92,46 @@ final class PurchaseApplyViewController: NiblessViewController {
         activateConstraintsSaveButton()
     }
 
-    private func configSaveButton() {
-        saveButton.addTarget(self, action: #selector(saveButtonDidTapped(_:)), for: .touchUpInside)
-    }
-
-    private func subscribeViewModel() {
-        viewModel.isNetworkProcessing
-            .skip(1)
-            .bind(to: rx.isActivityIndicatorAnimating)
-            .disposed(by: bag)
-
-        viewModel.view
-            .subscribe(onNext: navigation(with:))
-            .disposed(by: bag)
-    }
-
     private func configCollectionView() {
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.registerCell(ContainerCollectionViewCell.self)
-        collectionView.register(StageProgressCollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: String(describing: StageProgressCollectionReusableView.self))
     }
 
     private func generateContentViewControllers() {
+        guard let purchaseApplyInfoViewModel = viewModel.purchaseApplyInfoViewModel,
+              let pickPurchaseReviewerViewModel = viewModel.pickPurchaseReviewerViewModel
+        else {
+            return
+        }
         let purchaseApplyInfoViewController = PurchaseApplyInfoViewController.loadFormNib()
-        purchaseApplyInfoViewController.viewModel = viewModel.purchaseInfoViewModel
+        purchaseApplyInfoViewController.viewModel = purchaseApplyInfoViewModel
         contentViewControllers.append(purchaseApplyInfoViewController)
 
         let pickPurchaseReviewerViewController = PickPurchaseReviewerViewController.loadFormNib()
-        pickPurchaseReviewerViewController.viewModel = viewModel.pickReviewerViewModel
+        pickPurchaseReviewerViewController.viewModel = pickPurchaseReviewerViewModel
         contentViewControllers.append(pickPurchaseReviewerViewController)
+    }
+
+    private func navigation(with view: EditingPurchaseOrderViewModel.View) {
+        switch view {
+        case .purhcaseList:
+            navigationController?.popViewController(animated: true)
+        case .purchasedProducts(let viewModels):
+            let viewModel = EditablePickedProductsInfoViewModel(pickedProductMaterialViewModels: viewModels)
+            let viewController = EditablePickedProductsInfoViewController(viewModel: viewModel)
+            show(viewController, sender: nil)
+            break
+        }
     }
 
     @objc
     private func saveButtonDidTapped(_ sender: UIButton) {
-        viewModel.applyPurchase()
-    }
-
-    private func navigation(with view: PurchaseApplyViewModel.View) {
-        switch view {
-        case .finish(let purchaseID):
-            let viewController = PurchaseCompletedApplyViewController(purchaseID: purchaseID, loader: MyMindPurchaseAPIService.shared)
-            viewController.title = "完成申請"
-            show(viewController, sender: nil)
-        case .suggestion(let viewModels):
-            let viewModel = EditablePickedProductsInfoViewModel(pickedProductMaterialViewModels: viewModels)
-            let viewController = EditablePickedProductsInfoViewController(viewModel: viewModel)
-            show(viewController, sender: nil)
-        }
+        viewModel.sendEditedRequest()
     }
 }
 // MARK: - Collection view data source
-extension PurchaseApplyViewController: UICollectionViewDataSource {
+extension EditingPurchaseOrderViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return contentViewControllers.count
     }
@@ -148,34 +148,23 @@ extension PurchaseApplyViewController: UICollectionViewDataSource {
     }
 }
 // MARK: - Collection view delegate flow layout
-extension PurchaseApplyViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let view = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: String(describing: StageProgressCollectionReusableView.self), for: indexPath)
-        view.backgroundColor = .white
-        (view as? StageProgressCollectionReusableView)?.configProgressView(numberOfStage: 3, stageTitleList: ["採購建議", "採購申請", "送出審核"], currentStageIndex: 1)
-        return view
-    }
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: view.frame.width, height: 125)
-    }
-
+extension EditingPurchaseOrderViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let screenWidth = UIScreen.main.bounds.width
         var horizontalInsets: CGFloat = .zero
         if let flowLayout = collectionViewLayout as? UICollectionViewFlowLayout {
             horizontalInsets = flowLayout.sectionInset.left + flowLayout.sectionInset.right
         }
-        let width = screenWidth - horizontalInsets
 
-        switch indexPath.item {
-        case 0: return CGSize(width: width, height: 575)
-        default: return CGSize(width: width, height: 400)
-        }
+        let width = screenWidth - horizontalInsets
+        let viewController = contentViewControllers[indexPath.item]
+        let height = viewController.view.systemLayoutSizeFitting(CGSize(width: width, height: 0), withHorizontalFittingPriority: .required, verticalFittingPriority: .fittingSizeLevel).height
+
+        return CGSize(width: width, height: height)
     }
 }
 // MARK: - Layouts
-extension PurchaseApplyViewController {
+extension EditingPurchaseOrderViewController {
     private func activateConstraintsCollecitonView() {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         let top = collectionView.topAnchor
@@ -209,7 +198,7 @@ extension PurchaseApplyViewController {
     }
 }
 // MARK: - Keyboard handle
-extension PurchaseApplyViewController {
+extension EditingPurchaseOrderViewController {
     func addKeyboardObservers() {
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(handleContentUnderKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)

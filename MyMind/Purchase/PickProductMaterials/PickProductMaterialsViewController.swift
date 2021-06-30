@@ -81,14 +81,8 @@ class PickProductMaterialsViewController: NiblessViewController {
             navigationController.modalPresentationStyle = .fullScreen
             present(navigationController, animated: true, completion: nil)
         case .suggestion:
-            var imageDictionary: [String: URL?] = [:]
-            viewModel.pickedMaterials.forEach { productMaterail in
-                if let urlString = productMaterail.imageInfoList.first?.url, let url = URL(string: urlString) {
-                    imageDictionary[productMaterail.number] = url
-                }
-            }
             let productMaterialListLoader = MyMindPurchaseAPIService.shared
-            let adapter = PurchaseServiceToSuggestionProductMaterialViewModelAdapter(loader: productMaterialListLoader, imageDictionary: imageDictionary)
+            let adapter = PurchaseSuggestionInfosLoaderToSuggestionProductMaterialViewModelAdapter(loader: productMaterialListLoader)
             let pickedOrderedIDs = viewModel.pickedMaterials.map { $0.id }
             let purchaseSuggestionViewModel = PurchaseSuggestionViewModel(pickedProductIDList: pickedOrderedIDs , loader: adapter)
             let viewController = PurchaseSuggestionViewController(viewModel: purchaseSuggestionViewModel)
