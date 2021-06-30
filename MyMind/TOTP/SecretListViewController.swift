@@ -91,11 +91,10 @@ class SecretListViewController: UIViewController {
     }
 
     // MARK: - Actions
-    @IBAction private func infoBarButtonDidTapped() {
-        let viewController = InformationTableViewController(style: .grouped)
-        navigationController?.show(viewController, sender: nil)
+    @IBAction
+    private func closeButtonDidTapped(_ sender: Any) {
+        navigationController?.dismiss(animated: true, completion: nil)
     }
-
     @objc
     private func cameraBarButtonDidTapped() {
         guard let viewController = storyboard?.instantiateViewController(withIdentifier: "ScanViewController") as? ScanViewController else {

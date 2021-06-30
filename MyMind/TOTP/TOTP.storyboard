@@ -49,10 +49,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="zZZ-bs-6DS">
-                        <barButtonItem key="leftBarButtonItem" image="info" id="tj6-GR-deC">
-                            <color key="tintColor" systemColor="labelColor"/>
+                        <barButtonItem key="leftBarButtonItem" image="close" id="myR-8Z-IOg">
                             <connections>
-                                <action selector="infoBarButtonDidTapped" destination="BYZ-38-t0r" id="Z0K-BH-ojo"/>
+                                <action selector="closeButtonDidTapped:" destination="BYZ-38-t0r" id="SCw-sB-E9Q"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Item" image="camera" style="done" id="qc1-5x-pab">
@@ -126,10 +125,6 @@
     <resources>
         <image name="camera" width="32" height="32"/>
         <image name="close" width="24" height="24"/>
-        <image name="info" width="32" height="32"/>
-        <systemColor name="labelColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
