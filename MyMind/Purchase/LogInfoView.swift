@@ -34,11 +34,12 @@ class LogInfoView: NiblessView {
         $0.font = .pingFangTCRegular(ofSize: 14)
     }
 
-    private let noteLabel: UILabel = UILabel {
+    private let noteTextView: UITextView = UITextView {
         $0.textColor = UIColor(hex: "B4B4B4")
         $0.font = .pingFangTCRegular(ofSize: 14)
-        $0.numberOfLines = 0
         $0.textAlignment = .left
+        $0.isScrollEnabled = false
+        $0.isEditable = false
     }
 
     override init(frame: CGRect) {
@@ -54,7 +55,7 @@ class LogInfoView: NiblessView {
         addSubview(timeStampLabel)
         addSubview(createrLabel)
         addSubview(createrNameLabel)
-        addSubview(noteLabel)
+        addSubview(noteTextView)
     }
 
     private func activateConstraints() {
@@ -70,7 +71,7 @@ class LogInfoView: NiblessView {
         timeStampLabel.text = logInfo.createdDateString
         createrLabel.text = logInfo.creater
         createrNameLabel.text = logInfo.createrName
-        noteLabel.text = logInfo.note
+        noteTextView.text = logInfo.note
     }
 }
 // MARK: - Layouts
@@ -113,9 +114,11 @@ extension LogInfoView {
             .constraint(equalTo: dotView.centerYAnchor)
         let leading = timeStampLabel.leadingAnchor
             .constraint(equalTo: dotView.trailingAnchor, constant: 15)
+        let width = timeStampLabel.widthAnchor
+            .constraint(equalToConstant: 140)
 
         NSLayoutConstraint.activate([
-            centerY, leading
+            centerY, leading, width
         ])
     }
 
@@ -144,20 +147,20 @@ extension LogInfoView {
     }
 
     private func activateConstraintsNoteLabel() {
-        noteLabel.translatesAutoresizingMaskIntoConstraints = false
-        let top = noteLabel.topAnchor
+        noteTextView.translatesAutoresizingMaskIntoConstraints = false
+        let top = noteTextView.topAnchor
             .constraint(equalTo: timeStampLabel.topAnchor)
-        let leading = noteLabel.leadingAnchor
-            .constraint(equalTo: timeStampLabel.trailingAnchor, constant: 25)
-        let height = noteLabel.heightAnchor
-            .constraint(greaterThanOrEqualToConstant: 150)
-        let trailing = noteLabel.trailingAnchor
+        let leading = noteTextView.leadingAnchor
+            .constraint(equalTo: timeStampLabel.trailingAnchor, constant: 20)
+        let trailing = noteTextView.trailingAnchor
             .constraint(equalTo: trailingAnchor, constant: -10)
-        let bottom = noteLabel.bottomAnchor
+        let height = noteTextView.heightAnchor
+            .constraint(greaterThanOrEqualToConstant: 150)
+        let bottom = noteTextView.bottomAnchor
             .constraint(equalTo: bottomAnchor)
 
         NSLayoutConstraint.activate([
-            top, leading, height, trailing, bottom
+            top, leading, trailing, height, bottom
         ])
     }
 }
