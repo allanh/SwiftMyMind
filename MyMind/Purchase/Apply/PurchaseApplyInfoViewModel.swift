@@ -27,6 +27,8 @@ struct PurchaseApplyInfoViewModel {
         suggestionProductMaterialViewModels.value.first?.vendorID ?? ""
     }
 
+    let purchaseID: BehaviorRelay<String?> = .init(value: nil)
+
     let expectedStorageDate: BehaviorRelay<Date?> = .init(value: nil)
     let warehouseList: BehaviorRelay<[Warehouse]> = .init(value: [])
     let pickedWarehouse: BehaviorRelay<Warehouse?> = .init(value: nil)
@@ -45,6 +47,7 @@ struct PurchaseApplyInfoViewModel {
     // MARK: - Methods
     init(suggestionProductMaterialViewModels: [SuggestionProductMaterialViewModel],
          warehouseLoader: PurchaseWarehouseListLoader,
+         purchaseID: String? = nil,
          expectedStorageDate: Date? = nil,
          pickedWarehouse: Warehouse? = nil) {
 
@@ -53,6 +56,10 @@ struct PurchaseApplyInfoViewModel {
 
         bindStatus()
         bindRecipientInfo()
+
+        if let purchaseID = purchaseID {
+            self.purchaseID.accept(purchaseID)
+        }
         
         if let expectedStorageDate = expectedStorageDate {
             self.expectedStorageDate.accept(expectedStorageDate)

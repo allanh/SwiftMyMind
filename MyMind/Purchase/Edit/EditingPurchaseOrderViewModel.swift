@@ -152,6 +152,7 @@ class EditingPurchaseOrderViewModel {
         purchaseApplyInfoViewModel = PurchaseApplyInfoViewModel(
             suggestionProductMaterialViewModels: viewModels,
             warehouseLoader: warehouseListLoader,
+            purchaseID: order.id,
             expectedStorageDate: dateFormatter.date(from: order.expectStorageDate),
             pickedWarehouse: wareHoudse)
     }

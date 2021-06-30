@@ -11,6 +11,7 @@ import RxSwift
 
 final class PurchaseApplyInfoViewController: UIViewController {
 
+    @IBOutlet private weak var purchaseIDLabel: UILabel!
     @IBOutlet private weak var vendorNameLabel: UILabel!
     @IBOutlet private weak var statusLabel: UILabel!
     @IBOutlet private weak var expectStorageDateTextField: CustomClearButtonPositionTextField!
@@ -79,6 +80,11 @@ final class PurchaseApplyInfoViewController: UIViewController {
     }
 
     private func subscribeViewModel() {
+        viewModel.purchaseID
+            .compactMap({ $0 })
+            .bind(to: purchaseIDLabel.rx.text)
+            .disposed(by: bag)
+        
         viewModel.suggestionProductMaterialViewModels
             .map({ "共 \($0.count) 件SKU" })
             .bind(to: checkPurchasedProductsButton.rx.title())
