@@ -24,6 +24,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             lastSignInInfoDataStore: MyMindLastSignInInfoDataStore()
         )
         let signInViewController = SignInViewController(viewModel: viewModel)
+        
+//        let rootViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "Home") as? HomeViewController
+//        rootViewController?.modalPresentationStyle = .overFullScreen
 
         self.window?.makeKeyAndVisible()
         self.window?.rootViewController = signInViewController
