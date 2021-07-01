@@ -201,4 +201,14 @@ extension Endpoint {
     static func editingAndReviewPurchaseOrder(purchaseID: String) -> Self {
         return Endpoint(path: "/api/admin/\(version)/purchase/\(purchaseID)")
     }
+    
+    static func reviewPurchaseList(with partnerID: String, purchaseListQueryInfo: PurchaseListQueryInfo? = nil) -> Self {
+        var urlQueryItems: [URLQueryItem] = []
+        urlQueryItems.append(URLQueryItem(name: "partner_id", value: partnerID))
+        if let query = purchaseListQueryInfo {
+            urlQueryItems.append(contentsOf: query.queryItems)
+            return Endpoint(path: "/api/admin/\(version)/purchase/review", queryItems: urlQueryItems)
+        }
+        return Endpoint(path: "/api/admin/\(version)/purchase/review", queryItems: urlQueryItems)
+    }
 }
