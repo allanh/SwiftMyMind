@@ -43,6 +43,10 @@ class PurchaseBriefTableViewCell: UITableViewCell {
         $0.font = .pingFangTCRegular(ofSize: 12)
     }
 
+    let expectStorageDateLabel: UILabel = UILabel {
+        $0.textColor = UIColor(hex: "b4b4b4")
+        $0.font = .pingFangTCRegular(ofSize: 12)
+    }
     let statusLabel: UILabel = UILabel {
         $0.textAlignment = .center
         $0.font = .pingFangTCRegular(ofSize: 14)
@@ -66,18 +70,21 @@ class PurchaseBriefTableViewCell: UITableViewCell {
     func constructViewHierarchy() {
         contentView.addSubview(titleLabel)
         contentView.addSubview(createdDateLabel)
+        contentView.addSubview(expectStorageDateLabel)
         contentView.addSubview(statusLabel)
     }
 
     func activateConstraints() {
         activateConstraintsTitleLabel()
         activateConstraintsCreatedDateLabel()
+        activateConstraintsExpectStorageDateLabel()
         activateConstraintsStatusLabel()
     }
 
     func config(with purchaseBrief: PurchaseBrief) {
         titleLabel.text = purchaseBrief.vendorName
-        createdDateLabel.text = purchaseBrief.createdDateString
+        createdDateLabel.text = "填單日期："+purchaseBrief.createdDateString
+        expectStorageDateLabel.text = "預期入庫日："+purchaseBrief.expectStorageDateString
         configStatusLabel(with: purchaseBrief.status)
     }
 
@@ -113,11 +120,22 @@ extension PurchaseBriefTableViewCell {
             top, leading
         ])
     }
+    func activateConstraintsExpectStorageDateLabel() {
+        expectStorageDateLabel.translatesAutoresizingMaskIntoConstraints = false
+        let top = expectStorageDateLabel.topAnchor
+            .constraint(equalTo: titleLabel.bottomAnchor, constant: 3)
+        let trailing = expectStorageDateLabel.trailingAnchor
+            .constraint(equalTo: statusLabel.trailingAnchor)
+
+        NSLayoutConstraint.activate([
+            top, trailing
+        ])
+    }
 
     func activateConstraintsStatusLabel() {
         statusLabel.translatesAutoresizingMaskIntoConstraints = false
         let centerY = statusLabel.centerYAnchor
-            .constraint(equalTo: contentView.centerYAnchor)
+            .constraint(equalTo: titleLabel.centerYAnchor)
         let trailing = statusLabel.trailingAnchor
             .constraint(equalTo: contentView.trailingAnchor, constant: -20)
         let width = statusLabel.widthAnchor
