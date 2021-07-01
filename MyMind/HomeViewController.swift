@@ -146,11 +146,15 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch indexPath.item {
         case 0:
-            let navigationController = UINavigationController(rootViewController: PurchaseListViewController(purchaseListLoader: MyMindPurchaseAPIService.shared))
+            let purchaseListViewController = PurchaseListViewController(purchaseListLoader: MyMindPurchaseAPIService.shared)
+            purchaseListViewController.reviewing = false
+            let navigationController = UINavigationController(rootViewController: purchaseListViewController)
             navigationController.modalPresentationStyle = .fullScreen
             show(navigationController, sender: nil)
         case 1:
-            let navigationController = UINavigationController(rootViewController: PurchaseListViewController(purchaseListLoader: MyMindPurchaseReviewAPIService.shared))
+            let purchaseListViewController = PurchaseListViewController(purchaseListLoader: MyMindPurchaseReviewAPIService.shared)
+            purchaseListViewController.reviewing = true
+            let navigationController = UINavigationController(rootViewController: purchaseListViewController)
             navigationController.modalPresentationStyle = .fullScreen
             show(navigationController, sender: nil)
 //            let purchaseListViewController = PurchaseListViewController(purchaseListLoader: MyMindPurchaseAPIService.shared)

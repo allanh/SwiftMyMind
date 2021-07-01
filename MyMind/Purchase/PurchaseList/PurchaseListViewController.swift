@@ -12,6 +12,7 @@ import NVActivityIndicatorView
 final class PurchaseListViewController: NiblessViewController {
     // MARK: - Properties
     var rootView: PurchaseListRootView { view as! PurchaseListRootView }
+    var reviewing: Bool = false
 
     lazy var pickSortTypeView: PickSortTypeView<PurchaseListQueryInfo.OrderReference, SingleLabelTableViewCell> = {
         let pickSortView = PickSortTypeView<PurchaseListQueryInfo.OrderReference, SingleLabelTableViewCell>.init(
@@ -246,6 +247,7 @@ extension PurchaseListViewController: UITableViewDelegate, UITableViewDataSource
         guard let cell = tableView.dequeReusableCell(PurchaseBriefTableViewCell.self, for: indexPath) as? PurchaseBriefTableViewCell else {
             fatalError("Worng cell identifier")
         }
+        cell.construct(reviewing)
         if let purchaseBrief = purchaseList?.items[indexPath.row] {
             cell.config(with: purchaseBrief)
         }

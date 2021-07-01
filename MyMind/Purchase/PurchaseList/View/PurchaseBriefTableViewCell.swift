@@ -59,22 +59,24 @@ class PurchaseBriefTableViewCell: UITableViewCell {
     // MARK: - Methods
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        constructViewHierarchy()
-        activateConstraints()
     }
 
+    func construct(_ reviewing: Bool = false) {
+        constructViewHierarchy(reviewing)
+        activateConstraints(reviewing)
+    }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func constructViewHierarchy() {
+    func constructViewHierarchy(_ reviewing: Bool = false) {
         contentView.addSubview(titleLabel)
         contentView.addSubview(createdDateLabel)
         contentView.addSubview(expectStorageDateLabel)
         contentView.addSubview(statusLabel)
     }
 
-    func activateConstraints() {
+    func activateConstraints(_ reviewing: Bool = false) {
         activateConstraintsTitleLabel()
         activateConstraintsCreatedDateLabel()
         activateConstraintsExpectStorageDateLabel()
