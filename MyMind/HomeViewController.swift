@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 typealias FunctionControlInfo = (type: MainFunctoinType, imageName: String, title: String)
 final class HomeViewController: UIViewController {
@@ -23,6 +24,7 @@ final class HomeViewController: UIViewController {
             collectionView.reloadData()
         }
     }
+    var remoteConfig: RemoteConfig!
     /// Must set on main thread
     private var isNetworkProcessing: Bool = false {
         didSet {
@@ -57,11 +59,20 @@ final class HomeViewController: UIViewController {
     private func handleErrorForFetchPurchaseList(_ error: Error) {
         #warning("Error handling")
         print(error.localizedDescription)
+        ToastView.showIn(self, message: error.localizedDescription)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadPurchaseList()
+        remoteConfig = RemoteConfig.remoteConfig()
+        let settings = RemoteConfigSettings()
+        settings.minimumFetchInterval = 0
+        remoteConfig.configSettings = settings
+
+        remoteConfig.fetch { status, error in
+            self.remoteConfig.activate()
+            self.loadPurchaseList()
+        }
     }
 }
 extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
@@ -70,7 +81,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         return 2
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return section == 0 ? 4 : 3
+        return section == 0 ? 4 : remoteConfig["otp_enable"].boolValue ? 3 : 2
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -78,10 +89,10 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "InfoCollectionViewCell", for: indexPath) as? InfoCollectionViewCell {
                 var number = ""
                 switch indexPath.row {
-                case 0: number = purchaseList?.statusAmount.unusual ?? ""
-                case 1: number = purchaseList?.statusAmount.rejected ?? ""
-                case 2: number = purchaseList?.statusAmount.approved ?? ""
-                case 3: number = purchaseList?.statusAmount.pending ?? ""
+                case 0: number = purchaseList?.statusAmount?.unusual ?? ""
+                case 1: number = purchaseList?.statusAmount?.rejected ?? ""
+                case 2: number = purchaseList?.statusAmount?.approved ?? ""
+                case 3: number = purchaseList?.statusAmount?.pending ?? ""
                 default: break
                 }
                 cell.config(title: cellTitles[indexPath.item], number: number)
@@ -128,7 +139,35 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         let width = collectionView.bounds.width
         return CGSize(width: width, height: 40)
     }
-
+    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        return indexPath.section == 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        switch indexPath.item {
+        case 0:
+            let navigationController = UINavigationController(rootViewController: PurchaseListViewController(purchaseListLoader: MyMindPurchaseAPIService.shared))
+            navigationController.modalPresentationStyle = .fullScreen
+            show(navigationController, sender: nil)
+        case 1:
+            let navigationController = UINavigationController(rootViewController: PurchaseListViewController(purchaseListLoader: MyMindPurchaseReviewAPIService.shared))
+            navigationController.modalPresentationStyle = .fullScreen
+            show(navigationController, sender: nil)
+//            let purchaseListViewController = PurchaseListViewController(purchaseListLoader: MyMindPurchaseAPIService.shared)
+//            var purchaseListQueryInfo = PurchaseListQueryInfo.defaultQuery()
+//            purchaseListQueryInfo.status = .review
+//            purchaseListViewController.purchaseListQueryInfo = purchaseListQueryInfo
+//            let navigationController = UINavigationController(rootViewController: purchaseListViewController)
+//            navigationController.modalPresentationStyle = .fullScreen
+//            show(navigationController, sender: nil)
+        case 2:
+            let storyboard: UIStoryboard = UIStoryboard(name: "TOTP", bundle: nil)
+            let viewController = storyboard.instantiateViewController(withIdentifier: "SecretListViewControllerNavi")
+            present(viewController, animated: true, completion: nil)
+        default:
+            break
+        }
+    }
 }
 final class HomeCollectionViewHeaderView: UICollectionReusableView {
     @IBOutlet weak var indicatorView: UIView!
