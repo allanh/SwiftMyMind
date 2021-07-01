@@ -22,6 +22,7 @@ target 'MyMind' do
     pod 'PromiseKit', '~> 6.8'
     pod 'Kingfisher', '~> 6.0'
     pod 'SwiftOTP'
+    pod 'Firebase/RemoteConfig'
 
   target 'MyMindTests' do
     inherit! :search_paths
