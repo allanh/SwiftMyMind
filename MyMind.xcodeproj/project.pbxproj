@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		52D7249F268D62BC00B00585 /* MyMindPurchaseReviewAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D7249E268D62BC00B00585 /* MyMindPurchaseReviewAPIService.swift */; };
+		52D724A4268DBD6400B00585 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 52D724A3268DBD6400B00585 /* GoogleService-Info.plist */; };
 		97547CB8268039C6001859A8 /* PurchaseListLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97547CB7268039C6001859A8 /* PurchaseListLoader.swift */; };
 		97547CBB2680787E001859A8 /* ProductMaterialListLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97547CBA2680787E001859A8 /* ProductMaterialListLoader.swift */; };
 		97547CBD2680957D001859A8 /* PurchaseSuggestionInfosLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97547CBC2680957D001859A8 /* PurchaseSuggestionInfosLoader.swift */; };
@@ -215,6 +217,8 @@
 		13CCE330B89D7786D5D97F51 /* Pods-MyMindTests.alpha.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMindTests.alpha.xcconfig"; path = "Target Support Files/Pods-MyMindTests/Pods-MyMindTests.alpha.xcconfig"; sourceTree = "<group>"; };
 		342A86D10E509DC8A0C0719F /* Pods-MyMind-MyMindUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMind-MyMindUITests.debug.xcconfig"; path = "Target Support Files/Pods-MyMind-MyMindUITests/Pods-MyMind-MyMindUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		49082C5B628793B947583BE8 /* Pods_MyMind_MyMindUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyMind_MyMindUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		52D7249E268D62BC00B00585 /* MyMindPurchaseReviewAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMindPurchaseReviewAPIService.swift; sourceTree = "<group>"; };
+		52D724A3268DBD6400B00585 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		613512D2AB702F9C1AA2BCC5 /* Pods-MyMindTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMindTests.debug.xcconfig"; path = "Target Support Files/Pods-MyMindTests/Pods-MyMindTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6F231C5BAACFDBA2A1B0E19E /* Pods_MyMind.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyMind.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		813AE979B8E28B1A22020AB9 /* Pods-MyMind-MyMindUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMind-MyMindUITests.release.xcconfig"; path = "Target Support Files/Pods-MyMind-MyMindUITests/Pods-MyMind-MyMindUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -606,6 +610,7 @@
 				A44A5A7B25F9B0D300995823 /* Info.plist */,
 				A456701126845D14009598AE /* RootTabBarController.swift */,
 				A456701326845D87009598AE /* HomeViewController.swift */,
+				52D724A3268DBD6400B00585 /* GoogleService-Info.plist */,
 			);
 			path = MyMind;
 			sourceTree = "<group>";
@@ -770,6 +775,7 @@
 				A439BD362637E42F004F47C8 /* MyMindPurchaseAPIService.swift */,
 				A4DD410626425496007B2A41 /* PromiseKitAPIService.swift */,
 				A4DD410826427DD5007B2A41 /* MyMindAutoCompleteAPIService.swift */,
+				52D7249E268D62BC00B00585 /* MyMindPurchaseReviewAPIService.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -1026,6 +1032,7 @@
 				A43E850A268C081B008C8369 /* SecretTableViewCell.xib in Resources */,
 				A44A5A7525F9B0D200995823 /* Main.storyboard in Resources */,
 				A456700A26830BAB009598AE /* PurchasedProductInfoTableViewCell.xib in Resources */,
+				52D724A4268DBD6400B00585 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1205,6 +1212,7 @@
 				A4793C9626047C8000AD280C /* NibOwnerLoadable.swift in Sources */,
 				97547CC52681DC4C001859A8 /* PurchaseCompletedApplyViewController.swift in Sources */,
 				A4DD410926427DD5007B2A41 /* MyMindAutoCompleteAPIService.swift in Sources */,
+				52D7249F268D62BC00B00585 /* MyMindPurchaseReviewAPIService.swift in Sources */,
 				A4054107264A1B7400E2D21B /* DropDownView.swift in Sources */,
 				A4793C7A2604534100AD280C /* SignInInfo.swift in Sources */,
 				A4705B9126020E5700B30CE6 /* Response.swift in Sources */,
