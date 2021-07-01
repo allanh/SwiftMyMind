@@ -100,8 +100,8 @@ struct PurchaseApplyInfoViewModel {
         pickedWarehouse
             .compactMap({ $0?.recipientInfo })
             .subscribe(onNext: { recipientInfo in
-                recipientName.accept(recipientInfo.name)
-                recipientPhone.accept(recipientInfo.phone)
+                recipientName.accept(recipientInfo.name ?? "")
+                recipientPhone.accept(recipientInfo.phone ?? "")
                 recipientAddress.accept(recipientInfo.address.fullAddressString)
             })
             .disposed(by: bag)

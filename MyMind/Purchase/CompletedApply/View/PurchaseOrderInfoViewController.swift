@@ -46,7 +46,7 @@ class PurchaseOrderInfoViewController: UIViewController {
 
     private func configureContentWithPurchaseOrder() {
         guard let order = purchaseOrder else { return }
-        purchaseIDLabel.text = order.id
+        purchaseIDLabel.text = String(order.id)
         vendorNameLabel.text = order.vendorName
 
         statusLabel.text = order.status.description

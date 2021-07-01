@@ -48,18 +48,18 @@ extension PurchaseOrder.ProductInfo {
     var productSuggestionInfoViewModel: ProductSuggestionInfoViewModel {
         return ProductSuggestionInfoViewModel(
             number: number,
-            originalProductNumber: originalProductNumber,
+            originalProductNumber: originalProductNumber ?? "",
             name: name,
-            channelStockQuantity: channelStockQuantity,
-            fineStockQuantity: fineStockQuantity,
-            monthSaleQuantity: monthSaleQuantity,
-            daysSalesOfInventory: daysSalesOfInventory,
-            suggestedQuantity: suggestedQuantity,
-            quantityPerBox: quantityPerBox,
+            channelStockQuantity: String(channelStockQuantity),
+            fineStockQuantity: String(fineStockQuantity),
+            monthSaleQuantity: String(monthSaleQuantity),
+            daysSalesOfInventory: String(daysSalesOfInventory ?? 0),
+            suggestedQuantity: String(suggestedQuantity),
+            quantityPerBox: String(quantityPerBox),
             stockUnitName: stockUnitName,
             boxStockUnitName: boxStockUnitName,
-            cost: cost,
-            movingAverageCost: movingAverageCost
+            cost: String(cost ?? 0),
+            movingAverageCost: String(movingAverageCost ?? 0)
         )
     }
 }

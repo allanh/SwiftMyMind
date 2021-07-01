@@ -9,14 +9,14 @@
 import Foundation
 
 struct RecipientInfo: Codable {
-    let name, phone: String
+    let name, phone: String?
     let address: Address
 }
 
 struct Address: Codable {
-    let county, district, zipcode, address: String
+    let county, district, zipcode, address: String?
 
     var fullAddressString: String {
-        "\(zipcode) \(county)\(district)\(address)"
+        "\(zipcode ?? "") \(county ?? "")\(district ?? "")\(address ?? "")"
     }
 }

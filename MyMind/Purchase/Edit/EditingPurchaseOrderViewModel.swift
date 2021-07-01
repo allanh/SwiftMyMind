@@ -114,32 +114,32 @@ class EditingPurchaseOrderViewModel {
             let viewModel = SuggestionProductMaterialViewModel(
                 imageURL: url,
                 number: info.number,
-                originalProductNumber: info.originalProductNumber,
+                originalProductNumber: info.originalProductNumber ?? "",
                 name: info.name,
-                purchaseSuggestionQuantity: info.suggestedQuantity,
+                purchaseSuggestionQuantity: String(info.suggestedQuantity),
                 stockUnitName: info.stockUnitName,
                 boxStockUnitName: info.boxStockUnitName,
                 quantityPerBox: Int(info.quantityPerBox) ?? 0,
                 purchaseSuggestionInfo: PurchaseSuggestionInfo(
-                    id: info.id,
+                    id: String(info.id),
                     number: info.number,
-                    originalProductNumber: info.originalProductNumber,
+                    originalProductNumber: info.originalProductNumber ?? "",
                     name: info.name,
-                    quantityPerBox: info.quantityPerBox,
-                    channelStockQuantity: info.channelStockQuantity,
-                    fineStockQuantity: info.fineStockQuantity,
-                    totalStockQuantity: info.totalStockQuantity,
-                    monthSaleQuantity: info.monthSaleQuantity,
-                    suggestedQuantity: info.suggestedQuantity,
-                    daysSalesOfInventory: info.daysSalesOfInventory,
-                    cost: info.cost,
-                    movingAverageCost: info.movingAverageCost,
+                    quantityPerBox: String(info.quantityPerBox),
+                    channelStockQuantity: String(info.channelStockQuantity),
+                    fineStockQuantity: String(info.fineStockQuantity),
+                    totalStockQuantity: String(info.totalStockQuantity ?? 0),
+                    monthSaleQuantity: String(info.monthSaleQuantity),
+                    suggestedQuantity: String(info.suggestedQuantity),
+                    daysSalesOfInventory: String(info.daysSalesOfInventory ?? 0),
+                    cost: String(info.cost ?? 0),
+                    movingAverageCost: String(info.movingAverageCost ?? 0),
                     stockUnitName: info.stockUnitName,
                     boxStockUnitName: info.boxStockUnitName,
-                    imageInfos: info.imageInfos),
+                    imageInfos: info.imageInfos ?? []),
                 purchaseCostPerItem: Double(info.purchaseCost) ?? 0,
                 vendorName: order.vendorName,
-                vendorID: order.vendorID,
+                vendorID: String(order.vendorID),
                 purchasedQuantity: Int(info.purchaseQuantity) ?? 0)
 
             return viewModel
@@ -147,16 +147,16 @@ class EditingPurchaseOrderViewModel {
 
         let wareHoudse = Warehouse(name:
                                     order.expectStorageName,
-                                   id: order.expectWarehouseID,
+                                   id: String(order.expectWarehouseID),
                                    number: "",
                                    type: order.expectWarehouseType,
-                                   channelWareroomID: order.expectChannelWareroomID,
+                                   channelWareroomID: order.expectChannelWareroomID ?? "",
                                    recipientInfo: order.recipientInfo)
 
         purchaseApplyInfoViewModel = PurchaseApplyInfoViewModel(
             suggestionProductMaterialViewModels: viewModels,
             warehouseLoader: warehouseListLoader,
-            purchaseID: order.id,
+            purchaseID: String(order.id),
             expectedStorageDate: dateFormatter.date(from: order.expectStorageDate),
             pickedWarehouse: wareHoudse)
     }

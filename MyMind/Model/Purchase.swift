@@ -202,7 +202,7 @@ struct PurchaseList: MultiplePageList {
         }
     }
     var items: [PurchaseBrief]
-    let statusAmount: StatusAmount
+    let statusAmount: StatusAmount?
     let totalAmountOfItems: Int
     let totalAmountOfPages: Int
     var currentPageNumber: Int
@@ -227,15 +227,31 @@ extension PurchaseList: Decodable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         items = try container.decode([PurchaseBrief].self, forKey: .items)
-        statusAmount = try container.decode(StatusAmount.self, forKey: .statusAmount)
-        var string = try container.decode(String.self, forKey: .totalAmountOfItems)
-        totalAmountOfItems = Int(string) ?? 0
-        string = try container.decode(String.self, forKey: .totalAmountOfPages)
-        totalAmountOfPages = Int(string) ?? 0
-        string = try container.decode(String.self, forKey: .currentPageNumber)
-        currentPageNumber = Int(string) ?? 0
-        string = try container.decode(String.self, forKey: .itemsPerPage)
-        itemsPerPage = Int(string) ?? 0
+        statusAmount = try? container.decode(StatusAmount.self, forKey: .statusAmount)
+        var string = try? container.decode(String.self, forKey: .totalAmountOfItems)
+        if let total = string {
+            totalAmountOfItems = Int(total) ?? 0
+        } else {
+            totalAmountOfItems = try container.decode(Int.self, forKey: .totalAmountOfItems)
+        }
+        string = try? container.decode(String.self, forKey: .totalAmountOfPages)
+        if let pages = string {
+            totalAmountOfPages = Int(pages) ?? 0
+        } else {
+            totalAmountOfPages = try container.decode(Int.self, forKey: .totalAmountOfPages)
+        }
+        string = try? container.decode(String.self, forKey: .currentPageNumber)
+        if let current = string {
+            currentPageNumber = Int(current) ?? 0
+        } else {
+            currentPageNumber = try container.decode(Int.self, forKey: .currentPageNumber)
+        }
+        string = try? container.decode(String.self, forKey: .itemsPerPage)
+        if let perPage = string {
+            itemsPerPage = Int(perPage) ?? 0
+        } else {
+            itemsPerPage = try container.decode(Int.self, forKey: .itemsPerPage)
+        }
     }
 }
 

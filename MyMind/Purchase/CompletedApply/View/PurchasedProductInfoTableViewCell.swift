@@ -47,9 +47,9 @@ class PurchasedProductInfoTableViewCell: UITableViewCell {
         nameLabel.text = productInfo.name
         numberLabel.text = productInfo.number
         originalNumberLabel.text = productInfo.originalProductNumber
-        purchaseCostLabel.text = productInfo.purchaseCost
+        purchaseCostLabel.text = String(productInfo.purchaseCost)
         quantityLabel.text = "\(productInfo.purchaseQuantity) \(productInfo.stockUnitName)"
         boxQuantityLabel.text = "(=\(productInfo.purchaseBoxQuantity)\(productInfo.boxStockUnitName))"
-        totalCostLabel.text = productInfo.totalPrice
+        totalCostLabel.text = String(productInfo.totalPrice ?? 0)
     }
 }
