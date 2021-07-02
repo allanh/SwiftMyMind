@@ -14,11 +14,16 @@ protocol PromiseKitAPIService: RequestCreatable { }
 extension PromiseKitAPIService {
     func sendRequest<T: Decodable>(request: URLRequest) -> Promise<T> {
         return Promise<T> { seal in
-            URLSession.shared.dataTask(with: request) { data, _, error in
+            URLSession.shared.dataTask(with: request) { data, urlResponse, error in
+                if let httpResponse = urlResponse as? HTTPURLResponse, httpResponse.statusCode == 401 {
+                    seal.reject(APIError.invalidAccessToken)
+                    return
+                }
                 if let error = error {
                     seal.reject(error)
                     return
                 }
+                
 
                 guard let data = data else {
                     seal.reject(APIError.dataNotFoundError)

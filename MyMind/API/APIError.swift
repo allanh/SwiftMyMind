@@ -17,4 +17,8 @@ enum APIError : Error {
     case urlError
     case noAccessTokenError
     case unexpectedError
+    case invalidAccessToken
+}
+extension APIError: Equatable {
+    
 }

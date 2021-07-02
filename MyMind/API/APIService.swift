@@ -22,6 +22,7 @@ extension RequestCreatable {
         var request = URLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: timeoutInterval)
         request.httpMethod = httpMethod
 
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
         if let body = httpBody {
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
             request.httpBody = body
