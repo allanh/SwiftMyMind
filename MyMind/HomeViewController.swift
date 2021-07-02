@@ -17,6 +17,7 @@ final class HomeViewController: UIViewController {
     private let functionControlInfos: [FunctionControlInfo] = [
         (.purchaseApply, "buy_icon", "採購申請"),
         (.paybill, "examine_icon", "採購審核"),
+        (.accountSetting, "system_setting_icon", "帳號設定"),
         (.saleChart, "account_setting_icon", "OTP")
     ]
     private var purchaseList: PurchaseList? {
@@ -81,7 +82,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         return 2
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return section == 0 ? 4 : remoteConfig["otp_enable"].boolValue ? 3 : 2
+        return section == 0 ? 4 : remoteConfig["otp_enable"].boolValue ? 4 : 3
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -165,6 +166,8 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
 //            navigationController.modalPresentationStyle = .fullScreen
 //            show(navigationController, sender: nil)
         case 2:
+            break
+        case 3:
             let storyboard: UIStoryboard = UIStoryboard(name: "TOTP", bundle: nil)
             let viewController = storyboard.instantiateViewController(withIdentifier: "SecretListViewControllerNavi")
             present(viewController, animated: true, completion: nil)
@@ -204,14 +207,6 @@ final class ActionCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-//        let gradientLayer = CAGradientLayer()
-//        gradientLayer.frame = contentView.bounds
-//        let color1 = UIColor(hex: "e5e5e5").cgColor
-//        let color2 = UIColor.white.cgColor
-//        gradientLayer.colors = [color1, color2]
-//        gradientLayer.startPoint = CGPoint(x: 0.5, y: 0)
-//        gradientLayer.endPoint = CGPoint(x: 0.5, y: 1)
-//        contentView.layer.addSublayer(gradientLayer)
     }
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -238,7 +233,6 @@ final class ActionCollectionViewCell: UICollectionViewCell {
         gradientLayer.startPoint = CGPoint(x: 0.5, y: 0)
         gradientLayer.endPoint = CGPoint(x: 0.5, y: 1)
         contentView.layer.insertSublayer(gradientLayer, at: 0)
-//        contentView.layer.addSublayer(gradientLayer)
     }
     func config(with info: FunctionControlInfo) {
         iconImageView.image = UIImage(named: info.imageName)
