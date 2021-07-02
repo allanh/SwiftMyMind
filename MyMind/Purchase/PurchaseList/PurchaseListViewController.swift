@@ -15,14 +15,25 @@ final class PurchaseListViewController: NiblessViewController {
     var reviewing: Bool = false
 
     lazy var pickSortTypeView: PickSortTypeView<PurchaseListQueryInfo.OrderReference, SingleLabelTableViewCell> = {
-        let pickSortView = PickSortTypeView<PurchaseListQueryInfo.OrderReference, SingleLabelTableViewCell>.init(
-            dataSource: PurchaseListQueryInfo.OrderReference.allCases) { [unowned self] sortType, cell in
-            self.configSortCell(cell, item: sortType)
-        } cellSelectHandler: { [unowned self] sortType in
-            self.didPickSortType(sortType: sortType)
+        if reviewing {
+            let pickSortView = PickSortTypeView<PurchaseListQueryInfo.OrderReference, SingleLabelTableViewCell>.init(
+                dataSource: [PurchaseListQueryInfo.OrderReference.createdDate, PurchaseListQueryInfo.OrderReference.expectStorageDate]) { [unowned self] sortType, cell in
+                self.configSortCell(cell, item: sortType)
+            } cellSelectHandler: { [unowned self] sortType in
+                self.didPickSortType(sortType: sortType)
+            }
+            pickSortView.tableView.separatorStyle = .none
+            return pickSortView
+        } else {
+            let pickSortView = PickSortTypeView<PurchaseListQueryInfo.OrderReference, SingleLabelTableViewCell>.init(
+                dataSource: PurchaseListQueryInfo.OrderReference.allCases) { [unowned self] sortType, cell in
+                self.configSortCell(cell, item: sortType)
+            } cellSelectHandler: { [unowned self] sortType in
+                self.didPickSortType(sortType: sortType)
+            }
+            pickSortView.tableView.separatorStyle = .none
+            return pickSortView
         }
-        pickSortView.tableView.separatorStyle = .none
-        return pickSortView
     }()
     private var isPickSortTypeViewViewHierarchyNotReady: Bool = true
 
@@ -45,14 +56,16 @@ final class PurchaseListViewController: NiblessViewController {
     override func loadView() {
         super.loadView()
 
-        view = PurchaseListRootView()
+        let rootView = PurchaseListRootView()
+        rootView.reviewing = reviewing
+        view = rootView
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         view.backgroundColor = .white
-        title = "採購申請單列表"
+        title = (reviewing) ? "審核採購申請" : "採購申請單列表"
         addCloseButton()
         configTableView()
         configCollectionView()
@@ -100,6 +113,7 @@ final class PurchaseListViewController: NiblessViewController {
         rootView.collectionView.delegate = self
         rootView.collectionView.dataSource = self
         rootView.collectionView.registerCellFormNib(for: PurchaseBriefCollectionViewCell.self)
+        rootView.collectionView.registerCellFormNib(for: PurchaseBriefReviewingCollectionViewCell.self)
     }
 
     private func addButtonsActions() {
@@ -249,7 +263,7 @@ extension PurchaseListViewController: UITableViewDelegate, UITableViewDataSource
         }
         cell.construct(reviewing)
         if let purchaseBrief = purchaseList?.items[indexPath.row] {
-            cell.config(with: purchaseBrief)
+            cell.config(with: purchaseBrief, reviewing: reviewing)
         }
         return cell
     }
@@ -297,13 +311,23 @@ extension PurchaseListViewController: UICollectionViewDelegate, UICollectionView
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(PurchaseBriefCollectionViewCell.self, for: indexPath) as? PurchaseBriefCollectionViewCell else {
-            fatalError("Please register cell first or wrong identifier")
+        if reviewing {
+            guard let cell = collectionView.dequeueReusableCell(PurchaseBriefReviewingCollectionViewCell.self, for: indexPath) as? PurchaseBriefReviewingCollectionViewCell else {
+                fatalError("Please register cell first or wrong identifier")
+            }
+            if let purchaseBrief = purchaseList?.items[indexPath.item] {
+                cell.config(with: purchaseBrief)
+            }
+            return cell
+        } else {
+            guard let cell = collectionView.dequeueReusableCell(PurchaseBriefCollectionViewCell.self, for: indexPath) as? PurchaseBriefCollectionViewCell else {
+                fatalError("Please register cell first or wrong identifier")
+            }
+            if let purchaseBrief = purchaseList?.items[indexPath.item] {
+                cell.config(with: purchaseBrief)
+            }
+            return cell
         }
-        if let purchaseBrief = purchaseList?.items[indexPath.item] {
-            cell.config(with: purchaseBrief)
-        }
-        return cell
     }
 }
 // MARK: - Collection view flow layout
@@ -314,6 +338,6 @@ extension PurchaseListViewController: UICollectionViewDelegateFlowLayout {
             horizontalSpace = layout.minimumLineSpacing + layout.sectionInset.left + layout.sectionInset.right
         }
         let width = (collectionView.frame.width - horizontalSpace) / 2
-        return CGSize(width: width, height: 280)
+        return CGSize(width: width, height: reviewing ? 230 : 280)
     }
 }

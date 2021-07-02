@@ -56,6 +56,10 @@ class PurchaseBriefTableViewCell: UITableViewCell {
         $0.layer.borderColor = UIColor.green.cgColor
         $0.textColor = .green
     }
+    let amountLabel: UILabel = UILabel {
+        $0.textColor = .label
+        $0.font = .pingFangTCSemibold(ofSize: 16)
+    }
     // MARK: - Methods
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -73,21 +77,39 @@ class PurchaseBriefTableViewCell: UITableViewCell {
         contentView.addSubview(titleLabel)
         contentView.addSubview(createdDateLabel)
         contentView.addSubview(expectStorageDateLabel)
-        contentView.addSubview(statusLabel)
+        if reviewing {
+            contentView.addSubview(amountLabel)
+        } else {
+            contentView.addSubview(statusLabel)
+        }
     }
 
     func activateConstraints(_ reviewing: Bool = false) {
         activateConstraintsTitleLabel()
         activateConstraintsCreatedDateLabel()
-        activateConstraintsExpectStorageDateLabel()
-        activateConstraintsStatusLabel()
+        activateConstraintsExpectStorageDateLabel(reviewing)
+        if reviewing {
+            activateConstraintsAmountLabel()
+        } else {
+            activateConstraintsStatusLabel()
+        }
     }
 
-    func config(with purchaseBrief: PurchaseBrief) {
+    func config(with purchaseBrief: PurchaseBrief, reviewing: Bool = false) {
         titleLabel.text = purchaseBrief.vendorName
         createdDateLabel.text = "填單日期："+purchaseBrief.createdDateString
         expectStorageDateLabel.text = "預期入庫日："+purchaseBrief.expectStorageDateString
-        configStatusLabel(with: purchaseBrief.status)
+        if reviewing {
+            let formatter = NumberFormatter()
+            formatter.locale = Locale.current
+            formatter.numberStyle = .currency
+            formatter.currencySymbol = "$"
+            formatter.maximumFractionDigits = 0
+            let value: Int = Int(purchaseBrief.totalAmount) ?? 0
+            amountLabel.text = formatter.string(from: value as NSNumber)
+        } else {
+            configStatusLabel(with: purchaseBrief.status)
+        }
     }
 
     private func configStatusLabel(with status: PurchaseStatus) {
@@ -122,16 +144,26 @@ extension PurchaseBriefTableViewCell {
             top, leading
         ])
     }
-    func activateConstraintsExpectStorageDateLabel() {
+    func activateConstraintsExpectStorageDateLabel(_ reviewing: Bool = false) {
         expectStorageDateLabel.translatesAutoresizingMaskIntoConstraints = false
+        
         let top = expectStorageDateLabel.topAnchor
             .constraint(equalTo: titleLabel.bottomAnchor, constant: 3)
-        let trailing = expectStorageDateLabel.trailingAnchor
-            .constraint(equalTo: statusLabel.trailingAnchor)
+        if reviewing {
+            let trailing = expectStorageDateLabel.trailingAnchor
+                .constraint(equalTo: amountLabel.trailingAnchor)
 
-        NSLayoutConstraint.activate([
-            top, trailing
-        ])
+            NSLayoutConstraint.activate([
+                top, trailing
+            ])
+        } else {
+            let trailing = expectStorageDateLabel.trailingAnchor
+                .constraint(equalTo: statusLabel.trailingAnchor)
+
+            NSLayoutConstraint.activate([
+                top, trailing
+            ])
+        }
     }
 
     func activateConstraintsStatusLabel() {
@@ -149,5 +181,17 @@ extension PurchaseBriefTableViewCell {
             centerY, trailing, width, height
         ])
     }
+    
+    func activateConstraintsAmountLabel() {
+        amountLabel.translatesAutoresizingMaskIntoConstraints = false
+        let centerY = amountLabel.centerYAnchor
+            .constraint(equalTo: titleLabel.centerYAnchor)
+        let trailing = amountLabel.trailingAnchor
+            .constraint(equalTo: contentView.trailingAnchor, constant: -20)
+        NSLayoutConstraint.activate([
+            centerY, trailing
+        ])
+    }
+
 }
 extension PurchaseBriefTableViewCell: PurchaseStatusColorProvider { }

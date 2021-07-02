@@ -21,7 +21,6 @@ final class OrganizeOptionView: NiblessView {
         $0.titleLabel?.font = .pingFangTCRegular(ofSize: 14)
         $0.setTitleColor(.init(hex: "4c4c4c"), for: .normal)
         $0.setImage(UIImage(named: "sort"), for: .normal)
-        $0.setTitle("採購單編號", for: .normal)
     }
 
     let filterButton: UIButton = UIButton {
@@ -43,18 +42,27 @@ final class OrganizeOptionView: NiblessView {
         $0.backgroundColor = .init(hex: "e5e5e5")
     }
 
+    var reviewing: Bool = false
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .white
+    }
+    func setup() {
         constructViewHierarchy()
         activateConstraints()
     }
-
     func constructViewHierarchy() {
         addSubview(topSeparatorView)
         stackView.addArrangedSubview(sortButton)
-        stackView.addArrangedSubview(firstSeparatorView)
-        stackView.addArrangedSubview(filterButton)
+        if !reviewing {
+            sortButton.setTitle("採購單編號", for: .normal)
+            stackView.addArrangedSubview(firstSeparatorView)
+            stackView.addArrangedSubview(filterButton)
+        } else {
+            sortButton.contentHorizontalAlignment = .left
+            sortButton.contentEdgeInsets.left = 10
+            sortButton.setTitle("填單日期", for: .normal)
+        }
         stackView.addArrangedSubview(secondSeparatorView)
         stackView.addArrangedSubview(layoutButton)
         addSubview(stackView)
@@ -64,7 +72,9 @@ final class OrganizeOptionView: NiblessView {
         activateConstraintsTopSeparatorView()
         activateConstraintsStackView()
         activateConstraintsSortButton()
-        activateConstraintsFilterButton()
+        if !reviewing {
+            activateConstraintsFilterButton()
+        }
         activateConstraintsSeparatorViews()
         activateConstraintsLayoutButton()
     }
@@ -104,8 +114,10 @@ extension OrganizeOptionView {
 
     private func activateConstraintsSortButton() {
         sortButton.translatesAutoresizingMaskIntoConstraints = false
-        sortButton.widthAnchor
-            .constraint(equalTo: filterButton.widthAnchor).isActive = true
+        if !reviewing {
+            sortButton.widthAnchor
+                .constraint(equalTo: filterButton.widthAnchor).isActive = true
+        }
         sortButton.heightAnchor
             .constraint(equalTo: stackView.heightAnchor).isActive = true
     }
@@ -119,18 +131,29 @@ extension OrganizeOptionView {
     private func activateConstraintsSeparatorViews() {
         firstSeparatorView.translatesAutoresizingMaskIntoConstraints = false
         secondSeparatorView.translatesAutoresizingMaskIntoConstraints = false
-        let firstWidth = firstSeparatorView.widthAnchor
-            .constraint(equalToConstant: 2)
-        let firstHeight = firstSeparatorView.heightAnchor
-            .constraint(equalToConstant: 20)
-        let secondWidth = secondSeparatorView.widthAnchor
-            .constraint(equalToConstant: 2)
-        let secondHeight = secondSeparatorView.heightAnchor
-            .constraint(equalToConstant: 20)
+        if !reviewing {
+            let firstWidth = firstSeparatorView.widthAnchor
+                .constraint(equalToConstant: 2)
+            let firstHeight = firstSeparatorView.heightAnchor
+                .constraint(equalToConstant: 20)
+            let secondWidth = secondSeparatorView.widthAnchor
+                .constraint(equalToConstant: 2)
+            let secondHeight = secondSeparatorView.heightAnchor
+                .constraint(equalToConstant: 20)
 
-        NSLayoutConstraint.activate([
-            firstWidth, firstHeight, secondWidth, secondHeight
-        ])
+            NSLayoutConstraint.activate([
+                firstWidth, firstHeight, secondWidth, secondHeight
+            ])
+        } else {
+            let secondWidth = secondSeparatorView.widthAnchor
+                .constraint(equalToConstant: 2)
+            let secondHeight = secondSeparatorView.heightAnchor
+                .constraint(equalToConstant: 20)
+
+            NSLayoutConstraint.activate([
+                secondWidth, secondHeight
+            ])
+        }
     }
 
     private func activateConstraintsLayoutButton() {
@@ -144,4 +167,6 @@ extension OrganizeOptionView {
             width, height
         ])
     }
+}
+final class ReviewingOrganizeOptionView: NiblessView {
 }

@@ -33,8 +33,14 @@ final class PurchaseListRootView: NiblessView {
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 20
     }
-
-    let organizeOptionView: OrganizeOptionView = OrganizeOptionView()
+    var reviewing: Bool = false
+    lazy var organizeOptionView: OrganizeOptionView = {
+        let optionView = OrganizeOptionView()
+        optionView.reviewing = reviewing
+        optionView.setup()
+        return optionView
+    }()
+//    let organizeOptionView: OrganizeOptionView //= OrganizeOptionView()
 
     private var hierarchyNotReady: Bool = true
 
@@ -52,14 +58,18 @@ final class PurchaseListRootView: NiblessView {
         addSubview(collectionView)
         addSubview(tableView)
         addSubview(organizeOptionView)
-        addSubview(createButton)
+        if !reviewing {
+            addSubview(createButton)
+        }
     }
 
     func activateConstraints() {
         activateConstraintsCollecitonView()
         activateConstraintsTableView()
         activateConstraintsOrganizeOptionView()
-        activateConstraintsCreatButton()
+        if !reviewing {
+            activateConstraintsCreatButton()
+        }
     }
 }
 // MARK: - Layouts

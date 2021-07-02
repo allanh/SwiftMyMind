@@ -44,7 +44,13 @@ class PurchaseBriefCollectionViewCell: UICollectionViewCell {
         creatorLabel.text = purchaseBrief.creator
         createdDateLabel.text = purchaseBrief.createdDateString
         putInStorageDateLabel.text = purchaseBrief.expectStorageDateString
-        totalAmountLabel.text = "$ \(purchaseBrief.totalAmount)"
+        let formatter = NumberFormatter()
+        formatter.locale = Locale.current
+        formatter.numberStyle = .currency
+        formatter.currencySymbol = "$"
+        formatter.maximumFractionDigits = 0
+        let value: Int = Int(purchaseBrief.totalAmount) ?? 0
+        totalAmountLabel.text = formatter.string(from: value as NSNumber)
     }
 }
 extension PurchaseBriefCollectionViewCell: PurchaseStatusColorProvider { }
