@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		52282372268EB41400A66340 /* PurchaseBriefReviewingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52282370268EB41400A66340 /* PurchaseBriefReviewingCollectionViewCell.swift */; };
+		52282373268EB41400A66340 /* PurchaseBriefReviewingCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52282371268EB41400A66340 /* PurchaseBriefReviewingCollectionViewCell.xib */; };
 		52D7249F268D62BC00B00585 /* MyMindPurchaseReviewAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D7249E268D62BC00B00585 /* MyMindPurchaseReviewAPIService.swift */; };
 		52D724A4268DBD6400B00585 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 52D724A3268DBD6400B00585 /* GoogleService-Info.plist */; };
 		97547CB8268039C6001859A8 /* PurchaseListLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97547CB7268039C6001859A8 /* PurchaseListLoader.swift */; };
@@ -217,6 +219,8 @@
 		13CCE330B89D7786D5D97F51 /* Pods-MyMindTests.alpha.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMindTests.alpha.xcconfig"; path = "Target Support Files/Pods-MyMindTests/Pods-MyMindTests.alpha.xcconfig"; sourceTree = "<group>"; };
 		342A86D10E509DC8A0C0719F /* Pods-MyMind-MyMindUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMind-MyMindUITests.debug.xcconfig"; path = "Target Support Files/Pods-MyMind-MyMindUITests/Pods-MyMind-MyMindUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		49082C5B628793B947583BE8 /* Pods_MyMind_MyMindUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyMind_MyMindUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		52282370268EB41400A66340 /* PurchaseBriefReviewingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseBriefReviewingCollectionViewCell.swift; sourceTree = "<group>"; };
+		52282371268EB41400A66340 /* PurchaseBriefReviewingCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PurchaseBriefReviewingCollectionViewCell.xib; sourceTree = "<group>"; };
 		52D7249E268D62BC00B00585 /* MyMindPurchaseReviewAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMindPurchaseReviewAPIService.swift; sourceTree = "<group>"; };
 		52D724A3268DBD6400B00585 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		613512D2AB702F9C1AA2BCC5 /* Pods-MyMindTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMindTests.debug.xcconfig"; path = "Target Support Files/Pods-MyMindTests/Pods-MyMindTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -819,6 +823,8 @@
 				A489A1AF263FAA7D00832679 /* PurchaseBriefCollectionViewCell.swift */,
 				A489A1B0263FAA7D00832679 /* PurchaseBriefCollectionViewCell.xib */,
 				A47F39D4263A5A9B00A3097C /* PurchaseBriefTableViewCell.swift */,
+				52282370268EB41400A66340 /* PurchaseBriefReviewingCollectionViewCell.swift */,
+				52282371268EB41400A66340 /* PurchaseBriefReviewingCollectionViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1027,6 +1033,7 @@
 				97AFE3712667246B002CBE01 /* PurchaseProductSuggestionViewController.xib in Resources */,
 				A489A1B2263FAA7D00832679 /* PurchaseBriefCollectionViewCell.xib in Resources */,
 				A43E850E268C0889008C8369 /* TOTP.storyboard in Resources */,
+				52282373268EB41400A66340 /* PurchaseBriefReviewingCollectionViewCell.xib in Resources */,
 				A40EBFDA2671AD4900A4863D /* PurchaseApplyInfoViewController.xib in Resources */,
 				A4CBD8B7266A2CF200B19119 /* ProductMaterialSuggestionInfoTableViewCell.xib in Resources */,
 				A43E850A268C081B008C8369 /* SecretTableViewCell.xib in Resources */,
@@ -1266,6 +1273,7 @@
 				A43E8510268C08B8008C8369 /* InstructionView.swift in Sources */,
 				97AFE3792668D727002CBE01 /* UIViewController+loadNib.swift in Sources */,
 				A456701226845D14009598AE /* RootTabBarController.swift in Sources */,
+				52282372268EB41400A66340 /* PurchaseBriefReviewingCollectionViewCell.swift in Sources */,
 				A464877E2689BBD60053E6F5 /* EditingPurchaseOrderViewController.swift in Sources */,
 				A464877A26899DEF0053E6F5 /* EditingPurchaseOrderViewModel.swift in Sources */,
 				97B117372653B1AF00242428 /* PickProductMaterialsViewModel.swift in Sources */,
