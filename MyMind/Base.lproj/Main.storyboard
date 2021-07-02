@@ -35,7 +35,7 @@
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="NEX-yC-FgV">
                                 <rect key="frame" x="20" y="44" width="374" height="818"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="5" id="O09-S4-nKa">
                                     <size key="itemSize" width="128" height="128"/>
                                     <size key="headerReferenceSize" width="50" height="50"/>
@@ -99,8 +99,8 @@
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l2Y-u2-KHa">
-                                                    <rect key="frame" x="8" y="94" width="112" height="28"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <rect key="frame" x="0.0" y="94" width="128" height="28"/>
+                                                    <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="28" id="NXG-qN-jIC"/>
                                                     </constraints>
@@ -110,8 +110,8 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="l2Y-u2-KHa" secondAttribute="trailing" constant="8" id="17E-Uv-Kt3"/>
-                                                <constraint firstItem="l2Y-u2-KHa" firstAttribute="leading" secondItem="8Zw-pg-cEs" secondAttribute="leading" constant="8" id="79P-KV-n2N"/>
+                                                <constraint firstAttribute="trailing" secondItem="l2Y-u2-KHa" secondAttribute="trailing" id="17E-Uv-Kt3"/>
+                                                <constraint firstItem="l2Y-u2-KHa" firstAttribute="leading" secondItem="8Zw-pg-cEs" secondAttribute="leading" id="79P-KV-n2N"/>
                                                 <constraint firstAttribute="trailing" secondItem="gAL-g9-r9S" secondAttribute="trailing" id="BOV-5B-Are"/>
                                                 <constraint firstItem="nlI-pu-U0c" firstAttribute="centerY" secondItem="8Zw-pg-cEs" secondAttribute="centerY" multiplier="0.8" id="Ni7-ju-97o"/>
                                                 <constraint firstAttribute="bottom" secondItem="l2Y-u2-KHa" secondAttribute="bottom" constant="6" id="XbP-JN-8hP"/>
@@ -172,6 +172,7 @@
                                 <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="HomeFooter" id="w0I-FT-bPj">
                                     <rect key="frame" x="0.0" y="198" width="374" height="50"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                                 </collectionReusableView>
                                 <connections>
                                     <outlet property="dataSource" destination="AYc-8A-Vs7" id="97y-a1-0qR"/>
@@ -180,7 +181,7 @@
                             </collectionView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="YMf-yb-WQV"/>
-                        <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="NEX-yC-FgV" firstAttribute="leading" secondItem="YMf-yb-WQV" secondAttribute="leading" constant="20" id="9ql-lf-MkJ"/>
                             <constraint firstItem="YMf-yb-WQV" firstAttribute="bottom" secondItem="NEX-yC-FgV" secondAttribute="bottom" id="EEa-9u-7KF"/>
@@ -201,6 +202,9 @@
         <image name="buy_icon" width="40" height="40"/>
         <systemColor name="secondaryLabelColor">
             <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="secondarySystemBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

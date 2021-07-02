@@ -123,7 +123,6 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         let width = collectionView.bounds.width
         return CGSize(width: width, height: 50)
     }
-    
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         if kind == UICollectionView.elementKindSectionHeader {
             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HomeHeader", for: indexPath) as? HomeCollectionViewHeaderView
@@ -131,14 +130,14 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
             return headerView ?? UICollectionReusableView()
         } else if kind == UICollectionView.elementKindSectionFooter {
             let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HomeFooter", for: indexPath)
-            footerView.backgroundColor = UIColor(hex: "f5f5f5")
+//            footerView.backgroundColor = UIColor(hex: "f5f5f5")
             return footerView
         }
         return UICollectionReusableView()
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
         let width = collectionView.bounds.width
-        return CGSize(width: width, height: 40)
+        return CGSize(width: width, height: section == 0 ? 40 : 0)
     }
     func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
         return indexPath.section == 1
@@ -228,7 +227,7 @@ final class ActionCollectionViewCell: UICollectionViewCell {
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = contentView.bounds
         let color1 = UIColor(hex: "e5e5e5").cgColor
-        let color2 = UIColor.white.cgColor
+        let color2 = UIColor.tertiarySystemBackground.cgColor
         gradientLayer.colors = [color1, color2]
         gradientLayer.startPoint = CGPoint(x: 0.5, y: 0)
         gradientLayer.endPoint = CGPoint(x: 0.5, y: 1)
