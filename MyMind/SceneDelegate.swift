@@ -15,21 +15,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let windowScene = (scene as? UIWindowScene) else { return }
-        self.window = UIWindow(windowScene: windowScene)
-
-        let viewModel = SignInViewModel(
-            userSessionRepository: MyMindUserSessionRepository.shared,
-            signInValidationService: SignInValidatoinService(),
-            lastSignInInfoDataStore: MyMindLastSignInInfoDataStore()
-        )
-        let signInViewController = SignInViewController(viewModel: viewModel)
-        
-//        let rootViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "Home") as? HomeViewController
-//        rootViewController?.modalPresentationStyle = .overFullScreen
-
-        self.window?.makeKeyAndVisible()
-        self.window?.rootViewController = signInViewController
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -42,8 +27,34 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneDidBecomeActive(_ scene: UIScene) {
         // Called when the scene has moved from an inactive state to an active state.
         // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
-    }
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+        self.window = UIWindow(windowScene: windowScene)
 
+        let purchaseListLoader = MyMindPurchaseAPIService.shared
+        purchaseListLoader.loadPurchaseList(with: nil)
+            .done { purchaseList in
+                self.handleSession(true)
+            }
+            .ensure {
+            }
+            .catch { error in
+                self.handleSession((error as! APIError) != .invalidAccessToken)
+            }
+    }
+    private func handleSession(_ valid: Bool) {
+        let viewModel = SignInViewModel(
+            userSessionRepository: MyMindUserSessionRepository.shared,
+            signInValidationService: SignInValidatoinService(),
+            lastSignInInfoDataStore: MyMindLastSignInInfoDataStore()
+        )
+        let signInViewController = SignInViewController(viewModel: viewModel)
+        
+        let rootViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "Home") as? HomeViewController
+        rootViewController?.modalPresentationStyle = .overFullScreen
+        
+        self.window?.makeKeyAndVisible()
+        self.window?.rootViewController = valid ? rootViewController : signInViewController
+    }
     func sceneWillResignActive(_ scene: UIScene) {
         // Called when the scene will move from an active state to an inactive state.
         // This may occur due to temporary interruptions (ex. an incoming phone call).
