@@ -13,4 +13,5 @@ protocol AuthService {
     func captcha() -> Promise<CaptchaSession>
     func signIn(info: SignInInfo) -> Promise<UserSession>
     func forgotPasswordMail(info: ForgotPasswordInfo) -> Promise<Void>
+    func me(_ token: String) -> Promise<Account>
 }

@@ -30,4 +30,9 @@ class MyMindAuthService: PromiseKitAPIService, AuthService {
         let request = request(endPoint: Endpoint.forgotPassword, httpMethod: "POST", httpBody: body)
         return sendRequest(request: request)
     }
+    
+    func me(_ token: String) -> Promise<Account> {
+        let request = request(endPoint: .me, httpHeader: ["Authorization": "Bearer \(token)"])
+        return sendRequest(request: request)
+    }
 }
