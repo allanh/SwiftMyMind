@@ -38,7 +38,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             .ensure {
             }
             .catch { error in
-                self.handleSession((error as! APIError) != .invalidAccessToken)
+                self.handleSession((error as! APIError) != .invalidAccessToken && (error as! APIError) != .noAccessTokenError)
             }
     }
     private func handleSession(_ valid: Bool) {
@@ -50,10 +50,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let signInViewController = SignInViewController(viewModel: viewModel)
         
         let rootViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "Home") as? HomeViewController
-        rootViewController?.modalPresentationStyle = .overFullScreen
+        let navigationViewController = UINavigationController(rootViewController: rootViewController ?? UIViewController())
         
         self.window?.makeKeyAndVisible()
-        self.window?.rootViewController = valid ? rootViewController : signInViewController
+        self.window?.rootViewController = valid ? navigationViewController : signInViewController
     }
     func sceneWillResignActive(_ scene: UIScene) {
         // Called when the scene will move from an active state to an inactive state.

@@ -65,6 +65,8 @@ final class HomeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.backButtonTitle = ""
+        self.title = "MyMind"
         remoteConfig = RemoteConfig.remoteConfig()
         let settings = RemoteConfigSettings()
         settings.minimumFetchInterval = 0
@@ -130,7 +132,6 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
             return headerView ?? UICollectionReusableView()
         } else if kind == UICollectionView.elementKindSectionFooter {
             let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HomeFooter", for: indexPath)
-//            footerView.backgroundColor = UIColor(hex: "f5f5f5")
             return footerView
         }
         return UICollectionReusableView()
@@ -148,23 +149,15 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         case 0:
             let purchaseListViewController = PurchaseListViewController(purchaseListLoader: MyMindPurchaseAPIService.shared)
             purchaseListViewController.reviewing = false
-            let navigationController = UINavigationController(rootViewController: purchaseListViewController)
-            navigationController.modalPresentationStyle = .fullScreen
-            show(navigationController, sender: nil)
+            show(purchaseListViewController, sender: nil)
         case 1:
             let purchaseListViewController = PurchaseListViewController(purchaseListLoader: MyMindPurchaseReviewAPIService.shared)
             purchaseListViewController.reviewing = true
-            let navigationController = UINavigationController(rootViewController: purchaseListViewController)
-            navigationController.modalPresentationStyle = .fullScreen
-            show(navigationController, sender: nil)
-//            let purchaseListViewController = PurchaseListViewController(purchaseListLoader: MyMindPurchaseAPIService.shared)
-//            var purchaseListQueryInfo = PurchaseListQueryInfo.defaultQuery()
-//            purchaseListQueryInfo.status = .review
-//            purchaseListViewController.purchaseListQueryInfo = purchaseListQueryInfo
-//            let navigationController = UINavigationController(rootViewController: purchaseListViewController)
-//            navigationController.modalPresentationStyle = .fullScreen
-//            show(navigationController, sender: nil)
+            show(purchaseListViewController, sender: nil)
         case 2:
+            if let settingViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "Setting") as? SettingViewController {
+                show(settingViewController, sender: nil)
+            }
             break
         case 3:
             let storyboard: UIStoryboard = UIStoryboard(name: "TOTP", bundle: nil)
