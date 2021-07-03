@@ -7,8 +7,13 @@
 //
 
 import UIKit
-
+protocol SettingViewControllerDelegate: AnyObject {
+    func didSignOut()
+    func didCancel()
+}
 class SettingViewController: UIViewController {
+
+    weak var delegate: SettingViewControllerDelegate?
 
     @IBOutlet weak var accountLabel: UILabel!
     @IBOutlet weak var nameTitleLabel: UILabel!
@@ -70,7 +75,47 @@ class SettingViewController: UIViewController {
 
         // Do any additional setup after loading the view.
     }
-
+    @IBAction func signout(_ sender: Any) {
+        if let contentView = navigationController?.view {
+            let alertView = CustomAlertView(frame: contentView.bounds, title: "確定登出嗎？", descriptions: "請確定是否要登出。")
+            alertView.confirmButton.addAction {
+                MyMindUserSessionRepository.shared.signOut()
+                    .ensure {
+                        self.isNetworkProcessing = false
+                    }
+                    .done { [weak self] in
+                        guard let self = self else { return }
+                        alertView.removeFromSuperview()
+                        self.dismiss(animated: true, completion: nil)
+                        self.delegate?.didSignOut()
+                    }
+                    .catch { [weak self] error in
+                        guard let self = self else { return }
+                        alertView.removeFromSuperview()
+                        ToastView.showIn(self, message: error.localizedDescription)
+                    }
+            }
+            alertView.cancelButton.addAction {
+                alertView.removeFromSuperview()
+            }
+            contentView.addSubview(alertView)
+        }
+    }
+    @IBAction func back(_ sender: Any) {
+        if let contentView = navigationController?.view {
+            let alertView = CustomAlertView(frame: contentView.bounds, title: "確定返回嗎？", descriptions: "返回後本頁面資料將無法儲存，\n請確定是否要返回首頁。")
+            alertView.confirmButton.addAction { [weak self] in
+                guard let self = self else { return }
+                alertView.removeFromSuperview()
+                self.delegate?.didCancel()
+            }
+            alertView.cancelButton.addAction {
+                alertView.removeFromSuperview()
+            }
+            contentView.addSubview(alertView)
+        }
+    }
+    
     /*
     // MARK: - Navigation
 

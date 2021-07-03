@@ -156,6 +156,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
             show(purchaseListViewController, sender: nil)
         case 2:
             if let settingViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "Setting") as? SettingViewController {
+                settingViewController.delegate = self
                 show(settingViewController, sender: nil)
             }
             break
@@ -167,6 +168,27 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
             break
         }
     }
+}
+extension HomeViewController: SettingViewControllerDelegate {
+    func didSignOut() {
+        self.navigationController?.popViewController(animated: true)
+        let scene = UIApplication.shared.connectedScenes.first
+        if let sceneDelegate : SceneDelegate = (scene?.delegate as? SceneDelegate) {
+            let viewModel = SignInViewModel(
+                userSessionRepository: MyMindUserSessionRepository.shared,
+                signInValidationService: SignInValidatoinService(),
+                lastSignInInfoDataStore: MyMindLastSignInInfoDataStore()
+            )
+            let signInViewController = SignInViewController(viewModel: viewModel)
+            sceneDelegate.window?.rootViewController = signInViewController
+        }
+    }
+    
+    func didCancel() {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    
 }
 final class HomeCollectionViewHeaderView: UICollectionReusableView {
     @IBOutlet weak var indicatorView: UIView!
