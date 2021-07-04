@@ -12,6 +12,7 @@
 		5246E47226901BEC005C11EC /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5246E47126901BEC005C11EC /* SettingViewController.swift */; };
 		5246E4742690385C005C11EC /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5246E4732690385C005C11EC /* Account.swift */; };
 		5246E4772690A2A4005C11EC /* CustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5246E4762690A2A4005C11EC /* CustomAlertView.swift */; };
+		52B15CBA2691BAFC0010FCED /* MyMindEmployeeAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B15CB92691BAFC0010FCED /* MyMindEmployeeAPIService.swift */; };
 		52D7249F268D62BC00B00585 /* MyMindPurchaseReviewAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D7249E268D62BC00B00585 /* MyMindPurchaseReviewAPIService.swift */; };
 		52D724A4268DBD6400B00585 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 52D724A3268DBD6400B00585 /* GoogleService-Info.plist */; };
 		97547CB8268039C6001859A8 /* PurchaseListLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97547CB7268039C6001859A8 /* PurchaseListLoader.swift */; };
@@ -227,6 +228,7 @@
 		5246E47126901BEC005C11EC /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		5246E4732690385C005C11EC /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		5246E4762690A2A4005C11EC /* CustomAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertView.swift; sourceTree = "<group>"; };
+		52B15CB92691BAFC0010FCED /* MyMindEmployeeAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMindEmployeeAPIService.swift; sourceTree = "<group>"; };
 		52D7249E268D62BC00B00585 /* MyMindPurchaseReviewAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMindPurchaseReviewAPIService.swift; sourceTree = "<group>"; };
 		52D724A3268DBD6400B00585 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		613512D2AB702F9C1AA2BCC5 /* Pods-MyMindTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMindTests.debug.xcconfig"; path = "Target Support Files/Pods-MyMindTests/Pods-MyMindTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -805,6 +807,7 @@
 				A4DD410626425496007B2A41 /* PromiseKitAPIService.swift */,
 				A4DD410826427DD5007B2A41 /* MyMindAutoCompleteAPIService.swift */,
 				52D7249E268D62BC00B00585 /* MyMindPurchaseReviewAPIService.swift */,
+				52B15CB92691BAFC0010FCED /* MyMindEmployeeAPIService.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -1232,6 +1235,7 @@
 				A4F2D00F265D063B004D8D6D /* ProductMaterialsFilterViewController.swift in Sources */,
 				A47F39DF263A67E200A3097C /* UITableView+.swift in Sources */,
 				A4BCA0CA267C802B00E3B274 /* PurchaseOrderLoader.swift in Sources */,
+				52B15CBA2691BAFC0010FCED /* MyMindEmployeeAPIService.swift in Sources */,
 				A4CBD8B6266A2CF200B19119 /* ProductMaterialSuggestionInfoTableViewCell.swift in Sources */,
 				97B117342653AF1E00242428 /* ProductMaterialQueryInfo.swift in Sources */,
 				A44E8FDB265F82F80090D467 /* PurchaseAutoCompleteAdapters.swift in Sources */,
