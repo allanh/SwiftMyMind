@@ -88,11 +88,11 @@ class SignInViewController: NiblessViewController {
             .subscribe(onNext: { [unowned self] _ in
                 ToastView.showIn(self, message: "登入成功", iconName: "success")
                 if let rootViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "Home") as? HomeViewController {
-                rootViewController.modalPresentationStyle = .overFullScreen
-
-//                let rootViewController = RootTabBarController()
-//                rootViewController.modalPresentationStyle = .overFullScreen
-                present(rootViewController, animated: false, completion: nil)
+                    let scene = UIApplication.shared.connectedScenes.first
+                    if let sceneDelegate : SceneDelegate = (scene?.delegate as? SceneDelegate) {
+                        let navigationViewController = UINavigationController(rootViewController: rootViewController)
+                        sceneDelegate.window?.rootViewController = navigationViewController
+                    }
                 }
             })
             .disposed(by: bag)
