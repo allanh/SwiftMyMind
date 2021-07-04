@@ -260,6 +260,13 @@
                                                 </attributedString>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sPW-h7-PFn">
+                                                <rect key="frame" x="65" y="53" width="325" height="21"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="14"/>
+                                                <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="suc-me-Mij">
                                                 <rect key="frame" x="8" y="124" width="49" height="23"/>
                                                 <attributedString key="attributedText">
@@ -277,6 +284,13 @@
                                                         </attributes>
                                                     </fragment>
                                                 </attributedString>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zkc-UV-WQc">
+                                                <rect key="frame" x="65" y="126" width="325" height="21"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="14"/>
+                                                <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="手機" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7xW-DM-ejf">
@@ -416,6 +430,9 @@
                                 <state key="normal" title="儲存">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="save:" destination="7iF-qq-HFp" eventType="touchUpInside" id="nHP-zd-dgc"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6JK-93-4jH">
                                 <rect key="frame" x="0.0" y="816" width="207" height="46"/>
@@ -449,11 +466,13 @@
                     </view>
                     <connections>
                         <outlet property="accountLabel" destination="g0j-dA-AN0" id="b7P-R8-Zrs"/>
+                        <outlet property="emailErrorLabel" destination="zkc-UV-WQc" id="ZiW-6e-0zD"/>
                         <outlet property="emailTextField" destination="VrX-gA-3Wu" id="MEh-Fx-1j0"/>
                         <outlet property="emailTitleLabel" destination="suc-me-Mij" id="oDQ-qf-DQL"/>
                         <outlet property="lastLoginIPLabel" destination="UNP-V8-JT6" id="eDU-4T-jcN"/>
                         <outlet property="lastLoginTimeLabel" destination="YOA-el-FOR" id="6br-mT-MLc"/>
                         <outlet property="mobileLabel" destination="EEj-y2-zD1" id="Nrh-xU-XVw"/>
+                        <outlet property="nameErrorLabel" destination="sPW-h7-PFn" id="zcC-9L-gBp"/>
                         <outlet property="nameTextField" destination="wNq-lz-RRq" id="gET-bS-XBU"/>
                         <outlet property="nameTitleLabel" destination="3St-2p-f6Q" id="ZdY-st-h1x"/>
                         <outlet property="updateTimeLabel" destination="8zS-5R-Vrh" id="WMq-WY-R2A"/>
