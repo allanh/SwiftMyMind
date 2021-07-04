@@ -46,7 +46,11 @@ extension PromiseKitAPIService {
 
     func sendRequest(request: URLRequest) -> Promise<Void> {
         return Promise<Void> { seal in
-            URLSession.shared.dataTask(with: request) { data, _, error in
+            URLSession.shared.dataTask(with: request) { data, urlResponse, error in
+                if let httpResponse = urlResponse as? HTTPURLResponse, httpResponse.statusCode == 401 {
+                    seal.reject(APIError.invalidAccessToken)
+                    return
+                }
                 if let error = error {
                     seal.reject(error)
                     return
