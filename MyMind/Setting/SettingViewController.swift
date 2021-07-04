@@ -17,8 +17,10 @@ class SettingViewController: UIViewController {
 
     @IBOutlet weak var accountLabel: UILabel!
     @IBOutlet weak var nameTitleLabel: UILabel!
+    @IBOutlet weak var nameErrorLabel: UILabel!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var emailTitleLabel: UILabel!
+    @IBOutlet weak var emailErrorLabel: UILabel!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var mobileLabel: UILabel!
     @IBOutlet weak var lastLoginIPLabel: UILabel!
@@ -45,8 +47,27 @@ class SettingViewController: UIViewController {
             }
         }
     }
+    private func showErrorMessage(_ status: AccountValidateStatus) {
+        if status.contains(.nameError) {
+            nameErrorLabel.text = "\u{26a0}請輸入有效姓名"
+            nameTextField.layer.borderColor = UIColor.red.cgColor
+        }
+        if status.contains(.emailError) {
+            emailErrorLabel.text = "\u{26a0}請輸入有效Email"
+            emailTextField.layer.borderColor = UIColor.red.cgColor
+        }
+    }
+    private func clearErrorMessage() {
+        nameErrorLabel.text = nil
+        nameTextField.layer.borderColor = UIColor(hex: "cccccc").cgColor
+        emailErrorLabel.text = nil
+        emailTextField.layer.borderColor = UIColor(hex: "cccccc").cgColor
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
+        nameTextField.layer.borderWidth = 1
+        emailTextField.layer.borderWidth = 1
+        clearErrorMessage()
         title = "帳號設定"
         var attributedString = NSMutableAttributedString(string: "*姓名", attributes: [.foregroundColor: UIColor.label])
         attributedString.addAttributes([.foregroundColor : UIColor.red], range: NSRange(location:0,length:1))
@@ -55,7 +76,7 @@ class SettingViewController: UIViewController {
         attributedString.addAttributes([.foregroundColor : UIColor.red], range: NSRange(location:0,length:1))
         emailTitleLabel.attributedText =  attributedString
         isNetworkProcessing = true
-        MyMindUserSessionRepository.shared.me()
+        MyMindEmployeeAPIService.shared.me()
             .ensure {
                 self.isNetworkProcessing = false
             }
@@ -79,6 +100,7 @@ class SettingViewController: UIViewController {
         if let contentView = navigationController?.view {
             let alertView = CustomAlertView(frame: contentView.bounds, title: "確定登出嗎？", descriptions: "請確定是否要登出。")
             alertView.confirmButton.addAction {
+                self.isNetworkProcessing = true
                 MyMindUserSessionRepository.shared.signOut()
                     .ensure {
                         self.isNetworkProcessing = false
@@ -99,6 +121,26 @@ class SettingViewController: UIViewController {
                 alertView.removeFromSuperview()
             }
             contentView.addSubview(alertView)
+        }
+    }
+    @IBAction func save(_ sender: Any) {
+        let newAccount = Account(id: 0, mobile: "", account: "", lastLoginIP: "", lastLoginTime: "", updateTime: "", name: nameTextField.text ?? "", email: emailTextField.text ?? "")
+        let status = newAccount.validate()
+        if status == .valid {
+            clearErrorMessage()
+            isNetworkProcessing = true
+            MyMindEmployeeAPIService.shared.updateAccount(account: newAccount)
+                .ensure {
+                    self.isNetworkProcessing = false
+                }
+                .done {_ in 
+                    ToastView.showIn(self, message: "修改成功", iconName: "success")
+                }
+                .catch { error in
+                    ToastView.showIn(self, message: error.localizedDescription)
+                }
+        } else {
+            showErrorMessage(status)
         }
     }
     @IBAction func back(_ sender: Any) {

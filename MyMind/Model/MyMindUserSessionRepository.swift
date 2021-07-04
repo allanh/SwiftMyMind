@@ -49,11 +49,4 @@ class MyMindUserSessionRepository: UserSessionRepository {
     func captcha() -> Promise<CaptchaSession> {
         authService.captcha()
     }
-    
-    func me() -> Promise<Account> {
-        guard let userSession = readUserssion() else {
-            return .init(error: APIError.noAccessTokenError)
-        }
-        return authService.me(userSession.token)
-    }
 }
