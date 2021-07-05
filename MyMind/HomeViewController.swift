@@ -8,7 +8,9 @@
 
 import UIKit
 import Firebase
-
+protocol NavigationActionDelegate: AnyObject {
+    func didCancel()
+}
 typealias FunctionControlInfo = (type: MainFunctoinType, imageName: String, title: String)
 final class HomeViewController: UIViewController {
 
@@ -185,10 +187,11 @@ extension HomeViewController: SettingViewControllerDelegate {
         }
     }
     
+}
+extension HomeViewController: NavigationActionDelegate {
     func didCancel() {
         self.navigationController?.popViewController(animated: true)
     }
-    
     
 }
 final class HomeCollectionViewHeaderView: UICollectionReusableView {

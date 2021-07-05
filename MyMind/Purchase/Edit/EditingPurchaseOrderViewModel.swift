@@ -13,6 +13,7 @@ import RxRelay
 
 protocol EditingPurchaseOrderService {
     func editPurchaseOrder(for id: String, with info: EditingPurchaseOrderParameterInfo) -> Promise<Void>
+    func returnPurchaseOrder(for id: String, with info: ReturnPurchaseOrderParameterInfo) -> Promise<Void>
 }
 
 class EditingPurchaseOrderViewModel {
@@ -104,6 +105,25 @@ class EditingPurchaseOrderViewModel {
             }
     }
 
+    func sendReturnRequest() {
+        guard let info = makeReturnPurchaseOrderParameterInfo() else {
+            #warning("Error handling")
+            return
+        }
+
+        isNetworkProcessing.accept(true)
+        service.returnPurchaseOrder(for: purchaseID, with: info)
+            .ensure { [weak self] in
+                self?.isNetworkProcessing.accept(false)
+            }
+            .done { [unowned self] _ in
+                self.navigation(with: .purhcaseList)
+            }
+            .catch { error in
+                print(error.localizedDescription)
+                #warning("Error handling")
+            }
+    }
     private func makePurchaseApplyInfoViewModel(with order: PurchaseOrder) {
         let productInfos = order.productInfos
 
@@ -223,6 +243,13 @@ class EditingPurchaseOrderViewModel {
         )
         return info
     }
+    private func makeReturnPurchaseOrderParameterInfo() -> ReturnPurchaseOrderParameterInfo? {
+        let note = pickPurchaseReviewerViewModel?.note.value ?? ""
+        let info = ReturnPurchaseOrderParameterInfo(action: .RETURN, remark: note)
+        return info
+    }
+
+    
 
     func mapSuggestionProductMaterialViewModelsToProductInfos() -> [EditingPurchaseOrderParameterInfo.ProductInfo]? {
         guard let viewModel = purchaseApplyInfoViewModel else {

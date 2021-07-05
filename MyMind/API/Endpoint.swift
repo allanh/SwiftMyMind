@@ -210,6 +210,9 @@ extension Endpoint {
         return Endpoint(path: "/api/admin/\(version)/purchase/\(purchaseID)")
     }
     
+    static func returnPurchaseOrder(purchaseID: String) -> Self {
+        return Endpoint(path: "/api/admin/\(version)/purchase/\(purchaseID)/return")
+    }
     static func reviewPurchaseList(with partnerID: String, purchaseListQueryInfo: PurchaseListQueryInfo? = nil) -> Self {
         var urlQueryItems: [URLQueryItem] = []
         urlQueryItems.append(URLQueryItem(name: "partner_id", value: partnerID))

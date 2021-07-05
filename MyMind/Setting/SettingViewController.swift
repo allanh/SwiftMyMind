@@ -9,11 +9,11 @@
 import UIKit
 protocol SettingViewControllerDelegate: AnyObject {
     func didSignOut()
-    func didCancel()
 }
+typealias MixedDelegate = SettingViewControllerDelegate & NavigationActionDelegate
 class SettingViewController: UIViewController {
 
-    weak var delegate: SettingViewControllerDelegate?
+    weak var delegate: MixedDelegate?
 
     @IBOutlet weak var accountLabel: UILabel!
     @IBOutlet weak var nameTitleLabel: UILabel!
