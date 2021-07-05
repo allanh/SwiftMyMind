@@ -14,6 +14,8 @@
 		5246E4772690A2A4005C11EC /* CustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5246E4762690A2A4005C11EC /* CustomAlertView.swift */; };
 		527E11BB2692A05900FB8B01 /* Authorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527E11BA2692A05900FB8B01 /* Authorization.swift */; };
 		527E11BD2692A0D500FB8B01 /* OptionSet+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527E11BC2692A0D500FB8B01 /* OptionSet+.swift */; };
+		527E11C02692C38D00FB8B01 /* PurchaseReviewingApplyInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527E11BE2692C38D00FB8B01 /* PurchaseReviewingApplyInfoViewController.swift */; };
+		527E11C12692C38D00FB8B01 /* PurchaseReviewingApplyInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 527E11BF2692C38D00FB8B01 /* PurchaseReviewingApplyInfoViewController.xib */; };
 		52B15CBA2691BAFC0010FCED /* MyMindEmployeeAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B15CB92691BAFC0010FCED /* MyMindEmployeeAPIService.swift */; };
 		52D7249F268D62BC00B00585 /* MyMindPurchaseReviewAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D7249E268D62BC00B00585 /* MyMindPurchaseReviewAPIService.swift */; };
 		52D724A4268DBD6400B00585 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 52D724A3268DBD6400B00585 /* GoogleService-Info.plist */; };
@@ -232,6 +234,8 @@
 		5246E4762690A2A4005C11EC /* CustomAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertView.swift; sourceTree = "<group>"; };
 		527E11BA2692A05900FB8B01 /* Authorization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authorization.swift; sourceTree = "<group>"; };
 		527E11BC2692A0D500FB8B01 /* OptionSet+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OptionSet+.swift"; sourceTree = "<group>"; };
+		527E11BE2692C38D00FB8B01 /* PurchaseReviewingApplyInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseReviewingApplyInfoViewController.swift; sourceTree = "<group>"; };
+		527E11BF2692C38D00FB8B01 /* PurchaseReviewingApplyInfoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PurchaseReviewingApplyInfoViewController.xib; sourceTree = "<group>"; };
 		52B15CB92691BAFC0010FCED /* MyMindEmployeeAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMindEmployeeAPIService.swift; sourceTree = "<group>"; };
 		52D7249E268D62BC00B00585 /* MyMindPurchaseReviewAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMindPurchaseReviewAPIService.swift; sourceTree = "<group>"; };
 		52D724A3268DBD6400B00585 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -546,6 +550,8 @@
 				A40EBFDD2671F7A100A4863D /* PickPurchaseReviewerViewController.xib */,
 				A40EBFE0267216C100A4863D /* PurchaseApplyViewController.swift */,
 				A4BC88C62679DDC700956B95 /* EditablePickedProductsInfoViewController.swift */,
+				527E11BE2692C38D00FB8B01 /* PurchaseReviewingApplyInfoViewController.swift */,
+				527E11BF2692C38D00FB8B01 /* PurchaseReviewingApplyInfoViewController.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1068,6 +1074,7 @@
 				A489A1B2263FAA7D00832679 /* PurchaseBriefCollectionViewCell.xib in Resources */,
 				A43E850E268C0889008C8369 /* TOTP.storyboard in Resources */,
 				52282373268EB41400A66340 /* PurchaseBriefReviewingCollectionViewCell.xib in Resources */,
+				527E11C12692C38D00FB8B01 /* PurchaseReviewingApplyInfoViewController.xib in Resources */,
 				A40EBFDA2671AD4900A4863D /* PurchaseApplyInfoViewController.xib in Resources */,
 				A4CBD8B7266A2CF200B19119 /* ProductMaterialSuggestionInfoTableViewCell.xib in Resources */,
 				A43E850A268C081B008C8369 /* SecretTableViewCell.xib in Resources */,
@@ -1293,6 +1300,7 @@
 				A49CF8BB2603028C00AFC170 /* APIService.swift in Sources */,
 				A4CBD8AD2669C50A00B19119 /* StageProgressCollectionReusableView.swift in Sources */,
 				5246E4772690A2A4005C11EC /* CustomAlertView.swift in Sources */,
+				527E11C02692C38D00FB8B01 /* PurchaseReviewingApplyInfoViewController.swift in Sources */,
 				A48389BE260876770044C09E /* AuthService.swift in Sources */,
 				A464876C268968920053E6F5 /* ScanViewController.swift in Sources */,
 				A4CBD8A52664E10800B19119 /* VendorSelectionTableViewCell.swift in Sources */,

@@ -164,7 +164,9 @@ class EditingPurchaseOrderViewModel {
     private func makePickPurchaseReviewerViewModel(with order: PurchaseOrder) {
         pickPurchaseReviewerViewModel = PickPurchaseReviewerViewModel(
             loader: purchaseReviewerListLoader,
-            logInfos: order.logInfos)
+            logInfos: order.logInfos,
+            level: order.reviewLevel+1,
+            isLastReview: order.lastReview)
     }
 
     func subscribeChildViewModel() {

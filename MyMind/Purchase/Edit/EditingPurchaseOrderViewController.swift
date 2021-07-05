@@ -11,6 +11,7 @@ import RxSwift
 
 final class EditingPurchaseOrderViewController: NiblessViewController {
 
+    var reviewing: Bool = false
     let viewModel: EditingPurchaseOrderViewModel
 
     let bag: DisposeBag = DisposeBag()
@@ -24,7 +25,7 @@ final class EditingPurchaseOrderViewController: NiblessViewController {
         let horizontalInset: CGFloat = 20
         layout.sectionInset = UIEdgeInsets(top: 15, left: horizontalInset, bottom: 15, right: horizontalInset)
         let collecitonView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collecitonView.backgroundColor = .white
+        collecitonView.backgroundColor = .systemBackground
         return collecitonView
     }()
 
@@ -104,10 +105,15 @@ final class EditingPurchaseOrderViewController: NiblessViewController {
         else {
             return
         }
-        let purchaseApplyInfoViewController = PurchaseApplyInfoViewController.loadFormNib()
-        purchaseApplyInfoViewController.viewModel = purchaseApplyInfoViewModel
-        contentViewControllers.append(purchaseApplyInfoViewController)
-
+        if reviewing {
+            let purchaseReviewingApplyInfoViewController = PurchaseReviewingApplyInfoViewController.loadFormNib()
+            purchaseReviewingApplyInfoViewController.viewModel = purchaseApplyInfoViewModel
+            contentViewControllers.append(purchaseReviewingApplyInfoViewController)
+        } else {
+            let purchaseApplyInfoViewController = PurchaseApplyInfoViewController.loadFormNib()
+            purchaseApplyInfoViewController.viewModel = purchaseApplyInfoViewModel
+            contentViewControllers.append(purchaseApplyInfoViewController)
+        }
         let pickPurchaseReviewerViewController = PickPurchaseReviewerViewController.loadFormNib()
         pickPurchaseReviewerViewController.viewModel = pickPurchaseReviewerViewModel
         contentViewControllers.append(pickPurchaseReviewerViewController)

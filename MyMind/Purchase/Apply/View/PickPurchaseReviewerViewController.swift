@@ -11,8 +11,13 @@ import RxSwift
 
 final class PickPurchaseReviewerViewController: UIViewController {
 
+    @IBOutlet weak var pickReviewerTitleLabel: UILabel!
+    @IBOutlet weak var pickReviewerTitleLableHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var pickerReviewerTitleLabelBottomConstraint: NSLayoutConstraint!
     @IBOutlet private weak var pickReviewerTextField: CustomClearButtonPositionTextField!
+    @IBOutlet weak var pickReviewerTextFieldHeightConstraint: NSLayoutConstraint!
     @IBOutlet private weak var pickReviewerErrorLabel: UILabel!
+    @IBOutlet weak var noteTextViewTopConstraint: NSLayoutConstraint!
     @IBOutlet private weak var noteTextView: UITextView!
     @IBOutlet private weak var noteErrorLabel: UILabel!
     @IBOutlet private weak var noteTextCounterLabel: UILabel!
@@ -34,7 +39,11 @@ final class PickPurchaseReviewerViewController: UIViewController {
         super.viewDidLoad()
 
         configureRootView()
-        configurePickReviewerTextField()
+        if viewModel.isLastReview {
+            hideReviewerPicker()
+        } else {
+            configurePickReviewerTextField()
+        }
         configureDropDownView()
         configureLogInfosViews()
         viewModel.loadPurchaseReviewerList()
@@ -86,6 +95,12 @@ final class PickPurchaseReviewerViewController: UIViewController {
         view.layer.borderColor = UIColor.separator.cgColor
     }
 
+    private func hideReviewerPicker() {
+        pickReviewerTitleLableHeightConstraint.constant = 0
+        pickerReviewerTitleLabelBottomConstraint.constant = 0
+        pickReviewerTextFieldHeightConstraint.constant = 0
+        noteTextViewTopConstraint.constant = 0
+    }
     private func configurePickReviewerTextField() {
         pickReviewerTextField.delegate = self
         pickReviewerTextField.layer.borderWidth = 1

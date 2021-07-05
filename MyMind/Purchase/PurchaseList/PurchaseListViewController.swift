@@ -230,6 +230,7 @@ final class PurchaseListViewController: NiblessViewController {
             service: service)
 
         let viewController = EditingPurchaseOrderViewController(viewModel: viewModel)
+        viewController.reviewing = reviewing
         show(viewController, sender: nil)
     }
 }

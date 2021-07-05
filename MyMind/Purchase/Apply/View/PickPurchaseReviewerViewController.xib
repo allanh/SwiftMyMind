@@ -15,8 +15,13 @@
                 <outlet property="noteErrorLabel" destination="FAi-Le-JHA" id="jff-av-dTK"/>
                 <outlet property="noteTextCounterLabel" destination="1Oy-RU-G29" id="pQa-Xh-1fb"/>
                 <outlet property="noteTextView" destination="gci-2T-sxs" id="7b8-pe-hVL"/>
+                <outlet property="noteTextViewTopConstraint" destination="ACk-0S-hXv" id="nLW-WQ-BEt"/>
                 <outlet property="pickReviewerErrorLabel" destination="che-dt-V4o" id="gAH-9h-m2R"/>
                 <outlet property="pickReviewerTextField" destination="1s6-Fs-vbK" id="zOH-Bi-bcd"/>
+                <outlet property="pickReviewerTextFieldHeightConstraint" destination="Nzq-c2-rCm" id="kQo-L7-kkT"/>
+                <outlet property="pickReviewerTitleLabel" destination="f7b-NL-xtz" id="9vc-pc-PNh"/>
+                <outlet property="pickReviewerTitleLableHeightConstraint" destination="yEu-Ss-X55" id="zdu-jk-Rox"/>
+                <outlet property="pickerReviewerTitleLabelBottomConstraint" destination="fy3-yP-p9R" id="0hq-01-r8B"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

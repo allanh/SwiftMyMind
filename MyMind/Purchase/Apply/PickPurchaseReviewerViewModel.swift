@@ -12,6 +12,8 @@ import RxSwift
 
 struct PickPurchaseReviewerViewModel {
     // MARK: - Properties
+    let level: Int
+    let isLastReview: Bool
     let reviewerList: BehaviorRelay<[Reviewer]> = .init(value: [])
     let pickedReviewer: BehaviorRelay<Reviewer?> = .init(value: nil)
     let pickedReviewerValidationStatus: BehaviorRelay<ValidationResult> = .init(value: .invalid("此欄位必填"))
@@ -24,10 +26,13 @@ struct PickPurchaseReviewerViewModel {
     let bag: DisposeBag = DisposeBag()
     // MARK: - Methods
     init(loader: PurchaseReviewerListLoader,
-         logInfos: [PurchaseOrder.LogInfo]? = nil) {
+         logInfos: [PurchaseOrder.LogInfo]? = nil,
+         level: Int = 1,
+         isLastReview: Bool = false) {
         self.loader = loader
         self.logInfos = logInfos
-
+        self.level = level
+        self.isLastReview = isLastReview
         bindStatus()
     }
 
@@ -50,7 +55,7 @@ struct PickPurchaseReviewerViewModel {
     }
 
     func loadPurchaseReviewerList() {
-        loader.loadPurchaseReviewerList(level: 1)
+        loader.loadPurchaseReviewerList(level: level)
             .done { list in
                 reviewerList.accept(list)
             }
