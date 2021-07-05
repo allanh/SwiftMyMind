@@ -77,6 +77,10 @@ extension Endpoint {
     static var forgotPassword: Self {
         Endpoint(path: "/forgot_password", serviceType: .auth)
     }
+    
+    static var authorization: Self {
+        Endpoint(path: "/api/admin/v1/authorization", serviceType: .dos)
+    }
 
     static var me: Self {
         Endpoint(path: "/employee/me", serviceType: .auth)

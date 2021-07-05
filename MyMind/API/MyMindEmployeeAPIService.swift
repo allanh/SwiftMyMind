@@ -17,6 +17,14 @@ class MyMindEmployeeAPIService: PromiseKitAPIService {
     init(userSessionDataStore: UserSessionDataStore) {
         self.userSessionDataStore = userSessionDataStore
     }
+    func authorization() -> Promise<Authorization> {
+        guard let userSession = userSessionDataStore.readUserSession() else {
+            return .init(error: APIError.noAccessTokenError)
+        }
+
+        let request = request(endPoint: .authorization, httpHeader: ["Authorization": "Bearer \(userSession.token)"])
+        return sendRequest(request: request)
+    }
 
     func me() -> Promise<Account> {
         guard let userSession = userSessionDataStore.readUserSession() else {

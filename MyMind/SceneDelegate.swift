@@ -30,30 +30,55 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         self.window = UIWindow(windowScene: windowScene)
 
-        let purchaseListLoader = MyMindPurchaseAPIService.shared
-        purchaseListLoader.loadPurchaseList(with: nil)
-            .done { purchaseList in
-                self.handleSession(true)
+        MyMindEmployeeAPIService.shared.authorization()
+            .done { authorization in
+                self.handleSession(true, authorization: authorization)
             }
             .ensure {
             }
             .catch { error in
                 self.handleSession((error as! APIError) != .invalidAccessToken && (error as! APIError) != .noAccessTokenError)
             }
+//        let purchaseListLoader = MyMindPurchaseAPIService.shared
+//        purchaseListLoader.loadPurchaseList(with: nil)
+//            .done { purchaseList in
+//                self.handleSession(true)
+//            }
+//            .ensure {
+//            }
+//            .catch { error in
+//                self.handleSession((error as! APIError) != .invalidAccessToken && (error as! APIError) != .noAccessTokenError)
+//            }
     }
-    private func handleSession(_ valid: Bool) {
-        let viewModel = SignInViewModel(
-            userSessionRepository: MyMindUserSessionRepository.shared,
-            signInValidationService: SignInValidatoinService(),
-            lastSignInInfoDataStore: MyMindLastSignInInfoDataStore()
-        )
-        let signInViewController = SignInViewController(viewModel: viewModel)
+    private func handleSession(_ valid: Bool, authorization: Authorization? = nil) {
+        if valid {
+            if let rootViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "Home") as? HomeViewController {
+                rootViewController.authorization = authorization
+                let navigationViewController = UINavigationController(rootViewController: rootViewController)
+                self.window?.makeKeyAndVisible()
+                self.window?.rootViewController = navigationViewController
+            } else {
+                let navigationViewController = UINavigationController(rootViewController: UIViewController())
+                self.window?.makeKeyAndVisible()
+                self.window?.rootViewController = navigationViewController
+            }
+        } else {
+            let viewModel = SignInViewModel(
+                userSessionRepository: MyMindUserSessionRepository.shared,
+                signInValidationService: SignInValidatoinService(),
+                lastSignInInfoDataStore: MyMindLastSignInInfoDataStore()
+            )
+            let signInViewController = SignInViewController(viewModel: viewModel)
+            self.window?.makeKeyAndVisible()
+            self.window?.rootViewController = signInViewController
+        }
         
-        let rootViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "Home") as? HomeViewController
-        let navigationViewController = UINavigationController(rootViewController: rootViewController ?? UIViewController())
-        
-        self.window?.makeKeyAndVisible()
-        self.window?.rootViewController = valid ? navigationViewController : signInViewController
+//        let rootViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "Home") as? HomeViewController
+//
+//        let navigationViewController = UINavigationController(rootViewController: rootViewController ?? UIViewController())
+//
+//        self.window?.makeKeyAndVisible()
+//        self.window?.rootViewController = valid ? navigationViewController : signInViewController
     }
     func sceneWillResignActive(_ scene: UIScene) {
         // Called when the scene will move from an active state to an inactive state.

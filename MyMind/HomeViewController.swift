@@ -25,6 +25,7 @@ final class HomeViewController: UIViewController {
             collectionView.reloadData()
         }
     }
+    var authorization: Authorization?
     var remoteConfig: RemoteConfig!
     /// Must set on main thread
     private var isNetworkProcessing: Bool = false {
