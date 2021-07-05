@@ -15,8 +15,19 @@ extension PromiseKitAPIService {
     func sendRequest<T: Decodable>(request: URLRequest) -> Promise<T> {
         return Promise<T> { seal in
             URLSession.shared.dataTask(with: request) { data, urlResponse, error in
-                if let httpResponse = urlResponse as? HTTPURLResponse, httpResponse.statusCode == 401 {
-                    seal.reject(APIError.invalidAccessToken)
+                if let httpResponse = urlResponse as? HTTPURLResponse {
+                    var error: APIError
+                    switch httpResponse.statusCode {
+                    case 401:
+                        error = .invalidAccessToken
+                    case 503:
+                        error = .reparingError
+                    case 403:
+                        error = .insufficientPrivilegeError
+                    default:
+                        error = .unexpectedError
+                    }
+                    seal.reject(error)
                     return
                 }
                 if let error = error {
@@ -47,8 +58,19 @@ extension PromiseKitAPIService {
     func sendRequest(request: URLRequest) -> Promise<Void> {
         return Promise<Void> { seal in
             URLSession.shared.dataTask(with: request) { data, urlResponse, error in
-                if let httpResponse = urlResponse as? HTTPURLResponse, httpResponse.statusCode == 401 {
-                    seal.reject(APIError.invalidAccessToken)
+                if let httpResponse = urlResponse as? HTTPURLResponse {
+                    var error: APIError
+                    switch httpResponse.statusCode {
+                    case 401:
+                        error = .invalidAccessToken
+                    case 503:
+                        error = .reparingError
+                    case 403:
+                        error = .insufficientPrivilegeError
+                    default:
+                        error = .unexpectedError
+                    }
+                    seal.reject(error)
                     return
                 }
                 if let error = error {

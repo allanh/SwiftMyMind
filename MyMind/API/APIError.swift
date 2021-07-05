@@ -18,6 +18,8 @@ enum APIError : Error {
     case noAccessTokenError
     case unexpectedError
     case invalidAccessToken
+    case reparingError
+    case insufficientPrivilegeError
 }
 extension APIError: Equatable {
     
