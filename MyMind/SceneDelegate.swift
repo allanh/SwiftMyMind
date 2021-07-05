@@ -39,16 +39,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             .catch { error in
                 self.handleSession((error as! APIError) != .invalidAccessToken && (error as! APIError) != .noAccessTokenError)
             }
-//        let purchaseListLoader = MyMindPurchaseAPIService.shared
-//        purchaseListLoader.loadPurchaseList(with: nil)
-//            .done { purchaseList in
-//                self.handleSession(true)
-//            }
-//            .ensure {
-//            }
-//            .catch { error in
-//                self.handleSession((error as! APIError) != .invalidAccessToken && (error as! APIError) != .noAccessTokenError)
-//            }
     }
     private func handleSession(_ valid: Bool, authorization: Authorization? = nil) {
         if valid {
@@ -73,12 +63,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             self.window?.rootViewController = signInViewController
         }
         
-//        let rootViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "Home") as? HomeViewController
-//
-//        let navigationViewController = UINavigationController(rootViewController: rootViewController ?? UIViewController())
-//
-//        self.window?.makeKeyAndVisible()
-//        self.window?.rootViewController = valid ? navigationViewController : signInViewController
     }
     func sceneWillResignActive(_ scene: UIScene) {
         // Called when the scene will move from an active state to an inactive state.
