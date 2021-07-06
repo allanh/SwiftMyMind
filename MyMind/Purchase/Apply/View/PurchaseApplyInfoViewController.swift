@@ -11,7 +11,6 @@ import RxSwift
 
 final class PurchaseApplyInfoViewController: UIViewController {
 
-//    var reviewing: Bool = false
     @IBOutlet private weak var purchaseIDLabel: UILabel!
     @IBOutlet private weak var vendorNameLabel: UILabel!
     @IBOutlet private weak var statusLabel: UILabel!
@@ -52,17 +51,12 @@ final class PurchaseApplyInfoViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        if reviewing {
-//            expectStorageDateTitleLabel.attributedText = NSAttributedString(string: "預計入庫日")
-//            warehouseTitleLabel.attributedText = NSAttributedString(string: "預計入庫倉")
-//        } else {
-            var attributedString = NSMutableAttributedString(string: "*預計入庫日", attributes: [.foregroundColor: UIColor.label])
-            attributedString.addAttributes([.foregroundColor : UIColor.red], range: NSRange(location:0,length:1))
-            expectStorageDateTitleLabel.attributedText = attributedString
-            attributedString = NSMutableAttributedString(string: "*預計入庫倉", attributes: [.foregroundColor: UIColor.label])
-            attributedString.addAttributes([.foregroundColor : UIColor.red], range: NSRange(location:0,length:1))
-            warehouseTitleLabel.attributedText = attributedString
-//        }
+        var attributedString = NSMutableAttributedString(string: "*預計入庫日", attributes: [.foregroundColor: UIColor.label])
+        attributedString.addAttributes([.foregroundColor : UIColor.red], range: NSRange(location:0,length:1))
+        expectStorageDateTitleLabel.attributedText = attributedString
+        attributedString = NSMutableAttributedString(string: "*預計入庫倉", attributes: [.foregroundColor: UIColor.label])
+        attributedString.addAttributes([.foregroundColor : UIColor.red], range: NSRange(location:0,length:1))
+        warehouseTitleLabel.attributedText = attributedString
         bindToViewModel()
         subscribeViewModel()
         viewModel.loadWarehouseList()
