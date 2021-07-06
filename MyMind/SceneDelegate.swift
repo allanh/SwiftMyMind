@@ -29,40 +29,27 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
         guard let windowScene = (scene as? UIWindowScene) else { return }
         self.window = UIWindow(windowScene: windowScene)
-
+        self.window?.makeKeyAndVisible()
         MyMindEmployeeAPIService.shared.authorization()
             .done { authorization in
-                self.handleSession(true, authorization: authorization)
+                self.showHomePage(authorization)
             }
             .ensure {
             }
             .catch { error in
-                self.handleSession((error as! APIError) != .invalidAccessToken && (error as! APIError) != .noAccessTokenError)
+                _ = ErrorHandler.shared.handle((error as! APIError))
             }
     }
-    private func handleSession(_ valid: Bool, authorization: Authorization? = nil) {
-        if valid {
-            if let rootViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "Home") as? HomeViewController {
-                rootViewController.authorization = authorization
-                let navigationViewController = UINavigationController(rootViewController: rootViewController)
-                self.window?.makeKeyAndVisible()
-                self.window?.rootViewController = navigationViewController
-            } else {
-                let navigationViewController = UINavigationController(rootViewController: UIViewController())
-                self.window?.makeKeyAndVisible()
-                self.window?.rootViewController = navigationViewController
-            }
+    private func showHomePage(_ authorization: Authorization? = nil) {
+        if let rootViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "Home") as? HomeViewController {
+            rootViewController.authorization = authorization
+            let navigationViewController = UINavigationController(rootViewController: rootViewController)
+            self.window?.rootViewController = navigationViewController
         } else {
-            let viewModel = SignInViewModel(
-                userSessionRepository: MyMindUserSessionRepository.shared,
-                signInValidationService: SignInValidatoinService(),
-                lastSignInInfoDataStore: MyMindLastSignInInfoDataStore()
-            )
-            let signInViewController = SignInViewController(viewModel: viewModel)
+            let navigationViewController = UINavigationController(rootViewController: UIViewController())
             self.window?.makeKeyAndVisible()
-            self.window?.rootViewController = signInViewController
+            self.window?.rootViewController = navigationViewController
         }
-        
     }
     func sceneWillResignActive(_ scene: UIScene) {
         // Called when the scene will move from an active state to an inactive state.
