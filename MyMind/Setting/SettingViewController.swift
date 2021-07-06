@@ -15,6 +15,7 @@ class SettingViewController: UIViewController {
 
     weak var delegate: MixedDelegate?
 
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var accountLabel: UILabel!
     @IBOutlet weak var nameTitleLabel: UILabel!
     @IBOutlet weak var nameErrorLabel: UILabel!
@@ -65,6 +66,8 @@ class SettingViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        addKeyboardObservers()
+        addTapToResignKeyboardGesture()
         nameTextField.layer.borderWidth = 1
         emailTextField.layer.borderWidth = 1
         clearErrorMessage()
@@ -168,4 +171,30 @@ class SettingViewController: UIViewController {
     }
     */
 
+}
+extension SettingViewController {
+    func addKeyboardObservers() {
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(handleContentUnderKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(handleContentUnderKeyboard), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+    }
+
+    func removeObservers() {
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.removeObserver(self)
+    }
+
+    @objc func handleContentUnderKeyboard(notification: Notification) {
+        if let userInfo = notification.userInfo,
+           let keyboardEndFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let convertedKeyboardEndFrame = view.convert(keyboardEndFrame.cgRectValue, from: view.window)
+            if notification.name == UIResponder.keyboardWillHideNotification {
+                scrollView.contentInset = .zero
+            } else {
+                var insets = scrollView.contentInset
+                insets.bottom = convertedKeyboardEndFrame.height
+                scrollView.contentInset = insets
+            }
+        }
+    }
 }

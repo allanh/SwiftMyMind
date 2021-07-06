@@ -475,6 +475,7 @@
                         <outlet property="nameErrorLabel" destination="sPW-h7-PFn" id="zcC-9L-gBp"/>
                         <outlet property="nameTextField" destination="wNq-lz-RRq" id="gET-bS-XBU"/>
                         <outlet property="nameTitleLabel" destination="3St-2p-f6Q" id="ZdY-st-h1x"/>
+                        <outlet property="scrollView" destination="HaC-lo-ekI" id="H1v-br-h5w"/>
                         <outlet property="updateTimeLabel" destination="8zS-5R-Vrh" id="WMq-WY-R2A"/>
                     </connections>
                 </viewController>
