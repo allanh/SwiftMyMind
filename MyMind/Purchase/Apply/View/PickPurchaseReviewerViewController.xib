@@ -56,13 +56,19 @@
                         <constraint firstAttribute="height" constant="1" id="PyH-Ae-XqJ"/>
                     </constraints>
                 </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="選擇一審人員" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f7b-NL-xtz">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f7b-NL-xtz">
                     <rect key="frame" x="20" y="76" width="96" height="25"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="25" id="yEu-Ss-X55"/>
                     </constraints>
-                    <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="16"/>
-                    <color key="textColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <attributedString key="attributedText">
+                        <fragment content="選擇一審人員">
+                            <attributes>
+                                <color key="NSColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <font key="NSFont" size="16" name="PingFangTC-Semibold"/>
+                            </attributes>
+                        </fragment>
+                    </attributedString>
                     <color key="highlightedColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                 </label>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1s6-Fs-vbK" customClass="CustomClearButtonPositionTextField" customModule="MyMind" customModuleProvider="target">

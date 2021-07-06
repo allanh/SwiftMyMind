@@ -102,6 +102,9 @@ final class PickPurchaseReviewerViewController: UIViewController {
         noteTextViewTopConstraint.constant = 0
     }
     private func configurePickReviewerTextField() {
+        let attributedString = NSMutableAttributedString(string: "*選擇"+(viewModel.level == 1 ? "一" : "二")+"審人員", attributes: [.foregroundColor: UIColor.label])
+        attributedString.addAttributes([.foregroundColor : UIColor.red], range: NSRange(location:0,length:1))
+        pickReviewerTitleLabel.attributedText = attributedString
         pickReviewerTextField.delegate = self
         pickReviewerTextField.layer.borderWidth = 1
         pickReviewerTextField.layer.borderColor = UIColor.separator.cgColor

@@ -87,8 +87,9 @@ final class EditingPurchaseOrderViewController: NiblessViewController {
         removeObservers()
     }
     // MARK: - Methods
-    init(viewModel: EditingPurchaseOrderViewModel) {
+    init(viewModel: EditingPurchaseOrderViewModel, reviewing: Bool) {
         self.viewModel = viewModel
+        self.reviewing = reviewing
         super.init()
     }
 

@@ -237,8 +237,7 @@ final class PurchaseListViewController: NiblessViewController {
             purchaseReviewerListLoader: service,
             service: service)
 
-        let viewController = EditingPurchaseOrderViewController(viewModel: viewModel)
-        viewController.reviewing = reviewing
+        let viewController = EditingPurchaseOrderViewController(viewModel: viewModel, reviewing: reviewing)
         show(viewController, sender: nil)
     }
 }
