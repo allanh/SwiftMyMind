@@ -54,8 +54,11 @@ final class PickVendorViewController: UITableViewController {
                 self.tableView.reloadData()
             })
             .catch { error in
-                #warning("Error handling")
-                print(error.localizedDescription)
+                if let apiError = error as? APIError {
+                    _ = ErrorHandler.shared.handle(apiError, controller: self)
+                } else {
+                    ToastView.showIn(self, message: error.localizedDescription)
+                }
             }
     }
 

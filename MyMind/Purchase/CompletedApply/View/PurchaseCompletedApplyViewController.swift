@@ -116,8 +116,11 @@ final class PurchaseCompletedApplyViewController: NiblessViewController {
                 self.generateContentViewControllers(with: order)
                 self.collectionView.reloadData()
             }.catch { error in
-                print(error.localizedDescription)
-                #warning("Error handling")
+                if let apiError = error as? APIError {
+                    _ = ErrorHandler.shared.handle(apiError, controller: self)
+                } else {
+                    ToastView.showIn(self, message: error.localizedDescription)
+                }
             }
     }
 

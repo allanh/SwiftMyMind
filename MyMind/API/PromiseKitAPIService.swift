@@ -21,7 +21,7 @@ extension PromiseKitAPIService {
                         seal.reject(APIError.invalidAccessToken)
                         return
                     case 503:
-                        seal.reject(APIError.reparingError)
+                        seal.reject(APIError.maintenanceError)
                         return
                     case 403:
                         seal.reject(APIError.insufficientPrivilegeError)
@@ -64,7 +64,7 @@ extension PromiseKitAPIService {
                         seal.reject(APIError.invalidAccessToken)
                         return
                     case 503:
-                        seal.reject(APIError.reparingError)
+                        seal.reject(APIError.maintenanceError)
                         return
                     case 403:
                         seal.reject(APIError.insufficientPrivilegeError)

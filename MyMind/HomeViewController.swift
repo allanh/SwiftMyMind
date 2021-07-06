@@ -53,6 +53,7 @@ final class HomeViewController: UIViewController {
             .catch(handleErrorForFetchPurchaseList(_:))
     }
     private func handleSuccessFetchPurchaseList(_ purchaseList: PurchaseList) {
+
         if self.purchaseList != nil {
             self.purchaseList?.updateWithNextPageList(purchaseList: purchaseList)
         } else {
@@ -61,9 +62,11 @@ final class HomeViewController: UIViewController {
     }
 
     private func handleErrorForFetchPurchaseList(_ error: Error) {
-        #warning("Error handling")
-        print(error.localizedDescription)
-        ToastView.showIn(self, message: error.localizedDescription)
+        if let apiError = error as? APIError {
+            _ = ErrorHandler.shared.handle(apiError, controller: self)
+        } else {
+            ToastView.showIn(self, message: error.localizedDescription)
+        }
     }
 
     override func viewDidLoad() {
@@ -151,11 +154,9 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         switch indexPath.item {
         case 0:
             let purchaseListViewController = PurchaseListViewController(purchaseListLoader: MyMindPurchaseAPIService.shared)
-            purchaseListViewController.reviewing = false
             show(purchaseListViewController, sender: nil)
         case 1:
-            let purchaseListViewController = PurchaseListViewController(purchaseListLoader: MyMindPurchaseReviewAPIService.shared)
-            purchaseListViewController.reviewing = true
+            let purchaseListViewController = PurchaseListViewController(purchaseListLoader: MyMindPurchaseReviewAPIService.shared, reviewing: true)
             show(purchaseListViewController, sender: nil)
         case 2:
             if let settingViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "Setting") as? SettingViewController {

@@ -10,9 +10,11 @@ class CustomAlertView: NiblessView {
     var hierarchyNotReady: Bool = true
     let title: String
     let descriptions: String
-    init(frame: CGRect, title: String, descriptions: String) {
+    let needCancel: Bool
+    init(frame: CGRect, title: String, descriptions: String, needCancel: Bool = true) {
         self.title = title
         self.descriptions = descriptions
+        self.needCancel = needCancel
         super.init(frame: frame)
     }
     
@@ -74,7 +76,9 @@ extension CustomAlertView {
         alertView.addSubview(alertTitleLabel)
         alertView.addSubview(alertDescriptionsLabel)
         alertView.addSubview(confirmButton)
-        alertView.addSubview(cancelButton)
+        if needCancel {
+            alertView.addSubview(cancelButton)
+        }
         addSubview(alertView)
     }
     private func activateConstraints() {
@@ -82,7 +86,9 @@ extension CustomAlertView {
         activateConstraintsAlertTitleLabel()
         activateConstraintsAlertDescriptionsLabel()
         activateConstraintsAlertConfirmButton()
-        activateConstraintsAlertCancelButton()
+        if needCancel {
+            activateConstraintsAlertCancelButton()
+        }
     }
 }
 /// constraints

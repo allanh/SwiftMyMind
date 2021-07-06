@@ -12,7 +12,7 @@ import NVActivityIndicatorView
 final class PurchaseListViewController: NiblessViewController {
     // MARK: - Properties
     var rootView: PurchaseListRootView { view as! PurchaseListRootView }
-    var reviewing: Bool = false
+    var reviewing: Bool
 
     lazy var pickSortTypeView: PickSortTypeView<PurchaseListQueryInfo.OrderReference, SingleLabelTableViewCell> = {
         if reviewing {
@@ -73,9 +73,13 @@ final class PurchaseListViewController: NiblessViewController {
         addButtonsActions()
     }
     // MARK: - Methods
-    init(purchaseListLoader: PurchaseListLoader) {
+    init(purchaseListLoader: PurchaseListLoader, reviewing: Bool = false) {
         self.purchaseListLoader = purchaseListLoader
+        self.reviewing = reviewing
         super.init()
+        if reviewing {
+            purchaseListQueryInfo.orderReference = .createdDate
+        }
     }
 
     private func addCloseButton() {
@@ -154,8 +158,12 @@ final class PurchaseListViewController: NiblessViewController {
     }
 
     private func handleErrorForFetchPurchaseList(_ error: Error) {
-        #warning("Error handling")
         print(error.localizedDescription)
+        if let apiError = error as? APIError {
+            _ = ErrorHandler.shared.handle(apiError, controller: self)
+        } else {
+            ToastView.showIn(self, message: error.localizedDescription)
+        }
     }
 
     private func configSortCell(_ cell: SingleLabelTableViewCell, item: PurchaseListQueryInfo.OrderReference) {
