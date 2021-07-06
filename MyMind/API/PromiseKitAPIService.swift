@@ -16,19 +16,19 @@ extension PromiseKitAPIService {
         return Promise<T> { seal in
             URLSession.shared.dataTask(with: request) { data, urlResponse, error in
                 if let httpResponse = urlResponse as? HTTPURLResponse {
-                    var error: APIError
                     switch httpResponse.statusCode {
                     case 401:
-                        error = .invalidAccessToken
+                        seal.reject(APIError.invalidAccessToken)
+                        return
                     case 503:
-                        error = .reparingError
+                        seal.reject(APIError.reparingError)
+                        return
                     case 403:
-                        error = .insufficientPrivilegeError
+                        seal.reject(APIError.insufficientPrivilegeError)
+                        return
                     default:
-                        error = .unexpectedError
+                        break
                     }
-                    seal.reject(error)
-                    return
                 }
                 if let error = error {
                     seal.reject(error)
@@ -59,19 +59,19 @@ extension PromiseKitAPIService {
         return Promise<Void> { seal in
             URLSession.shared.dataTask(with: request) { data, urlResponse, error in
                 if let httpResponse = urlResponse as? HTTPURLResponse {
-                    var error: APIError
                     switch httpResponse.statusCode {
                     case 401:
-                        error = .invalidAccessToken
+                        seal.reject(APIError.invalidAccessToken)
+                        return
                     case 503:
-                        error = .reparingError
+                        seal.reject(APIError.reparingError)
+                        return
                     case 403:
-                        error = .insufficientPrivilegeError
+                        seal.reject(APIError.insufficientPrivilegeError)
+                        return
                     default:
-                        error = .unexpectedError
+                        break
                     }
-                    seal.reject(error)
-                    return
                 }
                 if let error = error {
                     seal.reject(error)
