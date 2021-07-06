@@ -66,8 +66,6 @@ class SettingViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        addKeyboardObservers()
-        addTapToResignKeyboardGesture()
         nameTextField.layer.borderWidth = 1
         emailTextField.layer.borderWidth = 1
         clearErrorMessage()
@@ -98,6 +96,15 @@ class SettingViewController: UIViewController {
             }
 
         // Do any additional setup after loading the view.
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        addKeyboardObservers()
+        addTapToResignKeyboardGesture()
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        removeObservers()
     }
     @IBAction func signout(_ sender: Any) {
         if let contentView = navigationController?.view {
