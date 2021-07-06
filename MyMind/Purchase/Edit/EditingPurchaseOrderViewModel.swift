@@ -26,6 +26,7 @@ class EditingPurchaseOrderViewModel {
     let service: EditingPurchaseOrderService
     let warehouseListLoader: PurchaseWarehouseListLoader
     let purchaseReviewerListLoader: PurchaseReviewerListLoader
+    let reviewing: Bool
 
     var purchaseApplyInfoViewModel: PurchaseApplyInfoViewModel?
     var pickPurchaseReviewerViewModel: PickPurchaseReviewerViewModel?
@@ -46,12 +47,14 @@ class EditingPurchaseOrderViewModel {
         purchaseOrderLoader: PurchaseOrderLoader,
         warehouseListLoader: PurchaseWarehouseListLoader,
         purchaseReviewerListLoader: PurchaseReviewerListLoader,
-        service: EditingPurchaseOrderService) {
+        service: EditingPurchaseOrderService,
+        reviewing: Bool) {
         self.purchaseID = purchaseID
         self.purchaseOrderLoader = purchaseOrderLoader
         self.warehouseListLoader = warehouseListLoader
         self.purchaseReviewerListLoader = purchaseReviewerListLoader
         self.service = service
+        self.reviewing = reviewing
     }
 
     func loadPurchaseOrderThenMakeChildViewModels() {
@@ -64,7 +67,7 @@ class EditingPurchaseOrderViewModel {
                 guard let self = self else { return }
                 self.makePurchaseApplyInfoViewModel(with: order)
                 self.makePickPurchaseReviewerViewModel(with: order)
-                self.subscribeChildViewModel()
+                self.subscribeChildViewModel(with: order)
                 self.didFinishMakeChildViewModels?()
             }
             .catch { error in
@@ -189,7 +192,7 @@ class EditingPurchaseOrderViewModel {
             isLastReview: order.lastReview)
     }
 
-    func subscribeChildViewModel() {
+    func subscribeChildViewModel(with order: PurchaseOrder) {
         guard let purchaseApplyInfoViewModel = purchaseApplyInfoViewModel,
               let pickPurchaseReviewerViewModel = pickPurchaseReviewerViewModel
         else {
@@ -201,17 +204,40 @@ class EditingPurchaseOrderViewModel {
             })
             .disposed(by: bag)
 
-        Observable.combineLatest([
-            purchaseApplyInfoViewModel.expectedStorageDateValidationStatus,
-            purchaseApplyInfoViewModel.pickedWarehouseValidationStatus,
-            pickPurchaseReviewerViewModel.pickedReviewerValidationStatus,
-            pickPurchaseReviewerViewModel.noteValidationStatus
-        ])
-        .map({ validationStatus in
-            validationStatus.filter({ $0 != .valid}).isEmpty
-        })
-        .bind(to: centralizedValidationStatus)
-        .disposed(by: bag)
+        if reviewing {
+            if order.lastReview {
+                Observable.combineLatest([
+                    pickPurchaseReviewerViewModel.noteValidationStatus
+                ])
+                .map({ validationStatus in
+                    validationStatus.filter({ $0 != .valid}).isEmpty
+                })
+                .bind(to: centralizedValidationStatus)
+                .disposed(by: bag)
+            } else {
+                Observable.combineLatest([
+                    pickPurchaseReviewerViewModel.pickedReviewerValidationStatus,
+                    pickPurchaseReviewerViewModel.noteValidationStatus
+                ])
+                .map({ validationStatus in
+                    validationStatus.filter({ $0 != .valid}).isEmpty
+                })
+                .bind(to: centralizedValidationStatus)
+                .disposed(by: bag)
+            }
+        } else {
+            Observable.combineLatest([
+                purchaseApplyInfoViewModel.expectedStorageDateValidationStatus,
+                purchaseApplyInfoViewModel.pickedWarehouseValidationStatus,
+                pickPurchaseReviewerViewModel.pickedReviewerValidationStatus,
+                pickPurchaseReviewerViewModel.noteValidationStatus
+            ])
+            .map({ validationStatus in
+                validationStatus.filter({ $0 != .valid}).isEmpty
+            })
+            .bind(to: centralizedValidationStatus)
+            .disposed(by: bag)
+        }
 
     }
 
@@ -227,21 +253,55 @@ class EditingPurchaseOrderViewModel {
         guard let date = purchaseApplyInfoViewModel?.expectedStorageDate.value else { return nil }
         let expectStorageDate = dateFormatter.string(from: date)
 
-        guard let reviewer = pickPurchaseReviewerViewModel?.pickedReviewer.value else { return nil }
+        if reviewing {
+            if let isLastReview = pickPurchaseReviewerViewModel?.isLastReview, isLastReview {
+                let note = pickPurchaseReviewerViewModel?.note.value ?? ""
 
-        let note = pickPurchaseReviewerViewModel?.note.value ?? ""
+                guard let pickedWarehouse = purchaseApplyInfoViewModel?.pickedWarehouse.value else { return nil }
 
-        guard let pickedWarehouse = purchaseApplyInfoViewModel?.pickedWarehouse.value else { return nil }
+                let info = EditingPurchaseOrderParameterInfo(
+                    expectStorageDate: expectStorageDate,
+                    reviewBy: "",
+                    remark: note,
+                    expectWarehouseID: pickedWarehouse.id,
+                    expectWarehouseType: pickedWarehouse.type,
+                    productInfo: productInfos
+                )
+                return info
+            } else {
+                guard let reviewer = pickPurchaseReviewerViewModel?.pickedReviewer.value else { return nil }
 
-        let info = EditingPurchaseOrderParameterInfo(
-            expectStorageDate: expectStorageDate,
-            reviewBy: reviewer.id,
-            remark: note,
-            expectWarehouseID: pickedWarehouse.id,
-            expectWarehouseType: pickedWarehouse.type,
-            productInfo: productInfos
-        )
-        return info
+                let note = pickPurchaseReviewerViewModel?.note.value ?? ""
+
+                guard let pickedWarehouse = purchaseApplyInfoViewModel?.pickedWarehouse.value else { return nil }
+
+                let info = EditingPurchaseOrderParameterInfo(
+                    expectStorageDate: expectStorageDate,
+                    reviewBy: reviewer.id,
+                    remark: note,
+                    expectWarehouseID: pickedWarehouse.id,
+                    expectWarehouseType: pickedWarehouse.type,
+                    productInfo: productInfos
+                )
+                return info
+            }
+        } else {
+            guard let reviewer = pickPurchaseReviewerViewModel?.pickedReviewer.value else { return nil }
+
+            let note = pickPurchaseReviewerViewModel?.note.value ?? ""
+
+            guard let pickedWarehouse = purchaseApplyInfoViewModel?.pickedWarehouse.value else { return nil }
+
+            let info = EditingPurchaseOrderParameterInfo(
+                expectStorageDate: expectStorageDate,
+                reviewBy: reviewer.id,
+                remark: note,
+                expectWarehouseID: pickedWarehouse.id,
+                expectWarehouseType: pickedWarehouse.type,
+                productInfo: productInfos
+            )
+            return info
+        }
     }
     private func makeReturnPurchaseOrderParameterInfo() -> ReturnPurchaseOrderParameterInfo? {
         let note = pickPurchaseReviewerViewModel?.note.value ?? ""

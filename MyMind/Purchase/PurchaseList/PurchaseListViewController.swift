@@ -69,7 +69,7 @@ final class PurchaseListViewController: NiblessViewController {
 //        addCloseButton()
         configTableView()
         configCollectionView()
-        loadPurchaseList()
+        loadPurchaseList(purchaseListQueryInfo: purchaseListQueryInfo)
         addButtonsActions()
     }
     // MARK: - Methods
@@ -235,9 +235,10 @@ final class PurchaseListViewController: NiblessViewController {
             purchaseOrderLoader: service,
             warehouseListLoader: service,
             purchaseReviewerListLoader: service,
-            service: service)
+            service: service,
+            reviewing: reviewing)
 
-        let viewController = EditingPurchaseOrderViewController(viewModel: viewModel, reviewing: reviewing)
+        let viewController = EditingPurchaseOrderViewController(viewModel: viewModel, reviewing: reviewing, delegate: self)
         show(viewController, sender: nil)
     }
 }
@@ -277,6 +278,7 @@ extension PurchaseListViewController: UITableViewDelegate, UITableViewDataSource
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
         guard let item = purchaseList?.items[indexPath.row] else { return }
 
         if item.availableActions.contains(.edit) {
@@ -337,6 +339,22 @@ extension PurchaseListViewController: UICollectionViewDelegate, UICollectionView
             return cell
         }
     }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: false)
+        guard let item = purchaseList?.items[indexPath.row] else { return }
+
+        if item.availableActions.contains(.edit) {
+            showPurchaseEditingPage(with: item.purchaseID)
+        } else {
+            let viewController = PurchaseCompletedApplyViewController(
+                purchaseID: item.purchaseID,
+                loader: MyMindPurchaseAPIService.shared
+            )
+            viewController.isForRead = true
+            viewController.title = "採購單資訊"
+            show(viewController, sender: nil)
+        }
+    }
 }
 // MARK: - Collection view flow layout
 extension PurchaseListViewController: UICollectionViewDelegateFlowLayout {
@@ -347,5 +365,11 @@ extension PurchaseListViewController: UICollectionViewDelegateFlowLayout {
         }
         let width = (collectionView.frame.width - horizontalSpace) / 2
         return CGSize(width: width, height: reviewing ? 230 : 280)
+    }
+}
+
+extension PurchaseListViewController: EditingPurchaseOrderViewControllerDelegate {
+    func didFinished(_ success: Bool) {
+        refreshFetchPurchaseList(query: purchaseListQueryInfo)
     }
 }

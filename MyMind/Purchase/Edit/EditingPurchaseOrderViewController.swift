@@ -9,9 +9,13 @@
 import UIKit
 import RxSwift
 
+protocol EditingPurchaseOrderViewControllerDelegate: AnyObject {
+    func didFinished(_ success: Bool)
+}
 final class EditingPurchaseOrderViewController: NiblessViewController {
 
-    var reviewing: Bool = false
+    weak var delegate: EditingPurchaseOrderViewControllerDelegate?
+    let reviewing: Bool
     let viewModel: EditingPurchaseOrderViewModel
 
     let bag: DisposeBag = DisposeBag()
@@ -87,9 +91,10 @@ final class EditingPurchaseOrderViewController: NiblessViewController {
         removeObservers()
     }
     // MARK: - Methods
-    init(viewModel: EditingPurchaseOrderViewModel, reviewing: Bool) {
+    init(viewModel: EditingPurchaseOrderViewModel, reviewing: Bool, delegate: EditingPurchaseOrderViewControllerDelegate? = nil) {
         self.viewModel = viewModel
         self.reviewing = reviewing
+        self.delegate = delegate
         super.init()
     }
 
@@ -159,6 +164,7 @@ final class EditingPurchaseOrderViewController: NiblessViewController {
         switch view {
         case .purhcaseList:
             navigationController?.popViewController(animated: true)
+            delegate?.didFinished(true)
         case .purchasedProducts(let viewModels):
             let viewModel = EditablePickedProductsInfoViewModel(pickedProductMaterialViewModels: viewModels)
             let viewController = EditablePickedProductsInfoViewController(viewModel: viewModel)
