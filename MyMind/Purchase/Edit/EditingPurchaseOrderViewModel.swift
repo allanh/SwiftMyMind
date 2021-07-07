@@ -89,12 +89,14 @@ class EditingPurchaseOrderViewModel {
             if let status = purchaseApplyInfoViewModel?.expectedStorageDateValidationStatus {
                 status.accept(status.value)
             }
-            #warning("Error handling")
+            self.navigation(with: .error(error: APIError.unexpectedError))
+//            #warning("Error handling")
             return
         }
 
         guard let info = makeEditingPurchaseOrderParameterInfo() else {
-            #warning("Error handling")
+            self.navigation(with: .error(error: APIError.unexpectedError))
+//            #warning("Error handling")
             return
         }
 
@@ -108,13 +110,15 @@ class EditingPurchaseOrderViewModel {
             }
             .catch { error in
                 print(error.localizedDescription)
-                #warning("Error handling")
+                self.navigation(with: .error(error: APIError.serviceError(error.localizedDescription)))
+//                #warning("Error handling")
             }
     }
 
     func sendReturnRequest() {
         guard let info = makeReturnPurchaseOrderParameterInfo() else {
-            #warning("Error handling")
+            self.navigation(with: .error(error: APIError.unexpectedError))
+//            #warning("Error handling")
             return
         }
 
@@ -128,7 +132,8 @@ class EditingPurchaseOrderViewModel {
             }
             .catch { error in
                 print(error.localizedDescription)
-                #warning("Error handling")
+                self.navigation(with: .error(error: APIError.serviceError(error.localizedDescription)))
+//                #warning("Error handling")
             }
     }
     private func makePurchaseApplyInfoViewModel(with order: PurchaseOrder) {
@@ -146,7 +151,7 @@ class EditingPurchaseOrderViewModel {
                 purchaseSuggestionQuantity: String(info.suggestedQuantity),
                 stockUnitName: info.stockUnitName,
                 boxStockUnitName: info.boxStockUnitName,
-                quantityPerBox: Int(info.quantityPerBox) ?? 0,
+                quantityPerBox: Int(info.quantityPerBox),
                 purchaseSuggestionInfo: PurchaseSuggestionInfo(
                     id: String(info.id),
                     number: info.number,
@@ -163,11 +168,11 @@ class EditingPurchaseOrderViewModel {
                     movingAverageCost: String(info.movingAverageCost ?? 0),
                     stockUnitName: info.stockUnitName,
                     boxStockUnitName: info.boxStockUnitName,
-                    imageInfos: info.imageInfos ?? []),
-                purchaseCostPerItem: Double(info.purchaseCost) ?? 0,
+                    imageInfos: info.imageInfos),
+                purchaseCostPerItem: Double(info.purchaseCost),
                 vendorName: order.vendorName,
                 vendorID: String(order.vendorID),
-                purchasedQuantity: Int(info.purchaseQuantity) ?? 0)
+                purchasedQuantity: Int(info.purchaseQuantity))
 
             return viewModel
         }
