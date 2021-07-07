@@ -123,7 +123,7 @@ struct PurchaseApplyViewModel {
             expectStorageDate: expectStorageDate,
             reviewBy: reviewer.id,
             remark: note,
-            expectWarehouseID: warehouseID,
+            expectWarehouseID: String(warehouseID),
             expectWarehouseType: warehouseType,
             productInfo: infos)
         return applyPurchaseParameterInfo

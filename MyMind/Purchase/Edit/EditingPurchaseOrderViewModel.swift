@@ -158,10 +158,10 @@ class EditingPurchaseOrderViewModel {
                     originalProductNumber: info.originalProductNumber ?? "",
                     name: info.name,
                     quantityPerBox: String(info.quantityPerBox),
-                    channelStockQuantity: String(info.channelStockQuantity),
-                    fineStockQuantity: String(info.fineStockQuantity),
+                    channelStockQuantity: String(info.channelStockQuantity ?? 0),
+                    fineStockQuantity: String(info.fineStockQuantity ?? 0),
                     totalStockQuantity: String(info.totalStockQuantity ?? 0),
-                    monthSaleQuantity: String(info.monthSaleQuantity),
+                    monthSaleQuantity: String(info.monthSaleQuantity ?? 0),
                     suggestedQuantity: String(info.suggestedQuantity),
                     daysSalesOfInventory: String(info.daysSalesOfInventory ?? 0),
                     cost: String(info.cost ?? 0),
@@ -177,13 +177,12 @@ class EditingPurchaseOrderViewModel {
             return viewModel
         }
 
-        let wareHoudse = Warehouse(name:
-                                    order.expectStorageName,
-                                   id: String(order.expectWarehouseID),
+        let wareHoudse = Warehouse(id: order.expectWarehouseID ?? 0,
+                                   name: order.expectStorageName ?? "",
                                    number: "",
-                                   type: order.expectWarehouseType,
+                                   type: order.expectWarehouseType ?? .own,
                                    channelWareroomID: order.expectChannelWareroomID ?? "",
-                                   recipientInfo: order.recipientInfo)
+                                   recipientInfo: [order.recipientInfo])
 
         purchaseApplyInfoViewModel = PurchaseApplyInfoViewModel(
             suggestionProductMaterialViewModels: viewModels,
@@ -276,7 +275,7 @@ class EditingPurchaseOrderViewModel {
                     expectStorageDate: expectStorageDate,
                     reviewBy: "",
                     remark: note,
-                    expectWarehouseID: pickedWarehouse.id,
+                    expectWarehouseID: String(pickedWarehouse.id),
                     expectWarehouseType: pickedWarehouse.type,
                     productInfo: productInfos
                 )
@@ -292,7 +291,7 @@ class EditingPurchaseOrderViewModel {
                     expectStorageDate: expectStorageDate,
                     reviewBy: reviewer.id,
                     remark: note,
-                    expectWarehouseID: pickedWarehouse.id,
+                    expectWarehouseID: String(pickedWarehouse.id),
                     expectWarehouseType: pickedWarehouse.type,
                     productInfo: productInfos
                 )
@@ -309,7 +308,7 @@ class EditingPurchaseOrderViewModel {
                 expectStorageDate: expectStorageDate,
                 reviewBy: reviewer.id,
                 remark: note,
-                expectWarehouseID: pickedWarehouse.id,
+                expectWarehouseID: String(pickedWarehouse.id),
                 expectWarehouseType: pickedWarehouse.type,
                 productInfo: productInfos
             )

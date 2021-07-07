@@ -13,11 +13,12 @@ struct Warehouse: Codable {
         case own = "OWN"
         case channel = "CHANNEL"
     }
-
-    let name, id, number: String
+    
+    let id: Int
+    let name, number: String
     let type: WarehouseType
-    let channelWareroomID: String
-    let recipientInfo: RecipientInfo?
+    let channelWareroomID: String?
+    let recipientInfo: [RecipientInfo]?
 
     enum CodingKeys: String, CodingKey {
         case name
@@ -27,4 +28,21 @@ struct Warehouse: Codable {
         case channelWareroomID = "channel_wareroom_id"
         case recipientInfo = "recipient_info"
     }
+//    init(id: Int, name: String, number: String, type: WarehouseType, channelWareroomID: String?, recipientInfo: [RecipientInfo]?) {
+//        self.id = id
+//        self.name = name
+//        self.number = number
+//        self.type = type
+//        self.channelWareroomID = channelWareroomID
+//        self.recipientInfo = recipientInfo
+//    }
+//    init(from decoder: Decoder) throws {
+//        let container = try decoder.container(keyedBy: CodingKeys.self)
+//        id = try container.decode(Int.self, forKey: .id)
+//        name = try container.decode(String.self, forKey: .name)
+//        number = try container.decode(String.self, forKey: .number)
+//        type = try container.decode(WarehouseType.self, forKey: .type)
+//        channelWareroomID = try? container.decode(String.self, forKey: .channelWareroomID)
+//        recipientInfo = try? container.decode([RecipientInfo].self, forKey: .recipientInfo)
+//    }
 }

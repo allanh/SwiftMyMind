@@ -35,7 +35,8 @@ struct PurchaseOrder: Codable {
         let purchaseBoxQuantity: Float
         let stockUnitName, boxStockUnitName: String
         let purchaseCost: Float
-        let channelStockQuantity, fineStockQuantity, monthSaleQuantity, suggestedQuantity : Int
+        let channelStockQuantity, fineStockQuantity, monthSaleQuantity: Int?
+        let suggestedQuantity : Int
         let totalStockQuantity, daysSalesOfInventory: Int?
         let cost, movingAverageCost, totalPrice: Float?
         let realPurchaseQuantity, realTotalPrice: Float?
@@ -77,10 +78,10 @@ struct PurchaseOrder: Codable {
 //            stockUnitName = try container.decode(String.self, forKey: .stockUnitName)
 //            boxStockUnitName = try container.decode(String.self, forKey: .boxStockUnitName)
 //            purchaseCost = try container.decode(Float.self, forKey: .purchaseCost)
-//            channelStockQuantity = try container.decode(Int.self, forKey: .channelStockQuantity)
-//            fineStockQuantity = try container.decode(Int.self, forKey: .fineStockQuantity)
+//            channelStockQuantity = try? container.decode(Int.self, forKey: .channelStockQuantity)
+//            fineStockQuantity = try? container.decode(Int.self, forKey: .fineStockQuantity)
 //            totalStockQuantity = try? container.decode(Int.self, forKey: .totalStockQuantity)
-//            monthSaleQuantity = try container.decode(Int.self, forKey: .monthSaleQuantity)
+//            monthSaleQuantity = try? container.decode(Int.self, forKey: .monthSaleQuantity)
 //            suggestedQuantity = try container.decode(Int.self, forKey: .suggestedQuantity)
 //            daysSalesOfInventory = try? container.decode(Int.self, forKey: .daysSalesOfInventory)
 //            cost = try? container.decode(Float.self, forKey: .cost)
@@ -94,10 +95,10 @@ struct PurchaseOrder: Codable {
     let id: Int
     let number: String
     let status: PurchaseStatus
-    let expectWarehouseType: Warehouse.WarehouseType
-    let expectWarehouseID: Int
+    let expectWarehouseType: Warehouse.WarehouseType?
+    let expectWarehouseID: Int?
     let expectChannelWareroomID: String?
-    let expectStorageName: String
+    let expectStorageName: String?
     let realAmount, realTax, realTotalAmount: String?
     let recipientInfo: RecipientInfo
     let reviewLevel: Int
@@ -138,10 +139,17 @@ struct PurchaseOrder: Codable {
         id = try container.decode(Int.self, forKey: .id)
         number = try container.decode(String.self, forKey: .number)
         status = try container.decode(PurchaseStatus.self, forKey: .status)
-        expectWarehouseType =  try container.decode(Warehouse.WarehouseType.self, forKey: .expectWarehouseType)
-        expectWarehouseID = try container.decode(Int.self, forKey: .expectWarehouseID)
+//        if let type = try? container.decode(Warehouse.WarehouseType.self, forKey: .expectWarehouseType) {
+//            expectWarehouseType = type
+//            expectWarehouseID = try container.decode(Int.self, forKey: .expectWarehouseID)
+//        } else {
+//            expectWarehouseType = .own
+//            expectWarehouseID = .max
+//        }
+        expectWarehouseType =  try? container.decode(Warehouse.WarehouseType.self, forKey: .expectWarehouseType)
+        expectWarehouseID = try? container.decode(Int.self, forKey: .expectWarehouseID)
         expectChannelWareroomID = try? container.decode(String.self, forKey: .expectChannelWareroomID)
-        expectStorageName = try container.decode(String.self, forKey: .expectStorageName)
+        expectStorageName = try? container.decode(String.self, forKey: .expectStorageName)
         realAmount = try? container.decode(String.self, forKey: .realAmount)
         realTax = try? container.decode(String.self, forKey: .realTax)
         realTotalAmount = try? container.decode(String.self, forKey: .realTotalAmount)
