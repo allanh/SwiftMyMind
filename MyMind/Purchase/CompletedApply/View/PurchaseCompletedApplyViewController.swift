@@ -57,7 +57,7 @@ final class PurchaseCompletedApplyViewController: NiblessViewController {
     // MARK: - View life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        navigationItem.backButtonTitle = ""
         view.backgroundColor = .white
         constructViewHierarchy()
         activateConstraints()
@@ -119,7 +119,8 @@ final class PurchaseCompletedApplyViewController: NiblessViewController {
                 if let apiError = error as? APIError {
                     _ = ErrorHandler.shared.handle(apiError, controller: self)
                 } else {
-                    ToastView.showIn(self, message: error.localizedDescription)
+                    _ = ErrorHandler.shared.handle(APIError.serviceError(error.localizedDescription), controller: self)
+//                    ToastView.showIn(self, message: error.localizedDescription)
                 }
             }
     }

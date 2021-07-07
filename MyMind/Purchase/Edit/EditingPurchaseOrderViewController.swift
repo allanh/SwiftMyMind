@@ -63,6 +63,7 @@ final class EditingPurchaseOrderViewController: NiblessViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        navigationItem.backButtonTitle = ""
         title = reviewing ? "審核採購申請" :"編輯採購申請"
         view.backgroundColor = .systemBackground
         addTapToResignKeyboardGesture()
@@ -170,6 +171,16 @@ final class EditingPurchaseOrderViewController: NiblessViewController {
             let viewController = EditablePickedProductsInfoViewController(viewModel: viewModel)
             show(viewController, sender: nil)
             break
+        case .purchasedProductInfos(let infos):
+            let viewController = PurchasedProductsInfoViewController(style: .plain)
+            viewController.productInfos = infos
+            show(viewController, sender: nil)
+        case .error(let error):
+            if let apiError = error as? APIError {
+                _ = ErrorHandler.shared.handle(apiError, controller: self)
+            } else {
+                ToastView.showIn(self, message: error.localizedDescription)
+            }
         }
     }
 

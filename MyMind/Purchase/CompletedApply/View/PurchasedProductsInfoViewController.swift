@@ -16,6 +16,7 @@ class PurchasedProductsInfoViewController: UITableViewController {
         super.viewDidLoad()
 
         title = "採購SKU資訊"
+        navigationItem.backButtonTitle = ""
 
         tableView.register(
             UINib(

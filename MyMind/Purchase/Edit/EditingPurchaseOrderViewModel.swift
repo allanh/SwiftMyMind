@@ -20,6 +20,8 @@ class EditingPurchaseOrderViewModel {
     enum View {
         case purchasedProducts(viewModels: BehaviorRelay<[SuggestionProductMaterialViewModel]>)
         case purhcaseList
+        case purchasedProductInfos(infos: [PurchaseOrder.ProductInfo])
+        case error(error: Error)
     }
     let purchaseID: String
     let purchaseOrderLoader: PurchaseOrderLoader
@@ -27,6 +29,7 @@ class EditingPurchaseOrderViewModel {
     let warehouseListLoader: PurchaseWarehouseListLoader
     let purchaseReviewerListLoader: PurchaseReviewerListLoader
     let reviewing: Bool
+    var productInfos: [PurchaseOrder.ProductInfo] = []
 
     var purchaseApplyInfoViewModel: PurchaseApplyInfoViewModel?
     var pickPurchaseReviewerViewModel: PickPurchaseReviewerViewModel?
@@ -71,7 +74,8 @@ class EditingPurchaseOrderViewModel {
                 self.didFinishMakeChildViewModels?()
             }
             .catch { error in
-                print(error.localizedDescription)
+                self.navigation(with: .error(error: APIError.serviceError(error.localizedDescription)))
+//                print(error.localizedDescription)
             }
     }
 
@@ -128,7 +132,7 @@ class EditingPurchaseOrderViewModel {
             }
     }
     private func makePurchaseApplyInfoViewModel(with order: PurchaseOrder) {
-        let productInfos = order.productInfos
+        productInfos = order.productInfos
 
         let viewModels = productInfos.map { info -> SuggestionProductMaterialViewModel in
             let urlString = info.imageInfos.first?.url ?? ""
@@ -200,7 +204,11 @@ class EditingPurchaseOrderViewModel {
         }
         purchaseApplyInfoViewModel.showSuggestionInfo
             .subscribe(onNext: { [unowned self] _ in
-                self.navigation(with: .purchasedProducts(viewModels: purchaseApplyInfoViewModel.suggestionProductMaterialViewModels))
+                if reviewing {
+                    self.navigation(with: .purchasedProductInfos(infos: productInfos))
+                } else {
+                    self.navigation(with: .purchasedProducts(viewModels: purchaseApplyInfoViewModel.suggestionProductMaterialViewModels))
+                }
             })
             .disposed(by: bag)
 
