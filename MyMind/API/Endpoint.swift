@@ -222,4 +222,13 @@ extension Endpoint {
         }
         return Endpoint(path: "/api/admin/\(version)/purchase/review", queryItems: urlQueryItems)
     }
+    
+    /// Dashboard
+    static func todo(partnerID: String, navigationNo: String) -> Self {
+        let items = [
+            URLQueryItem(name: "partner_id", value: partnerID),
+            URLQueryItem(name: "navigation_no", value: navigationNo),
+        ]
+        return Endpoint(path: "/api/admin/\(version)/dashboard/todo", queryItems: items)
+    }
 }

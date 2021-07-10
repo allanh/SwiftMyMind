@@ -70,6 +70,29 @@ class SignInViewController: NiblessViewController {
             })
             .disposed(by: bag)
     }
+    private func showHomePage() {
+        MyMindEmployeeAPIService.shared.authorization()
+            .done { authorization in
+                let scene = UIApplication.shared.connectedScenes.first
+                if let sceneDelegate : SceneDelegate = (scene?.delegate as? SceneDelegate) {
+                    let rootTabBarViewController = RootTabBarController(authorization: authorization)
+                    sceneDelegate.window?.rootViewController = rootTabBarViewController
+//                    if let rootViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "Home") as? HomeViewController {
+//                        rootViewController.authorization = authorization
+//                        let navigationViewController = UINavigationController(rootViewController: rootViewController)
+//                        sceneDelegate.window?.rootViewController = navigationViewController
+//                    } else {
+//                        let navigationViewController = UINavigationController(rootViewController: UIViewController())
+//                        sceneDelegate.window?.rootViewController = navigationViewController
+//                    }
+                }
+            }
+            .ensure {
+            }
+            .catch { error in
+                _ = ErrorHandler.shared.handle((error as! APIError))
+            }
+    }
 
     func observerViewModel() {
         viewModel.errorMessage
@@ -87,13 +110,14 @@ class SignInViewController: NiblessViewController {
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [unowned self] _ in
                 ToastView.showIn(self, message: "登入成功", iconName: "success")
-                if let rootViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "Home") as? HomeViewController {
-                    let scene = UIApplication.shared.connectedScenes.first
-                    if let sceneDelegate : SceneDelegate = (scene?.delegate as? SceneDelegate) {
-                        let navigationViewController = UINavigationController(rootViewController: rootViewController)
-                        sceneDelegate.window?.rootViewController = navigationViewController
-                    }
-                }
+                showHomePage()
+//                if let rootViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "Home") as? HomeViewController {
+//                    let scene = UIApplication.shared.connectedScenes.first
+//                    if let sceneDelegate : SceneDelegate = (scene?.delegate as? SceneDelegate) {
+//                        let navigationViewController = UINavigationController(rootViewController: rootViewController)
+//                        sceneDelegate.window?.rootViewController = navigationViewController
+//                    }
+//                }
             })
             .disposed(by: bag)
     }

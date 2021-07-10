@@ -49,14 +49,8 @@ extension ErrorHandler {
             .done { authorization in
                 let scene = UIApplication.shared.connectedScenes.first
                 if let sceneDelegate : SceneDelegate = (scene?.delegate as? SceneDelegate) {
-                    if let rootViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "Home") as? HomeViewController {
-                        rootViewController.authorization = authorization
-                        let navigationViewController = UINavigationController(rootViewController: rootViewController)
-                        sceneDelegate.window?.rootViewController = navigationViewController
-                    } else {
-                        let navigationViewController = UINavigationController(rootViewController: UIViewController())
-                        sceneDelegate.window?.rootViewController = navigationViewController
-                    }
+                    let rootTabBarViewController = RootTabBarController(authorization: authorization)
+                    sceneDelegate.window?.rootViewController = rootTabBarViewController
                 }
             }
             .ensure {

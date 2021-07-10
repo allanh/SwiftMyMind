@@ -178,3 +178,4 @@ extension MyMindPurchaseAPIService: ApplyPuchaseService { }
 extension MyMindPurchaseAPIService: PurchaseOrderLoader { }
 
 extension MyMindPurchaseAPIService: EditingPurchaseOrderService { }
+

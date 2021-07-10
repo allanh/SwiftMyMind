@@ -41,15 +41,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             }
     }
     private func showHomePage(_ authorization: Authorization? = nil) {
-        if let rootViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "Home") as? HomeViewController {
-            rootViewController.authorization = authorization
-            let navigationViewController = UINavigationController(rootViewController: rootViewController)
-            self.window?.rootViewController = navigationViewController
-        } else {
-            let navigationViewController = UINavigationController(rootViewController: UIViewController())
-            self.window?.makeKeyAndVisible()
-            self.window?.rootViewController = navigationViewController
-        }
+        let rootTabBarViewController = RootTabBarController(authorization: authorization)
+        self.window?.makeKeyAndVisible()
+        self.window?.rootViewController = rootTabBarViewController
+
+//        if let rootViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "Home") as? HomeViewController {
+//            rootViewController.authorization = authorization
+//            let navigationViewController = UINavigationController(rootViewController: rootViewController)
+//            self.window?.rootViewController = navigationViewController
+//        } else {
+//            let navigationViewController = UINavigationController(rootViewController: UIViewController())
+//            self.window?.makeKeyAndVisible()
+//            self.window?.rootViewController = navigationViewController
+//        }
     }
     func sceneWillResignActive(_ scene: UIScene) {
         // Called when the scene will move from an active state to an inactive state.

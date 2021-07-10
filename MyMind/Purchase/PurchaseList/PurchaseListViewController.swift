@@ -78,9 +78,9 @@ final class PurchaseListViewController: NiblessViewController {
         self.purchaseListLoader = purchaseListLoader
         self.reviewing = reviewing
         super.init()
-        if reviewing {
-            purchaseListQueryInfo.orderReference = .createdDate
-        }
+//        if reviewing {
+//            purchaseListQueryInfo.orderReference = .createdDate
+//        }
     }
 
     private func addCloseButton() {

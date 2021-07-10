@@ -72,8 +72,8 @@ struct PurchaseListQueryInfo {
     var createDateEnd: Date?
     var pageNumber: Int = 1
     var itemsPerPage: Int = 20
-    var sortOrder: SortOrder?
-    var orderReference: OrderReference = .purchaseNumber
+    var sortOrder: SortOrder? = .decending
+    var orderReference: OrderReference = .createdDate
 
     static func defaultQuery() -> PurchaseListQueryInfo {
         return PurchaseListQueryInfo()
