@@ -7,13 +7,24 @@
 //
 
 import UIKit
-
+extension UIView {
+   func roundCorners(corners: UIRectCorner, radius: CGFloat) {
+        let path = UIBezierPath(roundedRect: bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+        let mask = CAShapeLayer()
+        mask.path = path.cgPath
+        layer.mask = mask
+    }
+}
 class ToDoListCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var toDoListCollectionView: UICollectionView!
     private var toDos: [ToDo] = [] {
         didSet {
             toDoListCollectionView.reloadData()
         }
+    }
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        toDoListCollectionView.roundCorners(corners: [.bottomLeft, .bottomRight], radius: 16)
     }
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -41,6 +52,6 @@ extension ToDoListCollectionViewCell: UICollectionViewDataSource {
 }
 extension ToDoListCollectionViewCell: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return  CGSize(width: toDoListCollectionView.bounds.size.width-60, height: toDoListCollectionView.bounds.size.height)
+        return  CGSize(width: toDoListCollectionView.bounds.size.width-60, height: toDoListCollectionView.bounds.size.height-16)
     }
 }

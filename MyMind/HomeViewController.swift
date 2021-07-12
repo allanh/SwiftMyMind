@@ -26,7 +26,7 @@ final class HomeViewController: UIViewController {
     ]
     private var toDoList: ToDoList? {
         didSet {
-            collectionView.reloadData()
+            collectionView.reloadSections([0])
         }
     }
     private var saleReports: SaleReports? {
@@ -282,15 +282,8 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
                 return headerView
             }
             return UICollectionReusableView()
-        } else if kind == UICollectionView.elementKindSectionFooter {
-            let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HomeFooter", for: indexPath)
-            return footerView
         }
         return UICollectionReusableView()
-    }
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-        let width = collectionView.bounds.width
-        return CGSize(width: width, height: section == 0 ? 40 : 0)
     }
     func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
         return indexPath.section == 1

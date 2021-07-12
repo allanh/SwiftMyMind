@@ -34,29 +34,29 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="NEX-yC-FgV">
-                                <rect key="frame" x="20" y="44" width="374" height="818"/>
+                                <rect key="frame" x="15" y="54" width="384" height="808"/>
                                 <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="5" id="O09-S4-nKa">
                                     <size key="itemSize" width="128" height="128"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="50" height="50"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="10"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="8" minY="0.0" maxX="8" maxY="10"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ToDoListCollectionViewCell" id="chd-sF-Jh4" customClass="ToDoListCollectionViewCell" customModule="MyMind" customModuleProvider="target">
-                                        <rect key="frame" x="5" y="0.0" width="364" height="267"/>
+                                        <rect key="frame" x="13" y="0.0" width="358" height="267"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="y6w-uT-ggo">
-                                            <rect key="frame" x="0.0" y="0.0" width="364" height="267"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="358" height="267"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ROE-gm-8eb">
-                                                    <rect key="frame" x="0.0" y="0.0" width="364" height="267"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="358" height="259"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <collectionViewLayout key="collectionViewLayout" id="Oue-3v-Ovb" customClass="HorizontalCellSizePagingFlowLayout" customModule="MyMind" customModuleProvider="target"/>
                                                     <cells>
                                                         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ToDoInfoCollectionViewCell" id="wAM-hQ-wNi" customClass="ToDoInfoCollectionViewCell" customModule="MyMind" customModuleProvider="target">
-                                                            <rect key="frame" x="-2" y="0.0" width="368" height="250"/>
+                                                            <rect key="frame" x="-5" y="0.0" width="368" height="250"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="KOe-0p-MSr">
                                                                 <rect key="frame" x="0.0" y="0.0" width="368" height="250"/>
@@ -70,17 +70,17 @@
                                             <constraints>
                                                 <constraint firstItem="ROE-gm-8eb" firstAttribute="top" secondItem="y6w-uT-ggo" secondAttribute="top" id="3yA-Xf-atD"/>
                                                 <constraint firstAttribute="trailing" secondItem="ROE-gm-8eb" secondAttribute="trailing" id="FTk-Aa-bfT"/>
-                                                <constraint firstAttribute="bottom" secondItem="ROE-gm-8eb" secondAttribute="bottom" id="Odf-yQ-i7h"/>
+                                                <constraint firstAttribute="bottom" secondItem="ROE-gm-8eb" secondAttribute="bottom" constant="8" id="Odf-yQ-i7h"/>
                                                 <constraint firstItem="ROE-gm-8eb" firstAttribute="leading" secondItem="y6w-uT-ggo" secondAttribute="leading" id="SKU-Do-hxR"/>
                                             </constraints>
                                         </collectionViewCellContentView>
-                                        <size key="customSize" width="364" height="267"/>
+                                        <size key="customSize" width="358" height="267"/>
                                         <connections>
                                             <outlet property="toDoListCollectionView" destination="ROE-gm-8eb" id="37F-2g-xsS"/>
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ActionCollectionViewCell" id="LTg-Lk-Nvk" customClass="ActionCollectionViewCell" customModule="MyMind" customModuleProvider="target">
-                                        <rect key="frame" x="123" y="277" width="128" height="128"/>
+                                        <rect key="frame" x="128" y="277" width="128" height="128"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="8Zw-pg-cEs">
                                             <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
@@ -125,11 +125,6 @@
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
-                                <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="HomeFooter" id="w0I-FT-bPj">
-                                    <rect key="frame" x="0.0" y="415" width="374" height="50"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
-                                </collectionReusableView>
                                 <connections>
                                     <outlet property="dataSource" destination="AYc-8A-Vs7" id="97y-a1-0qR"/>
                                     <outlet property="delegate" destination="AYc-8A-Vs7" id="GNO-YS-Zng"/>
@@ -137,12 +132,12 @@
                             </collectionView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="YMf-yb-WQV"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="NEX-yC-FgV" firstAttribute="leading" secondItem="YMf-yb-WQV" secondAttribute="leading" constant="20" id="9ql-lf-MkJ"/>
+                            <constraint firstItem="NEX-yC-FgV" firstAttribute="leading" secondItem="YMf-yb-WQV" secondAttribute="leading" constant="15" id="9ql-lf-MkJ"/>
                             <constraint firstItem="YMf-yb-WQV" firstAttribute="bottom" secondItem="NEX-yC-FgV" secondAttribute="bottom" id="EEa-9u-7KF"/>
-                            <constraint firstItem="YMf-yb-WQV" firstAttribute="trailing" secondItem="NEX-yC-FgV" secondAttribute="trailing" constant="20" id="eAZ-i8-x2x"/>
-                            <constraint firstItem="NEX-yC-FgV" firstAttribute="top" secondItem="YMf-yb-WQV" secondAttribute="top" id="lkL-Oy-AE9"/>
+                            <constraint firstItem="YMf-yb-WQV" firstAttribute="trailing" secondItem="NEX-yC-FgV" secondAttribute="trailing" constant="15" id="eAZ-i8-x2x"/>
+                            <constraint firstItem="NEX-yC-FgV" firstAttribute="top" secondItem="YMf-yb-WQV" secondAttribute="top" constant="10" id="lkL-Oy-AE9"/>
                         </constraints>
                     </view>
                     <connections>
