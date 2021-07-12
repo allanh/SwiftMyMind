@@ -32,6 +32,11 @@
 		52944E332699CEF0006CC865 /* ToDoListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52944E322699CEF0006CC865 /* ToDoListCollectionViewCell.swift */; };
 		52944E352699CFC1006CC865 /* HomeCollectionViewHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52944E342699CFC1006CC865 /* HomeCollectionViewHeaderView.swift */; };
 		52B15CBA2691BAFC0010FCED /* MyMindEmployeeAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B15CB92691BAFC0010FCED /* MyMindEmployeeAPIService.swift */; };
+		52C2CBD0269BE52B002A2BA9 /* TodaySaleReportCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C2CBCF269BE52B002A2BA9 /* TodaySaleReportCollectionViewCell.swift */; };
+		52C2CBD2269BE6BC002A2BA9 /* TodaySaleInfoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C2CBD1269BE6BC002A2BA9 /* TodaySaleInfoCollectionViewCell.swift */; };
+		52C2CBD4269BED72002A2BA9 /* SaleReportInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C2CBD3269BED72002A2BA9 /* SaleReportInfoView.swift */; };
+		52C2CBD6269C4CED002A2BA9 /* MyMindSaleReportRatioNumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C2CBD5269C4CED002A2BA9 /* MyMindSaleReportRatioNumberFormatter.swift */; };
+		52C2CBD8269C4D4E002A2BA9 /* SaleReportInfoItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C2CBD7269C4D4E002A2BA9 /* SaleReportInfoItemView.swift */; };
 		52D7249F268D62BC00B00585 /* MyMindPurchaseReviewAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D7249E268D62BC00B00585 /* MyMindPurchaseReviewAPIService.swift */; };
 		52D724A4268DBD6400B00585 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 52D724A3268DBD6400B00585 /* GoogleService-Info.plist */; };
 		52F564272693F14200171032 /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F564262693F14100171032 /* ErrorHandler.swift */; };
@@ -269,6 +274,11 @@
 		52944E322699CEF0006CC865 /* ToDoListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListCollectionViewCell.swift; sourceTree = "<group>"; };
 		52944E342699CFC1006CC865 /* HomeCollectionViewHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewHeaderView.swift; sourceTree = "<group>"; };
 		52B15CB92691BAFC0010FCED /* MyMindEmployeeAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMindEmployeeAPIService.swift; sourceTree = "<group>"; };
+		52C2CBCF269BE52B002A2BA9 /* TodaySaleReportCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodaySaleReportCollectionViewCell.swift; sourceTree = "<group>"; };
+		52C2CBD1269BE6BC002A2BA9 /* TodaySaleInfoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodaySaleInfoCollectionViewCell.swift; sourceTree = "<group>"; };
+		52C2CBD3269BED72002A2BA9 /* SaleReportInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaleReportInfoView.swift; sourceTree = "<group>"; };
+		52C2CBD5269C4CED002A2BA9 /* MyMindSaleReportRatioNumberFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMindSaleReportRatioNumberFormatter.swift; sourceTree = "<group>"; };
+		52C2CBD7269C4D4E002A2BA9 /* SaleReportInfoItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaleReportInfoItemView.swift; sourceTree = "<group>"; };
 		52D7249E268D62BC00B00585 /* MyMindPurchaseReviewAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMindPurchaseReviewAPIService.swift; sourceTree = "<group>"; };
 		52D724A3268DBD6400B00585 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		52F564262693F14100171032 /* ErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandler.swift; sourceTree = "<group>"; };
@@ -544,6 +554,10 @@
 				52944E302699CE8B006CC865 /* ToDoInfoCollectionViewCell.swift */,
 				52944E322699CEF0006CC865 /* ToDoListCollectionViewCell.swift */,
 				52944E342699CFC1006CC865 /* HomeCollectionViewHeaderView.swift */,
+				52C2CBCF269BE52B002A2BA9 /* TodaySaleReportCollectionViewCell.swift */,
+				52C2CBD1269BE6BC002A2BA9 /* TodaySaleInfoCollectionViewCell.swift */,
+				52C2CBD3269BED72002A2BA9 /* SaleReportInfoView.swift */,
+				52C2CBD7269C4D4E002A2BA9 /* SaleReportInfoItemView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -842,6 +856,7 @@
 				A4793CAB260488E800AD280C /* Declarative.swift */,
 				A4BDC7B8260B3E0A005C33A5 /* KeychainHelper.swift */,
 				52F564262693F14100171032 /* ErrorHandler.swift */,
+				52C2CBD5269C4CED002A2BA9 /* MyMindSaleReportRatioNumberFormatter.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -1352,6 +1367,7 @@
 				A4054107264A1B7400E2D21B /* DropDownView.swift in Sources */,
 				A4793C7A2604534100AD280C /* SignInInfo.swift in Sources */,
 				A4705B9126020E5700B30CE6 /* Response.swift in Sources */,
+				52C2CBD6269C4CED002A2BA9 /* MyMindSaleReportRatioNumberFormatter.swift in Sources */,
 				A4DD410B26428927007B2A41 /* AutoCompleteInfo.swift in Sources */,
 				A439BD3C2637EC51004F47C8 /* Purchase.swift in Sources */,
 				A4793C9F26047DB900AD280C /* UIStoryboard+.swift in Sources */,
@@ -1411,6 +1427,7 @@
 				A43E8510268C08B8008C8369 /* InstructionView.swift in Sources */,
 				97AFE3792668D727002CBE01 /* UIViewController+loadNib.swift in Sources */,
 				52F564272693F14200171032 /* ErrorHandler.swift in Sources */,
+				52C2CBD8269C4D4E002A2BA9 /* SaleReportInfoItemView.swift in Sources */,
 				A456701226845D14009598AE /* RootTabBarController.swift in Sources */,
 				52282372268EB41400A66340 /* PurchaseBriefReviewingCollectionViewCell.swift in Sources */,
 				A464877E2689BBD60053E6F5 /* EditingPurchaseOrderViewController.swift in Sources */,
@@ -1437,6 +1454,7 @@
 				A4159204260C394F00FD3989 /* UIButton+.swift in Sources */,
 				A4CBD8A32664900100B19119 /* PickVendorViewController.swift in Sources */,
 				A439B52C26099AA1002352C2 /* UIViewController+.swift in Sources */,
+				52C2CBD4269BED72002A2BA9 /* SaleReportInfoView.swift in Sources */,
 				5293EE9E269A8F5B001A9754 /* Report.swift in Sources */,
 				A4793C7F2604573700AD280C /* UserSession.swift in Sources */,
 				A47F39CD263A58F700A3097C /* PurchaseListViewController.swift in Sources */,
@@ -1453,6 +1471,7 @@
 				A43E0B6F260DC66D005FC6CE /* UIControl+.swift in Sources */,
 				A46BA1DD263AAD2A0075E8C8 /* OrganizeOptionView.swift in Sources */,
 				A43E0B63260D7CA4005FC6CE /* NiblessViewController.swift in Sources */,
+				52C2CBD2269BE6BC002A2BA9 /* TodaySaleInfoCollectionViewCell.swift in Sources */,
 				A457AEAE2660A2230029DDBB /* PurchaseListFilterViewModel.swift in Sources */,
 				A4F2D017265D08D3004D8D6D /* SearchMaterialNamesViewModel.swift in Sources */,
 				A49CF8C0260306D200AFC170 /* APIError.swift in Sources */,
@@ -1465,6 +1484,7 @@
 				A4CBD8B1266A2ABA00B19119 /* ProductMaterialSuggestionInfoTableViewController.swift in Sources */,
 				5293EE9C269A8AEB001A9754 /* HorizontalCellSizePagingFlowLayout.swift in Sources */,
 				97547CBF2681C5B6001859A8 /* LogInfoView.swift in Sources */,
+				52C2CBD0269BE52B002A2BA9 /* TodaySaleReportCollectionViewCell.swift in Sources */,
 				A43E850C268C083C008C8369 /* SecretListViewController.swift in Sources */,
 				A40EBFD92671AD4900A4863D /* PurchaseApplyInfoViewController.swift in Sources */,
 				A47F39D5263A5A9B00A3097C /* PurchaseBriefTableViewCell.swift in Sources */,

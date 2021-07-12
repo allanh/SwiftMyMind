@@ -22,10 +22,6 @@ class ToDoListCollectionViewCell: UICollectionViewCell {
             toDoListCollectionView.reloadData()
         }
     }
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        toDoListCollectionView.roundCorners(corners: [.bottomLeft, .bottomRight], radius: 16)
-    }
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -55,3 +51,4 @@ extension ToDoListCollectionViewCell: UICollectionViewDelegate, UICollectionView
         return  CGSize(width: toDoListCollectionView.bounds.size.width-60, height: toDoListCollectionView.bounds.size.height-16)
     }
 }
+

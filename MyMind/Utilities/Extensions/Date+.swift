@@ -8,6 +8,11 @@
 
 import Foundation
 extension Date {
+    var yesterday: Self {
+        get {
+            return Calendar.current.date(byAdding: .day, value: -1, to: self)!
+        }
+    }
     var sevenDaysBefore: Self {
         get {
             return Calendar.current.date(byAdding: .day, value: -7, to: self)!

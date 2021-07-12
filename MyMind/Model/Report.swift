@@ -49,7 +49,8 @@ struct SaleReportList: Codable {
     let reports: [SaleReport]
 }
 struct SaleReports {
-    let typeSaleReportList: SaleReportList
+    let todayTransformedSaleReport: SaleReport?
+    let todayShippedSaleReport: SaleReport?
     let dateSaleReportList: SaleReportList
 }
 enum SKURankingReportSortOrder: String {

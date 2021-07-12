@@ -31,10 +31,14 @@ final class HomeViewController: UIViewController {
     }
     private var saleReports: SaleReports? {
         didSet {
-            print(saleReports)
-//            collectionView.reloadData()
+            collectionView.reloadSections([1])
         }
     }
+//    private var todaySaleTypeReport: SaleReport? {
+//        didSet {
+//            collectionView.reloadSections([1])
+//        }
+//    }
     private var skuRankingReports: SKURankingReports? {
         didSet {
             print(skuRankingReports)
@@ -75,9 +79,9 @@ final class HomeViewController: UIViewController {
     private func loadHomeData() {
         loadToDoList()
         loadSaleReports()
-        loadSKURankingReports()
-        loadSaleRankingReports()
-        loadGrossProfitRankingReports()
+//        loadSKURankingReports()
+//        loadSaleRankingReports()
+//        loadGrossProfitRankingReports()
     }
     private func loadToDoList() {
         if let authorization = authorization {
@@ -104,11 +108,17 @@ final class HomeViewController: UIViewController {
         isNetworkProcessing = true
         let dashboardLoader = MyMindDashboardAPIService.shared
         let end = Date()
-        dashboardLoader.orderSaleReport(start: end.thirtyDaysBefore, end: end, type: .byType)
+        dashboardLoader.orderSaleReport(start: end, end: end, type: .byType)
             .done { typeSaleReportList in
                 dashboardLoader.orderSaleReport(start: end.thirtyDaysBefore, end: end, type: .byDate)
                     .done { dateSaleReportList in
-                        self.saleReports = SaleReports(typeSaleReportList: typeSaleReportList, dateSaleReportList: dateSaleReportList)
+                        let transformedSaleReport = typeSaleReportList.reports.first {
+                            $0.type == .TRANSFORMED
+                        }
+                        let shippedSaleReport = typeSaleReportList.reports.first {
+                            $0.type == .SHIPPED
+                        }
+                        self.saleReports = SaleReports(todayTransformedSaleReport: transformedSaleReport, todayShippedSaleReport: shippedSaleReport, dateSaleReportList: dateSaleReportList)
                     }
                     .ensure {
                         self.isNetworkProcessing = false
@@ -237,14 +247,18 @@ final class HomeViewController: UIViewController {
 extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 2
+        return 3
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return section == 0 ? 1 : remoteConfig["otp_enable"].boolValue ? 4 : 3
+        switch section {
+        case 0, 1: return 1
+        default: return remoteConfig["otp_enable"].boolValue ? 4 : 3
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if indexPath.section == 0 {
+        switch indexPath.section {
+        case 0:
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ToDoListCollectionViewCell", for: indexPath) as? ToDoListCollectionViewCell {
                 if let items = toDoList?.items {
                     cell.config(with: items)
@@ -252,10 +266,27 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
                 return cell
             }
             return UICollectionViewCell()
+        case 1:
+            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TodaySaleReportCollectionViewCell", for: indexPath) as? TodaySaleReportCollectionViewCell {
+                let formatter = DateFormatter {
+                    $0.dateFormat = "yyyy-MM-dd"
+                }
+                let now = Date()
+                let reportOfToday = saleReports?.dateSaleReportList.reports.first(where: { report in
+                    report.date == formatter.string(from: now)
+                })
+                let reportOfYesterday = saleReports?.dateSaleReportList.reports.first(where: { report in
+                    report.date == formatter.string(from: now.yesterday)
+                })
+                cell.config(with: reportOfToday, yesterday: reportOfYesterday, transformed: saleReports?.todayTransformedSaleReport, shipped: saleReports?.todayShippedSaleReport)
+                return cell
+            }
+            return UICollectionViewCell()
+        default:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ActionCollectionViewCell", for: indexPath) as? ActionCollectionViewCell
+            cell?.config(with: functionControlInfos[indexPath.item])
+            return cell ?? UICollectionViewCell()
         }
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ActionCollectionViewCell", for: indexPath) as? ActionCollectionViewCell
-        cell?.config(with: functionControlInfos[indexPath.item])
-        return cell ?? UICollectionViewCell()
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -264,7 +295,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         let insets = ((collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.sectionInset ?? .zero)
         let itemSpaceing = ((collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.minimumLineSpacing ?? 10)
         let itemWidth = width-left-itemSpaceing-insets.left
-        if indexPath.section == 0 {
+        if indexPath.section == 0 || indexPath.section == 1 {
             return CGSize(width: itemWidth, height: 280)
         } else {
             return CGSize(width: itemWidth, height: itemWidth)
@@ -273,7 +304,12 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         let width = collectionView.bounds.width
-        return CGSize(width: width, height: 50)
+        switch section {
+        case 0:
+            return CGSize(width: width, height: 50)
+        default:
+            return .zero
+        }
     }
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         if kind == UICollectionView.elementKindSectionHeader {
