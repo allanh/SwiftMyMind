@@ -17,6 +17,10 @@
 		527E11C02692C38D00FB8B01 /* PurchaseReviewingApplyInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527E11BE2692C38D00FB8B01 /* PurchaseReviewingApplyInfoViewController.swift */; };
 		527E11C12692C38D00FB8B01 /* PurchaseReviewingApplyInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 527E11BF2692C38D00FB8B01 /* PurchaseReviewingApplyInfoViewController.xib */; };
 		527E11C32693084B00FB8B01 /* ReturnPurchaseOrderInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527E11C22693084B00FB8B01 /* ReturnPurchaseOrderInfo.swift */; };
+		5293EE9C269A8AEB001A9754 /* HorizontalCellSizePagingFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5293EE9B269A8AEB001A9754 /* HorizontalCellSizePagingFlowLayout.swift */; };
+		5293EE9E269A8F5B001A9754 /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5293EE9D269A8F5B001A9754 /* Report.swift */; };
+		5293EEA0269A9DBC001A9754 /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5293EE9F269A9DBC001A9754 /* HomeModel.swift */; };
+		5293EEA2269AF20F001A9754 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5293EEA1269AF20F001A9754 /* Date+.swift */; };
 		52944E212697F798006CC865 /* ToDo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52944E202697F798006CC865 /* ToDo.swift */; };
 		52944E232697FCFD006CC865 /* MyMindDashboardAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52944E222697FCFD006CC865 /* MyMindDashboardAPIService.swift */; };
 		52944E2726982B88006CC865 /* ToDoInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52944E2626982B88006CC865 /* ToDoInfoView.swift */; };
@@ -250,6 +254,10 @@
 		527E11BE2692C38D00FB8B01 /* PurchaseReviewingApplyInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseReviewingApplyInfoViewController.swift; sourceTree = "<group>"; };
 		527E11BF2692C38D00FB8B01 /* PurchaseReviewingApplyInfoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PurchaseReviewingApplyInfoViewController.xib; sourceTree = "<group>"; };
 		527E11C22693084B00FB8B01 /* ReturnPurchaseOrderInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReturnPurchaseOrderInfo.swift; sourceTree = "<group>"; };
+		5293EE9B269A8AEB001A9754 /* HorizontalCellSizePagingFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalCellSizePagingFlowLayout.swift; sourceTree = "<group>"; };
+		5293EE9D269A8F5B001A9754 /* Report.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Report.swift; sourceTree = "<group>"; };
+		5293EE9F269A9DBC001A9754 /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
+		5293EEA1269AF20F001A9754 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		52944E202697F798006CC865 /* ToDo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDo.swift; sourceTree = "<group>"; };
 		52944E222697FCFD006CC865 /* MyMindDashboardAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMindDashboardAPIService.swift; sourceTree = "<group>"; };
 		52944E2626982B88006CC865 /* ToDoInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoInfoView.swift; sourceTree = "<group>"; };
@@ -508,9 +516,18 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		5293EE9A269A8AC0001A9754 /* Layout */ = {
+			isa = PBXGroup;
+			children = (
+				5293EE9B269A8AEB001A9754 /* HorizontalCellSizePagingFlowLayout.swift */,
+			);
+			path = Layout;
+			sourceTree = "<group>";
+		};
 		52944E2426982B1D006CC865 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				5293EE9A269A8AC0001A9754 /* Layout */,
 				52944E2526982B2C006CC865 /* View */,
 			);
 			path = Home;
@@ -797,6 +814,8 @@
 				5246E4732690385C005C11EC /* Account.swift */,
 				527E11BA2692A05900FB8B01 /* Authorization.swift */,
 				52944E202697F798006CC865 /* ToDo.swift */,
+				5293EE9D269A8F5B001A9754 /* Report.swift */,
+				5293EE9F269A9DBC001A9754 /* HomeModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -847,6 +866,7 @@
 				A405410A264A575E00E2D21B /* UITextField+.swift */,
 				97AFE3782668D727002CBE01 /* UIViewController+loadNib.swift */,
 				527E11BC2692A0D500FB8B01 /* OptionSet+.swift */,
+				5293EEA1269AF20F001A9754 /* Date+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1312,6 +1332,7 @@
 				A4F2D00F265D063B004D8D6D /* ProductMaterialsFilterViewController.swift in Sources */,
 				52944E332699CEF0006CC865 /* ToDoListCollectionViewCell.swift in Sources */,
 				A47F39DF263A67E200A3097C /* UITableView+.swift in Sources */,
+				5293EEA2269AF20F001A9754 /* Date+.swift in Sources */,
 				A4BCA0CA267C802B00E3B274 /* PurchaseOrderLoader.swift in Sources */,
 				527E11BD2692A0D500FB8B01 /* OptionSet+.swift in Sources */,
 				52B15CBA2691BAFC0010FCED /* MyMindEmployeeAPIService.swift in Sources */,
@@ -1362,6 +1383,7 @@
 				97AFE37326673535002CBE01 /* PurchaseSuggestionViewController.swift in Sources */,
 				A457AEB42660F5F80029DDBB /* StageProgressView.swift in Sources */,
 				A48389AF2608360A0044C09E /* SignInViewController.swift in Sources */,
+				5293EEA0269A9DBC001A9754 /* HomeModel.swift in Sources */,
 				A4D50AB02645129E007B07D6 /* AutoCompleteSearchRootView.swift in Sources */,
 				52944E352699CFC1006CC865 /* HomeCollectionViewHeaderView.swift in Sources */,
 				A43E8509268C081B008C8369 /* SecretTableViewCell.swift in Sources */,
@@ -1415,6 +1437,7 @@
 				A4159204260C394F00FD3989 /* UIButton+.swift in Sources */,
 				A4CBD8A32664900100B19119 /* PickVendorViewController.swift in Sources */,
 				A439B52C26099AA1002352C2 /* UIViewController+.swift in Sources */,
+				5293EE9E269A8F5B001A9754 /* Report.swift in Sources */,
 				A4793C7F2604573700AD280C /* UserSession.swift in Sources */,
 				A47F39CD263A58F700A3097C /* PurchaseListViewController.swift in Sources */,
 				A4B55E4B265B4749002E1880 /* MyMindUserSessionRepository.swift in Sources */,
@@ -1440,6 +1463,7 @@
 				A4BC88C52679CB8100956B95 /* EditablePickedProductsInfoViewModel.swift in Sources */,
 				A40EBFDE2671F7A100A4863D /* PickPurchaseReviewerViewController.swift in Sources */,
 				A4CBD8B1266A2ABA00B19119 /* ProductMaterialSuggestionInfoTableViewController.swift in Sources */,
+				5293EE9C269A8AEB001A9754 /* HorizontalCellSizePagingFlowLayout.swift in Sources */,
 				97547CBF2681C5B6001859A8 /* LogInfoView.swift in Sources */,
 				A43E850C268C083C008C8369 /* SecretListViewController.swift in Sources */,
 				A40EBFD92671AD4900A4863D /* PurchaseApplyInfoViewController.swift in Sources */,

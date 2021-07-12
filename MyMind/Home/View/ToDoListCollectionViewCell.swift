@@ -19,9 +19,7 @@ class ToDoListCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         // Initialization code
         toDoListCollectionView.dataSource = self
-        if let flowLayout = toDoListCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            flowLayout.estimatedItemSize = CGSize(width: toDoListCollectionView.bounds.size.width-60, height: toDoListCollectionView.bounds.size.height)
-        }
+        toDoListCollectionView.delegate = self
     }
     func config(with toDos:[ToDo]) {
         self.toDos = toDos
@@ -39,5 +37,10 @@ extension ToDoListCollectionViewCell: UICollectionViewDataSource {
             return cell
         }
         return UICollectionViewCell()
+    }
+}
+extension ToDoListCollectionViewCell: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return  CGSize(width: toDoListCollectionView.bounds.size.width-60, height: toDoListCollectionView.bounds.size.height)
     }
 }

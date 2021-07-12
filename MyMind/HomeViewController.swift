@@ -14,6 +14,8 @@ protocol NavigationActionDelegate: AnyObject {
 typealias FunctionControlInfo = (type: MainFunctoinType, imageName: String, title: String)
 final class HomeViewController: UIViewController {
 
+    var skuRankingSortOrder: SKURankingReportSortOrder = .TOTAL_SALE_QUANTITY
+    var setSKURankingSortOrder: SKURankingReportSortOrder = .TOTAL_SALE_QUANTITY
     private let cellTitles = ["異常入庫", "審核退回", "審核通過", "待審核"]
     private let headerTitles = ["待辦事項", "", "", "近7日SKU銷售排行", "近7日加工組合SKU銷售排行", "近7日銷售金額佔比", "近7日銷售毛利佔比"]
     private let functionControlInfos: [FunctionControlInfo] = [
@@ -23,6 +25,36 @@ final class HomeViewController: UIViewController {
         (.saleChart, "account_setting_icon", "OTP")
     ]
     private var toDoList: ToDoList? {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
+    private var saleReports: SaleReports? {
+        didSet {
+            print(saleReports)
+//            collectionView.reloadData()
+        }
+    }
+    private var skuRankingReports: SKURankingReports? {
+        didSet {
+            print(skuRankingReports)
+//            collectionView.reloadData()
+        }
+    }
+    private var saleRankingReports: SaleRankingReports? {
+        didSet {
+            print(saleRankingReports)
+//            collectionView.reloadData()
+        }
+    }
+    private var grossProfitRankingReports: SaleRankingReports? {
+        didSet {
+            print(grossProfitRankingReports)
+//            collectionView.reloadData()
+        }
+    }
+
+    private var homeModelData: HomeModel? {
         didSet {
             collectionView.reloadData()
         }
@@ -41,9 +73,17 @@ final class HomeViewController: UIViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
     private func loadHomeData() {
+        loadToDoList()
+        loadSaleReports()
+        loadSKURankingReports()
+        loadSaleRankingReports()
+        loadGrossProfitRankingReports()
+    }
+    private func loadToDoList() {
         if let authorization = authorization {
             isNetworkProcessing = true
             let dashboardLoader = MyMindDashboardAPIService.shared
+
             dashboardLoader.todo(with: authorization.navigations.description)
                 .done { toDoList in
                     self.toDoList = toDoList
@@ -60,35 +100,122 @@ final class HomeViewController: UIViewController {
                 }
         }
     }
-//    private func loadPurchaseList() {
-//        isNetworkProcessing = true
-//        let purchaseListLoader = MyMindPurchaseAPIService.shared
-//        purchaseListLoader.loadPurchaseList(with: nil)
-//            .done { purchaseList in
-//                self.handleSuccessFetchPurchaseList(purchaseList)
-//            }
-//            .ensure {
-//                self.isNetworkProcessing = false
-//            }
-//            .catch(handleErrorForFetchPurchaseList(_:))
-//    }
-//    private func handleSuccessFetchPurchaseList(_ purchaseList: PurchaseList) {
-//
-//        if self.purchaseList != nil {
-//            self.purchaseList?.updateWithNextPageList(purchaseList: purchaseList)
-//        } else {
-//            self.purchaseList = purchaseList
-//        }
-//    }
-//
-//    private func handleErrorForFetchPurchaseList(_ error: Error) {
-//        if let apiError = error as? APIError {
-//            _ = ErrorHandler.shared.handle(apiError, controller: self)
-//        } else {
-//            ToastView.showIn(self, message: error.localizedDescription)
-//        }
-//    }
-
+    private func loadSaleReports() {
+        isNetworkProcessing = true
+        let dashboardLoader = MyMindDashboardAPIService.shared
+        let end = Date()
+        dashboardLoader.orderSaleReport(start: end.thirtyDaysBefore, end: end, type: .byType)
+            .done { typeSaleReportList in
+                dashboardLoader.orderSaleReport(start: end.thirtyDaysBefore, end: end, type: .byDate)
+                    .done { dateSaleReportList in
+                        self.saleReports = SaleReports(typeSaleReportList: typeSaleReportList, dateSaleReportList: dateSaleReportList)
+                    }
+                    .ensure {
+                        self.isNetworkProcessing = false
+                    }
+                    .catch { error in
+                        if let apiError = error as? APIError {
+                            _ = ErrorHandler.shared.handle(apiError, controller: self)
+                        } else {
+                            ToastView.showIn(self, message: error.localizedDescription)
+                        }
+                    }
+            }
+            .catch { error in
+                if let apiError = error as? APIError {
+                    _ = ErrorHandler.shared.handle(apiError, controller: self)
+                } else {
+                    ToastView.showIn(self, message: error.localizedDescription)
+                }
+            }
+    }
+    private func loadSKURankingReports() {
+        isNetworkProcessing = true
+        let dashboardLoader = MyMindDashboardAPIService.shared
+        let end = Date()
+        dashboardLoader.skuRankingReport(start: end.sevenDaysBefore, end: end, isSet: false, order: skuRankingSortOrder.rawValue, count: 5)
+            .done { rankingReportList in
+                dashboardLoader.skuRankingReport(start: end.sevenDaysBefore, end: end, isSet: true, order: self.setSKURankingSortOrder.rawValue, count: 5)
+                    .done { setRankingReportList in
+                        self.skuRankingReports = SKURankingReports(rankingReportList: rankingReportList, setRankingReportList: setRankingReportList)
+                    }
+                    .ensure {
+                        self.isNetworkProcessing = false
+                    }
+                    .catch { error in
+                        if let apiError = error as? APIError {
+                            _ = ErrorHandler.shared.handle(apiError, controller: self)
+                        } else {
+                            ToastView.showIn(self, message: error.localizedDescription)
+                        }
+                    }
+            }
+            .catch { error in
+                if let apiError = error as? APIError {
+                    _ = ErrorHandler.shared.handle(apiError, controller: self)
+                } else {
+                    ToastView.showIn(self, message: error.localizedDescription)
+                }
+            }
+    }
+    private func loadSaleRankingReports() {
+        isNetworkProcessing = true
+        let dashboardLoader = MyMindDashboardAPIService.shared
+        let end = Date()
+        dashboardLoader.storeRankingReport(start: end.sevenDaysBefore, end: end, order: "TOTAL_SALE_AMOUNT")
+            .done { storeRankingReportList in
+                dashboardLoader.channelRankingReport(start: end.sevenDaysBefore, end: end, order: "TOTAL_SALE_AMOUNT")
+                    .done { channelRankingReportList in
+                        self.saleRankingReports = SaleRankingReports(storeRankingReportList: storeRankingReportList, channelRankingReportList: channelRankingReportList)
+                    }
+                    .ensure {
+                        self.isNetworkProcessing = false
+                    }
+                    .catch { error in
+                        if let apiError = error as? APIError {
+                            _ = ErrorHandler.shared.handle(apiError, controller: self)
+                        } else {
+                            ToastView.showIn(self, message: error.localizedDescription)
+                        }
+                    }
+            }
+            .catch { error in
+                if let apiError = error as? APIError {
+                    _ = ErrorHandler.shared.handle(apiError, controller: self)
+                } else {
+                    ToastView.showIn(self, message: error.localizedDescription)
+                }
+            }
+    }
+    private func loadGrossProfitRankingReports() {
+        isNetworkProcessing = true
+        let dashboardLoader = MyMindDashboardAPIService.shared
+        let end = Date()
+        dashboardLoader.storeRankingReport(start: end.sevenDaysBefore, end: end, order: "SALE_GROSS_PROFIT")
+            .done { storeRankingReportList in
+                dashboardLoader.channelRankingReport(start: end.sevenDaysBefore, end: end, order: "SALE_GROSS_PROFIT")
+                    .done { channelRankingReportList in
+                        self.grossProfitRankingReports = SaleRankingReports(storeRankingReportList: storeRankingReportList, channelRankingReportList: channelRankingReportList)
+                    }
+                    .ensure {
+                        self.isNetworkProcessing = false
+                    }
+                    .catch { error in
+                        if let apiError = error as? APIError {
+                            _ = ErrorHandler.shared.handle(apiError, controller: self)
+                        } else {
+                            ToastView.showIn(self, message: error.localizedDescription)
+                        }
+                    }
+            }
+            .catch { error in
+                if let apiError = error as? APIError {
+                    _ = ErrorHandler.shared.handle(apiError, controller: self)
+                } else {
+                    ToastView.showIn(self, message: error.localizedDescription)
+                }
+            }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.backButtonTitle = ""
@@ -103,10 +230,10 @@ final class HomeViewController: UIViewController {
         remoteConfig.fetch { status, error in
             self.remoteConfig.activate()
             self.loadHomeData()
-//            self.loadPurchaseList()
         }
     }
 }
+/// UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout
 extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -192,6 +319,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         }
     }
 }
+/// SettingViewControllerDelegate
 extension HomeViewController: SettingViewControllerDelegate {
     func didSignOut() {
         self.navigationController?.popViewController(animated: true)
@@ -206,8 +334,8 @@ extension HomeViewController: SettingViewControllerDelegate {
             sceneDelegate.window?.rootViewController = signInViewController
         }
     }
-    
 }
+/// NavigationActionDelegate
 extension HomeViewController: NavigationActionDelegate {
     func didCancel() {
         self.navigationController?.popViewController(animated: true)
@@ -215,40 +343,6 @@ extension HomeViewController: NavigationActionDelegate {
     
 }
 
-//final class HorizontalCellSizePagingFlowLayout: UICollectionViewFlowLayout {
-//    override func awakeFromNib() {
-//        super.awakeFromNib()
-//        scrollDirection = .horizontal
-//    }
-//    override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
-//
-//        guard let collectionView = self.collectionView else {
-//            let latestOffset = super.targetContentOffset(forProposedContentOffset: proposedContentOffset, withScrollingVelocity: velocity)
-//            return latestOffset
-//        }
-//
-//        // Page width used for estimating and calculating paging.
-//        let pageWidth = self.itemSize.width + self.minimumInteritemSpacing //- 60
-//
-//        // Make an estimation of the current page position.
-//        let approximatePage = collectionView.contentOffset.x/pageWidth
-//
-//        // Determine the current page based on velocity.
-//        let currentPage = velocity.x == 0 ? round(approximatePage) : (velocity.x < 0.0 ? floor(approximatePage) : ceil(approximatePage))
-//
-//        // Create custom flickVelocity.
-//        let flickVelocity = velocity.x * 0.3
-//
-//        // Check how many pages the user flicked, if <= 1 then flickedPages should return 0.
-//        let flickedPages = (abs(round(flickVelocity)) <= 1) ? 0 : round(flickVelocity)
-//
-//        // Calculate newHorizontalOffset.
-//        let newHorizontalOffset = ((currentPage + flickedPages) * pageWidth) - collectionView.contentInset.left
-//
-//        return CGPoint(x: newHorizontalOffset, y: proposedContentOffset.y)
-//    }
-//
-//}
 final class ActionCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!

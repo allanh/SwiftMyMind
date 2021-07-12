@@ -231,4 +231,56 @@ extension Endpoint {
         ]
         return Endpoint(path: "/api/admin/\(version)/dashboard/todo", queryItems: items)
     }
+    static func saleReport(partnerID: String, start: Date, end: Date, type: SaleReport.SaleReportType) -> Self {
+        let formatter = DateFormatter {
+            $0.dateFormat = "yyyy-MM-dd"
+        }
+        let items = [
+            URLQueryItem(name: "partner_id", value: partnerID),
+            URLQueryItem(name: "channel_receipt_date_from", value: formatter.string(from: start)+" 00:00:00"),
+            URLQueryItem(name: "channel_receipt_date_to", value: formatter.string(from: end)+" 23:59:59")
+        ]
+        switch type {
+        case .byType: return Endpoint(path: "/api/admin/\(version)/dashboard/order_sale_by_type", queryItems: items)
+        case .byDate: return Endpoint(path: "/api/admin/\(version)/dashboard/order_sale_by_date", queryItems: items)
+        }
+    }
+    static func skuRankingReport(partnerID: String, start: Date, end: Date, isSet: Bool, order: String, count: Int) -> Self {
+        let formatter = DateFormatter {
+            $0.dateFormat = "yyyy-MM-dd"
+        }
+        let items = [
+            URLQueryItem(name: "partner_id", value: partnerID),
+            URLQueryItem(name: "channel_receipt_date_from", value: formatter.string(from: start)+" 00:00:00"),
+            URLQueryItem(name: "channel_receipt_date_to", value: formatter.string(from: end)+" 23:59:59"),
+            URLQueryItem(name: "is_set", value: "\(isSet)"),
+            URLQueryItem(name: "order_by", value: order),
+            URLQueryItem(name: "take", value: "\(count)")
+        ]
+        return Endpoint(path: "/api/admin/\(version)/dashboard/order_sale_by_sku", queryItems: items)
+    }
+    static func storeRankingReport(partnerID: String, start: Date, end: Date, order: String) -> Self {
+        let formatter = DateFormatter {
+            $0.dateFormat = "yyyy-MM-dd"
+        }
+        let items = [
+            URLQueryItem(name: "partner_id", value: partnerID),
+            URLQueryItem(name: "channel_receipt_date_from", value: formatter.string(from: start)+" 00:00:00"),
+            URLQueryItem(name: "channel_receipt_date_to", value: formatter.string(from: end)+" 23:59:59"),
+            URLQueryItem(name: "order_by", value: order)
+        ]
+        return Endpoint(path: "/api/admin/\(version)/dashboard/order_sale_by_store", queryItems: items)
+    }
+    static func channelRankingReport(partnerID: String, start: Date, end: Date, order: String) -> Self {
+        let formatter = DateFormatter {
+            $0.dateFormat = "yyyy-MM-dd"
+        }
+        let items = [
+            URLQueryItem(name: "partner_id", value: partnerID),
+            URLQueryItem(name: "channel_receipt_date_from", value: formatter.string(from: start)+" 00:00:00"),
+            URLQueryItem(name: "channel_receipt_date_to", value: formatter.string(from: end)+" 23:59:59"),
+            URLQueryItem(name: "order_by", value: order)
+        ]
+        return Endpoint(path: "/api/admin/\(version)/dashboard/order_sale_by_vendor", queryItems: items)
+    }
 }
