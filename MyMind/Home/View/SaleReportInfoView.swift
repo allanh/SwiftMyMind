@@ -44,7 +44,10 @@ class SaleReportInfoView: NiblessView {
 /// helper
 extension SaleReportInfoView {
     private func constructViews() {
-        headerView = IndicatorHeaderView(frame: bounds, indicatorWidth: 6, title: index == 0 ? "今日銷售數據": index == 1 ? "今日取消數據": "今日銷退數據")
+        let formatter = DateFormatter {
+            $0.dateFormat = "yyyy-MM-dd"
+        }
+        headerView = IndicatorHeaderView(frame: bounds, indicatorWidth: 6, title: index == 0 ? "今日銷售數據": index == 1 ? "今日取消數據": "今日銷退數據", alternativeInfo: formatter.string(from: Date()))
         quantityView = SaleReportInfoItemView(frame: bounds, today: reportOfToday, yesterday: reportOfYesterday, transformed: transformed, shipped: shipped, index: index, type: .quantity)
         amountView = SaleReportInfoItemView(frame: bounds, today: reportOfToday, yesterday: reportOfYesterday, transformed: transformed, shipped: shipped, index: index, type: .amount)
     }
