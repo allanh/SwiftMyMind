@@ -27,6 +27,9 @@ class ToDoListCollectionViewCell: UICollectionViewCell {
         // Initialization code
         toDoListCollectionView.dataSource = self
         toDoListCollectionView.delegate = self
+        toDoListCollectionView.clipsToBounds = true
+        toDoListCollectionView.layer.cornerRadius = 16
+        toDoListCollectionView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
     }
     func config(with toDos:[ToDo]) {
         self.toDos = toDos

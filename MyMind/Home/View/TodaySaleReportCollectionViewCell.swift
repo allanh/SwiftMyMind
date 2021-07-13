@@ -35,6 +35,9 @@ class TodaySaleReportCollectionViewCell: UICollectionViewCell {
         // Initialization code
         todaySaleReportCollectionView.dataSource = self
         todaySaleReportCollectionView.delegate = self
+        todaySaleReportCollectionView.clipsToBounds = true
+        todaySaleReportCollectionView.layer.cornerRadius = 16
+        todaySaleReportCollectionView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
     }
     func config(with today: SaleReport?, yesterday: SaleReport?, transformed: SaleReport?, shipped: SaleReport?) {
         self.reportOfToday = today
