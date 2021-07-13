@@ -11,9 +11,11 @@ final class IndicatorHeaderView: NiblessView {
     var hierarchyNotReady: Bool = true
     let indicatorWidth: CGFloat
     let title: String
-    init(frame: CGRect, indicatorWidth: CGFloat, title: String) {
+    let alternativeInfo: String?
+    init(frame: CGRect, indicatorWidth: CGFloat, title: String, alternativeInfo: String? = nil) {
         self.indicatorWidth = indicatorWidth
         self.title = title
+        self.alternativeInfo = alternativeInfo
         super.init(frame: frame)
         self.translatesAutoresizingMaskIntoConstraints = false
     }
@@ -26,6 +28,9 @@ final class IndicatorHeaderView: NiblessView {
         activateConstraints()
         backgroundColor = .systemBackground
         titleLabel.text = title
+        if let alternativeInfo = alternativeInfo {
+            alternativeLabel.text = alternativeInfo
+        }
         hierarchyNotReady = false
     }
     private let indicatorView: UIView = UIView {
@@ -37,6 +42,13 @@ final class IndicatorHeaderView: NiblessView {
         $0.font = .pingFangTCSemibold(ofSize: 16)
         $0.textColor = .secondaryLabel
     }
+    private let alternativeLabel: UILabel = UILabel {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.font = .pingFangTCSemibold(ofSize: 12)
+        $0.textColor = .tertiaryLabel
+        $0.textAlignment = .right
+
+    }
     private let seperatorView: UIView = UIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.backgroundColor = .secondarySystemBackground
@@ -46,11 +58,17 @@ extension IndicatorHeaderView {
     private func arrangeView() {
         addSubview(indicatorView)
         addSubview(titleLabel)
+        if alternativeInfo != nil {
+            addSubview(alternativeLabel)
+        }
         addSubview(seperatorView)
     }
     private func activateConstraints() {
         activateConstraintsIndicatorView()
         activateConstraintsTitleLabel()
+        if alternativeInfo != nil {
+            activateConstraintsAlternativeLabel()
+        }
         activateConstraintsSeperatorView()
     }
 }
@@ -76,10 +94,21 @@ extension IndicatorHeaderView {
             .constraint(equalTo: bottomAnchor, constant: -8)
         let leading = titleLabel.leadingAnchor
             .constraint(equalTo: indicatorView.trailingAnchor, constant: 8)
-        let trailing = titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8)
+//        let trailing = titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8)
         
         NSLayoutConstraint.activate([
-            top, bottom, leading, trailing
+            top, bottom, leading//, trailing
+        ])
+    }
+    private func activateConstraintsAlternativeLabel() {
+        let centerY = alternativeLabel.centerYAnchor
+            .constraint(equalTo: titleLabel.centerYAnchor)
+        let leading = alternativeLabel.leadingAnchor
+            .constraint(equalTo: titleLabel.trailingAnchor, constant: 8)
+        let trailing = alternativeLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8)
+
+        NSLayoutConstraint.activate([
+            centerY, leading, trailing
         ])
     }
     private func activateConstraintsSeperatorView() {
