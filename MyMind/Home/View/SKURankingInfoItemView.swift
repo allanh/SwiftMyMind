@@ -11,8 +11,8 @@ class SKURankingInfoItemView: NiblessView {
     var hierarchyNotReady: Bool = true
     let ranking: Int
     let report: SKURankingReport?
-    let order: SKURankingReportSortOrder
-    init(frame: CGRect, ranking: Int, report: SKURankingReport?, order: SKURankingReportSortOrder) {
+    let order: SKURankingReport.SKURankingReportSortOrder
+    init(frame: CGRect, ranking: Int, report: SKURankingReport?, order: SKURankingReport.SKURankingReportSortOrder) {
         self.ranking = ranking
         self.report = report
         self.order = order

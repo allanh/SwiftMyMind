@@ -15,14 +15,24 @@ typealias FunctionControlInfo = (type: MainFunctoinType, imageName: String, titl
 typealias SwitcherInfo = (firstTitle: String, secondTitle: String, current: Int, section: Int)
 final class HomeViewController: UIViewController {
 
-    var skuRankingSortOrder: SKURankingReportSortOrder = .TOTAL_SALE_QUANTITY {
+    private var skuRankingSortOrder: SKURankingReport.SKURankingReportSortOrder = .TOTAL_SALE_QUANTITY {
         didSet {
             loadSKURankingReportList()
         }
     }
-    var setSKURankingSortOrder: SKURankingReportSortOrder = .TOTAL_SALE_QUANTITY {
+    private var setSKURankingSortOrder: SKURankingReport.SKURankingReportSortOrder = .TOTAL_SALE_QUANTITY {
         didSet {
             loadSetSKURankingReportList()
+        }
+    }
+    private var amountRankingDevider: SaleRankingReport.SaleRankingReportDevider = .store {
+        didSet {
+            loadSaleRankingReportList()
+        }
+    }
+    private var grossProfitRankingDevider: SaleRankingReport.SaleRankingReportDevider = .store {
+        didSet {
+            loadGrossProfitRankingReportList()
         }
     }
     private var headerInfos: [(title: String, info: SwitcherInfo)] = [("待辦事項", ("", "", 0, 0)), ("", ("", "", 0, 1)), ("近30日銷售數量", ("銷售數量", "銷售總額", 0, 2)), ("近7日SKU銷售排行", ("銷售數量", "銷售總額", 0, 3)), ("近7日加工組合SKU銷售排行", ("銷售數量", "銷售總額", 0, 4)), ("近7日銷售金額佔比", ("通路", "供應商", 0, 5)), ("近7日銷售毛利佔比", ("通路", "供應商", 0, 6))]
@@ -46,22 +56,14 @@ final class HomeViewController: UIViewController {
             collectionView.reloadSections([4])
         }
     }
-    private var saleRankingReports: SaleRankingReports? {
+    private var saleRankingReportList: SaleRankingReportList? {
         didSet {
-            print(saleRankingReports)
-//            collectionView.reloadData()
+            collectionView.reloadSections([5])
         }
     }
-    private var grossProfitRankingReports: SaleRankingReports? {
+    private var grossProfitRankingReportList: SaleRankingReportList? {
         didSet {
-            print(grossProfitRankingReports)
-//            collectionView.reloadData()
-        }
-    }
-
-    private var homeModelData: HomeModel? {
-        didSet {
-            collectionView.reloadData()
+            collectionView.reloadSections([6])
         }
     }
     var authorization: Authorization?
@@ -82,8 +84,8 @@ final class HomeViewController: UIViewController {
         loadSaleReports()
         loadSKURankingReportList()
         loadSetSKURankingReportList()
-//        loadSaleRankingReports()
-//        loadGrossProfitRankingReports()
+        loadSaleRankingReportList()
+        loadGrossProfitRankingReportList()
     }
     private func loadToDoList() {
         if let authorization = authorization {
@@ -179,64 +181,79 @@ final class HomeViewController: UIViewController {
                 }
             }
     }
-    private func loadSaleRankingReports() {
+    private func loadSaleRankingReportList() {
         isNetworkProcessing = true
         let dashboardLoader = MyMindDashboardAPIService.shared
         let end = Date()
-        dashboardLoader.storeRankingReport(start: end.sevenDaysBefore, end: end, order: "TOTAL_SALE_AMOUNT")
-            .done { storeRankingReportList in
-                dashboardLoader.channelRankingReport(start: end.sevenDaysBefore, end: end, order: "TOTAL_SALE_AMOUNT")
-                    .done { channelRankingReportList in
-                        self.saleRankingReports = SaleRankingReports(storeRankingReportList: storeRankingReportList, channelRankingReportList: channelRankingReportList)
-                    }
-                    .ensure {
-                        self.isNetworkProcessing = false
-                    }
-                    .catch { error in
-                        if let apiError = error as? APIError {
-                            _ = ErrorHandler.shared.handle(apiError, controller: self)
-                        } else {
-                            ToastView.showIn(self, message: error.localizedDescription)
-                        }
-                    }
-            }
-            .catch { error in
-                if let apiError = error as? APIError {
-                    _ = ErrorHandler.shared.handle(apiError, controller: self)
-                } else {
-                    ToastView.showIn(self, message: error.localizedDescription)
+        if amountRankingDevider == .store {
+            dashboardLoader.storeRankingReport(start: end.sevenDaysBefore, end: end, order: "TOTAL_SALE_AMOUNT")
+                .done { saleRankingReportList in
+                    self.saleRankingReportList = saleRankingReportList
                 }
-            }
+                .ensure {
+                    self.isNetworkProcessing = false
+                }
+                .catch { error in
+                    if let apiError = error as? APIError {
+                        _ = ErrorHandler.shared.handle(apiError, controller: self)
+                    } else {
+                        ToastView.showIn(self, message: error.localizedDescription)
+                    }
+                }
+        } else {
+            dashboardLoader.vendorRankingReport(start: end.sevenDaysBefore, end: end, order: "TOTAL_SALE_AMOUNT")
+                .done { saleRankingReportList in
+                    self.saleRankingReportList = saleRankingReportList
+                }
+                .ensure {
+                    self.isNetworkProcessing = false
+                }
+                .catch { error in
+                    if let apiError = error as? APIError {
+                        _ = ErrorHandler.shared.handle(apiError, controller: self)
+                    } else {
+                        ToastView.showIn(self, message: error.localizedDescription)
+                    }
+                }
+        }
     }
-    private func loadGrossProfitRankingReports() {
+    private func loadGrossProfitRankingReportList() {
         isNetworkProcessing = true
         let dashboardLoader = MyMindDashboardAPIService.shared
         let end = Date()
-        dashboardLoader.storeRankingReport(start: end.sevenDaysBefore, end: end, order: "SALE_GROSS_PROFIT")
-            .done { storeRankingReportList in
-                dashboardLoader.channelRankingReport(start: end.sevenDaysBefore, end: end, order: "SALE_GROSS_PROFIT")
-                    .done { channelRankingReportList in
-                        self.grossProfitRankingReports = SaleRankingReports(storeRankingReportList: storeRankingReportList, channelRankingReportList: channelRankingReportList)
-                    }
-                    .ensure {
-                        self.isNetworkProcessing = false
-                    }
-                    .catch { error in
-                        if let apiError = error as? APIError {
-                            _ = ErrorHandler.shared.handle(apiError, controller: self)
-                        } else {
-                            ToastView.showIn(self, message: error.localizedDescription)
-                        }
-                    }
-            }
-            .catch { error in
-                if let apiError = error as? APIError {
-                    _ = ErrorHandler.shared.handle(apiError, controller: self)
-                } else {
-                    ToastView.showIn(self, message: error.localizedDescription)
+        if grossProfitRankingDevider == .store {
+            dashboardLoader.storeRankingReport(start: end.sevenDaysBefore, end: end, order: "SALE_GROSS_PROFIT")
+                .done { grossProfitRankingReportList in
+                    self.grossProfitRankingReportList = grossProfitRankingReportList
                 }
-            }
+                .ensure {
+                    self.isNetworkProcessing = false
+                }
+                .catch { error in
+                    if let apiError = error as? APIError {
+                        _ = ErrorHandler.shared.handle(apiError, controller: self)
+                    } else {
+                        ToastView.showIn(self, message: error.localizedDescription)
+                    }
+                }
+        } else {
+            dashboardLoader.vendorRankingReport(start: end.sevenDaysBefore, end: end, order: "SALE_GROSS_PROFIT")
+                .done { grossProfitRankingReportList in
+                    self.grossProfitRankingReportList = grossProfitRankingReportList
+                }
+                .ensure {
+                    self.isNetworkProcessing = false
+                }
+                .catch { error in
+                    if let apiError = error as? APIError {
+                        _ = ErrorHandler.shared.handle(apiError, controller: self)
+                    } else {
+                        ToastView.showIn(self, message: error.localizedDescription)
+                    }
+                }
+        }
     }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.backButtonTitle = ""
@@ -262,7 +279,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch section {
-        case 0, 1, 3, 4: return 1
+        case 0, 1, 3, 4, 5, 6: return 1
         default: return 0//return remoteConfig["otp_enable"].boolValue ? 4 : 3
         }
     }
@@ -305,11 +322,20 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
                 return cell
             }
             return UICollectionViewCell()
+        case 5:
+            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SaleRankingCollectionViewCell", for: indexPath) as? SaleRankingCollectionViewCell {
+                cell.config(with: saleRankingReportList, devider: amountRankingDevider)
+                return cell
+            }
+            return UICollectionViewCell()
+        case 6:
+            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SaleRankingCollectionViewCell", for: indexPath) as? SaleRankingCollectionViewCell {
+                cell.config(with: grossProfitRankingReportList, devider: grossProfitRankingDevider)
+                return cell
+            }
+            return UICollectionViewCell()
         default:
             return UICollectionViewCell()
-//            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ActionCollectionViewCell", for: indexPath) as? ActionCollectionViewCell
-//            cell?.config(with: functionControlInfos[indexPath.item])
-//            return cell ?? UICollectionViewCell()
         }
     }
     
@@ -324,6 +350,8 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
             return CGSize(width: itemWidth, height: 280)
         case 3, 4:
             return CGSize(width: itemWidth, height: CGFloat(236))
+        case 5, 6:
+            return CGSize(width: itemWidth, height: itemWidth*0.75)
         default:
             return CGSize(width: itemWidth, height: itemWidth)
         }
@@ -391,6 +419,10 @@ extension HomeViewController: IndicatorSwitchContentHeaderViewDelegate {
             skuRankingSortOrder = (index == 0) ? .TOTAL_SALE_QUANTITY : .TOTAL_SALE_AMOUNT
         case 4:
             setSKURankingSortOrder = (index == 0) ? .TOTAL_SALE_QUANTITY : .TOTAL_SALE_AMOUNT
+        case 5:
+            amountRankingDevider = (index == 0) ? .store : .vendor
+        case 6:
+            grossProfitRankingDevider = (index == 0) ? .store : .vendor
         default:
             collectionView.reloadSections([section])
             

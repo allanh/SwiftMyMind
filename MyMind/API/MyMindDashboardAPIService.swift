@@ -62,7 +62,7 @@ final class MyMindDashboardAPIService: PromiseKitAPIService {
         return sendRequest(request: request)
     }
     
-    func storeRankingReport(start: Date, end: Date, order: String) -> Promise<StoreRankingReportList> {
+    func storeRankingReport(start: Date, end: Date, order: String) -> Promise<SaleRankingReportList> {
         guard let userSession = userSessionDataStore.readUserSession() else {
             return .init(error: APIError.noAccessTokenError)
         }
@@ -76,7 +76,7 @@ final class MyMindDashboardAPIService: PromiseKitAPIService {
         return sendRequest(request: request)
     }
     
-    func channelRankingReport(start: Date, end: Date, order: String) -> Promise<ChannelRankingReportList> {
+    func vendorRankingReport(start: Date, end: Date, order: String) -> Promise<SaleRankingReportList> {
         guard let userSession = userSessionDataStore.readUserSession() else {
             return .init(error: APIError.noAccessTokenError)
         }

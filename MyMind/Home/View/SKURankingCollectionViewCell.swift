@@ -10,7 +10,7 @@ import UIKit
 
 class SKURankingCollectionViewCell: UICollectionViewCell {
     var infoView: SKURankingInfoView!
-    func config(with rankingList: SKURankingReportList?, order: SKURankingReportSortOrder) {
+    func config(with rankingList: SKURankingReportList?, order: SKURankingReport.SKURankingReportSortOrder) {
         clipsToBounds = true
         layer.cornerRadius = 16
         layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]

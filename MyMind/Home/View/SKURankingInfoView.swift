@@ -11,8 +11,8 @@ class SKURankingInfoView: NiblessView {
     var hierarchyNotReady: Bool = true
     let noDataView: NoDataView
     let rankingList: SKURankingReportList?
-    let order: SKURankingReportSortOrder
-    init(frame: CGRect, rankingList: SKURankingReportList?, order: SKURankingReportSortOrder) {
+    let order: SKURankingReport.SKURankingReportSortOrder
+    init(frame: CGRect, rankingList: SKURankingReportList?, order: SKURankingReport.SKURankingReportSortOrder) {
         self.rankingList = rankingList
         self.order = order
         self.noDataView = NoDataView()

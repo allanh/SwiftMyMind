@@ -13,8 +13,8 @@ struct HomeModel {
     var typeSaleReportList: SaleReportList?
     var dateSaleReportList: SaleReportList?
     var skuRankReportList: SKURankingReportList?
-    var storeRankingReportList: StoreRankingReportList?
-    var channelRankingReportList: ChannelRankingReportList?
+    var amountRankingReportList: SaleRankingReportList?
+    var grossProfitRankingReportList: SaleRankingReportList?
 //    init(toDoList: ToDoList? = nil, typeSaleReportList: SaleReportList? = nil, dateSaleReportList: SaleReportList? = nil, skuRankReportList: SKURankingReportList? = nil, storeRankingReportList: StoreRankingReportList? = nil, channelRankingReportList: ChannelRankingReportList? = nil) {
 //        self.toDoList = toDoList
 //        self.typeSaleReportList = typeSaleReportList
