@@ -37,6 +37,11 @@
 		52C2CBD4269BED72002A2BA9 /* SaleReportInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C2CBD3269BED72002A2BA9 /* SaleReportInfoView.swift */; };
 		52C2CBD6269C4CED002A2BA9 /* MyMindSaleReportRatioNumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C2CBD5269C4CED002A2BA9 /* MyMindSaleReportRatioNumberFormatter.swift */; };
 		52C2CBD8269C4D4E002A2BA9 /* SaleReportInfoItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C2CBD7269C4D4E002A2BA9 /* SaleReportInfoItemView.swift */; };
+		52C2CBDA269D6325002A2BA9 /* IndicatorSwitchContentHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C2CBD9269D6325002A2BA9 /* IndicatorSwitchContentHeaderView.swift */; };
+		52C2CBDC269D63D8002A2BA9 /* SKURankingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C2CBDB269D63D8002A2BA9 /* SKURankingCollectionViewCell.swift */; };
+		52C2CBDE269D643B002A2BA9 /* SKURankingInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C2CBDD269D643B002A2BA9 /* SKURankingInfoView.swift */; };
+		52C2CBE0269E890B002A2BA9 /* NoDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C2CBDF269E890B002A2BA9 /* NoDataView.swift */; };
+		52C2CBE2269E8950002A2BA9 /* SKURankingInfoItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C2CBE1269E8950002A2BA9 /* SKURankingInfoItemView.swift */; };
 		52D7249F268D62BC00B00585 /* MyMindPurchaseReviewAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D7249E268D62BC00B00585 /* MyMindPurchaseReviewAPIService.swift */; };
 		52D724A4268DBD6400B00585 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 52D724A3268DBD6400B00585 /* GoogleService-Info.plist */; };
 		52F564272693F14200171032 /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F564262693F14100171032 /* ErrorHandler.swift */; };
@@ -279,6 +284,11 @@
 		52C2CBD3269BED72002A2BA9 /* SaleReportInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaleReportInfoView.swift; sourceTree = "<group>"; };
 		52C2CBD5269C4CED002A2BA9 /* MyMindSaleReportRatioNumberFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMindSaleReportRatioNumberFormatter.swift; sourceTree = "<group>"; };
 		52C2CBD7269C4D4E002A2BA9 /* SaleReportInfoItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaleReportInfoItemView.swift; sourceTree = "<group>"; };
+		52C2CBD9269D6325002A2BA9 /* IndicatorSwitchContentHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatorSwitchContentHeaderView.swift; sourceTree = "<group>"; };
+		52C2CBDB269D63D8002A2BA9 /* SKURankingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKURankingCollectionViewCell.swift; sourceTree = "<group>"; };
+		52C2CBDD269D643B002A2BA9 /* SKURankingInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKURankingInfoView.swift; sourceTree = "<group>"; };
+		52C2CBDF269E890B002A2BA9 /* NoDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoDataView.swift; sourceTree = "<group>"; };
+		52C2CBE1269E8950002A2BA9 /* SKURankingInfoItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKURankingInfoItemView.swift; sourceTree = "<group>"; };
 		52D7249E268D62BC00B00585 /* MyMindPurchaseReviewAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMindPurchaseReviewAPIService.swift; sourceTree = "<group>"; };
 		52D724A3268DBD6400B00585 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		52F564262693F14100171032 /* ErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandler.swift; sourceTree = "<group>"; };
@@ -558,6 +568,11 @@
 				52C2CBD1269BE6BC002A2BA9 /* TodaySaleInfoCollectionViewCell.swift */,
 				52C2CBD3269BED72002A2BA9 /* SaleReportInfoView.swift */,
 				52C2CBD7269C4D4E002A2BA9 /* SaleReportInfoItemView.swift */,
+				52C2CBD9269D6325002A2BA9 /* IndicatorSwitchContentHeaderView.swift */,
+				52C2CBDB269D63D8002A2BA9 /* SKURankingCollectionViewCell.swift */,
+				52C2CBDD269D643B002A2BA9 /* SKURankingInfoView.swift */,
+				52C2CBDF269E890B002A2BA9 /* NoDataView.swift */,
+				52C2CBE1269E8950002A2BA9 /* SKURankingInfoItemView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1344,6 +1359,7 @@
 				A4F2D011265D0770004D8D6D /* ProductMaterialsFilterViewModel.swift in Sources */,
 				52944E2D269976C9006CC865 /* ToDoInfoHeaderView.swift in Sources */,
 				A457AEB22660A34A0029DDBB /* PickPurchaseStatusViewModel.swift in Sources */,
+				52C2CBDA269D6325002A2BA9 /* IndicatorSwitchContentHeaderView.swift in Sources */,
 				A4F2D00F265D063B004D8D6D /* ProductMaterialsFilterViewController.swift in Sources */,
 				52944E332699CEF0006CC865 /* ToDoListCollectionViewCell.swift in Sources */,
 				A47F39DF263A67E200A3097C /* UITableView+.swift in Sources */,
@@ -1381,6 +1397,7 @@
 				A4BDC7B4260B10E2005C33A5 /* SignInValidationService.swift in Sources */,
 				A43F42952643C75C00A246CC /* FilterSideMenuBottomView.swift in Sources */,
 				A442A16F266F797500AAB1ED /* Reviewer.swift in Sources */,
+				52C2CBDE269D643B002A2BA9 /* SKURankingInfoView.swift in Sources */,
 				A48389B4260869940044C09E /* SignInViewModel.swift in Sources */,
 				5246E4742690385C005C11EC /* Account.swift in Sources */,
 				A43E0B6A260D84FB005FC6CE /* NVActivityIndicatorView+Rx.swift in Sources */,
@@ -1464,6 +1481,7 @@
 				A439B53C2609CDC3002352C2 /* ToastView.swift in Sources */,
 				A43E8513268C08FC008C8369 /* UDISecretRepository.swift in Sources */,
 				A44A5A6E25F9B0D200995823 /* AppDelegate.swift in Sources */,
+				52C2CBE2269E8950002A2BA9 /* SKURankingInfoItemView.swift in Sources */,
 				52944E2B26997680006CC865 /* GridentCircleView.swift in Sources */,
 				A4AF79F72637B13B002B04F6 /* MainFunctionControl.swift in Sources */,
 				A43F428F2643866F00A246CC /* PurchaseListFilterViewController.swift in Sources */,
@@ -1490,6 +1508,7 @@
 				A47F39D5263A5A9B00A3097C /* PurchaseBriefTableViewCell.swift in Sources */,
 				A489A1B1263FAA7D00832679 /* PurchaseBriefCollectionViewCell.swift in Sources */,
 				97B117392654B8FC00242428 /* PickProductMaterialsViewController.swift in Sources */,
+				52C2CBE0269E890B002A2BA9 /* NoDataView.swift in Sources */,
 				A47AB496265DF53200FE3CFA /* ContainerTableViewCell.swift in Sources */,
 				A45E69C5264B89A300AADB44 /* CustomClearButtonPositionTextField.swift in Sources */,
 				A49CF8B6260301DE00AFC170 /* Endpoint.swift in Sources */,
@@ -1501,6 +1520,7 @@
 				A456700926830BAB009598AE /* PurchasedProductInfoTableViewCell.swift in Sources */,
 				97B1174126550C5E00242428 /* PickSortTypeView.swift in Sources */,
 				52944E232697FCFD006CC865 /* MyMindDashboardAPIService.swift in Sources */,
+				52C2CBDC269D63D8002A2BA9 /* SKURankingCollectionViewCell.swift in Sources */,
 				A4C0AFF4265B7A2E00B8D0C4 /* LastSignInInfoDataStore.swift in Sources */,
 				97547CC22681D8FF001859A8 /* PurchaseLogInfoViewController.swift in Sources */,
 				A4BCA0C6267C70FD00E3B274 /* PurchaseOrder.swift in Sources */,

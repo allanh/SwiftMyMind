@@ -64,17 +64,26 @@ struct SKURankingReport: Codable {
         case saleQuantity = "total_sale_quantity"
         case saleAmount = "total_sale_amount"
     }
-    let image: String
+    let image: String?
     let id: String
     let name: String
     let saleQuantity: Int
     let saleAmount: Float
+//    init(from decoder: Decoder) throws {
+//        let container = try decoder.container(keyedBy: CodingKeys.self)
+//        image = try container.decode(String.self, forKey: .image)
+//        id = try container.decode(String.self, forKey: .id)
+//        name = try container.decode(String.self, forKey: .name)
+//        saleQuantity = try container.decode(Int.self, forKey: .saleQuantity)
+//        saleAmount = try container.decode(Float.self, forKey: .saleAmount)
+//    }
 }
 struct SKURankingReportList: Codable {
     private enum CodingKeys: String, CodingKey {
         case reports = "detail"
     }
     let reports: [SKURankingReport]
+    static let mock: Self = SKURankingReportList(reports: [SKURankingReport(image: "", id: "1", name: "【CONVERSE】1234567890 All Star CHUCK 70 男女 高筒 休閒鞋", saleQuantity: 99999999, saleAmount: 66666666.0), SKURankingReport(image: "", id: "2", name: "【SASAKI 棉質吸濕排汗功能運動休閒長衫-女-深葡", saleQuantity: 9999999, saleAmount: 6666666.0), SKURankingReport(image: "", id: "3", name: "SASAKI 棉質吸濕排汗功能運動休閒長衫-女-深葡", saleQuantity: 999999, saleAmount: 666666.0), SKURankingReport(image: "", id: "4", name: "SK-II 亮采化妝水160ml", saleQuantity: 99999, saleAmount: 66666.0), SKURankingReport(image: "", id: "5", name: "【Philips 飛利浦】耳掛式耳機SHS4700", saleQuantity: 9999, saleAmount: 6666.0)])
 }
 struct SKURankingReports {
     let rankingReportList: SKURankingReportList

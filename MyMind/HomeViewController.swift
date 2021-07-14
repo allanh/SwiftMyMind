@@ -12,18 +12,20 @@ protocol NavigationActionDelegate: AnyObject {
     func didCancel()
 }
 typealias FunctionControlInfo = (type: MainFunctoinType, imageName: String, title: String)
+typealias SwitcherInfo = (firstTitle: String, secondTitle: String, current: Int, section: Int)
 final class HomeViewController: UIViewController {
 
-    var skuRankingSortOrder: SKURankingReportSortOrder = .TOTAL_SALE_QUANTITY
-    var setSKURankingSortOrder: SKURankingReportSortOrder = .TOTAL_SALE_QUANTITY
-    private let cellTitles = ["異常入庫", "審核退回", "審核通過", "待審核"]
-    private let headerTitles = ["待辦事項", "", "", "近7日SKU銷售排行", "近7日加工組合SKU銷售排行", "近7日銷售金額佔比", "近7日銷售毛利佔比"]
-    private let functionControlInfos: [FunctionControlInfo] = [
-        (.purchaseApply, "buy_icon", "採購申請"),
-        (.paybill, "examine_icon", "採購審核"),
-        (.accountSetting, "system_setting_icon", "帳號設定"),
-        (.saleChart, "account_setting_icon", "OTP")
-    ]
+    var skuRankingSortOrder: SKURankingReportSortOrder = .TOTAL_SALE_QUANTITY {
+        didSet {
+            loadSKURankingReportList()
+        }
+    }
+    var setSKURankingSortOrder: SKURankingReportSortOrder = .TOTAL_SALE_QUANTITY {
+        didSet {
+            loadSetSKURankingReportList()
+        }
+    }
+    private var headerInfos: [(title: String, info: SwitcherInfo)] = [("待辦事項", ("", "", 0, 0)), ("", ("", "", 0, 1)), ("近30日銷售數量", ("銷售數量", "銷售總額", 0, 2)), ("近7日SKU銷售排行", ("銷售數量", "銷售總額", 0, 3)), ("近7日加工組合SKU銷售排行", ("銷售數量", "銷售總額", 0, 4)), ("近7日銷售金額佔比", ("通路", "供應商", 0, 5)), ("近7日銷售毛利佔比", ("通路", "供應商", 0, 6))]
     private var toDoList: ToDoList? {
         didSet {
             collectionView.reloadSections([0])
@@ -31,18 +33,17 @@ final class HomeViewController: UIViewController {
     }
     private var saleReports: SaleReports? {
         didSet {
-            collectionView.reloadSections([1])
+            collectionView.reloadSections([1, 2])
         }
     }
-//    private var todaySaleTypeReport: SaleReport? {
-//        didSet {
-//            collectionView.reloadSections([1])
-//        }
-//    }
-    private var skuRankingReports: SKURankingReports? {
+    private var skuRankingReportList: SKURankingReportList? {
         didSet {
-            print(skuRankingReports)
-//            collectionView.reloadData()
+            collectionView.reloadSections([3])
+        }
+    }
+    private var setSKURankingReportList: SKURankingReportList? {
+        didSet {
+            collectionView.reloadSections([4])
         }
     }
     private var saleRankingReports: SaleRankingReports? {
@@ -79,7 +80,8 @@ final class HomeViewController: UIViewController {
     private func loadHomeData() {
         loadToDoList()
         loadSaleReports()
-//        loadSKURankingReports()
+        loadSKURankingReportList()
+        loadSetSKURankingReportList()
 //        loadSaleRankingReports()
 //        loadGrossProfitRankingReports()
     }
@@ -139,26 +141,35 @@ final class HomeViewController: UIViewController {
                 }
             }
     }
-    private func loadSKURankingReports() {
+    private func loadSKURankingReportList() {
         isNetworkProcessing = true
         let dashboardLoader = MyMindDashboardAPIService.shared
         let end = Date()
         dashboardLoader.skuRankingReport(start: end.sevenDaysBefore, end: end, isSet: false, order: skuRankingSortOrder.rawValue, count: 5)
             .done { rankingReportList in
-                dashboardLoader.skuRankingReport(start: end.sevenDaysBefore, end: end, isSet: true, order: self.setSKURankingSortOrder.rawValue, count: 5)
-                    .done { setRankingReportList in
-                        self.skuRankingReports = SKURankingReports(rankingReportList: rankingReportList, setRankingReportList: setRankingReportList)
-                    }
-                    .ensure {
-                        self.isNetworkProcessing = false
-                    }
-                    .catch { error in
-                        if let apiError = error as? APIError {
-                            _ = ErrorHandler.shared.handle(apiError, controller: self)
-                        } else {
-                            ToastView.showIn(self, message: error.localizedDescription)
-                        }
-                    }
+                self.skuRankingReportList = rankingReportList
+            }
+            .ensure {
+                self.isNetworkProcessing = false
+            }
+            .catch { error in
+                if let apiError = error as? APIError {
+                    _ = ErrorHandler.shared.handle(apiError, controller: self)
+                } else {
+                    ToastView.showIn(self, message: error.localizedDescription)
+                }
+            }
+    }
+    private func loadSetSKURankingReportList() {
+        isNetworkProcessing = true
+        let dashboardLoader = MyMindDashboardAPIService.shared
+        let end = Date()
+        dashboardLoader.skuRankingReport(start: end.sevenDaysBefore, end: end, isSet: true, order: setSKURankingSortOrder.rawValue, count: 5)
+            .done { setRankingReportList in
+                self.setSKURankingReportList = setRankingReportList
+            }
+            .ensure {
+                self.isNetworkProcessing = false
             }
             .catch { error in
                 if let apiError = error as? APIError {
@@ -236,7 +247,7 @@ final class HomeViewController: UIViewController {
         settings.minimumFetchInterval = 0
         remoteConfig.configSettings = settings
         collectionView.register(HomeCollectionViewHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HomeHeader")
-
+        collectionView.register(HomeCollectionViewSwitchContentHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HomeSwitchContentHeader")
         remoteConfig.fetch { status, error in
             self.remoteConfig.activate()
             self.loadHomeData()
@@ -247,12 +258,12 @@ final class HomeViewController: UIViewController {
 extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 3
+        return 7
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch section {
-        case 0, 1: return 1
-        default: return remoteConfig["otp_enable"].boolValue ? 4 : 3
+        case 0, 1, 3, 4: return 1
+        default: return 0//return remoteConfig["otp_enable"].boolValue ? 4 : 3
         }
     }
     
@@ -282,10 +293,23 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
                 return cell
             }
             return UICollectionViewCell()
+        case 3:
+            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SKURankingCollectionViewCell", for: indexPath) as? SKURankingCollectionViewCell {
+                cell.config(with: skuRankingReportList, order: skuRankingSortOrder)
+                return cell
+            }
+            return UICollectionViewCell()
+        case 4:
+            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SKURankingCollectionViewCell", for: indexPath) as? SKURankingCollectionViewCell {
+                cell.config(with: setSKURankingReportList, order: setSKURankingSortOrder)
+                return cell
+            }
+            return UICollectionViewCell()
         default:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ActionCollectionViewCell", for: indexPath) as? ActionCollectionViewCell
-            cell?.config(with: functionControlInfos[indexPath.item])
-            return cell ?? UICollectionViewCell()
+            return UICollectionViewCell()
+//            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ActionCollectionViewCell", for: indexPath) as? ActionCollectionViewCell
+//            cell?.config(with: functionControlInfos[indexPath.item])
+//            return cell ?? UICollectionViewCell()
         }
     }
     
@@ -295,9 +319,12 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         let insets = ((collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.sectionInset ?? .zero)
         let itemSpaceing = ((collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.minimumLineSpacing ?? 10)
         let itemWidth = width-left-itemSpaceing-insets.left
-        if indexPath.section == 0 || indexPath.section == 1 {
+        switch indexPath.section {
+        case 0, 1:
             return CGSize(width: itemWidth, height: 280)
-        } else {
+        case 3, 4:
+            return CGSize(width: itemWidth, height: CGFloat(236))
+        default:
             return CGSize(width: itemWidth, height: itemWidth)
         }
     }
@@ -305,17 +332,24 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         let width = collectionView.bounds.width
         switch section {
-        case 0:
-            return CGSize(width: width, height: 50)
-        default:
+        case 1:
             return .zero
+        default:
+            return CGSize(width: width, height: 50)
         }
     }
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         if kind == UICollectionView.elementKindSectionHeader {
-            if let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HomeHeader", for: indexPath) as? HomeCollectionViewHeaderView {
-                headerView.config(with: 6, title: headerTitles[indexPath.section])
-                return headerView
+            if indexPath.section == 0 {
+                if let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HomeHeader", for: indexPath) as? HomeCollectionViewHeaderView {
+                    headerView.config(with: 6, title: headerInfos[indexPath.section].title)
+                    return headerView
+                }
+            } else {
+                if let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HomeSwitchContentHeader", for: indexPath) as? HomeCollectionViewSwitchContentHeaderView {
+                    headerView.config(with: 6, title: headerInfos[indexPath.section].title, switcher: headerInfos[indexPath.section].info, delegate: self)
+                    return headerView
+                }
             }
             return UICollectionReusableView()
         }
@@ -345,6 +379,21 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
             present(viewController, animated: true, completion: nil)
         default:
             break
+        }
+    }
+}
+/// IndicatorSwitchContentHeaderViewDelegate
+extension HomeViewController: IndicatorSwitchContentHeaderViewDelegate {
+    func contentNeedSwitch(to index: Int, for section: Int) {
+        headerInfos[section].info.current = index
+        switch section {
+        case 3:
+            skuRankingSortOrder = (index == 0) ? .TOTAL_SALE_QUANTITY : .TOTAL_SALE_AMOUNT
+        case 4:
+            setSKURankingSortOrder = (index == 0) ? .TOTAL_SALE_QUANTITY : .TOTAL_SALE_AMOUNT
+        default:
+            collectionView.reloadSections([section])
+            
         }
     }
 }

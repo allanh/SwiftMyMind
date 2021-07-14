@@ -130,7 +130,7 @@ extension SaleReportInfoItemView {
         
         switch type {
         case .quantity:
-            quantityTitleLabel.text = index == 0 ? "今日銷售數量" : index == 1 ? "今日取消數量" : "今日銷退數量"
+            quantityTitleLabel.text = index == 0 ? "銷售數量" : index == 1 ? "取消數量" : "銷退數量"
             let ratio = index == 0 ? saleQuantityRatio: index == 1 ? canceledQuantityRatio : returnQuantityRatio
             let value = formatter.string(from: NSNumber(value:ratio))
             if ratio >= 0 {
@@ -140,11 +140,11 @@ extension SaleReportInfoItemView {
             }
             quantityRatioLabel.text = value
             quantityLabel.text = index == 0 ? "\(reportOfToday?.saleQuantity ?? 0)" : index == 1 ? "\(reportOfToday?.canceledQuantity ?? 0)" : "\(reportOfToday?.returnQuantity ?? 0)"
-            yesterdayQuantityLabel.text = index == 0 ? "昨日銷售 \(reportOfYesterday?.saleQuantity ?? 0)" : index == 1 ? "昨日取消 \(reportOfYesterday?.canceledQuantity ?? 0)" : "昨日銷退 \(reportOfYesterday?.returnQuantity ?? 0)"
+            yesterdayQuantityLabel.text = index == 0 ? "昨日數量 \(reportOfYesterday?.saleQuantity ?? 0)" : index == 1 ? "昨日數量 \(reportOfYesterday?.canceledQuantity ?? 0)" : "昨日數量 \(reportOfYesterday?.returnQuantity ?? 0)"
             transformedValueLabel.text = index == 0 ? "\(transformed?.saleQuantity ?? 0)" : index == 1 ? "\(transformed?.canceledQuantity ?? 0)" : "\(transformed?.returnQuantity ?? 0)"
             shippedValueLabel.text = index == 0 ? "\(shipped?.saleQuantity ?? 0)" : index == 1 ? "\(shipped?.canceledQuantity ?? 0)" : "\(shipped?.returnQuantity ?? 0)"
         case .amount:
-            quantityTitleLabel.text = index == 0 ? "今日銷售總額" : index == 1 ? "今日取消總額" : "今日銷退總額"
+            quantityTitleLabel.text = index == 0 ? "銷售總額" : index == 1 ? "取消總額" : "銷退總額"
             let ratio = index == 0 ? saleAmountRatio: index == 1 ? canceledAmountRatio : returnAmountRatio
             let value = formatter.string(from: NSNumber(value:ratio))
             if ratio >= 0 {
@@ -154,7 +154,7 @@ extension SaleReportInfoItemView {
             }
             quantityRatioLabel.text = (ratio > 0) ? "▲ \(ratio) %" : (ratio == 0) ? value : "▼ \(ratio) %"
             quantityLabel.text = index == 0 ? "\(reportOfToday?.saleAmount ?? 0)" : index == 1 ? "\(reportOfToday?.canceledAmount ?? 0)" : "\(reportOfToday?.returnAmount ?? 0)"
-            yesterdayQuantityLabel.text = index == 0 ? "昨日銷售 \(reportOfYesterday?.saleAmount ?? 0)" : index == 1 ? "昨日取消 \(reportOfYesterday?.canceledAmount ?? 0)" : "昨日銷退 \(reportOfYesterday?.returnAmount ?? 0)"
+            yesterdayQuantityLabel.text = index == 0 ? "昨日總額 \(reportOfYesterday?.saleAmount ?? 0)" : index == 1 ? "昨日總額 \(reportOfYesterday?.canceledAmount ?? 0)" : "昨日總額 \(reportOfYesterday?.returnAmount ?? 0)"
             transformedValueLabel.text = index == 0 ? "\(transformed?.saleAmount ?? 0)" : index == 1 ? "\(transformed?.canceledAmount ?? 0)" : "\(transformed?.returnAmount ?? 0)"
             shippedValueLabel.text = index == 0 ? "\(shipped?.saleAmount ?? 0)" : index == 1 ? "\(shipped?.canceledAmount ?? 0)" : "\(shipped?.returnAmount ?? 0)"
         }

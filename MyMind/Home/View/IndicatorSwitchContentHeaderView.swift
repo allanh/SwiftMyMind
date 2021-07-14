@@ -1,23 +1,29 @@
 //
-//  IndicatorHeaderView.swift
+//  IndicatorSwitchContentHeaderView.swift
 //  MyMind
 //
-//  Created by Nelson Chan on 2021/7/10.
+//  Created by Nelson Chan on 2021/7/13.
 //  Copyright © 2021 United Digital Intelligence. All rights reserved.
 //
 
 import UIKit
-final class IndicatorHeaderView: NiblessView {
+
+class IndicatorSwitchContentHeaderView: NiblessView {
     var hierarchyNotReady: Bool = true
     let indicatorWidth: CGFloat
     let title: String
-    let alternativeInfo: String?
-    init(frame: CGRect, indicatorWidth: CGFloat, title: String, alternativeInfo: String? = nil) {
+    let switcher: SwitcherInfo
+    weak var delegate: IndicatorSwitchContentHeaderViewDelegate?
+    init(frame: CGRect, indicatorWidth: CGFloat, title: String, switcher: SwitcherInfo, delegate: IndicatorSwitchContentHeaderViewDelegate? = nil) {
         self.indicatorWidth = indicatorWidth
         self.title = title
-        self.alternativeInfo = alternativeInfo
+        self.switcher = switcher
+        self.delegate = delegate
         super.init(frame: frame)
         self.translatesAutoresizingMaskIntoConstraints = false
+    }
+    @objc private func switchContent() {
+        delegate?.contentNeedSwitch(to: switcherSegmentControl.selectedSegmentIndex, for: switcher.section)
     }
     override func didMoveToWindow() {
         super.didMoveToWindow()
@@ -28,9 +34,10 @@ final class IndicatorHeaderView: NiblessView {
         activateConstraints()
         backgroundColor = .systemBackground
         titleLabel.text = title
-        if let alternativeInfo = alternativeInfo {
-            alternativeLabel.text = alternativeInfo
-        }
+        switcherSegmentControl.insertSegment(withTitle: switcher.0, at: 0, animated: false)
+        switcherSegmentControl.insertSegment(withTitle: switcher.1, at: 1, animated: false)
+        switcherSegmentControl.addTarget(self, action: #selector(switchContent), for: .valueChanged)
+        switcherSegmentControl.selectedSegmentIndex = switcher.current
         hierarchyNotReady = false
     }
     private let indicatorView: UIView = UIView {
@@ -42,37 +49,35 @@ final class IndicatorHeaderView: NiblessView {
         $0.font = .pingFangTCSemibold(ofSize: 16)
         $0.textColor = .secondaryLabel
     }
-    private let alternativeLabel: UILabel = UILabel {
+    private let switcherSegmentControl: UISegmentedControl = UISegmentedControl {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.font = .pingFangTCSemibold(ofSize: 12)
-        $0.textColor = .tertiaryLabel
-        $0.textAlignment = .right
-
+        $0.setTitleTextAttributes([.foregroundColor : UIColor.secondaryLabel], for: .normal)
+        $0.setTitleTextAttributes([.foregroundColor : UIColor.label], for: .selected)
+        $0.selectedSegmentTintColor = .secondarySystemBackground
+        $0.backgroundColor = .tertiarySystemBackground
     }
     private let seperatorView: UIView = UIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.backgroundColor = .secondarySystemBackground
     }
 }
-extension IndicatorHeaderView {
+/// helper
+extension IndicatorSwitchContentHeaderView {
     private func arrangeView() {
         addSubview(indicatorView)
         addSubview(titleLabel)
-        if alternativeInfo != nil {
-            addSubview(alternativeLabel)
-        }
+        addSubview(switcherSegmentControl)
         addSubview(seperatorView)
     }
     private func activateConstraints() {
         activateConstraintsIndicatorView()
         activateConstraintsTitleLabel()
-        if alternativeInfo != nil {
-            activateConstraintsAlternativeLabel()
-        }
+        activateConstraintsSwitcherSegmentControl()
         activateConstraintsSeperatorView()
     }
 }
-extension IndicatorHeaderView {
+/// constraint
+extension IndicatorSwitchContentHeaderView {
     private func activateConstraintsIndicatorView() {
         let top = indicatorView.topAnchor
             .constraint(equalTo: topAnchor, constant: 8)
@@ -100,15 +105,13 @@ extension IndicatorHeaderView {
             top, bottom, leading//, trailing
         ])
     }
-    private func activateConstraintsAlternativeLabel() {
-        let centerY = alternativeLabel.centerYAnchor
+    private func activateConstraintsSwitcherSegmentControl() {
+        let centerY = switcherSegmentControl.centerYAnchor
             .constraint(equalTo: titleLabel.centerYAnchor)
-        let leading = alternativeLabel.leadingAnchor
-            .constraint(equalTo: titleLabel.trailingAnchor, constant: 8)
-        let trailing = alternativeLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8)
+        let trailing = switcherSegmentControl.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8)
 
         NSLayoutConstraint.activate([
-            centerY, leading, trailing
+            centerY, trailing
         ])
     }
     private func activateConstraintsSeperatorView() {
@@ -124,7 +127,4 @@ extension IndicatorHeaderView {
             leading, trailing, height, bottom
         ])
     }
-}
-protocol IndicatorSwitchContentHeaderViewDelegate: AnyObject {
-    func contentNeedSwitch(to index: Int, for section: Int)
 }
