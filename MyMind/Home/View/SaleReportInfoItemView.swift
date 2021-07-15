@@ -13,21 +13,15 @@ class SaleReportInfoItemView: NiblessView {
     }
     var hierarchyNotReady: Bool = true
     let saleReports: SaleReports?
-//    let reportOfToday: SaleReport?
-//    let reportOfYesterday: SaleReport?
-//    let transformed: SaleReport?
-//    let shipped: SaleReport?
     let index: Int
     let type: SaleReportInfoType
     init(frame: CGRect, saleReports: SaleReports?, index: Int, type: SaleReportInfoType) {
         self.saleReports = saleReports
-//        self.reportOfYesterday = yesterday
-//        self.transformed = transformed
-//        self.shipped = shipped
         self.index = index
         self.type = type
         super.init(frame: frame)
         self.translatesAutoresizingMaskIntoConstraints = false
+        self.layer.cornerRadius = 8
     }
     override func didMoveToSuperview() {
         super.didMoveToSuperview()
@@ -58,9 +52,9 @@ class SaleReportInfoItemView: NiblessView {
         $0.font = .pingFangTCSemibold(ofSize: 14)
         $0.textColor = .label
     }
-    private let seperator: UIView = UIView {
+    private let seperator: DashedLineView = DashedLineView {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.backgroundColor = .label
+        $0.backgroundColor = .clear
     }
     private let transformedTitleLabel: UILabel = UILabel {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -165,35 +159,48 @@ extension SaleReportInfoItemView {
         formatter.minimumFractionDigits = 2
         formatter.maximumFractionDigits = 2
         
+        let numberFormatter = NumberFormatter {
+            $0.numberStyle = .decimal
+        }
+        
         switch type {
         case .quantity:
             quantityTitleLabel.text = index == 0 ? "銷售數量" : index == 1 ? "取消數量" : "銷退數量"
             let ratio = index == 0 ? saleQuantityRatio: index == 1 ? canceledQuantityRatio : returnQuantityRatio
-            let value = formatter.string(from: NSNumber(value:ratio))
+            let string = formatter.string(from: NSNumber(value:ratio))
             if ratio >= 0 {
                 quantityRatioLabel.textColor = .systemGreen
             } else {
                 quantityRatioLabel.textColor = .systemRed
             }
-            quantityRatioLabel.text = (ratio == 0) ? "--" : value
-            quantityLabel.text = index == 0 ? "\(saleQuantityDividend)" : index == 1 ? "\(canceledQuantityDividend)" : "\(returnQuantityDividend)"
-            yesterdayQuantityLabel.text = index == 0 ? "昨日數量 \(saleQuantityDivisor)" : index == 1 ? "昨日數量 \(canceledQuantityDivisor)" : "昨日數量 \(returnQuantityDivisor)"
-            transformedValueLabel.text = index == 0 ? "\(saleReports?.todayTransformedSaleReport?.saleQuantity ?? 0)" : index == 1 ? "\(saleReports?.todayTransformedSaleReport?.canceledQuantity ?? 0)" : "\(saleReports?.todayTransformedSaleReport?.returnQuantity ?? 0)"
-            shippedValueLabel.text = index == 0 ? "\(saleReports?.todayShippedSaleReport?.saleQuantity ?? 0)" : index == 1 ? "\(saleReports?.todayShippedSaleReport?.canceledQuantity ?? 0)" : "\(saleReports?.todayShippedSaleReport?.returnQuantity ?? 0)"
+            quantityRatioLabel.text = (ratio == 0) ? "--" : string
+            var quantity = index == 0 ? saleQuantityDividend : index == 1 ? canceledQuantityDividend : returnQuantityDividend
+            quantityLabel.text = numberFormatter.string(from: NSNumber(value: quantity))
+            quantity = index == 0 ? saleQuantityDivisor : index == 1 ? canceledQuantityDivisor : returnQuantityDivisor
+            yesterdayQuantityLabel.text = "昨日數量 "+(numberFormatter.string(from: NSNumber(value: quantity)) ?? "")
+            
+            var value = index == 0 ? saleReports?.todayTransformedSaleReport?.saleQuantity : index == 1 ? saleReports?.todayTransformedSaleReport?.canceledQuantity : saleReports?.todayTransformedSaleReport?.returnQuantity
+            transformedValueLabel.text = numberFormatter.string(from: NSNumber(value: value ?? 0))
+            value = index == 0 ? saleReports?.todayShippedSaleReport?.saleQuantity : index == 1 ? saleReports?.todayShippedSaleReport?.canceledQuantity : saleReports?.todayShippedSaleReport?.returnQuantity
+            shippedValueLabel.text = numberFormatter.string(from: NSNumber(value: value ?? 0))
         case .amount:
             quantityTitleLabel.text = index == 0 ? "銷售總額" : index == 1 ? "取消總額" : "銷退總額"
             let ratio = index == 0 ? saleAmountRatio: index == 1 ? canceledAmountRatio : returnAmountRatio
-            let value = formatter.string(from: NSNumber(value:ratio))
+            let string = formatter.string(from: NSNumber(value:ratio))
             if ratio >= 0 {
                 quantityRatioLabel.textColor = .systemGreen
             } else {
                 quantityRatioLabel.textColor = .systemRed
             }
-            quantityRatioLabel.text = (ratio == 0) ? "--" : value
-            quantityLabel.text = index == 0 ? "\(saleAmountDividend)" : index == 1 ? "\(canceledAmountDividend)" : "\(returnAmountDividend)"
-            yesterdayQuantityLabel.text = index == 0 ? "昨日總額 \(saleAmountDivisor)" : index == 1 ? "昨日總額 \(canceledAmountDivisor)" : "昨日總額 \(returnAmountDivisor)"
-            transformedValueLabel.text = index == 0 ? "\(saleReports?.todayTransformedSaleReport?.saleAmount ?? 0)" : index == 1 ? "\(saleReports?.todayTransformedSaleReport?.canceledAmount ?? 0)" : "\(saleReports?.todayTransformedSaleReport?.returnAmount ?? 0)"
-            shippedValueLabel.text = index == 0 ? "\(saleReports?.todayShippedSaleReport?.saleAmount ?? 0)" : index == 1 ? "\(saleReports?.todayShippedSaleReport?.canceledAmount ?? 0)" : "\(saleReports?.todayShippedSaleReport?.returnAmount ?? 0)"
+            quantityRatioLabel.text = (ratio == 0) ? "--" : string
+            var quantity = index == 0 ? saleAmountDividend : index == 1 ? canceledAmountDividend : returnAmountDividend
+            quantityLabel.text = numberFormatter.string(from: NSNumber(value: quantity))
+            quantity = index == 0 ? saleAmountDivisor : index == 1 ? canceledAmountDivisor : returnAmountDivisor
+            yesterdayQuantityLabel.text = "昨日總額 "+(numberFormatter.string(from: NSNumber(value: quantity)) ?? "")
+            var value = index == 0 ? saleReports?.todayTransformedSaleReport?.saleAmount : index == 1 ? saleReports?.todayTransformedSaleReport?.canceledAmount : saleReports?.todayTransformedSaleReport?.returnAmount
+            transformedValueLabel.text = numberFormatter.string(from: NSNumber(value: value ?? 0))
+            value = index == 0 ? saleReports?.todayShippedSaleReport?.saleAmount : index == 1 ? saleReports?.todayShippedSaleReport?.canceledAmount : saleReports?.todayShippedSaleReport?.returnAmount
+            shippedValueLabel.text = numberFormatter.string(from: NSNumber(value: value ?? 0))
         }
     }
     private func activateConstraints() {
@@ -227,12 +234,11 @@ extension SaleReportInfoItemView {
             .constraint(equalTo: quantityTitleLabel.centerYAnchor)
         let leading = quantityRatioLabel.leadingAnchor
             .constraint(equalTo: quantityTitleLabel.trailingAnchor, constant: 4)
-        let trailing = quantityRatioLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -4)
         let height = quantityRatioLabel.heightAnchor
             .constraint(equalToConstant: 17)
 
         NSLayoutConstraint.activate([
-            centerY, leading, height, trailing
+            centerY, leading, height
         ])
     }
     private func activateConstraintsQuantityLabel() {
