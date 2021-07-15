@@ -7,6 +7,7 @@
 //
 
 import Foundation
+// MARK: -- SaleReport --
 struct SaleReport: Codable {
     enum SaleReportType {
         case byType
@@ -42,6 +43,7 @@ struct SaleReport: Codable {
     let returnAmount: Float
     let canceledAmount: Float
 }
+// MARK: -- SaleReportList --
 struct SaleReportList: Codable {
     private enum CodingKeys: String, CodingKey {
         case reports = "detail"
@@ -76,12 +78,16 @@ struct SaleReportList: Codable {
         }
     }
 }
+// MARK: -- SaleReports --
 struct SaleReports {
     let todayTransformedSaleReport: SaleReport?
     let todayShippedSaleReport: SaleReport?
     let yesterdayTransformedSaleReport: SaleReport?
     let yesterdayShippedSaleReport: SaleReport?
+    static let empty: Self = SaleReports(todayTransformedSaleReport: nil, todayShippedSaleReport: nil, yesterdayTransformedSaleReport: nil, yesterdayShippedSaleReport: nil)
+
 }
+// MARK: -- SKURankingReport --
 struct SKURankingReport: Codable {
     enum SKURankingReportSortOrder: String {
         case TOTAL_SALE_QUANTITY = "TOTAL_SALE_QUANTITY", TOTAL_SALE_AMOUNT = "TOTAL_SALE_AMOUNT"
@@ -107,6 +113,7 @@ struct SKURankingReport: Codable {
 //        saleAmount = try container.decode(Float.self, forKey: .saleAmount)
 //    }
 }
+// MARK: -- SKURankingReportList --
 struct SKURankingReportList: Codable {
     private enum CodingKeys: String, CodingKey {
         case reports = "detail"
@@ -114,11 +121,7 @@ struct SKURankingReportList: Codable {
     let reports: [SKURankingReport]
     static let mock: Self = SKURankingReportList(reports: [SKURankingReport(image: "", id: "1", name: "【CONVERSE】1234567890 All Star CHUCK 70 男女 高筒 休閒鞋", saleQuantity: 99999999, saleAmount: 66666666.0), SKURankingReport(image: "", id: "2", name: "【SASAKI 棉質吸濕排汗功能運動休閒長衫-女-深葡", saleQuantity: 9999999, saleAmount: 6666666.0), SKURankingReport(image: "", id: "3", name: "SASAKI 棉質吸濕排汗功能運動休閒長衫-女-深葡", saleQuantity: 999999, saleAmount: 666666.0), SKURankingReport(image: "", id: "4", name: "SK-II 亮采化妝水160ml", saleQuantity: 99999, saleAmount: 66666.0), SKURankingReport(image: "", id: "5", name: "【Philips 飛利浦】耳掛式耳機SHS4700", saleQuantity: 9999, saleAmount: 6666.0)])
 }
-//struct SKURankingReports {
-//    let rankingReportList: SKURankingReportList
-//    let setRankingReportList: SKURankingReportList
-//}
-
+// MARK: -- SaleRankingReport --
 struct SaleRankingReport: Codable {
     enum SaleRankingReportDevider: CustomStringConvertible {
         case store, vendor
@@ -157,7 +160,7 @@ struct SaleRankingReport: Codable {
         try container.encode(saleGrossProfit, forKey: .saleGrossProfit)
     }
 }
-
+// MARK: -- SaleRankingReportList --
 struct SaleRankingReportList: Codable {
     private enum CodingKeys: String, CodingKey {
         case reports = "detail"

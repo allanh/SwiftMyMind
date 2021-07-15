@@ -38,13 +38,6 @@ extension SKURankingInfoView {
             for index in 0..<rankingList.reports.count {
                 itemViews.append(SKURankingInfoItemView(frame: .zero, ranking: index+1, report: rankingList.reports[index], order: order))
             }
-            for index in rankingList.reports.count..<5 {
-                itemViews.append(SKURankingInfoItemView(frame: .zero, ranking: index+1, report: nil, order: order))
-            }
-        } else {
-            for index in 0..<5 {
-                itemViews.append(SKURankingInfoItemView(frame: .zero, ranking: index+1, report: nil, order: order))
-            }
         }
     }
     private func arrangeView() {

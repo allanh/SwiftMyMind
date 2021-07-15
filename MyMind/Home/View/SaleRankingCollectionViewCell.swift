@@ -74,6 +74,26 @@ extension SaleRankingReportList {
         data.setValueTextColor(.black)
         return data
     }
+    static func emptyPieChartData(maximum: Int = 5) -> PieChartData {
+        let pieChartEntries: [PieChartDataEntry] = [PieChartDataEntry(value:100, label: "尚無資料")]
+        let set = PieChartDataSet(entries: pieChartEntries, label: "")
+        set.drawIconsEnabled = false
+        set.sliceSpace = 2
+        
+        set.colors = [.tertiaryLabel]
+        let data = PieChartData(dataSet: set)
+        
+        let pFormatter = NumberFormatter()
+        pFormatter.numberStyle = .percent
+        pFormatter.maximumFractionDigits = 1
+        pFormatter.multiplier = 1
+        pFormatter.percentSymbol = " %"
+        data.setValueFormatter(DefaultValueFormatter(formatter: pFormatter))
+        
+        data.setValueFont(.systemFont(ofSize: 11, weight: .light))
+        data.setValueTextColor(.black)
+        return data
+    }
 }
 class SaleRankingCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var chartView: PieChartView!
@@ -89,24 +109,12 @@ class SaleRankingCollectionViewCell: UICollectionViewCell {
         chartView.drawSlicesUnderHoleEnabled = true
         chartView.holeRadiusPercent = 0.6
         chartView.chartDescription?.enabled = true
-        chartView.setExtraOffsets(left: -100, top: 0, right: 100, bottom: 0)
+        chartView.setExtraOffsets(left: 0, top: 0, right: 0, bottom: 0)
         chartView.drawCenterTextEnabled = true
         chartView.rotationAngle = 0
         chartView.rotationEnabled = true
         chartView.highlightPerTapEnabled = true
-        
-        let l = chartView.legend
-        l.form = .circle
-        l.formSize = 10
-        l.horizontalAlignment = .right
-        l.verticalAlignment = .top
-        l.orientation = .vertical
-        l.drawInside = false
-        l.xEntrySpace = 40
-        l.yEntrySpace = 20
-        l.yOffset = 10
-        l.xOffset = 0
-        
+                
         chartView.renderer = EmptyValuePieChartRenderer(chart: chartView, animator: chartView.chartAnimator, viewPortHandler: chartView.viewPortHandler)
     }
     func config(with rankingList: SaleRankingReportList?, devider: SaleRankingReport.SaleRankingReportDevider) {
@@ -123,7 +131,24 @@ class SaleRankingCollectionViewCell: UICollectionViewCell {
         centerText.setAttributes([.font : UIFont.pingFangTCRegular(ofSize: 13),
                                   .paragraphStyle : paragraphStyle], range: NSRange(location: 0, length: centerText.length))
         chartView.centerAttributedText = centerText
-        chartView.data = rankingList?.pieChartData()
+        let legend = chartView.legend
+        legend.horizontalAlignment = .right
+        legend.verticalAlignment = .center
+        legend.orientation = .vertical
+        legend.drawInside = false
+        legend.yOffset = 0
+        legend.xEntrySpace = 40
+        legend.yEntrySpace = 20
+        if let rankingList = rankingList, rankingList.reports.count > 0 {
+            legend.form = .circle
+            legend.formSize = 10
+            legend.xOffset = 0
+            chartView.data = rankingList.pieChartData()
+        } else {
+            legend.form = .none
+            legend.xOffset = 20
+            chartView.data = SaleRankingReportList.emptyPieChartData()
+        }
 
     }
 }

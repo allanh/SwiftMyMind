@@ -324,8 +324,10 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         switch indexPath.section {
         case 0:
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ToDoListCollectionViewCell", for: indexPath) as? ToDoListCollectionViewCell {
-                if let items = toDoList?.items {
+                if let items = toDoList?.items, items.count > 0 {
                     cell.config(with: items)
+                } else {
+                    cell.config(with: ToDoList.emptyItems)
                 }
                 return cell
             }

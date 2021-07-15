@@ -7,6 +7,7 @@
 //
 
 import UIKit
+// MARK: -- ToDo --
 struct ToDo: Codable {
     struct ToDoItem: Codable {
         enum ToDoItemType: String, Codable {
@@ -40,11 +41,11 @@ struct ToDo: Codable {
         let type: ToDoItemType
         #warning("type may need change")
         let count: String
-        init(from decoder: Decoder) throws {
-            let container = try decoder.container(keyedBy: CodingKeys.self)
-            type = try container.decode(ToDoItemType.self, forKey: .type)
-            count = try container.decode(String.self, forKey: .count)
-        }
+//        init(from decoder: Decoder) throws {
+//            let container = try decoder.container(keyedBy: CodingKeys.self)
+//            type = try container.decode(ToDoItemType.self, forKey: .type)
+//            count = try container.decode(String.self, forKey: .count)
+//        }
 
     }
     enum ToDoType: String, Codable {
@@ -90,19 +91,21 @@ struct ToDo: Codable {
         case type
         case items = "info"
     }
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        type = try container.decode(ToDoType.self, forKey: .type)
-        items = try container.decode([ToDoItem].self, forKey: .items)
-    }
+//    init(from decoder: Decoder) throws {
+//        let container = try decoder.container(keyedBy: CodingKeys.self)
+//        type = try container.decode(ToDoType.self, forKey: .type)
+//        items = try container.decode([ToDoItem].self, forKey: .items)
+//    }
 }
+// MARK: -- ToDoList --
 struct ToDoList: Codable {
     let items: [ToDo]
     private enum CodingKeys: String, CodingKey {
         case items = "detail"
     }
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        items = try container.decode([ToDo].self, forKey: .items)
-    }
+//    init(from decoder: Decoder) throws {
+//        let container = try decoder.container(keyedBy: CodingKeys.self)
+//        items = try container.decode([ToDo].self, forKey: .items)
+//    }
+    static let emptyItems: [ToDo] = [ToDo(type: .RECEIPT, items: [ToDo.ToDoItem(type: .TRANSFER, count: "0"), ToDo.ToDoItem(type: .BORROWING, count: "0")]), ToDo(type: .RECEIPT_RETURN, items: [ToDo.ToDoItem(type: .TRANSFER_RETURN, count: "0"), ToDo.ToDoItem(type: .BORROWING_RETURN, count: "0")]), ToDo(type: .PURCHASE, items: [ToDo.ToDoItem(type: .PURCHASE_UNUSAL, count: "0"), ToDo.ToDoItem(type: .PURCHASE_REVIEW_REJECT, count: "0"), ToDo.ToDoItem(type: .PURCHASE_APPROVED, count: "0"), ToDo.ToDoItem(type: .PURCHASE_REIVEW, count: "0")]), ToDo(type: .INBOUND, items: [ToDo.ToDoItem(type: .INBOUND_UNUSAL, count: "0"), ToDo.ToDoItem(type: .INBOUND_PENDING, count: "0")]), ToDo(type: .STOCK, items: [ToDo.ToDoItem(type: .LOW_STOCK, count: "0"), ToDo.ToDoItem(type: .NONE_STOCK, count: "0")])]
 }

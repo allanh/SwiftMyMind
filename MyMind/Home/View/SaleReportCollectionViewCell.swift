@@ -63,6 +63,43 @@ extension SaleReportList {
         
         return data
     }
+    static func emptyLineChartData(order: SKURankingReport.SKURankingReportSortOrder) -> LineChartData{
+        let toDate: Date = Date()
+        let fromDate: Date = toDate.thirtyDaysBefore
+        let offset = Calendar.current.dateComponents([.day], from: fromDate, to: toDate).day!
+        let saleEntries: [ChartDataEntry] = (0..<offset).map { (i) -> ChartDataEntry in
+            return ChartDataEntry(x: Double(i), y: 0, data: Calendar.current.date(byAdding: .day, value: i, to: fromDate))
+        }
+        let canceledEntries: [ChartDataEntry] = (0..<offset).map { (i) -> ChartDataEntry in
+            return ChartDataEntry(x: Double(i), y: 0, data: Calendar.current.date(byAdding: .day, value: i, to: fromDate))
+        }
+        let returnedEntries: [ChartDataEntry] = (0..<offset).map { (i) -> ChartDataEntry in
+            return ChartDataEntry(x: Double(i), y: 0, data: Calendar.current.date(byAdding: .day, value: i, to: fromDate))
+        }
+
+        let saleSet = LineChartDataSet(entries: saleEntries, label: (order == .TOTAL_SALE_QUANTITY) ? "銷售數量" : "銷售總額")
+        saleSet.setColor(.systemGreen)
+        saleSet.drawCircleHoleEnabled = false
+        saleSet.drawCirclesEnabled = false
+        saleSet.drawIconsEnabled = false
+
+        let canceledSet = LineChartDataSet(entries: canceledEntries, label: (order == .TOTAL_SALE_QUANTITY) ? "取消數量" : "取消總額")
+        canceledSet.drawCircleHoleEnabled = false
+        canceledSet.drawCirclesEnabled = false
+        canceledSet.setColor(.systemGray)
+        canceledSet.drawIconsEnabled = false
+
+        
+        let returnedSet = LineChartDataSet(entries: returnedEntries, label: (order == .TOTAL_SALE_QUANTITY) ? "銷退數量" : "銷退總額")
+        returnedSet.setColor(.systemOrange)
+        returnedSet.drawCirclesEnabled = false
+        returnedSet.drawCircleHoleEnabled = false
+        returnedSet.drawIconsEnabled = false
+
+        let data: LineChartData = LineChartData(dataSets: [saleSet, canceledSet, returnedSet])
+        
+        return data
+    }
 }
 
 class SaleReportCollectionViewCell: UICollectionViewCell {
@@ -98,12 +135,17 @@ class SaleReportCollectionViewCell: UICollectionViewCell {
         layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         self.saleReportList = saleReportList
         let leftAxis = lineChartView.leftAxis
-        if let maximum = (order == .TOTAL_SALE_QUANTITY) ? self.saleReportList?.maximumQuantity : self.saleReportList?.maximumAmount {
-            leftAxis.axisMaximum = maximum + maximum/10
+        if let reportList = saleReportList, reportList.reports.count > 0 {
+            if let maximum = (order == .TOTAL_SALE_QUANTITY) ? self.saleReportList?.maximumQuantity : self.saleReportList?.maximumAmount {
+                leftAxis.axisMaximum = maximum + maximum/10
+            } else {
+                leftAxis.axisMaximum = 10000
+            }
+            lineChartView.data = reportList.lineChartData(order: order)
         } else {
             leftAxis.axisMaximum = 10000
+            lineChartView.data = SaleReportList.emptyLineChartData(order: order)
         }
-        lineChartView.data = saleReportList?.lineChartData(order: order)
     }
 }
 extension SaleReportCollectionViewCell: IAxisValueFormatter {
