@@ -47,6 +47,34 @@ struct SaleReportList: Codable {
         case reports = "detail"
     }
     let reports: [SaleReport]
+    var maximumQuantity: Double {
+        get {
+            let maximunSaleQuantity: Int = reports.sorted {
+                $0.saleQuantity > $1.saleQuantity
+            }.first?.saleQuantity ?? 0
+            let maximunCanceledQuantity: Int = reports.sorted {
+                $0.canceledQuantity > $1.canceledQuantity
+            }.first?.canceledQuantity ?? 0
+            let maximunReturnQuantity: Int = reports.sorted {
+                $0.returnQuantity > $1.returnQuantity
+            }.first?.returnQuantity ?? 0
+            return Double(max(maximunSaleQuantity, maximunCanceledQuantity, maximunReturnQuantity))
+        }
+    }
+    var maximumAmount: Double {
+        get {
+            let maximunSaleAmount: Float = reports.sorted {
+                $0.saleAmount > $1.saleAmount
+            }.first?.saleAmount ?? 0
+            let maximunCanceledAmount: Float = reports.sorted {
+                $0.canceledAmount > $1.canceledAmount
+            }.first?.canceledAmount ?? 0
+            let maximunReturnAmount: Float = reports.sorted {
+                $0.returnAmount > $1.returnAmount
+            }.first?.returnAmount ?? 0
+            return Double(max(maximunSaleAmount, maximunCanceledAmount, maximunReturnAmount))
+        }
+    }
 }
 struct SaleReports {
     let todayTransformedSaleReport: SaleReport?

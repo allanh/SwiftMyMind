@@ -97,6 +97,12 @@ class SaleReportCollectionViewCell: UICollectionViewCell {
         layer.cornerRadius = 16
         layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         self.saleReportList = saleReportList
+        let leftAxis = lineChartView.leftAxis
+        if let maximum = (order == .TOTAL_SALE_QUANTITY) ? self.saleReportList?.maximumQuantity : self.saleReportList?.maximumAmount {
+            leftAxis.axisMaximum = maximum + maximum/10
+        } else {
+            leftAxis.axisMaximum = 10000
+        }
         lineChartView.data = saleReportList?.lineChartData(order: order)
     }
 }
