@@ -10,22 +10,7 @@ import UIKit
 
 class TodaySaleReportCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var todaySaleReportCollectionView: UICollectionView!
-    private var reportOfToday: SaleReport?  {
-        didSet {
-            todaySaleReportCollectionView.reloadData()
-        }
-    }
-    private var reportOfYesterday: SaleReport?  {
-        didSet {
-            todaySaleReportCollectionView.reloadData()
-        }
-    }
-    private var transformed: SaleReport?  {
-        didSet {
-            todaySaleReportCollectionView.reloadData()
-        }
-    }
-    private var shipped: SaleReport?  {
+    private var saleReports: SaleReports? {
         didSet {
             todaySaleReportCollectionView.reloadData()
         }
@@ -39,13 +24,9 @@ class TodaySaleReportCollectionViewCell: UICollectionViewCell {
         todaySaleReportCollectionView.layer.cornerRadius = 16
         todaySaleReportCollectionView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
     }
-    func config(with today: SaleReport?, yesterday: SaleReport?, transformed: SaleReport?, shipped: SaleReport?) {
-        self.reportOfToday = today
-        self.reportOfYesterday = yesterday
-        self.transformed = transformed
-        self.shipped = shipped
+    func config(with saleReports: SaleReports?) {
+        self.saleReports = saleReports
     }
-
 }
 extension TodaySaleReportCollectionViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -54,7 +35,7 @@ extension TodaySaleReportCollectionViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TodaySaleInfoCollectionViewCell", for: indexPath) as? TodaySaleInfoCollectionViewCell {
-            cell.config(with: reportOfToday, yesterday: reportOfYesterday, transformed: transformed, shipped: shipped, at: indexPath.item)
+            cell.config(with: saleReports, at: indexPath.item)
             return cell
         }
         return UICollectionViewCell()

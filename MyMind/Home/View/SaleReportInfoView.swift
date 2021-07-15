@@ -10,17 +10,11 @@ import UIKit
 
 class SaleReportInfoView: NiblessView {
     var hierarchyNotReady: Bool = true
-    let reportOfToday: SaleReport?
-    let reportOfYesterday: SaleReport?
-    let transformed: SaleReport?
-    let shipped: SaleReport?
+    let saleReports: SaleReports?
     let index: Int
-    init(frame: CGRect, today: SaleReport?, yesterday: SaleReport?, transformed: SaleReport?, shipped: SaleReport?, index: Int) {
+    init(frame: CGRect, saleReports: SaleReports?, index: Int) {
         self.index = index
-        self.reportOfToday = today
-        self.reportOfYesterday = yesterday
-        self.transformed = transformed
-        self.shipped = shipped
+        self.saleReports = saleReports
         super.init(frame: frame)
         self.layer.cornerRadius = 8
         self.layer.borderWidth = 1
@@ -48,8 +42,8 @@ extension SaleReportInfoView {
             $0.dateFormat = "yyyy-MM-dd"
         }
         headerView = IndicatorHeaderView(frame: bounds, indicatorWidth: 6, title: index == 0 ? "今日銷售數據": index == 1 ? "今日取消數據": "今日銷退數據", alternativeInfo: formatter.string(from: Date()))
-        quantityView = SaleReportInfoItemView(frame: bounds, today: reportOfToday, yesterday: reportOfYesterday, transformed: transformed, shipped: shipped, index: index, type: .quantity)
-        amountView = SaleReportInfoItemView(frame: bounds, today: reportOfToday, yesterday: reportOfYesterday, transformed: transformed, shipped: shipped, index: index, type: .amount)
+        quantityView = SaleReportInfoItemView(frame: bounds, saleReports: saleReports, index: index, type: .quantity)
+        amountView = SaleReportInfoItemView(frame: bounds, saleReports: saleReports, index: index, type: .amount)
     }
     private func arrangeView() {
         addSubview(headerView)

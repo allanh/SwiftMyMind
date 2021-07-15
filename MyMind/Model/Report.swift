@@ -51,7 +51,8 @@ struct SaleReportList: Codable {
 struct SaleReports {
     let todayTransformedSaleReport: SaleReport?
     let todayShippedSaleReport: SaleReport?
-    let dateSaleReportList: SaleReportList
+    let yesterdayTransformedSaleReport: SaleReport?
+    let yesterdayShippedSaleReport: SaleReport?
 }
 struct SKURankingReport: Codable {
     enum SKURankingReportSortOrder: String {

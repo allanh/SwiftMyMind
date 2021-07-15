@@ -15,6 +15,11 @@ typealias FunctionControlInfo = (type: MainFunctoinType, imageName: String, titl
 typealias SwitcherInfo = (firstTitle: String, secondTitle: String, current: Int, section: Int)
 final class HomeViewController: UIViewController {
 
+    private var saleReportSortOrder: SKURankingReport.SKURankingReportSortOrder = .TOTAL_SALE_QUANTITY {
+        didSet {
+            collectionView.reloadSections([2])
+        }
+    }
     private var skuRankingSortOrder: SKURankingReport.SKURankingReportSortOrder = .TOTAL_SALE_QUANTITY {
         didSet {
             loadSKURankingReportList()
@@ -43,7 +48,12 @@ final class HomeViewController: UIViewController {
     }
     private var saleReports: SaleReports? {
         didSet {
-            collectionView.reloadSections([1, 2])
+            collectionView.reloadSections([1])
+        }
+    }
+    private var saleReportList: SaleReportList? {
+        didSet {
+            collectionView.reloadSections([2])
         }
     }
     private var skuRankingReportList: SKURankingReportList? {
@@ -81,7 +91,8 @@ final class HomeViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     private func loadHomeData() {
         loadToDoList()
-        loadSaleReports()
+        loadTodaySaleReports()
+        loadSaleReportList()
         loadSKURankingReportList()
         loadSetSKURankingReportList()
         loadSaleRankingReportList()
@@ -108,21 +119,27 @@ final class HomeViewController: UIViewController {
                 }
         }
     }
-    private func loadSaleReports() {
+    private func loadTodaySaleReports() {
         isNetworkProcessing = true
         let dashboardLoader = MyMindDashboardAPIService.shared
         let end = Date()
         dashboardLoader.orderSaleReport(start: end, end: end, type: .byType)
-            .done { typeSaleReportList in
-                dashboardLoader.orderSaleReport(start: end.thirtyDaysBefore, end: end, type: .byDate)
-                    .done { dateSaleReportList in
-                        let transformedSaleReport = typeSaleReportList.reports.first {
+            .done { todaySaleReportList in
+                dashboardLoader.orderSaleReport(start: end.yesterday, end: end.yesterday, type: .byType)
+                    .done { yesterdaySaleReportList in
+                        let todayTransformedSaleReport = todaySaleReportList.reports.first {
                             $0.type == .TRANSFORMED
                         }
-                        let shippedSaleReport = typeSaleReportList.reports.first {
+                        let todayShippedSaleReport = todaySaleReportList.reports.first {
                             $0.type == .SHIPPED
                         }
-                        self.saleReports = SaleReports(todayTransformedSaleReport: transformedSaleReport, todayShippedSaleReport: shippedSaleReport, dateSaleReportList: dateSaleReportList)
+                        let yesterdayTransformedSaleReport = yesterdaySaleReportList.reports.first {
+                            $0.type == .TRANSFORMED
+                        }
+                        let yesterdayShippedSaleReport = yesterdaySaleReportList.reports.first {
+                            $0.type == .SHIPPED
+                        }
+                        self.saleReports = SaleReports(todayTransformedSaleReport: todayTransformedSaleReport, todayShippedSaleReport: todayShippedSaleReport, yesterdayTransformedSaleReport: yesterdayTransformedSaleReport, yesterdayShippedSaleReport: yesterdayShippedSaleReport)
                     }
                     .ensure {
                         self.isNetworkProcessing = false
@@ -134,6 +151,25 @@ final class HomeViewController: UIViewController {
                             ToastView.showIn(self, message: error.localizedDescription)
                         }
                     }
+            }
+            .catch { error in
+                if let apiError = error as? APIError {
+                    _ = ErrorHandler.shared.handle(apiError, controller: self)
+                } else {
+                    ToastView.showIn(self, message: error.localizedDescription)
+                }
+            }
+    }
+    private func loadSaleReportList() {
+        isNetworkProcessing = true
+        let dashboardLoader = MyMindDashboardAPIService.shared
+        let end = Date()
+        dashboardLoader.orderSaleReport(start: end.thirtyDaysBefore, end: end, type: .byDate)
+            .done { saleReportList in
+                self.saleReportList = saleReportList
+            }
+            .ensure {
+                self.isNetworkProcessing = false
             }
             .catch { error in
                 if let apiError = error as? APIError {
@@ -279,7 +315,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch section {
-        case 0, 1, 3, 4, 5, 6: return 1
+        case 0, 1, 2, 3, 4, 5, 6: return 1
         default: return 0//return remoteConfig["otp_enable"].boolValue ? 4 : 3
         }
     }
@@ -296,17 +332,13 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
             return UICollectionViewCell()
         case 1:
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TodaySaleReportCollectionViewCell", for: indexPath) as? TodaySaleReportCollectionViewCell {
-                let formatter = DateFormatter {
-                    $0.dateFormat = "yyyy-MM-dd"
-                }
-                let now = Date()
-                let reportOfToday = saleReports?.dateSaleReportList.reports.first(where: { report in
-                    report.date == formatter.string(from: now)
-                })
-                let reportOfYesterday = saleReports?.dateSaleReportList.reports.first(where: { report in
-                    report.date == formatter.string(from: now.yesterday)
-                })
-                cell.config(with: reportOfToday, yesterday: reportOfYesterday, transformed: saleReports?.todayTransformedSaleReport, shipped: saleReports?.todayShippedSaleReport)
+                cell.config(with: saleReports)
+                return cell
+            }
+            return UICollectionViewCell()
+        case 2:
+            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SaleReportCollectionViewCell", for: indexPath) as? SaleReportCollectionViewCell {
+                cell.config(with: saleReportList, order: saleReportSortOrder)
                 return cell
             }
             return UICollectionViewCell()
@@ -340,21 +372,8 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = UIScreen.main.bounds.width
-        let left = collectionView.frame.origin.x
-        let insets = ((collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.sectionInset ?? .zero)
-        let itemSpaceing = ((collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.minimumLineSpacing ?? 10)
-        let itemWidth = width-left-itemSpaceing-insets.left
-        switch indexPath.section {
-        case 0, 1:
-            return CGSize(width: itemWidth, height: 280)
-        case 3, 4:
-            return CGSize(width: itemWidth, height: CGFloat(236))
-        case 5, 6:
-            return CGSize(width: itemWidth, height: itemWidth*0.75)
-        default:
-            return CGSize(width: itemWidth, height: itemWidth)
-        }
+        let width = collectionView.bounds.width
+        return CGSize(width: width, height: width*0.75)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
@@ -375,7 +394,11 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
                 }
             } else {
                 if let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HomeSwitchContentHeader", for: indexPath) as? HomeCollectionViewSwitchContentHeaderView {
-                    headerView.config(with: 6, title: headerInfos[indexPath.section].title, switcher: headerInfos[indexPath.section].info, delegate: self)
+                    var title = headerInfos[indexPath.section].title
+                    if indexPath.section == 2, saleReportSortOrder == .TOTAL_SALE_AMOUNT {
+                        title = "近30日銷售總額"
+                    }
+                    headerView.config(with: 6, title: title, switcher: headerInfos[indexPath.section].info, delegate: self)
                     return headerView
                 }
             }
@@ -384,37 +407,39 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         return UICollectionReusableView()
     }
     func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return indexPath.section == 1
+        return false
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        switch indexPath.item {
-        case 0:
-            let purchaseListViewController = PurchaseListViewController(purchaseListLoader: MyMindPurchaseAPIService.shared)
-            show(purchaseListViewController, sender: nil)
-        case 1:
-            let purchaseListViewController = PurchaseListViewController(purchaseListLoader: MyMindPurchaseReviewAPIService.shared, reviewing: true)
-            show(purchaseListViewController, sender: nil)
-        case 2:
-            if let settingViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "Setting") as? SettingViewController {
-                settingViewController.delegate = self
-                show(settingViewController, sender: nil)
-            }
-            break
-        case 3:
-            let storyboard: UIStoryboard = UIStoryboard(name: "TOTP", bundle: nil)
-            let viewController = storyboard.instantiateViewController(withIdentifier: "SecretListViewControllerNavi")
-            present(viewController, animated: true, completion: nil)
-        default:
-            break
-        }
-    }
+//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        switch indexPath.item {
+//        case 0:
+//            let purchaseListViewController = PurchaseListViewController(purchaseListLoader: MyMindPurchaseAPIService.shared)
+//            show(purchaseListViewController, sender: nil)
+//        case 1:
+//            let purchaseListViewController = PurchaseListViewController(purchaseListLoader: MyMindPurchaseReviewAPIService.shared, reviewing: true)
+//            show(purchaseListViewController, sender: nil)
+//        case 2:
+//            if let settingViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "Setting") as? SettingViewController {
+//                settingViewController.delegate = self
+//                show(settingViewController, sender: nil)
+//            }
+//            break
+//        case 3:
+//            let storyboard: UIStoryboard = UIStoryboard(name: "TOTP", bundle: nil)
+//            let viewController = storyboard.instantiateViewController(withIdentifier: "SecretListViewControllerNavi")
+//            present(viewController, animated: true, completion: nil)
+//        default:
+//            break
+//        }
+//    }
 }
 /// IndicatorSwitchContentHeaderViewDelegate
 extension HomeViewController: IndicatorSwitchContentHeaderViewDelegate {
     func contentNeedSwitch(to index: Int, for section: Int) {
         headerInfos[section].info.current = index
         switch section {
+        case 2:
+            saleReportSortOrder = (index == 0) ? .TOTAL_SALE_QUANTITY : .TOTAL_SALE_AMOUNT
         case 3:
             skuRankingSortOrder = (index == 0) ? .TOTAL_SALE_QUANTITY : .TOTAL_SALE_AMOUNT
         case 4:
@@ -450,7 +475,6 @@ extension HomeViewController: NavigationActionDelegate {
     func didCancel() {
         self.navigationController?.popViewController(animated: true)
     }
-    
 }
 
 final class ActionCollectionViewCell: UICollectionViewCell {

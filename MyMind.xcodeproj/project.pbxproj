@@ -43,6 +43,7 @@
 		52C2CBE0269E890B002A2BA9 /* NoDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C2CBDF269E890B002A2BA9 /* NoDataView.swift */; };
 		52C2CBE2269E8950002A2BA9 /* SKURankingInfoItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C2CBE1269E8950002A2BA9 /* SKURankingInfoItemView.swift */; };
 		52C2CBE4269E9F20002A2BA9 /* SaleRankingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C2CBE3269E9F20002A2BA9 /* SaleRankingCollectionViewCell.swift */; };
+		52C2CBE6269ED0D5002A2BA9 /* SaleReportCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C2CBE5269ED0D5002A2BA9 /* SaleReportCollectionViewCell.swift */; };
 		52D7249F268D62BC00B00585 /* MyMindPurchaseReviewAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D7249E268D62BC00B00585 /* MyMindPurchaseReviewAPIService.swift */; };
 		52D724A4268DBD6400B00585 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 52D724A3268DBD6400B00585 /* GoogleService-Info.plist */; };
 		52F564272693F14200171032 /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F564262693F14100171032 /* ErrorHandler.swift */; };
@@ -291,6 +292,7 @@
 		52C2CBDF269E890B002A2BA9 /* NoDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoDataView.swift; sourceTree = "<group>"; };
 		52C2CBE1269E8950002A2BA9 /* SKURankingInfoItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKURankingInfoItemView.swift; sourceTree = "<group>"; };
 		52C2CBE3269E9F20002A2BA9 /* SaleRankingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaleRankingCollectionViewCell.swift; sourceTree = "<group>"; };
+		52C2CBE5269ED0D5002A2BA9 /* SaleReportCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaleReportCollectionViewCell.swift; sourceTree = "<group>"; };
 		52D7249E268D62BC00B00585 /* MyMindPurchaseReviewAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMindPurchaseReviewAPIService.swift; sourceTree = "<group>"; };
 		52D724A3268DBD6400B00585 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		52F564262693F14100171032 /* ErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandler.swift; sourceTree = "<group>"; };
@@ -576,6 +578,7 @@
 				52C2CBDF269E890B002A2BA9 /* NoDataView.swift */,
 				52C2CBE1269E8950002A2BA9 /* SKURankingInfoItemView.swift */,
 				52C2CBE3269E9F20002A2BA9 /* SaleRankingCollectionViewCell.swift */,
+				52C2CBE5269ED0D5002A2BA9 /* SaleReportCollectionViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1496,6 +1499,7 @@
 				52C2CBD2269BE6BC002A2BA9 /* TodaySaleInfoCollectionViewCell.swift in Sources */,
 				A457AEAE2660A2230029DDBB /* PurchaseListFilterViewModel.swift in Sources */,
 				A4F2D017265D08D3004D8D6D /* SearchMaterialNamesViewModel.swift in Sources */,
+				52C2CBE6269ED0D5002A2BA9 /* SaleReportCollectionViewCell.swift in Sources */,
 				A49CF8C0260306D200AFC170 /* APIError.swift in Sources */,
 				A442A16B266F692600AAB1ED /* PurchaseApplyInfoViewModel.swift in Sources */,
 				A415920F260C796500FD3989 /* ForgotPasswordRootView.swift in Sources */,

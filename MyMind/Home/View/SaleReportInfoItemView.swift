@@ -12,17 +12,18 @@ class SaleReportInfoItemView: NiblessView {
         case quantity, amount
     }
     var hierarchyNotReady: Bool = true
-    let reportOfToday: SaleReport?
-    let reportOfYesterday: SaleReport?
-    let transformed: SaleReport?
-    let shipped: SaleReport?
+    let saleReports: SaleReports?
+//    let reportOfToday: SaleReport?
+//    let reportOfYesterday: SaleReport?
+//    let transformed: SaleReport?
+//    let shipped: SaleReport?
     let index: Int
     let type: SaleReportInfoType
-    init(frame: CGRect, today: SaleReport?, yesterday: SaleReport?, transformed: SaleReport?, shipped: SaleReport?, index: Int, type: SaleReportInfoType) {
-        self.reportOfToday = today
-        self.reportOfYesterday = yesterday
-        self.transformed = transformed
-        self.shipped = shipped
+    init(frame: CGRect, saleReports: SaleReports?, index: Int, type: SaleReportInfoType) {
+        self.saleReports = saleReports
+//        self.reportOfYesterday = yesterday
+//        self.transformed = transformed
+//        self.shipped = shipped
         self.index = index
         self.type = type
         super.init(frame: frame)
@@ -96,29 +97,65 @@ extension SaleReportInfoItemView {
         addSubview(transformedValueLabel)
         addSubview(shippedTitleLabel)
         addSubview(shippedValueLabel)
-        var saleAmountRatio: Float = 0
-        if let todaySaleAmount = reportOfToday?.saleAmount, let yesterdaySaleAmount = reportOfYesterday?.saleAmount {
-            saleAmountRatio = (todaySaleAmount - yesterdaySaleAmount) / yesterdaySaleAmount
+        var saleAmountDivisor: Float = .zero, returnAmountDivisor: Float = .zero, canceledAmountDivisor: Float = .zero
+        var saleQuantityDivisor: Float = .zero, returnQuantityDivisor: Float = .zero, canceledQuantityDivisor: Float = .zero
+        if let yesterdayTransformedSaleReport = saleReports?.yesterdayTransformedSaleReport {
+            saleAmountDivisor += yesterdayTransformedSaleReport.saleAmount
+            returnAmountDivisor += yesterdayTransformedSaleReport.returnAmount
+            canceledAmountDivisor += yesterdayTransformedSaleReport.canceledAmount
+            saleQuantityDivisor += Float(yesterdayTransformedSaleReport.saleQuantity)
+            returnQuantityDivisor += Float(yesterdayTransformedSaleReport.returnQuantity)
+            canceledQuantityDivisor += Float(yesterdayTransformedSaleReport.canceledQuantity)
         }
-        var saleQuantityRatio: Float = 0
-        if let todaySaleQuantity = reportOfToday?.saleQuantity, let yesterdaySaleQuantity = reportOfYesterday?.saleQuantity {
-            saleQuantityRatio = Float((todaySaleQuantity - yesterdaySaleQuantity) / yesterdaySaleQuantity)
+        if let yesterdayShippedSaleReport = saleReports?.yesterdayShippedSaleReport {
+            saleAmountDivisor += yesterdayShippedSaleReport.saleAmount
+            returnAmountDivisor += yesterdayShippedSaleReport.returnAmount
+            canceledAmountDivisor += yesterdayShippedSaleReport.canceledAmount
+            saleQuantityDivisor += Float(yesterdayShippedSaleReport.saleQuantity)
+            returnQuantityDivisor += Float(yesterdayShippedSaleReport.returnQuantity)
+            canceledQuantityDivisor += Float(yesterdayShippedSaleReport.canceledQuantity)
         }
-        var canceledAmountRatio: Float = 0
-        if let todayCanceledAmount = reportOfToday?.canceledAmount, let yesterdayCanceledAmount = reportOfYesterday?.canceledAmount {
-            canceledAmountRatio = (todayCanceledAmount - yesterdayCanceledAmount) / yesterdayCanceledAmount
+        var saleAmountDividend: Float = .zero, returnAmountDividend: Float = .zero, canceledAmountDividend: Float = .zero
+        var saleQuantityDividend: Float = .zero, returnQuantityDividend: Float = .zero, canceledQuantityDividend: Float = .zero
+        if let todayTransformedSaleReport = saleReports?.todayTransformedSaleReport {
+            saleAmountDividend += todayTransformedSaleReport.saleAmount
+            returnAmountDividend += todayTransformedSaleReport.returnAmount
+            canceledAmountDividend += todayTransformedSaleReport.canceledAmount
+            saleQuantityDividend += Float(todayTransformedSaleReport.saleQuantity)
+            returnQuantityDividend += Float(todayTransformedSaleReport.returnQuantity)
+            canceledQuantityDividend += Float(todayTransformedSaleReport.canceledQuantity)
         }
-        var canceledQuantityRatio: Float = 0
-        if let todayCanceledQuantity = reportOfToday?.canceledQuantity, let yesterdayCanceledQuantity = reportOfYesterday?.canceledQuantity {
-            canceledQuantityRatio = Float((todayCanceledQuantity - yesterdayCanceledQuantity) / yesterdayCanceledQuantity)
+        if let todayShippedSaleReport = saleReports?.todayShippedSaleReport {
+            saleAmountDividend += todayShippedSaleReport.saleAmount
+            returnAmountDividend += todayShippedSaleReport.returnAmount
+            canceledAmountDividend += todayShippedSaleReport.canceledAmount
+            saleQuantityDividend += Float(todayShippedSaleReport.saleQuantity)
+            returnQuantityDividend += Float(todayShippedSaleReport.returnQuantity)
+            canceledQuantityDividend += Float(todayShippedSaleReport.canceledQuantity)
         }
-        var returnAmountRatio: Float = 0
-        if let todayReturnAmount = reportOfToday?.returnAmount, let yesterdayReturnAmount = reportOfYesterday?.returnAmount {
-            returnAmountRatio = (todayReturnAmount - yesterdayReturnAmount) / yesterdayReturnAmount
+        var saleAmountRatio: Float = .zero
+        if saleAmountDivisor != .zero && saleAmountDividend != .zero {
+            saleAmountRatio = (saleAmountDividend-saleAmountDivisor)/saleAmountDivisor
         }
-        var returnQuantityRatio: Float = 0
-        if let todayReturnQuantity = reportOfToday?.returnQuantity, let yesterdayReturnQuantity = reportOfYesterday?.returnQuantity {
-            returnQuantityRatio = Float((todayReturnQuantity - yesterdayReturnQuantity) / yesterdayReturnQuantity)
+        var saleQuantityRatio: Float = .zero
+        if saleQuantityDivisor != .zero && saleQuantityDividend != .zero {
+            saleQuantityRatio = (saleQuantityDividend-saleQuantityDivisor)/saleQuantityDivisor
+        }
+        var canceledAmountRatio: Float = .zero
+        if canceledAmountDivisor != .zero && canceledAmountDividend != .zero {
+            canceledAmountRatio = (canceledAmountDividend-canceledAmountDivisor)/canceledAmountDivisor
+        }
+        var canceledQuantityRatio: Float = .zero
+        if canceledQuantityDivisor != .zero && canceledQuantityDividend != .zero {
+            canceledQuantityRatio = (canceledQuantityDividend-canceledQuantityDivisor)/canceledQuantityDivisor
+        }
+        var returnAmountRatio: Float = .zero
+        if returnAmountDivisor != .zero && returnAmountDividend != .zero {
+            returnAmountRatio = (returnAmountDividend-returnAmountDivisor)/returnAmountDivisor
+        }
+        var returnQuantityRatio: Float = .zero
+        if returnQuantityDivisor != .zero && returnQuantityDividend != .zero {
+            returnQuantityRatio = (returnQuantityDividend-returnQuantityDivisor)/returnQuantityDivisor
         }
 
         let formatter = MyMindSaleReportRatioNumberFormatter()
@@ -138,11 +175,11 @@ extension SaleReportInfoItemView {
             } else {
                 quantityRatioLabel.textColor = .systemRed
             }
-            quantityRatioLabel.text = value
-            quantityLabel.text = index == 0 ? "\(reportOfToday?.saleQuantity ?? 0)" : index == 1 ? "\(reportOfToday?.canceledQuantity ?? 0)" : "\(reportOfToday?.returnQuantity ?? 0)"
-            yesterdayQuantityLabel.text = index == 0 ? "昨日數量 \(reportOfYesterday?.saleQuantity ?? 0)" : index == 1 ? "昨日數量 \(reportOfYesterday?.canceledQuantity ?? 0)" : "昨日數量 \(reportOfYesterday?.returnQuantity ?? 0)"
-            transformedValueLabel.text = index == 0 ? "\(transformed?.saleQuantity ?? 0)" : index == 1 ? "\(transformed?.canceledQuantity ?? 0)" : "\(transformed?.returnQuantity ?? 0)"
-            shippedValueLabel.text = index == 0 ? "\(shipped?.saleQuantity ?? 0)" : index == 1 ? "\(shipped?.canceledQuantity ?? 0)" : "\(shipped?.returnQuantity ?? 0)"
+            quantityRatioLabel.text = (ratio == 0) ? "--" : value
+            quantityLabel.text = index == 0 ? "\(saleQuantityDividend)" : index == 1 ? "\(canceledQuantityDividend)" : "\(returnQuantityDividend)"
+            yesterdayQuantityLabel.text = index == 0 ? "昨日數量 \(saleQuantityDivisor)" : index == 1 ? "昨日數量 \(canceledQuantityDivisor)" : "昨日數量 \(returnQuantityDivisor)"
+            transformedValueLabel.text = index == 0 ? "\(saleReports?.todayTransformedSaleReport?.saleQuantity ?? 0)" : index == 1 ? "\(saleReports?.todayTransformedSaleReport?.canceledQuantity ?? 0)" : "\(saleReports?.todayTransformedSaleReport?.returnQuantity ?? 0)"
+            shippedValueLabel.text = index == 0 ? "\(saleReports?.todayShippedSaleReport?.saleQuantity ?? 0)" : index == 1 ? "\(saleReports?.todayShippedSaleReport?.canceledQuantity ?? 0)" : "\(saleReports?.todayShippedSaleReport?.returnQuantity ?? 0)"
         case .amount:
             quantityTitleLabel.text = index == 0 ? "銷售總額" : index == 1 ? "取消總額" : "銷退總額"
             let ratio = index == 0 ? saleAmountRatio: index == 1 ? canceledAmountRatio : returnAmountRatio
@@ -152,11 +189,11 @@ extension SaleReportInfoItemView {
             } else {
                 quantityRatioLabel.textColor = .systemRed
             }
-            quantityRatioLabel.text = (ratio > 0) ? "▲ \(ratio) %" : (ratio == 0) ? value : "▼ \(ratio) %"
-            quantityLabel.text = index == 0 ? "\(reportOfToday?.saleAmount ?? 0)" : index == 1 ? "\(reportOfToday?.canceledAmount ?? 0)" : "\(reportOfToday?.returnAmount ?? 0)"
-            yesterdayQuantityLabel.text = index == 0 ? "昨日總額 \(reportOfYesterday?.saleAmount ?? 0)" : index == 1 ? "昨日總額 \(reportOfYesterday?.canceledAmount ?? 0)" : "昨日總額 \(reportOfYesterday?.returnAmount ?? 0)"
-            transformedValueLabel.text = index == 0 ? "\(transformed?.saleAmount ?? 0)" : index == 1 ? "\(transformed?.canceledAmount ?? 0)" : "\(transformed?.returnAmount ?? 0)"
-            shippedValueLabel.text = index == 0 ? "\(shipped?.saleAmount ?? 0)" : index == 1 ? "\(shipped?.canceledAmount ?? 0)" : "\(shipped?.returnAmount ?? 0)"
+            quantityRatioLabel.text = (ratio == 0) ? "--" : value
+            quantityLabel.text = index == 0 ? "\(saleAmountDividend)" : index == 1 ? "\(canceledAmountDividend)" : "\(returnAmountDividend)"
+            yesterdayQuantityLabel.text = index == 0 ? "昨日總額 \(saleAmountDivisor)" : index == 1 ? "昨日總額 \(canceledAmountDivisor)" : "昨日總額 \(returnAmountDivisor)"
+            transformedValueLabel.text = index == 0 ? "\(saleReports?.todayTransformedSaleReport?.saleAmount ?? 0)" : index == 1 ? "\(saleReports?.todayTransformedSaleReport?.canceledAmount ?? 0)" : "\(saleReports?.todayTransformedSaleReport?.returnAmount ?? 0)"
+            shippedValueLabel.text = index == 0 ? "\(saleReports?.todayShippedSaleReport?.saleAmount ?? 0)" : index == 1 ? "\(saleReports?.todayShippedSaleReport?.canceledAmount ?? 0)" : "\(saleReports?.todayShippedSaleReport?.returnAmount ?? 0)"
         }
     }
     private func activateConstraints() {
