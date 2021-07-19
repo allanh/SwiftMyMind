@@ -27,23 +27,23 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneDidBecomeActive(_ scene: UIScene) {
         // Called when the scene has moved from an inactive state to an active state.
         // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
-        guard let windowScene = (scene as? UIWindowScene) else { return }
-        self.window = UIWindow(windowScene: windowScene)
-        self.window?.makeKeyAndVisible()
-        MyMindEmployeeAPIService.shared.authorization()
-            .done { authorization in
-                self.showHomePage(authorization)
-            }
-            .ensure {
-            }
-            .catch { error in
-                _ = ErrorHandler.shared.handle((error as! APIError))
-            }
+//        guard let windowScene = (scene as? UIWindowScene) else { return }
+//        self.window = UIWindow(windowScene: windowScene)
+//        self.window?.makeKeyAndVisible()
+//        MyMindEmployeeAPIService.shared.authorization()
+//            .done { authorization in
+//                self.showHomePage(authorization)
+//            }
+//            .ensure {
+//            }
+//            .catch { error in
+//                _ = ErrorHandler.shared.handle((error as! APIError))
+//            }
     }
     private func showHomePage(_ authorization: Authorization? = nil) {
-        let rootTabBarViewController = RootTabBarController(authorization: authorization)
-        self.window?.makeKeyAndVisible()
-        self.window?.rootViewController = rootTabBarViewController
+//        let rootTabBarViewController = RootTabBarController(authorization: authorization)
+//        self.window?.makeKeyAndVisible()
+//        self.window?.rootViewController = rootTabBarViewController
 
 //        if let rootViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "Home") as? HomeViewController {
 //            rootViewController.authorization = authorization

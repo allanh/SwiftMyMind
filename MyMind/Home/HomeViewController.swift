@@ -457,27 +457,27 @@ extension HomeViewController: IndicatorSwitchContentHeaderViewDelegate {
     }
 }
 /// SettingViewControllerDelegate
-extension HomeViewController: SettingViewControllerDelegate {
-    func didSignOut() {
-        self.navigationController?.popViewController(animated: true)
-        let scene = UIApplication.shared.connectedScenes.first
-        if let sceneDelegate : SceneDelegate = (scene?.delegate as? SceneDelegate) {
-            let viewModel = SignInViewModel(
-                userSessionRepository: MyMindUserSessionRepository.shared,
-                signInValidationService: SignInValidatoinService(),
-                lastSignInInfoDataStore: MyMindLastSignInInfoDataStore()
-            )
-            let signInViewController = SignInViewController(viewModel: viewModel)
-            sceneDelegate.window?.rootViewController = signInViewController
-        }
-    }
-}
-/// NavigationActionDelegate
-extension HomeViewController: NavigationActionDelegate {
-    func didCancel() {
-        self.navigationController?.popViewController(animated: true)
-    }
-}
+//extension HomeViewController: SettingViewControllerDelegate {
+//    func didSignOut() {
+//        self.navigationController?.popViewController(animated: true)
+//        let scene = UIApplication.shared.connectedScenes.first
+//        if let sceneDelegate : SceneDelegate = (scene?.delegate as? SceneDelegate) {
+//            let viewModel = SignInViewModel(
+//                userSessionRepository: MyMindUserSessionRepository.shared,
+//                signInValidationService: SignInValidatoinService(),
+//                lastSignInInfoDataStore: MyMindLastSignInInfoDataStore()
+//            )
+//            let signInViewController = SignInViewController(viewModel: viewModel)
+//            sceneDelegate.window?.rootViewController = signInViewController
+//        }
+//    }
+//}
+///// NavigationActionDelegate
+//extension HomeViewController: NavigationActionDelegate {
+//    func didCancel() {
+//        self.navigationController?.popViewController(animated: true)
+//    }
+//}
 
 final class ActionCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var iconImageView: UIImageView!

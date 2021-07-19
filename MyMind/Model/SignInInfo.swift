@@ -27,6 +27,11 @@ struct SignInInfo {
         self.captchaKey = captchaKey
         self.captchaValue = captchaValue
     }
+    var userNameForSecret: String {
+        get {
+            return account+"@"+storeID
+        }
+    }
 }
 extension SignInInfo: Encodable {
     func encode(to encoder: Encoder) throws {

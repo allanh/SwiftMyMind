@@ -19,6 +19,7 @@ class SignInViewModel {
     var signInInfo: SignInInfo = SignInInfo()
     let userDefault: UserDefaults = UserDefaults.standard
     let keychainHelper: KeychainHelper = KeychainHelper.default
+    let repository: UDISecretRepository = UDISecretRepository(dataStore: UserDefaultSecretDataStore.init())
     // MARK: - Output
     let lastSignInInfo: BehaviorRelay<SignInAccountInfo> = BehaviorRelay.init(value: .empty())
     let storeIDValidationResult: BehaviorRelay<ValidationResult> = BehaviorRelay.init(value: .valid)
@@ -33,11 +34,13 @@ class SignInViewModel {
     let activityIndicatorAnimating: BehaviorRelay<Bool> = BehaviorRelay.init(value: false)
     let captchaActivityIndicatorAnimating: BehaviorRelay<Bool> = BehaviorRelay.init(value: false)
 
+    let totp: PublishRelay<String> = PublishRelay.init()
     let userSession: PublishRelay<UserSession> = PublishRelay.init()
     let captchaSession: PublishRelay<CaptchaSession> = PublishRelay.init()
     let errorMessage: PublishRelay<String> = PublishRelay.init()
 
     let unexpectedErrorMessage: String = "未知的錯誤發生"
+    let noTOTPErrorMessage: String = "無法取得TOTP"
     private let shouldRememberAccountKey: String = "shouldRememberAccount"
     // MARK: - Methods
     init(userSessionRepository: UserSessionRepository,
@@ -89,29 +92,35 @@ class SignInViewModel {
 
     @objc
     func signIn() {
+        
         indicateSigningIn(true)
         guard validateSignInInfo() else {
             indicateSigningIn(false)
             return
         }
-
-        userSessionRepository.signIn(info: signInInfo)
-            .ensure {
-                self.indicateSigningIn(false)
-            }
-            .done { userSession in
-                self.saveSignInInfo(info: self.signInInfo)
-                self.userSession.accept(userSession)
-            }
-            .catch { [weak self] error in
-                guard let self = self else { return }
-                switch error {
-                case APIError.serviceError(let message):
-                    self.errorMessage.accept(message)
-                default:
-                    self.errorMessage.accept(self.unexpectedErrorMessage)
+        if let secret = repository.secret(for: signInInfo.userNameForSecret) {
+            print(secret.generatePin())
+            userSessionRepository.signIn(info: signInInfo)
+                .ensure {
+                    self.indicateSigningIn(false)
                 }
-            }
+                .done { userSession in
+                    self.saveSignInInfo(info: self.signInInfo)
+                    self.userSession.accept(userSession)
+                }
+                .catch { [weak self] error in
+                    guard let self = self else { return }
+                    switch error {
+                    case APIError.serviceError(let message):
+                        self.errorMessage.accept(message)
+                    default:
+                        self.errorMessage.accept(self.unexpectedErrorMessage)
+                    }
+                }
+        } else {
+            self.indicateSigningIn(false)
+            self.totp.accept(self.signInInfo.userNameForSecret)
+        }
     }
 
     private func saveSignInInfo(info: SignInInfo) {

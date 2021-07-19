@@ -30,3 +30,22 @@ extension UIView {
         }
     }
 }
+extension UIView {
+    enum GradientDirection {
+        case topDown, leftRight
+    }
+    func addGradient(_ gradientColors: [CGColor], direction: GradientDirection = .topDown) {
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = CGRect(x: bounds.minX, y: bounds.minY, width: bounds.width, height: bounds.height-35)
+        gradientLayer.colors = gradientColors
+        switch direction {
+        case .leftRight:
+            gradientLayer.startPoint = CGPoint(x: 0, y: 0.5)
+            gradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
+        case .topDown:
+            gradientLayer.startPoint = CGPoint(x: 0.5, y: 0)
+            gradientLayer.endPoint = CGPoint(x: 0.5, y: 1)
+        }
+        layer.insertSublayer(gradientLayer, at: 0)
+    }
+}

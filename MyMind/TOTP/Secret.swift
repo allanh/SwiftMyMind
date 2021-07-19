@@ -11,13 +11,17 @@ import SwiftOTP
 
 struct Secret: Equatable {
     enum SecretCodingKeys: String, CodingKey {
-        case secret, acc, time, isValid
+        case secret, acc, time, isValid, id
     }
     let user: String
     let identifier: String
     let registerDate: Date?
     var isValid: Bool
 
+    enum SecretUserPrefix: String {
+        case udn = "/UDN:"
+        case myMind = "/Mymind:"
+    }
     init(user: String, identifier: String, registerDate: Date? = nil, isValid: Bool = false) {
         self.user = user
         self.identifier = identifier
@@ -25,7 +29,7 @@ struct Secret: Equatable {
         self.isValid = isValid
     }
 
-    init?(url: URL) {
+    init?(url: URL, userPrefix: SecretUserPrefix = .udn) {
         guard
             let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
             components.scheme == "otpauth"
@@ -34,12 +38,16 @@ struct Secret: Equatable {
         }
         var path: String = components.path
 
-        let pathPrefixString: String = "/UDN:"
-        if path.hasPrefix(pathPrefixString) {
-            path.removeFirst(pathPrefixString.count)
+//        let pathPrefixString: String = "/UDN:"
+        if path.hasPrefix(userPrefix.rawValue) {
+            path.removeFirst(userPrefix.rawValue.count)
         }
-        user = path
-
+        switch userPrefix {
+        case .udn:
+            user = path
+        case .myMind:
+            user = path
+        }
         let queryItem = components.queryItems ?? []
 
         guard
@@ -89,7 +97,12 @@ struct Secret: Equatable {
 extension Secret: Decodable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: SecretCodingKeys.self)
-        user = try container.decode(String.self, forKey: .acc)
+        if let id = try container.decodeIfPresent(String.self, forKey: .id) {
+            let string = try container.decode(String.self, forKey: .acc)
+            user = string+"@"+id
+        } else {
+            user = try container.decode(String.self, forKey: .acc)
+        }
         identifier = try container.decode(String.self, forKey: .secret)
         if let dateString = try container.decodeIfPresent(String.self, forKey: .time) {
             registerDate = DateFormatter.secretDateFormatter.date(from: dateString)

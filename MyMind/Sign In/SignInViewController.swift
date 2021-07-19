@@ -73,18 +73,12 @@ class SignInViewController: NiblessViewController {
     private func showHomePage() {
         MyMindEmployeeAPIService.shared.authorization()
             .done { authorization in
-                let scene = UIApplication.shared.connectedScenes.first
-                if let sceneDelegate : SceneDelegate = (scene?.delegate as? SceneDelegate) {
-                    let rootTabBarViewController = RootTabBarController(authorization: authorization)
-                    sceneDelegate.window?.rootViewController = rootTabBarViewController
-//                    if let rootViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "Home") as? HomeViewController {
-//                        rootViewController.authorization = authorization
-//                        let navigationViewController = UINavigationController(rootViewController: rootViewController)
-//                        sceneDelegate.window?.rootViewController = navigationViewController
-//                    } else {
-//                        let navigationViewController = UINavigationController(rootViewController: UIViewController())
-//                        sceneDelegate.window?.rootViewController = navigationViewController
-//                    }
+                self.dismiss(animated: true) {
+                    let scene = UIApplication.shared.connectedScenes.first
+                    if let sceneDelegate : SceneDelegate = (scene?.delegate as? SceneDelegate) {
+                        let rootTabBarViewController = RootTabBarController(authorization: authorization)
+                        sceneDelegate.window?.rootViewController?.show(rootTabBarViewController, sender: nil)
+                    }
                 }
             }
             .ensure {
@@ -99,6 +93,18 @@ class SignInViewController: NiblessViewController {
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [unowned self] in
                 ToastView.showIn(self, message: $0)
+            })
+            .disposed(by: bag)
+
+        viewModel.totp
+            .observe(on: MainScheduler.instance)
+            .subscribe({ [unowned self] user in
+                let storyboard: UIStoryboard = UIStoryboard(name: "TOTP", bundle: nil)
+                if let viewController = storyboard.instantiateViewController(withIdentifier: "SecretListViewControllerNavi") as? UINavigationController, let totpViewController = viewController.topViewController as? SecretListViewController {
+                    totpViewController.requiredUser = user.element
+                    totpViewController.scanViewControllerDelegate = self
+                    present(viewController, animated: true, completion: nil)
+                }
             })
             .disposed(by: bag)
 
@@ -154,5 +160,31 @@ extension SignInViewController {
                 rootView.moveContent(forKeyboardFrame: convertedKeyboardEndFrame)
             }
         }
+    }
+}
+extension SignInViewController: ScanViewControllerDelegate {
+    func scanViewController(_ scanViewController: ScanViewController, didReceive qrCodeValue: String) {
+        if let url = URL(string: qrCodeValue),
+           let secret = Secret.init(url: url) {
+            updateAndSaveSecret(secret: secret)
+        } else if let secret = Secret.generateSecret(with: qrCodeValue) {
+            updateAndSaveSecret(secret: secret)
+        }
+        dismiss(animated: true) {
+            self.viewModel.signIn()
+        }
+    }
+    private func updateAndSaveSecret(secret: Secret) {
+        viewModel.repository.update(newSecrets: secret)
+        try? viewModel.repository.saveSecrets()
+    }
+    func scanViewController(_ scanViewController: ScanViewController, validate qrCodeValue: String) -> Bool {
+        if let url = URL(string: qrCodeValue),
+           let secret = Secret.init(url: url) {
+            return secret.user == viewModel.signInInfo.userNameForSecret
+        } else if let secret = Secret.generateSecret(with: qrCodeValue) {
+            return secret.user == viewModel.signInInfo.userNameForSecret
+        }
+        return false
     }
 }

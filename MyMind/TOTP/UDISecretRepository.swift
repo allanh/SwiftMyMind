@@ -97,6 +97,17 @@ class UDISecretRepository: SecretRepository {
 
     func deleteSecrets() {
         dataStore.deleteSecrets()
+        do {
+            try readSecrets()
+        } catch {
+            
+        }
+    }
+    
+    func secret(for user: String) -> Secret? {
+        return secrets.last {
+            $0.user == user
+        }
     }
 
 }

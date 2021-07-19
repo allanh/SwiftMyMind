@@ -17,6 +17,7 @@ enum MainFunctoinType: String {
 }
 
 final class MainFunctionEntryViewController: NiblessViewController {
+    
     typealias FunctionControlInfo = (type: MainFunctoinType, imageName: String)
     private var functionControls: [MainFunctionControl] = []
 
@@ -113,9 +114,23 @@ final class MainFunctionEntryViewController: NiblessViewController {
             let storyboard: UIStoryboard = UIStoryboard(name: "TOTP", bundle: nil)
             let viewController = storyboard.instantiateViewController(withIdentifier: "SecretListViewControllerNavi")
             present(viewController, animated: true, completion: nil)
+        case .accountSetting:
+            if let settingViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "Setting") as? SettingViewController {
+                settingViewController.delegate = self
+                show(settingViewController, sender: nil)
+            }
+
         default:
             print(sender.functionType)
         }
     }
 
+}
+extension MainFunctionEntryViewController: MixedDelegate {
+    func didSignOut() {
+        self.navigationController?.popToRootViewController(animated: true)
+    }
+    func didCancel() {
+        self.navigationController?.popViewController(animated: true)
+    }
 }

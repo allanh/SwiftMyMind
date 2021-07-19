@@ -264,8 +264,8 @@ class SignInRootView: NiblessView {
             .bind(to: viewModel.isSecureTextEntry)
             .disposed(by: bag)
 
-        signInButton.addTarget(viewModel, action: #selector(SignInViewModel.signIn), for: .touchUpInside)
-        reloadCaptchaButton.addTarget(viewModel, action: #selector(SignInViewModel.captcha), for: .touchUpInside)
+        signInButton.addTarget(viewModel, action: #selector(viewModel.signIn), for: .touchUpInside)
+        reloadCaptchaButton.addTarget(viewModel, action: #selector(viewModel.captcha), for: .touchUpInside)
     }
 
     func resetScrollViewContentInsets() {

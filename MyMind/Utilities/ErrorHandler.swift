@@ -41,7 +41,7 @@ extension ErrorHandler {
                 lastSignInInfoDataStore: MyMindLastSignInInfoDataStore()
             )
             let signInViewController = SignInViewController(viewModel: viewModel)
-            sceneDelegate.window?.rootViewController = signInViewController
+            sceneDelegate.window?.rootViewController?.present(signInViewController, animated: true, completion: nil)
         }
     }
     private func showHomePage() {
@@ -50,7 +50,7 @@ extension ErrorHandler {
                 let scene = UIApplication.shared.connectedScenes.first
                 if let sceneDelegate : SceneDelegate = (scene?.delegate as? SceneDelegate) {
                     let rootTabBarViewController = RootTabBarController(authorization: authorization)
-                    sceneDelegate.window?.rootViewController = rootTabBarViewController
+                    sceneDelegate.window?.rootViewController?.navigationController?.show(rootTabBarViewController, sender: nil)
                 }
             }
             .ensure {

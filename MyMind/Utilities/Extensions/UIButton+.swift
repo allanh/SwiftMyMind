@@ -30,4 +30,31 @@ extension UIButton {
 
         return frame.contains(point)
     }
+    func centerVertically(padding: CGFloat = 6.0) {
+        guard
+            let imageViewSize = self.imageView?.frame.size,
+            let titleLabelSize = self.titleLabel?.frame.size else {
+            return
+        }
+        
+        self.imageEdgeInsets = UIEdgeInsets(
+            top: 0.0,
+            left: 0.0,
+            bottom: 0.0,
+            right: -titleLabelSize.width
+        )
+        self.titleEdgeInsets = UIEdgeInsets(
+            top: bounds.height-padding,
+            left: -imageViewSize.width,
+            bottom: 0.0,
+            right: 0.0
+        )
+        
+        self.contentEdgeInsets = UIEdgeInsets(
+            top: 0.0,
+            left: 0.0,
+            bottom: titleLabelSize.height,
+            right: 0.0
+        )
+    }
 }

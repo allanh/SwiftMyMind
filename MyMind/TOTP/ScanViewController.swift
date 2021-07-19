@@ -8,8 +8,9 @@
 import UIKit
 import AVFoundation
 
-protocol ScanViewControllerDelegate: class {
+protocol ScanViewControllerDelegate: AnyObject {
     func scanViewController(_ scanViewController: ScanViewController, didReceive qrCodeValue: String)
+    func scanViewController(_ scanViewController: ScanViewController, validate qrCodeValue: String) -> Bool
 }
 
 final class ScanViewController: UIViewController {
@@ -24,9 +25,48 @@ final class ScanViewController: UIViewController {
     // MARK: - View life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        startReading()
+        let status = AVCaptureDevice.authorizationStatus(for: .video)
+        if status != .authorized {
+            AVCaptureDevice.requestAccess(for: .video) { [weak self] granted in
+                DispatchQueue.main.async {
+                    if granted {
+                        self?.startReading()
+                    } else {
+                        let alertViewController = UIAlertController(title: "若拒絕授權使用相機，將無法取得驗證碼", message: "請前往設定開啟相機權限", preferredStyle: .alert)
+                        let cancelAction = UIAlertAction(title: "取消", style: .cancel) { action in
+                            self?.dismiss(animated: true, completion: nil)
+                        }
+                        let confirmAction = UIAlertAction(title: "設定", style: .default) { action in
+                            let url = URL(string: UIApplication.openSettingsURLString)
+                            if let url = url, UIApplication.shared.canOpenURL(url) {
+                                UIApplication.shared.open(url, options: [:]) { success in
+                                }
+                            }
+                        }
+                        alertViewController.addAction(cancelAction)
+                        alertViewController.addAction(confirmAction)
+                        self?.present(alertViewController, animated: true, completion: nil)
+                    }
+                }
+           }
+        } else {
+            startReading()
+        }
     }
-
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+//        let string = "00rqN/DsTSDqZ5td5RqaA3ZND8hS4AkPFyA4EYe/Nzqa61LVk4xq4vxJspltcTdgZ+O3fPx7QraP0="
+//        if let delegate = delegate, delegate.scanViewController(self, validate: string) {
+//            guard validateMetadataString(string: string) else {
+//                showInvalidQRCodeAlert()
+//                return
+//            }
+//            delegate.scanViewController(self, didReceive: string)
+//            dismiss(animated: true, completion: nil)
+//        } else {
+//            showInvalidQRCodeAlert()
+//        }
+    }
     // MARK: - Methods
     private func startReading() {
         print("start reading")
@@ -35,7 +75,6 @@ final class ScanViewController: UIViewController {
         else {
             return
         }
-
         guard
             let captureDevice = AVCaptureDevice.default(for: .video),
             let input = try? AVCaptureDeviceInput.init(device: captureDevice)
@@ -110,8 +149,13 @@ extension ScanViewController: AVCaptureMetadataOutputObjectsDelegate {
             metadadaObject.type == .qr,
             let stringValue = metadadaObject.stringValue
         else { return }
-
-        guard validateMetadataString(string: stringValue) else {
+        if let delegate = delegate, delegate.scanViewController(self, validate: stringValue) {
+            guard validateMetadataString(string: stringValue) else {
+                captureSession?.stopRunning()
+                showInvalidQRCodeAlert()
+                return
+            }
+        } else {
             captureSession?.stopRunning()
             showInvalidQRCodeAlert()
             return

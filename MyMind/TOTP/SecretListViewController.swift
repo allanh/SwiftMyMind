@@ -15,6 +15,8 @@ class SecretListViewController: UIViewController {
     @IBOutlet private weak var introduceLabel: UILabel!
     @IBOutlet var cameraBarButton: UIBarButtonItem!
     private var instructionView: InstructionView?
+    weak var scanViewControllerDelegate: ScanViewControllerDelegate?
+    var requiredUser: String?
 
     // MARK: - View life cycle
     override func viewDidLoad() {
@@ -25,21 +27,28 @@ class SecretListViewController: UIViewController {
         tableView.register(SecretTableViewCell.nib, forCellReuseIdentifier: SecretTableViewCell.reuseIdentifier)
 
         addCustomViewForCameraBarButtonItem()
-
+//        let user = requiredUser, (repository.secret(for: user) == nil) ||
         if repository.secrets.isEmpty {
             showInstructionView()
         }
+//        scanViewController(ScanViewController(), didReceive: "00rqN/DsTSDqZzZt/0s2jz1d6uwamf1PBhF0XnBbes3dJywnO6RF0bLi9rXosCuNWQiC2QPzlWJJo=")
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
-        switch repository.secrets.isEmpty {
-        case true: showIntroduceLabel()
-        case false:
+//        let user = requiredUser, (repository.secret(for: user) == nil) ||
+        if repository.secrets.isEmpty {
+            showIntroduceLabel()
+        } else {
             removeInstructionView()
             hideIntroduceLabel()
         }
+//        switch repository.secrets.isEmpty {
+//        case true: showIntroduceLabel()
+//        case false:
+//            removeInstructionView()
+//            hideIntroduceLabel()
+//        }
     }
 
     // MARK: - Methods
@@ -100,7 +109,7 @@ class SecretListViewController: UIViewController {
         guard let viewController = storyboard?.instantiateViewController(withIdentifier: "ScanViewController") as? ScanViewController else {
             return
         }
-        viewController.delegate = self
+        viewController.delegate = (scanViewControllerDelegate != nil) ? scanViewControllerDelegate : self
         present(viewController, animated: true, completion: nil)
     }
 
@@ -121,6 +130,9 @@ extension SecretListViewController: ScanViewControllerDelegate {
         try? repository.saveSecrets()
         tableView.reloadData()
     }
+    func scanViewController(_ scanViewController: ScanViewController, validate qrCodeValue: String) -> Bool {
+        return true
+    }
 }
 // MARK: - Table view data source
 extension SecretListViewController: UITableViewDataSource {
@@ -136,7 +148,7 @@ extension SecretListViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: SecretTableViewCell.reuseIdentifier, for: indexPath) as? SecretTableViewCell else {
             fatalError("dequeue SecretTableViewCell failed")
         }
-        let secret = repository.secrets[indexPath.row]
+        let secret = repository.secrets[indexPath.section]
         cell.config(with: secret)
         return cell
     }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-private let cryptorKey: String = "lyAOvVCxkYvyTzSeEyRwkfzX"
+private let cryptorKey: String = "9Edv7aN6h2ZUpK6V6SmHmugm"//"lyAOvVCxkYvyTzSeEyRwkfzX"
 
 class UDI3DESCryptor {
     let key: String

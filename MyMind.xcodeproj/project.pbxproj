@@ -45,6 +45,7 @@
 		52C2CBE4269E9F20002A2BA9 /* SaleRankingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C2CBE3269E9F20002A2BA9 /* SaleRankingCollectionViewCell.swift */; };
 		52C2CBE6269ED0D5002A2BA9 /* SaleReportCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C2CBE5269ED0D5002A2BA9 /* SaleReportCollectionViewCell.swift */; };
 		52C2CBE926A01B70002A2BA9 /* DashedLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C2CBE826A01B70002A2BA9 /* DashedLineView.swift */; };
+		52C2CBED26A04243002A2BA9 /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C2CBEC26A04243002A2BA9 /* MainPageViewController.swift */; };
 		52D7249F268D62BC00B00585 /* MyMindPurchaseReviewAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D7249E268D62BC00B00585 /* MyMindPurchaseReviewAPIService.swift */; };
 		52D724A4268DBD6400B00585 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 52D724A3268DBD6400B00585 /* GoogleService-Info.plist */; };
 		52F564272693F14200171032 /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F564262693F14100171032 /* ErrorHandler.swift */; };
@@ -295,6 +296,7 @@
 		52C2CBE3269E9F20002A2BA9 /* SaleRankingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaleRankingCollectionViewCell.swift; sourceTree = "<group>"; };
 		52C2CBE5269ED0D5002A2BA9 /* SaleReportCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaleReportCollectionViewCell.swift; sourceTree = "<group>"; };
 		52C2CBE826A01B70002A2BA9 /* DashedLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashedLineView.swift; sourceTree = "<group>"; };
+		52C2CBEC26A04243002A2BA9 /* MainPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageViewController.swift; sourceTree = "<group>"; };
 		52D7249E268D62BC00B00585 /* MyMindPurchaseReviewAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMindPurchaseReviewAPIService.swift; sourceTree = "<group>"; };
 		52D724A3268DBD6400B00585 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		52F564262693F14100171032 /* ErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandler.swift; sourceTree = "<group>"; };
@@ -553,6 +555,7 @@
 		52944E2426982B1D006CC865 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				A456701326845D87009598AE /* HomeViewController.swift */,
 				5293EE9A269A8AC0001A9754 /* Layout */,
 				52944E2526982B2C006CC865 /* View */,
 			);
@@ -762,8 +765,8 @@
 				A44A5A7825F9B0D300995823 /* LaunchScreen.storyboard */,
 				A44A5A7B25F9B0D300995823 /* Info.plist */,
 				A456701126845D14009598AE /* RootTabBarController.swift */,
-				A456701326845D87009598AE /* HomeViewController.swift */,
 				52D724A3268DBD6400B00585 /* GoogleService-Info.plist */,
+				52C2CBEC26A04243002A2BA9 /* MainPageViewController.swift */,
 			);
 			path = MyMind;
 			sourceTree = "<group>";
@@ -1468,6 +1471,7 @@
 				A44A5A7225F9B0D200995823 /* MainFunctionEntryViewController.swift in Sources */,
 				52C2CBE926A01B70002A2BA9 /* DashedLineView.swift in Sources */,
 				52944E312699CE8B006CC865 /* ToDoInfoCollectionViewCell.swift in Sources */,
+				52C2CBED26A04243002A2BA9 /* MainPageViewController.swift in Sources */,
 				A47AB49A265E4DA400FE3CFA /* SearchMaterialNamesViewController.swift in Sources */,
 				52944E2726982B88006CC865 /* ToDoInfoView.swift in Sources */,
 				97B117432656064300242428 /* SingleLabelTableViewCell.swift in Sources */,

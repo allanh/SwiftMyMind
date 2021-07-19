@@ -36,14 +36,14 @@ final class RootTabBarController: UITabBarController {
             viewController.authorization = authorization
             viewController.tabBarItem.image = UIImage(named: "home")
             viewController.tabBarItem.title = "首頁"
-            let navigationViewController = UINavigationController(rootViewController: viewController)
-            contentViewControlelrs.append(navigationViewController)
+//            let navigationViewController = UINavigationController(rootViewController: viewController)
+            contentViewControlelrs.append(viewController)
        } else {
             let viewController = HomeViewController()
             viewController.tabBarItem.image = UIImage(named: "home")
             viewController.tabBarItem.title = "首頁"
-            let navigationViewController = UINavigationController(rootViewController: viewController)
-            contentViewControlelrs.append(navigationViewController)
+//            let navigationViewController = UINavigationController(rootViewController: viewController)
+            contentViewControlelrs.append(viewController)
         }
     }
 
@@ -51,7 +51,7 @@ final class RootTabBarController: UITabBarController {
         let viewController = MainFunctionEntryViewController()
         viewController.tabBarItem.image = UIImage(named: "main_function")
         viewController.tabBarItem.title = "功能"
-        let navigationViewController = UINavigationController(rootViewController: viewController)
-        contentViewControlelrs.append(navigationViewController)
+//        let navigationViewController = UINavigationController(rootViewController: viewController)
+        contentViewControlelrs.append(viewController)
     }
 }
