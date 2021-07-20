@@ -9,7 +9,7 @@ import Foundation
 
 struct SignInInfo {
     private enum CodingKeys: String, CodingKey {
-        case id, account, password, captcha
+        case id, account, password, captcha, otp
     }
     private enum CaptchaCodingKeys: String, CodingKey {
         case key, value
@@ -17,13 +17,15 @@ struct SignInInfo {
     var storeID: String
     var account: String
     var password: String
-    var captchaKey: String
-    var captchaValue: String
+    var otp: String?
+    var captchaKey: String?
+    var captchaValue: String?
 
-    init(storeID: String = "", account: String = "", password: String = "", captchaKey: String = "", captchaValue: String = "") {
+    init(storeID: String = "", account: String = "", password: String = "", otp: String? = nil, captchaKey: String? = nil, captchaValue: String? = nil) {
         self.storeID = storeID
         self.account = account
         self.password = password
+        self.otp = otp
         self.captchaKey = captchaKey
         self.captchaValue = captchaValue
     }
@@ -39,9 +41,10 @@ extension SignInInfo: Encodable {
         try container.encode(storeID, forKey: .id)
         try container.encode(account, forKey: .account)
         try container.encode(password, forKey: .password)
+        try? container.encode(otp, forKey: .otp)
 
         var captchaContainer = container.nestedContainer(keyedBy: CaptchaCodingKeys.self, forKey: .captcha)
-        try captchaContainer.encode(captchaKey, forKey: .key)
-        try captchaContainer.encode(captchaValue, forKey: .value)
+        try? captchaContainer.encode(captchaKey, forKey: .key)
+        try? captchaContainer.encode(captchaValue, forKey: .value)
     }
 }

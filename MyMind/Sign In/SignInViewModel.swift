@@ -25,22 +25,25 @@ class SignInViewModel {
     let storeIDValidationResult: BehaviorRelay<ValidationResult> = BehaviorRelay.init(value: .valid)
     let accountValidationResult: BehaviorRelay<ValidationResult> = BehaviorRelay.init(value: .valid)
     let passwordValidationResult: BehaviorRelay<ValidationResult> = BehaviorRelay.init(value: .valid)
-    let captchaValueValidationResult: BehaviorRelay<ValidationResult> = BehaviorRelay.init(value: .valid)
+//    let captchaValueValidationResult: BehaviorRelay<ValidationResult> = BehaviorRelay.init(value: .valid)
+    let otpValueValidationResult: BehaviorRelay<ValidationResult> = BehaviorRelay.init(value: .valid)
     let isSecureTextEntry: BehaviorRelay<Bool> = BehaviorRelay.init(value: true)
 
     let shouldRememberAccount: BehaviorRelay<Bool> = BehaviorRelay.init(value: true)
     let signInButtonEnabled: BehaviorRelay<Bool> = BehaviorRelay.init(value: true)
     let reloadButtonEnabled: BehaviorRelay<Bool> = BehaviorRelay.init(value: true)
     let activityIndicatorAnimating: BehaviorRelay<Bool> = BehaviorRelay.init(value: false)
-    let captchaActivityIndicatorAnimating: BehaviorRelay<Bool> = BehaviorRelay.init(value: false)
+//    let captchaActivityIndicatorAnimating: BehaviorRelay<Bool> = BehaviorRelay.init(value: false)
+    let timeActivityIndicatorAnimating: BehaviorRelay<Bool> = BehaviorRelay.init(value: false)
 
     let totp: PublishRelay<String> = PublishRelay.init()
     let userSession: PublishRelay<UserSession> = PublishRelay.init()
-    let captchaSession: PublishRelay<CaptchaSession> = PublishRelay.init()
+//    let captchaSession: PublishRelay<CaptchaSession> = PublishRelay.init()
+    let date: PublishRelay<Date> = PublishRelay.init()
+    
     let errorMessage: PublishRelay<String> = PublishRelay.init()
 
     let unexpectedErrorMessage: String = "未知的錯誤發生"
-    let noTOTPErrorMessage: String = "無法取得TOTP"
     private let shouldRememberAccountKey: String = "shouldRememberAccount"
     // MARK: - Methods
     init(userSessionRepository: UserSessionRepository,
@@ -77,13 +80,12 @@ class SignInViewModel {
         let passwordResult = signInValidationService.validatePassword(signInInfo.password)
         passwordValidationResult.accept(passwordResult)
 
-        let captchaValueResult = signInValidationService.validateCaptchaValue(signInInfo.captchaValue)
-        captchaValueValidationResult.accept(captchaValueResult)
-
+//        let captchaValueResult = signInValidationService.validateCaptchaValue(signInInfo.captchaValue)
+//        captchaValueValidationResult.accept(captchaValueResult)
+        
         if storeIDResult == .valid,
            accountResult == .valid,
-           passwordResult == .valid,
-           captchaValueResult == .valid {
+           passwordResult == .valid {
             return true
         } else {
             return false
@@ -99,7 +101,8 @@ class SignInViewModel {
             return
         }
         if let secret = repository.secret(for: signInInfo.userNameForSecret) {
-            print(secret.generatePin())
+            signInInfo.otp = "000000"
+//          signInInfo.otp = secret.generatePin()
             userSessionRepository.signIn(info: signInInfo)
                 .ensure {
                     self.indicateSigningIn(false)
@@ -134,16 +137,31 @@ class SignInViewModel {
         lastSignInInfoDataStore.saveLastSignInAccountInfo(info: accountInfo).cauterize()
     }
 
-    @objc
-    func captcha() {
-        indicateUpdatingCaptcha(true)
-        userSessionRepository.captcha()
-            .ensure {
-                self.indicateUpdatingCaptcha(false)
-            }
-            .done { session in
-                self.captchaSession.accept(session)
-                self.signInInfo.captchaKey = session.key
+//    @objc
+//    func captcha() {
+//        indicateUpdatingCaptcha(true)
+//        userSessionRepository.captcha()
+//            .ensure {
+//                self.indicateUpdatingCaptcha(false)
+//            }
+//            .done { session in
+//                self.captchaSession.accept(session)
+//                self.signInInfo.captchaKey = session.key
+//            }
+//            .catch { error in
+//                switch error {
+//                case APIError.serviceError(let message):
+//                    self.errorMessage.accept(message)
+//                default:
+//                    self.errorMessage.accept(self.unexpectedErrorMessage)
+//                }
+//            }
+//    }
+    
+    func time() {
+        userSessionRepository.time()
+            .done { date in
+                self.date.accept(date)
             }
             .catch { error in
                 switch error {
@@ -155,11 +173,15 @@ class SignInViewModel {
             }
     }
 
-    private func indicateUpdatingCaptcha(_ isUpdating: Bool) {
-        indicateNetworkProcessing(isUpdating)
-        captchaActivityIndicatorAnimating.accept(isUpdating)
-    }
+//    private func indicateUpdatingCaptcha(_ isUpdating: Bool) {
+//        indicateNetworkProcessing(isUpdating)
+//        captchaActivityIndicatorAnimating.accept(isUpdating)
+//    }
 
+    private func indicateUpdateTime(_ isUpdating: Bool) {
+        indicateNetworkProcessing(isUpdating)
+        timeActivityIndicatorAnimating.accept(isUpdating)
+    }
     private func indicateSigningIn(_ isSigningIn: Bool) {
         indicateNetworkProcessing(isSigningIn)
         activityIndicatorAnimating.accept(isSigningIn)

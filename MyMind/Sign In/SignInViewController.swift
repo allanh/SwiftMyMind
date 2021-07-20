@@ -36,14 +36,17 @@ class SignInViewController: NiblessViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.captcha()
+//        viewModel.time()
+//        viewModel.captcha()
         addTapToResignKeyboardGesture()
         observerViewModel()
         configForgotPasswordButton()
+        configResendOTPButton()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        viewModel.time()
         addKeyboardObservers()
 //        navigationController?.isNavigationBarHidden = true
     }
@@ -67,6 +70,14 @@ class SignInViewController: NiblessViewController {
             .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
             .subscribe(onNext: { [unowned self] in
                 self.showForgotPasswordViewController()
+            })
+            .disposed(by: bag)
+    }
+    func configResendOTPButton() {
+        rootView.resendOTPButton.rx.tap
+            .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] in
+                self.showResendOTPViewController()
             })
             .disposed(by: bag)
     }
@@ -134,6 +145,13 @@ class SignInViewController: NiblessViewController {
             signInValidationService: SignInValidatoinService()
         )
         let viewController = ForgotPasswordViewController(viewModel: viewModel)
+        show(viewController, sender: self)
+    }
+    func showResendOTPViewController() {
+        let viewModel = ResendOTPViewModel(authService: MyMindAuthService(),
+                                           signInValidationService: SignInValidatoinService()
+        )
+        let viewController = ResendOTPViewController(viewModel: viewModel)
         show(viewController, sender: self)
     }
 }
