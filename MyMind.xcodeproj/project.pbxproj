@@ -48,6 +48,10 @@
 		52C2CBED26A04243002A2BA9 /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C2CBEC26A04243002A2BA9 /* MainPageViewController.swift */; };
 		52D7249F268D62BC00B00585 /* MyMindPurchaseReviewAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D7249E268D62BC00B00585 /* MyMindPurchaseReviewAPIService.swift */; };
 		52D724A4268DBD6400B00585 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 52D724A3268DBD6400B00585 /* GoogleService-Info.plist */; };
+		52E505FE26A531B4000E5116 /* ResendOTPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E505FD26A531B4000E5116 /* ResendOTPViewController.swift */; };
+		52E5060026A532D7000E5116 /* ResendOTPViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E505FF26A532D7000E5116 /* ResendOTPViewModel.swift */; };
+		52E5060226A5337A000E5116 /* ResendOTPInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E5060126A5337A000E5116 /* ResendOTPInfo.swift */; };
+		52E5060426A53572000E5116 /* ResendOTPRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E5060326A53572000E5116 /* ResendOTPRootView.swift */; };
 		52F564272693F14200171032 /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F564262693F14100171032 /* ErrorHandler.swift */; };
 		52F5642A269408A300171032 /* StaticView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F56429269408A300171032 /* StaticView.swift */; };
 		97547CB8268039C6001859A8 /* PurchaseListLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97547CB7268039C6001859A8 /* PurchaseListLoader.swift */; };
@@ -299,6 +303,10 @@
 		52C2CBEC26A04243002A2BA9 /* MainPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageViewController.swift; sourceTree = "<group>"; };
 		52D7249E268D62BC00B00585 /* MyMindPurchaseReviewAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMindPurchaseReviewAPIService.swift; sourceTree = "<group>"; };
 		52D724A3268DBD6400B00585 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		52E505FD26A531B4000E5116 /* ResendOTPViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResendOTPViewController.swift; sourceTree = "<group>"; };
+		52E505FF26A532D7000E5116 /* ResendOTPViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResendOTPViewModel.swift; sourceTree = "<group>"; };
+		52E5060126A5337A000E5116 /* ResendOTPInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResendOTPInfo.swift; sourceTree = "<group>"; };
+		52E5060326A53572000E5116 /* ResendOTPRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResendOTPRootView.swift; sourceTree = "<group>"; };
 		52F564262693F14100171032 /* ErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandler.swift; sourceTree = "<group>"; };
 		52F56429269408A300171032 /* StaticView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticView.swift; sourceTree = "<group>"; };
 		613512D2AB702F9C1AA2BCC5 /* Pods-MyMindTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMindTests.debug.xcconfig"; path = "Target Support Files/Pods-MyMindTests/Pods-MyMindTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -589,6 +597,16 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		52E505FC26A53189000E5116 /* ResendOTP */ = {
+			isa = PBXGroup;
+			children = (
+				52E505FD26A531B4000E5116 /* ResendOTPViewController.swift */,
+				52E505FF26A532D7000E5116 /* ResendOTPViewModel.swift */,
+				52E5060326A53572000E5116 /* ResendOTPRootView.swift */,
+			);
+			path = ResendOTP;
+			sourceTree = "<group>";
+		};
 		52F564282694086500171032 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -857,6 +875,7 @@
 				52944E202697F798006CC865 /* ToDo.swift */,
 				5293EE9D269A8F5B001A9754 /* Report.swift */,
 				5293EE9F269A9DBC001A9754 /* HomeModel.swift */,
+				52E5060126A5337A000E5116 /* ResendOTPInfo.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -864,6 +883,7 @@
 		A4793C932604768200AD280C /* Sign In */ = {
 			isa = PBXGroup;
 			children = (
+				52E505FC26A53189000E5116 /* ResendOTP */,
 				A415920D260C794700FD3989 /* ForgotPassword */,
 				A4793CA62604873B00AD280C /* SignInRootView.swift */,
 				A4793CB526048EBA00AD280C /* ValidatableInputView.swift */,
@@ -1460,6 +1480,7 @@
 				52C2CBD8269C4D4E002A2BA9 /* SaleReportInfoItemView.swift in Sources */,
 				A456701226845D14009598AE /* RootTabBarController.swift in Sources */,
 				52282372268EB41400A66340 /* PurchaseBriefReviewingCollectionViewCell.swift in Sources */,
+				52E5060026A532D7000E5116 /* ResendOTPViewModel.swift in Sources */,
 				A464877E2689BBD60053E6F5 /* EditingPurchaseOrderViewController.swift in Sources */,
 				A464877A26899DEF0053E6F5 /* EditingPurchaseOrderViewModel.swift in Sources */,
 				97B117372653B1AF00242428 /* PickProductMaterialsViewModel.swift in Sources */,
@@ -1469,6 +1490,7 @@
 				A40EBFE1267216C100A4863D /* PurchaseApplyViewController.swift in Sources */,
 				97B1172F26535B9800242428 /* ProductMaterial.swift in Sources */,
 				A44A5A7225F9B0D200995823 /* MainFunctionEntryViewController.swift in Sources */,
+				52E5060226A5337A000E5116 /* ResendOTPInfo.swift in Sources */,
 				52C2CBE926A01B70002A2BA9 /* DashedLineView.swift in Sources */,
 				52944E312699CE8B006CC865 /* ToDoInfoCollectionViewCell.swift in Sources */,
 				52C2CBED26A04243002A2BA9 /* MainPageViewController.swift in Sources */,
@@ -1495,6 +1517,7 @@
 				A4F2D013265D07C7004D8D6D /* AutoCompleteSearchViewModel.swift in Sources */,
 				A439B53C2609CDC3002352C2 /* ToastView.swift in Sources */,
 				A43E8513268C08FC008C8369 /* UDISecretRepository.swift in Sources */,
+				52E505FE26A531B4000E5116 /* ResendOTPViewController.swift in Sources */,
 				A44A5A6E25F9B0D200995823 /* AppDelegate.swift in Sources */,
 				52C2CBE2269E8950002A2BA9 /* SKURankingInfoItemView.swift in Sources */,
 				52944E2B26997680006CC865 /* GridentCircleView.swift in Sources */,
@@ -1526,6 +1549,7 @@
 				97B117392654B8FC00242428 /* PickProductMaterialsViewController.swift in Sources */,
 				52C2CBE0269E890B002A2BA9 /* NoDataView.swift in Sources */,
 				A47AB496265DF53200FE3CFA /* ContainerTableViewCell.swift in Sources */,
+				52E5060426A53572000E5116 /* ResendOTPRootView.swift in Sources */,
 				A45E69C5264B89A300AADB44 /* CustomClearButtonPositionTextField.swift in Sources */,
 				A49CF8B6260301DE00AFC170 /* Endpoint.swift in Sources */,
 				A4BC88C72679DDC700956B95 /* EditablePickedProductsInfoViewController.swift in Sources */,
