@@ -10,32 +10,30 @@ import UIKit
 
 class MainPageViewController: UIViewController {
 
-    @IBOutlet weak var otpButton: UIButton!
-    @IBOutlet weak var myMindButton: UIButton!
+    @IBOutlet weak var otpView: UIView!
+    @IBOutlet weak var myMindView: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        let color1 = UIColor(hex: "ecedf0").cgColor
-        let color2 = UIColor(hex: "f9f9f9").cgColor
-        otpButton.centerVertically()
-        otpButton.addGradient([color1, color2])
-        otpButton.applySketchShadow()
-        otpButton.layer.cornerRadius = 16
-        otpButton.layer.borderWidth = 1
-        otpButton.layer.borderColor = UIColor.secondaryLabel.cgColor
-        otpButton.clipsToBounds = true
+        let navigationTitleView: UIImageView = UIImageView {
+            $0.image = UIImage(named: "udi_logo")
+        }
+        let leftItem = UIBarButtonItem(customView: navigationTitleView)
+        navigationItem.leftBarButtonItem = leftItem
         
-        myMindButton.centerVertically()
-        myMindButton.addGradient([color1, color2])
-        myMindButton.applySketchShadow()
-        myMindButton.layer.cornerRadius = 16
-        myMindButton.layer.borderWidth = 1
-        myMindButton.layer.borderColor = UIColor.secondaryLabel.cgColor
-        myMindButton.clipsToBounds = true
         
+        let otpTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(otp(_:)))
+        otpView.layer.cornerRadius = 10
+        otpView.layer.shadowOffset = CGSize(width: 0, height: 3)
+        otpView.layer.shadowOpacity = 0.6
+        otpView.addGestureRecognizer(otpTapGestureRecognizer)
+        let myMindTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(myMind(_:)))
+        myMindView.layer.cornerRadius = 10
+        myMindView.layer.shadowOffset = CGSize(width: 0, height: 3)
+        myMindView.layer.shadowOpacity = 0.6
+        myMindView.addGestureRecognizer(myMindTapGestureRecognizer)
         navigationItem.backButtonTitle = ""
-        title = "My Mind"
         
     }
     
