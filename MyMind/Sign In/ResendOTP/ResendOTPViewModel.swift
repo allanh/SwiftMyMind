@@ -7,3 +7,79 @@
 //
 
 import Foundation
+import RxSwift
+import RxRelay
+class ResendOTPViewModel {
+    let bag: DisposeBag = DisposeBag()
+    let authService: AuthService
+    let signInValidationService: SignInValidatoinService
+    var resendOTPInfo: ResendOTPInfo = .empty()
+
+    // MARK: - Output
+    let storeIDValidationResult: BehaviorRelay<ValidationResult> = BehaviorRelay.init(value: .valid)
+    let accountValidationResult: BehaviorRelay<ValidationResult> = BehaviorRelay.init(value: .valid)
+    let passwordValidationResult: BehaviorRelay<ValidationResult> = BehaviorRelay.init(value: .valid)
+    let emailValidationResult: BehaviorRelay<ValidationResult> = BehaviorRelay.init(value: .valid)
+    let isSecureTextEntry: BehaviorRelay<Bool> = BehaviorRelay.init(value: true)
+
+    let confirmButtonEnabled: BehaviorRelay<Bool> = BehaviorRelay.init(value: true)
+    let activityIndicatorAnimating: BehaviorRelay<Bool> = BehaviorRelay.init(value: false)
+
+    let successMessage: PublishRelay<String> = PublishRelay.init()
+    let errorMessage: PublishRelay<String> = PublishRelay.init()
+    let unexpectedErrorMessage: String = "未知的錯誤發生"
+
+    init(authService: AuthService,
+         signInValidationService: SignInValidatoinService) {
+        self.authService = authService
+        self.signInValidationService = signInValidationService
+    }
+
+    func validateInputInfo() -> Bool {
+        let storeIDResult = signInValidationService.validateStoreID(resendOTPInfo.storeID)
+        storeIDValidationResult.accept(storeIDResult)
+
+        let accountResult = signInValidationService.validateAccount(resendOTPInfo.account)
+        accountValidationResult.accept(accountResult)
+
+        let passwordResult = signInValidationService.validatePassword(resendOTPInfo.password)
+        passwordValidationResult.accept(passwordResult)
+        let emailResult = signInValidationService.validateEmail(resendOTPInfo.email)
+        emailValidationResult.accept(emailResult)
+
+        let result = storeIDResult == .valid
+            && accountResult == .valid
+            && emailResult == .valid
+            && passwordResult == .valid
+
+        return result
+    }
+
+    @objc
+    func confirmSendEmail() {
+        indicateSendingEmail(true)
+        guard validateInputInfo() else {
+            indicateSendingEmail(false)
+            return
+        }
+        authService.resendOTPMail(info: resendOTPInfo)
+            .done { self.successMessage.accept("新認證碼QR Code已寄出！") }
+            .catch { error in
+                switch error {
+                case APIError.serviceError(let message):
+                    self.errorMessage.accept(message)
+                default:
+                    self.errorMessage.accept(self.unexpectedErrorMessage)
+                }
+            }
+    }
+
+    private func indicateSendingEmail(_ isSending: Bool) {
+        indicateNetworkProcessing(isSending)
+        activityIndicatorAnimating.accept(isSending)
+    }
+
+    private func indicateNetworkProcessing(_ isProcessing: Bool) {
+        confirmButtonEnabled.accept(!isProcessing)
+    }
+}
