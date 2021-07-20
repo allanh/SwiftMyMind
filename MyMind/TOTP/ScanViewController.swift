@@ -32,7 +32,7 @@ final class ScanViewController: UIViewController {
                     if granted {
                         self?.startReading()
                     } else {
-                        let alertViewController = UIAlertController(title: "若拒絕授權使用相機，將無法取得驗證碼", message: "請前往設定開啟相機權限", preferredStyle: .alert)
+                        let alertViewController = UIAlertController(title: "拒絕授權使用", message: "若拒絕授權使用相機，將無法取得驗證碼，請前往設定開啟相機權限", preferredStyle: .alert)
                         let cancelAction = UIAlertAction(title: "取消", style: .cancel) { action in
                             self?.dismiss(animated: true, completion: nil)
                         }
@@ -55,7 +55,8 @@ final class ScanViewController: UIViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-//        let string = "00rqN/DsTSDqZ5td5RqaA3ZND8hS4AkPFyA4EYe/Nzqa61LVk4xq4vxJspltcTdgZ+O3fPx7QraP0="
+//        let string = "00GXfpCkQp082fcSlkJBinwwvdb2v4AbFJTP1Av4KQQpGJBvBXkt4eSY8HLwW71Dn9kEEZFwiQ9v29wNU9BG0uqCkCcjJOSApG9qyRL5yCRuH749foHk7kkbqvIaDyxgoSVhis0uU3r8o="
+//        let string = "00ADB1iGsn1jvWxnGtKSoj59plRI10N/okhYJZSthwwNWupnFdmvnN6sJQApqfOCQ6BM7022AaTCvNH/rhWTQbuVwyKEpOiY4MJbWwsNLuR9wcntj4+fAgrJ7JHPmJNZf/"
 //        if let delegate = delegate, delegate.scanViewController(self, validate: string) {
 //            guard validateMetadataString(string: string) else {
 //                showInvalidQRCodeAlert()
