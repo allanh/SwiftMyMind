@@ -13,90 +13,71 @@ class SecretListViewController: UIViewController {
 
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var introduceLabel: UILabel!
-    @IBOutlet var cameraBarButton: UIBarButtonItem!
-    private var instructionView: InstructionView?
+    private var instructionView: MyMindInstructionView?
     weak var scanViewControllerDelegate: ScanViewControllerDelegate?
-    var requiredUser: String?
 
     // MARK: - View life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        view.backgroundColor = UIColor.groupTableViewBackground
-        tableView.backgroundColor = UIColor.groupTableViewBackground
+        let navigationTitleImageView: UIImageView = UIImageView {
+            $0.image = UIImage(named: "udi_logo")
+        }
+        navigationItem.titleView = navigationTitleImageView
         tableView.register(SecretTableViewCell.nib, forCellReuseIdentifier: SecretTableViewCell.reuseIdentifier)
 
-        addCustomViewForCameraBarButtonItem()
-//        let user = requiredUser, (repository.secret(for: user) == nil) ||
-        if repository.secrets.isEmpty {
-            showInstructionView()
-        }
-//        scanViewController(ScanViewController(), didReceive: "00rqN/DsTSDqZzZt/0s2jz1d6uwamf1PBhF0XnBbes3dJywnO6RF0bLi9rXosCuNWQiC2QPzlWJJo=")
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        let user = requiredUser, (repository.secret(for: user) == nil) ||
-        if repository.secrets.isEmpty {
-            showIntroduceLabel()
-        } else {
+        switch repository.secrets.isEmpty {
+        case true:
+            showInstructionView()
+            hideCameraButton()
+        case false:
             removeInstructionView()
-            hideIntroduceLabel()
+            showCameraButton()
         }
-//        switch repository.secrets.isEmpty {
-//        case true: showIntroduceLabel()
-//        case false:
-//            removeInstructionView()
-//            hideIntroduceLabel()
-//        }
     }
-
+    
+    private let cameraButton: UIButton = UIButton {
+        $0.setImage(UIImage(named: "camera")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        $0.layer.cornerRadius = 24
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.backgroundColor = UIColor(hex:"ff7d2c")
+        $0.tintColor = .white
+        $0.addTarget(self, action: #selector(cameraBarButtonDidTapped), for: .touchUpInside)
+    }
     // MARK: - Methods
     // For animation purpose
-    private func addCustomViewForCameraBarButtonItem() {
-        let image = UIImage(named: "camera")
-        let button = UIButton()
-        button.setImage(image, for: .normal)
-        button.tintColor = .systemOrange
-        button.addTarget(self, action: #selector(cameraBarButtonDidTapped), for: .touchUpInside)
-        cameraBarButton.customView = button
+    private func showCameraButton() {
+        view.addSubview(cameraButton)
+        cameraButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
+        cameraButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20).isActive = true
+        cameraButton.widthAnchor.constraint(equalToConstant: 48).isActive = true
+        cameraButton.heightAnchor.constraint(equalToConstant: 48).isActive = true
     }
 
+    private func hideCameraButton() {
+        cameraButton.removeFromSuperview()
+    }
     private func showInstructionView() {
         guard instructionView == nil else { return }
-        instructionView = InstructionView()
+        instructionView = MyMindInstructionView()
 
-        self.navigationController?.view.addSubview(instructionView!)
+        view.addSubview(instructionView!)
+        instructionView?.topAnchor.constraint(equalTo: view.topAnchor, constant: 40).isActive = true
+        instructionView?.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25).isActive = true
+        instructionView?.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25).isActive = true
+        instructionView?.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -40).isActive = true
+        
         instructionView!.confirmButton.addTarget(self, action: #selector(cameraBarButtonDidTapped), for: .touchUpInside)
-        instructionView!.frame = UIScreen.main.bounds
         instructionView!.layoutIfNeeded()
     }
 
     private func removeInstructionView() {
         instructionView?.removeFromSuperview()
         instructionView = nil
-    }
-
-    private func showIntroduceLabel() {
-        introduceLabel.isHidden = false
-        animateCameraButton()
-    }
-
-    private func hideIntroduceLabel() {
-        introduceLabel.isHidden = true
-        cameraBarButton.customView?.layer.removeAnimation(forKey: "scale")
-    }
-
-    private func animateCameraButton() {
-        cameraBarButton.customView?.layer.removeAnimation(forKey: "scale")
-        let scaleAnimation = CABasicAnimation(keyPath: "transform.scale")
-        scaleAnimation.fromValue = 1
-        scaleAnimation.toValue = 1.5
-        scaleAnimation.duration = 1
-        scaleAnimation.autoreverses = true
-        scaleAnimation.repeatCount = .greatestFiniteMagnitude
-
-        cameraBarButton.customView?.layer.add(scaleAnimation, forKey: "scale")
     }
 
     // MARK: - Actions
@@ -156,24 +137,32 @@ extension SecretListViewController: UITableViewDataSource {
 // MARK: - Table view delegate
 extension SecretListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 74
+        return 114
     }
 
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
 
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        guard editingStyle == .delete else { return }
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive, title: nil) { (_, _, completionHandler) in
+            tableView.beginUpdates()
+            self.repository.deleteSecret(at: indexPath.section)
+            try? self.repository.saveSecrets()
+            tableView.deleteSections([indexPath.section], with: .left)
+            tableView.endUpdates()
 
-        tableView.beginUpdates()
-        repository.deleteSecret(at: indexPath.section)
-        try? repository.saveSecrets()
-        tableView.deleteSections([indexPath.section], with: .automatic)
-        tableView.endUpdates()
-
-        if repository.secrets.isEmpty {
-            showIntroduceLabel()
+            if self.repository.secrets.isEmpty {
+                self.showInstructionView()
+            }
+            completionHandler(true)
         }
+        deleteAction.image = UIImage(systemName: "trash")
+        deleteAction.backgroundColor = UIColor(hex: "ea6120")
+        let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
+        return configuration
+    }
+    func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
+        return false
     }
 }

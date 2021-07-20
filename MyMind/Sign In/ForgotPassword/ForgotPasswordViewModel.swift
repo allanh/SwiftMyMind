@@ -28,7 +28,7 @@ class ForgotPasswordViewModel {
     let activityIndicatorAnimating: BehaviorRelay<Bool> = BehaviorRelay.init(value: false)
 //    let captchaActivityIndicatorAnimating: BehaviorRelay<Bool> = BehaviorRelay.init(value: false)
 
-    let totp: PublishRelay<String> = PublishRelay.init()
+    let totp: PublishRelay<(String, String)> = PublishRelay.init()
     let successMessage: PublishRelay<String> = PublishRelay.init()
 //    let captchaSession: PublishRelay<CaptchaSession> = PublishRelay.init()
     let errorMessage: PublishRelay<String> = PublishRelay.init()
@@ -69,7 +69,7 @@ class ForgotPasswordViewModel {
             indicateSendingEmail(false)
             return
         }
-        if let secret = repository.secret(for: forgotPasswordInfo.userNameForSecret) {
+        if let secret = repository.secret(for: forgotPasswordInfo.account, storeID: forgotPasswordInfo.storeID) {
             forgotPasswordInfo.otp = "000000"
 //            forgotPasswordInfo.otp = secret.generatePin()
             authService.forgotPasswordMail(info: forgotPasswordInfo)
@@ -83,7 +83,7 @@ class ForgotPasswordViewModel {
                     }
                 }
         } else {
-            self.totp.accept(self.forgotPasswordInfo.userNameForSecret)
+            self.totp.accept((self.forgotPasswordInfo.account, self.forgotPasswordInfo.storeID))
         }
 
     }

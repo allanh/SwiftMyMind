@@ -17,9 +17,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="main_page_background" translatesAutoresizingMaskIntoConstraints="NO" id="DOU-A8-68j">
+                                <rect key="frame" x="0.0" y="68" width="414" height="181"/>
+                            </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="5" sectionFooterHeight="5" translatesAutoresizingMaskIntoConstraints="NO" id="zYc-n3-Fg2">
                                 <rect key="frame" x="15" y="88" width="384" height="774"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="dataSource" destination="BYZ-38-t0r" id="DV4-za-LQL"/>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="Aj2-ee-qub"/>
@@ -37,9 +42,12 @@
                             </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="DOU-A8-68j" secondAttribute="trailing" id="238-uJ-pEf"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="top" secondItem="DOU-A8-68j" secondAttribute="top" constant="20" id="A0E-nb-G8b"/>
                             <constraint firstItem="6b3-iE-oaP" firstAttribute="centerX" secondItem="zYc-n3-Fg2" secondAttribute="centerX" id="Itg-0z-9zW"/>
+                            <constraint firstItem="DOU-A8-68j" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="O1Z-us-UuQ"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="zYc-n3-Fg2" secondAttribute="bottom" id="X98-3z-nt0"/>
                             <constraint firstItem="zYc-n3-Fg2" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="b7j-YH-C19"/>
                             <constraint firstItem="zYc-n3-Fg2" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="gIF-sh-Zit"/>
@@ -48,18 +56,8 @@
                             <constraint firstItem="6b3-iE-oaP" firstAttribute="width" secondItem="zYc-n3-Fg2" secondAttribute="width" multiplier="1:1.1" id="u2J-vE-QYB"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="zZZ-bs-6DS">
-                        <barButtonItem key="leftBarButtonItem" image="close" id="myR-8Z-IOg">
-                            <connections>
-                                <action selector="closeButtonDidTapped:" destination="BYZ-38-t0r" id="SCw-sB-E9Q"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="camera" style="done" id="qc1-5x-pab">
-                            <color key="tintColor" systemColor="systemOrangeColor"/>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="zZZ-bs-6DS"/>
                     <connections>
-                        <outlet property="cameraBarButton" destination="qc1-5x-pab" id="Te0-Nu-O92"/>
                         <outlet property="introduceLabel" destination="6b3-iE-oaP" id="GPJ-ir-IUE"/>
                         <outlet property="tableView" destination="zYc-n3-Fg2" id="I5U-Gi-Rpz"/>
                     </connections>
@@ -123,13 +121,13 @@
         </scene>
     </scenes>
     <resources>
-        <image name="camera" width="32" height="32"/>
         <image name="close" width="24" height="24"/>
+        <image name="main_page_background" width="375" height="181"/>
+        <systemColor name="secondarySystemBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemOrangeColor">
-            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

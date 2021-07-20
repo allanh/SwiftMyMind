@@ -36,7 +36,7 @@ class SignInViewModel {
 //    let captchaActivityIndicatorAnimating: BehaviorRelay<Bool> = BehaviorRelay.init(value: false)
     let timeActivityIndicatorAnimating: BehaviorRelay<Bool> = BehaviorRelay.init(value: false)
 
-    let totp: PublishRelay<String> = PublishRelay.init()
+    let totp: PublishRelay<(String, String)> = PublishRelay.init()
     let userSession: PublishRelay<UserSession> = PublishRelay.init()
 //    let captchaSession: PublishRelay<CaptchaSession> = PublishRelay.init()
     let date: PublishRelay<Date> = PublishRelay.init()
@@ -100,7 +100,7 @@ class SignInViewModel {
             indicateSigningIn(false)
             return
         }
-        if let secret = repository.secret(for: signInInfo.userNameForSecret) {
+        if let secret = repository.secret(for: signInInfo.account, storeID: signInInfo.storeID) {
             signInInfo.otp = "000000"
 //          signInInfo.otp = secret.generatePin()
             userSessionRepository.signIn(info: signInInfo)
@@ -122,7 +122,7 @@ class SignInViewModel {
                 }
         } else {
             self.indicateSigningIn(false)
-            self.totp.accept(self.signInInfo.userNameForSecret)
+            self.totp.accept((self.signInInfo.account, self.signInInfo.storeID))
         }
     }
 

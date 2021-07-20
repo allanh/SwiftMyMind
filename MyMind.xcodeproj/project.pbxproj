@@ -52,6 +52,7 @@
 		52E5060026A532D7000E5116 /* ResendOTPViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E505FF26A532D7000E5116 /* ResendOTPViewModel.swift */; };
 		52E5060226A5337A000E5116 /* ResendOTPInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E5060126A5337A000E5116 /* ResendOTPInfo.swift */; };
 		52E5060426A53572000E5116 /* ResendOTPRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E5060326A53572000E5116 /* ResendOTPRootView.swift */; };
+		52E5060626A6BF4D000E5116 /* MyMindInstructionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E5060526A6BF4C000E5116 /* MyMindInstructionView.swift */; };
 		52F564272693F14200171032 /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F564262693F14100171032 /* ErrorHandler.swift */; };
 		52F5642A269408A300171032 /* StaticView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F56429269408A300171032 /* StaticView.swift */; };
 		97547CB8268039C6001859A8 /* PurchaseListLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97547CB7268039C6001859A8 /* PurchaseListLoader.swift */; };
@@ -307,6 +308,7 @@
 		52E505FF26A532D7000E5116 /* ResendOTPViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResendOTPViewModel.swift; sourceTree = "<group>"; };
 		52E5060126A5337A000E5116 /* ResendOTPInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResendOTPInfo.swift; sourceTree = "<group>"; };
 		52E5060326A53572000E5116 /* ResendOTPRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResendOTPRootView.swift; sourceTree = "<group>"; };
+		52E5060526A6BF4C000E5116 /* MyMindInstructionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMindInstructionView.swift; sourceTree = "<group>"; };
 		52F564262693F14100171032 /* ErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandler.swift; sourceTree = "<group>"; };
 		52F56429269408A300171032 /* StaticView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticView.swift; sourceTree = "<group>"; };
 		613512D2AB702F9C1AA2BCC5 /* Pods-MyMindTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMindTests.debug.xcconfig"; path = "Target Support Files/Pods-MyMindTests/Pods-MyMindTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -833,6 +835,7 @@
 				A464876F26896FD10053E6F5 /* Secret.swift */,
 				A46487712689702B0053E6F5 /* DateFormatter+Secret.swift */,
 				A4648773268970750053E6F5 /* UDI3DESCryptor.swift */,
+				52E5060526A6BF4C000E5116 /* MyMindInstructionView.swift */,
 			);
 			path = TOTP;
 			sourceTree = "<group>";
@@ -1569,6 +1572,7 @@
 				527E11BB2692A05900FB8B01 /* Authorization.swift in Sources */,
 				A494D9CE2670CDC1008658F8 /* PickPurchaseReviewerViewModel.swift in Sources */,
 				97547CBB2680787E001859A8 /* ProductMaterialListLoader.swift in Sources */,
+				52E5060626A6BF4D000E5116 /* MyMindInstructionView.swift in Sources */,
 				A442A168266F599A00AAB1ED /* PurchaseSuggestionInfo.swift in Sources */,
 				97547CB8268039C6001859A8 /* PurchaseListLoader.swift in Sources */,
 			);

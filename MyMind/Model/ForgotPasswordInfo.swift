@@ -23,11 +23,6 @@ struct ForgotPasswordInfo {
     var captchaKey: String?
     var captchaValue: String?
 
-    var userNameForSecret: String {
-        get {
-            return account+"@"+storeID
-        }
-    }
     static func empty() -> ForgotPasswordInfo {
         let info = ForgotPasswordInfo(storeID: "", account: "", email: "", otp: nil, captchaKey: nil, captchaValue: nil)
         return info

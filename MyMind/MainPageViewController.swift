@@ -39,8 +39,8 @@ class MainPageViewController: UIViewController {
     
     @IBAction func otp(_ sender: Any) {
         let storyboard: UIStoryboard = UIStoryboard(name: "TOTP", bundle: nil)
-        let viewController = storyboard.instantiateViewController(withIdentifier: "SecretListViewControllerNavi")
-        present(viewController, animated: true, completion: nil)
+        let viewController = storyboard.instantiateViewController(withIdentifier: "SecretListViewController")
+        show(viewController, sender: self)
     }
     @IBAction func myMind(_ sender: Any) {
         MyMindEmployeeAPIService.shared.authorization()

@@ -109,10 +109,11 @@ class SignInViewController: NiblessViewController {
 
         viewModel.totp
             .observe(on: MainScheduler.instance)
-            .subscribe({ [unowned self] user in
+            .subscribe({ [unowned self] info in
                 let storyboard: UIStoryboard = UIStoryboard(name: "TOTP", bundle: nil)
                 if let viewController = storyboard.instantiateViewController(withIdentifier: "SecretListViewControllerNavi") as? UINavigationController, let totpViewController = viewController.topViewController as? SecretListViewController {
-                    totpViewController.requiredUser = user.element
+//                    totpViewController.requiredUser = info.element?.0
+//                    totpViewController.requiredStoreID = info.element?.1
                     totpViewController.scanViewControllerDelegate = self
                     present(viewController, animated: true, completion: nil)
                 }
@@ -199,9 +200,9 @@ extension SignInViewController: ScanViewControllerDelegate {
     func scanViewController(_ scanViewController: ScanViewController, validate qrCodeValue: String) -> Bool {
         if let url = URL(string: qrCodeValue),
            let secret = Secret.init(url: url) {
-            return secret.user == viewModel.signInInfo.userNameForSecret
+            return secret.user == viewModel.signInInfo.account && secret.id == viewModel.signInInfo.storeID
         } else if let secret = Secret.generateSecret(with: qrCodeValue) {
-            return secret.user == viewModel.signInInfo.userNameForSecret
+            return secret.user == viewModel.signInInfo.account && secret.id == viewModel.signInInfo.storeID
         }
         return false
     }

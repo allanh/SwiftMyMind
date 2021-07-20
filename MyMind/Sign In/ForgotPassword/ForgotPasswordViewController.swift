@@ -61,10 +61,11 @@ class ForgotPasswordViewController: NiblessViewController {
         
         viewModel.totp
             .observe(on: MainScheduler.instance)
-            .subscribe({ [unowned self] user in
+            .subscribe({ [unowned self] info in
                 let storyboard: UIStoryboard = UIStoryboard(name: "TOTP", bundle: nil)
                 if let viewController = storyboard.instantiateViewController(withIdentifier: "SecretListViewControllerNavi") as? UINavigationController, let totpViewController = viewController.topViewController as? SecretListViewController {
-                    totpViewController.requiredUser = user.element
+//                    totpViewController.requiredUser = info.element?.0
+//                    totpViewController.requiredStoreID = info.element?.1
                     totpViewController.scanViewControllerDelegate = self
                     present(viewController, animated: true, completion: nil)
                 }
@@ -131,9 +132,9 @@ extension ForgotPasswordViewController: ScanViewControllerDelegate {
     func scanViewController(_ scanViewController: ScanViewController, validate qrCodeValue: String) -> Bool {
         if let url = URL(string: qrCodeValue),
            let secret = Secret.init(url: url) {
-            return secret.user == viewModel.forgotPasswordInfo.userNameForSecret
+            return secret.user == viewModel.forgotPasswordInfo.account && secret.id == viewModel.forgotPasswordInfo.storeID
         } else if let secret = Secret.generateSecret(with: qrCodeValue) {
-            return secret.user == viewModel.forgotPasswordInfo.userNameForSecret
+            return secret.user == viewModel.forgotPasswordInfo.account && secret.id == viewModel.forgotPasswordInfo.storeID
         }
         return false
     }

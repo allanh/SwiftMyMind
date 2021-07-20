@@ -28,6 +28,9 @@ final class SecretTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        layer.cornerRadius = 10
+        layer.shadowOffset = CGSize(width: 0, height: 3)
+        layer.shadowOpacity = 0.6
     }
 
     override func prepareForReuse() {
@@ -38,12 +41,13 @@ final class SecretTableViewCell: UITableViewCell {
     // MARK: - Methods
     func config(with secret: Secret) {
         self.secret = secret
+        layer.cornerRadius = 10
 
         updatePin()
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updatePin), userInfo: nil, repeats: true)
         timer?.fire()
 
-        userNameLabel.text = secret.user
+        userNameLabel.text = secret.user+" "+secret.id
 
         if let date = secret.registerDate {
             let dateFormatter = DateFormatter()
@@ -66,7 +70,7 @@ final class SecretTableViewCell: UITableViewCell {
         pin.insert(contentsOf: "  ", at: index)
         pinLabel.text = pin
 
-        let validColor: UIColor = UIColor(red: 1.0, green: 127.0/255.0, blue: 0.0, alpha: 1.0)
+        let validColor: UIColor = UIColor(hex: "042c5c")
         let inValidColor: UIColor = UIColor(white: 0.7, alpha: 1.0)
 
         progressView.progressTintColor = secret.isValid ? validColor : inValidColor
@@ -81,8 +85,8 @@ final class SecretTableViewCell: UITableViewCell {
         progressView.setProgress(progress, animated: true)
 
         if progress < 0.33 && secret.isValid {
-            pinLabel.textColor = .systemRed
-            progressView.progressTintColor = .systemRed
+            pinLabel.textColor = UIColor(hex: "ea6120")
+            progressView.progressTintColor = UIColor(hex: "ea6120")
         }
     }
 }

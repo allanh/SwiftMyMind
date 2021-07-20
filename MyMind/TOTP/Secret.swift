@@ -14,6 +14,7 @@ struct Secret: Equatable {
         case secret, acc, time, isValid, id
     }
     let user: String
+    let id: String
     let identifier: String
     let registerDate: Date?
     var isValid: Bool
@@ -22,8 +23,9 @@ struct Secret: Equatable {
         case udn = "/UDN:"
         case myMind = "/Mymind:"
     }
-    init(user: String, identifier: String, registerDate: Date? = nil, isValid: Bool = false) {
+    init(user: String, id: String, identifier: String, registerDate: Date? = nil, isValid: Bool = false) {
         self.user = user
+        self.id = id
         self.identifier = identifier
         self.registerDate = registerDate
         self.isValid = isValid
@@ -54,8 +56,13 @@ struct Secret: Equatable {
             let secretQuery = queryItem.first(where: { $0.name == "secret"}),
             let secret = secretQuery.value
         else { return nil }
-
         identifier = secret
+        
+        guard let idQuery = queryItem.first(where: {$0.name == "id"}),
+              let storeID = idQuery.value
+        else {return nil}
+        id = storeID
+        
         registerDate = nil
         isValid = false
     }
@@ -97,12 +104,13 @@ struct Secret: Equatable {
 extension Secret: Decodable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: SecretCodingKeys.self)
-        if let id = try container.decodeIfPresent(String.self, forKey: .id) {
-            let string = try container.decode(String.self, forKey: .acc)
-            user = string+"@"+id
+        if let idString = try container.decodeIfPresent(String.self, forKey: .id) {
+            id = idString
         } else {
-            user = try container.decode(String.self, forKey: .acc)
+            id = ""
         }
+        user = try container.decode(String.self, forKey: .acc)
+        
         identifier = try container.decode(String.self, forKey: .secret)
         if let dateString = try container.decodeIfPresent(String.self, forKey: .time) {
             registerDate = DateFormatter.secretDateFormatter.date(from: dateString)
@@ -127,5 +135,6 @@ extension Secret: Encodable {
             try container.encode(dateString, forKey: .time)
         }
         try container.encode(isValid, forKey: .isValid)
+        try container.encode(id, forKey: .id)
     }
 }
