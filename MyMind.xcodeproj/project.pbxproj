@@ -48,11 +48,225 @@
 		52C2CBED26A04243002A2BA9 /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C2CBEC26A04243002A2BA9 /* MainPageViewController.swift */; };
 		52D7249F268D62BC00B00585 /* MyMindPurchaseReviewAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D7249E268D62BC00B00585 /* MyMindPurchaseReviewAPIService.swift */; };
 		52D724A4268DBD6400B00585 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 52D724A3268DBD6400B00585 /* GoogleService-Info.plist */; };
+		52E1EDF726A6D29900506010 /* ServerTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E1EDF626A6D29900506010 /* ServerTime.swift */; };
 		52E505FE26A531B4000E5116 /* ResendOTPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E505FD26A531B4000E5116 /* ResendOTPViewController.swift */; };
 		52E5060026A532D7000E5116 /* ResendOTPViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E505FF26A532D7000E5116 /* ResendOTPViewModel.swift */; };
 		52E5060226A5337A000E5116 /* ResendOTPInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E5060126A5337A000E5116 /* ResendOTPInfo.swift */; };
 		52E5060426A53572000E5116 /* ResendOTPRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E5060326A53572000E5116 /* ResendOTPRootView.swift */; };
 		52E5060626A6BF4D000E5116 /* MyMindInstructionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E5060526A6BF4C000E5116 /* MyMindInstructionView.swift */; };
+		52E5060A26A6C681000E5116 /* ProductSuggestionInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A456700F268330F8009598AE /* ProductSuggestionInfoViewModel.swift */; };
+		52E5060B26A6C681000E5116 /* Secret.swift in Sources */ = {isa = PBXBuildFile; fileRef = A464876F26896FD10053E6F5 /* Secret.swift */; };
+		52E5060C26A6C681000E5116 /* SideMenuTopBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43F42922643C26400A246CC /* SideMenuTopBarView.swift */; };
+		52E5060D26A6C681000E5116 /* DispatchQueue+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4054108264A270C00E2D21B /* DispatchQueue+.swift */; };
+		52E5060E26A6C681000E5116 /* PurchaseOrderInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BCA0CC267C98B500E3B274 /* PurchaseOrderInfoViewController.swift */; };
+		52E5060F26A6C681000E5116 /* UICollectionViewLeftAlignedLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43F429B2643EAEF00A246CC /* UICollectionViewLeftAlignedLayout.swift */; };
+		52E5061026A6C681000E5116 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4793CBF2604A59C00AD280C /* GradientView.swift */; };
+		52E5061126A6C681000E5116 /* ContainerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97AFE37426676F83002CBE01 /* ContainerCollectionViewCell.swift */; };
+		52E5061226A6C681000E5116 /* EditingPurchaseOrderInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A464877B26899E8C0053E6F5 /* EditingPurchaseOrderInfo.swift */; };
+		52E5061326A6C681000E5116 /* InformationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43E8515268C0928008C8369 /* InformationTableViewController.swift */; };
+		52E5061426A6C681000E5116 /* PurchasedProductsInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4567005268307DD009598AE /* PurchasedProductsInfoViewController.swift */; };
+		52E5061526A6C681000E5116 /* MyMindAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49CF8C426030CEE00AFC170 /* MyMindAuthService.swift */; };
+		52E5061626A6C681000E5116 /* ProductMaterialsFilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F2D010265D0770004D8D6D /* ProductMaterialsFilterViewModel.swift */; };
+		52E5061726A6C681000E5116 /* ToDoInfoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52944E2C269976C9006CC865 /* ToDoInfoHeaderView.swift */; };
+		52E5061826A6C681000E5116 /* PickPurchaseStatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A457AEB12660A34A0029DDBB /* PickPurchaseStatusViewModel.swift */; };
+		52E5061926A6C681000E5116 /* IndicatorSwitchContentHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C2CBD9269D6325002A2BA9 /* IndicatorSwitchContentHeaderView.swift */; };
+		52E5061A26A6C681000E5116 /* ProductMaterialsFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F2D00E265D063B004D8D6D /* ProductMaterialsFilterViewController.swift */; };
+		52E5061B26A6C681000E5116 /* ToDoListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52944E322699CEF0006CC865 /* ToDoListCollectionViewCell.swift */; };
+		52E5061C26A6C681000E5116 /* UITableView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47F39DE263A67E200A3097C /* UITableView+.swift */; };
+		52E5061D26A6C681000E5116 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5293EEA1269AF20F001A9754 /* Date+.swift */; };
+		52E5061E26A6C681000E5116 /* PurchaseOrderLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BCA0C9267C802B00E3B274 /* PurchaseOrderLoader.swift */; };
+		52E5061F26A6C681000E5116 /* OptionSet+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527E11BC2692A0D500FB8B01 /* OptionSet+.swift */; };
+		52E5062026A6C681000E5116 /* MyMindEmployeeAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B15CB92691BAFC0010FCED /* MyMindEmployeeAPIService.swift */; };
+		52E5062126A6C681000E5116 /* ProductMaterialSuggestionInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CBD8B4266A2CF200B19119 /* ProductMaterialSuggestionInfoTableViewCell.swift */; };
+		52E5062226A6C681000E5116 /* ProductMaterialQueryInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B117332653AF1E00242428 /* ProductMaterialQueryInfo.swift */; };
+		52E5062326A6C681000E5116 /* PurchaseAutoCompleteAdapters.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44E8FDA265F82F80090D467 /* PurchaseAutoCompleteAdapters.swift */; };
+		52E5062426A6C681000E5116 /* SideMenuPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43F4290264388E400A246CC /* SideMenuPresentable.swift */; };
+		52E5062526A6C681000E5116 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4159213260C861F00FD3989 /* ForgotPasswordViewController.swift */; };
+		52E5062626A6C681000E5116 /* SuggestionProductMaterialViewModelLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A442A163266F547300AAB1ED /* SuggestionProductMaterialViewModelLoader.swift */; };
+		52E5062726A6C681000E5116 /* PurchaseListRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47F39D9263A64CD00A3097C /* PurchaseListRootView.swift */; };
+		52E5062826A6C681000E5116 /* PickProductMaterialsRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B1173A2654B9A100242428 /* PickProductMaterialsRootView.swift */; };
+		52E5062926A6C681000E5116 /* PickProductMaterialTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B1173E2654CBFD00242428 /* PickProductMaterialTableViewCell.swift */; };
+		52E5062A26A6C681000E5116 /* NibOwnerLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4793C9526047C8000AD280C /* NibOwnerLoadable.swift */; };
+		52E5062B26A6C681000E5116 /* PurchaseCompletedApplyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97547CC42681DC4C001859A8 /* PurchaseCompletedApplyViewController.swift */; };
+		52E5062C26A6C681000E5116 /* MyMindAutoCompleteAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DD410826427DD5007B2A41 /* MyMindAutoCompleteAPIService.swift */; };
+		52E5062D26A6C681000E5116 /* MyMindPurchaseReviewAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D7249E268D62BC00B00585 /* MyMindPurchaseReviewAPIService.swift */; };
+		52E5062E26A6C681000E5116 /* DropDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4054106264A1B7400E2D21B /* DropDownView.swift */; };
+		52E5062F26A6C681000E5116 /* SignInInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4793C792604534100AD280C /* SignInInfo.swift */; };
+		52E5063026A6C681000E5116 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4705B9026020E5700B30CE6 /* Response.swift */; };
+		52E5063126A6C681000E5116 /* MyMindSaleReportRatioNumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C2CBD5269C4CED002A2BA9 /* MyMindSaleReportRatioNumberFormatter.swift */; };
+		52E5063226A6C681000E5116 /* AutoCompleteInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DD410A26428927007B2A41 /* AutoCompleteInfo.swift */; };
+		52E5063326A6C681000E5116 /* Purchase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A439BD3B2637EC51004F47C8 /* Purchase.swift */; };
+		52E5063426A6C681000E5116 /* UIStoryboard+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4793C9E26047DB900AD280C /* UIStoryboard+.swift */; };
+		52E5063526A6C681000E5116 /* ToDoItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52944E2826997654006CC865 /* ToDoItemView.swift */; };
+		52E5063626A6C681000E5116 /* UIViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BDC79D260ADFC5005C33A5 /* UIViewController+Rx.swift */; };
+		52E5063726A6C681000E5116 /* ToDo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52944E202697F798006CC865 /* ToDo.swift */; };
+		52E5063826A6C681000E5116 /* UIView+shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CF09B22636C36800439D5F /* UIView+shadow.swift */; };
+		52E5063926A6C681000E5116 /* Declarative.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4793CAB260488E800AD280C /* Declarative.swift */; };
+		52E5063A26A6C681000E5116 /* PurchaseStatusSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A405410E264A758B00E2D21B /* PurchaseStatusSelectionViewController.swift */; };
+		52E5063B26A6C681000E5116 /* CaptchaSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49CF92926034BEA00AFC170 /* CaptchaSession.swift */; };
+		52E5063C26A6C681000E5116 /* SignInValidationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BDC7B3260B10E2005C33A5 /* SignInValidationService.swift */; };
+		52E5063D26A6C681000E5116 /* FilterSideMenuBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43F42942643C75C00A246CC /* FilterSideMenuBottomView.swift */; };
+		52E5063E26A6C681000E5116 /* Reviewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A442A16E266F797500AAB1ED /* Reviewer.swift */; };
+		52E5063F26A6C681000E5116 /* SKURankingInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C2CBDD269D643B002A2BA9 /* SKURankingInfoView.swift */; };
+		52E5064026A6C681000E5116 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48389B3260869940044C09E /* SignInViewModel.swift */; };
+		52E5064126A6C681000E5116 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5246E4732690385C005C11EC /* Account.swift */; };
+		52E5064226A6C681000E5116 /* NVActivityIndicatorView+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43E0B69260D84FB005FC6CE /* NVActivityIndicatorView+Rx.swift */; };
+		52E5064326A6C681000E5116 /* PurchaseApplyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A494D9C72670CC75008658F8 /* PurchaseApplyViewModel.swift */; };
+		52E5064426A6C681000E5116 /* ScannerOverlayPreviewLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A464876D268969010053E6F5 /* ScannerOverlayPreviewLayer.swift */; };
+		52E5064526A6C681000E5116 /* VendorInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CBD8A82664E2AF00B19119 /* VendorInfo.swift */; };
+		52E5064626A6C681000E5116 /* AutoCompleteSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47AB497265E00B300FE3CFA /* AutoCompleteSearchViewController.swift */; };
+		52E5064726A6C681000E5116 /* UIWindow+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4ACEDC62649374B008724E4 /* UIWindow+.swift */; };
+		52E5064826A6C681000E5116 /* NiblessNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43E0B61260D7CA4005FC6CE /* NiblessNavigationController.swift */; };
+		52E5064926A6C681000E5116 /* ApplyPuchaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A494D9C92670CCFC008658F8 /* ApplyPuchaseService.swift */; };
+		52E5064A26A6C681000E5116 /* SaleRankingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C2CBE3269E9F20002A2BA9 /* SaleRankingCollectionViewCell.swift */; };
+		52E5064B26A6C681000E5116 /* ForgotPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4159218260C8FC600FD3989 /* ForgotPasswordViewModel.swift */; };
+		52E5064C26A6C681000E5116 /* UserDefaultSecretDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43E8512268C08FC008C8369 /* UserDefaultSecretDataStore.swift */; };
+		52E5064D26A6C681000E5116 /* SuggestionProductMaterialViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97AFE36826661750002CBE01 /* SuggestionProductMaterialViewModel.swift */; };
+		52E5064E26A6C681000E5116 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BDC7B8260B3E0A005C33A5 /* KeychainHelper.swift */; };
+		52E5064F26A6C681000E5116 /* MultiSelectableDropDownTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A405410C264A670100E2D21B /* MultiSelectableDropDownTableViewCell.swift */; };
+		52E5065026A6C681000E5116 /* PurchaseSuggestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97AFE37226673535002CBE01 /* PurchaseSuggestionViewController.swift */; };
+		52E5065126A6C681000E5116 /* StageProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A457AEB32660F5F80029DDBB /* StageProgressView.swift */; };
+		52E5065226A6C681000E5116 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48389AE2608360A0044C09E /* SignInViewController.swift */; };
+		52E5065326A6C681000E5116 /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5293EE9F269A9DBC001A9754 /* HomeModel.swift */; };
+		52E5065426A6C681000E5116 /* AutoCompleteSearchRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D50AAF2645129E007B07D6 /* AutoCompleteSearchRootView.swift */; };
+		52E5065526A6C681000E5116 /* HomeCollectionViewHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52944E342699CFC1006CC865 /* HomeCollectionViewHeaderView.swift */; };
+		52E5065626A6C681000E5116 /* SecretTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43E8507268C081A008C8369 /* SecretTableViewCell.swift */; };
+		52E5065726A6C681000E5116 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49CF8BA2603028C00AFC170 /* APIService.swift */; };
+		52E5065826A6C681000E5116 /* StageProgressCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CBD8AC2669C50A00B19119 /* StageProgressCollectionReusableView.swift */; };
+		52E5065926A6C681000E5116 /* CustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5246E4762690A2A4005C11EC /* CustomAlertView.swift */; };
+		52E5065A26A6C681000E5116 /* PurchaseReviewingApplyInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527E11BE2692C38D00FB8B01 /* PurchaseReviewingApplyInfoViewController.swift */; };
+		52E5065B26A6C681000E5116 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48389BD260876770044C09E /* AuthService.swift */; };
+		52E5065C26A6C681000E5116 /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A464876B268968920053E6F5 /* ScanViewController.swift */; };
+		52E5065D26A6C681000E5116 /* VendorSelectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CBD8A42664E10800B19119 /* VendorSelectionTableViewCell.swift */; };
+		52E5065E26A6C681000E5116 /* Warehouse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A442A16C266F780C00AAB1ED /* Warehouse.swift */; };
+		52E5065F26A6C681000E5116 /* PickDatesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A457AEAF2660A31F0029DDBB /* PickDatesViewModel.swift */; };
+		52E5066026A6C681000E5116 /* SignInAccountInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BDC7BD260B418E005C33A5 /* SignInAccountInfo.swift */; };
+		52E5066126A6C681000E5116 /* MyMindPurchaseAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A439BD362637E42F004F47C8 /* MyMindPurchaseAPIService.swift */; };
+		52E5066226A6C681000E5116 /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A405410A264A575E00E2D21B /* UITextField+.swift */; };
+		52E5066326A6C681000E5116 /* IndicatorHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52944E2E2699CE02006CC865 /* IndicatorHeaderView.swift */; };
+		52E5066426A6C681000E5116 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A439B5402609D61C002352C2 /* String+.swift */; };
+		52E5066526A6C681000E5116 /* RecipientInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BCA0C7267C73DF00E3B274 /* RecipientInfo.swift */; };
+		52E5066626A6C681000E5116 /* PurchaseSuggestionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CBD8AE2669D18F00B19119 /* PurchaseSuggestionViewModel.swift */; };
+		52E5066726A6C681000E5116 /* NiblessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43E0B62260D7CA4005FC6CE /* NiblessView.swift */; };
+		52E5066826A6C681000E5116 /* PurchaseSuggestionInfosLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97547CBC2680957D001859A8 /* PurchaseSuggestionInfosLoader.swift */; };
+		52E5066926A6C681000E5116 /* ProductMaterialAutoCompleteAdapters.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F2D014265D088B004D8D6D /* ProductMaterialAutoCompleteAdapters.swift */; };
+		52E5066A26A6C681000E5116 /* PromiseKitAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DD410626425496007B2A41 /* PromiseKitAPIService.swift */; };
+		52E5066B26A6C681000E5116 /* StaticView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F56429269408A300171032 /* StaticView.swift */; };
+		52E5066C26A6C681000E5116 /* InstructionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43E850F268C08B8008C8369 /* InstructionView.swift */; };
+		52E5066D26A6C681000E5116 /* UIViewController+loadNib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97AFE3782668D727002CBE01 /* UIViewController+loadNib.swift */; };
+		52E5066E26A6C681000E5116 /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F564262693F14100171032 /* ErrorHandler.swift */; };
+		52E5066F26A6C681000E5116 /* SaleReportInfoItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C2CBD7269C4D4E002A2BA9 /* SaleReportInfoItemView.swift */; };
+		52E5067026A6C681000E5116 /* RootTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A456701126845D14009598AE /* RootTabBarController.swift */; };
+		52E5067126A6C681000E5116 /* PurchaseBriefReviewingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52282370268EB41400A66340 /* PurchaseBriefReviewingCollectionViewCell.swift */; };
+		52E5067226A6C681000E5116 /* ResendOTPViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E505FF26A532D7000E5116 /* ResendOTPViewModel.swift */; };
+		52E5067326A6C681000E5116 /* EditingPurchaseOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A464877D2689BBD60053E6F5 /* EditingPurchaseOrderViewController.swift */; };
+		52E5067426A6C681000E5116 /* EditingPurchaseOrderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A464877926899DEF0053E6F5 /* EditingPurchaseOrderViewModel.swift */; };
+		52E5067526A6C681000E5116 /* PickProductMaterialsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B117362653B1AF00242428 /* PickProductMaterialsViewModel.swift */; };
+		52E5067626A6C681000E5116 /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4793CB026048BB600AD280C /* UIFont+.swift */; };
+		52E5067726A6C681000E5116 /* UDI3DESCryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4648773268970750053E6F5 /* UDI3DESCryptor.swift */; };
+		52E5067826A6C681000E5116 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5246E47126901BEC005C11EC /* SettingViewController.swift */; };
+		52E5067926A6C681000E5116 /* PurchaseApplyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40EBFE0267216C100A4863D /* PurchaseApplyViewController.swift */; };
+		52E5067A26A6C681000E5116 /* ProductMaterial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B1172E26535B9800242428 /* ProductMaterial.swift */; };
+		52E5067B26A6C681000E5116 /* MainFunctionEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44A5A7125F9B0D200995823 /* MainFunctionEntryViewController.swift */; };
+		52E5067C26A6C681000E5116 /* ResendOTPInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E5060126A5337A000E5116 /* ResendOTPInfo.swift */; };
+		52E5067D26A6C681000E5116 /* DashedLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C2CBE826A01B70002A2BA9 /* DashedLineView.swift */; };
+		52E5067E26A6C681000E5116 /* ToDoInfoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52944E302699CE8B006CC865 /* ToDoInfoCollectionViewCell.swift */; };
+		52E5067F26A6C681000E5116 /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C2CBEC26A04243002A2BA9 /* MainPageViewController.swift */; };
+		52E5068026A6C681000E5116 /* SearchMaterialNamesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47AB499265E4DA400FE3CFA /* SearchMaterialNamesViewController.swift */; };
+		52E5068126A6C681000E5116 /* ToDoInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52944E2626982B88006CC865 /* ToDoInfoView.swift */; };
+		52E5068226A6C681000E5116 /* SingleLabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B117422656064300242428 /* SingleLabelTableViewCell.swift */; };
+		52E5068326A6C681000E5116 /* SelectedQueryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4ACEDC426490E25008724E4 /* SelectedQueryCollectionViewCell.swift */; };
+		52E5068426A6C681000E5116 /* KeychainUserSessionDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B55E4E265B538F002E1880 /* KeychainUserSessionDataStore.swift */; };
+		52E5068526A6C681000E5116 /* VendorInfoLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CBD8A62664E1E800B19119 /* VendorInfoLoader.swift */; };
+		52E5068626A6C681000E5116 /* PurchaseReviewerListLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A494D9CF2670CE0E008658F8 /* PurchaseReviewerListLoader.swift */; };
+		52E5068726A6C681000E5116 /* ApplyPurchaseParameterInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A494D9CB2670CD68008658F8 /* ApplyPurchaseParameterInfo.swift */; };
+		52E5068826A6C681000E5116 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A456701326845D87009598AE /* HomeViewController.swift */; };
+		52E5068926A6C681000E5116 /* ProductMaterialDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97AFE3652665E7DD002CBE01 /* ProductMaterialDetail.swift */; };
+		52E5068A26A6C681000E5116 /* ReturnPurchaseOrderInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527E11C22693084B00FB8B01 /* ReturnPurchaseOrderInfo.swift */; };
+		52E5068B26A6C681000E5116 /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4159203260C394F00FD3989 /* UIButton+.swift */; };
+		52E5068C26A6C681000E5116 /* PickVendorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CBD8A22664900100B19119 /* PickVendorViewController.swift */; };
+		52E5068D26A6C681000E5116 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A439B52B26099AA1002352C2 /* UIViewController+.swift */; };
+		52E5068E26A6C681000E5116 /* SaleReportInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C2CBD3269BED72002A2BA9 /* SaleReportInfoView.swift */; };
+		52E5068F26A6C681000E5116 /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5293EE9D269A8F5B001A9754 /* Report.swift */; };
+		52E5069026A6C681000E5116 /* UserSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4793C7E2604573700AD280C /* UserSession.swift */; };
+		52E5069126A6C681000E5116 /* PurchaseListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47F39CC263A58F700A3097C /* PurchaseListViewController.swift */; };
+		52E5069226A6C681000E5116 /* MyMindUserSessionRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B55E4A265B4749002E1880 /* MyMindUserSessionRepository.swift */; };
+		52E5069326A6C681000E5116 /* PurchaseProductSuggestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97AFE36E2667246B002CBE01 /* PurchaseProductSuggestionViewController.swift */; };
+		52E5069426A6C681000E5116 /* AutoCompleteSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F2D012265D07C7004D8D6D /* AutoCompleteSearchViewModel.swift */; };
+		52E5069526A6C681000E5116 /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A439B53B2609CDC3002352C2 /* ToastView.swift */; };
+		52E5069626A6C681000E5116 /* UDISecretRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43E8511268C08FC008C8369 /* UDISecretRepository.swift */; };
+		52E5069726A6C681000E5116 /* ResendOTPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E505FD26A531B4000E5116 /* ResendOTPViewController.swift */; };
+		52E5069826A6C681000E5116 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44A5A6D25F9B0D200995823 /* AppDelegate.swift */; };
+		52E5069926A6C681000E5116 /* SKURankingInfoItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C2CBE1269E8950002A2BA9 /* SKURankingInfoItemView.swift */; };
+		52E5069A26A6C681000E5116 /* GridentCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52944E2A2699767F006CC865 /* GridentCircleView.swift */; };
+		52E5069B26A6C681000E5116 /* MainFunctionControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4AF79F62637B13B002B04F6 /* MainFunctionControl.swift */; };
+		52E5069C26A6C681000E5116 /* PurchaseListFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43F428E2643866F00A246CC /* PurchaseListFilterViewController.swift */; };
+		52E5069D26A6C681000E5116 /* SignInRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4793CA62604873B00AD280C /* SignInRootView.swift */; };
+		52E5069E26A6C681000E5116 /* UIControl+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43E0B6E260DC66D005FC6CE /* UIControl+.swift */; };
+		52E5069F26A6C681000E5116 /* OrganizeOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A46BA1DC263AAD290075E8C8 /* OrganizeOptionView.swift */; };
+		52E506A026A6C681000E5116 /* NiblessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43E0B60260D7CA4005FC6CE /* NiblessViewController.swift */; };
+		52E506A126A6C681000E5116 /* TodaySaleInfoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C2CBD1269BE6BC002A2BA9 /* TodaySaleInfoCollectionViewCell.swift */; };
+		52E506A226A6C681000E5116 /* PurchaseListFilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A457AEAD2660A2230029DDBB /* PurchaseListFilterViewModel.swift */; };
+		52E506A326A6C681000E5116 /* SearchMaterialNamesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F2D016265D08D3004D8D6D /* SearchMaterialNamesViewModel.swift */; };
+		52E506A426A6C681000E5116 /* SaleReportCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C2CBE5269ED0D5002A2BA9 /* SaleReportCollectionViewCell.swift */; };
+		52E506A526A6C681000E5116 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49CF8BF260306D200AFC170 /* APIError.swift */; };
+		52E506A626A6C681000E5116 /* PurchaseApplyInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A442A16A266F692600AAB1ED /* PurchaseApplyInfoViewModel.swift */; };
+		52E506A726A6C681000E5116 /* ForgotPasswordRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A415920E260C796500FD3989 /* ForgotPasswordRootView.swift */; };
+		52E506A826A6C681000E5116 /* TriangleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A489A1AB263FA7C900832679 /* TriangleView.swift */; };
+		52E506A926A6C681000E5116 /* UICollectionView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A489A1B3263FC9D600832679 /* UICollectionView+.swift */; };
+		52E506AA26A6C681000E5116 /* EditablePickedProductsInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BC88C42679CB8100956B95 /* EditablePickedProductsInfoViewModel.swift */; };
+		52E506AB26A6C681000E5116 /* PickPurchaseReviewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40EBFDC2671F7A100A4863D /* PickPurchaseReviewerViewController.swift */; };
+		52E506AC26A6C681000E5116 /* ProductMaterialSuggestionInfoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CBD8B0266A2ABA00B19119 /* ProductMaterialSuggestionInfoTableViewController.swift */; };
+		52E506AD26A6C681000E5116 /* HorizontalCellSizePagingFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5293EE9B269A8AEB001A9754 /* HorizontalCellSizePagingFlowLayout.swift */; };
+		52E506AE26A6C681000E5116 /* LogInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97547CBE2681C5B6001859A8 /* LogInfoView.swift */; };
+		52E506AF26A6C681000E5116 /* TodaySaleReportCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C2CBCF269BE52B002A2BA9 /* TodaySaleReportCollectionViewCell.swift */; };
+		52E506B026A6C681000E5116 /* SecretListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43E850B268C083C008C8369 /* SecretListViewController.swift */; };
+		52E506B126A6C681000E5116 /* PurchaseApplyInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40EBFD72671AD4900A4863D /* PurchaseApplyInfoViewController.swift */; };
+		52E506B226A6C681000E5116 /* PurchaseBriefTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47F39D4263A5A9B00A3097C /* PurchaseBriefTableViewCell.swift */; };
+		52E506B326A6C681000E5116 /* PurchaseBriefCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A489A1AF263FAA7D00832679 /* PurchaseBriefCollectionViewCell.swift */; };
+		52E506B426A6C681000E5116 /* PickProductMaterialsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B117382654B8FC00242428 /* PickProductMaterialsViewController.swift */; };
+		52E506B526A6C681000E5116 /* NoDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C2CBDF269E890B002A2BA9 /* NoDataView.swift */; };
+		52E506B626A6C681000E5116 /* ContainerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47AB495265DF53200FE3CFA /* ContainerTableViewCell.swift */; };
+		52E506B726A6C681000E5116 /* ResendOTPRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E5060326A53572000E5116 /* ResendOTPRootView.swift */; };
+		52E506B826A6C681000E5116 /* CustomClearButtonPositionTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45E69C4264B89A300AADB44 /* CustomClearButtonPositionTextField.swift */; };
+		52E506B926A6C681000E5116 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49CF8B5260301DE00AFC170 /* Endpoint.swift */; };
+		52E506BA26A6C681000E5116 /* EditablePickedProductsInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BC88C62679DDC700956B95 /* EditablePickedProductsInfoViewController.swift */; };
+		52E506BB26A6C681000E5116 /* ValidatableInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4793CB526048EBA00AD280C /* ValidatableInputView.swift */; };
+		52E506BC26A6C681000E5116 /* DateFormatter+Secret.swift in Sources */ = {isa = PBXBuildFile; fileRef = A46487712689702B0053E6F5 /* DateFormatter+Secret.swift */; };
+		52E506BD26A6C681000E5116 /* ForgotPasswordInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4159208260C603B00FD3989 /* ForgotPasswordInfo.swift */; };
+		52E506BE26A6C681000E5116 /* PurchaseQueryDateSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4054110264A8F7600E2D21B /* PurchaseQueryDateSelectionViewController.swift */; };
+		52E506BF26A6C681000E5116 /* PurchasedProductInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A456700726830BAB009598AE /* PurchasedProductInfoTableViewCell.swift */; };
+		52E506C026A6C681000E5116 /* PickSortTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B1174026550C5E00242428 /* PickSortTypeView.swift */; };
+		52E506C126A6C681000E5116 /* MyMindDashboardAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52944E222697FCFD006CC865 /* MyMindDashboardAPIService.swift */; };
+		52E506C226A6C681000E5116 /* SKURankingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C2CBDB269D63D8002A2BA9 /* SKURankingCollectionViewCell.swift */; };
+		52E506C326A6C681000E5116 /* LastSignInInfoDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C0AFF3265B7A2E00B8D0C4 /* LastSignInInfoDataStore.swift */; };
+		52E506C426A6C681000E5116 /* PurchaseLogInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97547CC02681D8FF001859A8 /* PurchaseLogInfoViewController.swift */; };
+		52E506C526A6C681000E5116 /* PurchaseOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BCA0C5267C70FD00E3B274 /* PurchaseOrder.swift */; };
+		52E506C626A6C681000E5116 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44A5A6F25F9B0D200995823 /* SceneDelegate.swift */; };
+		52E506C726A6C681000E5116 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4793CBA260490A600AD280C /* UIColor+.swift */; };
+		52E506C826A6C681000E5116 /* Authorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527E11BA2692A05900FB8B01 /* Authorization.swift */; };
+		52E506C926A6C681000E5116 /* PickPurchaseReviewerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A494D9CD2670CDC1008658F8 /* PickPurchaseReviewerViewModel.swift */; };
+		52E506CA26A6C681000E5116 /* ProductMaterialListLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97547CBA2680787E001859A8 /* ProductMaterialListLoader.swift */; };
+		52E506CB26A6C681000E5116 /* MyMindInstructionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E5060526A6BF4C000E5116 /* MyMindInstructionView.swift */; };
+		52E506CC26A6C681000E5116 /* PurchaseSuggestionInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A442A167266F599A00AAB1ED /* PurchaseSuggestionInfo.swift */; };
+		52E506CD26A6C681000E5116 /* PurchaseListLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97547CB7268039C6001859A8 /* PurchaseListLoader.swift */; };
+		52E506CF26A6C681000E5116 /* Pods_MyMind.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F231C5BAACFDBA2A1B0E19E /* Pods_MyMind.framework */; };
+		52E506D126A6C681000E5116 /* PurchaseLogInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97547CC12681D8FF001859A8 /* PurchaseLogInfoViewController.xib */; };
+		52E506D226A6C681000E5116 /* PurchaseOrderInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4BCA0CD267C98B500E3B274 /* PurchaseOrderInfoViewController.xib */; };
+		52E506D326A6C681000E5116 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A44A5A7825F9B0D300995823 /* LaunchScreen.storyboard */; };
+		52E506D426A6C681000E5116 /* PickPurchaseReviewerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A40EBFDD2671F7A100A4863D /* PickPurchaseReviewerViewController.xib */; };
+		52E506D526A6C681000E5116 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A44A5A7625F9B0D300995823 /* Assets.xcassets */; };
+		52E506D626A6C681000E5116 /* PurchaseProductSuggestionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97AFE36F2667246B002CBE01 /* PurchaseProductSuggestionViewController.xib */; };
+		52E506D726A6C681000E5116 /* PurchaseBriefCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A489A1B0263FAA7D00832679 /* PurchaseBriefCollectionViewCell.xib */; };
+		52E506D826A6C681000E5116 /* TOTP.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A43E850D268C0889008C8369 /* TOTP.storyboard */; };
+		52E506D926A6C681000E5116 /* PurchaseBriefReviewingCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52282371268EB41400A66340 /* PurchaseBriefReviewingCollectionViewCell.xib */; };
+		52E506DA26A6C681000E5116 /* PurchaseReviewingApplyInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 527E11BF2692C38D00FB8B01 /* PurchaseReviewingApplyInfoViewController.xib */; };
+		52E506DB26A6C681000E5116 /* PurchaseApplyInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A40EBFD82671AD4900A4863D /* PurchaseApplyInfoViewController.xib */; };
+		52E506DC26A6C681000E5116 /* ProductMaterialSuggestionInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4CBD8B5266A2CF200B19119 /* ProductMaterialSuggestionInfoTableViewCell.xib */; };
+		52E506DD26A6C681000E5116 /* SecretTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A43E8508268C081B008C8369 /* SecretTableViewCell.xib */; };
+		52E506DE26A6C681000E5116 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A44A5A7325F9B0D200995823 /* Main.storyboard */; };
+		52E506DF26A6C681000E5116 /* PurchasedProductInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A456700826830BAB009598AE /* PurchasedProductInfoTableViewCell.xib */; };
+		52E506E026A6C681000E5116 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 52D724A3268DBD6400B00585 /* GoogleService-Info.plist */; };
 		52F564272693F14200171032 /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F564262693F14100171032 /* ErrorHandler.swift */; };
 		52F5642A269408A300171032 /* StaticView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F56429269408A300171032 /* StaticView.swift */; };
 		97547CB8268039C6001859A8 /* PurchaseListLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97547CB7268039C6001859A8 /* PurchaseListLoader.swift */; };
@@ -304,11 +518,14 @@
 		52C2CBEC26A04243002A2BA9 /* MainPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageViewController.swift; sourceTree = "<group>"; };
 		52D7249E268D62BC00B00585 /* MyMindPurchaseReviewAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMindPurchaseReviewAPIService.swift; sourceTree = "<group>"; };
 		52D724A3268DBD6400B00585 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		52E1EDF626A6D29900506010 /* ServerTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerTime.swift; sourceTree = "<group>"; };
 		52E505FD26A531B4000E5116 /* ResendOTPViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResendOTPViewController.swift; sourceTree = "<group>"; };
 		52E505FF26A532D7000E5116 /* ResendOTPViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResendOTPViewModel.swift; sourceTree = "<group>"; };
 		52E5060126A5337A000E5116 /* ResendOTPInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResendOTPInfo.swift; sourceTree = "<group>"; };
 		52E5060326A53572000E5116 /* ResendOTPRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResendOTPRootView.swift; sourceTree = "<group>"; };
 		52E5060526A6BF4C000E5116 /* MyMindInstructionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMindInstructionView.swift; sourceTree = "<group>"; };
+		52E506E626A6C681000E5116 /* MyMindDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyMindDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		52E506E726A6C682000E5116 /* MyMindDemo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "MyMindDemo-Info.plist"; path = "/Users/nelson/Program/BitBucket/mymind/MyMindDemo-Info.plist"; sourceTree = "<absolute>"; };
 		52F564262693F14100171032 /* ErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandler.swift; sourceTree = "<group>"; };
 		52F56429269408A300171032 /* StaticView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticView.swift; sourceTree = "<group>"; };
 		613512D2AB702F9C1AA2BCC5 /* Pods-MyMindTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMindTests.debug.xcconfig"; path = "Target Support Files/Pods-MyMindTests/Pods-MyMindTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -510,6 +727,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		52E506CE26A6C681000E5116 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				52E506CF26A6C681000E5116 /* Pods_MyMind.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A44A5A6725F9B0D200995823 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -761,6 +986,7 @@
 				A44A5A6A25F9B0D200995823 /* MyMind.app */,
 				A44A5A8025F9B0D300995823 /* MyMindTests.xctest */,
 				A44A5A8B25F9B0D300995823 /* MyMindUITests.xctest */,
+				52E506E626A6C681000E5116 /* MyMindDemo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -787,6 +1013,7 @@
 				A456701126845D14009598AE /* RootTabBarController.swift */,
 				52D724A3268DBD6400B00585 /* GoogleService-Info.plist */,
 				52C2CBEC26A04243002A2BA9 /* MainPageViewController.swift */,
+				52E506E726A6C682000E5116 /* MyMindDemo-Info.plist */,
 			);
 			path = MyMind;
 			sourceTree = "<group>";
@@ -879,6 +1106,7 @@
 				5293EE9D269A8F5B001A9754 /* Report.swift */,
 				5293EE9F269A9DBC001A9754 /* HomeModel.swift */,
 				52E5060126A5337A000E5116 /* ResendOTPInfo.swift */,
+				52E1EDF626A6D29900506010 /* ServerTime.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1106,6 +1334,25 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		52E5060726A6C681000E5116 /* MyMindDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 52E506E226A6C681000E5116 /* Build configuration list for PBXNativeTarget "MyMindDemo" */;
+			buildPhases = (
+				52E5060826A6C681000E5116 /* [CP] Check Pods Manifest.lock */,
+				52E5060926A6C681000E5116 /* Sources */,
+				52E506CE26A6C681000E5116 /* Frameworks */,
+				52E506D026A6C681000E5116 /* Resources */,
+				52E506E126A6C681000E5116 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MyMindDemo;
+			productName = MyMind;
+			productReference = 52E506E626A6C681000E5116 /* MyMindDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
 		A44A5A6925F9B0D200995823 /* MyMind */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A44A5A9425F9B0D300995823 /* Build configuration list for PBXNativeTarget "MyMind" */;
@@ -1204,11 +1451,35 @@
 				A44A5A6925F9B0D200995823 /* MyMind */,
 				A44A5A7F25F9B0D300995823 /* MyMindTests */,
 				A44A5A8A25F9B0D300995823 /* MyMindUITests */,
+				52E5060726A6C681000E5116 /* MyMindDemo */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		52E506D026A6C681000E5116 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				52E506D126A6C681000E5116 /* PurchaseLogInfoViewController.xib in Resources */,
+				52E506D226A6C681000E5116 /* PurchaseOrderInfoViewController.xib in Resources */,
+				52E506D326A6C681000E5116 /* LaunchScreen.storyboard in Resources */,
+				52E506D426A6C681000E5116 /* PickPurchaseReviewerViewController.xib in Resources */,
+				52E506D526A6C681000E5116 /* Assets.xcassets in Resources */,
+				52E506D626A6C681000E5116 /* PurchaseProductSuggestionViewController.xib in Resources */,
+				52E506D726A6C681000E5116 /* PurchaseBriefCollectionViewCell.xib in Resources */,
+				52E506D826A6C681000E5116 /* TOTP.storyboard in Resources */,
+				52E506D926A6C681000E5116 /* PurchaseBriefReviewingCollectionViewCell.xib in Resources */,
+				52E506DA26A6C681000E5116 /* PurchaseReviewingApplyInfoViewController.xib in Resources */,
+				52E506DB26A6C681000E5116 /* PurchaseApplyInfoViewController.xib in Resources */,
+				52E506DC26A6C681000E5116 /* ProductMaterialSuggestionInfoTableViewCell.xib in Resources */,
+				52E506DD26A6C681000E5116 /* SecretTableViewCell.xib in Resources */,
+				52E506DE26A6C681000E5116 /* Main.storyboard in Resources */,
+				52E506DF26A6C681000E5116 /* PurchasedProductInfoTableViewCell.xib in Resources */,
+				52E506E026A6C681000E5116 /* GoogleService-Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A44A5A6825F9B0D200995823 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1294,6 +1565,45 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		52E5060826A6C681000E5116 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MyMind-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		52E506E126A6C681000E5116 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MyMind/Pods-MyMind-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MyMind/Pods-MyMind-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MyMind/Pods-MyMind-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		7193E3825CC6FAD2274E5955 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1375,6 +1685,209 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		52E5060926A6C681000E5116 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				52E5060A26A6C681000E5116 /* ProductSuggestionInfoViewModel.swift in Sources */,
+				52E5060B26A6C681000E5116 /* Secret.swift in Sources */,
+				52E5060C26A6C681000E5116 /* SideMenuTopBarView.swift in Sources */,
+				52E5060D26A6C681000E5116 /* DispatchQueue+.swift in Sources */,
+				52E5060E26A6C681000E5116 /* PurchaseOrderInfoViewController.swift in Sources */,
+				52E5060F26A6C681000E5116 /* UICollectionViewLeftAlignedLayout.swift in Sources */,
+				52E5061026A6C681000E5116 /* GradientView.swift in Sources */,
+				52E5061126A6C681000E5116 /* ContainerCollectionViewCell.swift in Sources */,
+				52E5061226A6C681000E5116 /* EditingPurchaseOrderInfo.swift in Sources */,
+				52E5061326A6C681000E5116 /* InformationTableViewController.swift in Sources */,
+				52E5061426A6C681000E5116 /* PurchasedProductsInfoViewController.swift in Sources */,
+				52E5061526A6C681000E5116 /* MyMindAuthService.swift in Sources */,
+				52E5061626A6C681000E5116 /* ProductMaterialsFilterViewModel.swift in Sources */,
+				52E5061726A6C681000E5116 /* ToDoInfoHeaderView.swift in Sources */,
+				52E5061826A6C681000E5116 /* PickPurchaseStatusViewModel.swift in Sources */,
+				52E5061926A6C681000E5116 /* IndicatorSwitchContentHeaderView.swift in Sources */,
+				52E5061A26A6C681000E5116 /* ProductMaterialsFilterViewController.swift in Sources */,
+				52E5061B26A6C681000E5116 /* ToDoListCollectionViewCell.swift in Sources */,
+				52E5061C26A6C681000E5116 /* UITableView+.swift in Sources */,
+				52E5061D26A6C681000E5116 /* Date+.swift in Sources */,
+				52E5061E26A6C681000E5116 /* PurchaseOrderLoader.swift in Sources */,
+				52E5061F26A6C681000E5116 /* OptionSet+.swift in Sources */,
+				52E5062026A6C681000E5116 /* MyMindEmployeeAPIService.swift in Sources */,
+				52E5062126A6C681000E5116 /* ProductMaterialSuggestionInfoTableViewCell.swift in Sources */,
+				52E5062226A6C681000E5116 /* ProductMaterialQueryInfo.swift in Sources */,
+				52E5062326A6C681000E5116 /* PurchaseAutoCompleteAdapters.swift in Sources */,
+				52E5062426A6C681000E5116 /* SideMenuPresentable.swift in Sources */,
+				52E5062526A6C681000E5116 /* ForgotPasswordViewController.swift in Sources */,
+				52E5062626A6C681000E5116 /* SuggestionProductMaterialViewModelLoader.swift in Sources */,
+				52E5062726A6C681000E5116 /* PurchaseListRootView.swift in Sources */,
+				52E5062826A6C681000E5116 /* PickProductMaterialsRootView.swift in Sources */,
+				52E5062926A6C681000E5116 /* PickProductMaterialTableViewCell.swift in Sources */,
+				52E5062A26A6C681000E5116 /* NibOwnerLoadable.swift in Sources */,
+				52E5062B26A6C681000E5116 /* PurchaseCompletedApplyViewController.swift in Sources */,
+				52E5062C26A6C681000E5116 /* MyMindAutoCompleteAPIService.swift in Sources */,
+				52E5062D26A6C681000E5116 /* MyMindPurchaseReviewAPIService.swift in Sources */,
+				52E5062E26A6C681000E5116 /* DropDownView.swift in Sources */,
+				52E5062F26A6C681000E5116 /* SignInInfo.swift in Sources */,
+				52E5063026A6C681000E5116 /* Response.swift in Sources */,
+				52E5063126A6C681000E5116 /* MyMindSaleReportRatioNumberFormatter.swift in Sources */,
+				52E5063226A6C681000E5116 /* AutoCompleteInfo.swift in Sources */,
+				52E5063326A6C681000E5116 /* Purchase.swift in Sources */,
+				52E5063426A6C681000E5116 /* UIStoryboard+.swift in Sources */,
+				52E5063526A6C681000E5116 /* ToDoItemView.swift in Sources */,
+				52E5063626A6C681000E5116 /* UIViewController+Rx.swift in Sources */,
+				52E5063726A6C681000E5116 /* ToDo.swift in Sources */,
+				52E5063826A6C681000E5116 /* UIView+shadow.swift in Sources */,
+				52E5063926A6C681000E5116 /* Declarative.swift in Sources */,
+				52E5063A26A6C681000E5116 /* PurchaseStatusSelectionViewController.swift in Sources */,
+				52E5063B26A6C681000E5116 /* CaptchaSession.swift in Sources */,
+				52E5063C26A6C681000E5116 /* SignInValidationService.swift in Sources */,
+				52E5063D26A6C681000E5116 /* FilterSideMenuBottomView.swift in Sources */,
+				52E5063E26A6C681000E5116 /* Reviewer.swift in Sources */,
+				52E5063F26A6C681000E5116 /* SKURankingInfoView.swift in Sources */,
+				52E5064026A6C681000E5116 /* SignInViewModel.swift in Sources */,
+				52E5064126A6C681000E5116 /* Account.swift in Sources */,
+				52E5064226A6C681000E5116 /* NVActivityIndicatorView+Rx.swift in Sources */,
+				52E5064326A6C681000E5116 /* PurchaseApplyViewModel.swift in Sources */,
+				52E5064426A6C681000E5116 /* ScannerOverlayPreviewLayer.swift in Sources */,
+				52E5064526A6C681000E5116 /* VendorInfo.swift in Sources */,
+				52E5064626A6C681000E5116 /* AutoCompleteSearchViewController.swift in Sources */,
+				52E5064726A6C681000E5116 /* UIWindow+.swift in Sources */,
+				52E5064826A6C681000E5116 /* NiblessNavigationController.swift in Sources */,
+				52E5064926A6C681000E5116 /* ApplyPuchaseService.swift in Sources */,
+				52E5064A26A6C681000E5116 /* SaleRankingCollectionViewCell.swift in Sources */,
+				52E5064B26A6C681000E5116 /* ForgotPasswordViewModel.swift in Sources */,
+				52E5064C26A6C681000E5116 /* UserDefaultSecretDataStore.swift in Sources */,
+				52E5064D26A6C681000E5116 /* SuggestionProductMaterialViewModel.swift in Sources */,
+				52E5064E26A6C681000E5116 /* KeychainHelper.swift in Sources */,
+				52E5064F26A6C681000E5116 /* MultiSelectableDropDownTableViewCell.swift in Sources */,
+				52E5065026A6C681000E5116 /* PurchaseSuggestionViewController.swift in Sources */,
+				52E5065126A6C681000E5116 /* StageProgressView.swift in Sources */,
+				52E5065226A6C681000E5116 /* SignInViewController.swift in Sources */,
+				52E5065326A6C681000E5116 /* HomeModel.swift in Sources */,
+				52E5065426A6C681000E5116 /* AutoCompleteSearchRootView.swift in Sources */,
+				52E5065526A6C681000E5116 /* HomeCollectionViewHeaderView.swift in Sources */,
+				52E5065626A6C681000E5116 /* SecretTableViewCell.swift in Sources */,
+				52E5065726A6C681000E5116 /* APIService.swift in Sources */,
+				52E5065826A6C681000E5116 /* StageProgressCollectionReusableView.swift in Sources */,
+				52E5065926A6C681000E5116 /* CustomAlertView.swift in Sources */,
+				52E5065A26A6C681000E5116 /* PurchaseReviewingApplyInfoViewController.swift in Sources */,
+				52E5065B26A6C681000E5116 /* AuthService.swift in Sources */,
+				52E5065C26A6C681000E5116 /* ScanViewController.swift in Sources */,
+				52E5065D26A6C681000E5116 /* VendorSelectionTableViewCell.swift in Sources */,
+				52E5065E26A6C681000E5116 /* Warehouse.swift in Sources */,
+				52E5065F26A6C681000E5116 /* PickDatesViewModel.swift in Sources */,
+				52E5066026A6C681000E5116 /* SignInAccountInfo.swift in Sources */,
+				52E5066126A6C681000E5116 /* MyMindPurchaseAPIService.swift in Sources */,
+				52E5066226A6C681000E5116 /* UITextField+.swift in Sources */,
+				52E5066326A6C681000E5116 /* IndicatorHeaderView.swift in Sources */,
+				52E5066426A6C681000E5116 /* String+.swift in Sources */,
+				52E5066526A6C681000E5116 /* RecipientInfo.swift in Sources */,
+				52E5066626A6C681000E5116 /* PurchaseSuggestionViewModel.swift in Sources */,
+				52E5066726A6C681000E5116 /* NiblessView.swift in Sources */,
+				52E5066826A6C681000E5116 /* PurchaseSuggestionInfosLoader.swift in Sources */,
+				52E5066926A6C681000E5116 /* ProductMaterialAutoCompleteAdapters.swift in Sources */,
+				52E5066A26A6C681000E5116 /* PromiseKitAPIService.swift in Sources */,
+				52E5066B26A6C681000E5116 /* StaticView.swift in Sources */,
+				52E5066C26A6C681000E5116 /* InstructionView.swift in Sources */,
+				52E5066D26A6C681000E5116 /* UIViewController+loadNib.swift in Sources */,
+				52E5066E26A6C681000E5116 /* ErrorHandler.swift in Sources */,
+				52E5066F26A6C681000E5116 /* SaleReportInfoItemView.swift in Sources */,
+				52E5067026A6C681000E5116 /* RootTabBarController.swift in Sources */,
+				52E5067126A6C681000E5116 /* PurchaseBriefReviewingCollectionViewCell.swift in Sources */,
+				52E5067226A6C681000E5116 /* ResendOTPViewModel.swift in Sources */,
+				52E5067326A6C681000E5116 /* EditingPurchaseOrderViewController.swift in Sources */,
+				52E5067426A6C681000E5116 /* EditingPurchaseOrderViewModel.swift in Sources */,
+				52E5067526A6C681000E5116 /* PickProductMaterialsViewModel.swift in Sources */,
+				52E5067626A6C681000E5116 /* UIFont+.swift in Sources */,
+				52E5067726A6C681000E5116 /* UDI3DESCryptor.swift in Sources */,
+				52E5067826A6C681000E5116 /* SettingViewController.swift in Sources */,
+				52E5067926A6C681000E5116 /* PurchaseApplyViewController.swift in Sources */,
+				52E5067A26A6C681000E5116 /* ProductMaterial.swift in Sources */,
+				52E5067B26A6C681000E5116 /* MainFunctionEntryViewController.swift in Sources */,
+				52E5067C26A6C681000E5116 /* ResendOTPInfo.swift in Sources */,
+				52E5067D26A6C681000E5116 /* DashedLineView.swift in Sources */,
+				52E5067E26A6C681000E5116 /* ToDoInfoCollectionViewCell.swift in Sources */,
+				52E5067F26A6C681000E5116 /* MainPageViewController.swift in Sources */,
+				52E5068026A6C681000E5116 /* SearchMaterialNamesViewController.swift in Sources */,
+				52E5068126A6C681000E5116 /* ToDoInfoView.swift in Sources */,
+				52E5068226A6C681000E5116 /* SingleLabelTableViewCell.swift in Sources */,
+				52E5068326A6C681000E5116 /* SelectedQueryCollectionViewCell.swift in Sources */,
+				52E5068426A6C681000E5116 /* KeychainUserSessionDataStore.swift in Sources */,
+				52E5068526A6C681000E5116 /* VendorInfoLoader.swift in Sources */,
+				52E5068626A6C681000E5116 /* PurchaseReviewerListLoader.swift in Sources */,
+				52E5068726A6C681000E5116 /* ApplyPurchaseParameterInfo.swift in Sources */,
+				52E5068826A6C681000E5116 /* HomeViewController.swift in Sources */,
+				52E5068926A6C681000E5116 /* ProductMaterialDetail.swift in Sources */,
+				52E5068A26A6C681000E5116 /* ReturnPurchaseOrderInfo.swift in Sources */,
+				52E5068B26A6C681000E5116 /* UIButton+.swift in Sources */,
+				52E5068C26A6C681000E5116 /* PickVendorViewController.swift in Sources */,
+				52E5068D26A6C681000E5116 /* UIViewController+.swift in Sources */,
+				52E5068E26A6C681000E5116 /* SaleReportInfoView.swift in Sources */,
+				52E5068F26A6C681000E5116 /* Report.swift in Sources */,
+				52E5069026A6C681000E5116 /* UserSession.swift in Sources */,
+				52E5069126A6C681000E5116 /* PurchaseListViewController.swift in Sources */,
+				52E5069226A6C681000E5116 /* MyMindUserSessionRepository.swift in Sources */,
+				52E5069326A6C681000E5116 /* PurchaseProductSuggestionViewController.swift in Sources */,
+				52E5069426A6C681000E5116 /* AutoCompleteSearchViewModel.swift in Sources */,
+				52E5069526A6C681000E5116 /* ToastView.swift in Sources */,
+				52E5069626A6C681000E5116 /* UDISecretRepository.swift in Sources */,
+				52E5069726A6C681000E5116 /* ResendOTPViewController.swift in Sources */,
+				52E5069826A6C681000E5116 /* AppDelegate.swift in Sources */,
+				52E5069926A6C681000E5116 /* SKURankingInfoItemView.swift in Sources */,
+				52E5069A26A6C681000E5116 /* GridentCircleView.swift in Sources */,
+				52E5069B26A6C681000E5116 /* MainFunctionControl.swift in Sources */,
+				52E5069C26A6C681000E5116 /* PurchaseListFilterViewController.swift in Sources */,
+				52E5069D26A6C681000E5116 /* SignInRootView.swift in Sources */,
+				52E5069E26A6C681000E5116 /* UIControl+.swift in Sources */,
+				52E5069F26A6C681000E5116 /* OrganizeOptionView.swift in Sources */,
+				52E506A026A6C681000E5116 /* NiblessViewController.swift in Sources */,
+				52E506A126A6C681000E5116 /* TodaySaleInfoCollectionViewCell.swift in Sources */,
+				52E506A226A6C681000E5116 /* PurchaseListFilterViewModel.swift in Sources */,
+				52E506A326A6C681000E5116 /* SearchMaterialNamesViewModel.swift in Sources */,
+				52E506A426A6C681000E5116 /* SaleReportCollectionViewCell.swift in Sources */,
+				52E506A526A6C681000E5116 /* APIError.swift in Sources */,
+				52E506A626A6C681000E5116 /* PurchaseApplyInfoViewModel.swift in Sources */,
+				52E506A726A6C681000E5116 /* ForgotPasswordRootView.swift in Sources */,
+				52E506A826A6C681000E5116 /* TriangleView.swift in Sources */,
+				52E506A926A6C681000E5116 /* UICollectionView+.swift in Sources */,
+				52E506AA26A6C681000E5116 /* EditablePickedProductsInfoViewModel.swift in Sources */,
+				52E506AB26A6C681000E5116 /* PickPurchaseReviewerViewController.swift in Sources */,
+				52E506AC26A6C681000E5116 /* ProductMaterialSuggestionInfoTableViewController.swift in Sources */,
+				52E506AD26A6C681000E5116 /* HorizontalCellSizePagingFlowLayout.swift in Sources */,
+				52E506AE26A6C681000E5116 /* LogInfoView.swift in Sources */,
+				52E506AF26A6C681000E5116 /* TodaySaleReportCollectionViewCell.swift in Sources */,
+				52E506B026A6C681000E5116 /* SecretListViewController.swift in Sources */,
+				52E506B126A6C681000E5116 /* PurchaseApplyInfoViewController.swift in Sources */,
+				52E506B226A6C681000E5116 /* PurchaseBriefTableViewCell.swift in Sources */,
+				52E506B326A6C681000E5116 /* PurchaseBriefCollectionViewCell.swift in Sources */,
+				52E506B426A6C681000E5116 /* PickProductMaterialsViewController.swift in Sources */,
+				52E506B526A6C681000E5116 /* NoDataView.swift in Sources */,
+				52E506B626A6C681000E5116 /* ContainerTableViewCell.swift in Sources */,
+				52E506B726A6C681000E5116 /* ResendOTPRootView.swift in Sources */,
+				52E506B826A6C681000E5116 /* CustomClearButtonPositionTextField.swift in Sources */,
+				52E506B926A6C681000E5116 /* Endpoint.swift in Sources */,
+				52E506BA26A6C681000E5116 /* EditablePickedProductsInfoViewController.swift in Sources */,
+				52E506BB26A6C681000E5116 /* ValidatableInputView.swift in Sources */,
+				52E506BC26A6C681000E5116 /* DateFormatter+Secret.swift in Sources */,
+				52E506BD26A6C681000E5116 /* ForgotPasswordInfo.swift in Sources */,
+				52E506BE26A6C681000E5116 /* PurchaseQueryDateSelectionViewController.swift in Sources */,
+				52E506BF26A6C681000E5116 /* PurchasedProductInfoTableViewCell.swift in Sources */,
+				52E506C026A6C681000E5116 /* PickSortTypeView.swift in Sources */,
+				52E506C126A6C681000E5116 /* MyMindDashboardAPIService.swift in Sources */,
+				52E506C226A6C681000E5116 /* SKURankingCollectionViewCell.swift in Sources */,
+				52E506C326A6C681000E5116 /* LastSignInInfoDataStore.swift in Sources */,
+				52E506C426A6C681000E5116 /* PurchaseLogInfoViewController.swift in Sources */,
+				52E506C526A6C681000E5116 /* PurchaseOrder.swift in Sources */,
+				52E506C626A6C681000E5116 /* SceneDelegate.swift in Sources */,
+				52E506C726A6C681000E5116 /* UIColor+.swift in Sources */,
+				52E506C826A6C681000E5116 /* Authorization.swift in Sources */,
+				52E506C926A6C681000E5116 /* PickPurchaseReviewerViewModel.swift in Sources */,
+				52E506CA26A6C681000E5116 /* ProductMaterialListLoader.swift in Sources */,
+				52E506CB26A6C681000E5116 /* MyMindInstructionView.swift in Sources */,
+				52E506CC26A6C681000E5116 /* PurchaseSuggestionInfo.swift in Sources */,
+				52E506CD26A6C681000E5116 /* PurchaseListLoader.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A44A5A6625F9B0D200995823 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1556,6 +2069,7 @@
 				A45E69C5264B89A300AADB44 /* CustomClearButtonPositionTextField.swift in Sources */,
 				A49CF8B6260301DE00AFC170 /* Endpoint.swift in Sources */,
 				A4BC88C72679DDC700956B95 /* EditablePickedProductsInfoViewController.swift in Sources */,
+				52E1EDF726A6D29900506010 /* ServerTime.swift in Sources */,
 				A4793CB626048EBA00AD280C /* ValidatableInputView.swift in Sources */,
 				A46487722689702B0053E6F5 /* DateFormatter+Secret.swift in Sources */,
 				A4159209260C603B00FD3989 /* ForgotPasswordInfo.swift in Sources */,
@@ -1638,6 +2152,90 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		52E506E326A6C681000E5116 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8C4BA9CA7A7E7BD1C9712E01 /* Pods-MyMind.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
+				APP_DISPLAY_NAME = "MyMind Debug";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				AUTH_SERVER_URL = "https://api-demo-auth.udicommerce.com";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = NCP4JUG36Z;
+				INFOPLIST_FILE = "MyMindDemo-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.shopping.udi.MyMind.debug;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SERVER_URL = "https://demo-mymind.udicommerce.com";
+				SWIFT_OBJC_BRIDGING_HEADER = "MyMind/TOTP/MyMind-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = Debug;
+		};
+		52E506E426A6C681000E5116 /* Alpha */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E8BDB686048E1E4C810DE722 /* Pods-MyMind.alpha.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
+				APP_DISPLAY_NAME = "MyMind Alpha";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				AUTH_SERVER_URL = "https://api-demo-auth.udicommerce.com";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = NCP4JUG36Z;
+				INFOPLIST_FILE = "MyMindDemo-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.shopping.udi.MyMind.alpha;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SERVER_URL = "https://demo-mymind.udicommerce.com";
+				SWIFT_OBJC_BRIDGING_HEADER = "MyMind/TOTP/MyMind-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = Alpha;
+		};
+		52E506E526A6C681000E5116 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0234BB16C580C46052C9A518 /* Pods-MyMind.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
+				APP_DISPLAY_NAME = MyMind;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				AUTH_SERVER_URL = "https://api-demo-auth.udicommerce.com";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = NCP4JUG36Z;
+				INFOPLIST_FILE = "MyMindDemo-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.shopping.udi.MyMind;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SERVER_URL = "https://demo-mymind.udicommerce.com";
+				SWIFT_OBJC_BRIDGING_HEADER = "MyMind/TOTP/MyMind-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = Release;
+		};
 		A44A5A9225F9B0D300995823 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2034,6 +2632,16 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		52E506E226A6C681000E5116 /* Build configuration list for PBXNativeTarget "MyMindDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				52E506E326A6C681000E5116 /* Debug */,
+				52E506E426A6C681000E5116 /* Alpha */,
+				52E506E526A6C681000E5116 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		A44A5A6525F9B0D200995823 /* Build configuration list for PBXProject "MyMind" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
