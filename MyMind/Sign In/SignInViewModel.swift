@@ -39,7 +39,7 @@ class SignInViewModel {
     let totp: PublishRelay<(String, String)> = PublishRelay.init()
     let userSession: PublishRelay<UserSession> = PublishRelay.init()
 //    let captchaSession: PublishRelay<CaptchaSession> = PublishRelay.init()
-    let date: PublishRelay<Date> = PublishRelay.init()
+    let date: PublishRelay<ServerTime> = PublishRelay.init()
     
     let errorMessage: PublishRelay<String> = PublishRelay.init()
 

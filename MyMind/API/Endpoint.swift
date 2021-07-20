@@ -69,7 +69,7 @@ extension Endpoint {
 // MARK: - Endpoint list
 extension Endpoint {
     static var time: Self {
-        Endpoint(path: "", queryItems: [], serviceType: .time)
+        Endpoint(path: "/time", queryItems: [], serviceType: .auth)
     }
     static var captcha: Self {
         Endpoint(path: "/captcha", serviceType: .auth)

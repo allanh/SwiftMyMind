@@ -14,4 +14,5 @@ protocol AuthService {
     func signIn(info: SignInInfo) -> Promise<UserSession>
     func forgotPasswordMail(info: ForgotPasswordInfo) -> Promise<Void>
     func resendOTPMail(info: ResendOTPInfo) -> Promise<Void>
+    func time() -> Promise<ServerTime>
 }

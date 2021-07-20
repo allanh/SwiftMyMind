@@ -20,16 +20,16 @@ protocol UserSessionRepository {
     func signIn(info: SignInInfo) -> Promise<UserSession>
     func signOut() -> Promise<Void>
     func captcha() -> Promise<CaptchaSession>
-    func time() -> Promise<Date>
+    func time() -> Promise<ServerTime>
 }
 
 class MyMindUserSessionRepository: UserSessionRepository {
 
     let dataStore: UserSessionDataStore
-    let authService: AuthService & TimeService
+    let authService: AuthService
     static let shared: MyMindUserSessionRepository = .init(dataStore: KeychainUserSessionDataStore(), authService: MyMindAuthService())
 
-    init(dataStore: UserSessionDataStore, authService: AuthService & TimeService) {
+    init(dataStore: UserSessionDataStore, authService: AuthService) {
         self.dataStore = dataStore
         self.authService = authService
     }
@@ -51,7 +51,7 @@ class MyMindUserSessionRepository: UserSessionRepository {
         authService.captcha()
     }
     
-    func time() -> Promise<Date> {
+    func time() -> Promise<ServerTime> {
         authService.time()
     }
 }

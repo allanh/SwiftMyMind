@@ -713,10 +713,8 @@ extension SignInRootView {
         viewModel.date
             .subscribe(on: MainScheduler.instance)
             .do(onNext: { print($0) })
-            .map { date -> String? in
-                let formatter = DateFormatter()
-                formatter.dateFormat = "yyyy/MM/dd HH:mm"
-                return formatter.string(from: date)
+            .map { serverTime -> String in
+                return serverTime.time
             }
             .bind(to: timeLabel.rx.text)
             .disposed(by: bag)

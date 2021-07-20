@@ -9,10 +9,7 @@ import Foundation
 import RxSwift
 import PromiseKit
 
-protocol TimeService {
-    func time() -> Promise<Date>
-}
-class MyMindAuthService: PromiseKitAPIService, AuthService, TimeService {
+class MyMindAuthService: PromiseKitAPIService, AuthService {
     func captcha() -> Promise<CaptchaSession> {
         let request = request(endPoint: Endpoint.captcha)
         return sendRequest(request: request)
@@ -40,7 +37,7 @@ class MyMindAuthService: PromiseKitAPIService, AuthService, TimeService {
         let request = request(endPoint: Endpoint.otpSecret, httpMethod: "PUT", httpBody: body)
         return sendRequest(request: request)
     }
-    func time() -> Promise<Date> {
+    func time() -> Promise<ServerTime> {
         let request = request(endPoint: Endpoint.time)
         return sendRequest(request: request)
     }

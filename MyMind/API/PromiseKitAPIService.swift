@@ -97,38 +97,38 @@ extension PromiseKitAPIService {
         }
     }
     
-    func sendRequest(request: URLRequest) -> Promise<Date> {
-        return Promise<Date> { seal in
-            URLSession.shared.dataTask(with: request) { data, urlResponse, error in
-                if let httpResponse = urlResponse as? HTTPURLResponse {
-                    switch httpResponse.statusCode {
-                    case 401:
-                        seal.reject(APIError.invalidAccessToken)
-                        return
-                    case 503:
-                        seal.reject(APIError.maintenanceError)
-                        return
-                    case 403:
-                        seal.reject(APIError.insufficientPrivilegeError)
-                        return
-                    case 200:
-                        if let dateString = httpResponse.value(forHTTPHeaderField: "Date") {
-                            let formatter = DateFormatter()
-                            formatter.dateFormat = "EEE, dd MMM yyyy HH:mm:ss z"
-                            formatter.locale = Locale(identifier: "en-US")
-                            if let serverTime = formatter.date(from: dateString) {
-                                seal.fulfill(serverTime)
-                            } else {
-                                seal.reject(APIError.serviceError("unknown"))
-                            }
-                        } else {
-                            seal.reject(APIError.dataNotFoundError)
-                        }
-                    default:
-                        break
-                    }
-                }
-            }.resume()
-        }
-    }
+//    func sendRequest(request: URLRequest) -> Promise<String> {
+//        return Promise<String> { seal in
+//            URLSession.shared.dataTask(with: request) { data, urlResponse, error in
+//                if let httpResponse = urlResponse as? HTTPURLResponse {
+//                    switch httpResponse.statusCode {
+//                    case 401:
+//                        seal.reject(APIError.invalidAccessToken)
+//                        return
+//                    case 503:
+//                        seal.reject(APIError.maintenanceError)
+//                        return
+//                    case 403:
+//                        seal.reject(APIError.insufficientPrivilegeError)
+//                        return
+//                    case 200:
+//                        if let dateString = httpResponse.value(forHTTPHeaderField: "Date") {
+//                            let formatter = DateFormatter()
+//                            formatter.dateFormat = "EEE, dd MMM yyyy HH:mm:ss z"
+//                            formatter.locale = Locale(identifier: "en-US")
+//                            if let serverTime = formatter.date(from: dateString) {
+//                                seal.fulfill(serverTime)
+//                            } else {
+//                                seal.reject(APIError.serviceError("unknown"))
+//                            }
+//                        } else {
+//                            seal.reject(APIError.dataNotFoundError)
+//                        }
+//                    default:
+//                        break
+//                    }
+//                }
+//            }.resume()
+//        }
+//    }
 }
