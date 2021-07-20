@@ -15,8 +15,8 @@ public class ScannerOverlayPreviewLayer: AVCaptureVideoPreviewLayer {
     public var cornerLength: CGFloat = 30
     public var maskContainerCornerRadius: CGFloat = 10
 
-    public var lineWidth: CGFloat = 6
-    public var lineColor: UIColor = .white
+    public var lineWidth: CGFloat = 1
+    public var lineColor: UIColor = UIColor(hex: "365daf")
     public var lineCap: CAShapeLayerLineCap = .round
 
     public var maskSize: CGSize = CGSize(width: 200, height: 200)
