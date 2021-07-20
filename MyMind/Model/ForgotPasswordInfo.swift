@@ -10,7 +10,7 @@ import Foundation
 
 struct ForgotPasswordInfo {
     private enum CodingKeys: String, CodingKey {
-        case id, account, email, captcha
+        case id, account, email, otp, captcha
     }
     private enum CaptchaCodingKeys: String, CodingKey {
         case key, value
@@ -19,11 +19,17 @@ struct ForgotPasswordInfo {
     var storeID: String
     var account: String
     var email: String
-    var captchaKey: String
-    var captchaValue: String
+    var otp: String?
+    var captchaKey: String?
+    var captchaValue: String?
 
+    var userNameForSecret: String {
+        get {
+            return account+"@"+storeID
+        }
+    }
     static func empty() -> ForgotPasswordInfo {
-        let info = ForgotPasswordInfo(storeID: "", account: "", email: "", captchaKey: "", captchaValue: "")
+        let info = ForgotPasswordInfo(storeID: "", account: "", email: "", otp: nil, captchaKey: nil, captchaValue: nil)
         return info
     }
 }
@@ -34,9 +40,10 @@ extension ForgotPasswordInfo: Encodable {
         try container.encode(storeID, forKey: .id)
         try container.encode(account, forKey: .account)
         try container.encode(email, forKey: .email)
+        try? container.encode(otp, forKey: .otp)
 
         var captchaContainer = container.nestedContainer(keyedBy: CaptchaCodingKeys.self, forKey: .captcha)
-        try captchaContainer.encode(captchaKey, forKey: .key)
-        try captchaContainer.encode(captchaValue, forKey: .value)
+        try? captchaContainer.encode(captchaKey, forKey: .key)
+        try? captchaContainer.encode(captchaValue, forKey: .value)
     }
 }

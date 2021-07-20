@@ -463,10 +463,10 @@ extension ForgotPasswordRootView {
 extension ForgotPasswordRootView {
     func bindViewModelToViews() {
         bindViewModelToInputViews()
-        bindViewModelToReloadButton()
+//        bindViewModelToReloadButton()
         bindViewModelToConfirmButton()
-        bindViewModelToCaptchaImageView()
-        bindViewModelToCaptchaActivityIndicator()
+//        bindViewModelToCaptchaImageView()
+//        bindViewModelToCaptchaActivityIndicator()
     }
 
     func bindViewModelToInputViews() {
@@ -518,17 +518,17 @@ extension ForgotPasswordRootView {
             })
             .disposed(by: bag)
 
-        viewModel.captchaValueValidationResult
-            .asDriver()
-            .drive(onNext: { [unowned self] in
-                switch $0 {
-                case .valid:
-                    self.captchaInputView.clearError()
-                case .invalid(let message):
-                    self.captchaInputView.showError(with: message)
-                }
-            })
-            .disposed(by: bag)
+//        viewModel.captchaValueValidationResult
+//            .asDriver()
+//            .drive(onNext: { [unowned self] in
+//                switch $0 {
+//                case .valid:
+//                    self.captchaInputView.clearError()
+//                case .invalid(let message):
+//                    self.captchaInputView.showError(with: message)
+//                }
+//            })
+//            .disposed(by: bag)
     }
 
     private func bindViewModelToConfirmButton() {
@@ -538,31 +538,31 @@ extension ForgotPasswordRootView {
             .disposed(by: bag)
     }
 
-    private func bindViewModelToReloadButton() {
-        viewModel.reloadButtonEnabled
-            .asDriver()
-            .drive(reloadCaptchaButton.rx.isEnabled)
-            .disposed(by: bag)
-    }
+//    private func bindViewModelToReloadButton() {
+//        viewModel.reloadButtonEnabled
+//            .asDriver()
+//            .drive(reloadCaptchaButton.rx.isEnabled)
+//            .disposed(by: bag)
+//    }
 
-    private func bindViewModelToCaptchaActivityIndicator() {
-        viewModel.captchaActivityIndicatorAnimating
-            .asDriver()
-            .drive(captchaActivityIndicatorView.rx.isAnimating)
-            .disposed(by: bag)
-    }
+//    private func bindViewModelToCaptchaActivityIndicator() {
+//        viewModel.captchaActivityIndicatorAnimating
+//            .asDriver()
+//            .drive(captchaActivityIndicatorView.rx.isAnimating)
+//            .disposed(by: bag)
+//    }
 
-    private func bindViewModelToCaptchaImageView() {
-        viewModel.captchaSession
-            .asObservable()
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [unowned self] in
-                guard let data = $0.imageData else {
-                    return
-                }
-                let image = UIImage(data: data)
-                self.captchaImageView.image = image
-            })
-            .disposed(by: bag)
-    }
+//    private func bindViewModelToCaptchaImageView() {
+//        viewModel.captchaSession
+//            .asObservable()
+//            .observe(on: MainScheduler.instance)
+//            .subscribe(onNext: { [unowned self] in
+//                guard let data = $0.imageData else {
+//                    return
+//                }
+//                let image = UIImage(data: data)
+//                self.captchaImageView.image = image
+//            })
+//            .disposed(by: bag)
+//    }
 }
