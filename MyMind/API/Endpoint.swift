@@ -10,6 +10,7 @@ import Foundation
 enum ServiceType {
     case auth
     case dos
+    case time
 }
 
 fileprivate enum Version: String {
@@ -50,6 +51,7 @@ extension Endpoint {
         switch serviceType {
         case .auth: components = URLComponents(string: Endpoint.baseAuthURL)
         case .dos: components = URLComponents(string: Endpoint.baseURL)
+        case .time: components = URLComponents(string: "https://www.google.com")
         }
 
         components?.path = path
@@ -66,6 +68,9 @@ extension Endpoint {
 }
 // MARK: - Endpoint list
 extension Endpoint {
+    static var time: Self {
+        Endpoint(path: "", queryItems: [], serviceType: .time)
+    }
     static var captcha: Self {
         Endpoint(path: "/captcha", serviceType: .auth)
     }
@@ -78,6 +83,9 @@ extension Endpoint {
         Endpoint(path: "/forgot_password", serviceType: .auth)
     }
     
+    static var otpSecret: Self {
+        Endpoint(path: "/otp_secret", serviceType: .auth)
+    }
     static var authorization: Self {
         Endpoint(path: "/api/admin/v1/authorization", serviceType: .dos)
     }
