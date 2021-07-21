@@ -28,7 +28,7 @@ extension KeychainError: LocalizedError {
 }
 
 public enum KeychainKeys: String {
-    case lastSignInAccountInfo, userSession
+    case lastSignInAccountInfo, userSession, otpStatus
 }
 // MARK: - Keychain helper
 public struct KeychainHelper {

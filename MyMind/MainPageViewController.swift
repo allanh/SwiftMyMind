@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import Firebase
 
 class MainPageViewController: UIViewController {
 
     @IBOutlet weak var otpView: UIView!
     @IBOutlet weak var myMindView: UIView!
+    var remoteConfig: RemoteConfig!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -34,7 +36,18 @@ class MainPageViewController: UIViewController {
         myMindView.layer.shadowOpacity = 0.6
         myMindView.addGestureRecognizer(myMindTapGestureRecognizer)
         navigationItem.backButtonTitle = ""
-        
+        remoteConfig = RemoteConfig.remoteConfig()
+        let settings = RemoteConfigSettings()
+        settings.minimumFetchInterval = 0
+        remoteConfig.configSettings = settings
+        remoteConfig.fetch { status, error in
+            self.remoteConfig.activate()
+            do {
+                try KeychainHelper.default.saveItem(self.remoteConfig["otp_enable"].boolValue, for: .otpStatus)
+            } catch {
+                ToastView.showIn(self, message: "save keychain failed")
+            }
+        }
     }
     
     @IBAction func otp(_ sender: Any) {

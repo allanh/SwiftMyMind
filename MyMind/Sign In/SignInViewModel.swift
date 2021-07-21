@@ -14,6 +14,7 @@ class SignInViewModel {
     let userSessionRepository: UserSessionRepository
     let signInValidationService: SignInValidatoinService
     let lastSignInInfoDataStore: LastSignInInfoDataStore
+    let otpEnabled: Bool
 
     let bag: DisposeBag = DisposeBag()
     var signInInfo: SignInInfo = SignInInfo()
@@ -25,7 +26,7 @@ class SignInViewModel {
     let storeIDValidationResult: BehaviorRelay<ValidationResult> = BehaviorRelay.init(value: .valid)
     let accountValidationResult: BehaviorRelay<ValidationResult> = BehaviorRelay.init(value: .valid)
     let passwordValidationResult: BehaviorRelay<ValidationResult> = BehaviorRelay.init(value: .valid)
-//    let captchaValueValidationResult: BehaviorRelay<ValidationResult> = BehaviorRelay.init(value: .valid)
+    let captchaValueValidationResult: BehaviorRelay<ValidationResult> = BehaviorRelay.init(value: .valid)
     let otpValueValidationResult: BehaviorRelay<ValidationResult> = BehaviorRelay.init(value: .valid)
     let isSecureTextEntry: BehaviorRelay<Bool> = BehaviorRelay.init(value: true)
 
@@ -33,12 +34,12 @@ class SignInViewModel {
     let signInButtonEnabled: BehaviorRelay<Bool> = BehaviorRelay.init(value: true)
     let reloadButtonEnabled: BehaviorRelay<Bool> = BehaviorRelay.init(value: true)
     let activityIndicatorAnimating: BehaviorRelay<Bool> = BehaviorRelay.init(value: false)
-//    let captchaActivityIndicatorAnimating: BehaviorRelay<Bool> = BehaviorRelay.init(value: false)
+    let captchaActivityIndicatorAnimating: BehaviorRelay<Bool> = BehaviorRelay.init(value: false)
     let timeActivityIndicatorAnimating: BehaviorRelay<Bool> = BehaviorRelay.init(value: false)
 
     let totp: PublishRelay<(String, String)> = PublishRelay.init()
     let userSession: PublishRelay<UserSession> = PublishRelay.init()
-//    let captchaSession: PublishRelay<CaptchaSession> = PublishRelay.init()
+    let captchaSession: PublishRelay<CaptchaSession> = PublishRelay.init()
     let date: PublishRelay<ServerTime> = PublishRelay.init()
     
     let errorMessage: PublishRelay<String> = PublishRelay.init()
@@ -48,11 +49,12 @@ class SignInViewModel {
     // MARK: - Methods
     init(userSessionRepository: UserSessionRepository,
          signInValidationService: SignInValidatoinService,
-         lastSignInInfoDataStore: LastSignInInfoDataStore) {
+         lastSignInInfoDataStore: LastSignInInfoDataStore,
+         otpEnabled: Bool) {
         self.userSessionRepository = userSessionRepository
         self.signInValidationService = signInValidationService
         self.lastSignInInfoDataStore = lastSignInInfoDataStore
-
+        self.otpEnabled = otpEnabled
         configLastSignInStatus()
     }
 
@@ -71,6 +73,7 @@ class SignInViewModel {
     }
 
     func validateSignInInfo() -> Bool {
+        var valid = true
         let storeIDResult = signInValidationService.validateStoreID(signInInfo.storeID)
         storeIDValidationResult.accept(storeIDResult)
 
@@ -80,16 +83,20 @@ class SignInViewModel {
         let passwordResult = signInValidationService.validatePassword(signInInfo.password)
         passwordValidationResult.accept(passwordResult)
 
-//        let captchaValueResult = signInValidationService.validateCaptchaValue(signInInfo.captchaValue)
-//        captchaValueValidationResult.accept(captchaValueResult)
+        let captchaValueResult = signInValidationService.validateCaptchaValue(signInInfo.captchaValue ?? "")
+        captchaValueValidationResult.accept(captchaValueResult)
         
         if storeIDResult == .valid,
            accountResult == .valid,
            passwordResult == .valid {
-            return true
+            valid = true
         } else {
-            return false
+            valid = false
         }
+        if !otpEnabled, valid {
+            valid = captchaValueResult == .valid
+        }
+        return valid
     }
 
     @objc
@@ -100,9 +107,7 @@ class SignInViewModel {
             indicateSigningIn(false)
             return
         }
-        if let secret = repository.secret(for: signInInfo.account, storeID: signInInfo.storeID) {
-            signInInfo.otp = "000000"
-//          signInInfo.otp = secret.generatePin()
+        if !otpEnabled {
             userSessionRepository.signIn(info: signInInfo)
                 .ensure {
                     self.indicateSigningIn(false)
@@ -121,8 +126,30 @@ class SignInViewModel {
                     }
                 }
         } else {
-            self.indicateSigningIn(false)
-            self.totp.accept((self.signInInfo.account, self.signInInfo.storeID))
+            if let secret = repository.secret(for: signInInfo.account, storeID: signInInfo.storeID) {
+                signInInfo.otp = "000000"
+    //          signInInfo.otp = secret.generatePin()
+                userSessionRepository.signIn(info: signInInfo)
+                    .ensure {
+                        self.indicateSigningIn(false)
+                    }
+                    .done { userSession in
+                        self.saveSignInInfo(info: self.signInInfo)
+                        self.userSession.accept(userSession)
+                    }
+                    .catch { [weak self] error in
+                        guard let self = self else { return }
+                        switch error {
+                        case APIError.serviceError(let message):
+                            self.errorMessage.accept(message)
+                        default:
+                            self.errorMessage.accept(self.unexpectedErrorMessage)
+                        }
+                    }
+            } else {
+               self.indicateSigningIn(false)
+               self.totp.accept((self.signInInfo.account, self.signInInfo.storeID))
+           }
         }
     }
 
@@ -137,26 +164,26 @@ class SignInViewModel {
         lastSignInInfoDataStore.saveLastSignInAccountInfo(info: accountInfo).cauterize()
     }
 
-//    @objc
-//    func captcha() {
-//        indicateUpdatingCaptcha(true)
-//        userSessionRepository.captcha()
-//            .ensure {
-//                self.indicateUpdatingCaptcha(false)
-//            }
-//            .done { session in
-//                self.captchaSession.accept(session)
-//                self.signInInfo.captchaKey = session.key
-//            }
-//            .catch { error in
-//                switch error {
-//                case APIError.serviceError(let message):
-//                    self.errorMessage.accept(message)
-//                default:
-//                    self.errorMessage.accept(self.unexpectedErrorMessage)
-//                }
-//            }
-//    }
+    @objc
+    func captcha() {
+        indicateUpdatingCaptcha(true)
+        userSessionRepository.captcha()
+            .ensure {
+                self.indicateUpdatingCaptcha(false)
+            }
+            .done { session in
+                self.captchaSession.accept(session)
+                self.signInInfo.captchaKey = session.key
+            }
+            .catch { error in
+                switch error {
+                case APIError.serviceError(let message):
+                    self.errorMessage.accept(message)
+                default:
+                    self.errorMessage.accept(self.unexpectedErrorMessage)
+                }
+            }
+    }
     
     func time() {
         userSessionRepository.time()
@@ -173,10 +200,10 @@ class SignInViewModel {
             }
     }
 
-//    private func indicateUpdatingCaptcha(_ isUpdating: Bool) {
-//        indicateNetworkProcessing(isUpdating)
-//        captchaActivityIndicatorAnimating.accept(isUpdating)
-//    }
+    private func indicateUpdatingCaptcha(_ isUpdating: Bool) {
+        indicateNetworkProcessing(isUpdating)
+        captchaActivityIndicatorAnimating.accept(isUpdating)
+    }
 
     private func indicateUpdateTime(_ isUpdating: Bool) {
         indicateNetworkProcessing(isUpdating)

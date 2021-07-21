@@ -35,10 +35,13 @@ extension ForgotPasswordInfo: Encodable {
         try container.encode(storeID, forKey: .id)
         try container.encode(account, forKey: .account)
         try container.encode(email, forKey: .email)
-        try? container.encode(otp, forKey: .otp)
-
-        var captchaContainer = container.nestedContainer(keyedBy: CaptchaCodingKeys.self, forKey: .captcha)
-        try? captchaContainer.encode(captchaKey, forKey: .key)
-        try? captchaContainer.encode(captchaValue, forKey: .value)
+        if let otp = otp {
+            try container.encode(otp, forKey: .otp)
+        }
+        if let key = captchaKey, let value = captchaValue {
+            var captchaContainer = container.nestedContainer(keyedBy: CaptchaCodingKeys.self, forKey: .captcha)
+            try captchaContainer.encode(key, forKey: .key)
+            try captchaContainer.encode(value, forKey: .value)
+        }
     }
 }

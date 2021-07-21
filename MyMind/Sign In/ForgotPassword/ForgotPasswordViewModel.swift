@@ -14,6 +14,7 @@ class ForgotPasswordViewModel {
     let bag: DisposeBag = DisposeBag()
     let authService: AuthService
     let signInValidationService: SignInValidatoinService
+    let otpEnabled: Bool
     var forgotPasswordInfo: ForgotPasswordInfo = .empty()
     let repository: UDISecretRepository = UDISecretRepository(dataStore: UserDefaultSecretDataStore.init())
 
@@ -21,24 +22,27 @@ class ForgotPasswordViewModel {
     let storeIDValidationResult: BehaviorRelay<ValidationResult> = BehaviorRelay.init(value: .valid)
     let accountValidationResult: BehaviorRelay<ValidationResult> = BehaviorRelay.init(value: .valid)
     let emailValidationResult: BehaviorRelay<ValidationResult> = BehaviorRelay.init(value: .valid)
-//    let captchaValueValidationResult: BehaviorRelay<ValidationResult> = BehaviorRelay.init(value: .valid)
+    let captchaValueValidationResult: BehaviorRelay<ValidationResult> = BehaviorRelay.init(value: .valid)
 
     let confirmButtonEnabled: BehaviorRelay<Bool> = BehaviorRelay.init(value: true)
     let reloadButtonEnabled: BehaviorRelay<Bool> = BehaviorRelay.init(value: true)
     let activityIndicatorAnimating: BehaviorRelay<Bool> = BehaviorRelay.init(value: false)
-//    let captchaActivityIndicatorAnimating: BehaviorRelay<Bool> = BehaviorRelay.init(value: false)
+    let captchaActivityIndicatorAnimating: BehaviorRelay<Bool> = BehaviorRelay.init(value: false)
 
     let totp: PublishRelay<(String, String)> = PublishRelay.init()
     let successMessage: PublishRelay<String> = PublishRelay.init()
-//    let captchaSession: PublishRelay<CaptchaSession> = PublishRelay.init()
+    let captchaSession: PublishRelay<CaptchaSession> = PublishRelay.init()
     let errorMessage: PublishRelay<String> = PublishRelay.init()
+    let date: PublishRelay<ServerTime> = PublishRelay.init()
 
     let unexpectedErrorMessage: String = "未知的錯誤發生"
 
     init(authService: AuthService,
-         signInValidationService: SignInValidatoinService) {
+         signInValidationService: SignInValidatoinService,
+         otpEnabled: Bool) {
         self.authService = authService
         self.signInValidationService = signInValidationService
+        self.otpEnabled = otpEnabled
     }
 
     func validateInputInfo() -> Bool {
@@ -51,13 +55,14 @@ class ForgotPasswordViewModel {
         let emailResult = signInValidationService.validateEmail(forgotPasswordInfo.email)
         emailValidationResult.accept(emailResult)
 
-//        let captchaValueResult = signInValidationService.validateCaptchaValue(forgotPasswordInfo.captchaValue)
-//        captchaValueValidationResult.accept(captchaValueResult)
-
-        let result = storeIDResult == .valid
+        var result = storeIDResult == .valid
             && accountResult == .valid
             && emailResult == .valid
-//            && captchaValueResult == .valid
+        if !otpEnabled, result {
+            let captchaValueResult = signInValidationService.validateCaptchaValue(forgotPasswordInfo.captchaValue ?? "")
+            captchaValueValidationResult.accept(captchaValueResult)
+            result = captchaValueResult == .valid
+        }
 
         return result
     }
@@ -69,9 +74,7 @@ class ForgotPasswordViewModel {
             indicateSendingEmail(false)
             return
         }
-        if let secret = repository.secret(for: forgotPasswordInfo.account, storeID: forgotPasswordInfo.storeID) {
-            forgotPasswordInfo.otp = "000000"
-//            forgotPasswordInfo.otp = secret.generatePin()
+        if !otpEnabled {
             authService.forgotPasswordMail(info: forgotPasswordInfo)
                 .done { self.successMessage.accept("重設密碼連結已寄出！") }
                 .catch { error in
@@ -83,34 +86,63 @@ class ForgotPasswordViewModel {
                     }
                 }
         } else {
-            self.totp.accept((self.forgotPasswordInfo.account, self.forgotPasswordInfo.storeID))
+            if let secret = repository.secret(for: forgotPasswordInfo.account, storeID: forgotPasswordInfo.storeID) {
+                forgotPasswordInfo.otp = "000000"
+    //            forgotPasswordInfo.otp = secret.generatePin()
+                authService.forgotPasswordMail(info: forgotPasswordInfo)
+                    .done { self.successMessage.accept("重設密碼連結已寄出！") }
+                    .catch { error in
+                        switch error {
+                        case APIError.serviceError(let message):
+                            self.errorMessage.accept(message)
+                        default:
+                            self.errorMessage.accept(self.unexpectedErrorMessage)
+                        }
+                    }
+            } else {
+                self.totp.accept((self.forgotPasswordInfo.account, self.forgotPasswordInfo.storeID))
+            }
         }
-
     }
 
     @objc
     func captcha() {
-//        indicateUpdatingCaptcha(true)
-//        authService.captcha()
-//            .ensure { self.indicateUpdatingCaptcha(false) }
-//            .done { session in
-//                self.captchaSession.accept(session)
-//                self.forgotPasswordInfo.captchaKey = session.key
-//            }
-//            .catch { error in
-//                switch error {
-//                case APIError.serviceError(let message):
-//                    self.errorMessage.accept(message)
-//                default:
-//                    self.errorMessage.accept(self.unexpectedErrorMessage)
-//                }
-//            }
+        indicateUpdatingCaptcha(true)
+        authService.captcha()
+            .ensure { self.indicateUpdatingCaptcha(false) }
+            .done { session in
+                self.captchaSession.accept(session)
+                self.forgotPasswordInfo.captchaKey = session.key
+            }
+            .catch { error in
+                switch error {
+                case APIError.serviceError(let message):
+                    self.errorMessage.accept(message)
+                default:
+                    self.errorMessage.accept(self.unexpectedErrorMessage)
+                }
+            }
+    }
+    
+    func time() {
+        authService.time()
+            .done { date in
+                self.date.accept(date)
+            }
+            .catch { error in
+                switch error {
+                case APIError.serviceError(let message):
+                    self.errorMessage.accept(message)
+                default:
+                    self.errorMessage.accept(self.unexpectedErrorMessage)
+                }
+            }
     }
 
-//    private func indicateUpdatingCaptcha(_ isUpdating: Bool) {
-//        indicateNetworkProcessing(isUpdating)
-//        captchaActivityIndicatorAnimating.accept(isUpdating)
-//    }
+    private func indicateUpdatingCaptcha(_ isUpdating: Bool) {
+        indicateNetworkProcessing(isUpdating)
+        captchaActivityIndicatorAnimating.accept(isUpdating)
+    }
 
     private func indicateSendingEmail(_ isSending: Bool) {
         indicateNetworkProcessing(isSending)

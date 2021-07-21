@@ -47,6 +47,13 @@ class ForgotPasswordRootView: NiblessView {
         $0.backgroundColor = .clear
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
+    
+    private let timeLabel: UILabel = UILabel {
+        $0.font = UIFont.pingFangTCSemibold(ofSize: 14)
+        $0.textColor = UIColor(hex: "306ab2")
+        $0.backgroundColor = .clear
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
 
     private let resetPasswordTitleLabel: UILabel = UILabel {
         $0.font = UIFont.pingFangTCSemibold(ofSize: 16)
@@ -120,40 +127,47 @@ class ForgotPasswordRootView: NiblessView {
         return stackView
     }()
 
-//    private let captchaInputView: ValidatableInputView = ValidatableInputView {
-//        $0.textField.attributedPlaceholder = NSAttributedString(
-//            string: "驗證碼-6碼",
-//            attributes: [.foregroundColor: UIColor(hex: "b4b4b4")]
-//        )
-//        $0.textField.textColor = UIColor(hex: "545454")
-//        let image = UIImage(named: "security")
-//        let containerView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 30, height: 30)))
-//        let imageView = UIImageView(frame: CGRect(x: 8, y: containerView.frame.midY-7, width: 14, height: 14))
-//        imageView.image = image
-//        containerView.addSubview(imageView)
-//        $0.textField.leftView = containerView
-//        $0.textField.leftViewMode = .always
-//        $0.translatesAutoresizingMaskIntoConstraints = false
-//    }
+    private let captchaInputView: ValidatableInputView = ValidatableInputView {
+        $0.textField.attributedPlaceholder = NSAttributedString(
+            string: "驗證碼-6碼",
+            attributes: [.foregroundColor: UIColor(hex: "b4b4b4")]
+        )
+        $0.textField.textColor = UIColor(hex: "545454")
+        let image = UIImage(named: "security")
+        let containerView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 30, height: 30)))
+        let imageView = UIImageView(frame: CGRect(x: 8, y: containerView.frame.midY-7, width: 14, height: 14))
+        imageView.image = image
+        containerView.addSubview(imageView)
+        $0.textField.leftView = containerView
+        $0.textField.leftViewMode = .always
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
 
-//    private let captchaImageView: UIImageView = UIImageView {
-//        $0.translatesAutoresizingMaskIntoConstraints = false
-//    }
+    private let captchaImageView: UIImageView = UIImageView {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
 
-//    private let captchaActivityIndicatorView: NVActivityIndicatorView = {
-//        let indicator = NVActivityIndicatorView(
-//            frame: .zero,
-//            type: .ballSpinFadeLoader,
-//            color: UIColor(hex: "043458"))
-//        indicator.translatesAutoresizingMaskIntoConstraints = false
-//        return indicator
-//    }()
+    private let captchaActivityIndicatorView: NVActivityIndicatorView = {
+        let indicator = NVActivityIndicatorView(
+            frame: .zero,
+            type: .ballSpinFadeLoader,
+            color: UIColor(hex: "043458"))
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        return indicator
+    }()
 
-//    private let reloadCaptchaButton: UIButton = UIButton {
-//        $0.translatesAutoresizingMaskIntoConstraints = false
-//        let image = UIImage(named: "reload")
-//        $0.setImage(image, for: .normal)
-//    }
+    private let reloadCaptchaButton: UIButton = UIButton {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        let image = UIImage(named: "reload")
+        $0.setImage(image, for: .normal)
+    }
+    
+    private let confirmTimeLabel: UILabel = UILabel {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.textColor = UIColor(hex: "306ab2")
+        $0.text = "請檢視手機時間是否與標準時間同步。"
+        $0.font = .pingFangTCRegular(ofSize: 14)
+    }
 
     private let confirmButton: UIButton = UIButton {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -193,10 +207,15 @@ class ForgotPasswordRootView: NiblessView {
         contentView.addSubview(resetPasswordTitleLabel)
         contentView.addSubview(resetPasswordDescriptionLabel)
         contentView.addSubview(inputStackView)
-//        contentView.addSubview(captchaInputView)
-//        contentView.addSubview(captchaImageView)
-//        contentView.addSubview(captchaActivityIndicatorView)
-//        contentView.addSubview(reloadCaptchaButton)
+        if !viewModel.otpEnabled {
+            contentView.addSubview(captchaInputView)
+            contentView.addSubview(captchaImageView)
+            contentView.addSubview(captchaActivityIndicatorView)
+            contentView.addSubview(reloadCaptchaButton)
+        } else {
+            contentView.addSubview(timeLabel)
+            contentView.addSubview(confirmTimeLabel)
+        }
         contentView.addSubview(confirmButton)
         addSubview(scrollView)
     }
@@ -211,31 +230,60 @@ class ForgotPasswordRootView: NiblessView {
         activateConstraintsResetPasswordDescriptionLabel()
         activateConstraintsStackView()
         activateConstraintsInputView()
-//        activateConstraintsCaptchaInputView()
-//        activateConstraintsCaptchaImageView()
-//        activateConstraintsCaptchaActivityIndicatorView()
-//        activateConstraintsReloadCaptchaButton()
+        if !viewModel.otpEnabled {
+            activateConstraintsCaptchaInputView()
+            activateConstraintsCaptchaImageView()
+            activateConstraintsCaptchaActivityIndicatorView()
+            activateConstraintsReloadCaptchaButton()
+        } else {
+            activateConstraintsTimeLabel()
+            activateConstraintsConfirmTimeLabel()
+        }
         activateConstraintsConfirmButton()
     }
 
     private func bindToViewModel() {
-        Observable.combineLatest(
-            storeIDInputView.textField.rx.text.orEmpty,
-            accountInputView.textField.rx.text.orEmpty,
-            emailInputView.textField.rx.text.orEmpty
-        ) { storeID, account, email in
-            (storeID, account, email)
+        if !viewModel.otpEnabled {
+            Observable.combineLatest(
+                storeIDInputView.textField.rx.text.orEmpty,
+                accountInputView.textField.rx.text.orEmpty,
+                emailInputView.textField.rx.text.orEmpty,
+                captchaInputView.textField.rx.text.orEmpty
+            ) { storeID, account, email, captcha in
+                (storeID, account, email, captcha)
+            }
+            .subscribe(onNext: { [unowned self] in
+                self.viewModel.forgotPasswordInfo.storeID = $0.0
+                self.viewModel.forgotPasswordInfo.account = $0.1
+                self.viewModel.forgotPasswordInfo.email = $0.2
+                self.viewModel.forgotPasswordInfo.captchaValue = $0.3
+            })
+            .disposed(by: bag)
+            reloadCaptchaButton.addTarget(viewModel, action: #selector(ForgotPasswordViewModel.captcha), for: .touchUpInside)
+        } else {
+            Observable.combineLatest(
+                storeIDInputView.textField.rx.text.orEmpty,
+                accountInputView.textField.rx.text.orEmpty,
+                emailInputView.textField.rx.text.orEmpty
+            ) { storeID, account, email in
+                (storeID, account, email)
+            }
+            .subscribe(onNext: { [unowned self] in
+                self.viewModel.forgotPasswordInfo.storeID = $0.0
+                self.viewModel.forgotPasswordInfo.account = $0.1
+                self.viewModel.forgotPasswordInfo.email = $0.2
+            })
+            .disposed(by: bag)
+            viewModel.date
+                .subscribe(on: MainScheduler.instance)
+                .do(onNext: { print($0) })
+                .map { serverTime -> String in
+                    return serverTime.time
+                }
+                .bind(to: timeLabel.rx.text)
+                .disposed(by: bag)
         }
-        .subscribe(onNext: { [unowned self] in
-            self.viewModel.forgotPasswordInfo.storeID = $0.0
-            self.viewModel.forgotPasswordInfo.account = $0.1
-            self.viewModel.forgotPasswordInfo.email = $0.2
-//            self.viewModel.forgotPasswordInfo.captchaValue = $0.3
-        })
-        .disposed(by: bag)
-
         confirmButton.addTarget(viewModel, action: #selector(ForgotPasswordViewModel.confirmSendEmail), for: .touchUpInside)
-//        reloadCaptchaButton.addTarget(viewModel, action: #selector(ForgotPasswordViewModel.captcha), for: .touchUpInside)
     }
 
     func resetScrollViewContentInsets() {
@@ -332,6 +380,17 @@ extension ForgotPasswordRootView {
             centerY, trailing
         ])
     }
+    
+    private func activateConstraintsTimeLabel() {
+        let centerY = timeLabel.centerYAnchor
+            .constraint(equalTo: titleGradientView.centerYAnchor)
+        let trailing = timeLabel.trailingAnchor
+            .constraint(equalTo: contentView.trailingAnchor, constant: -12)
+
+        NSLayoutConstraint.activate([
+            centerY, trailing
+        ])
+    }
 
     private func activateConstraintsResetPasswordTitleLabel() {
         let top = resetPasswordTitleLabel.topAnchor
@@ -381,69 +440,84 @@ extension ForgotPasswordRootView {
         ])
     }
 
-//    private func activateConstraintsCaptchaInputView() {
-//        let top = captchaInputView.topAnchor
-//            .constraint(equalTo: inputStackView.bottomAnchor)
-//        let leading = captchaInputView.leadingAnchor
-//            .constraint(equalTo: inputStackView.leadingAnchor)
-//        let trailing = captchaInputView.trailingAnchor
-//            .constraint(equalTo: captchaImageView.leadingAnchor, constant: -15)
-//        let height = captchaInputView.heightAnchor
-//            .constraint(equalToConstant: 52)
-//
-//        NSLayoutConstraint.activate([
-//            top, leading, trailing, height
-//        ])
-//    }
-//
-//    private func activateConstraintsCaptchaImageView() {
-//        let top = captchaImageView.topAnchor
-//            .constraint(equalTo: captchaInputView.topAnchor)
-//        let width = captchaImageView.widthAnchor
-//            .constraint(equalToConstant: 115)
-//        let height = captchaImageView.heightAnchor
-//            .constraint(equalToConstant: 32)
-//        let trailing = captchaImageView.trailingAnchor
-//            .constraint(equalTo: reloadCaptchaButton.leadingAnchor)
-//
-//        NSLayoutConstraint.activate([
-//            top, width, height, trailing
-//        ])
-//    }
+    private func activateConstraintsCaptchaInputView() {
+        let top = captchaInputView.topAnchor
+            .constraint(equalTo: inputStackView.bottomAnchor)
+        let leading = captchaInputView.leadingAnchor
+            .constraint(equalTo: inputStackView.leadingAnchor)
+        let trailing = captchaInputView.trailingAnchor
+            .constraint(equalTo: captchaImageView.leadingAnchor, constant: -15)
+        let height = captchaInputView.heightAnchor
+            .constraint(equalToConstant: 52)
 
-//    private func activateConstraintsCaptchaActivityIndicatorView() {
-//        let centerX = captchaActivityIndicatorView.centerXAnchor
-//            .constraint(equalTo: captchaImageView.centerXAnchor)
-//        let centerY = captchaActivityIndicatorView.centerYAnchor
-//            .constraint(equalTo: captchaImageView.centerYAnchor)
-//        let width = captchaActivityIndicatorView.widthAnchor
-//            .constraint(equalToConstant: 25)
-//        let height = captchaActivityIndicatorView.heightAnchor
-//            .constraint(equalTo: captchaActivityIndicatorView.widthAnchor)
-//
-//        NSLayoutConstraint.activate([
-//            centerX, centerY, width, height
-//        ])
-//    }
-//
-//    private func activateConstraintsReloadCaptchaButton() {
-//        let trailing = reloadCaptchaButton.trailingAnchor
-//            .constraint(equalTo: inputStackView.trailingAnchor)
-//        let centerY = reloadCaptchaButton.centerYAnchor
-//            .constraint(equalTo: captchaImageView.centerYAnchor)
-//        let width = reloadCaptchaButton.widthAnchor
-//            .constraint(equalToConstant: 20)
-//        let height = reloadCaptchaButton.heightAnchor
-//            .constraint(equalTo: reloadCaptchaButton.heightAnchor)
-//
-//        NSLayoutConstraint.activate([
-//            trailing, centerY, width, height
-//        ])
-//    }
+        NSLayoutConstraint.activate([
+            top, leading, trailing, height
+        ])
+    }
+
+    private func activateConstraintsCaptchaImageView() {
+        let top = captchaImageView.topAnchor
+            .constraint(equalTo: captchaInputView.topAnchor)
+        let width = captchaImageView.widthAnchor
+            .constraint(equalToConstant: 115)
+        let height = captchaImageView.heightAnchor
+            .constraint(equalToConstant: 32)
+        let trailing = captchaImageView.trailingAnchor
+            .constraint(equalTo: reloadCaptchaButton.leadingAnchor)
+
+        NSLayoutConstraint.activate([
+            top, width, height, trailing
+        ])
+    }
+
+    private func activateConstraintsCaptchaActivityIndicatorView() {
+        let centerX = captchaActivityIndicatorView.centerXAnchor
+            .constraint(equalTo: captchaImageView.centerXAnchor)
+        let centerY = captchaActivityIndicatorView.centerYAnchor
+            .constraint(equalTo: captchaImageView.centerYAnchor)
+        let width = captchaActivityIndicatorView.widthAnchor
+            .constraint(equalToConstant: 25)
+        let height = captchaActivityIndicatorView.heightAnchor
+            .constraint(equalTo: captchaActivityIndicatorView.widthAnchor)
+
+        NSLayoutConstraint.activate([
+            centerX, centerY, width, height
+        ])
+    }
+
+    private func activateConstraintsReloadCaptchaButton() {
+        let trailing = reloadCaptchaButton.trailingAnchor
+            .constraint(equalTo: inputStackView.trailingAnchor)
+        let centerY = reloadCaptchaButton.centerYAnchor
+            .constraint(equalTo: captchaImageView.centerYAnchor)
+        let width = reloadCaptchaButton.widthAnchor
+            .constraint(equalToConstant: 20)
+        let height = reloadCaptchaButton.heightAnchor
+            .constraint(equalTo: reloadCaptchaButton.heightAnchor)
+
+        NSLayoutConstraint.activate([
+            trailing, centerY, width, height
+        ])
+    }
+    
+    private func activateConstraintsConfirmTimeLabel() {
+        let top = confirmTimeLabel.topAnchor
+            .constraint(equalTo: inputStackView.bottomAnchor)
+        let leading = confirmTimeLabel.leadingAnchor
+            .constraint(equalTo: inputStackView.leadingAnchor)
+        let trailing = confirmTimeLabel.trailingAnchor
+            .constraint(equalTo: inputStackView.trailingAnchor)
+        let height = confirmTimeLabel.heightAnchor
+            .constraint(equalToConstant: 20)
+
+        NSLayoutConstraint.activate([
+            top, leading, trailing, height
+        ])
+    }
 
     private func activateConstraintsConfirmButton() {
         let top = confirmButton.topAnchor
-            .constraint(equalTo: inputStackView.bottomAnchor)
+            .constraint(equalTo: (!viewModel.otpEnabled) ? captchaInputView.bottomAnchor : confirmTimeLabel.bottomAnchor, constant: 8)
         let leading = confirmButton.leadingAnchor
             .constraint(equalTo: inputStackView.leadingAnchor)
         let trailing = confirmButton.trailingAnchor
@@ -462,10 +536,10 @@ extension ForgotPasswordRootView {
 extension ForgotPasswordRootView {
     func bindViewModelToViews() {
         bindViewModelToInputViews()
-//        bindViewModelToReloadButton()
+        bindViewModelToReloadButton()
         bindViewModelToConfirmButton()
-//        bindViewModelToCaptchaImageView()
-//        bindViewModelToCaptchaActivityIndicator()
+        bindViewModelToCaptchaImageView()
+        bindViewModelToCaptchaActivityIndicator()
     }
 
     func bindViewModelToInputViews() {
@@ -517,17 +591,17 @@ extension ForgotPasswordRootView {
             })
             .disposed(by: bag)
 
-//        viewModel.captchaValueValidationResult
-//            .asDriver()
-//            .drive(onNext: { [unowned self] in
-//                switch $0 {
-//                case .valid:
-//                    self.captchaInputView.clearError()
-//                case .invalid(let message):
-//                    self.captchaInputView.showError(with: message)
-//                }
-//            })
-//            .disposed(by: bag)
+        viewModel.captchaValueValidationResult
+            .asDriver()
+            .drive(onNext: { [unowned self] in
+                switch $0 {
+                case .valid:
+                    self.captchaInputView.clearError()
+                case .invalid(let message):
+                    self.captchaInputView.showError(with: message)
+                }
+            })
+            .disposed(by: bag)
     }
 
     private func bindViewModelToConfirmButton() {
@@ -537,31 +611,31 @@ extension ForgotPasswordRootView {
             .disposed(by: bag)
     }
 
-//    private func bindViewModelToReloadButton() {
-//        viewModel.reloadButtonEnabled
-//            .asDriver()
-//            .drive(reloadCaptchaButton.rx.isEnabled)
-//            .disposed(by: bag)
-//    }
+    private func bindViewModelToReloadButton() {
+        viewModel.reloadButtonEnabled
+            .asDriver()
+            .drive(reloadCaptchaButton.rx.isEnabled)
+            .disposed(by: bag)
+    }
 
-//    private func bindViewModelToCaptchaActivityIndicator() {
-//        viewModel.captchaActivityIndicatorAnimating
-//            .asDriver()
-//            .drive(captchaActivityIndicatorView.rx.isAnimating)
-//            .disposed(by: bag)
-//    }
+    private func bindViewModelToCaptchaActivityIndicator() {
+        viewModel.captchaActivityIndicatorAnimating
+            .asDriver()
+            .drive(captchaActivityIndicatorView.rx.isAnimating)
+            .disposed(by: bag)
+    }
 
-//    private func bindViewModelToCaptchaImageView() {
-//        viewModel.captchaSession
-//            .asObservable()
-//            .observe(on: MainScheduler.instance)
-//            .subscribe(onNext: { [unowned self] in
-//                guard let data = $0.imageData else {
-//                    return
-//                }
-//                let image = UIImage(data: data)
-//                self.captchaImageView.image = image
-//            })
-//            .disposed(by: bag)
-//    }
+    private func bindViewModelToCaptchaImageView() {
+        viewModel.captchaSession
+            .asObservable()
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] in
+                guard let data = $0.imageData else {
+                    return
+                }
+                let image = UIImage(data: data)
+                self.captchaImageView.image = image
+            })
+            .disposed(by: bag)
+    }
 }

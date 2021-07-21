@@ -49,6 +49,7 @@
 		52D7249F268D62BC00B00585 /* MyMindPurchaseReviewAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D7249E268D62BC00B00585 /* MyMindPurchaseReviewAPIService.swift */; };
 		52D724A4268DBD6400B00585 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 52D724A3268DBD6400B00585 /* GoogleService-Info.plist */; };
 		52E1EDF726A6D29900506010 /* ServerTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E1EDF626A6D29900506010 /* ServerTime.swift */; };
+		52E1EDF826A6DBF700506010 /* ServerTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E1EDF626A6D29900506010 /* ServerTime.swift */; };
 		52E505FE26A531B4000E5116 /* ResendOTPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E505FD26A531B4000E5116 /* ResendOTPViewController.swift */; };
 		52E5060026A532D7000E5116 /* ResendOTPViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E505FF26A532D7000E5116 /* ResendOTPViewModel.swift */; };
 		52E5060226A5337A000E5116 /* ResendOTPInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E5060126A5337A000E5116 /* ResendOTPInfo.swift */; };
@@ -1866,6 +1867,7 @@
 				52E506B826A6C681000E5116 /* CustomClearButtonPositionTextField.swift in Sources */,
 				52E506B926A6C681000E5116 /* Endpoint.swift in Sources */,
 				52E506BA26A6C681000E5116 /* EditablePickedProductsInfoViewController.swift in Sources */,
+				52E1EDF826A6DBF700506010 /* ServerTime.swift in Sources */,
 				52E506BB26A6C681000E5116 /* ValidatableInputView.swift in Sources */,
 				52E506BC26A6C681000E5116 /* DateFormatter+Secret.swift in Sources */,
 				52E506BD26A6C681000E5116 /* ForgotPasswordInfo.swift in Sources */,

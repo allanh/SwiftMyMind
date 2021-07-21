@@ -36,8 +36,7 @@ class SignInViewController: NiblessViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        viewModel.time()
-//        viewModel.captcha()
+        if !viewModel.otpEnabled { viewModel.captcha() }
         addTapToResignKeyboardGesture()
         observerViewModel()
         configForgotPasswordButton()
@@ -46,7 +45,7 @@ class SignInViewController: NiblessViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        viewModel.time()
+        if viewModel.otpEnabled { viewModel.time() }
         addKeyboardObservers()
 //        navigationController?.isNavigationBarHidden = true
     }
@@ -112,8 +111,6 @@ class SignInViewController: NiblessViewController {
             .subscribe({ [unowned self] info in
                 let storyboard: UIStoryboard = UIStoryboard(name: "TOTP", bundle: nil)
                 if let viewController = storyboard.instantiateViewController(withIdentifier: "SecretListViewControllerNavi") as? UINavigationController, let totpViewController = viewController.topViewController as? SecretListViewController {
-//                    totpViewController.requiredUser = info.element?.0
-//                    totpViewController.requiredStoreID = info.element?.1
                     totpViewController.scanViewControllerDelegate = self
                     present(viewController, animated: true, completion: nil)
                 }
@@ -129,21 +126,19 @@ class SignInViewController: NiblessViewController {
             .subscribe(onNext: { [unowned self] _ in
                 ToastView.showIn(self, message: "登入成功", iconName: "success")
                 showHomePage()
-//                if let rootViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "Home") as? HomeViewController {
-//                    let scene = UIApplication.shared.connectedScenes.first
-//                    if let sceneDelegate : SceneDelegate = (scene?.delegate as? SceneDelegate) {
-//                        let navigationViewController = UINavigationController(rootViewController: rootViewController)
-//                        sceneDelegate.window?.rootViewController = navigationViewController
-//                    }
-//                }
             })
             .disposed(by: bag)
     }
 
     func showForgotPasswordViewController() {
+        var otpEnabled: Bool = false
+        do {
+            otpEnabled = try KeychainHelper.default.readItem(key: .otpStatus, valueType: Bool.self)
+        } catch {}
         let viewModel = ForgotPasswordViewModel(
             authService: MyMindAuthService(),
-            signInValidationService: SignInValidatoinService()
+            signInValidationService: SignInValidatoinService(),
+            otpEnabled: otpEnabled
         )
         let viewController = ForgotPasswordViewController(viewModel: viewModel)
         show(viewController, sender: self)

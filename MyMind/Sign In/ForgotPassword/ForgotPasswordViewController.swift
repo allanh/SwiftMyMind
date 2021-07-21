@@ -30,7 +30,7 @@ class ForgotPasswordViewController: NiblessViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.captcha()
+        if !viewModel.otpEnabled { viewModel.captcha() }
         observerViewModel()
         addTapToResignKeyboardGesture()
         addCustomBackNavigationItem()
@@ -38,6 +38,7 @@ class ForgotPasswordViewController: NiblessViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        if viewModel.otpEnabled { viewModel.time() }
         addKeyboardObservers()
     }
 
@@ -64,8 +65,6 @@ class ForgotPasswordViewController: NiblessViewController {
             .subscribe({ [unowned self] info in
                 let storyboard: UIStoryboard = UIStoryboard(name: "TOTP", bundle: nil)
                 if let viewController = storyboard.instantiateViewController(withIdentifier: "SecretListViewControllerNavi") as? UINavigationController, let totpViewController = viewController.topViewController as? SecretListViewController {
-//                    totpViewController.requiredUser = info.element?.0
-//                    totpViewController.requiredStoreID = info.element?.1
                     totpViewController.scanViewControllerDelegate = self
                     present(viewController, animated: true, completion: nil)
                 }

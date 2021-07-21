@@ -35,10 +35,17 @@ extension ErrorHandler {
     private func showSignInPage() {
         let scene = UIApplication.shared.connectedScenes.first
         if let sceneDelegate : SceneDelegate = (scene?.delegate as? SceneDelegate) {
+            var otpEnabled: Bool = false
+            do {
+                otpEnabled = try KeychainHelper.default.readItem(key: .otpStatus, valueType: Bool.self)
+            } catch {
+                print(error)
+            }
             let viewModel = SignInViewModel(
                 userSessionRepository: MyMindUserSessionRepository.shared,
                 signInValidationService: SignInValidatoinService(),
-                lastSignInInfoDataStore: MyMindLastSignInInfoDataStore()
+                lastSignInInfoDataStore: MyMindLastSignInInfoDataStore(),
+                otpEnabled: otpEnabled
             )
             let signInViewController = SignInViewController(viewModel: viewModel)
             sceneDelegate.window?.rootViewController?.present(signInViewController, animated: true, completion: nil)
