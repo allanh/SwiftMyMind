@@ -12,8 +12,8 @@ class SecretListViewController: UIViewController {
     let repository: UDISecretRepository = UDISecretRepository(dataStore: UserDefaultSecretDataStore.init())
 
     @IBOutlet private weak var tableView: UITableView!
-    @IBOutlet private weak var introduceLabel: UILabel!
     private var instructionView: MyMindInstructionView?
+    private var emptySecretView: MyMindEmptySecretView?
     weak var scanViewControllerDelegate: ScanViewControllerDelegate?
 
     // MARK: - View life cycle
@@ -25,17 +25,25 @@ class SecretListViewController: UIViewController {
         }
         navigationItem.titleView = navigationTitleImageView
         tableView.register(SecretTableViewCell.nib, forCellReuseIdentifier: SecretTableViewCell.reuseIdentifier)
-
+        
+        if repository.secrets.isEmpty {
+            showInstructionView()
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         switch repository.secrets.isEmpty {
         case true:
-            showInstructionView()
-            hideCameraButton()
+            if instructionView?.superview != nil {
+                hideCameraButton()
+            } else {
+                showEmptySecretView()
+                showCameraButton()
+            }
         case false:
             removeInstructionView()
+            hideEmptySecretView()
             showCameraButton()
         }
     }
@@ -80,6 +88,27 @@ class SecretListViewController: UIViewController {
         instructionView = nil
     }
 
+    private func showEmptySecretView() {
+        guard emptySecretView == nil else { return }
+        emptySecretView = MyMindEmptySecretView()
+
+        if cameraButton.superview != nil {
+            view.insertSubview(emptySecretView!, belowSubview: cameraButton)
+        } else {
+            view.addSubview(emptySecretView!)
+        }
+        emptySecretView?.topAnchor.constraint(equalTo: view.topAnchor, constant: 40).isActive = true
+        emptySecretView?.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25).isActive = true
+        emptySecretView?.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25).isActive = true
+        emptySecretView?.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -40).isActive = true
+        emptySecretView?.layoutIfNeeded()
+    }
+    
+    private func hideEmptySecretView() {
+        emptySecretView?.removeFromSuperview()
+        emptySecretView = nil
+    }
+    
     // MARK: - Actions
     @IBAction
     private func closeButtonDidTapped(_ sender: Any) {
@@ -146,16 +175,25 @@ extension SecretListViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .destructive, title: nil) { (_, _, completionHandler) in
-            tableView.beginUpdates()
-            self.repository.deleteSecret(at: indexPath.section)
-            try? self.repository.saveSecrets()
-            tableView.deleteSections([indexPath.section], with: .left)
-            tableView.endUpdates()
-
-            if self.repository.secrets.isEmpty {
-                self.showInstructionView()
+            let alertViewController = UIAlertController(title: "確定移除驗證碼？", message: "點擊確定後此驗證碼將被移除，若要再次取得驗證碼，需重新掃描 QR Code", preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "取消", style: .cancel) { action in
+                self.dismiss(animated: true, completion: nil)
             }
-            completionHandler(true)
+            let confirmAction = UIAlertAction(title: "確定", style: .default) { action in
+                tableView.beginUpdates()
+                self.repository.deleteSecret(at: indexPath.section)
+                try? self.repository.saveSecrets()
+                tableView.deleteSections([indexPath.section], with: .left)
+                tableView.endUpdates()
+
+                if self.repository.secrets.isEmpty {
+                    self.showEmptySecretView()
+                }
+                completionHandler(true)
+            }
+            alertViewController.addAction(cancelAction)
+            alertViewController.addAction(confirmAction)
+            self.present(alertViewController, animated: true, completion: nil)
         }
         deleteAction.image = UIImage(systemName: "trash")
         deleteAction.backgroundColor = UIColor(hex: "ea6120")

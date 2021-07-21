@@ -12,6 +12,7 @@
 		5246E47226901BEC005C11EC /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5246E47126901BEC005C11EC /* SettingViewController.swift */; };
 		5246E4742690385C005C11EC /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5246E4732690385C005C11EC /* Account.swift */; };
 		5246E4772690A2A4005C11EC /* CustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5246E4762690A2A4005C11EC /* CustomAlertView.swift */; };
+		524AB04826A802BA003D1E92 /* MyMindEmptySecretView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524AB04726A802BA003D1E92 /* MyMindEmptySecretView.swift */; };
 		527E11BB2692A05900FB8B01 /* Authorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527E11BA2692A05900FB8B01 /* Authorization.swift */; };
 		527E11BD2692A0D500FB8B01 /* OptionSet+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527E11BC2692A0D500FB8B01 /* OptionSet+.swift */; };
 		527E11C02692C38D00FB8B01 /* PurchaseReviewingApplyInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527E11BE2692C38D00FB8B01 /* PurchaseReviewingApplyInfoViewController.swift */; };
@@ -269,6 +270,7 @@
 		5246E47126901BEC005C11EC /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		5246E4732690385C005C11EC /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		5246E4762690A2A4005C11EC /* CustomAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertView.swift; sourceTree = "<group>"; };
+		524AB04726A802BA003D1E92 /* MyMindEmptySecretView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMindEmptySecretView.swift; sourceTree = "<group>"; };
 		527E11BA2692A05900FB8B01 /* Authorization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authorization.swift; sourceTree = "<group>"; };
 		527E11BC2692A0D500FB8B01 /* OptionSet+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OptionSet+.swift"; sourceTree = "<group>"; };
 		527E11BE2692C38D00FB8B01 /* PurchaseReviewingApplyInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseReviewingApplyInfoViewController.swift; sourceTree = "<group>"; };
@@ -838,6 +840,7 @@
 				A46487712689702B0053E6F5 /* DateFormatter+Secret.swift */,
 				A4648773268970750053E6F5 /* UDI3DESCryptor.swift */,
 				52E5060526A6BF4C000E5116 /* MyMindInstructionView.swift */,
+				524AB04726A802BA003D1E92 /* MyMindEmptySecretView.swift */,
 			);
 			path = TOTP;
 			sourceTree = "<group>";
@@ -1562,6 +1565,7 @@
 				52E1EDF726A6D29900506010 /* ServerTime.swift in Sources */,
 				A4793CB626048EBA00AD280C /* ValidatableInputView.swift in Sources */,
 				A46487722689702B0053E6F5 /* DateFormatter+Secret.swift in Sources */,
+				524AB04826A802BA003D1E92 /* MyMindEmptySecretView.swift in Sources */,
 				A4159209260C603B00FD3989 /* ForgotPasswordInfo.swift in Sources */,
 				A4054111264A8F7600E2D21B /* PurchaseQueryDateSelectionViewController.swift in Sources */,
 				A456700926830BAB009598AE /* PurchasedProductInfoTableViewCell.swift in Sources */,
@@ -1766,7 +1770,7 @@
 				APP_DISPLAY_NAME = "MyMind Debug";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				AUTH_SERVER_URL = "https://api-demo-auth.udicommerce.com";
+				AUTH_SERVER_URL = "https://api-auth.udicommerce.com";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = NCP4JUG36Z;
@@ -1778,7 +1782,7 @@
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.shopping.udi.MyMind.debug;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SERVER_URL = "https://demo-mymind.udicommerce.com";
+				SERVER_URL = "https://api-mymind.udicommerce.com";
 				SWIFT_OBJC_BRIDGING_HEADER = "MyMind/TOTP/MyMind-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1794,7 +1798,7 @@
 				APP_DISPLAY_NAME = MyMind;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				AUTH_SERVER_URL = "https://api-demo-auth.udicommerce.com";
+				AUTH_SERVER_URL = "https://api-auth.udicommerce.com";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = NCP4JUG36Z;
@@ -1806,7 +1810,7 @@
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.shopping.udi.MyMind;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SERVER_URL = "https://demo-mymind.udicommerce.com";
+				SERVER_URL = "https://api-mymind.udicommerce.com";
 				SWIFT_OBJC_BRIDGING_HEADER = "MyMind/TOTP/MyMind-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1971,7 +1975,7 @@
 				APP_DISPLAY_NAME = "MyMind Alpha";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				AUTH_SERVER_URL = "https://api-demo-auth.udicommerce.com";
+				AUTH_SERVER_URL = "https://api-auth.udicommerce.com";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = NCP4JUG36Z;
@@ -1983,7 +1987,7 @@
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.shopping.udi.MyMind.alpha;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SERVER_URL = "https://demo-mymind.udicommerce.com";
+				SERVER_URL = "https://api-mymind.udicommerce.com";
 				SWIFT_OBJC_BRIDGING_HEADER = "MyMind/TOTP/MyMind-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

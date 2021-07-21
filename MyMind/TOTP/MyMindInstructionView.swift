@@ -71,7 +71,7 @@ final class MyMindInstructionView: NiblessView {
         activateConstraintsIconImageView()
         activateConstraintsTitleLabel()
         activateConstraintsSeperator()
-        activateConstraintsDescripyionLabel()
+        activateConstraintsDescriptionLabel()
         activateConstraintsConfirmButton()
     }
 
@@ -115,7 +115,7 @@ final class MyMindInstructionView: NiblessView {
         ])
     }
 
-    private func activateConstraintsDescripyionLabel() {
+    private func activateConstraintsDescriptionLabel() {
         let centerX = descriptionLabel.centerXAnchor
             .constraint(equalTo: centerXAnchor)
         let top = descriptionLabel.topAnchor
@@ -144,3 +144,4 @@ final class MyMindInstructionView: NiblessView {
     }
 
 }
+
