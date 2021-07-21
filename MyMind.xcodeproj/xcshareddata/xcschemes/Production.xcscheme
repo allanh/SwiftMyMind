@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A44A5A6925F9B0D200995823"
-               BuildableName = "MyMind.app"
-               BlueprintName = "MyMind"
+               BlueprintIdentifier = "527777A026A80DF500CF4E07"
+               BuildableName = "Production.app"
+               BlueprintName = "Production"
                ReferencedContainer = "container:MyMind.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -44,9 +44,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "A44A5A6925F9B0D200995823"
-            BuildableName = "MyMind.app"
-            BlueprintName = "MyMind"
+            BlueprintIdentifier = "527777A026A80DF500CF4E07"
+            BuildableName = "Production.app"
+            BlueprintName = "Production"
             ReferencedContainer = "container:MyMind.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -61,9 +61,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "A44A5A6925F9B0D200995823"
-            BuildableName = "MyMind.app"
-            BlueprintName = "MyMind"
+            BlueprintIdentifier = "527777A026A80DF500CF4E07"
+            BuildableName = "Production.app"
+            BlueprintName = "Production"
             ReferencedContainer = "container:MyMind.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
