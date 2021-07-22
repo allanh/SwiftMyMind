@@ -17,29 +17,72 @@ struct SignInValidatoinService {
 
     func validateStoreID(_ storeID: String) -> ValidationResult {
         let count = storeID.count
-        if count >= 5, count <= 8 {
-            return .valid
-        } else {
-            return .invalid("企業帳號長度為5~8碼")
+        if count == 0 {
+            return .invalid("此欄位必填")
         }
+        if count < 6 || count > 20 {
+            return .invalid("請輸入 6~20 個半形英文/數字")
+        }
+        if storeID.contains(" ") {
+            return .invalid("此欄位不支援空白")
+        }
+        do {
+            let regex = try NSRegularExpression(pattern: "^[^A-Za-z0-9]$", options: [])
+            if regex.firstMatch(in: storeID, options: [], range: NSMakeRange(0, storeID.count)) == nil {
+                return .invalid("請輸入半形英文/數字")
+            }
+        }
+        catch {
+            return .invalid("請輸入半形英文/數字")
+        }
+        return .valid
     }
 
     func validateAccount(_ account: String) -> ValidationResult {
+        
         let count = account.count
-        if count >= 3, count <= 20 {
-            return .valid
-        } else {
-            return .invalid("使用者帳號長度為3~20碼")
+        if count == 0 {
+            return .invalid("此欄位必填")
         }
+        if count < 6 || count > 20 {
+            return .invalid("請輸入 6~20 個半形英文/數字/符號'.'")
+        }
+        if account.contains(" ") {
+            return .invalid("此欄位不支援空白")
+        }
+        do {
+            let regex = try NSRegularExpression(pattern: "^[A-Za-z0-9.]$", options: [])
+            if regex.firstMatch(in: account, options: [], range: NSMakeRange(0, account.count)) == nil {
+                return .invalid("請輸入半形英文/數字/符號'.'")
+            }
+        }
+        catch {
+            return .invalid("請輸入半形英文/數字/符號'.'")
+        }
+        return .valid
     }
 
     func validatePassword(_ password: String) -> ValidationResult {
         let count = password.count
-        if count >= 6, count <= 20 {
-            return .valid
-        } else {
-            return .invalid("密碼長度為6~20碼，英文字母需區分大小寫")
+        if count == 0 {
+            return .invalid("此欄位必填")
         }
+        if count < 6 || count > 20 {
+            return .invalid("請輸入 6~20 個半形英文/數字/特殊符號")
+        }
+        if password.contains(" ") {
+            return .invalid("此欄位不支援空白")
+        }
+        do {
+            let regex = try NSRegularExpression(pattern:"(?=.*\\d)(?=.*[a-zA-z])(?=.*[@$!%*#?&])" , options: [])
+            if  regex.firstMatch(in: password, options: [], range: NSMakeRange(0, password.count)) == nil {
+                return .invalid("請輸入至少各一個半形英文、數字、特殊符號")
+            }
+        }
+        catch {
+            return .invalid("請輸入至少各一個半形英文、數字、特殊符號")
+        }
+        return .valid
     }
 
     func validateCaptchaValue(_ captchaValue: String) -> ValidationResult {
