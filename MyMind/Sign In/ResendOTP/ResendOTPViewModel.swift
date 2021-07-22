@@ -61,6 +61,7 @@ class ResendOTPViewModel {
         }
         authService.resendOTPMail(info: resendOTPInfo)
             .done { self.successMessage.accept("新認證碼QR Code已寄出！") }
+            .ensure { self.indicateSendingEmail(false) }
             .catch { error in
                 switch error {
                 case APIError.serviceError(let message):

@@ -77,6 +77,9 @@ class ForgotPasswordViewModel {
         if !otpEnabled {
             authService.forgotPasswordMail(info: forgotPasswordInfo)
                 .done { self.successMessage.accept("重設密碼連結已寄出！") }
+                .ensure {
+                    self.indicateSendingEmail(false)
+                }
                 .catch { error in
                     switch error {
                     case APIError.serviceError(let message):
@@ -91,6 +94,9 @@ class ForgotPasswordViewModel {
     //            forgotPasswordInfo.otp = secret.generatePin()
                 authService.forgotPasswordMail(info: forgotPasswordInfo)
                     .done { self.successMessage.accept("重設密碼連結已寄出！") }
+                    .ensure {
+                        self.indicateSendingEmail(false)
+                    }
                     .catch { error in
                         switch error {
                         case APIError.serviceError(let message):
