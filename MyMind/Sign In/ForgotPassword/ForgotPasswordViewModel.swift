@@ -90,8 +90,7 @@ class ForgotPasswordViewModel {
                 }
         } else {
             if let secret = repository.secret(for: forgotPasswordInfo.account, storeID: forgotPasswordInfo.storeID) {
-                forgotPasswordInfo.otp = "000000"
-    //            forgotPasswordInfo.otp = secret.generatePin()
+                forgotPasswordInfo.otp = secret.generatePin(decode: .base32)
                 authService.forgotPasswordMail(info: forgotPasswordInfo)
                     .done { self.successMessage.accept("重設密碼連結已寄出！") }
                     .ensure {
