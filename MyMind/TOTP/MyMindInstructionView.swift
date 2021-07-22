@@ -55,6 +55,7 @@ final class MyMindInstructionView: NiblessView {
             backgroundColor = .white
         }
         self.translatesAutoresizingMaskIntoConstraints = false
+        self.layer.cornerRadius = 10
         constructViewHierarchy()
         activateConstraints()
     }

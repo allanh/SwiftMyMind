@@ -53,7 +53,7 @@ class SignInRootView: NiblessView {
     }
     private let storeIDInputView: ValidatableInputView = ValidatableInputView {
         $0.textField.attributedPlaceholder = NSAttributedString(
-            string: "企業編碼-5~8碼",
+            string: "請輸入商店代號",
             attributes: [.foregroundColor: UIColor(hex: "b4b4b4")]
         )
         $0.textField.textColor = UIColor(hex: "545454")
@@ -69,7 +69,7 @@ class SignInRootView: NiblessView {
 
     private let accountInputView: ValidatableInputView = ValidatableInputView {
         $0.textField.attributedPlaceholder = NSAttributedString(
-            string: "使用者帳號-3~20碼",
+            string: "請輸入管理員帳號",
             attributes: [.foregroundColor: UIColor(hex: "b4b4b4")]
         )
         $0.textField.textColor = UIColor(hex: "545454")
@@ -91,7 +91,7 @@ class SignInRootView: NiblessView {
 
     private lazy var passwordInputView: ValidatableInputView = ValidatableInputView {
         $0.textField.attributedPlaceholder = NSAttributedString(
-            string: "密碼-6~20碼，英文字母需區分大小寫",
+            string: "請輸入密碼",
             attributes: [.foregroundColor: UIColor(hex: "b4b4b4")]
         )
         $0.textField.textColor = UIColor(hex: "545454")
@@ -137,7 +137,7 @@ class SignInRootView: NiblessView {
 
     private let captchaInputView: ValidatableInputView = ValidatableInputView {
         $0.textField.attributedPlaceholder = NSAttributedString(
-            string: "驗證碼-6碼",
+            string: "請輸入驗證碼",
             attributes: [.foregroundColor: UIColor(hex: "b4b4b4")]
         )
         $0.textField.textColor = UIColor(hex: "545454")
@@ -301,6 +301,7 @@ class SignInRootView: NiblessView {
                 self.viewModel.signInInfo.password = $0.2
             })
             .disposed(by: bag)
+//            resendOTPButton.addTarget(viewModel, action: #selector(view), for: <#T##UIControl.Event#>)
         }
 
         rememberAccountButton.rx.tap

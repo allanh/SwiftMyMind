@@ -64,7 +64,7 @@ class ResendOTPRootView: NiblessView {
     }
     private let storeIDInputView: ValidatableInputView = ValidatableInputView {
         $0.textField.attributedPlaceholder = NSAttributedString(
-            string: "企業編碼-5~8碼",
+            string: "請輸入商店代號",
             attributes: [.foregroundColor: UIColor(hex: "b4b4b4")]
         )
         $0.textField.textColor = UIColor(hex: "545454")
@@ -76,7 +76,7 @@ class ResendOTPRootView: NiblessView {
 
     private let accountInputView: ValidatableInputView = ValidatableInputView {
         $0.textField.attributedPlaceholder = NSAttributedString(
-            string: "使用者帳號-3~20碼",
+            string: "請輸入管理員帳號",
             attributes: [.foregroundColor: UIColor(hex: "b4b4b4")]
         )
         $0.textField.textColor = UIColor(hex: "545454")
@@ -93,7 +93,7 @@ class ResendOTPRootView: NiblessView {
 
     private lazy var passwordInputView: ValidatableInputView = ValidatableInputView {
         $0.textField.attributedPlaceholder = NSAttributedString(
-            string: "輸入密碼",
+            string: "請輸入密碼",
             attributes: [.foregroundColor: UIColor(hex: "b4b4b4")]
         )
         $0.textField.textColor = UIColor(hex: "545454")
@@ -114,20 +114,20 @@ class ResendOTPRootView: NiblessView {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
 
-    private let emailInputView: ValidatableInputView = ValidatableInputView {
-        $0.textField.attributedPlaceholder = NSAttributedString(
-            string: "輸入 Email",
-            attributes: [.foregroundColor: UIColor(hex: "b4b4b4")]
-        )
-        $0.textField.textColor = UIColor(hex: "545454")
-        let containerView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 10, height: 30)))
-        $0.textField.leftView = containerView
-        $0.textField.leftViewMode = .always
-        $0.translatesAutoresizingMaskIntoConstraints = false
-    }
+//    private let emailInputView: ValidatableInputView = ValidatableInputView {
+//        $0.textField.attributedPlaceholder = NSAttributedString(
+//            string: "輸入 Email",
+//            attributes: [.foregroundColor: UIColor(hex: "b4b4b4")]
+//        )
+//        $0.textField.textColor = UIColor(hex: "545454")
+//        let containerView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 10, height: 30)))
+//        $0.textField.leftView = containerView
+//        $0.textField.leftViewMode = .always
+//        $0.translatesAutoresizingMaskIntoConstraints = false
+//    }
 
     private lazy var inputStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [storeIDInputView, accountInputView, passwordInputView, emailInputView])
+        let stackView = UIStackView(arrangedSubviews: [storeIDInputView, accountInputView, passwordInputView])
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.distribution = .fillEqually
@@ -191,16 +191,14 @@ class ResendOTPRootView: NiblessView {
         Observable.combineLatest(
             storeIDInputView.textField.rx.text.orEmpty,
             accountInputView.textField.rx.text.orEmpty,
-            passwordInputView.textField.rx.text.orEmpty,
-            emailInputView.textField.rx.text.orEmpty
-        ) { storeID, account, password, email in
-            (storeID, account, password, email)
+            passwordInputView.textField.rx.text.orEmpty
+        ) { storeID, account, password in
+            (storeID, account, password)
         }
         .subscribe(onNext: { [unowned self] in
             self.viewModel.resendOTPInfo.storeID = $0.0
             self.viewModel.resendOTPInfo.account = $0.1
             self.viewModel.resendOTPInfo.password = $0.2
-            self.viewModel.resendOTPInfo.email = $0.3
         })
         .disposed(by: bag)
         passwordSecureButton.rx.tap
@@ -340,8 +338,6 @@ extension ResendOTPRootView {
             .constraint(equalToConstant: 52).isActive = true
         passwordInputView.heightAnchor
             .constraint(equalToConstant: 52).isActive = true
-        emailInputView.heightAnchor
-            .constraint(equalToConstant: 52).isActive = true
     }
 
     private func activateConstraintsStackView() {
@@ -417,19 +413,6 @@ extension ResendOTPRootView {
                 }
             })
             .disposed(by: bag)
-
-        viewModel.emailValidationResult
-            .asDriver()
-            .drive(onNext: { [unowned self] in
-                switch $0 {
-                case .valid:
-                    self.emailInputView.clearError()
-                case .invalid(let message):
-                    self.emailInputView.showError(with: message)
-                }
-            })
-            .disposed(by: bag)
-
     }
 
     private func bindViewModelToConfirmButton() {

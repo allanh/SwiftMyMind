@@ -44,12 +44,9 @@ class ResendOTPViewModel {
 
         let passwordResult = signInValidationService.validatePassword(resendOTPInfo.password)
         passwordValidationResult.accept(passwordResult)
-        let emailResult = signInValidationService.validateEmail(resendOTPInfo.email)
-        emailValidationResult.accept(emailResult)
 
         let result = storeIDResult == .valid
             && accountResult == .valid
-            && emailResult == .valid
             && passwordResult == .valid
 
         return result

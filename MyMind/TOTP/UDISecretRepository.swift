@@ -106,7 +106,7 @@ class UDISecretRepository: SecretRepository {
     
     func secret(for user: String, storeID: String) -> Secret? {
         return secrets.last {
-            $0.user == user && $0.id == storeID
+            $0.user == user && $0.id == storeID && $0.isValid
         }
     }
 
