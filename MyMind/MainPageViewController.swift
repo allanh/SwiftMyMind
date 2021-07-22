@@ -65,7 +65,7 @@ class MainPageViewController: UIViewController {
             }
             .catch { error in
                 if let apiError = error as? APIError {
-                    _ = ErrorHandler.shared.handle(apiError)
+                    _ = ErrorHandler.shared.handle(apiError, controller: self)
                 } else {
                     ToastView.showIn(self, message: error.localizedDescription)
                 }
