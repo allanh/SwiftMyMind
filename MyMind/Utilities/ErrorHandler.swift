@@ -63,7 +63,9 @@ extension ErrorHandler {
             .ensure {
             }
             .catch { error in
-                _ = ErrorHandler.shared.handle((error as! APIError))
+                if let apiError = error as? APIError {
+                    _ = ErrorHandler.shared.handle(apiError)
+                }
             }
     }
     

@@ -94,15 +94,29 @@ class SignInViewController: NiblessViewController {
             .ensure {
             }
             .catch { error in
-                _ = ErrorHandler.shared.handle((error as! APIError))
+                if let apiError = error as? APIError {
+                    _ = ErrorHandler.shared.handle(apiError, controller: self)
+                } else {
+                    ToastView.showIn(self, message: error.localizedDescription)
+                }
             }
     }
 
     func observerViewModel() {
-        viewModel.errorMessage
+        viewModel.error
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [unowned self] in
-                ToastView.showIn(self, message: $0)
+                if let apiError = $0 as? APIError {
+                    switch apiError {
+                    case .serviceError(let message):
+                        ToastView.showIn(self, message: message)
+                    default:
+                        ToastView.showIn(self, message: "")
+                    }
+                    
+                } else {
+                    ToastView.showIn(self, message: $0.localizedDescription)
+                }
             })
             .disposed(by: bag)
 
