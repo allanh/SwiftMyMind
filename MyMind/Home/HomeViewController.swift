@@ -111,11 +111,12 @@ final class HomeViewController: UIViewController {
                     self.isNetworkProcessing = false
                 }
                 .catch { error in
-                    if let apiError = error as? APIError {
-                        _ = ErrorHandler.shared.handle(apiError, controller: self)
-                    } else {
-                        ToastView.showIn(self, message: error.localizedDescription)
-                    }
+                    self.toDoList = nil
+//                    if let apiError = error as? APIError {
+//                        _ = ErrorHandler.shared.handle(apiError, controller: self)
+//                    } else {
+//                        ToastView.showIn(self, message: error.localizedDescription)
+//                    }
                 }
         }
     }
@@ -145,19 +146,21 @@ final class HomeViewController: UIViewController {
                         self.isNetworkProcessing = false
                     }
                     .catch { error in
-                        if let apiError = error as? APIError {
-                            _ = ErrorHandler.shared.handle(apiError, controller: self)
-                        } else {
-                            ToastView.showIn(self, message: error.localizedDescription)
-                        }
+                        self.saleReports = nil
+//                        if let apiError = error as? APIError {
+//                            _ = ErrorHandler.shared.handle(apiError, controller: self)
+//                        } else {
+//                            ToastView.showIn(self, message: error.localizedDescription)
+//                        }
                     }
             }
             .catch { error in
-                if let apiError = error as? APIError {
-                    _ = ErrorHandler.shared.handle(apiError, controller: self)
-                } else {
-                    ToastView.showIn(self, message: error.localizedDescription)
-                }
+                self.saleReports = nil
+//                if let apiError = error as? APIError {
+//                    _ = ErrorHandler.shared.handle(apiError, controller: self)
+//                } else {
+//                    ToastView.showIn(self, message: error.localizedDescription)
+//                }
             }
     }
     private func loadSaleReportList() {
@@ -172,11 +175,12 @@ final class HomeViewController: UIViewController {
                 self.isNetworkProcessing = false
             }
             .catch { error in
-                if let apiError = error as? APIError {
-                    _ = ErrorHandler.shared.handle(apiError, controller: self)
-                } else {
-                    ToastView.showIn(self, message: error.localizedDescription)
-                }
+                self.saleReportList = nil
+//                if let apiError = error as? APIError {
+//                    _ = ErrorHandler.shared.handle(apiError, controller: self)
+//                } else {
+//                    ToastView.showIn(self, message: error.localizedDescription)
+//                }
             }
     }
     private func loadSKURankingReportList() {
@@ -191,11 +195,12 @@ final class HomeViewController: UIViewController {
                 self.isNetworkProcessing = false
             }
             .catch { error in
-                if let apiError = error as? APIError {
-                    _ = ErrorHandler.shared.handle(apiError, controller: self)
-                } else {
-                    ToastView.showIn(self, message: error.localizedDescription)
-                }
+                self.skuRankingReportList = nil
+//                if let apiError = error as? APIError {
+//                    _ = ErrorHandler.shared.handle(apiError, controller: self)
+//                } else {
+//                    ToastView.showIn(self, message: error.localizedDescription)
+//                }
             }
     }
     private func loadSetSKURankingReportList() {
@@ -210,11 +215,12 @@ final class HomeViewController: UIViewController {
                 self.isNetworkProcessing = false
             }
             .catch { error in
-                if let apiError = error as? APIError {
-                    _ = ErrorHandler.shared.handle(apiError, controller: self)
-                } else {
-                    ToastView.showIn(self, message: error.localizedDescription)
-                }
+                self.setSKURankingReportList = nil
+//                if let apiError = error as? APIError {
+//                    _ = ErrorHandler.shared.handle(apiError, controller: self)
+//                } else {
+//                    ToastView.showIn(self, message: error.localizedDescription)
+//                }
             }
     }
     private func loadSaleRankingReportList() {
@@ -230,11 +236,12 @@ final class HomeViewController: UIViewController {
                     self.isNetworkProcessing = false
                 }
                 .catch { error in
-                    if let apiError = error as? APIError {
-                        _ = ErrorHandler.shared.handle(apiError, controller: self)
-                    } else {
-                        ToastView.showIn(self, message: error.localizedDescription)
-                    }
+                    self.saleRankingReportList = nil
+//                    if let apiError = error as? APIError {
+//                        _ = ErrorHandler.shared.handle(apiError, controller: self)
+//                    } else {
+//                        ToastView.showIn(self, message: error.localizedDescription)
+//                    }
                 }
         } else {
             dashboardLoader.vendorRankingReport(start: end.sevenDaysBefore, end: end, order: "TOTAL_SALE_AMOUNT")
@@ -245,11 +252,12 @@ final class HomeViewController: UIViewController {
                     self.isNetworkProcessing = false
                 }
                 .catch { error in
-                    if let apiError = error as? APIError {
-                        _ = ErrorHandler.shared.handle(apiError, controller: self)
-                    } else {
-                        ToastView.showIn(self, message: error.localizedDescription)
-                    }
+                    self.saleRankingReportList = nil
+//                    if let apiError = error as? APIError {
+//                        _ = ErrorHandler.shared.handle(apiError, controller: self)
+//                    } else {
+//                        ToastView.showIn(self, message: error.localizedDescription)
+//                    }
                 }
         }
     }
@@ -266,11 +274,12 @@ final class HomeViewController: UIViewController {
                     self.isNetworkProcessing = false
                 }
                 .catch { error in
-                    if let apiError = error as? APIError {
-                        _ = ErrorHandler.shared.handle(apiError, controller: self)
-                    } else {
-                        ToastView.showIn(self, message: error.localizedDescription)
-                    }
+                    self.grossProfitRankingReportList = nil
+//                    if let apiError = error as? APIError {
+//                        _ = ErrorHandler.shared.handle(apiError, controller: self)
+//                    } else {
+//                        ToastView.showIn(self, message: error.localizedDescription)
+//                    }
                 }
         } else {
             dashboardLoader.vendorRankingReport(start: end.sevenDaysBefore, end: end, order: "SALE_GROSS_PROFIT")
@@ -281,11 +290,12 @@ final class HomeViewController: UIViewController {
                     self.isNetworkProcessing = false
                 }
                 .catch { error in
-                    if let apiError = error as? APIError {
-                        _ = ErrorHandler.shared.handle(apiError, controller: self)
-                    } else {
-                        ToastView.showIn(self, message: error.localizedDescription)
-                    }
+                    self.grossProfitRankingReportList = nil
+//                    if let apiError = error as? APIError {
+//                        _ = ErrorHandler.shared.handle(apiError, controller: self)
+//                    } else {
+//                        ToastView.showIn(self, message: error.localizedDescription)
+//                    }
                 }
         }
     }
