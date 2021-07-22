@@ -31,7 +31,7 @@ final class MyMindInstructionView: NiblessView {
         $0.font = .pingFangTCRegular(ofSize: 14)
         $0.numberOfLines = 0
         $0.textAlignment = .left
-        $0.text = "1.\t請點選下方按鈕來掃描「My Mind買賣-登入OTP驗證綁定通知信」內的【驗證QR Code】。\n\n2.\t掃描成功後即綁定完成，會出現六位動態數字的驗證碼，並於每60秒更換一次。\n\n3.\t在My Mind買賣後台登入時，輸入這六位動態數字的驗證碼，即可完成登入。"
+        $0.text = "1.\t請點選下方「開始掃描」按鈕來掃描「帳號綁定 OTP 驗證通知信」內的【驗證 QR Code】。\n\n2.\t掃描成功後即綁定完成，會出現六位動態數字的驗證碼，並於每60秒更換一次。\n\n3.\t在My Mind買賣後台登入時，輸入這六位動態數字的驗證碼，即可完成登入。"
         $0.textColor = UIColor(hex: "545454")
     }
 
