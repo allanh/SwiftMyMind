@@ -41,10 +41,8 @@ class SignInViewModel {
     let userSession: PublishRelay<UserSession> = PublishRelay.init()
     let captchaSession: PublishRelay<CaptchaSession> = PublishRelay.init()
     let date: PublishRelay<ServerTime> = PublishRelay.init()
-    
-    let errorMessage: PublishRelay<String> = PublishRelay.init()
+    let error: PublishRelay<Error> = PublishRelay.init()
 
-    let unexpectedErrorMessage: String = "未知的錯誤發生"
     private let shouldRememberAccountKey: String = "shouldRememberAccount"
     // MARK: - Methods
     init(userSessionRepository: UserSessionRepository,
@@ -118,12 +116,7 @@ class SignInViewModel {
                 }
                 .catch { [weak self] error in
                     guard let self = self else { return }
-                    switch error {
-                    case APIError.serviceError(let message):
-                        self.errorMessage.accept(message)
-                    default:
-                        self.errorMessage.accept(self.unexpectedErrorMessage)
-                    }
+                    self.error.accept(error)
                 }
         } else {
             if let secret = repository.secret(for: signInInfo.account, storeID: signInInfo.storeID) {
@@ -139,12 +132,7 @@ class SignInViewModel {
                     }
                     .catch { [weak self] error in
                         guard let self = self else { return }
-                        switch error {
-                        case APIError.serviceError(let message):
-                            self.errorMessage.accept(message)
-                        default:
-                            self.errorMessage.accept(self.unexpectedErrorMessage)
-                        }
+                        self.error.accept(error)
                     }
             } else {
                self.indicateSigningIn(false)
@@ -176,12 +164,7 @@ class SignInViewModel {
                 self.signInInfo.captchaKey = session.key
             }
             .catch { error in
-                switch error {
-                case APIError.serviceError(let message):
-                    self.errorMessage.accept(message)
-                default:
-                    self.errorMessage.accept(self.unexpectedErrorMessage)
-                }
+                self.error.accept(error)
             }
     }
     
@@ -191,12 +174,7 @@ class SignInViewModel {
                 self.date.accept(date)
             }
             .catch { error in
-                switch error {
-                case APIError.serviceError(let message):
-                    self.errorMessage.accept(message)
-                default:
-                    self.errorMessage.accept(self.unexpectedErrorMessage)
-                }
+                self.error.accept(error)
             }
     }
 
