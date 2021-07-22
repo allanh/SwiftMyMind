@@ -66,14 +66,27 @@ struct Secret: Equatable {
         registerDate = nil
         isValid = false
     }
+    enum SecretDecodeType {
+        case base32, utf8
+    }
+    
+    func generatePin(decode: SecretDecodeType = .utf8, digits: Int = 6, timeInterval: Int = 60) -> String {
+        switch decode {
+        case .base32:
+            guard let data = base32DecodeToData(self.identifier) else {return "" }
+            let totp = TOTP(secret: data, digits: digits, timeInterval: timeInterval, algorithm: .sha1)
+            let currentDate: Date = Date()
 
-    func generatePin() -> String {
-        guard let data = self.identifier.data(using: .utf8) else { return "" }
-        let totp = TOTP(secret: data, digits: 6, timeInterval: 60, algorithm: .sha1)
-        let currentDate: Date = Date()
+            let pin: String = totp?.generate(time: currentDate) ?? ""
+            return pin
+        case .utf8:
+            guard let data = self.identifier.data(using: .utf8) else { return "" }
+            let totp = TOTP(secret: data, digits: digits, timeInterval: timeInterval, algorithm: .sha1)
+            let currentDate: Date = Date()
 
-        let pin: String = totp?.generate(time: currentDate) ?? ""
-        return pin
+            let pin: String = totp?.generate(time: currentDate) ?? ""
+            return pin
+        }
     }
 
     static func generateSecret(with encryptedString: String) -> Secret? {

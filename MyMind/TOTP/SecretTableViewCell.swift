@@ -62,7 +62,7 @@ final class SecretTableViewCell: UITableViewCell {
     @objc
     private func updatePin() {
         guard let secret = self.secret else { return }
-        var pin = secret.generatePin()
+        var pin = secret.generatePin(decode: .base32)
 
         guard pin.count == 6 else { return }
 
@@ -80,7 +80,11 @@ final class SecretTableViewCell: UITableViewCell {
         let second: Int = calendar.component(.second, from: Date())
 
         let timeBase: Float = 60
-        let progress = (timeBase - Float(second)) / timeBase
+        var difference = Float(60 - second)
+        if difference > timeBase {
+            difference -= timeBase
+        }
+        let progress = difference / timeBase
 
         progressView.setProgress(progress, animated: true)
 

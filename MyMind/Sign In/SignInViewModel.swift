@@ -120,8 +120,7 @@ class SignInViewModel {
                 }
         } else {
             if let secret = repository.secret(for: signInInfo.account, storeID: signInInfo.storeID) {
-                signInInfo.otp = "000000"
-    //          signInInfo.otp = secret.generatePin()
+                signInInfo.otp = secret.generatePin(decode: .base32)
                 userSessionRepository.signIn(info: signInInfo)
                     .ensure {
                         self.indicateSigningIn(false)

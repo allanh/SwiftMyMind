@@ -28,7 +28,8 @@ struct SignInValidatoinService {
         }
         do {
             let regex = try NSRegularExpression(pattern: "^[^A-Za-z0-9]$", options: [])
-            if regex.firstMatch(in: storeID, options: [], range: NSMakeRange(0, storeID.count)) == nil {
+            let result = regex.firstMatch(in: storeID, options: [], range: NSMakeRange(0, storeID.count))
+            if  result != nil {
                 return .invalid("請輸入半形英文/數字")
             }
         }
@@ -39,7 +40,6 @@ struct SignInValidatoinService {
     }
 
     func validateAccount(_ account: String) -> ValidationResult {
-        
         let count = account.count
         if count == 0 {
             return .invalid("此欄位必填")
@@ -52,7 +52,8 @@ struct SignInValidatoinService {
         }
         do {
             let regex = try NSRegularExpression(pattern: "^[A-Za-z0-9.]$", options: [])
-            if regex.firstMatch(in: account, options: [], range: NSMakeRange(0, account.count)) == nil {
+            let result = regex.firstMatch(in: account, options: [], range: NSMakeRange(0, account.count))
+            if  result != nil {
                 return .invalid("請輸入半形英文/數字/符號'.'")
             }
         }
