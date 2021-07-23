@@ -33,5 +33,27 @@ target 'MyMind' do
   target 'MyMindUITests' do
     # Pods for testing
   end
+  target 'Demo' do
+  use_frameworks!
+    pod 'RxSwift', '6.1.0'
+    pod 'RxCocoa', '6.1.0'
+    pod 'NVActivityIndicatorView'
+    pod 'Charts'
+    pod 'PromiseKit', '~> 6.8'
+    pod 'Kingfisher', '~> 6.0'
+    pod 'SwiftOTP'
+    pod 'Firebase/RemoteConfig'
+  end
+  target 'Production' do
+  use_frameworks!
+    pod 'RxSwift', '6.1.0'
+    pod 'RxCocoa', '6.1.0'
+    pod 'NVActivityIndicatorView'
+    pod 'Charts'
+    pod 'PromiseKit', '~> 6.8'
+    pod 'Kingfisher', '~> 6.0'
+    pod 'SwiftOTP'
+    pod 'Firebase/RemoteConfig'
+  end
 
 end
