@@ -90,7 +90,7 @@ extension PromiseKitAPIService {
                 }
 
                 do {
-                    let response = try JSONDecoder().decode(Response<Int>.self, from: data)
+                    let response = try JSONDecoder().decode(Response<[Int]>.self, from: data)
                     if response.status == .SUCCESS {
                         seal.fulfill(())
                     } else {
