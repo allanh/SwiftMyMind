@@ -23,28 +23,19 @@ class SecretListViewController: UIViewController {
 //        let navigationTitleImageView: UIImageView = UIImageView {
 //            $0.image = UIImage(named: "udi_logo")
 //        }
-        title = "My Mind 買賣 OTP"
 //        navigationItem.titleView = navigationTitleImageView
+        title = "My Mind 買賣 OTP"
         tableView.register(SecretTableViewCell.nib, forCellReuseIdentifier: SecretTableViewCell.reuseIdentifier)
-        
-        if repository.secrets.isEmpty {
-            showInstructionView()
-        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         switch repository.secrets.isEmpty {
         case true:
-            if instructionView?.superview != nil {
-                hideCameraButton()
-            } else {
-                showEmptySecretView()
-                showCameraButton()
-            }
+            showInstructionView()
+            hideCameraButton()
         case false:
             removeInstructionView()
-            hideEmptySecretView()
             showCameraButton()
         }
     }
@@ -188,7 +179,8 @@ extension SecretListViewController: UITableViewDelegate {
                 tableView.endUpdates()
 
                 if self.repository.secrets.isEmpty {
-                    self.showEmptySecretView()
+                    self.showInstructionView()
+                    self.hideCameraButton()
                 }
                 completionHandler(true)
             }
