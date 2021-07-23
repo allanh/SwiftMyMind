@@ -48,6 +48,7 @@ class IndicatorSwitchContentHeaderView: NiblessView {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = .pingFangTCSemibold(ofSize: 16)
         $0.textColor = .secondaryLabel
+        $0.adjustsFontSizeToFitWidth = true
     }
     private let switcherSegmentControl: UISegmentedControl = UISegmentedControl {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -106,12 +107,14 @@ extension IndicatorSwitchContentHeaderView {
         ])
     }
     private func activateConstraintsSwitcherSegmentControl() {
+        let leading = switcherSegmentControl.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: 8)
         let centerY = switcherSegmentControl.centerYAnchor
             .constraint(equalTo: titleLabel.centerYAnchor)
         let trailing = switcherSegmentControl.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8)
 
+        let width = switcherSegmentControl.widthAnchor.constraint(equalToConstant: 140)
         NSLayoutConstraint.activate([
-            centerY, trailing
+            centerY, trailing, leading, width
         ])
     }
     private func activateConstraintsSeperatorView() {
