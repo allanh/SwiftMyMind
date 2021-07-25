@@ -8,12 +8,17 @@
 
 import Foundation
 
-private let cryptorKey: String = "9Edv7aN6h2ZUpK6V6SmHmugm"//"lyAOvVCxkYvyTzSeEyRwkfzX"
+//private let cryptorKey: String = "9Edv7aN6h2ZUpK6V6SmHmugm"//"lyAOvVCxkYvyTzSeEyRwkfzX"
 
 class UDI3DESCryptor {
     let key: String
-
-    init(key: String = cryptorKey) {
+    static func cryptorKey()-> String {
+        if let crypto = Bundle.main.infoDictionary?["CryptoKey"] as? String {
+            return crypto
+        }
+        return ""
+    }
+    init(key: String = UDI3DESCryptor.cryptorKey()) {
         self.key = key
     }
 

@@ -133,7 +133,13 @@ extension SecretListViewController: ScanViewControllerDelegate {
         tableView.reloadData()
     }
     func scanViewController(_ scanViewController: ScanViewController, validate qrCodeValue: String) -> Bool {
-        return true
+        if let url = URL(string: qrCodeValue),
+           let _ = Secret.init(url: url) {
+            return true
+        } else if let _ = Secret.generateSecret(with: qrCodeValue) {
+            return true
+        }
+        return false
     }
 }
 // MARK: - Table view data source
