@@ -33,15 +33,15 @@ class ForgotPasswordRootView: NiblessView {
     }
 
     private let titleGradientView: GradientView = {
-        let view = GradientView(gradientStartColor: UIColor(hex: "f26523"), gradientEndColor: UIColor(hex: "fa9e49"))
-        view.layer.cornerRadius = 100
+        let view = GradientView(gradientStartColor: UIColor(hex: "004477"), gradientEndColor: UIColor(hex: "004477"))
+        view.layer.cornerRadius = 10
         view.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMaxXMaxYCorner]
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
 
     private let titleLabel: UILabel = UILabel {
-        $0.font = UIFont.pingFangTCSemibold(ofSize: 16)
+        $0.font = UIFont.pingFangTCSemibold(ofSize: 14)
         $0.text = "管理後台"
         $0.textColor = .white
         $0.backgroundColor = .clear
@@ -49,8 +49,8 @@ class ForgotPasswordRootView: NiblessView {
     }
     
     private let timeLabel: UILabel = UILabel {
-        $0.font = UIFont.pingFangTCSemibold(ofSize: 14)
-        $0.textColor = UIColor(hex: "306ab2")
+        $0.font = UIFont.pingFangTCRegular(ofSize: 14)
+        $0.textColor = UIColor(hex: "545454")
         $0.backgroundColor = .clear
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
@@ -64,9 +64,9 @@ class ForgotPasswordRootView: NiblessView {
     }
 
     private let resetPasswordDescriptionLabel: UILabel = UILabel {
-        $0.font = UIFont.pingFangTCRegular(ofSize: 14)
+        $0.font = UIFont.pingFangTCRegular(ofSize: 12)
         $0.text = "輸入以下資料，我們將發送重設密碼連結"
-        $0.textColor = UIColor(hex: "7f7f7f")
+        $0.textColor = UIColor(hex: "545454")
         $0.backgroundColor = .clear
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
@@ -162,9 +162,14 @@ class ForgotPasswordRootView: NiblessView {
         $0.setImage(image, for: .normal)
     }
     
+    private let exclamationImageView: UIImageView = UIImageView {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.image = UIImage(named: "exclamation_circle")
+    }
+
     private let confirmTimeLabel: UILabel = UILabel {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.textColor = UIColor(hex: "306ab2")
+        $0.textColor = UIColor(hex: "7f7f7f")
         $0.text = "請檢視手機時間是否與標準時間同步。"
         $0.font = .pingFangTCRegular(ofSize: 14)
     }
@@ -175,8 +180,10 @@ class ForgotPasswordRootView: NiblessView {
         $0.setTitleColor(UIColor.white, for: .normal)
         $0.setTitleColor(UIColor(hex: "b4b4b4"), for: .disabled)
         $0.titleLabel?.font = UIFont.pingFangTCSemibold(ofSize: 16)
-        $0.backgroundColor = UIColor(hex: "ff7d2c")
-        $0.layer.cornerRadius = 4
+        $0.backgroundColor = UIColor(hex: "ea6120")
+        $0.layer.cornerRadius = 10
+        $0.layer.shadowColor = UIColor(hex: "ea6120").withAlphaComponent(0.5).cgColor
+        $0.layer.shadowOffset = CGSize(width: 0, height: 3)
     }
 
     // MARK: - Methods
@@ -214,6 +221,7 @@ class ForgotPasswordRootView: NiblessView {
             contentView.addSubview(reloadCaptchaButton)
         } else {
             contentView.addSubview(timeLabel)
+            contentView.addSubview(exclamationImageView)
             contentView.addSubview(confirmTimeLabel)
         }
         contentView.addSubview(confirmButton)
@@ -237,6 +245,7 @@ class ForgotPasswordRootView: NiblessView {
             activateConstraintsReloadCaptchaButton()
         } else {
             activateConstraintsTimeLabel()
+            activateConstraintsExclamationImageView()
             activateConstraintsConfirmTimeLabel()
         }
         activateConstraintsConfirmButton()
@@ -361,9 +370,9 @@ extension ForgotPasswordRootView {
         let leading = titleGradientView.leadingAnchor
             .constraint(equalTo: contentView.leadingAnchor)
         let width = titleGradientView.widthAnchor
-            .constraint(equalToConstant: 126)
+            .constraint(equalToConstant: 98)
         let height = titleGradientView.heightAnchor
-            .constraint(equalToConstant: 30)
+            .constraint(equalToConstant: 28)
 
         NSLayoutConstraint.activate([
             top, leading, width, height
@@ -373,11 +382,11 @@ extension ForgotPasswordRootView {
     private func activateConstraintsTitleLabel() {
         let centerY = titleLabel.centerYAnchor
             .constraint(equalTo: titleGradientView.centerYAnchor)
-        let trailing = titleLabel.trailingAnchor
-            .constraint(equalTo: titleGradientView.trailingAnchor, constant: -12)
+        let centerX = titleLabel.centerXAnchor
+            .constraint(equalTo: titleGradientView.centerXAnchor)
 
         NSLayoutConstraint.activate([
-            centerY, trailing
+            centerY, centerX
         ])
     }
     
@@ -499,19 +508,34 @@ extension ForgotPasswordRootView {
             trailing, centerY, width, height
         ])
     }
-    
-    private func activateConstraintsConfirmTimeLabel() {
-        let top = confirmTimeLabel.topAnchor
-            .constraint(equalTo: inputStackView.bottomAnchor)
-        let leading = confirmTimeLabel.leadingAnchor
+
+    private func activateConstraintsExclamationImageView() {
+        let top = exclamationImageView.topAnchor
+            .constraint(equalTo: inputStackView.bottomAnchor, constant: 10)
+        let leading = exclamationImageView.leadingAnchor
             .constraint(equalTo: inputStackView.leadingAnchor)
+        let width = exclamationImageView.widthAnchor
+            .constraint(equalToConstant: 16)
+        let height = exclamationImageView.heightAnchor
+            .constraint(equalToConstant: 16)
+
+        NSLayoutConstraint.activate([
+            top, leading, width, height
+        ])
+    }
+
+    private func activateConstraintsConfirmTimeLabel() {
+        let centerY = confirmTimeLabel.centerYAnchor
+            .constraint(equalTo: exclamationImageView.centerYAnchor)
+        let leading = confirmTimeLabel.leadingAnchor
+            .constraint(equalTo: exclamationImageView.trailingAnchor, constant: 4)
         let trailing = confirmTimeLabel.trailingAnchor
             .constraint(equalTo: inputStackView.trailingAnchor)
         let height = confirmTimeLabel.heightAnchor
             .constraint(equalToConstant: 20)
 
         NSLayoutConstraint.activate([
-            top, leading, trailing, height
+            centerY, leading, trailing, height
         ])
     }
 
@@ -523,7 +547,7 @@ extension ForgotPasswordRootView {
         let trailing = confirmButton.trailingAnchor
             .constraint(equalTo: inputStackView.trailingAnchor)
         let height = confirmButton.heightAnchor
-            .constraint(equalToConstant: 40)
+            .constraint(equalToConstant: 46)
         let bottom = contentView.bottomAnchor
             .constraint(equalTo: confirmButton.bottomAnchor, constant: 30)
 

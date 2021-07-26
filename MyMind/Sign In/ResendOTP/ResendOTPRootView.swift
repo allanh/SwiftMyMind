@@ -31,15 +31,15 @@ class ResendOTPRootView: NiblessView {
     }
 
     private let titleGradientView: GradientView = {
-        let view = GradientView(gradientStartColor: UIColor(hex: "f26523"), gradientEndColor: UIColor(hex: "fa9e49"))
-        view.layer.cornerRadius = 100
+        let view = GradientView(gradientStartColor: UIColor(hex: "004477"), gradientEndColor: UIColor(hex: "004477"))
+        view.layer.cornerRadius = 10
         view.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMaxXMaxYCorner]
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
 
     private let titleLabel: UILabel = UILabel {
-        $0.font = UIFont.pingFangTCSemibold(ofSize: 16)
+        $0.font = UIFont.pingFangTCSemibold(ofSize: 14)
         $0.text = "管理後台"
         $0.textColor = .white
         $0.backgroundColor = .clear
@@ -49,16 +49,16 @@ class ResendOTPRootView: NiblessView {
     private let resendOTPTitleLabel: UILabel = UILabel {
         $0.font = UIFont.pingFangTCSemibold(ofSize: 16)
         $0.text = "補發APP QR Code"
-        $0.textColor = UIColor(hex: "306ab2")
+        $0.textColor = UIColor(hex: "545454")
         $0.backgroundColor = .clear
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
 
     private let resendOTPDescriptionLabel: UILabel = UILabel {
-        $0.font = UIFont.pingFangTCRegular(ofSize: 14)
-        $0.text = "1.請輸入以下資料，我們將重新發送【Mymind買賣-登入驗證APP綁定通知信】\n2.請安裝Mymind OTP APP，掃描信中驗證QR Code，即可產生APP驗證碼。"
+        $0.font = UIFont.pingFangTCRegular(ofSize: 12)
+        $0.text = "1.請輸入以下資料，我們將重新發送【帳號綁定 OTP驗證通知信】\n2.掃描信中驗證 QR Code，即可產生 OTP 驗證碼"
         $0.numberOfLines = 0
-        $0.textColor = UIColor(hex: "306ab2")
+        $0.textColor = UIColor(hex: "545454")
         $0.backgroundColor = .clear
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
@@ -139,8 +139,10 @@ class ResendOTPRootView: NiblessView {
         $0.setTitleColor(UIColor.white, for: .normal)
         $0.setTitleColor(UIColor(hex: "b4b4b4"), for: .disabled)
         $0.titleLabel?.font = UIFont.pingFangTCSemibold(ofSize: 16)
-        $0.backgroundColor = UIColor(hex: "ff7d2c")
-        $0.layer.cornerRadius = 4
+        $0.backgroundColor = UIColor(hex: "ea6120")
+        $0.layer.cornerRadius = 10
+        $0.layer.shadowColor = UIColor(hex: "ea6120").withAlphaComponent(0.5).cgColor
+        $0.layer.shadowOffset = CGSize(width: 0, height: 3)
     }
 
     // MARK: - Methods

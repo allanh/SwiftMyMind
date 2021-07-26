@@ -71,7 +71,7 @@ class SignInViewModel {
     }
 
     func validateSignInInfo() -> Bool {
-        var valid = true
+        var valid = false
         let storeIDResult = signInValidationService.validateStoreID(signInInfo.storeID)
         storeIDValidationResult.accept(storeIDResult)
 
@@ -84,15 +84,19 @@ class SignInViewModel {
         let captchaValueResult = signInValidationService.validateCaptchaValue(signInInfo.captchaValue ?? "")
         captchaValueValidationResult.accept(captchaValueResult)
         
-        if storeIDResult == .valid,
-           accountResult == .valid,
-           passwordResult == .valid {
-            valid = true
+        if !otpEnabled {
+            if storeIDResult == .valid,
+               accountResult == .valid,
+               passwordResult == .valid {
+                valid = true
+            }
         } else {
-            valid = false
-        }
-        if !otpEnabled, valid {
-            valid = captchaValueResult == .valid
+            if storeIDResult == .valid,
+               accountResult == .valid,
+               passwordResult == .valid,
+               captchaValueResult == .valid {
+                valid = true
+            }
         }
         return valid
     }

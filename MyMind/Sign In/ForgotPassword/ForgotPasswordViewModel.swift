@@ -54,16 +54,22 @@ class ForgotPasswordViewModel {
 
         let emailResult = signInValidationService.validateEmail(forgotPasswordInfo.email)
         emailValidationResult.accept(emailResult)
+        let captchaValueResult = signInValidationService.validateCaptchaValue(forgotPasswordInfo.captchaValue ?? "")
+        captchaValueValidationResult.accept(captchaValueResult)
 
-        var result = storeIDResult == .valid
-            && accountResult == .valid
-            && emailResult == .valid
-        if !otpEnabled, result {
-            let captchaValueResult = signInValidationService.validateCaptchaValue(forgotPasswordInfo.captchaValue ?? "")
-            captchaValueValidationResult.accept(captchaValueResult)
-            result = captchaValueResult == .valid
+        var result: Bool = false
+        if !otpEnabled {
+            if accountResult == .valid,
+               accountResult == .valid {
+                result = true
+            }
+        } else {
+            if accountResult == .valid,
+               emailResult == .valid,
+               captchaValueResult == .valid {
+                result = true
+            }
         }
-
         return result
     }
 

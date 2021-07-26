@@ -18,6 +18,9 @@ class ValidatableInputView: UIView {
         $0.font = UIFont.pingFangTCRegular(ofSize: 14)
     }
 
+    private let indicatorImageView: UIImageView = UIImageView {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
     private let errorMessageLabel: UILabel = UILabel {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = UIFont.pingFangTCRegular(ofSize: 12)
@@ -38,23 +41,28 @@ class ValidatableInputView: UIView {
 
     func constructViewHeirachy() {
         addSubview(textField)
+        addSubview(indicatorImageView)
         addSubview(errorMessageLabel)
     }
 
     func activateConstraints() {
         activateConstraintsTextField()
+        activateConstraintsIndicatorImageView()
         activateConstraintsErrorMessageLabel()
     }
 
-    func showError(with message: String) {
+    func showError(with message: String, indicator: UIImage? = UIImage(named: "exclamation_triangle")) {
         textField.layer.borderColor = UIColor(hex: "f5222d").cgColor
         errorMessageLabel.text = message
         errorMessageLabel.isHidden = false
+        indicatorImageView.image = indicator
+        indicatorImageView.isHidden = false
     }
 
     func clearError() {
         textField.layer.borderColor = UIColor(hex: "cccccc").cgColor
         errorMessageLabel.isHidden = true
+        indicatorImageView.isHidden = true
     }
 }
 // MARK: - Layout
@@ -69,15 +77,26 @@ extension ValidatableInputView {
             top, leading, trailing, height
         ])
     }
+    
+    private func activateConstraintsIndicatorImageView() {
+        let top = indicatorImageView.topAnchor.constraint(equalTo: textField.bottomAnchor)
+        let leading = indicatorImageView.leadingAnchor.constraint(equalTo: leadingAnchor)
+        let width = indicatorImageView.widthAnchor.constraint(equalToConstant: 16)
+        let height = indicatorImageView.heightAnchor.constraint(equalToConstant: 16)
 
+        NSLayoutConstraint.activate([
+            top, leading, width, height
+        ])
+    }
+    
     private func activateConstraintsErrorMessageLabel() {
-        let top = errorMessageLabel.topAnchor.constraint(equalTo: textField.bottomAnchor)
-        let leading = errorMessageLabel.leadingAnchor.constraint(equalTo: leadingAnchor)
+        let centerY = errorMessageLabel.centerYAnchor.constraint(equalTo: indicatorImageView.centerYAnchor)
+        let leading = errorMessageLabel.leadingAnchor.constraint(equalTo: indicatorImageView.trailingAnchor, constant: 4)
         let trailing = errorMessageLabel.trailingAnchor.constraint(equalTo: trailingAnchor)
         let bottom = errorMessageLabel.bottomAnchor.constraint(equalTo: bottomAnchor)
 
         NSLayoutConstraint.activate([
-            top, leading, trailing, bottom
+            centerY, leading, trailing, bottom
         ])
     }
 }
