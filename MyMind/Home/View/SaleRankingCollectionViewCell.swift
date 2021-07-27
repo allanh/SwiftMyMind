@@ -18,21 +18,25 @@ extension SaleRankingReportList {
         get {
             var amount: Float = 0
             for report in reports {
-                amount += report.saleAmount
+                if report.saleAmount > 0 {
+                    amount += report.saleAmount
+                }
             }
-            return amount
+            return amount > 0 ? amount : 1
         }
     }
     var totalGrossProfit: Float {
         get {
             var grossProfit: Float = 0
             for report in reports {
-                grossProfit += report.saleGrossProfit
+                if report.saleGrossProfit > 0 {
+                    grossProfit += report.saleGrossProfit
+                }
             }
-            return grossProfit
+            return grossProfit > 0 ? grossProfit : 1
         }
     }
-    func pieChartData(maximum: Int = 5) -> PieChartData {
+    func pieChartData(maximum: Int = 5, profit: Bool = false) -> PieChartData {
         var pieChartEntries: [PieChartDataEntry] = []
         let formatter = NumberFormatter {
             $0.numberStyle = .percent
@@ -40,9 +44,11 @@ extension SaleRankingReportList {
             $0.minimumFractionDigits = 2
         }
         for report in reports {
-            let amount: Double = Double(report.saleAmount)/Double(totalSaleAmount)
-            let string: String = formatter.string(from: NSNumber(value: amount)) ?? ""
-            pieChartEntries.append(PieChartDataEntry(value:amount, label: report.name+" "+string))
+            let amount: Double = profit ? Double(report.saleGrossProfit)/Double(totalGrossProfit) : Double(report.saleAmount)/Double(totalSaleAmount)
+            if amount > 0 {
+                let string: String = formatter.string(from: NSNumber(value: amount)) ?? ""
+                pieChartEntries.append(PieChartDataEntry(value:amount, label: report.name+" "+string))
+            }
         }
         var value: Double = 0
         if pieChartEntries.count > maximum {
@@ -117,7 +123,7 @@ class SaleRankingCollectionViewCell: UICollectionViewCell {
                 
         chartView.renderer = EmptyValuePieChartRenderer(chart: chartView, animator: chartView.chartAnimator, viewPortHandler: chartView.viewPortHandler)
     }
-    func config(with rankingList: SaleRankingReportList?, devider: SaleRankingReport.SaleRankingReportDevider) {
+    func config(with rankingList: SaleRankingReportList?, devider: SaleRankingReport.SaleRankingReportDevider, profit: Bool) {
         clipsToBounds = true
         backgroundColor = .systemBackground
         layer.cornerRadius = 16
@@ -140,10 +146,17 @@ class SaleRankingCollectionViewCell: UICollectionViewCell {
         legend.xEntrySpace = 40
         legend.yEntrySpace = 20
         if let rankingList = rankingList, rankingList.reports.count > 0 {
-            legend.form = .circle
-            legend.formSize = 10
-            legend.xOffset = 0
-            chartView.data = rankingList.pieChartData()
+            let data = rankingList.pieChartData(profit: profit)
+            if data.entryCount > 0 {
+                legend.form = .circle
+                legend.formSize = 10
+                legend.xOffset = 0
+                chartView.data = data
+            } else {
+                legend.form = .none
+                legend.xOffset = 20
+                chartView.data = SaleRankingReportList.emptyPieChartData()
+            }
         } else {
             legend.form = .none
             legend.xOffset = 20

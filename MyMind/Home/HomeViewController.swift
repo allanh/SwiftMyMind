@@ -368,13 +368,13 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
             return UICollectionViewCell()
         case 5:
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SaleRankingCollectionViewCell", for: indexPath) as? SaleRankingCollectionViewCell {
-                cell.config(with: saleRankingReportList, devider: amountRankingDevider)
+                cell.config(with: saleRankingReportList, devider: amountRankingDevider, profit: false)
                 return cell
             }
             return UICollectionViewCell()
         case 6:
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SaleRankingCollectionViewCell", for: indexPath) as? SaleRankingCollectionViewCell {
-                cell.config(with: grossProfitRankingReportList, devider: grossProfitRankingDevider)
+                cell.config(with: grossProfitRankingReportList, devider: grossProfitRankingDevider, profit: true)
                 return cell
             }
             return UICollectionViewCell()
