@@ -55,7 +55,7 @@ final class ScanViewController: UIViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-//        let string = "00GXfpCkQp082fcSlkJBinwwvdb2v4AbFJTP1Av4KQQpGJBvBXkt4eSY8HLwW71Dn9kEEZFwiQ9v29wNU9BG0uqCkCcjJOSApG9qyRL5yCRuH749foHk7kkbqvIaDyxgoSVhis0uU3r8o="
+//        let string = "00ADB1iGsn1jugq7WcuyzdTVCfkoCnC40nJzR98tsxQGRt5/u4nhHPgNG1yiDUeeL13gixxmsPWS37CMd94Pi/mc3g7tni/gtWJbWwsNLuR9y8OnRDAQSFGBJRpVuDdKga"
 //        let string = "00prqa3Y1IJyAAjkavCTMa0//neIbPtOzq0WQ0KFm+50suD+ljTQqpMKQ4iA/j4gxsbZ8fka91SJ9yFmtjzpkHH3Eikvwn4gU4+/Kf8tHmcSPlSXnvFoREa4hNn1+d/zfr"
 //        if let delegate = delegate, delegate.scanViewController(self, validate: string) {
 //            guard validateMetadataString(string: string) else {
