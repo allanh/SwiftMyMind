@@ -60,13 +60,13 @@ class ForgotPasswordViewModel {
         var result: Bool = false
         if !otpEnabled {
             if accountResult == .valid,
-               accountResult == .valid {
+               accountResult == .valid,
+               captchaValueResult == .valid {
                 result = true
             }
         } else {
             if accountResult == .valid,
-               emailResult == .valid,
-               captchaValueResult == .valid {
+               emailResult == .valid {
                 result = true
             }
         }

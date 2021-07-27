@@ -87,14 +87,14 @@ class SignInViewModel {
         if !otpEnabled {
             if storeIDResult == .valid,
                accountResult == .valid,
-               passwordResult == .valid {
+               passwordResult == .valid,
+               captchaValueResult == .valid {
                 valid = true
             }
         } else {
             if storeIDResult == .valid,
                accountResult == .valid,
-               passwordResult == .valid,
-               captchaValueResult == .valid {
+               passwordResult == .valid {
                 valid = true
             }
         }

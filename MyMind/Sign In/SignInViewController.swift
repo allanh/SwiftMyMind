@@ -123,11 +123,20 @@ class SignInViewController: NiblessViewController {
         viewModel.totp
             .observe(on: MainScheduler.instance)
             .subscribe({ [unowned self] info in
-                let storyboard: UIStoryboard = UIStoryboard(name: "TOTP", bundle: nil)
-                if let viewController = storyboard.instantiateViewController(withIdentifier: "SecretListViewControllerNavi") as? UINavigationController, let totpViewController = viewController.topViewController as? SecretListViewController {
-                    totpViewController.scanViewControllerDelegate = self
-                    present(viewController, animated: true, completion: nil)
+                let alert = UIAlertController(title: "您還未綁定 OTP 驗證碼", message: "點擊確定將協助轉導至「My Mind 買賣 OTP」進行 OTP 驗證設定", preferredStyle: .alert)
+                let cancelAction = UIAlertAction(title: "取消", style: .cancel) { action in
                 }
+                let confirmAction = UIAlertAction(title: "確定", style: .default) { action in
+                    let storyboard: UIStoryboard = UIStoryboard(name: "TOTP", bundle: nil)
+                    if let viewController = storyboard.instantiateViewController(withIdentifier: "SecretListViewControllerNavi") as? UINavigationController, let totpViewController = viewController.topViewController as? SecretListViewController {
+                        totpViewController.scanViewControllerDelegate = self
+                        present(viewController, animated: true, completion: nil)
+                    }
+               }
+                alert.addAction(cancelAction)
+                alert.addAction(confirmAction)
+                present(alert, animated: true, completion: nil)
+
             })
             .disposed(by: bag)
 
