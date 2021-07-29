@@ -5,13 +5,12 @@
 //  Created by Nelson Chan on 2021/7/9.
 //  Copyright © 2021 United Digital Intelligence. All rights reserved.
 //
-
 import UIKit
 // MARK: -- ToDo --
 struct ToDo: Codable {
     struct ToDoItem: Codable {
         enum ToDoItemType: String, Codable {
-            case TRANSFER, TRANSFER_RETURN, BORROWING, BORROWING_RETURN, PURCHASE_UNUSAL, PURCHASE_REVIEW_REJECT, PURCHASE_APPROVED, PURCHASE_REIVEW, INBOUND_UNUSAL, INBOUND_PENDING, LOW_STOCK, NONE_STOCK, SALE, SALE_RETURN
+            case TRANSFER, TRANSFER_RETURN, BORROWING, BORROWING_RETURN, PURCHASE_UNUSUAL, PURCHASE_REVIEW_REJECT, PURCHASE_APPROVED, PURCHASE_REVIEW, INBOUND_UNUSUAL, INBOUND_PENDING, LOW_STOCK, NONE_STOCK, SALE, SALE_RETURN
             var displayName: String {
                 get {
                     switch self {
@@ -19,11 +18,11 @@ struct ToDo: Codable {
                     case .TRANSFER_RETURN: return "轉單銷退"
                     case .BORROWING: return "借貨"
                     case .BORROWING_RETURN: return "還貨"
-                    case .PURCHASE_UNUSAL: return "異常入庫(採購)"
+                    case .PURCHASE_UNUSUAL: return "異常入庫(採購)"
                     case .PURCHASE_REVIEW_REJECT: return "審核退回"
                     case .PURCHASE_APPROVED: return "審核通過"
-                    case .PURCHASE_REIVEW: return "待審核"
-                    case .INBOUND_UNUSAL: return "異常入庫(倉庫)"
+                    case .PURCHASE_REVIEW: return "待審核"
+                    case .INBOUND_UNUSUAL: return "異常入庫(倉庫)"
                     case .INBOUND_PENDING: return "待入庫"
                     case .LOW_STOCK: return "低庫存"
                     case .NONE_STOCK: return "無庫存"
@@ -107,5 +106,5 @@ struct ToDoList: Codable {
 //        let container = try decoder.container(keyedBy: CodingKeys.self)
 //        items = try container.decode([ToDo].self, forKey: .items)
 //    }
-    static let emptyItems: [ToDo] = [ToDo(type: .RECEIPT, items: [ToDo.ToDoItem(type: .TRANSFER, count: "0"), ToDo.ToDoItem(type: .BORROWING, count: "0")]), ToDo(type: .RECEIPT_RETURN, items: [ToDo.ToDoItem(type: .TRANSFER_RETURN, count: "0"), ToDo.ToDoItem(type: .BORROWING_RETURN, count: "0")]), ToDo(type: .PURCHASE, items: [ToDo.ToDoItem(type: .PURCHASE_UNUSAL, count: "0"), ToDo.ToDoItem(type: .PURCHASE_REVIEW_REJECT, count: "0"), ToDo.ToDoItem(type: .PURCHASE_APPROVED, count: "0"), ToDo.ToDoItem(type: .PURCHASE_REIVEW, count: "0")]), ToDo(type: .INBOUND, items: [ToDo.ToDoItem(type: .INBOUND_UNUSAL, count: "0"), ToDo.ToDoItem(type: .INBOUND_PENDING, count: "0")]), ToDo(type: .STOCK, items: [ToDo.ToDoItem(type: .LOW_STOCK, count: "0"), ToDo.ToDoItem(type: .NONE_STOCK, count: "0")])]
+    static let emptyItems: [ToDo] = [ToDo(type: .RECEIPT, items: [ToDo.ToDoItem(type: .TRANSFER, count: "0"), ToDo.ToDoItem(type: .BORROWING, count: "0")]), ToDo(type: .RECEIPT_RETURN, items: [ToDo.ToDoItem(type: .TRANSFER_RETURN, count: "0"), ToDo.ToDoItem(type: .BORROWING_RETURN, count: "0")]), ToDo(type: .PURCHASE, items: [ToDo.ToDoItem(type: .PURCHASE_UNUSUAL, count: "0"), ToDo.ToDoItem(type: .PURCHASE_REVIEW_REJECT, count: "0"), ToDo.ToDoItem(type: .PURCHASE_APPROVED, count: "0"), ToDo.ToDoItem(type: .PURCHASE_REVIEW, count: "0")]), ToDo(type: .INBOUND, items: [ToDo.ToDoItem(type: .INBOUND_UNUSUAL, count: "0"), ToDo.ToDoItem(type: .INBOUND_PENDING, count: "0")]), ToDo(type: .STOCK, items: [ToDo.ToDoItem(type: .LOW_STOCK, count: "0"), ToDo.ToDoItem(type: .NONE_STOCK, count: "0")])]
 }
