@@ -142,12 +142,16 @@ final class PurchaseCompletedApplyViewController: NiblessViewController {
 
     @objc
     private func backToHomeButtonDidTapped(_ sender: UIButton) {
-
+        if let viewControllers = navigationController?.viewControllers, viewControllers.count > 2 {
+            navigationController?.popToViewController(viewControllers[1], animated: true)
+        }
     }
 
     @objc
     private func backToListButtonDidTapped(_ sender: UIButton) {
-        navigationController?.popToRootViewController(animated: true)
+        if let viewControllers = navigationController?.viewControllers, viewControllers.count > 3 {
+            navigationController?.popToViewController(viewControllers[2], animated: true)
+        }
     }
 }
 // MARK: - Collection view data source

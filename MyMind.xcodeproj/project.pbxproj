@@ -2702,7 +2702,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				AUTH_SERVER_URL = "https://api-demo-auth.udicommerce.com";
 				CODE_SIGN_STYLE = Automatic;
-				CRYPTO = 9Edv7aN6h2ZUpK6V6SmHmugm;
+				CRYPTO = tAGsC6LLLFU2TwHBzvqLFjms;
 				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = NCP4JUG36Z;
 				INFOPLIST_FILE = "Demo-Info.plist";
@@ -2731,7 +2731,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				AUTH_SERVER_URL = "https://api-demo-auth.udicommerce.com";
 				CODE_SIGN_STYLE = Automatic;
-				CRYPTO = 9Edv7aN6h2ZUpK6V6SmHmugm;
+				CRYPTO = tAGsC6LLLFU2TwHBzvqLFjms;
 				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = NCP4JUG36Z;
 				INFOPLIST_FILE = "Demo-Info.plist";
@@ -2760,7 +2760,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				AUTH_SERVER_URL = "https://api-demo-auth.udicommerce.com";
 				CODE_SIGN_STYLE = Automatic;
-				CRYPTO = 9Edv7aN6h2ZUpK6V6SmHmugm;
+				CRYPTO = tAGsC6LLLFU2TwHBzvqLFjms;
 				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = NCP4JUG36Z;
 				INFOPLIST_FILE = "Demo-Info.plist";

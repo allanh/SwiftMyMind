@@ -114,6 +114,7 @@ struct PurchaseApplyViewModel {
         guard let pickedWarehouse = purchaseInfoViewModel.pickedWarehouse.value else { return nil }
         let warehouseID = pickedWarehouse.id
         let warehouseType = pickedWarehouse.type
+        let warehouseIndex: Int = pickedWarehouse.recipientInfo?.first?.warehouseIndex ?? 0
 
         let infos: [ApplyPurchaseParameterInfo.ProductInfo] = mapSuggestionProductMaterialViewModelsToProductInfos()
 
@@ -125,6 +126,7 @@ struct PurchaseApplyViewModel {
             remark: note,
             expectWarehouseID: String(warehouseID),
             expectWarehouseType: warehouseType,
+            warehouseIndex: warehouseIndex,
             productInfo: infos)
         return applyPurchaseParameterInfo
     }

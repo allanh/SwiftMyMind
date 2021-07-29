@@ -9,8 +9,16 @@
 import Foundation
 
 struct RecipientInfo: Codable {
+    private enum CodingKeys: String, CodingKey {
+        case name
+        case phone
+        case address
+        case warehouseIndex = "warehouse_index"
+    }
+
     let name, phone: String?
     let address: Address
+    let warehouseIndex: Int
 }
 
 struct Address: Codable {

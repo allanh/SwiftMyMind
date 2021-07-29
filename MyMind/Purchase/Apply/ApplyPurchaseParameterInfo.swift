@@ -28,6 +28,7 @@ struct ApplyPurchaseParameterInfo: Codable {
     let partnerID, vendorID, expectStorageDate, reviewBy: String
     let remark, expectWarehouseID: String
     let expectWarehouseType: Warehouse.WarehouseType
+    let warehouseIndex: Int
     let productInfo: [ProductInfo]
 
     enum CodingKeys: String, CodingKey {
@@ -36,6 +37,7 @@ struct ApplyPurchaseParameterInfo: Codable {
         case expectStorageDate = "expect_storage_date"
         case reviewBy = "review_by"
         case remark
+        case warehouseIndex = "warehouse_index"
         case expectWarehouseType = "expect_warehouse_type"
         case expectWarehouseID = "expect_warehouse_id"
         case productInfo = "product_info"
