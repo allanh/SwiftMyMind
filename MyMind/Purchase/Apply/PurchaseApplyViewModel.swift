@@ -14,6 +14,7 @@ struct PurchaseApplyViewModel {
     enum View {
         case suggestion(viewModels: BehaviorRelay<[SuggestionProductMaterialViewModel]>)
         case finish(purchaseID: String)
+        case error(descriptions: String)
     }
     let userSessionDataStore: UserSessionDataStore
     let purchaseInfoViewModel: PurchaseApplyInfoViewModel
@@ -66,7 +67,7 @@ struct PurchaseApplyViewModel {
                 navigation(with: view)
             }
             .catch { error in
-                print(error.localizedDescription)
+                navigation(with: .error(descriptions: error.localizedDescription))
             }
     }
 

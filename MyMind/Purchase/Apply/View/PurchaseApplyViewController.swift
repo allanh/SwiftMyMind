@@ -127,6 +127,8 @@ final class PurchaseApplyViewController: NiblessViewController {
             let viewModel = EditablePickedProductsInfoViewModel(pickedProductMaterialViewModels: viewModels)
             let viewController = EditablePickedProductsInfoViewController(viewModel: viewModel)
             show(viewController, sender: nil)
+        case .error(let descriptions):
+            ToastView.showIn(self, message: descriptions)
         }
     }
 }
