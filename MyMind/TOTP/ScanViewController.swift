@@ -55,6 +55,7 @@ final class ScanViewController: UIViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+//        let string = "00yIC3PIZ/ZScC5Vwg2TFR8eXhKfZhVSSc/mtYJI8MAgp+wBxdIFvW17oMMLlSK7Ho5qtI2HuTMz2sQh8fmAY2hU2UPIOTPv5p+QuLVtvN1AS8nK56Gh/wH32KXXDS21Xl"// production sam lai
 //        let string = "00ADB1iGsn1jvWxnGtKSoj59plRI10N/ok6DN8i5qX3neupnFdmvnN6gIxPZh4gozrYdgP4+MCjkPf7NIlkg+e1CkFBp8QIBV3LQgfBigXBtKQtCUblc6uze/83V3BWjX4"// alpha
 //        let string = "00yIC3PIZ/ZScC5Vwg2TFR8eXhKfZhVSScBz5kHxqXZQb8hgFv2wbX4lj/fHdxZkeyYj0MIzgvuarqv/sWbKLTl6Kzwi4GOk/TVXSqPiGm7UYHasOKQQ7v4B9jBeDrSEQuA3ffWbi7h6Q=" // demo
 //        let string = "00prqa3Y1IJyAAjkavCTMa0//neIbPtOzq0WQ0KFm+50suD+ljTQqpMKQ4iA/j4gxsbZ8fka91SJ9yFmtjzpkHH3Eikvwn4gU4+/Kf8tHmcSPlSXnvFoREa4hNn1+d/zfr" //production
