@@ -16,7 +16,7 @@ extension RequestCreatable {
                  httpMethod: String = "GET",
                  httpHeader: [String: String]? = nil,
                  httpBody: Data? = nil,
-                 timeoutInterval: TimeInterval = 5) -> URLRequest {
+                 timeoutInterval: TimeInterval = 15) -> URLRequest {
         let url = endPoint.url
 
         var request = URLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: timeoutInterval)
