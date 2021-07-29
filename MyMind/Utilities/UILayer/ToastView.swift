@@ -42,8 +42,8 @@ class ToastView: NiblessView {
         activateConstraintsImageView()
         activateConstraintsLabel()
     }
-
-    static func showIn(_ viewController: UIViewController, message: String, iconName: String = "error") {
+    
+    static func showIn(_ viewController: UIViewController, message: String, iconName: String = "error", completion: (() -> Void)? = nil) {
         var displayVC = viewController
 
         if let tabController = viewController as? UITabBarController {
@@ -73,7 +73,9 @@ class ToastView: NiblessView {
             sharedView?.fadeIn()
 
             // this call needs to be counter balanced on fadeOut [1]
-            sharedView?.perform(#selector(fadeOut), with: nil, afterDelay: 2.5)
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+2.5, execute: {
+                sharedView?.fadeOut()
+            })
         }
     }
 
@@ -84,7 +86,7 @@ class ToastView: NiblessView {
       })
     }
 
-    @objc func fadeOut() {
+    @objc func fadeOut(completion: (() -> Void)? = nil) {
 
       // [1] Counter balance previous perfom:with:afterDelay
       NSObject.cancelPreviousPerformRequests(withTarget: self)
@@ -93,6 +95,9 @@ class ToastView: NiblessView {
         self.alpha = 0.0
       }, completion: { _ in
         self.removeFromSuperview()
+        if let handler = completion {
+            handler()
+        }
       })
     }
 }
