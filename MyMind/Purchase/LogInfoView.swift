@@ -152,9 +152,9 @@ extension LogInfoView {
     private func activateConstraintsNoteLabel() {
         noteTextView.translatesAutoresizingMaskIntoConstraints = false
         let top = noteTextView.topAnchor
-            .constraint(equalTo: timeStampLabel.topAnchor)
+            .constraint(equalTo: createrLabel.bottomAnchor, constant: 10)
         let leading = noteTextView.leadingAnchor
-            .constraint(equalTo: timeStampLabel.trailingAnchor, constant: 20)
+            .constraint(equalTo: timeStampLabel.leadingAnchor)
         let trailing = noteTextView.trailingAnchor
             .constraint(equalTo: trailingAnchor, constant: -10)
         let height = noteTextView.heightAnchor
