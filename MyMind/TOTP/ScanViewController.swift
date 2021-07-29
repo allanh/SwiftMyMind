@@ -55,8 +55,9 @@ final class ScanViewController: UIViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-//        let string = "00ADB1iGsn1jugq7WcuyzdTVCfkoCnC40nJzR98tsxQGRt5/u4nhHPgNG1yiDUeeL13gixxmsPWS37CMd94Pi/mc3g7tni/gtWJbWwsNLuR9y8OnRDAQSFGBJRpVuDdKga"
-//        let string = "00prqa3Y1IJyAAjkavCTMa0//neIbPtOzq0WQ0KFm+50suD+ljTQqpMKQ4iA/j4gxsbZ8fka91SJ9yFmtjzpkHH3Eikvwn4gU4+/Kf8tHmcSPlSXnvFoREa4hNn1+d/zfr"
+//        let string = "00ADB1iGsn1jvWxnGtKSoj59plRI10N/ok6DN8i5qX3neupnFdmvnN6gIxPZh4gozrYdgP4+MCjkPf7NIlkg+e1CkFBp8QIBV3LQgfBigXBtKQtCUblc6uze/83V3BWjX4"// alpha
+//        let string = "00yIC3PIZ/ZScC5Vwg2TFR8eXhKfZhVSScBz5kHxqXZQb8hgFv2wbX4lj/fHdxZkeyYj0MIzgvuarqv/sWbKLTl6Kzwi4GOk/TVXSqPiGm7UYHasOKQQ7v4B9jBeDrSEQuA3ffWbi7h6Q=" // demo
+//        let string = "00prqa3Y1IJyAAjkavCTMa0//neIbPtOzq0WQ0KFm+50suD+ljTQqpMKQ4iA/j4gxsbZ8fka91SJ9yFmtjzpkHH3Eikvwn4gU4+/Kf8tHmcSPlSXnvFoREa4hNn1+d/zfr" //production
 //        if let delegate = delegate, delegate.scanViewController(self, validate: string) {
 //            guard validateMetadataString(string: string) else {
 //                showInvalidQRCodeAlert()
