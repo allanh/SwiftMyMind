@@ -118,7 +118,7 @@ final class MainFunctionEntryViewController: NiblessViewController {
             let viewController = storyboard.instantiateViewController(withIdentifier: "SecretListViewControllerNavi")
             present(viewController, animated: true, completion: nil)
         case .purchaseReview:
-            show(PurchaseListViewController(purchaseListLoader: MyMindPurchaseReviewAPIService.shared), sender: nil)
+            show(PurchaseListViewController(purchaseListLoader: MyMindPurchaseReviewAPIService.shared, reviewing: true), sender: nil)
         case .accountSetting:
             if let settingViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "Setting") as? SettingViewController {
                 settingViewController.delegate = self
