@@ -232,25 +232,41 @@ extension PurchaseList: Decodable {
         if let total = string {
             totalAmountOfItems = Int(total) ?? 0
         } else {
-            totalAmountOfItems = try container.decode(Int.self, forKey: .totalAmountOfItems)
+            if let value = try? container.decode(Int.self, forKey: .totalAmountOfItems) {
+                totalAmountOfItems = value
+            } else {
+                totalAmountOfItems = 0
+            }
         }
         string = try? container.decode(String.self, forKey: .totalAmountOfPages)
         if let pages = string {
             totalAmountOfPages = Int(pages) ?? 0
         } else {
-            totalAmountOfPages = try container.decode(Int.self, forKey: .totalAmountOfPages)
+            if let value = try? container.decode(Int.self, forKey: .totalAmountOfPages) {
+                totalAmountOfPages = value
+            } else {
+                totalAmountOfPages = 0
+            }
         }
         string = try? container.decode(String.self, forKey: .currentPageNumber)
         if let current = string {
             currentPageNumber = Int(current) ?? 0
         } else {
-            currentPageNumber = try container.decode(Int.self, forKey: .currentPageNumber)
+            if let value = try? container.decode(Int.self, forKey: .currentPageNumber) {
+                currentPageNumber = value
+            } else {
+                currentPageNumber = 0
+            }
         }
         string = try? container.decode(String.self, forKey: .itemsPerPage)
         if let perPage = string {
             itemsPerPage = Int(perPage) ?? 0
         } else {
-            itemsPerPage = try container.decode(Int.self, forKey: .itemsPerPage)
+            if let value = try? container.decode(Int.self, forKey: .itemsPerPage) {
+                itemsPerPage = value
+            } else {
+                itemsPerPage = 0
+            }
         }
     }
 }
