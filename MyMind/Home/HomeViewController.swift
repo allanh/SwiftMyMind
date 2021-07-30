@@ -167,7 +167,7 @@ final class HomeViewController: UIViewController {
         isNetworkProcessing = true
         let dashboardLoader = MyMindDashboardAPIService.shared
         let end = Date()
-        dashboardLoader.orderSaleReport(start: end.thirtyDaysBefore, end: end, type: .byDate)
+        dashboardLoader.orderSaleReport(start: end.thirtyDaysBefore, end: end.yesterday, type: .byDate)
             .done { saleReportList in
                 self.saleReportList = saleReportList
             }
@@ -187,7 +187,7 @@ final class HomeViewController: UIViewController {
         isNetworkProcessing = true
         let dashboardLoader = MyMindDashboardAPIService.shared
         let end = Date()
-        dashboardLoader.skuRankingReport(start: end.sevenDaysBefore, end: end, isSet: false, order: skuRankingSortOrder.rawValue, count: 5)
+        dashboardLoader.skuRankingReport(start: end.sevenDaysBefore, end: end.yesterday, isSet: false, order: skuRankingSortOrder.rawValue, count: 5)
             .done { rankingReportList in
                 self.skuRankingReportList = rankingReportList
             }
@@ -207,7 +207,7 @@ final class HomeViewController: UIViewController {
         isNetworkProcessing = true
         let dashboardLoader = MyMindDashboardAPIService.shared
         let end = Date()
-        dashboardLoader.skuRankingReport(start: end.sevenDaysBefore, end: end, isSet: true, order: setSKURankingSortOrder.rawValue, count: 5)
+        dashboardLoader.skuRankingReport(start: end.sevenDaysBefore, end: end.yesterday, isSet: true, order: setSKURankingSortOrder.rawValue, count: 5)
             .done { setRankingReportList in
                 self.setSKURankingReportList = setRankingReportList
             }
@@ -228,7 +228,7 @@ final class HomeViewController: UIViewController {
         let dashboardLoader = MyMindDashboardAPIService.shared
         let end = Date()
         if amountRankingDevider == .store {
-            dashboardLoader.storeRankingReport(start: end.sevenDaysBefore, end: end, order: "TOTAL_SALE_AMOUNT")
+            dashboardLoader.storeRankingReport(start: end.sevenDaysBefore, end: end.yesterday, order: "TOTAL_SALE_AMOUNT")
                 .done { saleRankingReportList in
                     self.saleRankingReportList = saleRankingReportList
                 }
@@ -244,7 +244,7 @@ final class HomeViewController: UIViewController {
 //                    }
                 }
         } else {
-            dashboardLoader.vendorRankingReport(start: end.sevenDaysBefore, end: end, order: "TOTAL_SALE_AMOUNT")
+            dashboardLoader.vendorRankingReport(start: end.sevenDaysBefore, end: end.yesterday, order: "TOTAL_SALE_AMOUNT")
                 .done { saleRankingReportList in
                     self.saleRankingReportList = saleRankingReportList
                 }
@@ -266,7 +266,7 @@ final class HomeViewController: UIViewController {
         let dashboardLoader = MyMindDashboardAPIService.shared
         let end = Date()
         if grossProfitRankingDevider == .store {
-            dashboardLoader.storeRankingReport(start: end.sevenDaysBefore, end: end, order: "SALE_GROSS_PROFIT")
+            dashboardLoader.storeRankingReport(start: end.sevenDaysBefore, end: end.yesterday, order: "SALE_GROSS_PROFIT")
                 .done { grossProfitRankingReportList in
                     self.grossProfitRankingReportList = grossProfitRankingReportList
                 }
@@ -282,7 +282,7 @@ final class HomeViewController: UIViewController {
 //                    }
                 }
         } else {
-            dashboardLoader.vendorRankingReport(start: end.sevenDaysBefore, end: end, order: "SALE_GROSS_PROFIT")
+            dashboardLoader.vendorRankingReport(start: end.sevenDaysBefore, end: end.yesterday, order: "SALE_GROSS_PROFIT")
                 .done { grossProfitRankingReportList in
                     self.grossProfitRankingReportList = grossProfitRankingReportList
                 }

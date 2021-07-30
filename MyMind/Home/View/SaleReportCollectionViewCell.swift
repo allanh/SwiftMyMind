@@ -9,7 +9,7 @@
 import Charts
 extension SaleReportList {
     func lineChartData(order: SKURankingReport.SKURankingReportSortOrder) -> LineChartData {
-        let toDate: Date = Date()
+        let toDate: Date = Date().yesterday
         let fromDate: Date = toDate.thirtyDaysBefore
         let offset = Calendar.current.dateComponents([.day], from: fromDate, to: toDate).day!
         let saleEntries: [ChartDataEntry] = (0..<offset).map { (i) -> ChartDataEntry in
@@ -122,7 +122,7 @@ class SaleReportCollectionViewCell: UICollectionViewCell {
         xAxis.labelFont = .pingFangTCRegular(ofSize: 10)
         xAxis.drawGridLinesEnabled = false
         xAxis.granularity = 1
-        xAxis.labelCount = 9
+        xAxis.labelCount = 7
         xAxis.valueFormatter = self
 
         lineChartView.rightAxis.enabled = false

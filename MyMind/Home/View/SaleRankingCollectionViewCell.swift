@@ -53,7 +53,7 @@ extension SaleRankingReportList {
         var value: Double = 0
         if pieChartEntries.count > maximum {
             for (index, entry) in pieChartEntries.enumerated() {
-                if index < maximum-1 {
+                if index < maximum {
                     continue
                 }
                 value += entry.value
