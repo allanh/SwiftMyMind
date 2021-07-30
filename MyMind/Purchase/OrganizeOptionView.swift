@@ -54,14 +54,14 @@ final class OrganizeOptionView: NiblessView {
     func constructViewHierarchy() {
         addSubview(topSeparatorView)
         stackView.addArrangedSubview(sortButton)
+        sortButton.setTitle("填單日期", for: .normal)
         if !reviewing {
-            sortButton.setTitle("採購單編號", for: .normal)
             stackView.addArrangedSubview(firstSeparatorView)
             stackView.addArrangedSubview(filterButton)
         } else {
+            
             sortButton.contentHorizontalAlignment = .left
             sortButton.contentEdgeInsets.left = 10
-            sortButton.setTitle("填單日期", for: .normal)
         }
         stackView.addArrangedSubview(secondSeparatorView)
         stackView.addArrangedSubview(layoutButton)
