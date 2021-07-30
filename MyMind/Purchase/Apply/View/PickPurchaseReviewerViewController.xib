@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PickPurchaseReviewerViewController" customModule="MyMind" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PickPurchaseReviewerViewController" customModule="Demo" customModuleProvider="target">
             <connections>
                 <outlet property="logInfosStackView" destination="9ge-U2-Zhx" id="c2r-n0-XbA"/>
                 <outlet property="noteErrorLabel" destination="FAi-Le-JHA" id="jff-av-dTK"/>
@@ -71,7 +71,7 @@
                     </attributedString>
                     <color key="highlightedColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                 </label>
-                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1s6-Fs-vbK" customClass="CustomClearButtonPositionTextField" customModule="MyMind" customModuleProvider="target">
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1s6-Fs-vbK" customClass="CustomClearButtonPositionTextField" customModule="Demo" customModuleProvider="target">
                     <rect key="frame" x="20" y="116" width="374" height="40"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -123,15 +123,15 @@
                     <color key="textColor" systemColor="systemRedColor"/>
                     <color key="highlightedColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                 </label>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="9ge-U2-Zhx">
+                    <rect key="frame" x="20" y="406" width="374" height="162"/>
+                </stackView>
                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="最多 200 個字元" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FAi-Le-JHA">
-                    <rect key="frame" x="67" y="187" width="120" height="23"/>
+                    <rect key="frame" x="20" y="365" width="120" height="23"/>
                     <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
                     <color key="textColor" systemColor="systemRedColor"/>
                     <color key="highlightedColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                 </label>
-                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="9ge-U2-Zhx">
-                    <rect key="frame" x="20" y="406" width="374" height="162"/>
-                </stackView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -141,8 +141,6 @@
                 <constraint firstItem="1Oy-RU-G29" firstAttribute="trailing" secondItem="gci-2T-sxs" secondAttribute="trailing" id="6Ww-CA-rVa"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="9ge-U2-Zhx" secondAttribute="bottom" constant="20" id="8zk-91-hjq"/>
                 <constraint firstItem="Emr-wL-R6H" firstAttribute="top" secondItem="1s6-Fs-vbK" secondAttribute="bottom" constant="30" id="ACk-0S-hXv"/>
-                <constraint firstItem="FAi-Le-JHA" firstAttribute="leading" secondItem="Emr-wL-R6H" secondAttribute="trailing" constant="15" id="Cfy-oS-QU5"/>
-                <constraint firstItem="FAi-Le-JHA" firstAttribute="centerY" secondItem="Emr-wL-R6H" secondAttribute="centerY" id="EaM-OE-3ti"/>
                 <constraint firstItem="gci-2T-sxs" firstAttribute="trailing" secondItem="1s6-Fs-vbK" secondAttribute="trailing" id="IDZ-pk-aHR"/>
                 <constraint firstItem="gci-2T-sxs" firstAttribute="leading" secondItem="1s6-Fs-vbK" secondAttribute="leading" id="IxF-4p-L1t"/>
                 <constraint firstItem="BbB-Lj-KaG" firstAttribute="leading" secondItem="U3g-mh-sgN" secondAttribute="trailing" constant="15" id="KXM-qC-b65"/>
@@ -154,6 +152,8 @@
                 <constraint firstItem="f7b-NL-xtz" firstAttribute="top" secondItem="ycO-O0-AlP" secondAttribute="bottom" constant="20" id="acC-uT-jjZ"/>
                 <constraint firstItem="9ge-U2-Zhx" firstAttribute="top" secondItem="1Oy-RU-G29" secondAttribute="bottom" constant="20" id="bJd-7B-mFl"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="9ge-U2-Zhx" secondAttribute="trailing" constant="20" id="c4U-zL-CuM"/>
+                <constraint firstItem="FAi-Le-JHA" firstAttribute="top" secondItem="gci-2T-sxs" secondAttribute="bottom" constant="9" id="cre-Ol-nie"/>
+                <constraint firstItem="FAi-Le-JHA" firstAttribute="leading" secondItem="gci-2T-sxs" secondAttribute="leading" id="dIg-xn-1hy"/>
                 <constraint firstItem="U3g-mh-sgN" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="15" id="dYT-Jq-XIW"/>
                 <constraint firstItem="1s6-Fs-vbK" firstAttribute="top" secondItem="f7b-NL-xtz" secondAttribute="bottom" constant="15" id="fy3-yP-p9R"/>
                 <constraint firstItem="che-dt-V4o" firstAttribute="leading" secondItem="f7b-NL-xtz" secondAttribute="trailing" constant="15" id="hCW-gW-tUT"/>
