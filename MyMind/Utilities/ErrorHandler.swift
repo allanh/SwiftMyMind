@@ -48,6 +48,8 @@ extension ErrorHandler {
                 otpEnabled: otpEnabled
             )
             let signInViewController = SignInViewController(viewModel: viewModel)
+            signInViewController.modalPresentationStyle = .custom
+            signInViewController.transitioningDelegate = SignInTransitionDelegate.shared
             sceneDelegate.window?.rootViewController?.present(signInViewController, animated: true, completion: nil)
         }
     }

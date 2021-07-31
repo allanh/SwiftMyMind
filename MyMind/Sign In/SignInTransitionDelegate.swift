@@ -6,4 +6,11 @@
 //  Copyright © 2021 United Digital Intelligence. All rights reserved.
 //
 
-import Foundation
+import UIKit
+class SignInTransitionDelegate: NSObject, UIViewControllerTransitioningDelegate {
+    static let shared: SignInTransitionDelegate = .init()
+    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
+        return SignInPresentationController(presentedViewController: presented, presenting: presenting)
+    }
+
+}

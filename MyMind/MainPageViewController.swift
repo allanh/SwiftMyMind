@@ -21,8 +21,7 @@ class MainPageViewController: UIViewController {
         let navigationTitleView: UIImageView = UIImageView {
             $0.image = UIImage(named: "udi_logo")
         }
-        let leftItem = UIBarButtonItem(customView: navigationTitleView)
-        navigationItem.leftBarButtonItem = leftItem
+        navigationItem.titleView = navigationTitleView
         
         
         let otpTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(otp(_:)))
@@ -49,7 +48,6 @@ class MainPageViewController: UIViewController {
             }
         }
     }
-    
     @IBAction func otp(_ sender: Any) {
         let storyboard: UIStoryboard = UIStoryboard(name: "TOTP", bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier: "SecretListViewController")
@@ -65,6 +63,12 @@ class MainPageViewController: UIViewController {
             }
             .catch { error in
                 if let apiError = error as? APIError {
+                    if apiError == .invalidAccessToken || apiError == .noAccessTokenError {
+                        let titleLabel = UILabel()
+                        titleLabel.text = "My Mind 買賣後台"
+                        titleLabel.textColor = .white
+                        self.navigationItem.titleView = titleLabel
+                    }
                     _ = ErrorHandler.shared.handle(apiError, controller: self)
                 } else {
                     ToastView.showIn(self, message: error.localizedDescription)

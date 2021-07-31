@@ -164,6 +164,8 @@ class SignInViewController: NiblessViewController {
             otpEnabled: otpEnabled
         )
         let viewController = ForgotPasswordViewController(viewModel: viewModel)
+        viewController.modalPresentationStyle = .custom
+        viewController.transitioningDelegate = transitioningDelegate
         show(viewController, sender: self)
     }
     func showResendOTPViewController() {
@@ -171,6 +173,8 @@ class SignInViewController: NiblessViewController {
                                            signInValidationService: SignInValidatoinService()
         )
         let viewController = ResendOTPViewController(viewModel: viewModel)
+        viewController.modalPresentationStyle = .custom
+        viewController.transitioningDelegate = transitioningDelegate
         show(viewController, sender: self)
     }
 }
