@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		01FE629A3FE5283B00E20CB8 /* Pods_MyMind.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F231C5BAACFDBA2A1B0E19E /* Pods_MyMind.framework */; };
+		520776A926B50FBC005BA621 /* SignInTransitionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520776A826B50FBC005BA621 /* SignInTransitionDelegate.swift */; };
+		520776AA26B51001005BA621 /* SignInTransitionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520776A826B50FBC005BA621 /* SignInTransitionDelegate.swift */; };
+		520776AB26B51001005BA621 /* SignInTransitionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520776A826B50FBC005BA621 /* SignInTransitionDelegate.swift */; };
+		520776AD26B5106D005BA621 /* SignInPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520776AC26B5106D005BA621 /* SignInPresentationController.swift */; };
+		520776AE26B5106D005BA621 /* SignInPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520776AC26B5106D005BA621 /* SignInPresentationController.swift */; };
+		520776AF26B5106D005BA621 /* SignInPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520776AC26B5106D005BA621 /* SignInPresentationController.swift */; };
 		52282372268EB41400A66340 /* PurchaseBriefReviewingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52282370268EB41400A66340 /* PurchaseBriefReviewingCollectionViewCell.swift */; };
 		52282373268EB41400A66340 /* PurchaseBriefReviewingCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52282371268EB41400A66340 /* PurchaseBriefReviewingCollectionViewCell.xib */; };
 		5246E47226901BEC005C11EC /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5246E47126901BEC005C11EC /* SettingViewController.swift */; };
@@ -700,6 +706,8 @@
 		4ADE5ABC3B80D9CEABC6A0DC /* Pods-MyMind-Production.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMind-Production.debug.xcconfig"; path = "Target Support Files/Pods-MyMind-Production/Pods-MyMind-Production.debug.xcconfig"; sourceTree = "<group>"; };
 		4CA27CCE1C56A2E5B9C83176 /* Pods-MyMind-Production.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMind-Production.release.xcconfig"; path = "Target Support Files/Pods-MyMind-Production/Pods-MyMind-Production.release.xcconfig"; sourceTree = "<group>"; };
 		4E97409623994378E4E04B8B /* Pods-MyMind-Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMind-Demo.debug.xcconfig"; path = "Target Support Files/Pods-MyMind-Demo/Pods-MyMind-Demo.debug.xcconfig"; sourceTree = "<group>"; };
+		520776A826B50FBC005BA621 /* SignInTransitionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInTransitionDelegate.swift; sourceTree = "<group>"; };
+		520776AC26B5106D005BA621 /* SignInPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInPresentationController.swift; sourceTree = "<group>"; };
 		52282370268EB41400A66340 /* PurchaseBriefReviewingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseBriefReviewingCollectionViewCell.swift; sourceTree = "<group>"; };
 		52282371268EB41400A66340 /* PurchaseBriefReviewingCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PurchaseBriefReviewingCollectionViewCell.xib; sourceTree = "<group>"; };
 		5246E47126901BEC005C11EC /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
@@ -1363,6 +1371,8 @@
 				A48389AE2608360A0044C09E /* SignInViewController.swift */,
 				A48389B3260869940044C09E /* SignInViewModel.swift */,
 				A4BDC7B3260B10E2005C33A5 /* SignInValidationService.swift */,
+				520776A826B50FBC005BA621 /* SignInTransitionDelegate.swift */,
+				520776AC26B5106D005BA621 /* SignInPresentationController.swift */,
 			);
 			path = "Sign In";
 			sourceTree = "<group>";
@@ -2088,6 +2098,7 @@
 				524AB08C26A80913003D1E92 /* SaleRankingCollectionViewCell.swift in Sources */,
 				524AB08D26A80913003D1E92 /* ForgotPasswordViewModel.swift in Sources */,
 				524AB08E26A80913003D1E92 /* UserDefaultSecretDataStore.swift in Sources */,
+				520776AA26B51001005BA621 /* SignInTransitionDelegate.swift in Sources */,
 				524AB08F26A80913003D1E92 /* SuggestionProductMaterialViewModel.swift in Sources */,
 				524AB09026A80913003D1E92 /* KeychainHelper.swift in Sources */,
 				524AB09126A80913003D1E92 /* MultiSelectableDropDownTableViewCell.swift in Sources */,
@@ -2101,6 +2112,7 @@
 				524AB09926A80913003D1E92 /* APIService.swift in Sources */,
 				524AB09A26A80913003D1E92 /* StageProgressCollectionReusableView.swift in Sources */,
 				524AB09B26A80913003D1E92 /* CustomAlertView.swift in Sources */,
+				520776AE26B5106D005BA621 /* SignInPresentationController.swift in Sources */,
 				524AB09C26A80913003D1E92 /* PurchaseReviewingApplyInfoViewController.swift in Sources */,
 				524AB09D26A80913003D1E92 /* AuthService.swift in Sources */,
 				524AB09E26A80913003D1E92 /* ScanViewController.swift in Sources */,
@@ -2293,6 +2305,7 @@
 				527777E326A80DF500CF4E07 /* SaleRankingCollectionViewCell.swift in Sources */,
 				527777E426A80DF500CF4E07 /* ForgotPasswordViewModel.swift in Sources */,
 				527777E526A80DF500CF4E07 /* UserDefaultSecretDataStore.swift in Sources */,
+				520776AB26B51001005BA621 /* SignInTransitionDelegate.swift in Sources */,
 				527777E626A80DF500CF4E07 /* SuggestionProductMaterialViewModel.swift in Sources */,
 				527777E726A80DF500CF4E07 /* KeychainHelper.swift in Sources */,
 				527777E826A80DF500CF4E07 /* MultiSelectableDropDownTableViewCell.swift in Sources */,
@@ -2306,6 +2319,7 @@
 				527777F026A80DF500CF4E07 /* APIService.swift in Sources */,
 				527777F126A80DF500CF4E07 /* StageProgressCollectionReusableView.swift in Sources */,
 				527777F226A80DF500CF4E07 /* CustomAlertView.swift in Sources */,
+				520776AF26B5106D005BA621 /* SignInPresentationController.swift in Sources */,
 				527777F326A80DF500CF4E07 /* PurchaseReviewingApplyInfoViewController.swift in Sources */,
 				527777F426A80DF500CF4E07 /* AuthService.swift in Sources */,
 				527777F526A80DF500CF4E07 /* ScanViewController.swift in Sources */,
@@ -2498,6 +2512,7 @@
 				52C2CBE4269E9F20002A2BA9 /* SaleRankingCollectionViewCell.swift in Sources */,
 				A4159219260C8FC600FD3989 /* ForgotPasswordViewModel.swift in Sources */,
 				A43E8514268C08FC008C8369 /* UserDefaultSecretDataStore.swift in Sources */,
+				520776A926B50FBC005BA621 /* SignInTransitionDelegate.swift in Sources */,
 				97AFE36926661750002CBE01 /* SuggestionProductMaterialViewModel.swift in Sources */,
 				A4BDC7B9260B3E0A005C33A5 /* KeychainHelper.swift in Sources */,
 				A405410D264A670100E2D21B /* MultiSelectableDropDownTableViewCell.swift in Sources */,
@@ -2511,6 +2526,7 @@
 				A49CF8BB2603028C00AFC170 /* APIService.swift in Sources */,
 				A4CBD8AD2669C50A00B19119 /* StageProgressCollectionReusableView.swift in Sources */,
 				5246E4772690A2A4005C11EC /* CustomAlertView.swift in Sources */,
+				520776AD26B5106D005BA621 /* SignInPresentationController.swift in Sources */,
 				527E11C02692C38D00FB8B01 /* PurchaseReviewingApplyInfoViewController.swift in Sources */,
 				A48389BE260876770044C09E /* AuthService.swift in Sources */,
 				A464876C268968920053E6F5 /* ScanViewController.swift in Sources */,
