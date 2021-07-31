@@ -46,11 +46,11 @@ extension SecretRepository {
             case .orderedSame:
                 secretToAdd.isValid = secret.isValid
             case .orderedDescending:
-                secretToAdd.isValid = true
-                secret.isValid = false
-            case .orderedAscending:
                 secretToAdd.isValid = false
                 secret.isValid = true
+            case .orderedAscending:
+                secretToAdd.isValid = true
+                secret.isValid = false
             }
             finalSecrets.append(secret)
         }
