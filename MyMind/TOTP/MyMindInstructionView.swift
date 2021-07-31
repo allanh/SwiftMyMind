@@ -26,12 +26,49 @@ final class MyMindInstructionView: NiblessView {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.backgroundColor = UIColor(hex: "e5e5e0")
     }
-    private let descriptionLabel: UILabel = UILabel {
+    private let bullet1Label: UILabel = UILabel {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.font = UIFont.pingFangTCRegular(ofSize: 14)
+        $0.textColor = UIColor(hex: "545454")
+        $0.backgroundColor = .clear
+        $0.text = "1."
+    }
+    private let description1Label: UILabel = UILabel {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = .pingFangTCRegular(ofSize: 14)
         $0.numberOfLines = 0
         $0.textAlignment = .left
-        $0.text = "1.\t請點選下方「開始掃描」按鈕來掃描「帳號綁定 OTP 驗證通知信」內的【驗證 QR Code】。\n\n2.\t掃描成功後即綁定完成，會出現六位動態數字的驗證碼，並於每60秒更換一次。\n\n3.\t在My Mind買賣後台登入時，輸入這六位動態數字的驗證碼，即可完成登入。"
+        $0.text = "請點選下方「開始掃描」按鈕來掃描「帳號綁定 OTP 驗證通知信」內的【驗證 QR Code】"
+        $0.textColor = UIColor(hex: "545454")
+    }
+    private let bullet2Label: UILabel = UILabel {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.font = UIFont.pingFangTCRegular(ofSize: 14)
+        $0.textColor = UIColor(hex: "545454")
+        $0.backgroundColor = .clear
+        $0.text = "2."
+    }
+    private let description2Label: UILabel = UILabel {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.font = .pingFangTCRegular(ofSize: 14)
+        $0.numberOfLines = 0
+        $0.textAlignment = .left
+        $0.text = "掃描成功後即綁定完成，會出現六位數字的動態驗證碼，並於每 60 秒更換一次。"
+        $0.textColor = UIColor(hex: "545454")
+    }
+    private let bullet3Label: UILabel = UILabel {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.font = UIFont.pingFangTCRegular(ofSize: 14)
+        $0.textColor = UIColor(hex: "545454")
+        $0.backgroundColor = .clear
+        $0.text = "3."
+    }
+    private let description3Label: UILabel = UILabel {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.font = .pingFangTCRegular(ofSize: 14)
+        $0.numberOfLines = 0
+        $0.textAlignment = .left
+        $0.text = "在 My Mind 買賣後台登入時，輸入這六位數字的動態驗證碼，即可完成登入。"
         $0.textColor = UIColor(hex: "545454")
     }
 
@@ -64,7 +101,12 @@ final class MyMindInstructionView: NiblessView {
         addSubview(logoImageView)
         addSubview(titleLabel)
         addSubview(seperator)
-        addSubview(descriptionLabel)
+        addSubview(bullet1Label)
+        addSubview(description1Label)
+        addSubview(bullet2Label)
+        addSubview(description2Label)
+        addSubview(bullet3Label)
+        addSubview(description3Label)
         addSubview(confirmButton)
     }
 
@@ -72,7 +114,12 @@ final class MyMindInstructionView: NiblessView {
         activateConstraintsIconImageView()
         activateConstraintsTitleLabel()
         activateConstraintsSeperator()
-        activateConstraintsDescriptionLabel()
+        activateConstraintsBullet1Label()
+        activateConstraintsDescription1Label()
+        activateConstraintsBullet2Label()
+        activateConstraintsDescription2Label()
+        activateConstraintsBullet3Label()
+        activateConstraintsDescription3Label()
         activateConstraintsConfirmButton()
     }
 
@@ -81,7 +128,7 @@ final class MyMindInstructionView: NiblessView {
         let centerX = logoImageView.centerXAnchor
             .constraint(equalTo: centerXAnchor)
         let top = logoImageView.topAnchor
-            .constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 80)
+            .constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 25)
         let width = logoImageView.widthAnchor.constraint(equalToConstant: 100)
         let height = logoImageView.heightAnchor.constraint(equalToConstant: 100)
         NSLayoutConstraint.activate([
@@ -115,17 +162,79 @@ final class MyMindInstructionView: NiblessView {
             centerX, top, width, height
         ])
     }
-
-    private func activateConstraintsDescriptionLabel() {
-        let centerX = descriptionLabel.centerXAnchor
-            .constraint(equalTo: centerXAnchor)
-        let top = descriptionLabel.topAnchor
+    private func activateConstraintsBullet1Label() {
+        let leading = bullet1Label.leadingAnchor
+            .constraint(equalTo: seperator.leadingAnchor)
+        let top = bullet1Label.topAnchor
             .constraint(equalTo: seperator.bottomAnchor, constant: 12)
-        let width = descriptionLabel.widthAnchor
-            .constraint(equalTo: widthAnchor, multiplier: 1 / 1.2)
+        let width = bullet1Label.widthAnchor
+            .constraint(equalToConstant: 15)
 
         NSLayoutConstraint.activate([
-            centerX, top, width
+            leading, top, width
+        ])
+    }
+
+    private func activateConstraintsDescription1Label() {
+        let firstBaseLine = description1Label.firstBaselineAnchor
+            .constraint(equalTo: bullet1Label.firstBaselineAnchor)
+        let leading = description1Label.leadingAnchor
+            .constraint(equalTo: bullet1Label.trailingAnchor)
+        let trailing = description1Label.trailingAnchor
+            .constraint(equalTo: seperator.trailingAnchor)
+
+        NSLayoutConstraint.activate([
+            firstBaseLine, leading, trailing
+        ])
+    }
+    private func activateConstraintsBullet2Label() {
+        let leading = bullet2Label.leadingAnchor
+            .constraint(equalTo: bullet1Label.leadingAnchor)
+        let top = bullet2Label.topAnchor
+            .constraint(equalTo: description1Label.bottomAnchor, constant: 20)
+        let width = bullet2Label.widthAnchor
+            .constraint(equalToConstant: 15)
+
+        NSLayoutConstraint.activate([
+            leading, top, width
+        ])
+    }
+
+    private func activateConstraintsDescription2Label() {
+        let firstBaseLine = description2Label.firstBaselineAnchor
+            .constraint(equalTo: bullet2Label.firstBaselineAnchor)
+        let leading = description2Label.leadingAnchor
+            .constraint(equalTo: bullet2Label.trailingAnchor)
+        let trailing = description2Label.trailingAnchor
+            .constraint(equalTo: description1Label.trailingAnchor)
+
+        NSLayoutConstraint.activate([
+            firstBaseLine, leading, trailing
+        ])
+    }
+    private func activateConstraintsBullet3Label() {
+        let leading = bullet3Label.leadingAnchor
+            .constraint(equalTo: bullet2Label.leadingAnchor)
+        let top = bullet3Label.topAnchor
+            .constraint(equalTo: description2Label.bottomAnchor, constant: 20)
+        let width = bullet3Label.widthAnchor
+            .constraint(equalToConstant: 15)
+
+        NSLayoutConstraint.activate([
+            leading, top, width
+        ])
+    }
+
+    private func activateConstraintsDescription3Label() {
+        let firstBaseLine = description3Label.firstBaselineAnchor
+            .constraint(equalTo: bullet3Label.firstBaselineAnchor)
+        let leading = description3Label.leadingAnchor
+            .constraint(equalTo: bullet3Label.trailingAnchor)
+        let trailing = description3Label.trailingAnchor
+            .constraint(equalTo: description2Label.trailingAnchor)
+
+        NSLayoutConstraint.activate([
+            firstBaseLine, leading, trailing
         ])
     }
 
