@@ -31,7 +31,7 @@ class ResendOTPRootView: NiblessView {
     }
 
     private let titleGradientView: GradientView = {
-        let view = GradientView(gradientStartColor: UIColor(hex: "004477"), gradientEndColor: UIColor(hex: "004477"))
+        let view = GradientView(gradientStartColor: UIColor(hex: "f5a700"), gradientEndColor: UIColor(hex: "f5a700"))
         view.layer.cornerRadius = 10
         view.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMaxXMaxYCorner]
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -48,15 +48,37 @@ class ResendOTPRootView: NiblessView {
 
     private let resendOTPTitleLabel: UILabel = UILabel {
         $0.font = UIFont.pingFangTCSemibold(ofSize: 16)
-        $0.text = "補發APP QR Code"
+        $0.text = "補發 OTP QR Code"
         $0.textColor = UIColor(hex: "545454")
         $0.backgroundColor = .clear
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
 
-    private let resendOTPDescriptionLabel: UILabel = UILabel {
+    private let bullet1Label: UILabel = UILabel {
+        $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = UIFont.pingFangTCRegular(ofSize: 12)
-        $0.text = "1.請輸入以下資料，我們將重新發送【帳號綁定 OTP驗證通知信】\n2.掃描信中驗證 QR Code，即可產生 OTP 驗證碼"
+        $0.textColor = UIColor(hex: "545454")
+        $0.backgroundColor = .clear
+        $0.text = "1."
+    }
+    private let description1Label: UILabel = UILabel {
+        $0.font = UIFont.pingFangTCRegular(ofSize: 12)
+        $0.text = "請輸入以下資料，我們將重新發送【帳號綁定 OTP驗證通知信】"
+        $0.numberOfLines = 0
+        $0.textColor = UIColor(hex: "545454")
+        $0.backgroundColor = .clear
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    private let bullet2Label: UILabel = UILabel {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.font = UIFont.pingFangTCRegular(ofSize: 12)
+        $0.textColor = UIColor(hex: "545454")
+        $0.backgroundColor = .clear
+        $0.text = "2."
+    }
+    private let description2Label: UILabel = UILabel {
+        $0.font = UIFont.pingFangTCRegular(ofSize: 12)
+        $0.text = "掃描信中驗證 QR Code，即可產生 OTP 驗證碼"
         $0.numberOfLines = 0
         $0.textColor = UIColor(hex: "545454")
         $0.backgroundColor = .clear
@@ -68,7 +90,11 @@ class ResendOTPRootView: NiblessView {
             attributes: [.foregroundColor: UIColor(hex: "b4b4b4")]
         )
         $0.textField.textColor = UIColor(hex: "545454")
-        let containerView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 10, height: 30)))
+        let image = UIImage(named: "company")
+        let containerView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 30, height: 30)))
+        let imageView = UIImageView(frame: CGRect(x: 8, y: containerView.frame.midY-7, width: 14, height: 14))
+        imageView.image = image
+        containerView.addSubview(imageView)
         $0.textField.leftView = containerView
         $0.textField.leftViewMode = .always
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -80,7 +106,11 @@ class ResendOTPRootView: NiblessView {
             attributes: [.foregroundColor: UIColor(hex: "b4b4b4")]
         )
         $0.textField.textColor = UIColor(hex: "545454")
-        let containerView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 10, height: 30)))
+        let image = UIImage(named: "id")
+        let containerView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 30, height: 30)))
+        let imageView = UIImageView(frame: CGRect(x: 8, y: containerView.frame.midY-7, width: 14, height: 14))
+        imageView.image = image
+        containerView.addSubview(imageView)
         $0.textField.leftView = containerView
         $0.textField.leftViewMode = .always
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -139,10 +169,10 @@ class ResendOTPRootView: NiblessView {
         $0.setTitleColor(UIColor.white, for: .normal)
         $0.setTitleColor(UIColor(hex: "b4b4b4"), for: .disabled)
         $0.titleLabel?.font = UIFont.pingFangTCSemibold(ofSize: 16)
-        $0.backgroundColor = UIColor(hex: "ea6120")
+        $0.backgroundColor = UIColor(hex: "004477")
         $0.layer.cornerRadius = 10
-        $0.layer.shadowColor = UIColor(hex: "ea6120").withAlphaComponent(0.5).cgColor
-        $0.layer.shadowOffset = CGSize(width: 0, height: 3)
+//        $0.layer.shadowColor = UIColor(hex: "ea6120").withAlphaComponent(0.5).cgColor
+//        $0.layer.shadowOffset = CGSize(width: 0, height: 3)
     }
 
     // MARK: - Methods
@@ -170,7 +200,10 @@ class ResendOTPRootView: NiblessView {
         contentView.addSubview(titleGradientView)
         titleGradientView.addSubview(titleLabel)
         contentView.addSubview(resendOTPTitleLabel)
-        contentView.addSubview(resendOTPDescriptionLabel)
+        contentView.addSubview(bullet1Label)
+        contentView.addSubview(description1Label)
+        contentView.addSubview(bullet2Label)
+        contentView.addSubview(description2Label)
         contentView.addSubview(inputStackView)
         contentView.addSubview(confirmButton)
         addSubview(scrollView)
@@ -183,7 +216,10 @@ class ResendOTPRootView: NiblessView {
         activateConstraintsGradientView()
         activateConstraintsTitleLabel()
         activateConstraintsResendOTPTitleLabel()
-        activateConstraintsResendOTPDescriptionLabel()
+        activateConstraintsBullet1Label()
+        activateConstraintsDescription1Label()
+        activateConstraintsBullet2Label()
+        activateConstraintsDescription2Label()
         activateConstraintsStackView()
         activateConstraintsInputView()
         activateConstraintsConfirmButton()
@@ -268,7 +304,7 @@ extension ResendOTPRootView {
 
     private func activateConstraintsBannerImageView() {
         let top = bannerImageView.topAnchor
-            .constraint(equalTo: contentView.topAnchor)
+            .constraint(equalTo: contentView.topAnchor, constant: 25)
         let centerX = bannerImageView.centerXAnchor
             .constraint(equalTo: contentView.centerXAnchor)
         let width = bannerImageView.widthAnchor
@@ -319,19 +355,67 @@ extension ResendOTPRootView {
             top, leading, height
         ])
     }
-
-    private func activateConstraintsResendOTPDescriptionLabel() {
-        let top = resendOTPDescriptionLabel.topAnchor
+    private func activateConstraintsBullet1Label() {
+        let top = bullet1Label.topAnchor
             .constraint(equalTo: resendOTPTitleLabel.bottomAnchor, constant: 15)
-        let leading = resendOTPDescriptionLabel.leadingAnchor
+        let leading = bullet1Label.leadingAnchor
             .constraint(equalTo: resendOTPTitleLabel.leadingAnchor)
-        let trailing = resendOTPDescriptionLabel.trailingAnchor
+        let width = bullet1Label.widthAnchor
+            .constraint(equalToConstant: 12)
+
+        NSLayoutConstraint.activate([
+            top, leading, width
+        ])
+    }
+    private func activateConstraintsDescription1Label() {
+        let firstBaseLine = description1Label.firstBaselineAnchor
+            .constraint(equalTo: bullet1Label.firstBaselineAnchor)
+        let leading = description1Label.leadingAnchor
+            .constraint(equalTo: bullet1Label.trailingAnchor, constant: 2)
+        let trailing = description1Label.trailingAnchor
             .constraint(equalTo: contentView.trailingAnchor, constant: -50)
 
         NSLayoutConstraint.activate([
-            top, leading, trailing
+            firstBaseLine, leading, trailing
         ])
     }
+    private func activateConstraintsBullet2Label() {
+        let top = bullet2Label.topAnchor
+            .constraint(equalTo: description1Label.bottomAnchor, constant: 4)
+        let leading = bullet2Label.leadingAnchor
+            .constraint(equalTo: bullet1Label.leadingAnchor)
+        let width = bullet2Label.widthAnchor
+            .constraint(equalToConstant: 12)
+
+        NSLayoutConstraint.activate([
+            top, leading, width
+        ])
+    }
+    private func activateConstraintsDescription2Label() {
+        let firstBaseLine = description2Label.firstBaselineAnchor
+            .constraint(equalTo: bullet2Label.firstBaselineAnchor)
+        let leading = description2Label.leadingAnchor
+            .constraint(equalTo: bullet2Label.trailingAnchor, constant: 2)
+        let trailing = description2Label.trailingAnchor
+            .constraint(equalTo: contentView.trailingAnchor, constant: -50)
+
+        NSLayoutConstraint.activate([
+            firstBaseLine, leading, trailing
+        ])
+    }
+
+//    private func activateConstraintsResendOTPDescriptionLabel() {
+//        let top = resendOTPDescriptionLabel.topAnchor
+//            .constraint(equalTo: resendOTPTitleLabel.bottomAnchor, constant: 15)
+//        let leading = resendOTPDescriptionLabel.leadingAnchor
+//            .constraint(equalTo: resendOTPTitleLabel.leadingAnchor)
+//        let trailing = resendOTPDescriptionLabel.trailingAnchor
+//            .constraint(equalTo: contentView.trailingAnchor, constant: -50)
+//
+//        NSLayoutConstraint.activate([
+//            top, leading, trailing
+//        ])
+//    }
 
     private func activateConstraintsInputView() {
         storeIDInputView.heightAnchor
@@ -344,7 +428,7 @@ extension ResendOTPRootView {
 
     private func activateConstraintsStackView() {
         let top = inputStackView.topAnchor
-            .constraint(equalTo: resendOTPDescriptionLabel.bottomAnchor, constant: 20)
+            .constraint(equalTo: description2Label.bottomAnchor, constant: 20)
         let leading = inputStackView.leadingAnchor
             .constraint(equalTo: contentView.leadingAnchor, constant: 50)
         let trailing = inputStackView.trailingAnchor
@@ -376,6 +460,7 @@ extension ResendOTPRootView {
 extension ResendOTPRootView {
     func bindViewModelToViews() {
         bindViewModelToInputViews()
+        bindViewModelToPasswordSecureButton()
         bindViewModelToConfirmButton()
     }
 
@@ -413,6 +498,17 @@ extension ResendOTPRootView {
                 case .invalid(let message):
                     self.passwordInputView.showError(with: message)
                 }
+            })
+            .disposed(by: bag)
+    }
+    private func bindViewModelToPasswordSecureButton() {
+        viewModel.isSecureTextEntry
+            .asDriver()
+            .do(onNext: { [unowned self] in
+                self.passwordSecureButton.isSelected = $0
+            })
+            .drive(onNext: { [unowned self] in
+                self.passwordInputView.textField.isSecureTextEntry = $0
             })
             .disposed(by: bag)
     }
