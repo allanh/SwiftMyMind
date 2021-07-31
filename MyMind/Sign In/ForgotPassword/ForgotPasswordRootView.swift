@@ -33,7 +33,7 @@ class ForgotPasswordRootView: NiblessView {
     }
 
     private let titleGradientView: GradientView = {
-        let view = GradientView(gradientStartColor: UIColor(hex: "004477"), gradientEndColor: UIColor(hex: "004477"))
+        let view = GradientView(gradientStartColor: UIColor(hex: "f5a700"), gradientEndColor: UIColor(hex: "f5a700"))
         view.layer.cornerRadius = 10
         view.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMaxXMaxYCorner]
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -77,11 +77,11 @@ class ForgotPasswordRootView: NiblessView {
             attributes: [.foregroundColor: UIColor(hex: "b4b4b4")]
         )
         $0.textField.textColor = UIColor(hex: "545454")
-//        let image = UIImage(named: "company")
-        let containerView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 10, height: 30)))
-//        let imageView = UIImageView(frame: CGRect(x: 8, y: containerView.frame.midY-7, width: 14, height: 14))
-//        imageView.image = image
-//        containerView.addSubview(imageView)
+        let image = UIImage(named: "company")
+        let containerView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 30, height: 30)))
+        let imageView = UIImageView(frame: CGRect(x: 8, y: containerView.frame.midY-7, width: 14, height: 14))
+        imageView.image = image
+        containerView.addSubview(imageView)
         $0.textField.leftView = containerView
         $0.textField.leftViewMode = .always
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -93,11 +93,11 @@ class ForgotPasswordRootView: NiblessView {
             attributes: [.foregroundColor: UIColor(hex: "b4b4b4")]
         )
         $0.textField.textColor = UIColor(hex: "545454")
-//        let image = UIImage(named: "id")
-        let containerView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 10, height: 30)))
-//        let imageView = UIImageView(frame: CGRect(x: 8, y: containerView.frame.midY-7, width: 14, height: 14))
-//        imageView.image = image
-//        containerView.addSubview(imageView)
+        let image = UIImage(named: "id")
+        let containerView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 30, height: 30)))
+        let imageView = UIImageView(frame: CGRect(x: 8, y: containerView.frame.midY-7, width: 14, height: 14))
+        imageView.image = image
+        containerView.addSubview(imageView)
         $0.textField.leftView = containerView
         $0.textField.leftViewMode = .always
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -109,11 +109,11 @@ class ForgotPasswordRootView: NiblessView {
             attributes: [.foregroundColor: UIColor(hex: "b4b4b4")]
         )
         $0.textField.textColor = UIColor(hex: "545454")
-//        let image = UIImage(named: "id")
-        let containerView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 10, height: 30)))
-//        let imageView = UIImageView(frame: CGRect(x: 8, y: containerView.frame.midY-7, width: 14, height: 14))
-//        imageView.image = image
-//        containerView.addSubview(imageView)
+        let image = UIImage(named: "email")
+        let containerView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 30, height: 30)))
+        let imageView = UIImageView(frame: CGRect(x: 8, y: containerView.frame.midY-7, width: 14, height: 14))
+        imageView.image = image
+        containerView.addSubview(imageView)
         $0.textField.leftView = containerView
         $0.textField.leftViewMode = .always
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -180,10 +180,10 @@ class ForgotPasswordRootView: NiblessView {
         $0.setTitleColor(UIColor.white, for: .normal)
         $0.setTitleColor(UIColor(hex: "b4b4b4"), for: .disabled)
         $0.titleLabel?.font = UIFont.pingFangTCSemibold(ofSize: 16)
-        $0.backgroundColor = UIColor(hex: "ea6120")
+        $0.backgroundColor = UIColor(hex: "004477")
         $0.layer.cornerRadius = 10
-        $0.layer.shadowColor = UIColor(hex: "ea6120").withAlphaComponent(0.5).cgColor
-        $0.layer.shadowOffset = CGSize(width: 0, height: 3)
+//        $0.layer.shadowColor = UIColor(hex: "ea6120").withAlphaComponent(0.5).cgColor
+//        $0.layer.shadowOffset = CGSize(width: 0, height: 3)
     }
 
     // MARK: - Methods
@@ -287,7 +287,10 @@ class ForgotPasswordRootView: NiblessView {
                 .subscribe(on: MainScheduler.instance)
                 .do(onNext: { print($0) })
                 .map { serverTime -> String in
-                    return serverTime.time
+                    var display = serverTime.time
+                    display.removeLast(3)
+                    display = display.replacingOccurrences(of: "-", with: "/")
+                    return display
                 }
                 .bind(to: timeLabel.rx.text)
                 .disposed(by: bag)
@@ -351,7 +354,7 @@ extension ForgotPasswordRootView {
 
     private func activateConstraintsBannerImageView() {
         let top = bannerImageView.topAnchor
-            .constraint(equalTo: contentView.topAnchor)
+            .constraint(equalTo: contentView.topAnchor, constant: 25)
         let centerX = bannerImageView.centerXAnchor
             .constraint(equalTo: contentView.centerXAnchor)
         let width = bannerImageView.widthAnchor
@@ -394,7 +397,7 @@ extension ForgotPasswordRootView {
         let centerY = timeLabel.centerYAnchor
             .constraint(equalTo: titleGradientView.centerYAnchor)
         let trailing = timeLabel.trailingAnchor
-            .constraint(equalTo: contentView.trailingAnchor, constant: -12)
+            .constraint(equalTo: contentView.trailingAnchor, constant: -50)
 
         NSLayoutConstraint.activate([
             centerY, trailing
