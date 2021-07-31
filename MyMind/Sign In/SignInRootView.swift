@@ -30,7 +30,7 @@ class SignInRootView: NiblessView {
     }
 
     private let titleGradientView: GradientView = {
-        let view = GradientView(gradientStartColor: UIColor(hex: "004477"), gradientEndColor: UIColor(hex: "004477"))
+        let view = GradientView(gradientStartColor: UIColor(hex: "f5a700"), gradientEndColor: UIColor(hex: "f5a700"))// 245 167 0
         view.layer.cornerRadius = 10
         view.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMaxXMaxYCorner]
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -180,15 +180,15 @@ class SignInRootView: NiblessView {
         $0.setTitleColor(UIColor.white, for: .normal)
         $0.setTitleColor(UIColor(hex: "b4b4b4"), for: .disabled)
         $0.titleLabel?.font = UIFont.pingFangTCSemibold(ofSize: 16)
-        $0.backgroundColor = UIColor(hex: "ea6120")
+        $0.backgroundColor = UIColor(hex: "004477")
         $0.layer.cornerRadius = 10
-        $0.layer.shadowColor = UIColor(hex: "ea6120").withAlphaComponent(0.5).cgColor
-        $0.layer.shadowOffset = CGSize(width: 0, height: 3)
+//        $0.layer.shadowColor = UIColor(hex: "ea6120").withAlphaComponent(0.5).cgColor
+//        $0.layer.shadowOffset = CGSize(width: 0, height: 3)
     }
 
     let resetPasswordButton: UIButton = UIButton {
         let attributedString = NSAttributedString(
-            string: "忘記密碼?",
+            string: "忘記密碼",
             attributes: [
                 NSAttributedString.Key.font: UIFont.pingFangTCRegular(ofSize: 14),
                 NSAttributedString.Key.foregroundColor: UIColor(hex: "306ab2"),
@@ -201,7 +201,7 @@ class SignInRootView: NiblessView {
     
     let resendOTPButton: UIButton = UIButton {
         let attributedString = NSAttributedString(
-            string: "補發APP QR Code",
+            string: "補發 OTP QR Code",
             attributes: [
                 NSAttributedString.Key.font: UIFont.pingFangTCRegular(ofSize: 14),
                 NSAttributedString.Key.foregroundColor: UIColor(hex: "306ab2"),
@@ -385,7 +385,7 @@ extension SignInRootView {
 
     private func activateConstraintsBannerImageView() {
         let top = bannerImageView.topAnchor
-            .constraint(equalTo: contentView.topAnchor)
+            .constraint(equalTo: contentView.topAnchor, constant: 25)
         let centerX = bannerImageView.centerXAnchor
             .constraint(equalTo: contentView.centerXAnchor)
         let width = bannerImageView.widthAnchor
@@ -427,7 +427,7 @@ extension SignInRootView {
         let centerY = timeLabel.centerYAnchor
             .constraint(equalTo: titleGradientView.centerYAnchor)
         let trailing = timeLabel.trailingAnchor
-            .constraint(equalTo: contentView.trailingAnchor, constant: -12)
+            .constraint(equalTo: contentView.trailingAnchor, constant: -50)
 
         NSLayoutConstraint.activate([
             centerY, trailing
@@ -665,7 +665,7 @@ extension SignInRootView {
         viewModel.signInButtonEnabled
             .asDriver(onErrorJustReturn: true)
             .do(onNext: { [unowned self] in
-                let backgroundColor: UIColor = $0 ? UIColor(hex: "ff7d2c") : UIColor(hex: "f2f2f2")
+                let backgroundColor: UIColor = $0 ? UIColor(hex: "004477") : UIColor(hex: "f2f2f2")
                 self.signInButton.backgroundColor = backgroundColor
             })
             .drive(signInButton.rx.isEnabled)
@@ -773,7 +773,10 @@ extension SignInRootView {
             .subscribe(on: MainScheduler.instance)
             .do(onNext: { print($0) })
             .map { serverTime -> String in
-                return serverTime.time
+                var display = serverTime.time
+                display.removeLast(3)
+                display = display.replacingOccurrences(of: "-", with: "/")
+                return display
             }
             .bind(to: timeLabel.rx.text)
             .disposed(by: bag)
