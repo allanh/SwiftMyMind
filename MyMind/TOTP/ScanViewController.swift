@@ -137,7 +137,7 @@ final class ScanViewController: UIViewController {
 // MARK: - AV Capture Metadata Output Delegate
 extension ScanViewController: AVCaptureMetadataOutputObjectsDelegate {
     func showInvalidQRCodeAlert() {
-        let alert = UIAlertController.init(title: nil, message: "無效的 QR 碼", preferredStyle: .alert)
+        let alert = UIAlertController.init(title: "無效的 QR Code", message: "請再次確認掃描的 QR Code 是否正確，並點選確定後重新掃描", preferredStyle: .alert)
         let action = UIAlertAction.init(title: "確定", style: .default) { [weak self] (_) in
             guard let self = self else { return }
             self.captureSession?.startRunning()
