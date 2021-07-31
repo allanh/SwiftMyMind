@@ -66,7 +66,7 @@ class SecretListViewController: UIViewController {
         instructionView = MyMindInstructionView()
 
         view.addSubview(instructionView!)
-        instructionView?.topAnchor.constraint(equalTo: view.topAnchor, constant: 40).isActive = true
+        instructionView?.topAnchor.constraint(equalTo: view.topAnchor, constant: 114).isActive = true
         instructionView?.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25).isActive = true
         instructionView?.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25).isActive = true
         instructionView?.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -40).isActive = true
