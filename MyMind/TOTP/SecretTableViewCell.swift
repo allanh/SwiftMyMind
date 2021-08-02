@@ -24,15 +24,30 @@ final class SecretTableViewCell: UITableViewCell {
 
     var timer: Timer?
     var secret: Secret?
+    private var maskLayer: CAShapeLayer!
 
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        layer.cornerRadius = 10
-        layer.shadowOffset = CGSize(width: 0, height: 3)
-        layer.shadowOpacity = 0.6
+        maskLayer = CAShapeLayer()
+        layer.mask = maskLayer
     }
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        if let superview = superview {
+            if superview.isKind(of: UITableView.self) {
+                let path = UIBezierPath(roundedRect: bounds, cornerRadius: 10)
+                maskLayer.path = path.cgPath
+                maskLayer.frame = bounds
+            } else {
+                let path = UIBezierPath(rect: bounds)
+                maskLayer.path = path.cgPath
+                maskLayer.frame = bounds
+                superview.layer.cornerRadius = 10
+            }
+        }
+    }
     override func prepareForReuse() {
         super.prepareForReuse()
         timer?.invalidate()
