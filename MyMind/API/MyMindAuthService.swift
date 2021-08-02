@@ -27,7 +27,7 @@ class MyMindAuthService: PromiseKitAPIService, AuthService {
         guard let body = try? JSONEncoder().encode(info) else {
             return .init(error: APIError.parseError)
         }
-        let request = request(endPoint: Endpoint.forgotPassword, httpMethod: "POST", httpBody: body)
+        let request = request(endPoint: Endpoint.forgotPassword, httpMethod: "POST", httpHeader: ["Origin": Endpoint.baseURL], httpBody: body)
         return sendRequest(request: request)
     }
     func resendOTPMail(info: ResendOTPInfo) -> Promise<Void> {
