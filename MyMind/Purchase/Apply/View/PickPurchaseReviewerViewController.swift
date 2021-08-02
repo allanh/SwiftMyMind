@@ -39,7 +39,7 @@ final class PickPurchaseReviewerViewController: UIViewController {
         super.viewDidLoad()
 
         configureRootView()
-        if viewModel.isLastReview {
+        if viewModel.isLastReview && !isEditing {
             hideReviewerPicker()
         } else {
             configurePickReviewerTextField()

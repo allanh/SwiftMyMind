@@ -157,6 +157,7 @@ final class EditingPurchaseOrderViewController: NiblessViewController {
             contentViewControllers.append(purchaseApplyInfoViewController)
         }
         let pickPurchaseReviewerViewController = PickPurchaseReviewerViewController.loadFormNib()
+        pickPurchaseReviewerViewController.isEditing = reviewing ? false : true
         pickPurchaseReviewerViewController.viewModel = pickPurchaseReviewerViewModel
         contentViewControllers.append(pickPurchaseReviewerViewController)
     }

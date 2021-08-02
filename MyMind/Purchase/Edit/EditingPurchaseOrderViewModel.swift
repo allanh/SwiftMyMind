@@ -196,7 +196,7 @@ class EditingPurchaseOrderViewModel {
         pickPurchaseReviewerViewModel = PickPurchaseReviewerViewModel(
             loader: purchaseReviewerListLoader,
             logInfos: order.logInfos,
-            level: order.reviewLevel+1,
+            level: reviewing ? order.reviewLevel+1: order.reviewLevel,
             isLastReview: order.lastReview)
     }
 
