@@ -26,6 +26,7 @@ final class PickVendorViewController: UITableViewController {
         super.viewDidLoad()
 
         title = "請選擇供應商"
+        navigationItem.backButtonTitle = ""
         configTableView()
         subscribeTextField()
     }

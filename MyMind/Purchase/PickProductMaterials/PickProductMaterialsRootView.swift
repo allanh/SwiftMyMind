@@ -17,11 +17,9 @@ class PickProductMaterialsRootView: NiblessView {
 
     let organizeOptionView: OrganizeOptionView = OrganizeOptionView {
         $0.backgroundColor = .white
+        $0.displayType = [.sort, .filter]
+        $0.setup()
         $0.sortButton.setTitle("SKU編號", for: .normal)
-        $0.stackView.removeArrangedSubview($0.layoutButton)
-        $0.stackView.removeArrangedSubview($0.secondSeparatorView)
-        $0.layoutButton.removeFromSuperview()
-        $0.secondSeparatorView.removeFromSuperview()
     }
 
     let nextStepButton: UIButton = UIButton {

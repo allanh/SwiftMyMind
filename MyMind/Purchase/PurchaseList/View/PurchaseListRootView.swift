@@ -36,7 +36,7 @@ final class PurchaseListRootView: NiblessView {
     var reviewing: Bool = false
     lazy var organizeOptionView: OrganizeOptionView = {
         let optionView = OrganizeOptionView()
-        optionView.reviewing = reviewing
+        optionView.displayType = reviewing ? [.sort, .layout] : .all
         optionView.setup()
         return optionView
     }()

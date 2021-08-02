@@ -9,6 +9,13 @@
 import UIKit
 
 final class OrganizeOptionView: NiblessView {
+    struct DisplayType: OptionSet {
+        let rawValue: Int
+        static let sort = DisplayType(rawValue: 1 << 0)
+        static let filter = DisplayType(rawValue: 1 << 1)
+        static let layout = DisplayType(rawValue: 1 << 2)
+        static let all: Self = [.sort, .filter, .layout]
+    }
     let topSeparatorView: UIView = UIView{
         $0.backgroundColor = .init(hex: "e5e5e5")
     }
@@ -41,8 +48,7 @@ final class OrganizeOptionView: NiblessView {
     let secondSeparatorView: UIView = UIView {
         $0.backgroundColor = .init(hex: "e5e5e5")
     }
-
-    var reviewing: Bool = false
+    var displayType: DisplayType = .all
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .white
@@ -53,30 +59,31 @@ final class OrganizeOptionView: NiblessView {
     }
     func constructViewHierarchy() {
         addSubview(topSeparatorView)
-        stackView.addArrangedSubview(sortButton)
-        sortButton.setTitle("填單日期", for: .normal)
-        if !reviewing {
+        if displayType.contains(.sort) {
+            stackView.addArrangedSubview(sortButton)
+            sortButton.setTitle("填單日期", for: .normal)
+        }
+        if displayType.contains(.filter) {
             stackView.addArrangedSubview(firstSeparatorView)
             stackView.addArrangedSubview(filterButton)
         } else {
-            
             sortButton.contentHorizontalAlignment = .left
             sortButton.contentEdgeInsets.left = 10
         }
-        stackView.addArrangedSubview(secondSeparatorView)
-        stackView.addArrangedSubview(layoutButton)
+        if displayType.contains(.layout) {
+            stackView.addArrangedSubview(secondSeparatorView)
+            stackView.addArrangedSubview(layoutButton)
+        }
         addSubview(stackView)
     }
 
     func activateConstraints() {
         activateConstraintsTopSeparatorView()
         activateConstraintsStackView()
-        activateConstraintsSortButton()
-        if !reviewing {
-            activateConstraintsFilterButton()
-        }
+        if displayType.contains(.sort) { activateConstraintsSortButton() }
+        if displayType.contains(.filter) { activateConstraintsFilterButton() }
         activateConstraintsSeparatorViews()
-        activateConstraintsLayoutButton()
+        if displayType.contains(.layout) { activateConstraintsLayoutButton() }
     }
 }
 extension OrganizeOptionView {
@@ -114,7 +121,7 @@ extension OrganizeOptionView {
 
     private func activateConstraintsSortButton() {
         sortButton.translatesAutoresizingMaskIntoConstraints = false
-        if !reviewing {
+        if displayType.contains(.filter) {
             sortButton.widthAnchor
                 .constraint(equalTo: filterButton.widthAnchor).isActive = true
         }
@@ -131,7 +138,7 @@ extension OrganizeOptionView {
     private func activateConstraintsSeparatorViews() {
         firstSeparatorView.translatesAutoresizingMaskIntoConstraints = false
         secondSeparatorView.translatesAutoresizingMaskIntoConstraints = false
-        if !reviewing {
+        if displayType.contains(.filter) {
             let firstWidth = firstSeparatorView.widthAnchor
                 .constraint(equalToConstant: 2)
             let firstHeight = firstSeparatorView.heightAnchor
