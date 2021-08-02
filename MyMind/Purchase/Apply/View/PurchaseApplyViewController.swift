@@ -42,6 +42,7 @@ final class PurchaseApplyViewController: NiblessViewController {
         super.viewDidLoad()
 
         title = "採購申請"
+        navigationItem.backButtonTitle = ""
         view.backgroundColor = .white
         subscribeViewModel()
         configSaveButton()

@@ -43,6 +43,7 @@ class PurchaseSuggestionViewController: NiblessViewController {
         super.viewDidLoad()
 
         title = "採購建議"
+        navigationItem.backButtonTitle = ""
         view.backgroundColor = .white
         addTapToResignKeyboardGesture()
         constructViewHierarchy()
