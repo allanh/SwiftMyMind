@@ -25,6 +25,7 @@ class SecretListViewController: UIViewController {
 //        }
 //        navigationItem.titleView = navigationTitleImageView
         title = "My Mind 買賣 OTP"
+        navigationItem.backButtonTitle = ""
         tableView.register(SecretTableViewCell.nib, forCellReuseIdentifier: SecretTableViewCell.reuseIdentifier)
     }
 
@@ -112,7 +113,8 @@ class SecretListViewController: UIViewController {
             return
         }
         viewController.delegate = (scanViewControllerDelegate != nil) ? scanViewControllerDelegate : self
-        present(viewController, animated: true, completion: nil)
+        show(viewController, sender: self)
+//        present(viewController, animated: true, completion: nil)
     }
 
 }

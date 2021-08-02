@@ -25,6 +25,33 @@ public class ScannerOverlayPreviewLayer: AVCaptureVideoPreviewLayer {
         metadataOutputRectConverted(fromLayerRect: maskContainer)
     }
 
+    private let maskLayer: CAShapeLayer = CAShapeLayer {
+        $0.fillRule = .evenOdd
+    }
+    private let shapeLayer: CAShapeLayer = CAShapeLayer {
+        $0.fillColor = UIColor.clear.cgColor
+    }
+    private let textBackgroundLayer: CALayer = CALayer {
+        $0.backgroundColor = UIColor.white.cgColor
+    }
+    private let textLayer: CATextLayer = CATextLayer {
+        $0.foregroundColor = UIColor(hex: "004477").cgColor
+        $0.font = UIFont.pingFangTCSemibold(ofSize: 16)
+        $0.fontSize = 16
+        $0.alignmentMode = .center
+        $0.string = "QR Code掃描"
+    }
+    override public init(session: AVCaptureSession) {
+        super.init(session: session)
+        addSublayer(maskLayer)
+        addSublayer(shapeLayer)
+        addSublayer(textBackgroundLayer)
+        addSublayer(textLayer)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     public override var frame: CGRect {
         didSet {
             setNeedsDisplay()
@@ -46,12 +73,8 @@ public class ScannerOverlayPreviewLayer: AVCaptureVideoPreviewLayer {
         path.addRect(bounds)
         path.addRoundedRect(in: maskContainer, cornerWidth: maskContainerCornerRadius, cornerHeight: maskContainerCornerRadius)
 
-        let maskLayer = CAShapeLayer()
         maskLayer.path = path
         maskLayer.fillColor = backgroundColor
-        maskLayer.fillRule = .evenOdd
-
-        addSublayer(maskLayer)
 
         // MARK: - Edged Corners
         if maskContainerCornerRadius > cornerLength { maskContainerCornerRadius = cornerLength }
@@ -112,14 +135,12 @@ public class ScannerOverlayPreviewLayer: AVCaptureVideoPreviewLayer {
         combinedPath.addPath(lowerRightCorner.cgPath)
         combinedPath.addPath(bottomLeftCorner.cgPath)
 
-        let shapeLayer = CAShapeLayer()
         shapeLayer.path = combinedPath
         shapeLayer.strokeColor = lineColor.cgColor
-        shapeLayer.fillColor = UIColor.clear.cgColor
         shapeLayer.lineWidth = lineWidth
         shapeLayer.lineCap = lineCap
-
-        addSublayer(shapeLayer)
+        textBackgroundLayer.frame = CGRect(origin: .zero, size: CGSize(width: bounds.width, height: 50))
+        textLayer.frame = CGRect(origin: CGPoint(x: 0, y: 13), size: CGSize(width: bounds.width, height: 22))
     }
 }
 

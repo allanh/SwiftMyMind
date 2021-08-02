@@ -21,10 +21,11 @@ final class ScanViewController: UIViewController {
 
     weak var delegate: ScanViewControllerDelegate?
 
-    @IBOutlet weak var closeButton: UIButton!
+//    @IBOutlet weak var closeButton: UIButton!
     // MARK: - View life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "My Mind 買賣 OTP"
         let status = AVCaptureDevice.authorizationStatus(for: .video)
         if status != .authorized {
             AVCaptureDevice.requestAccess(for: .video) { [weak self] granted in
@@ -95,8 +96,6 @@ final class ScanViewController: UIViewController {
 
         configPreviewLayer()
 
-        view.bringSubviewToFront(closeButton)
-
         captureSession?.startRunning()
     }
 
@@ -165,7 +164,7 @@ extension ScanViewController: AVCaptureMetadataOutputObjectsDelegate {
         }
         stopRunning()
         delegate?.scanViewController(self, didReceive: stringValue)
-        dismiss(animated: true, completion: nil)
+        navigationController?.popViewController(animated: true)
     }
 }
 
