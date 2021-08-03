@@ -2719,7 +2719,7 @@
 				AUTH_SERVER_URL = "https://api-demo-auth.udicommerce.com";
 				CODE_SIGN_STYLE = Automatic;
 				CRYPTO = tAGsC6LLLFU2TwHBzvqLFjms;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = NCP4JUG36Z;
 				INFOPLIST_FILE = "Demo-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -2732,7 +2732,7 @@
 				SERVER_URL = "https://demo-mymind.udicommerce.com";
 				SWIFT_OBJC_BRIDGING_HEADER = "MyMind/TOTP/MyMind-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -2748,7 +2748,7 @@
 				AUTH_SERVER_URL = "https://api-demo-auth.udicommerce.com";
 				CODE_SIGN_STYLE = Automatic;
 				CRYPTO = tAGsC6LLLFU2TwHBzvqLFjms;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = NCP4JUG36Z;
 				INFOPLIST_FILE = "Demo-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -2761,7 +2761,7 @@
 				SERVER_URL = "https://demo-mymind.udicommerce.com";
 				SWIFT_OBJC_BRIDGING_HEADER = "MyMind/TOTP/MyMind-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Alpha;
@@ -2777,7 +2777,7 @@
 				AUTH_SERVER_URL = "https://api-demo-auth.udicommerce.com";
 				CODE_SIGN_STYLE = Automatic;
 				CRYPTO = tAGsC6LLLFU2TwHBzvqLFjms;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = NCP4JUG36Z;
 				INFOPLIST_FILE = "Demo-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -2790,7 +2790,7 @@
 				SERVER_URL = "https://demo-mymind.udicommerce.com";
 				SWIFT_OBJC_BRIDGING_HEADER = "MyMind/TOTP/MyMind-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
@@ -2806,7 +2806,7 @@
 				AUTH_SERVER_URL = "https://api-auth.udicommerce.com";
 				CODE_SIGN_STYLE = Automatic;
 				CRYPTO = tAGsC6LLLFU2TwHBzvqLFjms;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = NCP4JUG36Z;
 				INFOPLIST_FILE = "Production-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -2819,7 +2819,7 @@
 				SERVER_URL = "https://api-mymind.udicommerce.com";
 				SWIFT_OBJC_BRIDGING_HEADER = "MyMind/TOTP/MyMind-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -2835,7 +2835,7 @@
 				AUTH_SERVER_URL = "https://api-auth.udicommerce.com";
 				CODE_SIGN_STYLE = Automatic;
 				CRYPTO = tAGsC6LLLFU2TwHBzvqLFjms;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = NCP4JUG36Z;
 				INFOPLIST_FILE = "Production-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -2848,7 +2848,7 @@
 				SERVER_URL = "https://api-mymind.udicommerce.com";
 				SWIFT_OBJC_BRIDGING_HEADER = "MyMind/TOTP/MyMind-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Alpha;
@@ -2864,7 +2864,7 @@
 				AUTH_SERVER_URL = "https://api-auth.udicommerce.com";
 				CODE_SIGN_STYLE = Automatic;
 				CRYPTO = tAGsC6LLLFU2TwHBzvqLFjms;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = NCP4JUG36Z;
 				INFOPLIST_FILE = "Production-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -2877,7 +2877,7 @@
 				SERVER_URL = "https://api-mymind.udicommerce.com";
 				SWIFT_OBJC_BRIDGING_HEADER = "MyMind/TOTP/MyMind-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
@@ -3009,7 +3009,7 @@
 				AUTH_SERVER_URL = "http://api-alpha-auth.udnshopping.com";
 				CODE_SIGN_STYLE = Automatic;
 				CRYPTO = 9Edv7aN6h2ZUpK6V6SmHmugm;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = NCP4JUG36Z;
 				INFOPLIST_FILE = MyMind/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -3022,7 +3022,7 @@
 				SERVER_URL = "http://api-gke-alpha-dos.udnshopping.com";
 				SWIFT_OBJC_BRIDGING_HEADER = "MyMind/TOTP/MyMind-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -3038,7 +3038,7 @@
 				AUTH_SERVER_URL = "http://api-alpha-auth.udnshopping.com";
 				CODE_SIGN_STYLE = Automatic;
 				CRYPTO = 9Edv7aN6h2ZUpK6V6SmHmugm;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = NCP4JUG36Z;
 				INFOPLIST_FILE = MyMind/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -3051,7 +3051,7 @@
 				SERVER_URL = "http://api-gke-alpha-dos.udnshopping.com";
 				SWIFT_OBJC_BRIDGING_HEADER = "MyMind/TOTP/MyMind-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
@@ -3216,7 +3216,7 @@
 				AUTH_SERVER_URL = "http://api-alpha-auth.udnshopping.com";
 				CODE_SIGN_STYLE = Automatic;
 				CRYPTO = 9Edv7aN6h2ZUpK6V6SmHmugm;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = NCP4JUG36Z;
 				INFOPLIST_FILE = MyMind/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -3229,7 +3229,7 @@
 				SERVER_URL = "http://api-gke-alpha-dos.udnshopping.com";
 				SWIFT_OBJC_BRIDGING_HEADER = "MyMind/TOTP/MyMind-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Alpha;
