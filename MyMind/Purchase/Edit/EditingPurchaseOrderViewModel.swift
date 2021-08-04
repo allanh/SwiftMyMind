@@ -209,7 +209,7 @@ class EditingPurchaseOrderViewModel {
             logInfos: order.logInfos,
             level: order.reviewLevel,
             isLastReview: (reviewing) ? order.lastReview : false,
-            editable: (reviewing) ? true : status == .pending)
+            editable: (reviewing) ? true : (status == .pending || status == .rejected))
     }
 
     func subscribeChildViewModel(with order: PurchaseOrder) {

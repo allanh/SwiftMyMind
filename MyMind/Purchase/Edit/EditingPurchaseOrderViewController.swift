@@ -145,7 +145,7 @@ final class EditingPurchaseOrderViewController: NiblessViewController {
         else {
             return
         }
-        if reviewing || viewModel.status != .pending {
+        if reviewing || (viewModel.status != .pending && viewModel.status != .rejected) {
             let purchaseReviewingApplyInfoViewController = PurchaseReviewingApplyInfoViewController.loadFormNib()
             purchaseReviewingApplyInfoViewController.viewModel = purchaseApplyInfoViewModel
             contentViewControllers.append(purchaseReviewingApplyInfoViewController)
@@ -165,7 +165,7 @@ final class EditingPurchaseOrderViewController: NiblessViewController {
             defaultButton.addTarget(self, action: #selector(agreeButtonDidTapped(_:)), for: .touchUpInside)
             alternativeButton.addTarget(self, action: #selector(disagreeButtonDidTapped(_:)), for: .touchUpInside)
         } else {
-            if viewModel.status == .pending {
+            if viewModel.status == .pending || viewModel.status == .rejected {
                 // save, void
                 defaultButton.setTitle("儲存", for: .normal)
                 alternativeButton.setTitle("作廢此單", for: .normal)
