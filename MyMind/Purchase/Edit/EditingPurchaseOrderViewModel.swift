@@ -30,7 +30,7 @@ class EditingPurchaseOrderViewModel {
     let purchaseReviewerListLoader: PurchaseReviewerListLoader
     let reviewing: Bool
     var productInfos: [PurchaseOrder.ProductInfo] = []
-    var status: PurchaseStatus = .closed
+    var editable: Bool = false
 
     var purchaseApplyInfoViewModel: PurchaseApplyInfoViewModel?
     var pickPurchaseReviewerViewModel: PickPurchaseReviewerViewModel?
@@ -69,7 +69,7 @@ class EditingPurchaseOrderViewModel {
             }
             .done { [weak self] order in
                 guard let self = self else { return }
-                self.status = order.status
+                self.editable = order.status == .pending || order.status == .rejected
                 self.makePurchaseApplyInfoViewModel(with: order)
                 self.makePickPurchaseReviewerViewModel(with: order)
                 self.subscribeChildViewModel(with: order)
@@ -209,7 +209,7 @@ class EditingPurchaseOrderViewModel {
             logInfos: order.logInfos,
             level: order.reviewLevel,
             isLastReview: (reviewing) ? order.lastReview : false,
-            editable: (reviewing) ? true : (status == .pending || status == .rejected))
+            editable: (reviewing) ? true : editable)
     }
 
     func subscribeChildViewModel(with order: PurchaseOrder) {
