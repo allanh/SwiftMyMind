@@ -73,7 +73,7 @@ extension MainPageViewController {
                         titleLabel.textColor = .white
                         self.navigationItem.titleView = titleLabel
                     }
-                    _ = ErrorHandler.shared.handle(apiError, controller: self)
+                    _ = ErrorHandler.shared.handle(apiError, controller: self, forceAction: true)
                 } else {
                     ToastView.showIn(self, message: error.localizedDescription)
                 }

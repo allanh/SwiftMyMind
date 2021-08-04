@@ -9,20 +9,20 @@
 import Foundation
 import UIKit
 protocol ErrorHandling {
-    func handle(_ error: APIError, controller: UIViewController?) -> Bool
+    func handle(_ error: APIError, controller: UIViewController?, forceAction: Bool) -> Bool
 }
 class ErrorHandler: ErrorHandling {
     static let shared: ErrorHandler = .init()
-    func handle(_ error: APIError, controller: UIViewController? = nil) -> Bool {
+    func handle(_ error: APIError, controller: UIViewController? = nil, forceAction: Bool = false) -> Bool {
         switch error {
         case .noAccessTokenError, .invalidAccessToken:
             showSignInPage(controller)
         case .serviceError(_), .parseError:
             showServiceErrorPage(controller)
         case .maintenanceError:
-            showMaintenanceErrorPage(controller)
+            showMaintenanceErrorPage(controller, forceAction: forceAction)
         case .networkError:
-            showNetworkErrorPage(controller)
+            showNetworkErrorPage(controller, forceAction: forceAction)
         case .insufficientPrivilegeError:
             showInsufficientPrivilegeAlert(controller)
         default:
@@ -54,23 +54,23 @@ extension ErrorHandler {
             sceneDelegate.window?.rootViewController?.present(signInViewController, animated: true, completion: nil)
         }
     }
-    private func showHomePage() {
-        MyMindEmployeeAPIService.shared.authorization()
-            .done { authorization in
-                let scene = UIApplication.shared.connectedScenes.first
-                if let sceneDelegate : SceneDelegate = (scene?.delegate as? SceneDelegate) {
-                    let rootTabBarViewController = RootTabBarController(authorization: authorization)
-                    sceneDelegate.window?.rootViewController?.navigationController?.popToViewController(rootTabBarViewController, animated: true)
-                }
-            }
-            .ensure {
-            }
-            .catch { error in
-                if let apiError = error as? APIError {
-                    _ = ErrorHandler.shared.handle(apiError)
-                }
-            }
-    }
+//    private func showHomePage() {
+//        MyMindEmployeeAPIService.shared.authorization()
+//            .done { authorization in
+//                let scene = UIApplication.shared.connectedScenes.first
+//                if let sceneDelegate : SceneDelegate = (scene?.delegate as? SceneDelegate) {
+//                    let rootTabBarViewController = RootTabBarController(authorization: authorization)
+//                    sceneDelegate.window?.rootViewController?.navigationController?.popToViewController(rootTabBarViewController, animated: true)
+//                }
+//            }
+//            .ensure {
+//            }
+//            .catch { error in
+//                if let apiError = error as? APIError {
+//                    _ = ErrorHandler.shared.handle(apiError)
+//                }
+//            }
+//    }
     
     private func showStaticPage(_ controller: UIViewController, page: StaticView) {
         controller.view.addSubview(page)
@@ -90,17 +90,27 @@ extension ErrorHandler {
         }
     }
     
-    private func showMaintenanceErrorPage(_ controller: UIViewController?) {
+    private func showMaintenanceErrorPage(_ controller: UIViewController?, forceAction: Bool) {
         if let controller = controller {
-            let page = StaticView(frame: controller.view.bounds, type: .maintenance, title:"系統維護中！" , descriptions: "為提供您更好的體驗， 我們正在進行服務更新， 敬請期待！")
+            let page = StaticView(frame: controller.view.bounds, type: .maintenance, title:"系統維護中！" , descriptions: "為提供您更好的體驗， 我們正在進行服務更新， 敬請期待！",defaultButtonTitle: (forceAction) ? "關閉" : nil)
+            if (forceAction) {
+                page.defaultButton.addAction {
+                    page.removeFromSuperview()
+                }
+            }
             showStaticPage(controller, page: page)
         }
 
     }
     
-    private func showNetworkErrorPage(_ controller: UIViewController?) {
+    private func showNetworkErrorPage(_ controller: UIViewController?, forceAction: Bool) {
         if let controller = controller {
             let page = StaticView(frame: controller.view.bounds, type: .maintenance, title:"網路異常" , descriptions: "網路連線異常，請確認網路連線狀態。")
+            if (forceAction) {
+                page.defaultButton.addAction {
+                    page.removeFromSuperview()
+                }
+            }
             showStaticPage(controller, page: page)
         }
     }
