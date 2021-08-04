@@ -9,10 +9,10 @@
 import UIKit
 import Firebase
 
+typealias ServiceInfo = (title: String, version: String, icon: String, descriptions: String, action: Selector)
 class MainPageViewController: UIViewController {
 
-    @IBOutlet weak var otpView: UIView!
-    @IBOutlet weak var myMindView: UIView!
+    private let serviceInfos: [ServiceInfo] = [("My Mind 買賣", "1.0.0", "my_mind_icon", "雲端進銷存．一鍵上架．多通路訂單整合，輕鬆搞定電商營運。", #selector(myMind)), ("OTP 服務", "1.0.0", "otp", "取得My Mind 買賣「一次性動態安全密碼」，保護資訊安全有保障。",#selector(otp))]
     var remoteConfig: RemoteConfig!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,19 +22,8 @@ class MainPageViewController: UIViewController {
             $0.image = UIImage(named: "udi_logo")
         }
         navigationItem.titleView = navigationTitleView
-        
-        
-        let otpTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(otp(_:)))
-        otpView.layer.cornerRadius = 10
-        otpView.layer.shadowOffset = CGSize(width: 0, height: 3)
-        otpView.layer.shadowOpacity = 0.6
-        otpView.addGestureRecognizer(otpTapGestureRecognizer)
-        let myMindTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(myMind(_:)))
-        myMindView.layer.cornerRadius = 10
-        myMindView.layer.shadowOffset = CGSize(width: 0, height: 3)
-        myMindView.layer.shadowOpacity = 0.6
-        myMindView.addGestureRecognizer(myMindTapGestureRecognizer)
         navigationItem.backButtonTitle = ""
+
         remoteConfig = RemoteConfig.remoteConfig()
         let settings = RemoteConfigSettings()
         settings.minimumFetchInterval = 0
@@ -48,12 +37,27 @@ class MainPageViewController: UIViewController {
             }
         }
     }
-    @IBAction func otp(_ sender: Any) {
+
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
+    }
+    */
+
+}
+extension MainPageViewController {
+    @objc
+    func otp() {
         let storyboard: UIStoryboard = UIStoryboard(name: "TOTP", bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier: "SecretListViewController")
         show(viewController, sender: self)
     }
-    @IBAction func myMind(_ sender: Any) {
+    @objc
+    func myMind() {
         MyMindEmployeeAPIService.shared.authorization()
             .done { authorization in
                 let rootTabBarViewController = RootTabBarController(authorization: authorization)
@@ -75,15 +79,44 @@ class MainPageViewController: UIViewController {
                 }
             }
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+}
+extension MainPageViewController: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return serviceInfos.count
     }
-    */
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "ServiceCell", for: indexPath) as? ServiceCell {
+            cell.config(with: serviceInfos[indexPath.section])
+            return cell
+        }
+        return UITableViewCell()
+    }
+    
+    
+}
+extension MainPageViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        perform(serviceInfos[indexPath.section].action)
+    }
+}
 
+class ServiceCell: UITableViewCell {
+    @IBOutlet weak var iconImageView: UIImageView!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var versionLabel: UILabel!
+    @IBOutlet weak var descriptionsLabel: UILabel!
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.layer.cornerRadius = 10
+    }
+    func config(with service: ServiceInfo) {
+        iconImageView.image = UIImage(named: service.icon)
+        titleLabel.text = service.title
+        versionLabel.text = service.version
+        descriptionsLabel.text = service.descriptions
+    }
 }
