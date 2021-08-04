@@ -16,7 +16,7 @@ class ErrorHandler: ErrorHandling {
     func handle(_ error: APIError, controller: UIViewController? = nil) -> Bool {
         switch error {
         case .noAccessTokenError, .invalidAccessToken:
-            showSignInPage()
+            showSignInPage(controller)
         case .serviceError(_), .parseError:
             showServiceErrorPage(controller)
         case .maintenanceError:
@@ -32,7 +32,8 @@ class ErrorHandler: ErrorHandling {
     }
 }
 extension ErrorHandler {
-    private func showSignInPage() {
+    private func showSignInPage(_ controller: UIViewController?) {
+        controller?.navigationController?.popToRootViewController(animated: false)
         let scene = UIApplication.shared.connectedScenes.first
         if let sceneDelegate : SceneDelegate = (scene?.delegate as? SceneDelegate) {
             var otpEnabled: Bool = false
@@ -59,7 +60,7 @@ extension ErrorHandler {
                 let scene = UIApplication.shared.connectedScenes.first
                 if let sceneDelegate : SceneDelegate = (scene?.delegate as? SceneDelegate) {
                     let rootTabBarViewController = RootTabBarController(authorization: authorization)
-                    sceneDelegate.window?.rootViewController?.navigationController?.show(rootTabBarViewController, sender: nil)
+                    sceneDelegate.window?.rootViewController?.navigationController?.popToViewController(rootTabBarViewController, animated: true)
                 }
             }
             .ensure {
@@ -83,7 +84,7 @@ extension ErrorHandler {
             }
             page.alternativeButton.addAction {
                 page.removeFromSuperview()
-                self.showHomePage()
+                controller.navigationController?.popToRootViewController(animated: true)
             }
             showStaticPage(controller, page: page)
         }
