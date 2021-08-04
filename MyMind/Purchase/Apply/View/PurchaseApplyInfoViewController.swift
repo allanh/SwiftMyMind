@@ -141,6 +141,13 @@ final class PurchaseApplyInfoViewController: UIViewController {
                 self.updateWarehoseTextFieldLayout(validationStatus: status)
             })
             .disposed(by: bag)
+        
+        viewModel.purchaseStatus
+            .map({
+                $0.description
+            })
+            .bind(to: statusLabel.rx.text)
+            .disposed(by: bag)
     }
 
     private func configureContentWithViewModel() {

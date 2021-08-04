@@ -130,7 +130,7 @@ class PurchaseSuggestionViewController: NiblessViewController {
         case .purchaseApply:
             let service = MyMindPurchaseAPIService.shared
             
-            let purchaseInfoViewModel = PurchaseApplyInfoViewModel(suggestionProductMaterialViewModels: viewModel.suggestionProductMaterialViewModels, warehouseLoader: service)
+            let purchaseInfoViewModel = PurchaseApplyInfoViewModel(suggestionProductMaterialViewModels: viewModel.suggestionProductMaterialViewModels, warehouseLoader: service, purchaseStatus: .pending)
 
             let pickReviewerViewModel = PickPurchaseReviewerViewModel(loader: service)
             let purchaseApplyViewModel = PurchaseApplyViewModel(

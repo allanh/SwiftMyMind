@@ -33,22 +33,16 @@ final class EditingPurchaseOrderViewController: NiblessViewController {
         return collecitonView
     }()
 
-    let saveButton: UIButton = UIButton {
+    let defaultButton: UIButton = UIButton {
         $0.backgroundColor = UIColor(hex: "004477")
         $0.setTitleColor(.white, for: .normal)
-        $0.setTitle("儲存", for: .normal)
+//        $0.setTitle("撒回", for: .normal)
         $0.titleLabel?.font = .pingFangTCSemibold(ofSize: 16)
     }
-    let agreeButton: UIButton = UIButton {
-        $0.backgroundColor = UIColor(hex: "004477")
-        $0.setTitleColor(.white, for: .normal)
-        $0.setTitle("通過審核", for: .normal)
-        $0.titleLabel?.font = .pingFangTCSemibold(ofSize: 16)
-    }
-    let disagreeButton: UIButton = UIButton {
+    let alternativeButton: UIButton = UIButton {
         $0.backgroundColor = .white
         $0.setTitleColor(UIColor(hex: "004477"), for: .normal)
-        $0.setTitle("審核退回", for: .normal)
+//        $0.setTitle("返回", for: .normal)
         $0.titleLabel?.font = .pingFangTCSemibold(ofSize: 16)
         let topBorder = UIView(frame: CGRect(x: 0, y: 0, width: $0.frame.width, height: 1))
         topBorder.translatesAutoresizingMaskIntoConstraints = false
@@ -57,8 +51,27 @@ final class EditingPurchaseOrderViewController: NiblessViewController {
         topBorder.topAnchor.constraint(equalTo: $0.topAnchor).isActive = true
         topBorder.leadingAnchor.constraint(equalTo: $0.leadingAnchor).isActive = true
         topBorder.heightAnchor.constraint(equalToConstant: 1).isActive = true
-        topBorder.widthAnchor.constraint(equalTo: $0.widthAnchor).isActive = true
-    }
+        topBorder.widthAnchor.constraint(equalTo: $0.widthAnchor).isActive = true    }
+//    let agreeButton: UIButton = UIButton {
+//        $0.backgroundColor = UIColor(hex: "004477")
+//        $0.setTitleColor(.white, for: .normal)
+//        $0.setTitle("通過審核", for: .normal)
+//        $0.titleLabel?.font = .pingFangTCSemibold(ofSize: 16)
+//    }
+//    let disagreeButton: UIButton = UIButton {
+//        $0.backgroundColor = .white
+//        $0.setTitleColor(UIColor(hex: "004477"), for: .normal)
+//        $0.setTitle("審核退回", for: .normal)
+//        $0.titleLabel?.font = .pingFangTCSemibold(ofSize: 16)
+//        let topBorder = UIView(frame: CGRect(x: 0, y: 0, width: $0.frame.width, height: 1))
+//        topBorder.translatesAutoresizingMaskIntoConstraints = false
+//        topBorder.backgroundColor = UIColor(hex: "004477")
+//        $0.addSubview(topBorder)
+//        topBorder.topAnchor.constraint(equalTo: $0.topAnchor).isActive = true
+//        topBorder.leadingAnchor.constraint(equalTo: $0.leadingAnchor).isActive = true
+//        topBorder.heightAnchor.constraint(equalToConstant: 1).isActive = true
+//        topBorder.widthAnchor.constraint(equalTo: $0.widthAnchor).isActive = true
+//    }
     // MARK: - View life cycles
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,16 +85,11 @@ final class EditingPurchaseOrderViewController: NiblessViewController {
         configCollectionView()
         subscribeViewModel()
         viewModel.loadPurchaseOrderThenMakeChildViewModels()
-        if reviewing {
-            agreeButton.addTarget(self, action: #selector(agreeButtonDidTapped(_:)), for: .touchUpInside)
-            disagreeButton.addTarget(self, action: #selector(disagreeButtonDidTapped(_:)), for: .touchUpInside)
-        } else {
-            saveButton.addTarget(self, action: #selector(saveButtonDidTapped(_:)), for: .touchUpInside)
-        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        ErrorHandler.shared.handle(.serviceError("service error"), controller: self)
 
         addKeyboardObservers()
     }
@@ -117,22 +125,14 @@ final class EditingPurchaseOrderViewController: NiblessViewController {
 
     private func constructViewHierarchy() {
         view.addSubview(collectionView)
-        if reviewing {
-            view.addSubview(agreeButton)
-            view.addSubview(disagreeButton)
-        } else {
-            view.addSubview(saveButton)
-        }
+        view.addSubview(defaultButton)
+        view.addSubview(alternativeButton)
     }
 
     private func activateConstraints() {
         activateConstraintsCollecitonView()
-        if reviewing {
-            activateConstraintsAgreeButton()
-            activateConstraintsDisagreeButton()
-        } else {
-            activateConstraintsSaveButton()
-        }
+        activateConstraintsDefaultButton()
+        activateConstraintsAlternativeButton()
     }
 
     private func configCollectionView() {
@@ -147,7 +147,7 @@ final class EditingPurchaseOrderViewController: NiblessViewController {
         else {
             return
         }
-        if reviewing {
+        if reviewing || viewModel.status != .pending {
             let purchaseReviewingApplyInfoViewController = PurchaseReviewingApplyInfoViewController.loadFormNib()
             purchaseReviewingApplyInfoViewController.viewModel = purchaseApplyInfoViewModel
             contentViewControllers.append(purchaseReviewingApplyInfoViewController)
@@ -157,9 +157,30 @@ final class EditingPurchaseOrderViewController: NiblessViewController {
             contentViewControllers.append(purchaseApplyInfoViewController)
         }
         let pickPurchaseReviewerViewController = PickPurchaseReviewerViewController.loadFormNib()
-        pickPurchaseReviewerViewController.isEditing = reviewing ? false : true
+//        pickPurchaseReviewerViewController.isEditing = viewModel.status == .pending
         pickPurchaseReviewerViewController.viewModel = pickPurchaseReviewerViewModel
         contentViewControllers.append(pickPurchaseReviewerViewController)
+        if reviewing {
+            // approve, return
+            defaultButton.setTitle("通過審核", for: .normal)
+            alternativeButton.setTitle("審核退回", for: .normal)
+            defaultButton.addTarget(self, action: #selector(agreeButtonDidTapped(_:)), for: .touchUpInside)
+            alternativeButton.addTarget(self, action: #selector(disagreeButtonDidTapped(_:)), for: .touchUpInside)
+        } else {
+            if viewModel.status == .pending {
+                // save, void
+                defaultButton.setTitle("儲存", for: .normal)
+                alternativeButton.setTitle("作廢此單", for: .normal)
+                defaultButton.addTarget(self, action: #selector(saveButtonDidTapped(_:)), for: .touchUpInside)
+                alternativeButton.addTarget(self, action: #selector(invalidButtonDidTapped(_:)), for: .touchUpInside)
+            } else {
+                // revoke, cancel
+                defaultButton.setTitle("撤回", for: .normal)
+                alternativeButton.setTitle("取消", for: .normal)
+                defaultButton.addTarget(self, action: #selector(revokeButtonDidTapped(_:)), for: .touchUpInside)
+                alternativeButton.addTarget(self, action: #selector(cancelButtonDidTapped(_:)), for: .touchUpInside)
+            }
+        }
     }
 
     private func navigation(with view: EditingPurchaseOrderViewModel.View) {
@@ -190,13 +211,48 @@ final class EditingPurchaseOrderViewController: NiblessViewController {
         viewModel.sendEditedRequest()
     }
     @objc
+    private func cancelButtonDidTapped(_ sender: UIButton) {
+        navigationController?.popViewController(animated: true)
+    }
+    @objc
+    private func revokeButtonDidTapped(_ sender: UIButton) {
+        if let contentView = navigationController?.view {
+            let alertView = CustomAlertView(frame: contentView.bounds, title: "確定撤回嗎？", descriptions: "撤回後，需要重新審核，是否確認撤回？")
+            alertView.confirmButton.addAction { [weak self] in
+                guard let self = self else { return }
+                alertView.removeFromSuperview()
+                self.viewModel.sendRevokeRequest()
+            }
+            alertView.cancelButton.addAction {
+                alertView.removeFromSuperview()
+            }
+            contentView.addSubview(alertView)
+        }
+    }
+    @objc
+    private func invalidButtonDidTapped(_ sender: UIButton) {
+        if let contentView = navigationController?.view {
+            let alertView = CustomAlertView(frame: contentView.bounds, title: "確定作廢嗎？", descriptions: "作廢後，需要重新申請，是否確認作廢？")
+            alertView.confirmButton.addAction { [weak self] in
+                guard let self = self else { return }
+                alertView.removeFromSuperview()
+                self.viewModel.sendInvalidRequest()
+            }
+            alertView.cancelButton.addAction {
+                alertView.removeFromSuperview()
+            }
+            contentView.addSubview(alertView)
+        }
+    }
+
+    @objc
     private func agreeButtonDidTapped(_ sender: UIButton) {
         viewModel.sendEditedRequest()
     }
     @objc
     private func disagreeButtonDidTapped(_ sender: UIButton) {
         if let contentView = navigationController?.view {
-            let alertView = CustomAlertView(frame: contentView.bounds, title: "確定撤回嗎？", descriptions: "撤回後，需要重新審核，是否確認撤回？")
+            let alertView = CustomAlertView(frame: contentView.bounds, title: "確定退回嗎？", descriptions: "退回後，需要重新審核，是否確認退回？")
             alertView.confirmButton.addAction { [weak self] in
                 guard let self = self else { return }
                 alertView.removeFromSuperview()
@@ -207,7 +263,6 @@ final class EditingPurchaseOrderViewController: NiblessViewController {
             }
             contentView.addSubview(alertView)
         }
-
     }
 }
 // MARK: - Collection view data source
@@ -252,7 +307,7 @@ extension EditingPurchaseOrderViewController {
         let leading = collectionView.leadingAnchor
             .constraint(equalTo: view.leadingAnchor)
         let bottom = collectionView.bottomAnchor
-            .constraint(equalTo: reviewing ? agreeButton.topAnchor: saveButton.topAnchor)
+            .constraint(equalTo: defaultButton.topAnchor)
         let trailing = collectionView.trailingAnchor
             .constraint(equalTo: view.trailingAnchor)
 
@@ -261,45 +316,30 @@ extension EditingPurchaseOrderViewController {
         ])
     }
 
-    private func activateConstraintsSaveButton() {
-        saveButton.translatesAutoresizingMaskIntoConstraints = false
-        let leading = saveButton.leadingAnchor
-            .constraint(equalTo: view.leadingAnchor)
-        let trailing = saveButton.trailingAnchor
-            .constraint(equalTo: view.trailingAnchor)
-        let bottom = saveButton.bottomAnchor
-            .constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
-        let height = saveButton.heightAnchor
-            .constraint(equalToConstant: 50)
-
-        NSLayoutConstraint.activate([
-            leading, trailing, bottom, height
-        ])
-    }
-    private func activateConstraintsAgreeButton() {
-        agreeButton.translatesAutoresizingMaskIntoConstraints = false
-        let width = agreeButton.widthAnchor
+    private func activateConstraintsDefaultButton() {
+        defaultButton.translatesAutoresizingMaskIntoConstraints = false
+        let width = defaultButton.widthAnchor
             .constraint(equalTo: view.widthAnchor, multiplier: 0.5)
-        let trailing = agreeButton.trailingAnchor
+        let trailing = defaultButton.trailingAnchor
             .constraint(equalTo: view.trailingAnchor)
-        let bottom = agreeButton.bottomAnchor
+        let bottom = defaultButton.bottomAnchor
             .constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
-        let height = agreeButton.heightAnchor
+        let height = defaultButton.heightAnchor
             .constraint(equalToConstant: 50)
 
         NSLayoutConstraint.activate([
             width, trailing, bottom, height
         ])
     }
-    private func activateConstraintsDisagreeButton() {
-        disagreeButton.translatesAutoresizingMaskIntoConstraints = false
-        let leading = disagreeButton.leadingAnchor
+    private func activateConstraintsAlternativeButton() {
+        alternativeButton.translatesAutoresizingMaskIntoConstraints = false
+        let leading = alternativeButton.leadingAnchor
             .constraint(equalTo: view.leadingAnchor)
-        let width = disagreeButton.widthAnchor
+        let width = alternativeButton.widthAnchor
             .constraint(equalTo: view.widthAnchor, multiplier: 0.5)
-        let bottom = disagreeButton.bottomAnchor
+        let bottom = alternativeButton.bottomAnchor
             .constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
-        let height = disagreeButton.heightAnchor
+        let height = alternativeButton.heightAnchor
             .constraint(equalToConstant: 50)
 
         NSLayoutConstraint.activate([

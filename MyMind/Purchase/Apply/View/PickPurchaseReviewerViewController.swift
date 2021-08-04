@@ -15,6 +15,7 @@ final class PickPurchaseReviewerViewController: UIViewController {
     @IBOutlet weak var pickReviewerTitleLableHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var pickerReviewerTitleLabelBottomConstraint: NSLayoutConstraint!
     @IBOutlet private weak var pickReviewerTextField: CustomClearButtonPositionTextField!
+    @IBOutlet private weak var pickReviewerLabel: UILabel!
     @IBOutlet weak var pickReviewerTextFieldHeightConstraint: NSLayoutConstraint!
     @IBOutlet private weak var pickReviewerErrorLabel: UILabel!
     @IBOutlet weak var noteTextViewTopConstraint: NSLayoutConstraint!
@@ -39,7 +40,9 @@ final class PickPurchaseReviewerViewController: UIViewController {
         super.viewDidLoad()
 
         configureRootView()
-        if viewModel.isLastReview && !isEditing {
+        if viewModel.editable {
+            configurePickReviewerTextField()
+        } else if viewModel.isLastReview {
             hideReviewerPicker()
         } else {
             configurePickReviewerTextField()
@@ -68,6 +71,10 @@ final class PickPurchaseReviewerViewController: UIViewController {
         viewModel.pickedReviewer
             .map({ $0?.account })
             .bind(to: pickReviewerTextField.rx.text)
+            .disposed(by: bag)
+
+        viewModel.reviewerName
+            .bind(to: pickReviewerLabel.rx.text)
             .disposed(by: bag)
 
         viewModel.note
@@ -105,9 +112,11 @@ final class PickPurchaseReviewerViewController: UIViewController {
         let formatter = NumberFormatter()
         formatter.locale = Locale(identifier: "zh_Hant")
         formatter.numberStyle = .spellOut
-        let level: String = formatter.string(from: viewModel.level as NSNumber) ?? ""
-        let attributedString = NSMutableAttributedString(string: "*選擇\(level)審人員", attributes: [.foregroundColor: UIColor.label])
-        attributedString.addAttributes([.foregroundColor : UIColor.red], range: NSRange(location:0,length:1))
+        let level: String = formatter.string(from: (viewModel.level + ((viewModel.editable) ? 1 : 0)) as NSNumber) ?? ""
+        let attributedString = viewModel.editable ? NSMutableAttributedString(string: "*選擇\(level)審人員", attributes: [.foregroundColor: UIColor.label]) : NSMutableAttributedString(string: "\(level)審人員", attributes: [.foregroundColor: UIColor.label])
+        if viewModel.editable {
+            attributedString.addAttributes([.foregroundColor : UIColor.red], range: NSRange(location:0,length:1))
+        }
         pickReviewerTitleLabel.attributedText = attributedString
         pickReviewerTextField.delegate = self
         pickReviewerTextField.layer.borderWidth = 1
@@ -116,6 +125,9 @@ final class PickPurchaseReviewerViewController: UIViewController {
         pickReviewerTextField.setLeftPaddingPoints(10)
         pickReviewerTextField.font = .pingFangTCRegular(ofSize: 14)
         pickReviewerTextField.textColor = UIColor(hex: "4c4c4c")
+        pickReviewerLabel.textColor = UIColor(hex: "4c4c4c")
+        pickReviewerTextField.isHidden = !viewModel.editable
+        pickReviewerLabel.isHidden = viewModel.editable
     }
 
     private func updatePickReviewerTextFieldLayout(with validationStatus: ValidationResult) {

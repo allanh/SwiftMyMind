@@ -94,6 +94,8 @@ struct PurchaseOrder: Codable {
     }
     let id: Int
     let number: String
+    let reviewerAccount: String
+    let reviewerName: String
     let status: PurchaseStatus
     let expectWarehouseType: Warehouse.WarehouseType?
     let expectWarehouseID: Int?
@@ -114,6 +116,8 @@ struct PurchaseOrder: Codable {
     enum CodingKeys: String, CodingKey {
         case id = "purchase_id"
         case number = "purchase_no"
+        case reviewerAccount = "review_account"
+        case reviewerName = "review_name"
         case status
         case expectWarehouseType = "expect_warehouse_type"
         case expectWarehouseID = "expect_warehouse_id"
@@ -138,6 +142,8 @@ struct PurchaseOrder: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decode(Int.self, forKey: .id)
         number = try container.decode(String.self, forKey: .number)
+        reviewerAccount = try container.decode(String.self, forKey: .reviewerAccount)
+        reviewerName = try container.decode(String.self, forKey: .reviewerName)
         status = try container.decode(PurchaseStatus.self, forKey: .status)
 //        if let type = try? container.decode(Warehouse.WarehouseType.self, forKey: .expectWarehouseType) {
 //            expectWarehouseType = type

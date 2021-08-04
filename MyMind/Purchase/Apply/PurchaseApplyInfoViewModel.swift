@@ -29,6 +29,7 @@ struct PurchaseApplyInfoViewModel {
 
     let purchaseID: BehaviorRelay<String?> = .init(value: nil)
 
+    let purchaseStatus: BehaviorRelay<PurchaseStatus> = .init(value: .review)
     let expectedStorageDate: BehaviorRelay<Date?> = .init(value: nil)
     let warehouseList: BehaviorRelay<[Warehouse]> = .init(value: [])
     let pickedWarehouse: BehaviorRelay<Warehouse?> = .init(value: nil)
@@ -49,7 +50,8 @@ struct PurchaseApplyInfoViewModel {
          warehouseLoader: PurchaseWarehouseListLoader,
          purchaseID: String? = nil,
          expectedStorageDate: Date? = nil,
-         pickedWarehouse: Warehouse? = nil) {
+         pickedWarehouse: Warehouse? = nil,
+         purchaseStatus: PurchaseStatus) {
 
         self.suggestionProductMaterialViewModels = .init(value: suggestionProductMaterialViewModels)
         self.warehouseLoader = warehouseLoader
@@ -68,7 +70,7 @@ struct PurchaseApplyInfoViewModel {
         if let pickedWarehouse = pickedWarehouse {
             self.pickedWarehouse.accept(pickedWarehouse)
         }
-
+        self.purchaseStatus.accept(purchaseStatus)
     }
 
     func bindStatus() {
