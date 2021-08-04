@@ -50,6 +50,7 @@ final class RootTabBarController: UITabBarController {
 
     private func generateMainFunctionEntryViewController() {
         let viewController = MainFunctionEntryViewController()
+        viewController.authorization = authorization
         viewController.tabBarItem.image = UIImage(named: "main_function")
         viewController.tabBarItem.title = "功能"
 //        let navigationViewController = UINavigationController(rootViewController: viewController)

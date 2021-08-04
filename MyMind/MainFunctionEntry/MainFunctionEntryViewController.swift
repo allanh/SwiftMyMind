@@ -22,16 +22,17 @@ final class MainFunctionEntryViewController: NiblessViewController {
     typealias FunctionControlInfo = (type: MainFunctoinType, imageName: String)
     private var functionControls: [MainFunctionControl] = []
 //    private var functionControls: [UIView] = []
+    var authorization: Authorization?
 
 
-    private let functionControlInfos: [FunctionControlInfo] = [
-        (.purchaseApply, "buy_icon"),
-        (.purchaseReview, "examine_icon"),
+    private var functionControlInfos: [FunctionControlInfo] = [
+//        (.purchaseApply, "buy_icon"),
+//        (.purchaseReview, "examine_icon"),
 //        (.paybill, "pay_icon"),
 //        (.saleChart, "sale_icon"),
 //        (.revenueChart, "renvenu_icon"),
 //        (.systemSetting, "system_setting_icon"),
-        (.accountSetting, "account_setting_icon")
+//        (.accountSetting, "account_setting_icon")
     ]
 
     private let stackView: UIStackView = UIStackView {
@@ -46,6 +47,16 @@ final class MainFunctionEntryViewController: NiblessViewController {
         view.backgroundColor = .white
         title = "站內功能"
         navigationController?.navigationBar.tintColor = .white
+        if let authorization = authorization {
+            if authorization.navigations.purchase.contains(.purapp) {
+                functionControlInfos.append((.purchaseApply, "buy_icon"))
+            }
+            if authorization.navigations.purchase.contains(.purrev) {
+                functionControlInfos.append((.purchaseReview, "examine_icon"))
+
+            }
+        }
+        functionControlInfos.append((.accountSetting, "account_setting_icon"))
         constructViewHeirarchy()
         creatFuncitonControls()
         constructStackViews()
