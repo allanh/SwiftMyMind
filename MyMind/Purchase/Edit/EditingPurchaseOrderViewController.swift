@@ -89,8 +89,6 @@ final class EditingPurchaseOrderViewController: NiblessViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        ErrorHandler.shared.handle(.serviceError("service error"), controller: self)
-
         addKeyboardObservers()
     }
 
