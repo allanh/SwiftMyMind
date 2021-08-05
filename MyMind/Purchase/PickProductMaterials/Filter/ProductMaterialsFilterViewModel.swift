@@ -43,6 +43,7 @@ class ProductMaterialsFilterViewModel {
         self.queryInfo = queryInfo
         self.didUpdateQueryInfo = didUpdateQueryInfo
         subscribeChildViewModels()
+        searchMaterialNameViewModel.addedSearchTerms.accept(queryInfo.materailNames)
     }
 
     func subscribeChildViewModels() {
