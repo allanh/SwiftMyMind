@@ -12,6 +12,7 @@ import RxRelay
 
 struct AutoCompleteSearchViewModel {
     let title: String
+    let placeholder: String
     let searchTerm: BehaviorRelay<String> = .init(value: "")
     let loader: RxAutoCompleteItemViewModelLoader
     let autoCompleteItemViewModels: BehaviorRelay<[AutoCompleteItemViewModel]> = .init(value: [])
@@ -20,8 +21,10 @@ struct AutoCompleteSearchViewModel {
     let bag: DisposeBag = DisposeBag()
 
     init(title: String,
+         placeholder: String,
          loader: RxAutoCompleteItemViewModelLoader) {
         self.title = title
+        self.placeholder = placeholder
         self.loader = loader
         bindSearchTerm()
     }

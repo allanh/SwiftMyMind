@@ -36,6 +36,7 @@ class AutoCompleteSearchViewController: NiblessViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         rootView.titleLabel.text = viewModel.title
+        rootView.textField.placeholder = viewModel.placeholder
         configCollectionView()
         bindToViewModel()
         subscribeToViewModel()

@@ -40,6 +40,7 @@ class PurchaseStatusSelectionViewController: NiblessViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         rootView.titleLabel.text = viewModel.title
+        rootView.textField.placeholder = viewModel.placeholder
         configCollectionView()
         configTextField()
         configDropDownView()

@@ -11,6 +11,7 @@ import RxRelay
 
 struct PickPurchaseStatusViewModel {
     let title: String = "採購單狀態"
+    let placeholder: String = "請選擇"
     let allStatus: [PurchaseStatus] = PurchaseStatus.allCases
     let pickedStatus: BehaviorRelay<PurchaseStatus?> = .init(value: nil)
 

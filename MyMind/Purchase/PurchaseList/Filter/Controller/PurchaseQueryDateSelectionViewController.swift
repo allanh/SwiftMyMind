@@ -71,6 +71,8 @@ class PurchaseQueryDateSelectionViewController: NiblessViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         titleLabel.text = viewModel.title
+        firstTextField.placeholder = viewModel.startDatePlaceholder
+        secondTextField.placeholder = viewModel.endDatePlaceholder
         constructViewHierarchy()
         activateConstraints()
         configTextFields()
