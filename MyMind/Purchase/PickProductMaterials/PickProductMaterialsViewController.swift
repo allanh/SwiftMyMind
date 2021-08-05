@@ -72,7 +72,7 @@ class PickProductMaterialsViewController: NiblessViewController {
 
     private func showProductMaterials() {
         if viewModel.currentProductMaterials.value.count == 0 {
-            rootView.addSubview(emptyListView)
+            rootView.tableView.addSubview(emptyListView)
         } else {
             emptyListView.removeFromSuperview()
             rootView.tableView.reloadData()
