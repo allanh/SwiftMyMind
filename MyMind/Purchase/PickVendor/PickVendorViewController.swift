@@ -20,6 +20,9 @@ final class PickVendorViewController: UITableViewController {
     let loader: VendorInfoLoader
     var vendorInfos: [VendorInfo] = []
     let bag: DisposeBag = DisposeBag()
+    private lazy var emptyListView: EmptyDataView = {
+        return EmptyDataView(frame: tableView.bounds)
+    }()
 
     // MARK: - View life cycles
     override func viewDidLoad() {
@@ -52,7 +55,12 @@ final class PickVendorViewController: UITableViewController {
             .done({ [weak self] infos in
                 guard let self = self else { return }
                 self.vendorInfos = infos
-                self.tableView.reloadData()
+                if self.vendorInfos.count == 0 {
+                    self.tableView.addSubview(self.emptyListView)
+                } else {
+                    self.emptyListView.removeFromSuperview()
+                    self.tableView.reloadData()
+                }
             })
             .catch { error in
                 if let apiError = error as? APIError {

@@ -16,6 +16,9 @@
 		520776AF26B5106D005BA621 /* SignInPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520776AC26B5106D005BA621 /* SignInPresentationController.swift */; };
 		52282372268EB41400A66340 /* PurchaseBriefReviewingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52282370268EB41400A66340 /* PurchaseBriefReviewingCollectionViewCell.swift */; };
 		52282373268EB41400A66340 /* PurchaseBriefReviewingCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52282371268EB41400A66340 /* PurchaseBriefReviewingCollectionViewCell.xib */; };
+		522F855626BB85C7002ED473 /* EmptyDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522F855526BB85C7002ED473 /* EmptyDataView.swift */; };
+		522F855726BB85CF002ED473 /* EmptyDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522F855526BB85C7002ED473 /* EmptyDataView.swift */; };
+		522F855826BB85CF002ED473 /* EmptyDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522F855526BB85C7002ED473 /* EmptyDataView.swift */; };
 		5246E47226901BEC005C11EC /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5246E47126901BEC005C11EC /* SettingViewController.swift */; };
 		5246E4742690385C005C11EC /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5246E4732690385C005C11EC /* Account.swift */; };
 		5246E4772690A2A4005C11EC /* CustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5246E4762690A2A4005C11EC /* CustomAlertView.swift */; };
@@ -710,6 +713,7 @@
 		520776AC26B5106D005BA621 /* SignInPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInPresentationController.swift; sourceTree = "<group>"; };
 		52282370268EB41400A66340 /* PurchaseBriefReviewingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseBriefReviewingCollectionViewCell.swift; sourceTree = "<group>"; };
 		52282371268EB41400A66340 /* PurchaseBriefReviewingCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PurchaseBriefReviewingCollectionViewCell.xib; sourceTree = "<group>"; };
+		522F855526BB85C7002ED473 /* EmptyDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyDataView.swift; sourceTree = "<group>"; };
 		5246E47126901BEC005C11EC /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		5246E4732690385C005C11EC /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		5246E4762690A2A4005C11EC /* CustomAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertView.swift; sourceTree = "<group>"; };
@@ -1085,6 +1089,7 @@
 			isa = PBXGroup;
 			children = (
 				52F56429269408A300171032 /* StaticView.swift */,
+				522F855526BB85C7002ED473 /* EmptyDataView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2186,6 +2191,7 @@
 				524AB0E226A80913003D1E92 /* NiblessViewController.swift in Sources */,
 				524AB0E326A80913003D1E92 /* TodaySaleInfoCollectionViewCell.swift in Sources */,
 				524AB0E426A80913003D1E92 /* PurchaseListFilterViewModel.swift in Sources */,
+				522F855726BB85CF002ED473 /* EmptyDataView.swift in Sources */,
 				524AB0E526A80913003D1E92 /* SearchMaterialNamesViewModel.swift in Sources */,
 				524AB0E626A80913003D1E92 /* SaleReportCollectionViewCell.swift in Sources */,
 				524AB0E726A80913003D1E92 /* APIError.swift in Sources */,
@@ -2393,6 +2399,7 @@
 				5277783926A80DF500CF4E07 /* NiblessViewController.swift in Sources */,
 				5277783A26A80DF500CF4E07 /* TodaySaleInfoCollectionViewCell.swift in Sources */,
 				5277783B26A80DF500CF4E07 /* PurchaseListFilterViewModel.swift in Sources */,
+				522F855826BB85CF002ED473 /* EmptyDataView.swift in Sources */,
 				5277783C26A80DF500CF4E07 /* SearchMaterialNamesViewModel.swift in Sources */,
 				5277783D26A80DF500CF4E07 /* SaleReportCollectionViewCell.swift in Sources */,
 				5277783E26A80DF500CF4E07 /* APIError.swift in Sources */,
@@ -2600,6 +2607,7 @@
 				A43E0B63260D7CA4005FC6CE /* NiblessViewController.swift in Sources */,
 				52C2CBD2269BE6BC002A2BA9 /* TodaySaleInfoCollectionViewCell.swift in Sources */,
 				A457AEAE2660A2230029DDBB /* PurchaseListFilterViewModel.swift in Sources */,
+				522F855626BB85C7002ED473 /* EmptyDataView.swift in Sources */,
 				A4F2D017265D08D3004D8D6D /* SearchMaterialNamesViewModel.swift in Sources */,
 				52C2CBE6269ED0D5002A2BA9 /* SaleReportCollectionViewCell.swift in Sources */,
 				A49CF8C0260306D200AFC170 /* APIError.swift in Sources */,

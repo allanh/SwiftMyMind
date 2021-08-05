@@ -13,7 +13,9 @@ final class PurchaseListViewController: NiblessViewController {
     // MARK: - Properties
     var rootView: PurchaseListRootView { view as! PurchaseListRootView }
     var reviewing: Bool
-
+    private lazy var emptyListView: EmptyDataView = {
+        return EmptyDataView(frame: rootView.tableView.bounds)
+    }()
     lazy var pickSortTypeView: PickSortTypeView<PurchaseListQueryInfo.OrderReference, SingleLabelTableViewCell> = {
         if reviewing {
             let pickSortView = PickSortTypeView<PurchaseListQueryInfo.OrderReference, SingleLabelTableViewCell>.init(
@@ -154,8 +156,13 @@ final class PurchaseListViewController: NiblessViewController {
             self.purchaseList = purchaseList
         }
         purchaseListQueryInfo.updateCurrentPageInfo(with: purchaseList)
-        rootView.tableView.reloadData()
-        rootView.collectionView.reloadData()
+        if self.purchaseList?.items.count == 0 {
+            rootView.tableView.addSubview(emptyListView)
+        } else {
+            emptyListView.removeFromSuperview()
+            rootView.tableView.reloadData()
+            rootView.collectionView.reloadData()
+        }
     }
 
     private func handleErrorForFetchPurchaseList(_ error: Error) {
