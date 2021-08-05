@@ -96,7 +96,7 @@ class PurchaseBriefTableViewCell: UITableViewCell {
     }
 
     func config(with purchaseBrief: PurchaseBrief, reviewing: Bool = false) {
-        titleLabel.text = purchaseBrief.vendorName
+        titleLabel.text = purchaseBrief.vendorName+"-"+purchaseBrief.purchaseNumber
         createdDateLabel.text = "填單日期："+purchaseBrief.createdDateString
         expectStorageDateLabel.text = "預期入庫日："+purchaseBrief.expectStorageDateString
         if reviewing {
