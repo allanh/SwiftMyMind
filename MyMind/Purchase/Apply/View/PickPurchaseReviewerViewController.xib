@@ -102,7 +102,7 @@
                     <rect key="frame" x="20" y="226" width="374" height="130"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="130" id="Voc-zm-Q2r"/>
+                        <constraint firstAttribute="height" priority="900" constant="130" id="Voc-zm-Q2r"/>
                     </constraints>
                     <attributedString key="attributedText"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -120,6 +120,9 @@
                 </textView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0/200" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Oy-RU-G29">
                     <rect key="frame" x="353" y="366" width="41" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="1ZD-Oe-2ua"/>
+                    </constraints>
                     <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="14"/>
                     <color key="textColor" red="0.70588235290000001" green="0.70588235290000001" blue="0.70588235290000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
