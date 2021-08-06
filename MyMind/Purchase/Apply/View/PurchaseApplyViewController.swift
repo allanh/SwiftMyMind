@@ -115,7 +115,26 @@ final class PurchaseApplyViewController: NiblessViewController {
 
     @objc
     private func saveButtonDidTapped(_ sender: UIButton) {
-        viewModel.applyPurchase()
+        guard let purchaseInfo = viewModel.mapCurrentInfoToApplyPurchaseParameterInfo() else { return }
+        let dateFormatter: DateFormatter = DateFormatter {
+            $0.dateFormat = "yyyy-MM-dd"
+        }
+
+        let expectStorageDate = dateFormatter.date(from: purchaseInfo.expectStorageDate) ?? Date()
+        let days = Calendar.current.dateComponents([.day], from: Date(), to: expectStorageDate).day ?? 0
+        if days < 3 {
+            let alertController = UIAlertController(title: "確定申請?", message: "預計入庫日距離今日小於 3 天，請確定是否送出申請。", preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "取消", style: .cancel) { action in
+            }
+            let confirmAction = UIAlertAction(title: "確定", style: .default) { [weak self] action in
+                self?.viewModel.applyPurchase()
+           }
+            alertController.addAction(cancelAction)
+            alertController.addAction(confirmAction)
+            present(alertController, animated: true, completion: nil)
+        } else {
+            viewModel.applyPurchase()
+        }
     }
 
     private func navigation(with view: PurchaseApplyViewModel.View) {
