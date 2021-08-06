@@ -40,6 +40,7 @@ final class PurchaseApplyInfoViewController: UIViewController {
         if #available(iOS 14.0, *) {
             $0.preferredDatePickerStyle = .wheels
         }
+        $0.minimumDate = Date()
     }
 
     private let dateFormatter: DateFormatter = DateFormatter {
