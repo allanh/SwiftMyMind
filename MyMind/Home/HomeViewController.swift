@@ -100,7 +100,7 @@ final class HomeViewController: UIViewController {
     }
     private func handlerError(_ error: Error) {
         if let apiError = error as? APIError {
-            _ = ErrorHandler.shared.handle(apiError, controller: self)
+            _ = ErrorHandler.shared.handle(apiError)
         } else {
             ToastView.showIn(self, message: error.localizedDescription)
         }

@@ -196,7 +196,7 @@ final class EditingPurchaseOrderViewController: NiblessViewController {
             show(viewController, sender: nil)
         case .error(let error):
             if let apiError = error as? APIError {
-                _ = ErrorHandler.shared.handle(apiError, controller: self)
+                _ = ErrorHandler.shared.handle(apiError)
             } else {
                 ToastView.showIn(self, message: error.localizedDescription)
             }

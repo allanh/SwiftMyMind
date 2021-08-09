@@ -64,7 +64,7 @@ final class PickVendorViewController: UITableViewController {
             })
             .catch { error in
                 if let apiError = error as? APIError {
-                    _ = ErrorHandler.shared.handle(apiError, controller: self)
+                    _ = ErrorHandler.shared.handle(apiError)
                 } else {
                     ToastView.showIn(self, message: error.localizedDescription)
                 }

@@ -168,7 +168,7 @@ final class PurchaseListViewController: NiblessViewController {
     private func handleErrorForFetchPurchaseList(_ error: Error) {
         print(error.localizedDescription)
         if let apiError = error as? APIError {
-            _ = ErrorHandler.shared.handle(apiError, controller: self)
+            _ = ErrorHandler.shared.handle(apiError)
         } else {
             ToastView.showIn(self, message: error.localizedDescription)
         }
