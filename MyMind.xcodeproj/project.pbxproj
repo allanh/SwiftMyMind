@@ -456,6 +456,9 @@
 		527E11C02692C38D00FB8B01 /* PurchaseReviewingApplyInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527E11BE2692C38D00FB8B01 /* PurchaseReviewingApplyInfoViewController.swift */; };
 		527E11C12692C38D00FB8B01 /* PurchaseReviewingApplyInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 527E11BF2692C38D00FB8B01 /* PurchaseReviewingApplyInfoViewController.xib */; };
 		527E11C32693084B00FB8B01 /* ReturnPurchaseOrderInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527E11C22693084B00FB8B01 /* ReturnPurchaseOrderInfo.swift */; };
+		5280D6E726C0D711004363C6 /* ServiceCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5280D6E626C0D711004363C6 /* ServiceCellTableViewCell.swift */; };
+		5280D6E826C0D711004363C6 /* ServiceCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5280D6E626C0D711004363C6 /* ServiceCellTableViewCell.swift */; };
+		5280D6E926C0D711004363C6 /* ServiceCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5280D6E626C0D711004363C6 /* ServiceCellTableViewCell.swift */; };
 		5293EE9C269A8AEB001A9754 /* HorizontalCellSizePagingFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5293EE9B269A8AEB001A9754 /* HorizontalCellSizePagingFlowLayout.swift */; };
 		5293EE9E269A8F5B001A9754 /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5293EE9D269A8F5B001A9754 /* Report.swift */; };
 		5293EEA0269A9DBC001A9754 /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5293EE9F269A9DBC001A9754 /* HomeModel.swift */; };
@@ -727,6 +730,7 @@
 		527E11BE2692C38D00FB8B01 /* PurchaseReviewingApplyInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseReviewingApplyInfoViewController.swift; sourceTree = "<group>"; };
 		527E11BF2692C38D00FB8B01 /* PurchaseReviewingApplyInfoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PurchaseReviewingApplyInfoViewController.xib; sourceTree = "<group>"; };
 		527E11C22693084B00FB8B01 /* ReturnPurchaseOrderInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReturnPurchaseOrderInfo.swift; sourceTree = "<group>"; };
+		5280D6E626C0D711004363C6 /* ServiceCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceCellTableViewCell.swift; sourceTree = "<group>"; };
 		5293EE9B269A8AEB001A9754 /* HorizontalCellSizePagingFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalCellSizePagingFlowLayout.swift; sourceTree = "<group>"; };
 		5293EE9D269A8F5B001A9754 /* Report.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Report.swift; sourceTree = "<group>"; };
 		5293EE9F269A9DBC001A9754 /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
@@ -1268,6 +1272,7 @@
 				52C2CBEC26A04243002A2BA9 /* MainPageViewController.swift */,
 				524AB12B26A80913003D1E92 /* Demo-Info.plist */,
 				5277788226A80DF500CF4E07 /* Production-Info.plist */,
+				5280D6E626C0D711004363C6 /* ServiceCellTableViewCell.swift */,
 			);
 			path = MyMind;
 			sourceTree = "<group>";
@@ -2195,6 +2200,7 @@
 				524AB0E526A80913003D1E92 /* SearchMaterialNamesViewModel.swift in Sources */,
 				524AB0E626A80913003D1E92 /* SaleReportCollectionViewCell.swift in Sources */,
 				524AB0E726A80913003D1E92 /* APIError.swift in Sources */,
+				5280D6E826C0D711004363C6 /* ServiceCellTableViewCell.swift in Sources */,
 				524AB0E826A80913003D1E92 /* PurchaseApplyInfoViewModel.swift in Sources */,
 				524AB0E926A80913003D1E92 /* ForgotPasswordRootView.swift in Sources */,
 				524AB0EA26A80913003D1E92 /* TriangleView.swift in Sources */,
@@ -2403,6 +2409,7 @@
 				5277783C26A80DF500CF4E07 /* SearchMaterialNamesViewModel.swift in Sources */,
 				5277783D26A80DF500CF4E07 /* SaleReportCollectionViewCell.swift in Sources */,
 				5277783E26A80DF500CF4E07 /* APIError.swift in Sources */,
+				5280D6E926C0D711004363C6 /* ServiceCellTableViewCell.swift in Sources */,
 				5277783F26A80DF500CF4E07 /* PurchaseApplyInfoViewModel.swift in Sources */,
 				5277784026A80DF500CF4E07 /* ForgotPasswordRootView.swift in Sources */,
 				5277784126A80DF500CF4E07 /* TriangleView.swift in Sources */,
@@ -2611,6 +2618,7 @@
 				A4F2D017265D08D3004D8D6D /* SearchMaterialNamesViewModel.swift in Sources */,
 				52C2CBE6269ED0D5002A2BA9 /* SaleReportCollectionViewCell.swift in Sources */,
 				A49CF8C0260306D200AFC170 /* APIError.swift in Sources */,
+				5280D6E726C0D711004363C6 /* ServiceCellTableViewCell.swift in Sources */,
 				A442A16B266F692600AAB1ED /* PurchaseApplyInfoViewModel.swift in Sources */,
 				A415920F260C796500FD3989 /* ForgotPasswordRootView.swift in Sources */,
 				A489A1AC263FA7C900832679 /* TriangleView.swift in Sources */,

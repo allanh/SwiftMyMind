@@ -89,7 +89,7 @@ extension MainPageViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "ServiceCell", for: indexPath) as? ServiceCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "ServiceCellTableViewCell", for: indexPath) as? ServiceCellTableViewCell {
             cell.config(with: serviceInfos[indexPath.section])
             return cell
         }
@@ -101,22 +101,5 @@ extension MainPageViewController: UITableViewDataSource {
 extension MainPageViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         perform(serviceInfos[indexPath.section].action)
-    }
-}
-
-class ServiceCell: UITableViewCell {
-    @IBOutlet weak var iconImageView: UIImageView!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var versionLabel: UILabel!
-    @IBOutlet weak var descriptionsLabel: UILabel!
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        self.layer.cornerRadius = 10
-    }
-    func config(with service: ServiceInfo) {
-        iconImageView.image = UIImage(named: service.icon)
-        titleLabel.text = service.title
-        versionLabel.text = service.version
-        descriptionsLabel.text = service.descriptions
     }
 }
