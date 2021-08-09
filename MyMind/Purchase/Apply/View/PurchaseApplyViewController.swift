@@ -118,12 +118,20 @@ final class PurchaseApplyViewController: NiblessViewController {
         let expectStorageDate = viewModel.purchaseInfoViewModel.expectedStorageDate.value ?? Date()
         let days = Calendar.current.dateComponents([.day], from: Date(), to: expectStorageDate).day ?? 0
         if days < 3 {
+//            let titleFont = UIFont.preferredFont(forTextStyle: .headline).withTraits(traits: .traitBold)
+//            let bodyFont = UIFont.preferredFont(forTextStyle: .body)
+//            let alertController = UIAlertController(title: NSAttributedString(string: "確定申請?", attributes: [.foregroundColor: UIColor(hex: "1c4373"), .font: titleFont]), message:  NSAttributedString(string: "預計入庫日距離今日小於 3 天，請確定是否送出申請。", attributes: [.foregroundColor: UIColor(hex: "7f7f7f"), .font: bodyFont]), preferredStyle: .alert)
+//            let cancelAction = UIAlertAction(title: "取消", style: .cancel, color: UIColor(hex: "7f7f7f")) { action in
+//            }
+//            let confirmAction = UIAlertAction(title: "確定", style: .default, color: UIColor(hex: "1c4373")) { [weak self] action in
+//                self?.viewModel.applyPurchase()
+//           }
             let alertController = UIAlertController(title: "確定申請?", message: "預計入庫日距離今日小於 3 天，請確定是否送出申請。", preferredStyle: .alert)
             let cancelAction = UIAlertAction(title: "取消", style: .cancel) { action in
             }
             let confirmAction = UIAlertAction(title: "確定", style: .default) { [weak self] action in
                 self?.viewModel.applyPurchase()
-           }
+            }
             alertController.addAction(cancelAction)
             alertController.addAction(confirmAction)
             present(alertController, animated: true, completion: nil)
@@ -142,8 +150,12 @@ final class PurchaseApplyViewController: NiblessViewController {
             let viewModel = EditablePickedProductsInfoViewModel(pickedProductMaterialViewModels: viewModels)
             let viewController = EditablePickedProductsInfoViewController(viewModel: viewModel)
             show(viewController, sender: nil)
-        case .error(let descriptions):
-            ToastView.showIn(self, message: descriptions)
+        case .error(let error):
+            if let apiError = error as? APIError {
+                _ = ErrorHandler.shared.handle(apiError)
+            } else {
+                ToastView.showIn(self, message: error.localizedDescription)
+            }
         }
     }
 }

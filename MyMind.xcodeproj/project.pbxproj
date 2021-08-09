@@ -459,6 +459,12 @@
 		5280D6E726C0D711004363C6 /* ServiceCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5280D6E626C0D711004363C6 /* ServiceCellTableViewCell.swift */; };
 		5280D6E826C0D711004363C6 /* ServiceCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5280D6E626C0D711004363C6 /* ServiceCellTableViewCell.swift */; };
 		5280D6E926C0D711004363C6 /* ServiceCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5280D6E626C0D711004363C6 /* ServiceCellTableViewCell.swift */; };
+		5280D6EB26C1226E004363C6 /* UIAlertController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5280D6EA26C1226E004363C6 /* UIAlertController+.swift */; };
+		5280D6EC26C1226E004363C6 /* UIAlertController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5280D6EA26C1226E004363C6 /* UIAlertController+.swift */; };
+		5280D6ED26C1226E004363C6 /* UIAlertController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5280D6EA26C1226E004363C6 /* UIAlertController+.swift */; };
+		5280D6EF26C122A7004363C6 /* UIAlertAction+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5280D6EE26C122A7004363C6 /* UIAlertAction+.swift */; };
+		5280D6F026C122A7004363C6 /* UIAlertAction+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5280D6EE26C122A7004363C6 /* UIAlertAction+.swift */; };
+		5280D6F126C122A7004363C6 /* UIAlertAction+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5280D6EE26C122A7004363C6 /* UIAlertAction+.swift */; };
 		5293EE9C269A8AEB001A9754 /* HorizontalCellSizePagingFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5293EE9B269A8AEB001A9754 /* HorizontalCellSizePagingFlowLayout.swift */; };
 		5293EE9E269A8F5B001A9754 /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5293EE9D269A8F5B001A9754 /* Report.swift */; };
 		5293EEA0269A9DBC001A9754 /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5293EE9F269A9DBC001A9754 /* HomeModel.swift */; };
@@ -731,6 +737,8 @@
 		527E11BF2692C38D00FB8B01 /* PurchaseReviewingApplyInfoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PurchaseReviewingApplyInfoViewController.xib; sourceTree = "<group>"; };
 		527E11C22693084B00FB8B01 /* ReturnPurchaseOrderInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReturnPurchaseOrderInfo.swift; sourceTree = "<group>"; };
 		5280D6E626C0D711004363C6 /* ServiceCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceCellTableViewCell.swift; sourceTree = "<group>"; };
+		5280D6EA26C1226E004363C6 /* UIAlertController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+.swift"; sourceTree = "<group>"; };
+		5280D6EE26C122A7004363C6 /* UIAlertAction+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertAction+.swift"; sourceTree = "<group>"; };
 		5293EE9B269A8AEB001A9754 /* HorizontalCellSizePagingFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalCellSizePagingFlowLayout.swift; sourceTree = "<group>"; };
 		5293EE9D269A8F5B001A9754 /* Report.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Report.swift; sourceTree = "<group>"; };
 		5293EE9F269A9DBC001A9754 /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
@@ -1422,6 +1430,8 @@
 				97AFE3782668D727002CBE01 /* UIViewController+loadNib.swift */,
 				527E11BC2692A0D500FB8B01 /* OptionSet+.swift */,
 				5293EEA1269AF20F001A9754 /* Date+.swift */,
+				5280D6EA26C1226E004363C6 /* UIAlertController+.swift */,
+				5280D6EE26C122A7004363C6 /* UIAlertAction+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -2190,6 +2200,7 @@
 				524AB0DC26A80913003D1E92 /* GridentCircleView.swift in Sources */,
 				524AB0DD26A80913003D1E92 /* MainFunctionControl.swift in Sources */,
 				524AB0DE26A80913003D1E92 /* PurchaseListFilterViewController.swift in Sources */,
+				5280D6EC26C1226E004363C6 /* UIAlertController+.swift in Sources */,
 				524AB0DF26A80913003D1E92 /* SignInRootView.swift in Sources */,
 				524AB0E026A80913003D1E92 /* UIControl+.swift in Sources */,
 				524AB0E126A80913003D1E92 /* OrganizeOptionView.swift in Sources */,
@@ -2238,6 +2249,7 @@
 				524AB10A26A80913003D1E92 /* SceneDelegate.swift in Sources */,
 				524AB10B26A80913003D1E92 /* UIColor+.swift in Sources */,
 				524AB10C26A80913003D1E92 /* Authorization.swift in Sources */,
+				5280D6F026C122A7004363C6 /* UIAlertAction+.swift in Sources */,
 				524AB10D26A80913003D1E92 /* PickPurchaseReviewerViewModel.swift in Sources */,
 				524AB10E26A80913003D1E92 /* ProductMaterialListLoader.swift in Sources */,
 				524AB10F26A80913003D1E92 /* MyMindInstructionView.swift in Sources */,
@@ -2399,6 +2411,7 @@
 				5277783326A80DF500CF4E07 /* GridentCircleView.swift in Sources */,
 				5277783426A80DF500CF4E07 /* MainFunctionControl.swift in Sources */,
 				5277783526A80DF500CF4E07 /* PurchaseListFilterViewController.swift in Sources */,
+				5280D6ED26C1226E004363C6 /* UIAlertController+.swift in Sources */,
 				5277783626A80DF500CF4E07 /* SignInRootView.swift in Sources */,
 				5277783726A80DF500CF4E07 /* UIControl+.swift in Sources */,
 				5277783826A80DF500CF4E07 /* OrganizeOptionView.swift in Sources */,
@@ -2447,6 +2460,7 @@
 				5277786126A80DF500CF4E07 /* SceneDelegate.swift in Sources */,
 				5277786226A80DF500CF4E07 /* UIColor+.swift in Sources */,
 				5277786326A80DF500CF4E07 /* Authorization.swift in Sources */,
+				5280D6F126C122A7004363C6 /* UIAlertAction+.swift in Sources */,
 				5277786426A80DF500CF4E07 /* PickPurchaseReviewerViewModel.swift in Sources */,
 				5277786526A80DF500CF4E07 /* ProductMaterialListLoader.swift in Sources */,
 				5277786626A80DF500CF4E07 /* MyMindInstructionView.swift in Sources */,
@@ -2608,6 +2622,7 @@
 				52944E2B26997680006CC865 /* GridentCircleView.swift in Sources */,
 				A4AF79F72637B13B002B04F6 /* MainFunctionControl.swift in Sources */,
 				A43F428F2643866F00A246CC /* PurchaseListFilterViewController.swift in Sources */,
+				5280D6EB26C1226E004363C6 /* UIAlertController+.swift in Sources */,
 				A4793CA72604873B00AD280C /* SignInRootView.swift in Sources */,
 				A43E0B6F260DC66D005FC6CE /* UIControl+.swift in Sources */,
 				A46BA1DD263AAD2A0075E8C8 /* OrganizeOptionView.swift in Sources */,
@@ -2656,6 +2671,7 @@
 				A44A5A7025F9B0D200995823 /* SceneDelegate.swift in Sources */,
 				A4793CBB260490A600AD280C /* UIColor+.swift in Sources */,
 				527E11BB2692A05900FB8B01 /* Authorization.swift in Sources */,
+				5280D6EF26C122A7004363C6 /* UIAlertAction+.swift in Sources */,
 				A494D9CE2670CDC1008658F8 /* PickPurchaseReviewerViewModel.swift in Sources */,
 				97547CBB2680787E001859A8 /* ProductMaterialListLoader.swift in Sources */,
 				52E5060626A6BF4D000E5116 /* MyMindInstructionView.swift in Sources */,
