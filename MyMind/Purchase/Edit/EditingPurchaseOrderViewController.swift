@@ -205,7 +205,21 @@ final class EditingPurchaseOrderViewController: NiblessViewController {
 
     @objc
     private func saveButtonDidTapped(_ sender: UIButton) {
-        viewModel.sendEditedRequest()
+        let expectStorageDate = viewModel.purchaseApplyInfoViewModel?.expectedStorageDate.value ?? Date()
+        let days = Calendar.current.dateComponents([.day], from: Date(), to: expectStorageDate).day ?? 0
+        if days < 3 {
+            let alertController = UIAlertController(title: "確定申請?", message: "預計入庫日距離今日小於 3 天，請確定是否送出申請。", preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "取消", style: .cancel) { action in
+            }
+            let confirmAction = UIAlertAction(title: "確定", style: .default) { [weak self] action in
+                self?.viewModel.sendEditedRequest()
+            }
+            alertController.addAction(cancelAction)
+            alertController.addAction(confirmAction)
+            present(alertController, animated: true, completion: nil)
+        } else {
+            viewModel.sendEditedRequest()
+        }
     }
     @objc
     private func cancelButtonDidTapped(_ sender: UIButton) {
