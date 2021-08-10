@@ -20,6 +20,14 @@ final class ScanViewController: UIViewController {
     private var qrCodeFrameView: UIView?
 
     weak var delegate: ScanViewControllerDelegate?
+    private var isNetworkProcessing: Bool = false {
+        didSet {
+            switch isNetworkProcessing {
+            case true: startAnimatingActivityIndicator()
+            case false: stopAnimatinActivityIndicator()
+            }
+        }
+    }
 
 //    @IBOutlet weak var closeButton: UIButton!
     // MARK: - View life cycle
@@ -57,19 +65,10 @@ final class ScanViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 //        let string = "00yIC3PIZ/ZScC5Vwg2TFR8eXhKfZhVSSc/mtYJI8MAgp+wBxdIFvW17oMMLlSK7Ho5qtI2HuTMz2sQh8fmAY2hU2UPIOTPv5p+QuLVtvN1AS8nK56Gh/wH32KXXDS21Xl"// production sam lai
-//        let string = "00ADB1iGsn1jvWxnGtKSoj59plRI10N/ok6DN8i5qX3neupnFdmvnN6gIxPZh4gozrYdgP4+MCjkPf7NIlkg+e1CkFBp8QIBV3LQgfBigXBtKQtCUblc6uze/83V3BWjX4"// alpha
+//        let string = "00ADB1iGsn1jvWxnGtKSoj59plRI10N/ok6DN8i5qX3neupnFdmvnN6ti9ADusrV6Uy9lzyOpbYOkx4zimcgUjgikFBp8QIBV3Y3QyeyjhbLfbZubDfpzPljuHQjjWIziv"// alpha
 //        let string = "00yIC3PIZ/ZScC5Vwg2TFR8eXhKfZhVSScBz5kHxqXZQb8hgFv2wbX4lj/fHdxZkeyYj0MIzgvuarqv/sWbKLTl6Kzwi4GOk/TVXSqPiGm7UYHasOKQQ7v4B9jBeDrSEQuA3ffWbi7h6Q=" // demo
 //        let string = "00prqa3Y1IJyAAjkavCTMa0//neIbPtOzq0WQ0KFm+50suD+ljTQqpMKQ4iA/j4gxsbZ8fka91SJ9yFmtjzpkHH3Eikvwn4gU4+/Kf8tHmcSPlSXnvFoREa4hNn1+d/zfr" //production
-//        if let delegate = delegate, delegate.scanViewController(self, validate: string) {
-//            guard validateMetadataString(string: string) else {
-//                showInvalidQRCodeAlert()
-//                return
-//            }
-//            delegate.scanViewController(self, didReceive: string)
-//            dismiss(animated: true, completion: nil)
-//        } else {
-//            showInvalidQRCodeAlert()
-//        }
+//        handleReceive(string)
     }
     // MARK: - Methods
     private func startReading() {
@@ -135,8 +134,8 @@ final class ScanViewController: UIViewController {
 }
 // MARK: - AV Capture Metadata Output Delegate
 extension ScanViewController: AVCaptureMetadataOutputObjectsDelegate {
-    func showInvalidQRCodeAlert() {
-        let alert = UIAlertController.init(title: "無效的 QR Code", message: "請再次確認掃描的 QR Code 是否正確，並點選確定後重新掃描", preferredStyle: .alert)
+    private func showInvalidQRCodeAlert(title: String?, message: String?) {
+        let alert = UIAlertController.init(title: title, message: message, preferredStyle: .alert)
         let action = UIAlertAction.init(title: "確定", style: .default) { [weak self] (_) in
             guard let self = self else { return }
             self.captureSession?.startRunning()
@@ -145,26 +144,40 @@ extension ScanViewController: AVCaptureMetadataOutputObjectsDelegate {
         present(alert, animated: true, completion: nil)
     }
 
+    private func handleReceive(_ value: String) {
+        do {
+            let uuid = try KeychainHelper.default.readItem(key: .uuid, valueType: String.self)
+            if let delegate = delegate, delegate.scanViewController(self, validate: value) {
+                let authService = MyMindAuthService()
+                isNetworkProcessing = true
+                authService.binding(info: BindingInfo(uuid: uuid, qrCode: value))
+                    .done {
+                        self.stopRunning()
+                        delegate.scanViewController(self, didReceive: value)
+                        self.navigationController?.popViewController(animated: true)
+                    }
+                    .ensure { self.isNetworkProcessing = false }
+                    .catch { error in
+                        self.captureSession?.stopRunning()
+                        self.showInvalidQRCodeAlert(title: "App ID 不相符", message: error.localizedDescription)
+                    }
+            }
+        } catch {
+            ToastView.showIn(self, message: error.localizedDescription)
+        }
+    }
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
         guard
             let metadadaObject = metadataObjects.first as? AVMetadataMachineReadableCodeObject,
             metadadaObject.type == .qr,
             let stringValue = metadadaObject.stringValue
         else { return }
-        if let delegate = delegate, delegate.scanViewController(self, validate: stringValue) {
-            guard validateMetadataString(string: stringValue) else {
-                captureSession?.stopRunning()
-                showInvalidQRCodeAlert()
-                return
-            }
-        } else {
+        guard validateMetadataString(string: stringValue) else {
             captureSession?.stopRunning()
-            showInvalidQRCodeAlert()
+            showInvalidQRCodeAlert(title: "無效的 QR Code", message: "請再次確認掃描的 QR Code 是否正確，並點選確定後重新掃描")
             return
         }
-        stopRunning()
-        delegate?.scanViewController(self, didReceive: stringValue)
-        navigationController?.popViewController(animated: true)
+        handleReceive(stringValue)
     }
 }
 
