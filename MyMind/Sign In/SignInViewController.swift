@@ -130,6 +130,7 @@ class SignInViewController: NiblessViewController {
                     let storyboard: UIStoryboard = UIStoryboard(name: "TOTP", bundle: nil)
                     if let viewController = storyboard.instantiateViewController(withIdentifier: "SecretListViewControllerNavi") as? UINavigationController, let totpViewController = viewController.topViewController as? SecretListViewController {
                         totpViewController.scanViewControllerDelegate = self
+                        totpViewController.needBackButton = true
                         present(viewController, animated: true, completion: nil)
                     }
                }

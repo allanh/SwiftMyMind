@@ -15,6 +15,7 @@ class SecretListViewController: UIViewController {
     private var instructionView: MyMindInstructionView?
     private var emptySecretView: MyMindEmptySecretView?
     weak var scanViewControllerDelegate: ScanViewControllerDelegate?
+    var needBackButton: Bool = false
 
     // MARK: - View life cycle
     override func viewDidLoad() {
@@ -25,6 +26,14 @@ class SecretListViewController: UIViewController {
 //        }
 //        navigationItem.titleView = navigationTitleImageView
         title = "My Mind 買賣 OTP"
+        if needBackButton {
+            let closeButton = UIButton()
+            closeButton.setImage(UIImage(named: "back_arrow"), for: .normal)
+            closeButton.tintColor = .white
+            closeButton.addTarget(self, action: #selector(closeButtonDidTapped(_:)), for: .touchUpInside)
+            let barItem = UIBarButtonItem(customView: closeButton)
+            navigationItem.setLeftBarButton(barItem, animated: true)
+        }
         navigationItem.backButtonTitle = ""
         tableView.register(SecretTableViewCell.nib, forCellReuseIdentifier: SecretTableViewCell.reuseIdentifier)
     }
