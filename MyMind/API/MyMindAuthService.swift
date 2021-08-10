@@ -8,6 +8,27 @@
 import Foundation
 import RxSwift
 import PromiseKit
+struct BindingInfo {
+    private enum CodingKeys: String, CodingKey {
+        case uuid, qrCode
+    }
+
+    var uuid: String
+    var qrCode: String
+
+    static func empty() -> BindingInfo {
+        let info = BindingInfo(uuid: "", qrCode: "")
+        return info
+    }
+}
+
+extension BindingInfo: Encodable {
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(uuid, forKey: .uuid)
+        try container.encode(qrCode, forKey: .qrCode)
+    }
+}
 
 class MyMindAuthService: PromiseKitAPIService, AuthService {
     func captcha() -> Promise<CaptchaSession> {
@@ -39,6 +60,13 @@ class MyMindAuthService: PromiseKitAPIService, AuthService {
     }
     func time() -> Promise<ServerTime> {
         let request = request(endPoint: Endpoint.time)
+        return sendRequest(request: request)
+    }
+    func binding(info: BindingInfo) -> Promise<Void> {
+        guard let body = try? JSONEncoder().encode(info) else {
+            return .init(error: APIError.parseError)
+        }
+        let request = request(endPoint: Endpoint.bind, httpMethod: "POST", httpHeader: ["Origin": Endpoint.baseURL], httpBody: body)
         return sendRequest(request: request)
     }
 }
