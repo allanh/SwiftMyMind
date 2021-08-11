@@ -41,6 +41,7 @@ class SignInViewController: NiblessViewController {
         observerViewModel()
         configForgotPasswordButton()
         configResendOTPButton()
+        title = "My Mind 買賣後台"
     }
 
     override func viewWillAppear(_ animated: Bool) {

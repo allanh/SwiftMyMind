@@ -18,7 +18,11 @@ class MainPageViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-
+        let navigationTitleView: UIImageView = UIImageView {
+            $0.image = UIImage(named: "udi_logo")
+        }
+        navigationItem.titleView = navigationTitleView
+        navigationItem.backButtonTitle = ""
         remoteConfig = RemoteConfig.remoteConfig()
         let settings = RemoteConfigSettings()
         settings.minimumFetchInterval = 0
@@ -33,14 +37,6 @@ class MainPageViewController: UIViewController {
         }
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        let navigationTitleView: UIImageView = UIImageView {
-            $0.image = UIImage(named: "udi_logo")
-        }
-        navigationItem.titleView = navigationTitleView
-        navigationItem.backButtonTitle = ""
-    }
     /*
     // MARK: - Navigation
 
@@ -70,12 +66,6 @@ extension MainPageViewController {
             }
             .catch { error in
                 if let apiError = error as? APIError {
-                    if apiError == .invalidAccessToken || apiError == .noAccessTokenError {
-                        let titleLabel = UILabel()
-                        titleLabel.text = "My Mind 買賣後台"
-                        titleLabel.textColor = .white
-                        self.navigationItem.titleView = titleLabel
-                    }
                     _ = ErrorHandler.shared.handle(apiError, forceAction: true)
                 } else {
                     ToastView.showIn(self, message: error.localizedDescription)

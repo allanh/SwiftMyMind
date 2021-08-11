@@ -14,13 +14,36 @@ class SignInRootView: NiblessView {
     var hierarchyNotReady: Bool = true
     let bag: DisposeBag = DisposeBag()
 
+    private let backgroundView: UIView = UIView {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.backgroundColor = UIColor(hex: "f2f2f4")
+    }
+    private let backgroundImageView: UIImageView = UIImageView {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.image = UIImage(named: "main_page_background")
+    }
+    private let backgroundTitleLabel: UILabel = UILabel {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.text = "最懂你的電商智慧夥伴"
+        $0.textColor = .white
+        $0.font = .pingFangTCSemibold(ofSize: 24)
+    }
+    private let backgroundDescriptionLabel: UILabel = UILabel {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.text = "致力整合網路生態鏈服務的創新公司"
+        $0.textColor = .white.withAlphaComponent(0.6)
+        $0.font = .pingFangTCRegular(ofSize: 14)
+    }
     private let scrollView: UIScrollView = UIScrollView {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.showsVerticalScrollIndicator = false
+        $0.layer.cornerRadius = 10
     }
 
     private let contentView: UIView = UIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.backgroundColor = .white
+        $0.layer.cornerRadius = 10
     }
 
     private let bannerImageView: UIImageView = UIImageView {
@@ -231,6 +254,10 @@ class SignInRootView: NiblessView {
     }
 
     private func constructViewHierarchy() {
+        backgroundView.addSubview(backgroundImageView)
+        backgroundView.addSubview(backgroundTitleLabel)
+        backgroundView.addSubview(backgroundDescriptionLabel)
+        addSubview(backgroundView)
         scrollView.addSubview(contentView)
         contentView.addSubview(bannerImageView)
         contentView.addSubview(titleGradientView)
@@ -254,6 +281,10 @@ class SignInRootView: NiblessView {
     }
 
     private func activateConstraints() {
+        activateConstraintsBackgroundView()
+        activateConstraintsBackgroundImageView()
+        activateConstraintsBackgroundTitleLabel()
+        activateConstraintsBackgroundDescriptionLabel()
         activateConstraintsScrollView()
         activateConstraintsContentView()
         activateConstraintsBannerImageView()
@@ -351,15 +382,66 @@ class SignInRootView: NiblessView {
 }
 // MARK: - Layout
 extension SignInRootView {
+    private func activateConstraintsBackgroundView() {
+        let top = backgroundView.topAnchor
+            .constraint(equalTo: safeAreaLayoutGuide.topAnchor)
+        let bottom = backgroundView.bottomAnchor
+            .constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
+        let leading = backgroundView.leadingAnchor
+            .constraint(equalTo: leadingAnchor)
+        let trailing = backgroundView.trailingAnchor
+            .constraint(equalTo: trailingAnchor)
+
+        NSLayoutConstraint.activate([
+            top, bottom, leading, trailing
+        ])
+    }
+    private func activateConstraintsBackgroundImageView() {
+        let top = backgroundImageView.topAnchor
+            .constraint(equalTo: topAnchor)
+        let height = backgroundImageView.heightAnchor
+            .constraint(equalToConstant: 181)
+        let leading = backgroundImageView.leadingAnchor
+            .constraint(equalTo: leadingAnchor)
+        let trailing = backgroundImageView.trailingAnchor
+            .constraint(equalTo: trailingAnchor)
+
+        NSLayoutConstraint.activate([
+            top, height, leading, trailing
+        ])
+    }
+    private func activateConstraintsBackgroundTitleLabel() {
+        let top = backgroundTitleLabel.topAnchor
+            .constraint(equalTo: topAnchor, constant: 20)
+        let height = backgroundTitleLabel.heightAnchor
+            .constraint(equalToConstant: 33)
+        let leading = backgroundTitleLabel.leadingAnchor
+            .constraint(equalTo: leadingAnchor, constant: 25)
+
+        NSLayoutConstraint.activate([
+            top, height, leading
+        ])
+    }
+    private func activateConstraintsBackgroundDescriptionLabel() {
+        let top = backgroundDescriptionLabel.topAnchor
+            .constraint(equalTo: backgroundTitleLabel.bottomAnchor, constant: 3)
+        let leading = backgroundDescriptionLabel.leadingAnchor
+            .constraint(equalTo: backgroundTitleLabel.leadingAnchor)
+
+        NSLayoutConstraint.activate([
+            top, leading
+        ])
+    }
+
     private func activateConstraintsScrollView() {
         let top = scrollView.topAnchor
-            .constraint(equalTo: safeAreaLayoutGuide.topAnchor)
+            .constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 90)
         let bottom = scrollView.bottomAnchor
-            .constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
+            .constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -24)
         let leading = scrollView.leadingAnchor
-            .constraint(equalTo: leadingAnchor)
+            .constraint(equalTo: leadingAnchor, constant: 25)
         let trailing = scrollView.trailingAnchor
-            .constraint(equalTo: trailingAnchor)
+            .constraint(equalTo: trailingAnchor, constant: -25)
 
         NSLayoutConstraint.activate([
             top, bottom, leading, trailing
@@ -427,7 +509,7 @@ extension SignInRootView {
         let centerY = timeLabel.centerYAnchor
             .constraint(equalTo: titleGradientView.centerYAnchor)
         let trailing = timeLabel.trailingAnchor
-            .constraint(equalTo: contentView.trailingAnchor, constant: -50)
+            .constraint(equalTo: contentView.trailingAnchor, constant: -20)
 
         NSLayoutConstraint.activate([
             centerY, trailing
@@ -438,9 +520,9 @@ extension SignInRootView {
         let top = inputStackView.topAnchor
             .constraint(equalTo: titleGradientView.bottomAnchor, constant: 30)
         let leading = inputStackView.leadingAnchor
-            .constraint(equalTo: contentView.leadingAnchor, constant: 50)
+            .constraint(equalTo: contentView.leadingAnchor, constant: 20)
         let trailing = inputStackView.trailingAnchor
-            .constraint(equalTo: contentView.trailingAnchor, constant: -50)
+            .constraint(equalTo: contentView.trailingAnchor, constant: -20)
 
         NSLayoutConstraint.activate([
             top, leading, trailing
@@ -612,7 +694,7 @@ extension SignInRootView {
         let height = signInButton.heightAnchor
             .constraint(equalToConstant: 46)
         let bottom = contentView.bottomAnchor
-            .constraint(equalTo: signInButton.bottomAnchor, constant: 30)
+            .constraint(equalTo: signInButton.bottomAnchor, constant: 61)
 
         NSLayoutConstraint.activate([
             top, leading, trailing, height, bottom

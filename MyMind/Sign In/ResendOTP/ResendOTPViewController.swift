@@ -32,6 +32,7 @@ class ResendOTPViewController: NiblessViewController {
         observerViewModel()
         addTapToResignKeyboardGesture()
         addCustomBackNavigationItem()
+        title = "My Mind 買賣後台"
     }
 
     override func viewWillAppear(_ animated: Bool) {

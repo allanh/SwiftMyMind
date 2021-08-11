@@ -647,7 +647,7 @@
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="MHu-CN-NUh"/>
-                        <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                        <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.95686274509803915" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="dEb-Y1-7aJ" firstAttribute="leading" secondItem="MHu-CN-NUh" secondAttribute="leading" constant="25" id="80m-SK-NWX"/>
                             <constraint firstItem="dEb-Y1-7aJ" firstAttribute="top" secondItem="MHu-CN-NUh" secondAttribute="top" constant="82" id="9A0-FC-2Nh"/>
