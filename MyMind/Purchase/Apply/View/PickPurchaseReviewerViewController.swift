@@ -18,10 +18,15 @@ final class PickPurchaseReviewerViewController: UIViewController {
     @IBOutlet private weak var pickReviewerLabel: UILabel!
     @IBOutlet weak var pickReviewerTextFieldHeightConstraint: NSLayoutConstraint!
     @IBOutlet private weak var pickReviewerErrorLabel: UILabel!
+    @IBOutlet weak var noteLabelTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var noteLabelHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var noteTextViewTopConstraint: NSLayoutConstraint!
     @IBOutlet private weak var noteTextView: UITextView!
+    @IBOutlet weak var noteTextViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet private weak var noteErrorLabel: UILabel!
     @IBOutlet private weak var noteTextCounterLabel: UILabel!
+    @IBOutlet weak var noteTextCounterLabelTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var noteTextCounterLabelHeightConstraint: NSLayoutConstraint!
     @IBOutlet private weak var logInfosStackView: UIStackView!
 
     lazy var dropDownView: DropDownView<Reviewer, DropDownListTableViewCell> = {
@@ -46,6 +51,10 @@ final class PickPurchaseReviewerViewController: UIViewController {
             hideReviewerPicker()
         } else {
             configurePickReviewerTextField()
+        }
+        if viewModel.status == .approved {
+            hideReviewerPicker()
+            hideNoteTextView()
         }
         configureDropDownView()
         configureLogInfosViews()
@@ -107,6 +116,13 @@ final class PickPurchaseReviewerViewController: UIViewController {
         pickerReviewerTitleLabelBottomConstraint.constant = 0
         pickReviewerTextFieldHeightConstraint.constant = 0
         noteTextViewTopConstraint.constant = 0
+    }
+    private func hideNoteTextView() {
+        noteLabelTopConstraint.constant = 0
+        noteLabelHeightConstraint.constant = 0
+        noteTextViewHeightConstraint.constant = 0
+        noteTextCounterLabelTopConstraint.constant = 0
+        noteTextCounterLabelHeightConstraint.constant = 0
     }
     private func configurePickReviewerTextField() {
         let formatter = NumberFormatter()

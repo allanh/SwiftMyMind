@@ -13,8 +13,13 @@
             <connections>
                 <outlet property="logInfosStackView" destination="9ge-U2-Zhx" id="c2r-n0-XbA"/>
                 <outlet property="noteErrorLabel" destination="FAi-Le-JHA" id="jff-av-dTK"/>
+                <outlet property="noteLabelHeightConstraint" destination="XCZ-GS-baG" id="72h-hY-tIM"/>
+                <outlet property="noteLabelTopConstraint" destination="ACk-0S-hXv" id="r1A-yN-To4"/>
                 <outlet property="noteTextCounterLabel" destination="1Oy-RU-G29" id="pQa-Xh-1fb"/>
+                <outlet property="noteTextCounterLabelHeightConstraint" destination="1ZD-Oe-2ua" id="bDF-Ic-UEU"/>
+                <outlet property="noteTextCounterLabelTopConstraint" destination="qtz-5N-KWj" id="sCD-xi-nAz"/>
                 <outlet property="noteTextView" destination="gci-2T-sxs" id="7b8-pe-hVL"/>
+                <outlet property="noteTextViewHeightConstraint" destination="Voc-zm-Q2r" id="Zl6-qq-K4r"/>
                 <outlet property="noteTextViewTopConstraint" destination="ACk-0S-hXv" id="nLW-WQ-BEt"/>
                 <outlet property="pickReviewerErrorLabel" destination="che-dt-V4o" id="gAH-9h-m2R"/>
                 <outlet property="pickReviewerLabel" destination="DTL-3s-d3G" id="iiN-q1-byf"/>

@@ -25,6 +25,7 @@ struct PickPurchaseReviewerViewModel {
     let loader: PurchaseReviewerListLoader
     var logInfos: [PurchaseOrder.LogInfo]?
 
+    let status: PurchaseStatus
     let bag: DisposeBag = DisposeBag()
     // MARK: - Methods
     init(loader: PurchaseReviewerListLoader,
@@ -32,12 +33,14 @@ struct PickPurchaseReviewerViewModel {
          logInfos: [PurchaseOrder.LogInfo]? = nil,
          level: Int = 0,
          isLastReview: Bool = false,
-         editable: Bool = true) {
+         editable: Bool = true,
+         status: PurchaseStatus) {
         self.loader = loader
         self.logInfos = logInfos
         self.level = level
         self.isLastReview = isLastReview
         self.editable = editable
+        self.status = status
         bindStatus()
         self.reviewerName.accept(reviewerName)
     }
