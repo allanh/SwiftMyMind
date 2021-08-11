@@ -123,14 +123,18 @@ final class EditingPurchaseOrderViewController: NiblessViewController {
 
     private func constructViewHierarchy() {
         view.addSubview(collectionView)
-        view.addSubview(defaultButton)
-        view.addSubview(alternativeButton)
+        if viewModel.status != .approved {
+            view.addSubview(defaultButton)
+            view.addSubview(alternativeButton)
+        }
     }
 
     private func activateConstraints() {
         activateConstraintsCollecitonView()
-        activateConstraintsDefaultButton()
-        activateConstraintsAlternativeButton()
+        if viewModel.status != .approved {
+            activateConstraintsDefaultButton()
+            activateConstraintsAlternativeButton()
+        }
     }
 
     private func configCollectionView() {
@@ -171,11 +175,16 @@ final class EditingPurchaseOrderViewController: NiblessViewController {
                 defaultButton.addTarget(self, action: #selector(saveButtonDidTapped(_:)), for: .touchUpInside)
                 alternativeButton.addTarget(self, action: #selector(invalidButtonDidTapped(_:)), for: .touchUpInside)
             } else {
-                // revoke, cancel
-                defaultButton.setTitle("撤回", for: .normal)
-                alternativeButton.setTitle("取消", for: .normal)
-                defaultButton.addTarget(self, action: #selector(revokeButtonDidTapped(_:)), for: .touchUpInside)
-                alternativeButton.addTarget(self, action: #selector(cancelButtonDidTapped(_:)), for: .touchUpInside)
+                if purchaseApplyInfoViewModel.purchaseStatus.value == .approved {
+                    defaultButton.isHidden = true
+                    alternativeButton.isHidden = true
+                } else {
+                    // revoke, cancel
+                    defaultButton.setTitle("撤回", for: .normal)
+                    alternativeButton.setTitle("取消", for: .normal)
+                    defaultButton.addTarget(self, action: #selector(revokeButtonDidTapped(_:)), for: .touchUpInside)
+                    alternativeButton.addTarget(self, action: #selector(cancelButtonDidTapped(_:)), for: .touchUpInside)
+                }
             }
         }
     }
@@ -318,7 +327,7 @@ extension EditingPurchaseOrderViewController {
         let leading = collectionView.leadingAnchor
             .constraint(equalTo: view.leadingAnchor)
         let bottom = collectionView.bottomAnchor
-            .constraint(equalTo: defaultButton.topAnchor)
+            .constraint(equalTo: (viewModel.status == .approved) ? view.bottomAnchor : defaultButton.topAnchor)
         let trailing = collectionView.trailingAnchor
             .constraint(equalTo: view.trailingAnchor)
 

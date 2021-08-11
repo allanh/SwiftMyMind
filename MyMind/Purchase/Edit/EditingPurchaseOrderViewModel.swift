@@ -31,6 +31,7 @@ class EditingPurchaseOrderViewModel {
     let reviewing: Bool
     var productInfos: [PurchaseOrder.ProductInfo] = []
     var editable: Bool = false
+    let status: PurchaseStatus
 
     var purchaseApplyInfoViewModel: PurchaseApplyInfoViewModel?
     var pickPurchaseReviewerViewModel: PickPurchaseReviewerViewModel?
@@ -52,13 +53,15 @@ class EditingPurchaseOrderViewModel {
         warehouseListLoader: PurchaseWarehouseListLoader,
         purchaseReviewerListLoader: PurchaseReviewerListLoader,
         service: EditingPurchaseOrderService,
-        reviewing: Bool) {
+        reviewing: Bool,
+        status: PurchaseStatus) {
         self.purchaseID = purchaseID
         self.purchaseOrderLoader = purchaseOrderLoader
         self.warehouseListLoader = warehouseListLoader
         self.purchaseReviewerListLoader = purchaseReviewerListLoader
         self.service = service
         self.reviewing = reviewing
+        self.status = status
     }
 
     func loadPurchaseOrderThenMakeChildViewModels() {
@@ -209,7 +212,8 @@ class EditingPurchaseOrderViewModel {
             logInfos: order.logInfos,
             level: order.reviewLevel,
             isLastReview: (reviewing) ? order.lastReview : false,
-            editable: (reviewing) ? true : editable)
+            editable: (reviewing) ? true : editable,
+            status: order.status)
     }
 
     func subscribeChildViewModel(with order: PurchaseOrder) {

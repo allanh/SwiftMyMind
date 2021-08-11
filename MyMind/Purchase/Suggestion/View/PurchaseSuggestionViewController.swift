@@ -132,7 +132,7 @@ class PurchaseSuggestionViewController: NiblessViewController {
             
             let purchaseInfoViewModel = PurchaseApplyInfoViewModel(suggestionProductMaterialViewModels: viewModel.suggestionProductMaterialViewModels, warehouseLoader: service, purchaseStatus: .pending)
 
-            let pickReviewerViewModel = PickPurchaseReviewerViewModel(loader: service)
+            let pickReviewerViewModel = PickPurchaseReviewerViewModel(loader: service, status: .pending)
             let purchaseApplyViewModel = PurchaseApplyViewModel(
                 userSessionDataStore: KeychainUserSessionDataStore(),
                 purchaseInfoViewModel: purchaseInfoViewModel,
