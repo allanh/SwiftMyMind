@@ -18,11 +18,6 @@ class MainPageViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        let navigationTitleView: UIImageView = UIImageView {
-            $0.image = UIImage(named: "udi_logo")
-        }
-        navigationItem.titleView = navigationTitleView
-        navigationItem.backButtonTitle = ""
 
         remoteConfig = RemoteConfig.remoteConfig()
         let settings = RemoteConfigSettings()
@@ -38,6 +33,14 @@ class MainPageViewController: UIViewController {
         }
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        let navigationTitleView: UIImageView = UIImageView {
+            $0.image = UIImage(named: "udi_logo")
+        }
+        navigationItem.titleView = navigationTitleView
+        navigationItem.backButtonTitle = ""
+    }
     /*
     // MARK: - Navigation
 

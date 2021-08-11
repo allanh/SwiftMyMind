@@ -45,7 +45,7 @@ final class MainFunctionEntryViewController: NiblessViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         view.backgroundColor = .white
-        title = "功能"
+        self.tabBarItem.title = "功能"
         navigationController?.navigationBar.tintColor = .white
         if let authorization = authorization {
             if authorization.navigations.purchase.contains(.purapp) {

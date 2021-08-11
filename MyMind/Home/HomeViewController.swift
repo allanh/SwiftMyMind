@@ -270,8 +270,7 @@ final class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.backButtonTitle = ""
-        self.title = "MyMind"
-        self.tabBarItem.title = "首頁"
+        title = "首頁"
         remoteConfig = RemoteConfig.remoteConfig()
         let settings = RemoteConfigSettings()
         settings.minimumFetchInterval = 0
