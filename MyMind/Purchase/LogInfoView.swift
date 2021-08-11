@@ -33,6 +33,12 @@ class LogInfoView: NiblessView {
         $0.textColor = UIColor(hex: "434343")
         $0.font = .pingFangTCRegular(ofSize: 14)
     }
+    
+    private let statusLabel: UILabel = UILabel {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.textColor = UIColor(hex: "434343")
+        $0.font = .pingFangTCRegular(ofSize: 14)
+    }
 
     private let noteTextView: UITextView = UITextView {
         $0.textColor = UIColor(hex: "B4B4B4")
@@ -58,6 +64,7 @@ class LogInfoView: NiblessView {
         addSubview(timeStampLabel)
         addSubview(createrLabel)
         addSubview(createrNameLabel)
+        addSubview(statusLabel)
         addSubview(noteTextView)
     }
 
@@ -67,6 +74,7 @@ class LogInfoView: NiblessView {
         activateConstraintsTimeStampLabel()
         activateConstriantsCreaterLabel()
         activateConstriantsCreaterNameLabel()
+        activateConstraintsStatusLabel()
         activateConstraintsNoteLabel()
     }
 
@@ -74,6 +82,7 @@ class LogInfoView: NiblessView {
         timeStampLabel.text = logInfo.createdDateString
         createrLabel.text = logInfo.creater
         createrNameLabel.text = logInfo.createrName
+        statusLabel.text = logInfo.status.description
         noteTextView.text = logInfo.note
     }
 }
@@ -148,11 +157,21 @@ extension LogInfoView {
             top, leading
         ])
     }
+    private func activateConstraintsStatusLabel() {
+        let top = statusLabel.topAnchor
+            .constraint(equalTo: createrNameLabel.bottomAnchor, constant: 10)
+        let leading = statusLabel.leadingAnchor
+            .constraint(equalTo: timeStampLabel.leadingAnchor)
 
+        NSLayoutConstraint.activate([
+            top, leading
+        ])
+
+    }
     private func activateConstraintsNoteLabel() {
         noteTextView.translatesAutoresizingMaskIntoConstraints = false
         let top = noteTextView.topAnchor
-            .constraint(equalTo: createrLabel.bottomAnchor, constant: 10)
+            .constraint(equalTo: statusLabel.bottomAnchor, constant: 10)
         let leading = noteTextView.leadingAnchor
             .constraint(equalTo: timeStampLabel.leadingAnchor)
         let trailing = noteTextView.trailingAnchor

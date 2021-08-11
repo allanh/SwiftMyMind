@@ -11,7 +11,25 @@ import Foundation
 struct PurchaseOrder: Codable {
     // MARK: - LogInfo
     struct LogInfo: Codable {
-        let createdDateString, status, creater: String
+        enum LogStatus: String, Codable, CustomStringConvertible {
+            var description: String {
+                get {
+                    switch self {
+                    case .PENDING: return "待送審"
+                    case .REVIEW: return "審核中"
+                    case .APPROVED: return "審核通過"
+                    case .PUT_IN_STORAGE: return "待結案"
+                    case .CLOSED: return "已結案"
+                    case .REVIEW_REJECT: return "退回"
+                    case .VOID: return "作廢"
+                    }
+                }
+            }
+            
+            case PENDING, REVIEW, APPROVED, PUT_IN_STORAGE, CLOSED, REVIEW_REJECT, VOID
+        }
+        let createdDateString, creater: String
+        let status: LogStatus
         let reviewLevel: Int
         let createrName: String
         let note: String?
