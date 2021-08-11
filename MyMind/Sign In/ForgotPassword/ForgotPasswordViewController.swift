@@ -74,7 +74,9 @@ class ForgotPasswordViewController: NiblessViewController {
         viewModel.successMessage
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [unowned self] in
-                ToastView.showIn(self, message: $0, iconName: "success")
+                ToastView.showIn(self, message: $0, iconName: "success") {
+                    dismiss(animated: true, completion: nil)
+                }
             })
             .disposed(by: bag)
 
