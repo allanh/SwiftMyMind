@@ -42,6 +42,7 @@ class SignInViewController: NiblessViewController {
         configForgotPasswordButton()
         configResendOTPButton()
         title = "My Mind 買賣後台"
+        navigationItem.backButtonTitle = ""
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -84,12 +85,14 @@ class SignInViewController: NiblessViewController {
     private func showHomePage() {
         MyMindEmployeeAPIService.shared.authorization()
             .done { authorization in
-                self.dismiss(animated: true) {
-                    let scene = UIApplication.shared.connectedScenes.first
-                    if let sceneDelegate : SceneDelegate = (scene?.delegate as? SceneDelegate) {
-                        let rootTabBarViewController = RootTabBarController(authorization: authorization)
-                        sceneDelegate.window?.rootViewController?.show(rootTabBarViewController, sender: nil)
+                let scene = UIApplication.shared.connectedScenes.first
+                if let sceneDelegate : SceneDelegate = (scene?.delegate as? SceneDelegate) {
+                    let rootTabBarViewController = RootTabBarController(authorization: authorization)
+                    let rootViewController = sceneDelegate.window?.rootViewController
+                    if let navigationController = rootViewController as? UINavigationController {
+                        navigationController.popToRootViewController(animated: false)
                     }
+                    rootViewController?.show(rootTabBarViewController, sender: nil)
                 }
             }
             .ensure {
@@ -131,8 +134,7 @@ class SignInViewController: NiblessViewController {
                     let storyboard: UIStoryboard = UIStoryboard(name: "TOTP", bundle: nil)
                     if let viewController = storyboard.instantiateViewController(withIdentifier: "SecretListViewControllerNavi") as? UINavigationController, let totpViewController = viewController.topViewController as? SecretListViewController {
                         totpViewController.scanViewControllerDelegate = self
-                        totpViewController.needBackButton = true
-                        present(viewController, animated: true, completion: nil)
+                        show(totpViewController, sender: self)
                     }
                }
                 alert.addAction(cancelAction)
@@ -213,9 +215,7 @@ extension SignInViewController: ScanViewControllerDelegate {
         } else if let secret = Secret.generateSecret(with: qrCodeValue) {
             updateAndSaveSecret(secret: secret)
         }
-        dismiss(animated: true) {
-            self.viewModel.signIn()
-        }
+        self.viewModel.signIn()
     }
     private func updateAndSaveSecret(secret: Secret) {
         viewModel.repository.update(newSecrets: secret)

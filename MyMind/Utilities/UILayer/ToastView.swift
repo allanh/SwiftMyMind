@@ -74,7 +74,11 @@ class ToastView: NiblessView {
 
             // this call needs to be counter balanced on fadeOut [1]
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+2.5, execute: {
-                sharedView?.fadeOut()
+                sharedView?.fadeOut(completion: {
+                    if let completion = completion {
+                        completion()
+                    }
+                })
             })
         }
     }

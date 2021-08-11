@@ -58,9 +58,8 @@ extension ErrorHandler {
             otpEnabled: otpEnabled
         )
         let signInViewController = SignInViewController(viewModel: viewModel)
-        signInViewController.modalPresentationStyle = .custom
-        signInViewController.transitioningDelegate = SignInTransitionDelegate.shared
-        topMostViewController?.present(signInViewController, animated: true, completion: nil)
+        topMostViewController?.navigationController?.popToRootViewController(animated: false)
+        topMostViewController?.navigationController?.show(signInViewController, sender: self)
     }
     
     private func showStaticPage(_ controller: UIViewController, page: StaticView) {
