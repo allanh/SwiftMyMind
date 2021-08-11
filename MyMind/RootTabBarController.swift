@@ -25,7 +25,7 @@ final class RootTabBarController: UITabBarController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "MyMind"
+        self.title = "My Mind 買賣後台"
         navigationItem.backButtonTitle = ""
         generateHomeViewController()
         generateMainFunctionEntryViewController()
