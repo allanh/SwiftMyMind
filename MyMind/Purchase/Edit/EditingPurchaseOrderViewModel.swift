@@ -199,7 +199,7 @@ class EditingPurchaseOrderViewModel {
             
             suggestionProductMaterialViewModels: viewModels,
             warehouseLoader: warehouseListLoader,
-            purchaseID: String(order.id),
+            purchaseID: String(order.number),
             expectedStorageDate: dateFormatter.date(from: order.expectStorageDate),
             pickedWarehouse: wareHoudse,
             purchaseStatus: order.status)
@@ -211,8 +211,8 @@ class EditingPurchaseOrderViewModel {
             reviewerName: order.reviewerName,
             logInfos: order.logInfos,
             level: order.reviewLevel,
-            isLastReview: (reviewing) ? order.lastReview : false,
-            editable: (reviewing) ? true : editable,
+            isLastReview: order.lastReview,
+            reviewing: reviewing,
             status: order.status)
     }
 
@@ -227,7 +227,11 @@ class EditingPurchaseOrderViewModel {
                 if reviewing {
                     self.navigation(with: .purchasedProductInfos(infos: productInfos))
                 } else {
-                    self.navigation(with: .purchasedProducts(viewModels: purchaseApplyInfoViewModel.suggestionProductMaterialViewModels))
+                    if status == .pending || status == .rejected {
+                        self.navigation(with: .purchasedProducts(viewModels: purchaseApplyInfoViewModel.suggestionProductMaterialViewModels))
+                    } else {
+                        self.navigation(with: .purchasedProductInfos(infos: productInfos))
+                    }
                 }
             })
             .disposed(by: bag)

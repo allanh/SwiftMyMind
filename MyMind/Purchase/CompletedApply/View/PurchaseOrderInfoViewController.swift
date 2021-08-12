@@ -19,7 +19,11 @@ class PurchaseOrderInfoViewController: UIViewController {
     @IBOutlet private weak var recipientPhoneLabel: UILabel!
     @IBOutlet private weak var recipientAddressLabel: UILabel!
     @IBOutlet private weak var checkPurchasedProductsButton: UIButton!
-
+    @IBOutlet weak var summaryLabel: UILabel!
+    @IBOutlet weak var totalCostLabel: UILabel!
+    @IBOutlet weak var taxLabel: UILabel!
+    @IBOutlet weak var totalLabel: UILabel!
+    
     var purchaseOrder: PurchaseOrder?
 
     var didTapCheckPurchasedProductButton: (() -> Void)?
@@ -61,7 +65,14 @@ class PurchaseOrderInfoViewController: UIViewController {
         recipientPhoneLabel.text = order.recipientInfo.phone
         recipientAddressLabel.text = order.recipientInfo.address.fullAddressString
 
-        checkPurchasedProductsButton.setTitle("共 \(order.productInfos.count) 件SKU", for: .normal)
+        summaryLabel.text = "共 \(order.productInfos.count) 件SKU"
+        let formatter: NumberFormatter = NumberFormatter {
+            $0.numberStyle = .currency
+            $0.currencySymbol = ""
+        }
+        totalCostLabel.text = formatter.string(from: NSNumber(value: order.totalCost))
+        taxLabel.text = formatter.string(from: NSNumber(value: order.totalTax))
+        totalLabel.text = formatter.string(from: NSNumber(value: order.totalCost+order.totalTax))
     }
 
     @objc

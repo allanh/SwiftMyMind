@@ -20,19 +20,20 @@ class ProductMaterialSuggestionInfoTableViewController: UITableViewController {
         ("SKU名稱", viewModel.name),
         ("通路倉庫存量", viewModel.channelStockQuantity),
         ("良品倉庫存量", viewModel.fineStockQuantity),
+        ("總庫存量", viewModel.fineStockQuantity),
         ("月平鈞銷售量\n(庫存單位)", viewModel.monthSaleQuantity),
         ("迴轉天數", viewModel.daysSalesOfInventory),
         ("建議採購量", viewModel.suggestedQuantity),
         ("箱入數", "\(viewModel.quantityPerBox)\(viewModel.stockUnitName)/\(viewModel.boxStockUnitName)"),
-        ("最新採購成本", viewModel.cost),
-        ("移動平均成本", viewModel.movingAverageCost),
+        ("最新採購成本(未稅)", viewModel.cost),
+        ("移動平均成本(未稅)", viewModel.movingAverageCost),
     ]
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = "建議採購資訊"
+//        title = "建議採購資訊"
         tableView.register(UINib(nibName: String(describing: ProductMaterialSuggestionInfoTableViewCell.self), bundle: nil), forCellReuseIdentifier: String(describing: ProductMaterialSuggestionInfoTableViewCell.self))
         tableView.rowHeight = 44
         tableView.separatorStyle = .none
@@ -59,7 +60,27 @@ class ProductMaterialSuggestionInfoTableViewController: UITableViewController {
             return UITableViewCell()
         }
         let item = itemList[indexPath.row]
-        cell.config(with: item.title, content: item.content)
+        var content = item.content
+        switch indexPath.row {
+        case 3, 4, 5, 6, 8:
+            let formatter: NumberFormatter = NumberFormatter {
+                $0.numberStyle = .currency
+                $0.currencySymbol = ""
+                $0.maximumFractionDigits = 0
+            }
+            let value = Int(content)
+            content = formatter.string(from: NSNumber(value: value ?? 0)) ?? ""
+        case 10, 11:
+            let formatter: NumberFormatter = NumberFormatter {
+                $0.numberStyle = .currency
+                $0.currencySymbol = ""
+            }
+            let value = Float(content)
+            content = formatter.string(from: NSNumber(value: value ?? 0)) ?? ""
+        default:
+            break
+        }
+        cell.config(with: item.title, content: content)
 
         let isLastRow = indexPath.row == itemList.count - 1
         cell.bottomBorderView.isHidden = !isLastRow

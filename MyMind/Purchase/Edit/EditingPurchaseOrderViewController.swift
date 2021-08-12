@@ -200,7 +200,7 @@ final class EditingPurchaseOrderViewController: NiblessViewController {
             show(viewController, sender: nil)
             break
         case .purchasedProductInfos(let infos):
-            let viewController = PurchasedProductsInfoViewController(style: .plain)
+            let viewController = PurchasedProductsInfoViewController()//PurchasedProductsInfoViewController(style: .plain)
             viewController.productInfos = infos
             show(viewController, sender: nil)
         case .error(let error):

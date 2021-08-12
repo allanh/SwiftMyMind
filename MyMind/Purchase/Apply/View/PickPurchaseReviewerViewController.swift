@@ -45,16 +45,14 @@ final class PickPurchaseReviewerViewController: UIViewController {
         super.viewDidLoad()
 
         configureRootView()
-        if viewModel.editable {
-            configurePickReviewerTextField()
-        } else if viewModel.isLastReview {
-            hideReviewerPicker()
+        if viewModel.reviewing {
+            if viewModel.isLastReview {
+                hideReviewerPicker()
+            } else {
+                configurePickReviewerTextField()
+            }
         } else {
             configurePickReviewerTextField()
-        }
-        if viewModel.status == .approved {
-            hideReviewerPicker()
-            hideNoteTextView()
         }
         configureDropDownView()
         configureLogInfosViews()
@@ -128,9 +126,10 @@ final class PickPurchaseReviewerViewController: UIViewController {
         let formatter = NumberFormatter()
         formatter.locale = Locale(identifier: "zh_Hant")
         formatter.numberStyle = .spellOut
-        let level: String = formatter.string(from: (viewModel.level + ((viewModel.editable) ? 1 : 0)) as NSNumber) ?? ""
-        let attributedString = viewModel.editable ? NSMutableAttributedString(string: "*選擇\(level)審人員", attributes: [.foregroundColor: UIColor.label]) : NSMutableAttributedString(string: "\(level)審人員", attributes: [.foregroundColor: UIColor.label])
-        if viewModel.editable {
+        let editable = viewModel.reviewing || viewModel.status == .pending || viewModel.status == .rejected
+        let level: String = formatter.string(from: (viewModel.level + (editable ? 1 : 0)) as NSNumber) ?? ""
+        let attributedString = editable ? NSMutableAttributedString(string: "*選擇\(level)審人員", attributes: [.foregroundColor: UIColor.label]) : NSMutableAttributedString(string: "\(level)審人員", attributes: [.foregroundColor: UIColor.label])
+        if editable {
             attributedString.addAttributes([.foregroundColor : UIColor.red], range: NSRange(location:0,length:1))
         }
         pickReviewerTitleLabel.attributedText = attributedString
@@ -141,9 +140,10 @@ final class PickPurchaseReviewerViewController: UIViewController {
         pickReviewerTextField.setLeftPaddingPoints(10)
         pickReviewerTextField.font = .pingFangTCRegular(ofSize: 14)
         pickReviewerTextField.textColor = UIColor(hex: "4c4c4c")
+        pickReviewerTextField.placeholder = "請選擇"
         pickReviewerLabel.textColor = UIColor(hex: "4c4c4c")
-        pickReviewerTextField.isHidden = !viewModel.editable
-        pickReviewerLabel.isHidden = viewModel.editable
+        pickReviewerTextField.isHidden = !editable
+        pickReviewerLabel.isHidden = editable
     }
 
     private func updatePickReviewerTextFieldLayout(with validationStatus: ValidationResult) {

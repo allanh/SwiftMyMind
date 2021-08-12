@@ -24,13 +24,64 @@ class EditablePickedProductsInfoViewController: NiblessViewController {
         collecitonView.backgroundColor = .white
         return collecitonView
     }()
-
-    let closeButton: UIButton = UIButton {
-        $0.backgroundColor = UIColor(hex: "004477")
-        $0.setTitleColor(.white, for: .normal)
-        $0.setTitle("關閉", for: .normal)
-        $0.titleLabel?.font = .pingFangTCSemibold(ofSize: 16)
+    private let seperator: UIView = UIView {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.backgroundColor = UIColor(hex: "797979")
     }
+    private let summaryLabel: UILabel = UILabel {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.textColor = UIColor(hex: "434343")
+        $0.font = .pingFangTCSemibold(ofSize: 16)
+    }
+    private let costTitleLabel: UILabel = UILabel {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.textColor = UIColor(hex: "7f7f7f")
+        $0.font = .pingFangTCSemibold(ofSize: 14)
+        $0.textAlignment = .right
+        $0.text = "未稅 $"
+    }
+    private let costLabel: UILabel = UILabel {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.textColor = UIColor(hex: "7f7f7f")
+        $0.font = .pingFangTCSemibold(ofSize: 14)
+        $0.textAlignment = .right
+        $0.text = "cost"
+    }
+    private let taxTitleLabel: UILabel = UILabel {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.textColor = UIColor(hex: "7f7f7f")
+        $0.font = .pingFangTCSemibold(ofSize: 14)
+        $0.textAlignment = .right
+        $0.text = "稅額 $"
+    }
+    private let taxLabel: UILabel = UILabel {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.textColor = UIColor(hex: "7f7f7f")
+        $0.font = .pingFangTCSemibold(ofSize: 14)
+        $0.textAlignment = .right
+        $0.text = "tax"
+    }
+   private let totalTitleLabel: UILabel = UILabel {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.textColor = UIColor(hex: "3758a8")
+        $0.font = .pingFangTCSemibold(ofSize: 14)
+        $0.textAlignment = .right
+        $0.text = "合計(含稅) $"
+    }
+    private let totalLabel: UILabel = UILabel {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.textColor = UIColor(hex: "3758a8")
+        $0.font = .pingFangTCSemibold(ofSize: 14)
+        $0.textAlignment = .right
+        $0.text = "total"
+    }
+
+//    let closeButton: UIButton = UIButton {
+//        $0.backgroundColor = UIColor(hex: "004477")
+//        $0.setTitleColor(.white, for: .normal)
+//        $0.setTitle("關閉", for: .normal)
+//        $0.titleLabel?.font = .pingFangTCSemibold(ofSize: 16)
+//    }
 
     var contentViewControllers: [PurchaseProductSuggestionViewController] = []
 
@@ -75,26 +126,61 @@ class EditablePickedProductsInfoViewController: NiblessViewController {
 
     private func constructViewHierarchy() {
         view.addSubview(collectionView)
-        view.addSubview(closeButton)
+        view.addSubview(seperator)
+        view.addSubview(summaryLabel)
+        view.addSubview(costTitleLabel)
+        view.addSubview(costLabel)
+        view.addSubview(taxTitleLabel)
+        view.addSubview(taxLabel)
+        view.addSubview(totalTitleLabel)
+        view.addSubview(totalLabel)
     }
 
     private func activateConstraints() {
         activateConstraintsCollecitonView()
-        activateConstraintsCloseButton()
+        activateConstraintsSeperator()
+        activateConstraintsSummaryLabel()
+        activateConstraintsCostTitleLabel()
+        activateConstraintsCostLabel()
+        activateConstraintsTaxTitleLabel()
+        activateConstraintsTaxLabel()
+        activateConstraintsTotalTitleLabel()
+        activateConstraintsTotalLabel()
     }
 
     private func wireToViewModel() {
-        closeButton.rx.tap
-            .subscribe(onNext: { [unowned self] _ in
-                self.viewModel.backToApply()
-            })
-            .disposed(by: bag)
+//        closeButton.rx.tap
+//            .subscribe(onNext: { [unowned self] _ in
+//                self.viewModel.backToApply()
+//            })
+//            .disposed(by: bag)
     }
 
     private func subscribeViewModel() {
         viewModel.view
             .subscribe(onNext: handleNavigation(with:))
             .disposed(by: bag)
+        
+        viewModel.pickedProductMaterialViewModels
+            .map({ "共 \($0.count) 件SKU" })
+            .bind(to: summaryLabel.rx.text)
+            .disposed(by: bag)
+        let formatter: NumberFormatter = NumberFormatter {
+            $0.numberStyle = .currency
+            $0.currencySymbol = ""
+        }
+
+        let totalCost = viewModel.pickedProductMaterialViewModels.value
+            .map {
+                $0.purchaseCost.value
+            }.reduce(0) { (sum, num) -> Double in
+                return sum+num
+            }
+        let tax = totalCost * 0.05
+        costLabel.text = formatter.string(from: NSNumber(value: totalCost))
+        taxLabel.text = formatter.string(from: NSNumber(value: tax))
+        totalLabel.text = formatter.string(from: NSNumber(value: totalCost+tax))
+
     }
 
     private func configCollectionView() {
@@ -175,31 +261,92 @@ extension EditablePickedProductsInfoViewController {
             .constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
         let leading = collectionView.leadingAnchor
             .constraint(equalTo: view.leadingAnchor)
-        let bottom = collectionView.bottomAnchor
-            .constraint(equalTo: closeButton.topAnchor)
         let trailing = collectionView.trailingAnchor
             .constraint(equalTo: view.trailingAnchor)
 
         NSLayoutConstraint.activate([
-            top, leading, bottom, trailing
+            top, leading, trailing
         ])
     }
-
-    private func activateConstraintsCloseButton() {
-        closeButton.translatesAutoresizingMaskIntoConstraints = false
-        let leading = closeButton.leadingAnchor
-            .constraint(equalTo: view.leadingAnchor)
-        let trailing = closeButton.trailingAnchor
-            .constraint(equalTo: view.trailingAnchor)
-        let bottom = closeButton.bottomAnchor
-            .constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
-        let height = closeButton.heightAnchor
-            .constraint(equalToConstant: 50)
-
+    private func activateConstraintsSeperator() {
+        let top = seperator.topAnchor.constraint(equalTo: collectionView.bottomAnchor)
+        let leading = seperator.leadingAnchor.constraint(equalTo: view.leadingAnchor)
+        let trailing = seperator.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        let height = seperator.heightAnchor.constraint(equalToConstant: 1)
         NSLayoutConstraint.activate([
-            leading, trailing, bottom, height
+            top, leading, trailing, height
         ])
     }
+    private func activateConstraintsSummaryLabel() {
+        let top = summaryLabel.topAnchor.constraint(equalTo: seperator.bottomAnchor, constant: 8)
+        let leading = summaryLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20)
+        let centerY = summaryLabel.centerYAnchor.constraint(equalTo: costTitleLabel.centerYAnchor)
+        NSLayoutConstraint.activate([
+            top, leading, centerY
+        ])
+    }
+    private func activateConstraintsCostTitleLabel() {
+        let trailing = costTitleLabel.trailingAnchor.constraint(equalTo: taxTitleLabel.trailingAnchor)
+        let leading = costTitleLabel.leadingAnchor.constraint(equalTo: taxTitleLabel.leadingAnchor)
+        let centerY = costTitleLabel.centerYAnchor.constraint(equalTo: costLabel.centerYAnchor)
+        NSLayoutConstraint.activate([
+            trailing, leading, centerY
+        ])
+    }
+    private func activateConstraintsCostLabel() {
+        let trailing = costLabel.trailingAnchor.constraint(equalTo: taxLabel.trailingAnchor)
+        let leading = costLabel.leadingAnchor.constraint(equalTo: taxLabel.leadingAnchor)
+        let bottom = costLabel.bottomAnchor.constraint(equalTo: taxLabel.topAnchor, constant: -8)
+        NSLayoutConstraint.activate([
+            trailing, leading, bottom
+        ])
+    }
+    private func activateConstraintsTaxTitleLabel() {
+        let trailing = taxTitleLabel.trailingAnchor.constraint(equalTo: totalTitleLabel.trailingAnchor)
+        let leading = taxTitleLabel.leadingAnchor.constraint(equalTo: totalTitleLabel.leadingAnchor)
+        let centerY = taxTitleLabel.centerYAnchor.constraint(equalTo: taxLabel.centerYAnchor)
+        NSLayoutConstraint.activate([
+            trailing, leading, centerY
+        ])
+    }
+    private func activateConstraintsTaxLabel() {
+        let trailing = taxLabel.trailingAnchor.constraint(equalTo: totalLabel.trailingAnchor)
+        let leading = taxLabel.leadingAnchor.constraint(equalTo: totalLabel.leadingAnchor)
+        let bottom = taxLabel.bottomAnchor.constraint(equalTo: totalLabel.topAnchor, constant: -8)
+        NSLayoutConstraint.activate([
+            trailing, leading, bottom
+        ])
+    }
+    private func activateConstraintsTotalTitleLabel() {
+        let centerY = totalTitleLabel.centerYAnchor.constraint(equalTo: totalLabel.centerYAnchor)
+        NSLayoutConstraint.activate([
+            centerY
+        ])
+    }
+    private func activateConstraintsTotalLabel() {
+        let trailing = totalLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
+        let leading = totalLabel.leadingAnchor.constraint(equalTo: totalTitleLabel.trailingAnchor, constant: 8)
+        let bottom = totalLabel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10)
+        NSLayoutConstraint.activate([
+            trailing, leading, bottom
+        ])
+    }
+
+//    private func activateConstraintsCloseButton() {
+//        closeButton.translatesAutoresizingMaskIntoConstraints = false
+//        let leading = closeButton.leadingAnchor
+//            .constraint(equalTo: view.leadingAnchor)
+//        let trailing = closeButton.trailingAnchor
+//            .constraint(equalTo: view.trailingAnchor)
+//        let bottom = closeButton.bottomAnchor
+//            .constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+//        let height = closeButton.heightAnchor
+//            .constraint(equalToConstant: 50)
+//
+//        NSLayoutConstraint.activate([
+//            leading, trailing, bottom, height
+//        ])
+//    }
 }
 // MARK: - Keyboard handle
 extension EditablePickedProductsInfoViewController {

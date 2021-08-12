@@ -20,6 +20,10 @@ class PurchaseReviewingApplyInfoViewController: UIViewController {
     @IBOutlet private weak var recipientPhoneLabel: UILabel!
     @IBOutlet private weak var recipientAddressLabel: UILabel!
     @IBOutlet private weak var checkPurchasedProductsButton: UIButton!
+    @IBOutlet weak var summaryLabel: UILabel!
+    @IBOutlet weak var totalCostLabel: UILabel!
+    @IBOutlet weak var taxLabel: UILabel!
+    @IBOutlet weak var totalLabel: UILabel!
     
     private let dateFormatter: DateFormatter = DateFormatter {
         $0.dateFormat = "yyyy-MM-dd"
@@ -58,10 +62,10 @@ class PurchaseReviewingApplyInfoViewController: UIViewController {
             .bind(to: purchaseIDLabel.rx.text)
             .disposed(by: bag)
 
-        viewModel.suggestionProductMaterialViewModels
-            .map({ "共 \($0.count) 件SKU" })
-            .bind(to: checkPurchasedProductsButton.rx.title())
-            .disposed(by: bag)
+//        viewModel.suggestionProductMaterialViewModels
+//            .map({ "共 \($0.count) 件SKU" })
+//            .bind(to: checkPurchasedProductsButton.rx.title())
+//            .disposed(by: bag)
 
         viewModel.expectedStorageDate
             .map { [unowned self] date -> String in
@@ -87,7 +91,26 @@ class PurchaseReviewingApplyInfoViewController: UIViewController {
         viewModel.recipientAddress
             .bind(to: recipientAddressLabel.rx.text)
             .disposed(by: bag)
+        
+        viewModel.suggestionProductMaterialViewModels
+            .map({ "共 \($0.count) 件SKU" })
+            .bind(to: summaryLabel.rx.text)
+            .disposed(by: bag)
+        let formatter: NumberFormatter = NumberFormatter {
+            $0.numberStyle = .currency
+            $0.currencySymbol = ""
+        }
 
+        let totalCost = viewModel.suggestionProductMaterialViewModels.value
+            .map {
+                $0.purchaseCost.value
+            }.reduce(0) { (sum, num) -> Double in
+                return sum+num
+            }
+        let tax = totalCost * 0.05
+        totalCostLabel.text = formatter.string(from: NSNumber(value: totalCost))
+        taxLabel.text = formatter.string(from: NSNumber(value: tax))
+        totalLabel.text = formatter.string(from: NSNumber(value: totalCost+tax))
     }
 
     private func configureContentWithViewModel() {

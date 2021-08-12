@@ -43,8 +43,24 @@ struct PurchaseOrder: Codable {
             case note = "remark"
         }
     }
-
+    
     // MARK: - ProductInfo
+    var totalCost: Float {
+        get {
+            productInfos.map {
+                $0.totalPrice
+            }.compactMap {
+                $0 != nil ? $0! : 0
+            }.reduce(0) { (sum, num) -> Float in
+                return sum+num
+            }
+        }
+    }
+    var totalTax: Float {
+        get {
+            return totalCost * 0.05
+        }
+    }
     struct ProductInfo: Codable {
         let id: Int
         let number, name: String

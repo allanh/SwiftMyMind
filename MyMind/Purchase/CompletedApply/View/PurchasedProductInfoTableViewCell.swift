@@ -44,12 +44,16 @@ class PurchasedProductInfoTableViewCell: UITableViewCell {
            let url = URL(string: imageURLString) {
             productImageView.kf.setImage(with: url)
         }
+        let formatter: NumberFormatter = NumberFormatter {
+            $0.numberStyle = .currency
+            $0.currencySymbol = ""
+        }
         nameLabel.text = productInfo.name
         numberLabel.text = productInfo.number
         originalNumberLabel.text = productInfo.originalProductNumber
-        purchaseCostLabel.text = String(productInfo.purchaseCost)
+        purchaseCostLabel.text =  formatter.string(from: NSNumber(value: productInfo.purchaseCost))
         quantityLabel.text = "\(productInfo.purchaseQuantity) \(productInfo.stockUnitName)"
         boxQuantityLabel.text = "(=\(productInfo.purchaseBoxQuantity)\(productInfo.boxStockUnitName))"
-        totalCostLabel.text = String(productInfo.totalPrice ?? 0)
+        totalCostLabel.text = formatter.string(from: NSNumber(value: productInfo.totalPrice ?? 0))
     }
 }

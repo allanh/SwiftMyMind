@@ -14,6 +14,7 @@ struct ProductSuggestionInfoViewModel {
     let name: String
     let channelStockQuantity: String
     let fineStockQuantity: String
+    let totalStockQuantity: String
     let monthSaleQuantity: String
     let daysSalesOfInventory: String
     let suggestedQuantity: String
@@ -32,6 +33,7 @@ extension PurchaseSuggestionInfo {
             name: name,
             channelStockQuantity: channelStockQuantity,
             fineStockQuantity: fineStockQuantity,
+            totalStockQuantity: totalStockQuantity,
             monthSaleQuantity: monthSaleQuantity,
             daysSalesOfInventory: daysSalesOfInventory,
             suggestedQuantity: suggestedQuantity,
@@ -52,6 +54,7 @@ extension PurchaseOrder.ProductInfo {
             name: name,
             channelStockQuantity: String(channelStockQuantity ?? 0),
             fineStockQuantity: String(fineStockQuantity ?? 0),
+            totalStockQuantity: String(totalStockQuantity ?? 0),
             monthSaleQuantity: String(monthSaleQuantity ?? 0),
             daysSalesOfInventory: String(daysSalesOfInventory ?? 0),
             suggestedQuantity: String(suggestedQuantity),

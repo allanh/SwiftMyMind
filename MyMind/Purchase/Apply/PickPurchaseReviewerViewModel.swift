@@ -13,9 +13,10 @@ import RxSwift
 struct PickPurchaseReviewerViewModel {
     // MARK: - Properties
     let level: Int
+    let reviewing: Bool
     let isLastReview: Bool
     let reviewerList: BehaviorRelay<[Reviewer]> = .init(value: [])
-    let editable: Bool
+//    let editable: Bool
     let pickedReviewer: BehaviorRelay<Reviewer?> = .init(value: nil)
     let pickedReviewerValidationStatus: BehaviorRelay<ValidationResult> = .init(value: .invalid("此欄位必填"))
     let note: BehaviorRelay<String> = .init(value: "")
@@ -33,13 +34,13 @@ struct PickPurchaseReviewerViewModel {
          logInfos: [PurchaseOrder.LogInfo]? = nil,
          level: Int = 0,
          isLastReview: Bool = false,
-         editable: Bool = true,
+         reviewing: Bool = true,
          status: PurchaseStatus) {
         self.loader = loader
         self.logInfos = logInfos
         self.level = level
         self.isLastReview = isLastReview
-        self.editable = editable
+        self.reviewing = reviewing
         self.status = status
         bindStatus()
         self.reviewerName.accept(reviewerName)
