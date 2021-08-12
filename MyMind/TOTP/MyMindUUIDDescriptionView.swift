@@ -15,6 +15,7 @@ final class MyMindUUIDDescriptionView: NiblessView {
     private let contentView: UIView = UIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.backgroundColor = .white
+        $0.layer.cornerRadius = 10
     }
     private let titleLabel: UILabel = UILabel {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -61,7 +62,8 @@ final class MyMindUUIDDescriptionView: NiblessView {
         $0.textAlignment = .center
         var string = "App ID:"
         do {
-            let uuid = try KeychainHelper.default.readItem(key: .uuid, valueType: String.self)
+            var uuid: String = try KeychainHelper.default.readItem(key: .uuid, valueType: String.self)
+            uuid.removeLast(uuid.count-8)
             string += uuid
             $0.text = string
         } catch {}
@@ -145,7 +147,7 @@ extension MyMindUUIDDescriptionView {
         let centerY = contentView.centerYAnchor
             .constraint(equalTo: centerYAnchor)
         let width = contentView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.75)
-        let height = contentView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.75)
+        let height = contentView.heightAnchor.constraint(equalToConstant: 260)
         NSLayoutConstraint.activate([
             centerX, centerY, width, height
         ])
