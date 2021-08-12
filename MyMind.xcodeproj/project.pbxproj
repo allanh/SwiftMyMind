@@ -465,6 +465,9 @@
 		5280D6EF26C122A7004363C6 /* UIAlertAction+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5280D6EE26C122A7004363C6 /* UIAlertAction+.swift */; };
 		5280D6F026C122A7004363C6 /* UIAlertAction+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5280D6EE26C122A7004363C6 /* UIAlertAction+.swift */; };
 		5280D6F126C122A7004363C6 /* UIAlertAction+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5280D6EE26C122A7004363C6 /* UIAlertAction+.swift */; };
+		5280D6F726C4F90E004363C6 /* PurchasedProductsInfoRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5280D6F626C4F90E004363C6 /* PurchasedProductsInfoRootView.swift */; };
+		5280D6F826C4F90E004363C6 /* PurchasedProductsInfoRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5280D6F626C4F90E004363C6 /* PurchasedProductsInfoRootView.swift */; };
+		5280D6F926C4F90F004363C6 /* PurchasedProductsInfoRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5280D6F626C4F90E004363C6 /* PurchasedProductsInfoRootView.swift */; };
 		5293EE9C269A8AEB001A9754 /* HorizontalCellSizePagingFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5293EE9B269A8AEB001A9754 /* HorizontalCellSizePagingFlowLayout.swift */; };
 		5293EE9E269A8F5B001A9754 /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5293EE9D269A8F5B001A9754 /* Report.swift */; };
 		5293EEA0269A9DBC001A9754 /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5293EE9F269A9DBC001A9754 /* HomeModel.swift */; };
@@ -739,6 +742,7 @@
 		5280D6E626C0D711004363C6 /* ServiceCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceCellTableViewCell.swift; sourceTree = "<group>"; };
 		5280D6EA26C1226E004363C6 /* UIAlertController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+.swift"; sourceTree = "<group>"; };
 		5280D6EE26C122A7004363C6 /* UIAlertAction+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertAction+.swift"; sourceTree = "<group>"; };
+		5280D6F626C4F90E004363C6 /* PurchasedProductsInfoRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasedProductsInfoRootView.swift; sourceTree = "<group>"; };
 		5293EE9B269A8AEB001A9754 /* HorizontalCellSizePagingFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalCellSizePagingFlowLayout.swift; sourceTree = "<group>"; };
 		5293EE9D269A8F5B001A9754 /* Report.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Report.swift; sourceTree = "<group>"; };
 		5293EE9F269A9DBC001A9754 /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
@@ -1528,6 +1532,7 @@
 				A4567005268307DD009598AE /* PurchasedProductsInfoViewController.swift */,
 				A456700726830BAB009598AE /* PurchasedProductInfoTableViewCell.swift */,
 				A456700826830BAB009598AE /* PurchasedProductInfoTableViewCell.xib */,
+				5280D6F626C4F90E004363C6 /* PurchasedProductsInfoRootView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2066,6 +2071,7 @@
 				524AB05826A80913003D1E92 /* ProductMaterialsFilterViewModel.swift in Sources */,
 				524AB05926A80913003D1E92 /* ToDoInfoHeaderView.swift in Sources */,
 				524AB05A26A80913003D1E92 /* PickPurchaseStatusViewModel.swift in Sources */,
+				5280D6F826C4F90E004363C6 /* PurchasedProductsInfoRootView.swift in Sources */,
 				524AB05B26A80913003D1E92 /* IndicatorSwitchContentHeaderView.swift in Sources */,
 				524AB05C26A80913003D1E92 /* ProductMaterialsFilterViewController.swift in Sources */,
 				524AB05D26A80913003D1E92 /* ToDoListCollectionViewCell.swift in Sources */,
@@ -2277,6 +2283,7 @@
 				527777AF26A80DF500CF4E07 /* ProductMaterialsFilterViewModel.swift in Sources */,
 				527777B026A80DF500CF4E07 /* ToDoInfoHeaderView.swift in Sources */,
 				527777B126A80DF500CF4E07 /* PickPurchaseStatusViewModel.swift in Sources */,
+				5280D6F926C4F90F004363C6 /* PurchasedProductsInfoRootView.swift in Sources */,
 				527777B226A80DF500CF4E07 /* IndicatorSwitchContentHeaderView.swift in Sources */,
 				527777B326A80DF500CF4E07 /* ProductMaterialsFilterViewController.swift in Sources */,
 				527777B426A80DF500CF4E07 /* ToDoListCollectionViewCell.swift in Sources */,
@@ -2488,6 +2495,7 @@
 				A4F2D011265D0770004D8D6D /* ProductMaterialsFilterViewModel.swift in Sources */,
 				52944E2D269976C9006CC865 /* ToDoInfoHeaderView.swift in Sources */,
 				A457AEB22660A34A0029DDBB /* PickPurchaseStatusViewModel.swift in Sources */,
+				5280D6F726C4F90E004363C6 /* PurchasedProductsInfoRootView.swift in Sources */,
 				52C2CBDA269D6325002A2BA9 /* IndicatorSwitchContentHeaderView.swift in Sources */,
 				A4F2D00F265D063B004D8D6D /* ProductMaterialsFilterViewController.swift in Sources */,
 				52944E332699CEF0006CC865 /* ToDoListCollectionViewCell.swift in Sources */,

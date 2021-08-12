@@ -7,30 +7,49 @@
 //
 
 import UIKit
-
-class PurchasedProductsInfoViewController: UITableViewController {
-
+class PurchasedProductsInfoViewController: NiblessViewController {
     var productInfos: [PurchaseOrder.ProductInfo] = []
-
+    var totalCost: Float {
+        get {
+            productInfos.map {
+                $0.totalPrice
+            }.compactMap {
+                $0 != nil ? $0! : 0
+            }.reduce(0) { (sum, num) -> Float in
+                return sum+num
+            }
+        }
+    }
+    var rootView: PurchasedProductsInfoRootView {
+        return view as! PurchasedProductsInfoRootView
+    }
+    override func loadView() {
+        view = PurchasedProductsInfoRootView()
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-
         title = "採購SKU資訊"
         navigationItem.backButtonTitle = ""
-
-        tableView.register(
+        rootView.tableView.register(
             UINib(
                 nibName: String(describing: PurchasedProductInfoTableViewCell.self),
                 bundle: nil),
             forCellReuseIdentifier: String(describing: PurchasedProductInfoTableViewCell.self))
-        tableView.separatorStyle = .none
+        rootView.tableView.separatorStyle = .none
+        rootView.tableView.dataSource = self
+        rootView.tableView.delegate = self
+        rootView.config(with: productInfos.count, totalCost: totalCost)
     }
-
+}
+extension PurchasedProductsInfoViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return productInfos.count
+    }
     @objc
     private func detailButtonDidTapped(_ sender: UIButton) {
         guard
-            let point = sender.superview?.convert(sender.frame.origin, to: tableView),
-            let indexPath = tableView.indexPathForRow(at: point)
+            let point = sender.superview?.convert(sender.frame.origin, to: rootView.tableView),
+            let indexPath = rootView.tableView.indexPathForRow(at: point)
         else {
             return
         }
@@ -41,11 +60,7 @@ class PurchasedProductsInfoViewController: UITableViewController {
         show(viewController, sender: nil)
     }
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return productInfos.count
-    }
-
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeReusableCell(PurchasedProductInfoTableViewCell.self, for: indexPath) as? PurchasedProductInfoTableViewCell else {
             fatalError("Unabled to deque reusable cell")
         }
@@ -56,8 +71,9 @@ class PurchasedProductsInfoViewController: UITableViewController {
         cell.detailButton.addTarget(self, action: #selector(detailButtonDidTapped(_:)), for: .touchUpInside)
         return cell
     }
-
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+}
+extension PurchasedProductsInfoViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 380
     }
 }
