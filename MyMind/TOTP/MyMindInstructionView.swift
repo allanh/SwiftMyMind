@@ -13,17 +13,6 @@ final class MyMindInstructionView: NiblessView {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.image = UIImage(named: "otp")
     }
-
-    @objc
-    private func questionMarkDidTapped() {
-        addSubview(MyMindUUIDDescriptionView.init(frame: bounds))
-    }
-    private let questionMarkButton: UIButton = UIButton {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.setImage(UIImage(systemName: "questionmark.circle")?.withRenderingMode(.alwaysTemplate), for: .normal)
-        $0.addTarget(self, action: #selector(questionMarkDidTapped), for: .touchUpInside)
-
-    }
     private let titleLabel: UILabel = UILabel {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = .pingFangTCSemibold(ofSize: 16)
@@ -109,7 +98,6 @@ final class MyMindInstructionView: NiblessView {
 
     private func constructViewHierarchy() {
         addSubview(logoImageView)
-        addSubview(questionMarkButton)
         addSubview(titleLabel)
         addSubview(seperator)
         addSubview(bullet1Label)
@@ -123,7 +111,6 @@ final class MyMindInstructionView: NiblessView {
 
     private func activateConstraints() {
         activateConstraintsIconImageView()
-        activateConstraintsQuestionMarkButton()
         activateConstraintsTitleLabel()
         activateConstraintsSeperator()
         activateConstraintsBullet1Label()
@@ -146,15 +133,6 @@ final class MyMindInstructionView: NiblessView {
         NSLayoutConstraint.activate([
             centerX, top, width, height
         ])
-    }
-    private func activateConstraintsQuestionMarkButton() {
-        let top = questionMarkButton.topAnchor
-            .constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 15)
-        let trailing = questionMarkButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -15)
-        NSLayoutConstraint.activate([
-            trailing, top
-        ])
-
     }
     private func activateConstraintsTitleLabel() {
         let centerX = titleLabel.centerXAnchor

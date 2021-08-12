@@ -142,14 +142,13 @@ extension MyMindUUIDDescriptionView {
         ])
     }
     private func activateConstraintsContentView() {
-        let centerX = contentView.centerXAnchor
-            .constraint(equalTo: centerXAnchor)
         let centerY = contentView.centerYAnchor
             .constraint(equalTo: centerYAnchor)
-        let width = contentView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.75)
+        let leading = contentView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 25)
+        let trailing = contentView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -25)
         let height = contentView.heightAnchor.constraint(equalToConstant: 260)
         NSLayoutConstraint.activate([
-            centerX, centerY, width, height
+            leading, centerY, trailing, height
         ])
     }
     private func activateConstraintsTitleLabel() {
