@@ -88,7 +88,7 @@ extension Endpoint {
     }
     
     static var bind: Self {
-        Endpoint(path: "/bind", serviceType: .auth)
+        Endpoint(path: "/employee/device_id", serviceType: .auth)
     }
     static var authorization: Self {
         Endpoint(path: "/api/admin/v1/authorization", serviceType: .dos)

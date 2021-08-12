@@ -146,24 +146,34 @@ extension ScanViewController: AVCaptureMetadataOutputObjectsDelegate {
 
     private func handleReceive(_ value: String) {
         do {
+            captureSession?.stopRunning()
             let uuid = try KeychainHelper.default.readItem(key: .uuid, valueType: String.self)
             if let delegate = delegate, delegate.scanViewController(self, validate: value) {
-                let authService = MyMindAuthService()
-                isNetworkProcessing = true
-                authService.binding(info: BindingInfo(uuid: uuid, qrCode: value))
-                    .done {
-                        self.stopRunning()
-                        delegate.scanViewController(self, didReceive: value)
-                        self.navigationController?.popViewController(animated: true)
-                    }
-                    .ensure { self.isNetworkProcessing = false }
-                    .catch { error in
-                        self.captureSession?.stopRunning()
-                        self.showInvalidQRCodeAlert(title: "App ID 不相符", message: error.localizedDescription)
-                    }
+                var scaned: Secret?
+                if let url = URL(string: value),
+                   let secret = Secret.init(url: url) {
+                    scaned = secret
+                } else if let secret = Secret.generateSecret(with: value) {
+                    scaned = secret
+                }
+                if let scaned = scaned {
+                    let authService = MyMindAuthService()
+                    isNetworkProcessing = true
+                    authService.binding(info: BindingInfo(uuid: uuid, id: scaned.id, account: scaned.user))
+                        .done {
+                            self.stopRunning()
+                            delegate.scanViewController(self, didReceive: value)
+                            self.navigationController?.popViewController(animated: true)
+                        }
+                        .ensure { self.isNetworkProcessing = false }
+                        .catch { error in
+                            self.showInvalidQRCodeAlert(title: "App ID 不相符", message: error.localizedDescription)
+                        }
+                }
             }
         } catch {
             ToastView.showIn(self, message: error.localizedDescription)
+            captureSession?.stopRunning()
         }
     }
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {

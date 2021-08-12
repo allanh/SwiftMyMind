@@ -10,14 +10,17 @@ import RxSwift
 import PromiseKit
 struct BindingInfo {
     private enum CodingKeys: String, CodingKey {
-        case uuid, qrCode
+        case uuid = "device_id"
+        case id
+        case account
     }
 
     var uuid: String
-    var qrCode: String
+    var id: String
+    var account: String
 
     static func empty() -> BindingInfo {
-        let info = BindingInfo(uuid: "", qrCode: "")
+        let info = BindingInfo(uuid: "", id: "", account: "")
         return info
     }
 }
@@ -26,7 +29,8 @@ extension BindingInfo: Encodable {
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(uuid, forKey: .uuid)
-        try container.encode(qrCode, forKey: .qrCode)
+        try container.encode(id, forKey: .id)
+        try container.encode(account, forKey: .account)
     }
 }
 
@@ -66,7 +70,7 @@ class MyMindAuthService: PromiseKitAPIService, AuthService {
         guard let body = try? JSONEncoder().encode(info) else {
             return .init(error: APIError.parseError)
         }
-        let request = request(endPoint: Endpoint.bind, httpMethod: "POST", httpHeader: ["Origin": Endpoint.baseURL], httpBody: body)
+        let request = request(endPoint: Endpoint.bind, httpMethod: "PATCH", httpHeader: ["Origin": Endpoint.baseURL], httpBody: body)
         return sendRequest(request: request)
     }
 }
