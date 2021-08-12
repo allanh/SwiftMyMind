@@ -167,7 +167,7 @@ extension ScanViewController: AVCaptureMetadataOutputObjectsDelegate {
                         }
                         .ensure { self.isNetworkProcessing = false }
                         .catch { error in
-                            self.showInvalidQRCodeAlert(title: "App ID 不相符", message: error.localizedDescription)
+                            self.showInvalidQRCodeAlert(title: "App ID 不相符", message: "此QR Code所綁定的AppID與此裝置不符，若要重新綁定，請到登入頁點選右下角【重綁驗證碼】")
                         }
                 }
             }
