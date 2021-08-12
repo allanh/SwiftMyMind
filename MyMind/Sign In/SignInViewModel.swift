@@ -53,6 +53,9 @@ class SignInViewModel {
         self.signInValidationService = signInValidationService
         self.lastSignInInfoDataStore = lastSignInInfoDataStore
         self.otpEnabled = otpEnabled
+        do {
+            self.signInInfo.uuid = try KeychainHelper.default.readItem(key: .uuid, valueType: String.self)
+        } catch {}
         configLastSignInStatus()
     }
 
