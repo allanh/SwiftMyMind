@@ -11,7 +11,7 @@ import RxSwift
 
 struct RxBrandNameAutoCompleteItemViewModelAdapter: RxAutoCompleteItemViewModelLoader {
     let service: AutoCompleteAPIService
-    let vendorID: String
+    let vendorID: String?
 
     func loadAutoCompleteItemViewModel(with searchTerm: String) -> Single<[AutoCompleteItemViewModel]> {
         return Single<[AutoCompleteItemViewModel]>.create { single in

@@ -36,6 +36,10 @@ class PurchaseListFilterViewModel {
     let expectPutInStoragePeriodViewModel: PickDatesViewModel = PickDatesViewModel(title: "預計入庫日")
 
     let creatPeriodViewModel: PickDatesViewModel = PickDatesViewModel(title: "填單日期")
+    
+    lazy var brandNameViewModel: AutoCompleteSearchViewModel = {
+        makeViewModelForBrandName()
+    }()
 
     let bag: DisposeBag = DisposeBag()
 
@@ -113,6 +117,14 @@ class PurchaseListFilterViewModel {
                 self.queryInfo.createDateEnd = date
             })
             .disposed(by: bag)
+        
+        brandNameViewModel.pickedItemViewModels
+            .subscribe(onNext: { [unowned self] items in
+                self.queryInfo.brands = items.map({ item in
+                    AutoCompleteInfo(id: nil, number: item.identifier, name: item.identifier)
+                })
+            })
+            .disposed(by: bag)
     }
 
     private func updateWithCurrentQuery() {
@@ -123,6 +135,7 @@ class PurchaseListFilterViewModel {
         updateCurrentQueryForProductNumber()
         updateCurrentQueryForStoragePeriod()
         updateCurrentQueryForCreatPeriod()
+        updateCurrentQueryForBrand()
     }
 
     private func updateCurrentQueryForPurchaseNumber() {
@@ -154,6 +167,11 @@ class PurchaseListFilterViewModel {
         creatPeriodViewModel.startDate.accept(queryInfo.createDateStart)
         creatPeriodViewModel.endDate.accept(queryInfo.createDateEnd)
     }
+    
+    private func updateCurrentQueryForBrand() {
+        let items = queryInfo.brands.map { AutoCompleteItemViewModel(representTitle: $0.name ?? "", identifier: $0.name ?? "")}
+        productNumberViewModel.pickedItemViewModels.accept(items)
+    }
 
     func cleanQueryInfo() {
         queryInfo = .defaultQuery()
@@ -165,6 +183,7 @@ class PurchaseListFilterViewModel {
         purchaseStatusViewModel.cleanPickedStatus()
         expectPutInStoragePeriodViewModel.cleanPickedDates()
         creatPeriodViewModel.cleanPickedDates()
+        brandNameViewModel.cleanPickedItemViewModel()
     }
 }
 // MARK: - Child view models factory mehods
@@ -190,6 +209,11 @@ extension PurchaseListFilterViewModel {
     private func makeViewModelForProductNumber() -> AutoCompleteSearchViewModel {
         let adapter = RxProductNumberAutoCompleteItemViewModelAdapter(service: service)
         let viewModel = AutoCompleteSearchViewModel.init(title: "SKU編號", placeholder: "請選擇", loader: adapter)
+        return viewModel
+    }
+    private func makeViewModelForBrandName() -> AutoCompleteSearchViewModel {
+        let adapter = RxBrandNameAutoCompleteItemViewModelAdapter(service: service, vendorID: nil)
+        let viewModel = AutoCompleteSearchViewModel.init(title: "品牌", placeholder: "請選擇", loader: adapter)
         return viewModel
     }
 }
