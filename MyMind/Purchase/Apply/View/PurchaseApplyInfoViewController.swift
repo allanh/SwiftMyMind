@@ -24,7 +24,11 @@ final class PurchaseApplyInfoViewController: UIViewController {
     @IBOutlet private weak var recipientPhoneLabel: UILabel!
     @IBOutlet private weak var recipientAddressLabel: UILabel!
     @IBOutlet private weak var checkPurchasedProductsButton: UIButton!
-
+    @IBOutlet weak var summaryLabel: UILabel!
+    @IBOutlet weak var totalCostLabel: UILabel!
+    @IBOutlet weak var taxLabel: UILabel!
+    @IBOutlet weak var totalLabel: UILabel!
+    
     lazy var dropDownView: DropDownView<Warehouse, DropDownListTableViewCell> = {
         let dropDownView = DropDownView(dataSource: []) { (cell: DropDownListTableViewCell, item) in
             self.configDropDownCell(cell: cell, with: item)
@@ -40,6 +44,7 @@ final class PurchaseApplyInfoViewController: UIViewController {
         if #available(iOS 14.0, *) {
             $0.preferredDatePickerStyle = .wheels
         }
+        $0.minimumDate = Date()
     }
 
     private let dateFormatter: DateFormatter = DateFormatter {
@@ -94,7 +99,7 @@ final class PurchaseApplyInfoViewController: UIViewController {
 
         viewModel.suggestionProductMaterialViewModels
             .map({ "共 \($0.count) 件SKU" })
-            .bind(to: checkPurchasedProductsButton.rx.title())
+            .bind(to: summaryLabel.rx.text)
             .disposed(by: bag)
 
         viewModel.expectedStorageDate
@@ -141,6 +146,28 @@ final class PurchaseApplyInfoViewController: UIViewController {
                 self.updateWarehoseTextFieldLayout(validationStatus: status)
             })
             .disposed(by: bag)
+        
+        viewModel.purchaseStatus
+            .map({
+                $0.description
+            })
+            .bind(to: statusLabel.rx.text)
+            .disposed(by: bag)
+        let formatter: NumberFormatter = NumberFormatter {
+            $0.numberStyle = .currency
+            $0.currencySymbol = ""
+        }
+
+        let totalCost = viewModel.suggestionProductMaterialViewModels.value
+            .map {
+                $0.purchaseCost.value
+            }.reduce(0) { (sum, num) -> Double in
+                return sum+num
+            }
+        let tax = totalCost * 0.05
+        totalCostLabel.text = formatter.string(from: NSNumber(value: totalCost))
+        taxLabel.text = formatter.string(from: NSNumber(value: tax))
+        totalLabel.text = formatter.string(from: NSNumber(value: totalCost+tax))
     }
 
     private func configureContentWithViewModel() {

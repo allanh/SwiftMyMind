@@ -13,7 +13,9 @@ final class PurchaseListViewController: NiblessViewController {
     // MARK: - Properties
     var rootView: PurchaseListRootView { view as! PurchaseListRootView }
     var reviewing: Bool
-
+    private lazy var emptyListView: EmptyDataView = {
+        return EmptyDataView(frame: rootView.tableView.bounds)
+    }()
     lazy var pickSortTypeView: PickSortTypeView<PurchaseListQueryInfo.OrderReference, SingleLabelTableViewCell> = {
         if reviewing {
             let pickSortView = PickSortTypeView<PurchaseListQueryInfo.OrderReference, SingleLabelTableViewCell>.init(
@@ -154,14 +156,19 @@ final class PurchaseListViewController: NiblessViewController {
             self.purchaseList = purchaseList
         }
         purchaseListQueryInfo.updateCurrentPageInfo(with: purchaseList)
-        rootView.tableView.reloadData()
-        rootView.collectionView.reloadData()
+        if self.purchaseList?.items.count == 0 {
+            rootView.tableView.addSubview(emptyListView)
+        } else {
+            emptyListView.removeFromSuperview()
+            rootView.tableView.reloadData()
+            rootView.collectionView.reloadData()
+        }
     }
 
     private func handleErrorForFetchPurchaseList(_ error: Error) {
         print(error.localizedDescription)
         if let apiError = error as? APIError {
-            _ = ErrorHandler.shared.handle(apiError, controller: self)
+            _ = ErrorHandler.shared.handle(apiError)
         } else {
             ToastView.showIn(self, message: error.localizedDescription)
         }
@@ -229,7 +236,7 @@ final class PurchaseListViewController: NiblessViewController {
         dismiss(animated: true, completion: nil)
     }
 
-    private func showPurchaseEditingPage(with purchaseID: String) {
+    private func showPurchaseEditingPage(with purchaseID: String, status: PurchaseStatus) {
         let service = MyMindPurchaseAPIService.shared
         let viewModel = EditingPurchaseOrderViewModel(
             purchaseID: purchaseID,
@@ -237,7 +244,8 @@ final class PurchaseListViewController: NiblessViewController {
             warehouseListLoader: service,
             purchaseReviewerListLoader: service,
             service: service,
-            reviewing: reviewing)
+            reviewing: reviewing,
+            status: status)
 
         let viewController = EditingPurchaseOrderViewController(viewModel: viewModel, reviewing: reviewing, delegate: self)
         show(viewController, sender: nil)
@@ -283,7 +291,7 @@ extension PurchaseListViewController: UITableViewDelegate, UITableViewDataSource
         guard let item = purchaseList?.items[indexPath.row] else { return }
 
         if item.availableActions.contains(.edit) {
-            showPurchaseEditingPage(with: item.purchaseID)
+            showPurchaseEditingPage(with: item.purchaseID, status: item.status)
         } else {
             let viewController = PurchaseCompletedApplyViewController(
                 purchaseID: item.purchaseID,
@@ -345,7 +353,7 @@ extension PurchaseListViewController: UICollectionViewDelegate, UICollectionView
         guard let item = purchaseList?.items[indexPath.row] else { return }
 
         if item.availableActions.contains(.edit) {
-            showPurchaseEditingPage(with: item.purchaseID)
+            showPurchaseEditingPage(with: item.purchaseID, status: item.status)
         } else {
             let viewController = PurchaseCompletedApplyViewController(
                 purchaseID: item.purchaseID,

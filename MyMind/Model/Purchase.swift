@@ -54,7 +54,7 @@ struct PurchaseListQueryInfo {
         var description: String {
             switch self {
             case .purchaseNumber: return "採購單編號"
-            case .status: return "狀態"
+            case .status: return "採購單狀態"
             case .totalAmount: return "採購金額(未稅)"
             case .createdDate: return "填單日期"
             case .expectStorageDate: return "預計入庫日"
@@ -66,6 +66,7 @@ struct PurchaseListQueryInfo {
     var vendorIDs: [AutoCompleteInfo] = []
     var productNumbers: [AutoCompleteInfo] = []
     var applicants: [AutoCompleteInfo] = []
+    var brands: [AutoCompleteInfo] = []
     var expectStorageStartDate: Date?
     var expectStorageEndDate: Date?
     var createDateStart: Date?
@@ -119,7 +120,12 @@ struct PurchaseListQueryInfo {
             let item = URLQueryItem(name: "employee_id", value: value)
             queryItems.append(item)
         }
-
+        if brands.isEmpty == false {
+            let value = brands.compactMap{ $0.name }.joined(separator: ",")
+            let item = URLQueryItem(name: "brand_name", value: value)
+            queryItems.append(item)
+        }
+        
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         if let expectStorageStartDate = expectStorageStartDate {

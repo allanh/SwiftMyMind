@@ -14,7 +14,11 @@ class PickProductMaterialsViewController: NiblessViewController {
     var rootView: PickProductMaterialsRootView {
         view as! PickProductMaterialsRootView
     }
-
+    
+    private lazy var emptyListView: EmptyDataView = {
+        return EmptyDataView(frame: rootView.bounds)
+    }()
+    
     let viewModel: PickProductMaterialsViewModel
     let bag: DisposeBag = DisposeBag()
 
@@ -51,7 +55,7 @@ class PickProductMaterialsViewController: NiblessViewController {
             .subscribe(on: MainScheduler.instance)
             .skip(1)
             .subscribe(onNext: { [unowned self] _ in
-                self.rootView.tableView.reloadData()
+                self.showProductMaterials()
             })
             .disposed(by: bag)
 
@@ -66,6 +70,14 @@ class PickProductMaterialsViewController: NiblessViewController {
             .disposed(by: bag)
     }
 
+    private func showProductMaterials() {
+        if viewModel.currentProductMaterials.value.count == 0 {
+            rootView.tableView.addSubview(emptyListView)
+        } else {
+            emptyListView.removeFromSuperview()
+            rootView.tableView.reloadData()
+        }
+    }
     private func handleNavigation(with view: PickMaterialView) {
         switch view {
         case .filter:

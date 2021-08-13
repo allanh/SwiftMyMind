@@ -98,6 +98,13 @@ final class HomeViewController: UIViewController {
         loadSaleRankingReportList()
         loadGrossProfitRankingReportList()
     }
+    private func handlerError(_ error: Error) {
+        if let apiError = error as? APIError {
+            _ = ErrorHandler.shared.handle(apiError)
+        } else {
+            ToastView.showIn(self, message: error.localizedDescription)
+        }
+    }
     private func loadToDoList() {
         if let authorization = authorization {
             isNetworkProcessing = true
@@ -112,11 +119,7 @@ final class HomeViewController: UIViewController {
                 }
                 .catch { error in
                     self.toDoList = nil
-//                    if let apiError = error as? APIError {
-//                        _ = ErrorHandler.shared.handle(apiError, controller: self)
-//                    } else {
-//                        ToastView.showIn(self, message: error.localizedDescription)
-//                    }
+                    self.handlerError(error)
                 }
         }
     }
@@ -147,20 +150,12 @@ final class HomeViewController: UIViewController {
                     }
                     .catch { error in
                         self.saleReports = nil
-//                        if let apiError = error as? APIError {
-//                            _ = ErrorHandler.shared.handle(apiError, controller: self)
-//                        } else {
-//                            ToastView.showIn(self, message: error.localizedDescription)
-//                        }
+                        self.handlerError(error)
                     }
             }
             .catch { error in
                 self.saleReports = nil
-//                if let apiError = error as? APIError {
-//                    _ = ErrorHandler.shared.handle(apiError, controller: self)
-//                } else {
-//                    ToastView.showIn(self, message: error.localizedDescription)
-//                }
+                self.handlerError(error)
             }
     }
     private func loadSaleReportList() {
@@ -176,11 +171,7 @@ final class HomeViewController: UIViewController {
             }
             .catch { error in
                 self.saleReportList = nil
-//                if let apiError = error as? APIError {
-//                    _ = ErrorHandler.shared.handle(apiError, controller: self)
-//                } else {
-//                    ToastView.showIn(self, message: error.localizedDescription)
-//                }
+                self.handlerError(error)
             }
     }
     private func loadSKURankingReportList() {
@@ -196,11 +187,7 @@ final class HomeViewController: UIViewController {
             }
             .catch { error in
                 self.skuRankingReportList = nil
-//                if let apiError = error as? APIError {
-//                    _ = ErrorHandler.shared.handle(apiError, controller: self)
-//                } else {
-//                    ToastView.showIn(self, message: error.localizedDescription)
-//                }
+                self.handlerError(error)
             }
     }
     private func loadSetSKURankingReportList() {
@@ -216,11 +203,7 @@ final class HomeViewController: UIViewController {
             }
             .catch { error in
                 self.setSKURankingReportList = nil
-//                if let apiError = error as? APIError {
-//                    _ = ErrorHandler.shared.handle(apiError, controller: self)
-//                } else {
-//                    ToastView.showIn(self, message: error.localizedDescription)
-//                }
+                self.handlerError(error)
             }
     }
     private func loadSaleRankingReportList() {
@@ -237,11 +220,7 @@ final class HomeViewController: UIViewController {
                 }
                 .catch { error in
                     self.saleRankingReportList = nil
-//                    if let apiError = error as? APIError {
-//                        _ = ErrorHandler.shared.handle(apiError, controller: self)
-//                    } else {
-//                        ToastView.showIn(self, message: error.localizedDescription)
-//                    }
+                    self.handlerError(error)
                 }
         } else {
             dashboardLoader.vendorRankingReport(start: end.sevenDaysBefore, end: end.yesterday, order: "TOTAL_SALE_AMOUNT")
@@ -253,11 +232,7 @@ final class HomeViewController: UIViewController {
                 }
                 .catch { error in
                     self.saleRankingReportList = nil
-//                    if let apiError = error as? APIError {
-//                        _ = ErrorHandler.shared.handle(apiError, controller: self)
-//                    } else {
-//                        ToastView.showIn(self, message: error.localizedDescription)
-//                    }
+                    self.handlerError(error)
                 }
         }
     }
@@ -275,11 +250,7 @@ final class HomeViewController: UIViewController {
                 }
                 .catch { error in
                     self.grossProfitRankingReportList = nil
-//                    if let apiError = error as? APIError {
-//                        _ = ErrorHandler.shared.handle(apiError, controller: self)
-//                    } else {
-//                        ToastView.showIn(self, message: error.localizedDescription)
-//                    }
+                    self.handlerError(error)
                 }
         } else {
             dashboardLoader.vendorRankingReport(start: end.sevenDaysBefore, end: end.yesterday, order: "SALE_GROSS_PROFIT")
@@ -291,11 +262,7 @@ final class HomeViewController: UIViewController {
                 }
                 .catch { error in
                     self.grossProfitRankingReportList = nil
-//                    if let apiError = error as? APIError {
-//                        _ = ErrorHandler.shared.handle(apiError, controller: self)
-//                    } else {
-//                        ToastView.showIn(self, message: error.localizedDescription)
-//                    }
+                    self.handlerError(error)
                 }
         }
     }
@@ -303,8 +270,7 @@ final class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.backButtonTitle = ""
-        self.title = "MyMind"
-        self.tabBarItem.title = "首頁"
+        title = "首頁"
         remoteConfig = RemoteConfig.remoteConfig()
         let settings = RemoteConfigSettings()
         settings.minimumFetchInterval = 0

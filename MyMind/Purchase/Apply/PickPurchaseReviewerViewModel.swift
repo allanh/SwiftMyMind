@@ -13,27 +13,37 @@ import RxSwift
 struct PickPurchaseReviewerViewModel {
     // MARK: - Properties
     let level: Int
+    let reviewing: Bool
     let isLastReview: Bool
     let reviewerList: BehaviorRelay<[Reviewer]> = .init(value: [])
+//    let editable: Bool
     let pickedReviewer: BehaviorRelay<Reviewer?> = .init(value: nil)
     let pickedReviewerValidationStatus: BehaviorRelay<ValidationResult> = .init(value: .invalid("此欄位必填"))
     let note: BehaviorRelay<String> = .init(value: "")
     let noteValidationStatus: BehaviorRelay<ValidationResult> = .init(value: .valid)
+    let reviewerName: BehaviorRelay<String?> = .init(value: nil)
 
     let loader: PurchaseReviewerListLoader
     var logInfos: [PurchaseOrder.LogInfo]?
 
+    let status: PurchaseStatus
     let bag: DisposeBag = DisposeBag()
     // MARK: - Methods
     init(loader: PurchaseReviewerListLoader,
+         reviewerName: String? = nil,
          logInfos: [PurchaseOrder.LogInfo]? = nil,
-         level: Int = 1,
-         isLastReview: Bool = false) {
+         level: Int = 0,
+         isLastReview: Bool = false,
+         reviewing: Bool = true,
+         status: PurchaseStatus) {
         self.loader = loader
         self.logInfos = logInfos
         self.level = level
         self.isLastReview = isLastReview
+        self.reviewing = reviewing
+        self.status = status
         bindStatus()
+        self.reviewerName.accept(reviewerName)
     }
 
     func bindStatus() {
@@ -55,7 +65,7 @@ struct PickPurchaseReviewerViewModel {
     }
 
     func loadPurchaseReviewerList() {
-        loader.loadPurchaseReviewerList(level: level)
+        loader.loadPurchaseReviewerList(level: level+1)
             .done { list in
                 reviewerList.accept(list)
             }

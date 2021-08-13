@@ -36,7 +36,7 @@ extension BindingInfo: Encodable {
 
 class MyMindAuthService: PromiseKitAPIService, AuthService {
     func captcha() -> Promise<CaptchaSession> {
-        let request = request(endPoint: Endpoint.captcha)
+        let request = request(endPoint: Endpoint.captcha, httpHeader: ["Origin": Endpoint.baseURL])
         return sendRequest(request: request)
     }
 
@@ -44,7 +44,7 @@ class MyMindAuthService: PromiseKitAPIService, AuthService {
         guard let body = try? JSONEncoder().encode(info) else {
             return .init(error: APIError.parseError)
         }
-        let request = request(endPoint: Endpoint.signIn, httpMethod: "POST", httpBody: body)
+        let request = request(endPoint: Endpoint.signIn, httpMethod: "POST", httpHeader: ["Origin": Endpoint.baseURL], httpBody: body)
         return sendRequest(request: request)
     }
 
@@ -59,11 +59,11 @@ class MyMindAuthService: PromiseKitAPIService, AuthService {
         guard let body = try? JSONEncoder().encode(info) else {
             return .init(error: APIError.parseError)
         }
-        let request = request(endPoint: Endpoint.otpSecret, httpMethod: "PUT", httpBody: body)
+        let request = request(endPoint: Endpoint.otpSecret, httpMethod: "PUT", httpHeader: ["Origin": Endpoint.baseURL], httpBody: body)
         return sendRequest(request: request)
     }
     func time() -> Promise<ServerTime> {
-        let request = request(endPoint: Endpoint.time)
+        let request = request(endPoint: Endpoint.time, httpHeader: ["Origin": Endpoint.baseURL])
         return sendRequest(request: request)
     }
     func binding(info: BindingInfo) -> Promise<Void> {

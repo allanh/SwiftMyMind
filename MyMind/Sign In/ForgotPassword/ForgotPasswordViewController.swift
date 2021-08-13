@@ -34,6 +34,8 @@ class ForgotPasswordViewController: NiblessViewController {
         observerViewModel()
         addTapToResignKeyboardGesture()
         addCustomBackNavigationItem()
+        title = "My Mind 買賣後台"
+        navigationItem.backButtonTitle = ""
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -66,7 +68,7 @@ class ForgotPasswordViewController: NiblessViewController {
                 let storyboard: UIStoryboard = UIStoryboard(name: "TOTP", bundle: nil)
                 if let viewController = storyboard.instantiateViewController(withIdentifier: "SecretListViewControllerNavi") as? UINavigationController, let totpViewController = viewController.topViewController as? SecretListViewController {
                     totpViewController.scanViewControllerDelegate = self
-                    present(viewController, animated: true, completion: nil)
+                    show(totpViewController, sender: self)
                 }
             })
             .disposed(by: bag)
@@ -74,7 +76,9 @@ class ForgotPasswordViewController: NiblessViewController {
         viewModel.successMessage
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [unowned self] in
-                ToastView.showIn(self, message: $0, iconName: "success")
+                ToastView.showIn(self, message: $0, iconName: "success") {
+                    navigationController?.popViewController(animated: true)
+                }
             })
             .disposed(by: bag)
 
@@ -120,9 +124,7 @@ extension ForgotPasswordViewController: ScanViewControllerDelegate {
         } else if let secret = Secret.generateSecret(with: qrCodeValue) {
             updateAndSaveSecret(secret: secret)
         }
-        dismiss(animated: true) {
-            self.viewModel.confirmSendEmail()
-        }
+        viewModel.confirmSendEmail()
     }
     private func updateAndSaveSecret(secret: Secret) {
         viewModel.repository.update(newSecrets: secret)

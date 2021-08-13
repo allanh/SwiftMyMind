@@ -197,10 +197,12 @@ extension Endpoint {
         return Endpoint(path: "/api/admin/\(version)/purchase/product", queryItems: [query])
     }
 
-    static func productMaterialBrandNameAutoComplete(searchTerm: String, vendorID: String) -> Self {
+    static func productMaterialBrandNameAutoComplete(searchTerm: String, vendorID: String? = nil) -> Self {
         var query: [URLQueryItem] = []
         query.append(URLQueryItem(name: "key", value: "BRAND_NAME"))
-        query.append(URLQueryItem(name: "vendor_id", value: vendorID))
+        if let vendorID = vendorID {
+            query.append(URLQueryItem(name: "vendor_id", value: vendorID))
+        }
         if searchTerm.isEmpty == false {
             query.append(URLQueryItem(name: "word", value: searchTerm))
         }

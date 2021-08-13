@@ -63,19 +63,21 @@ extension PromiseKitAPIService {
         return Promise<Void> { seal in
             URLSession.shared.dataTask(with: request) { data, urlResponse, error in
                 if let httpResponse = urlResponse as? HTTPURLResponse {
-                    if httpResponse.url?.host != Endpoint.baseAuthURL {
-                        switch httpResponse.statusCode {
-                        case 401:
-                            seal.reject(APIError.invalidAccessToken)
-                            return
-                        case 503:
-                            seal.reject(APIError.maintenanceError)
-                            return
-                        case 403:
-                            seal.reject(APIError.insufficientPrivilegeError)
-                            return
-                        default:
-                            break
+                    if let host = httpResponse.url?.host {
+                        if !Endpoint.baseAuthURL.contains(host) {
+                            switch httpResponse.statusCode {
+                            case 401:
+                                seal.reject(APIError.invalidAccessToken)
+                                return
+                            case 503:
+                                seal.reject(APIError.maintenanceError)
+                                return
+                            case 403:
+                                seal.reject(APIError.insufficientPrivilegeError)
+                                return
+                            default:
+                                break
+                            }
                         }
                     }
                 }

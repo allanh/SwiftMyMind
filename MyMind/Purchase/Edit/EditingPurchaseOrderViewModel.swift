@@ -30,6 +30,8 @@ class EditingPurchaseOrderViewModel {
     let purchaseReviewerListLoader: PurchaseReviewerListLoader
     let reviewing: Bool
     var productInfos: [PurchaseOrder.ProductInfo] = []
+    var editable: Bool = false
+    let status: PurchaseStatus
 
     var purchaseApplyInfoViewModel: PurchaseApplyInfoViewModel?
     var pickPurchaseReviewerViewModel: PickPurchaseReviewerViewModel?
@@ -51,13 +53,15 @@ class EditingPurchaseOrderViewModel {
         warehouseListLoader: PurchaseWarehouseListLoader,
         purchaseReviewerListLoader: PurchaseReviewerListLoader,
         service: EditingPurchaseOrderService,
-        reviewing: Bool) {
+        reviewing: Bool,
+        status: PurchaseStatus) {
         self.purchaseID = purchaseID
         self.purchaseOrderLoader = purchaseOrderLoader
         self.warehouseListLoader = warehouseListLoader
         self.purchaseReviewerListLoader = purchaseReviewerListLoader
         self.service = service
         self.reviewing = reviewing
+        self.status = status
     }
 
     func loadPurchaseOrderThenMakeChildViewModels() {
@@ -68,6 +72,7 @@ class EditingPurchaseOrderViewModel {
             }
             .done { [weak self] order in
                 guard let self = self else { return }
+                self.editable = order.status == .pending || order.status == .rejected
                 self.makePurchaseApplyInfoViewModel(with: order)
                 self.makePickPurchaseReviewerViewModel(with: order)
                 self.subscribeChildViewModel(with: order)
@@ -114,11 +119,9 @@ class EditingPurchaseOrderViewModel {
 //                #warning("Error handling")
             }
     }
-
-    func sendReturnRequest() {
-        guard let info = makeReturnPurchaseOrderParameterInfo() else {
+    private func sendAuditRequest(action: ReturnPurchaseOrderParameterInfo.ActionType) {
+        guard let info = makeReturnPurchaseOrderParameterInfo(action: action) else {
             self.navigation(with: .error(error: APIError.unexpectedError))
-//            #warning("Error handling")
             return
         }
 
@@ -133,8 +136,16 @@ class EditingPurchaseOrderViewModel {
             .catch { error in
                 print(error.localizedDescription)
                 self.navigation(with: .error(error: APIError.serviceError(error.localizedDescription)))
-//                #warning("Error handling")
             }
+    }
+    func sendReturnRequest() {
+        sendAuditRequest(action: .RETURN)
+    }
+    func sendRevokeRequest() {
+        sendAuditRequest(action: .REVOKED)
+    }
+    func sendInvalidRequest() {
+        sendAuditRequest(action: .VOID)
     }
     private func makePurchaseApplyInfoViewModel(with order: PurchaseOrder) {
         productInfos = order.productInfos
@@ -185,19 +196,24 @@ class EditingPurchaseOrderViewModel {
                                    recipientInfo: [order.recipientInfo])
 
         purchaseApplyInfoViewModel = PurchaseApplyInfoViewModel(
+            
             suggestionProductMaterialViewModels: viewModels,
             warehouseLoader: warehouseListLoader,
-            purchaseID: String(order.id),
+            purchaseID: String(order.number),
             expectedStorageDate: dateFormatter.date(from: order.expectStorageDate),
-            pickedWarehouse: wareHoudse)
+            pickedWarehouse: wareHoudse,
+            purchaseStatus: order.status)
     }
 
     private func makePickPurchaseReviewerViewModel(with order: PurchaseOrder) {
         pickPurchaseReviewerViewModel = PickPurchaseReviewerViewModel(
             loader: purchaseReviewerListLoader,
+            reviewerName: order.reviewerName,
             logInfos: order.logInfos,
-            level: reviewing ? order.reviewLevel+1: order.reviewLevel,
-            isLastReview: order.lastReview)
+            level: order.reviewLevel,
+            isLastReview: order.lastReview,
+            reviewing: reviewing,
+            status: order.status)
     }
 
     func subscribeChildViewModel(with order: PurchaseOrder) {
@@ -211,7 +227,11 @@ class EditingPurchaseOrderViewModel {
                 if reviewing {
                     self.navigation(with: .purchasedProductInfos(infos: productInfos))
                 } else {
-                    self.navigation(with: .purchasedProducts(viewModels: purchaseApplyInfoViewModel.suggestionProductMaterialViewModels))
+                    if status == .pending || status == .rejected {
+                        self.navigation(with: .purchasedProducts(viewModels: purchaseApplyInfoViewModel.suggestionProductMaterialViewModels))
+                    } else {
+                        self.navigation(with: .purchasedProductInfos(infos: productInfos))
+                    }
                 }
             })
             .disposed(by: bag)
@@ -277,6 +297,7 @@ class EditingPurchaseOrderViewModel {
                     remark: note,
                     expectWarehouseID: String(pickedWarehouse.id),
                     expectWarehouseType: pickedWarehouse.type,
+                    warehouseIndex: pickedWarehouse.recipientInfo?.first?.warehouseIndex,
                     productInfo: productInfos
                 )
                 return info
@@ -293,6 +314,7 @@ class EditingPurchaseOrderViewModel {
                     remark: note,
                     expectWarehouseID: String(pickedWarehouse.id),
                     expectWarehouseType: pickedWarehouse.type,
+                    warehouseIndex: pickedWarehouse.recipientInfo?.first?.warehouseIndex,
                     productInfo: productInfos
                 )
                 return info
@@ -310,19 +332,18 @@ class EditingPurchaseOrderViewModel {
                 remark: note,
                 expectWarehouseID: String(pickedWarehouse.id),
                 expectWarehouseType: pickedWarehouse.type,
+                warehouseIndex: pickedWarehouse.recipientInfo?.first?.warehouseIndex,
                 productInfo: productInfos
             )
             return info
         }
     }
-    private func makeReturnPurchaseOrderParameterInfo() -> ReturnPurchaseOrderParameterInfo? {
+    private func makeReturnPurchaseOrderParameterInfo(action: ReturnPurchaseOrderParameterInfo.ActionType) -> ReturnPurchaseOrderParameterInfo? {
         let note = pickPurchaseReviewerViewModel?.note.value ?? ""
-        let info = ReturnPurchaseOrderParameterInfo(action: .RETURN, remark: note)
+        let info = ReturnPurchaseOrderParameterInfo(action: action, remark: note)
         return info
     }
-
     
-
     func mapSuggestionProductMaterialViewModelsToProductInfos() -> [EditingPurchaseOrderParameterInfo.ProductInfo]? {
         guard let viewModel = purchaseApplyInfoViewModel else {
             return nil

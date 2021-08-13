@@ -32,6 +32,8 @@ class ResendOTPViewController: NiblessViewController {
         observerViewModel()
         addTapToResignKeyboardGesture()
         addCustomBackNavigationItem()
+        title = "My Mind 買賣後台"
+        navigationItem.backButtonTitle = ""
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -61,7 +63,7 @@ class ResendOTPViewController: NiblessViewController {
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [unowned self] in
                 ToastView.showIn(self, message: $0, iconName: "success") {
-                    dismiss(animated: true, completion: nil)
+                    navigationController?.popViewController(animated: true)
                 }
             })
             .disposed(by: bag)

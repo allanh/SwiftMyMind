@@ -117,9 +117,9 @@ final class PurchaseCompletedApplyViewController: NiblessViewController {
                 self.collectionView.reloadData()
             }.catch { error in
                 if let apiError = error as? APIError {
-                    _ = ErrorHandler.shared.handle(apiError, controller: self)
+                    _ = ErrorHandler.shared.handle(apiError)
                 } else {
-                    _ = ErrorHandler.shared.handle(APIError.serviceError(error.localizedDescription), controller: self)
+                    _ = ErrorHandler.shared.handle(APIError.serviceError(error.localizedDescription))
 //                    ToastView.showIn(self, message: error.localizedDescription)
                 }
             }
@@ -129,7 +129,7 @@ final class PurchaseCompletedApplyViewController: NiblessViewController {
         let purchaseOrderInfoViewController = PurchaseOrderInfoViewController.loadFormNib()
         purchaseOrderInfoViewController.purchaseOrder = purchaseOrder
         purchaseOrderInfoViewController.didTapCheckPurchasedProductButton = { [weak self] in
-            let viewController = PurchasedProductsInfoViewController(style: .plain)
+            let viewController = PurchasedProductsInfoViewController()//PurchasedProductsInfoViewController(style: .plain)
             viewController.productInfos = purchaseOrder.productInfos
             self?.show(viewController, sender: nil)
         }

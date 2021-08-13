@@ -11,6 +11,8 @@ import RxRelay
 
 struct PickDatesViewModel {
     let title: String
+    let startDatePlaceholder: String = "開始日期"
+    let endDatePlaceholder: String = "結束日期"
     let startDate: BehaviorRelay<Date?> = .init(value: nil)
     let endDate: BehaviorRelay<Date?> = .init(value: nil)
 

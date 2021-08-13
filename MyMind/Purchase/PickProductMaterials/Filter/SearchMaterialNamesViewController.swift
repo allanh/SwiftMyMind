@@ -33,6 +33,7 @@ class SearchMaterialNameViewController: NiblessViewController {
         bindToViewModel()
         subscribeViewModel()
         rootView.titleLabel.text = viewModel.title
+        rootView.textField.placeholder = viewModel.placeholder
     }
 
     private func configCollectionView() {
@@ -42,9 +43,11 @@ class SearchMaterialNameViewController: NiblessViewController {
     }
 
     private func updateCollectionView() {
-        rootView.collectionView.reloadData()
-        rootView.layoutIfNeeded()
-        rootView.collectionViewHeightAnchor.constant = rootView.collectionView.contentSize.height
+        DispatchQueue.main.async {
+            self.rootView.collectionView.reloadData()
+            self.rootView.layoutIfNeeded()
+            self.rootView.collectionViewHeightAnchor.constant = self.rootView.collectionView.contentSize.height
+        }
     }
 
     private func bindToViewModel() {
@@ -52,7 +55,7 @@ class SearchMaterialNameViewController: NiblessViewController {
             .bind(to: viewModel.searchTerm)
             .disposed(by: bag)
 
-        rootView.textField.rx.controlEvent(.editingDidEndOnExit)
+        rootView.textField.rx.controlEvent(.editingDidEnd)
             .subscribe(onNext: { [unowned self] _ in
                 viewModel.addSearchTerm()
             })
@@ -62,9 +65,16 @@ class SearchMaterialNameViewController: NiblessViewController {
     private func subscribeViewModel() {
         viewModel.addedSearchTerms
             .subscribe(onNext: { [unowned self] _ in
-                updateCollectionView()
+                self.updateCollectionView()
             })
             .disposed(by: bag)    }
+    @objc
+    private func didTapDeleteButtonInCell(_ sender: UIButton) {
+        guard let point = sender.superview?.convert(sender.frame.origin, to: rootView.collectionView),
+              let indexPath = rootView.collectionView.indexPathForItem(at: point)
+        else { return }
+        viewModel.removeSearchTerm(at: indexPath.item)
+    }
 }
 extension SearchMaterialNameViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -77,6 +87,7 @@ extension SearchMaterialNameViewController: UICollectionViewDataSource {
         }
         let item = viewModel.addedSearchTerms.value[indexPath.item]
         cell.config(with: item)
+        cell.deleteButton.addTarget(self, action: #selector(didTapDeleteButtonInCell(_:)), for: .touchUpInside)
         return cell
     }
 }

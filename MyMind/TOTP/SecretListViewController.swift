@@ -20,10 +20,6 @@ class SecretListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-//        let navigationTitleImageView: UIImageView = UIImageView {
-//            $0.image = UIImage(named: "udi_logo")
-//        }
-//        navigationItem.titleView = navigationTitleImageView
         title = "My Mind 買賣 OTP"
         navigationItem.backButtonTitle = ""
         tableView.register(SecretTableViewCell.nib, forCellReuseIdentifier: SecretTableViewCell.reuseIdentifier)

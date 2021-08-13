@@ -12,7 +12,7 @@ import RxSwift
 import RxRelay
 
 enum PurchaseQueryType: String, CustomStringConvertible, CaseIterable {
-    case purchaseNumber, vendorID, purchaseStatus, applicant, productNumbers, expectPutInStoragePeriod, createdPeriod
+    case purchaseNumber, vendorID, purchaseStatus, applicant, productNumbers, expectPutInStoragePeriod, createdPeriod, brandName
     var description: String {
         switch self {
         case .purchaseNumber: return "採購單編號"
@@ -22,6 +22,7 @@ enum PurchaseQueryType: String, CustomStringConvertible, CaseIterable {
         case .productNumbers: return "商品編號"
         case .expectPutInStoragePeriod: return "預計入庫日"
         case .createdPeriod: return "填單日期"
+        case .brandName: return "品牌"
         }
     }
 }
@@ -112,6 +113,8 @@ class PurchaseListFilterViewController: NiblessViewController {
             case .expectPutInStoragePeriod:
                 let viewController = PurchaseQueryDateSelectionViewController(viewModel: viewModel.creatPeriodViewModel)
                 addViewControllerAsChild(viewController)
+            case .brandName:
+                addAutoSearchViewCotrollerAsChild(with: viewModel.brandNameViewModel)
             }
         }
     }

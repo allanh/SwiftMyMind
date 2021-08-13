@@ -14,7 +14,7 @@ protocol AutoCompleteAPIService {
     func vendorNameAutoComplete(searchTerm: String) -> Promise<AutoCompleteList>
     func applicantAutoComplete(searchTerm: String) -> Promise<AutoCompleteList>
     func productNumberAutoComplete(searchTerm: String) -> Promise<AutoCompleteList>
-    func productMaterialBrandNameAutoComplete(searchTerm: String, vendorID: String) -> Promise<AutoCompleteList>
+    func productMaterialBrandNameAutoComplete(searchTerm: String, vendorID: String?) -> Promise<AutoCompleteList>
     func productMaterailOriginalNumberAutoComplete(searchTerm: String) -> Promise<AutoCompleteList>
     func productNumberSetAutoComplete(searchTerm: String) -> Promise<AutoCompleteList>
 }
@@ -77,7 +77,7 @@ class MyMindAutoCompleteAPIService: PromiseKitAPIService {
         return sendRequest(request: request)
     }
 
-    func productMaterialBrandNameAutoComplete(searchTerm: String = "", vendorID: String) -> Promise<AutoCompleteList> {
+    func productMaterialBrandNameAutoComplete(searchTerm: String = "", vendorID: String? = nil) -> Promise<AutoCompleteList> {
         guard let userSession = userSessionDataStore.readUserSession() else {
             return .init(error: APIError.noAccessTokenError)
         }

@@ -30,8 +30,7 @@ class MyMindEmployeeAPIService: PromiseKitAPIService {
         guard let userSession = userSessionDataStore.readUserSession() else {
             return .init(error: APIError.noAccessTokenError)
         }
-
-        let request = request(endPoint: .me, httpHeader: ["Authorization": "Bearer \(userSession.token)"])
+        let request = request(endPoint: .me, httpHeader: ["Authorization": "Bearer \(userSession.token)", "Origin": Endpoint.baseURL])
         return sendRequest(request: request)
     }
     

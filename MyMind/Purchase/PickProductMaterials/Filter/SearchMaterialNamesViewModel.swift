@@ -11,6 +11,7 @@ import RxRelay
 
 struct SearchMaterialNameViewModel {
     let title: String = "SKU名稱"
+    let placeholder: String = "請輸入SKU名稱"
     let searchTerm: BehaviorRelay<String> = .init(value: "")
     let addedSearchTerms: BehaviorRelay<[String]> = .init(value: [])
 
@@ -19,5 +20,12 @@ struct SearchMaterialNameViewModel {
         var tempAdded = addedSearchTerms.value
         tempAdded.append(searchTerm)
         addedSearchTerms.accept(tempAdded)
+    }
+    
+    func removeSearchTerm(at index: Int) {
+        var tempAddedSearchTerms = addedSearchTerms.value
+        tempAddedSearchTerms.remove(at: index)
+        addedSearchTerms.accept(tempAddedSearchTerms)
+
     }
 }
