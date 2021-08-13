@@ -170,6 +170,8 @@ extension ScanViewController: AVCaptureMetadataOutputObjectsDelegate {
                             self.showInvalidQRCodeAlert(title: "App ID 不相符", message: "此QR Code所綁定的AppID與此裝置不符，若要重新綁定，請到登入頁點選右下角【重綁驗證碼】")
                         }
                 }
+            } else {
+                showInvalidQRCodeAlert(title: "無效的 QR Code", message: "請再次確認掃描的 QR Code 是否正確，並點選確定後重新掃描")
             }
         } catch {
             ToastView.showIn(self, message: error.localizedDescription)
