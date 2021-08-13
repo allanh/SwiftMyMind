@@ -113,7 +113,23 @@ class SignInViewController: NiblessViewController {
                 if let apiError = $0 as? APIError {
                     switch apiError {
                     case .serviceError(let message):
-                        ToastView.showIn(self, message: message)
+                        if message == "OTP驗證碼錯誤" {
+                            let alert = UIAlertController(title: "OTP驗證碼已失效", message: "請至信箱開啟「帳號綁定OTP驗證通知信」，並掃描最新的【驗證QR Code】。", preferredStyle: .alert)
+                            let cancelAction = UIAlertAction(title: "取消", style: .cancel) { action in
+                            }
+                            let confirmAction = UIAlertAction(title: "確定", style: .default) { action in
+                                let storyboard: UIStoryboard = UIStoryboard(name: "TOTP", bundle: nil)
+                                if let viewController = storyboard.instantiateViewController(withIdentifier: "SecretListViewControllerNavi") as? UINavigationController, let totpViewController = viewController.topViewController as? SecretListViewController {
+                                    totpViewController.scanViewControllerDelegate = self
+                                    show(totpViewController, sender: self)
+                                }
+                           }
+                            alert.addAction(cancelAction)
+                            alert.addAction(confirmAction)
+                            present(alert, animated: true, completion: nil)
+                        } else {
+                            ToastView.showIn(self, message: message)
+                        }
                     default:
                         ToastView.showIn(self, message: "")
                     }
