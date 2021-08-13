@@ -198,7 +198,7 @@ extension PurchaseApplyViewController: UICollectionViewDelegateFlowLayout {
         let width = screenWidth - horizontalInsets
 
         switch indexPath.item {
-        case 0: return CGSize(width: width, height: 575)
+        case 0: return CGSize(width: width, height: 625)
         default: return CGSize(width: width, height: 400)
         }
     }

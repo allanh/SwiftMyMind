@@ -12,7 +12,7 @@ import RxSwift
 import RxRelay
 
 enum PurchaseQueryType: String, CustomStringConvertible, CaseIterable {
-    case purchaseNumber, vendorID, purchaseStatus, applicant, productNumbers, expectPutInStoragePeriod, createdPeriod, brandName
+    case purchaseNumber, vendorID, purchaseStatus, applicant, productNumbers, brandName, expectPutInStoragePeriod, createdPeriod
     var description: String {
         switch self {
         case .purchaseNumber: return "採購單編號"

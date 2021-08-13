@@ -197,6 +197,7 @@ final class PurchaseApplyInfoViewController: UIViewController {
             textField.font = .pingFangTCRegular(ofSize: 14)
             textField.textColor = UIColor(hex: "4c4c4c")
             textField.delegate = self
+            textField.placeholder = "請選擇"
             let imageName: String = textField == expectStorageDateTextField ? "calendar_icon" : "search"
 
             configRightIconForTextField(textField, imageName: imageName)

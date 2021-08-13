@@ -52,7 +52,12 @@ final class PickPurchaseReviewerViewController: UIViewController {
                 configurePickReviewerTextField()
             }
         } else {
-            configurePickReviewerTextField()
+            if viewModel.status == .pending || viewModel.status == .rejected {
+                configurePickReviewerTextField()
+            } else {
+                hideReviewerPicker()
+                hideNoteTextView()
+            }
         }
         configureDropDownView()
         configureLogInfosViews()
