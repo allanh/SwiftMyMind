@@ -58,7 +58,6 @@ final class PickPurchaseReviewerViewController: UIViewController {
                 hideReviewerPicker()
                 hideNoteTextView()
             }
-//            configurePickReviewerTextField()
         }
         configureDropDownView()
         configureLogInfosViews()

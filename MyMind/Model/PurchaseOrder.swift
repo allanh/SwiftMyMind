@@ -22,11 +22,12 @@ struct PurchaseOrder: Codable {
                     case .CLOSED: return "已結案"
                     case .REVIEW_REJECT: return "退回"
                     case .VOID: return "作廢"
+                    case .PURCHASING: return "採購中"
                     }
                 }
             }
             
-            case PENDING, REVIEW, APPROVED, PUT_IN_STORAGE, CLOSED, REVIEW_REJECT, VOID
+            case PENDING, REVIEW, APPROVED, PUT_IN_STORAGE, CLOSED, REVIEW_REJECT, VOID, PURCHASING
         }
         let createdDateString, creater: String
         let status: LogStatus

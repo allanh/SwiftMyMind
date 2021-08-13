@@ -92,6 +92,13 @@ class PurchaseReviewingApplyInfoViewController: UIViewController {
             .bind(to: recipientAddressLabel.rx.text)
             .disposed(by: bag)
         
+        viewModel.purchaseStatus
+            .map({
+                $0.description
+            })
+            .bind(to: statusLabel.rx.text)
+            .disposed(by: bag)
+
         viewModel.suggestionProductMaterialViewModels
             .map({ "共 \($0.count) 件SKU" })
             .bind(to: summaryLabel.rx.text)
