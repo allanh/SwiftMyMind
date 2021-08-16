@@ -456,6 +456,9 @@
 		527E11C02692C38D00FB8B01 /* PurchaseReviewingApplyInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527E11BE2692C38D00FB8B01 /* PurchaseReviewingApplyInfoViewController.swift */; };
 		527E11C12692C38D00FB8B01 /* PurchaseReviewingApplyInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 527E11BF2692C38D00FB8B01 /* PurchaseReviewingApplyInfoViewController.xib */; };
 		527E11C32693084B00FB8B01 /* ReturnPurchaseOrderInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527E11C22693084B00FB8B01 /* ReturnPurchaseOrderInfo.swift */; };
+		5280D6F326C25A6F004363C6 /* MyMindUUIDDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5280D6F226C25A6F004363C6 /* MyMindUUIDDescriptionView.swift */; };
+		5280D6F426C25A6F004363C6 /* MyMindUUIDDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5280D6F226C25A6F004363C6 /* MyMindUUIDDescriptionView.swift */; };
+		5280D6F526C25A6F004363C6 /* MyMindUUIDDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5280D6F226C25A6F004363C6 /* MyMindUUIDDescriptionView.swift */; };
 		5280D6E726C0D711004363C6 /* ServiceCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5280D6E626C0D711004363C6 /* ServiceCellTableViewCell.swift */; };
 		5280D6E826C0D711004363C6 /* ServiceCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5280D6E626C0D711004363C6 /* ServiceCellTableViewCell.swift */; };
 		5280D6E926C0D711004363C6 /* ServiceCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5280D6E626C0D711004363C6 /* ServiceCellTableViewCell.swift */; };
@@ -739,6 +742,7 @@
 		527E11BE2692C38D00FB8B01 /* PurchaseReviewingApplyInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseReviewingApplyInfoViewController.swift; sourceTree = "<group>"; };
 		527E11BF2692C38D00FB8B01 /* PurchaseReviewingApplyInfoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PurchaseReviewingApplyInfoViewController.xib; sourceTree = "<group>"; };
 		527E11C22693084B00FB8B01 /* ReturnPurchaseOrderInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReturnPurchaseOrderInfo.swift; sourceTree = "<group>"; };
+		5280D6F226C25A6F004363C6 /* MyMindUUIDDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMindUUIDDescriptionView.swift; sourceTree = "<group>"; };
 		5280D6E626C0D711004363C6 /* ServiceCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceCellTableViewCell.swift; sourceTree = "<group>"; };
 		5280D6EA26C1226E004363C6 /* UIAlertController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+.swift"; sourceTree = "<group>"; };
 		5280D6EE26C122A7004363C6 /* UIAlertAction+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertAction+.swift"; sourceTree = "<group>"; };
@@ -1335,6 +1339,7 @@
 				A4648773268970750053E6F5 /* UDI3DESCryptor.swift */,
 				52E5060526A6BF4C000E5116 /* MyMindInstructionView.swift */,
 				524AB04726A802BA003D1E92 /* MyMindEmptySecretView.swift */,
+				5280D6F226C25A6F004363C6 /* MyMindUUIDDescriptionView.swift */,
 			);
 			path = TOTP;
 			sourceTree = "<group>";
@@ -2259,6 +2264,7 @@
 				524AB10D26A80913003D1E92 /* PickPurchaseReviewerViewModel.swift in Sources */,
 				524AB10E26A80913003D1E92 /* ProductMaterialListLoader.swift in Sources */,
 				524AB10F26A80913003D1E92 /* MyMindInstructionView.swift in Sources */,
+				5280D6F426C25A6F004363C6 /* MyMindUUIDDescriptionView.swift in Sources */,
 				524AB11026A80913003D1E92 /* PurchaseSuggestionInfo.swift in Sources */,
 				524AB11126A80913003D1E92 /* PurchaseListLoader.swift in Sources */,
 			);
@@ -2471,6 +2477,7 @@
 				5277786426A80DF500CF4E07 /* PickPurchaseReviewerViewModel.swift in Sources */,
 				5277786526A80DF500CF4E07 /* ProductMaterialListLoader.swift in Sources */,
 				5277786626A80DF500CF4E07 /* MyMindInstructionView.swift in Sources */,
+				5280D6F526C25A6F004363C6 /* MyMindUUIDDescriptionView.swift in Sources */,
 				5277786726A80DF500CF4E07 /* PurchaseSuggestionInfo.swift in Sources */,
 				5277786826A80DF500CF4E07 /* PurchaseListLoader.swift in Sources */,
 			);
@@ -2683,6 +2690,7 @@
 				A494D9CE2670CDC1008658F8 /* PickPurchaseReviewerViewModel.swift in Sources */,
 				97547CBB2680787E001859A8 /* ProductMaterialListLoader.swift in Sources */,
 				52E5060626A6BF4D000E5116 /* MyMindInstructionView.swift in Sources */,
+				5280D6F326C25A6F004363C6 /* MyMindUUIDDescriptionView.swift in Sources */,
 				A442A168266F599A00AAB1ED /* PurchaseSuggestionInfo.swift in Sources */,
 				97547CB8268039C6001859A8 /* PurchaseListLoader.swift in Sources */,
 			);

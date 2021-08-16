@@ -86,6 +86,10 @@ extension Endpoint {
     static var otpSecret: Self {
         Endpoint(path: "/otp_secret", serviceType: .auth)
     }
+    
+    static var bind: Self {
+        Endpoint(path: "/employee/device_id", serviceType: .auth)
+    }
     static var authorization: Self {
         Endpoint(path: "/api/admin/v1/authorization", serviceType: .dos)
     }

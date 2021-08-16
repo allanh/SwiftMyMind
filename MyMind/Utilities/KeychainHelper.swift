@@ -8,7 +8,7 @@
 
 import Foundation
 
-public enum KeychainError: Error {
+public enum KeychainError: Error, Equatable {
     case noValueFound
     case unexpectedItemData
     case unhandledError(message: String)
@@ -28,7 +28,7 @@ extension KeychainError: LocalizedError {
 }
 
 public enum KeychainKeys: String {
-    case lastSignInAccountInfo, userSession, otpStatus
+    case lastSignInAccountInfo, userSession, otpStatus, uuid
 }
 // MARK: - Keychain helper
 public struct KeychainHelper {

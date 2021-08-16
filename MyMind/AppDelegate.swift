@@ -15,6 +15,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         setUpNavigationBarAppearance()
         FirebaseApp.configure()
+        do {
+            _ = try KeychainHelper.default.readItem(key: .uuid, valueType: String.self)
+        } catch {
+            if let keychainError = error as? KeychainError, keychainError == KeychainError.noValueFound {
+                let uuid = UUID().uuidString
+                do {
+                    try KeychainHelper.default.saveItem(uuid, for: .uuid)
+                } catch {}
+            } else {
+                print("keychain save fail")
+            }
+        }
+
         return true
     }
 

@@ -30,9 +30,11 @@ class SecretListViewController: UIViewController {
         switch repository.secrets.isEmpty {
         case true:
             showInstructionView()
+            showQuestionMark()
             hideCameraButton()
         case false:
             removeInstructionView()
+            hideQuestionMark()
             showCameraButton()
         }
     }
@@ -76,7 +78,21 @@ class SecretListViewController: UIViewController {
         instructionView?.removeFromSuperview()
         instructionView = nil
     }
+    @objc
+    private func questionButtonDidTapped(_ sender: Any?) {
+        view.addSubview(MyMindUUIDDescriptionView.init(frame: view.bounds))
 
+    }
+    private func showQuestionMark() {
+        let button = UIButton(type: .custom)
+        button.setImage(UIImage(named: "question_circle"), for: .normal)
+        button.addTarget(self, action: #selector(questionButtonDidTapped(_:)), for: .touchUpInside)
+        let barButton = UIBarButtonItem(customView: button)
+        navigationItem.rightBarButtonItem = barButton
+    }
+    private func hideQuestionMark() {
+        navigationItem.rightBarButtonItem = nil
+    }
     private func showEmptySecretView() {
         guard emptySecretView == nil else { return }
         emptySecretView = MyMindEmptySecretView()
@@ -184,6 +200,7 @@ extension SecretListViewController: UITableViewDelegate {
 
                 if self.repository.secrets.isEmpty {
                     self.showInstructionView()
+                    self.showQuestionMark()
                     self.hideCameraButton()
                 }
                 completionHandler(true)

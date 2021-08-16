@@ -13,7 +13,6 @@ final class MyMindInstructionView: NiblessView {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.image = UIImage(named: "otp")
     }
-
     private let titleLabel: UILabel = UILabel {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = .pingFangTCSemibold(ofSize: 16)
