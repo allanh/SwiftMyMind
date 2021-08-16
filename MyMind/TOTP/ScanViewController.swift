@@ -174,8 +174,9 @@ extension ScanViewController: AVCaptureMetadataOutputObjectsDelegate {
                 showInvalidQRCodeAlert(title: "無效的 QR Code", message: "請再次確認掃描的 QR Code 是否正確，並點選確定後重新掃描")
             }
         } catch {
-            ToastView.showIn(self, message: error.localizedDescription)
-            captureSession?.stopRunning()
+            ToastView.showIn(self, message: error.localizedDescription) {
+                self.captureSession?.startRunning()
+            }
         }
     }
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
