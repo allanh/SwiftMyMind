@@ -225,6 +225,7 @@ extension SignInViewController {
 }
 extension SignInViewController: ScanViewControllerDelegate {
     func scanViewController(_ scanViewController: ScanViewController, didReceive qrCodeValue: String) {
+        navigationController?.popToViewController(self, animated: true)
         if let url = URL(string: qrCodeValue),
            let secret = Secret.init(url: url) {
             updateAndSaveSecret(secret: secret)
