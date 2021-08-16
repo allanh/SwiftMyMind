@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PickPurchaseReviewerViewController" customModule="Demo" customModuleProvider="target">
             <connections>
+                <outlet property="logInfoStackViewTopConstraint" destination="bJd-7B-mFl" id="TfF-UA-qSR"/>
                 <outlet property="logInfosStackView" destination="9ge-U2-Zhx" id="c2r-n0-XbA"/>
                 <outlet property="noteErrorLabel" destination="FAi-Le-JHA" id="jff-av-dTK"/>
                 <outlet property="noteLabelHeightConstraint" destination="XCZ-GS-baG" id="72h-hY-tIM"/>
@@ -27,6 +28,7 @@
                 <outlet property="pickReviewerTextFieldHeightConstraint" destination="Nzq-c2-rCm" id="kQo-L7-kkT"/>
                 <outlet property="pickReviewerTitleLabel" destination="f7b-NL-xtz" id="9vc-pc-PNh"/>
                 <outlet property="pickReviewerTitleLableHeightConstraint" destination="yEu-Ss-X55" id="zdu-jk-Rox"/>
+                <outlet property="pickReviewerTitleTopConstraint" destination="acC-uT-jjZ" id="Uic-kH-UHW"/>
                 <outlet property="pickerReviewerTitleLabelBottomConstraint" destination="fy3-yP-p9R" id="0hq-01-r8B"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>

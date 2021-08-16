@@ -11,6 +11,7 @@ import RxSwift
 
 final class PickPurchaseReviewerViewController: UIViewController {
 
+    @IBOutlet weak var pickReviewerTitleTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var pickReviewerTitleLabel: UILabel!
     @IBOutlet weak var pickReviewerTitleLableHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var pickerReviewerTitleLabelBottomConstraint: NSLayoutConstraint!
@@ -27,6 +28,7 @@ final class PickPurchaseReviewerViewController: UIViewController {
     @IBOutlet private weak var noteTextCounterLabel: UILabel!
     @IBOutlet weak var noteTextCounterLabelTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var noteTextCounterLabelHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var logInfoStackViewTopConstraint: NSLayoutConstraint!
     @IBOutlet private weak var logInfosStackView: UIStackView!
 
     lazy var dropDownView: DropDownView<Reviewer, DropDownListTableViewCell> = {
@@ -115,6 +117,7 @@ final class PickPurchaseReviewerViewController: UIViewController {
     }
 
     private func hideReviewerPicker() {
+        pickReviewerTitleTopConstraint.constant = 0
         pickReviewerTitleLableHeightConstraint.constant = 0
         pickerReviewerTitleLabelBottomConstraint.constant = 0
         pickReviewerTextFieldHeightConstraint.constant = 0
@@ -126,6 +129,7 @@ final class PickPurchaseReviewerViewController: UIViewController {
         noteTextViewHeightConstraint.constant = 0
         noteTextCounterLabelTopConstraint.constant = 0
         noteTextCounterLabelHeightConstraint.constant = 0
+        logInfoStackViewTopConstraint.constant = 0
     }
     private func configurePickReviewerTextField() {
         let formatter = NumberFormatter()
