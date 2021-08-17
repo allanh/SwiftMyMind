@@ -139,6 +139,7 @@ extension SecretListViewController: ScanViewControllerDelegate {
         } else if let secret = Secret.generateSecret(with: qrCodeValue) {
             updateAndSaveSecret(secret: secret)
         }
+        navigationController?.popToViewController(self, animated: true)
     }
 
     private func updateAndSaveSecret(secret: Secret) {

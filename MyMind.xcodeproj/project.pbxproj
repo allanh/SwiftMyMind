@@ -1795,6 +1795,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.shopping.udi.MyMind.gamma;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SERVER_URL = "http://api-gke-alpha-dos.udnshopping.com";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG GAMMA";
 				SWIFT_OBJC_BRIDGING_HEADER = "MyMind/TOTP/MyMind-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1923,6 +1924,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.shopping.udi.MyMind.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SERVER_URL = "https://demo-mymind.udicommerce.com";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEMO;
 				SWIFT_OBJC_BRIDGING_HEADER = "MyMind/TOTP/MyMind-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -2112,6 +2114,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.shopping.udi.MyMind.debug;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SERVER_URL = "http://api-beta-dos.udnshopping.com";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG BETA";
 				SWIFT_OBJC_BRIDGING_HEADER = "MyMind/TOTP/MyMind-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -2141,6 +2144,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.shopping.udi.MyMind;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SERVER_URL = "https://api-mymind.udicommerce.com";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = PRODUCTION;
 				SWIFT_OBJC_BRIDGING_HEADER = "MyMind/TOTP/MyMind-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -2319,6 +2323,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.shopping.udi.MyMind.alpha;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SERVER_URL = "http://api-gke-alpha-dos.udnshopping.com";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG ALPHA";
 				SWIFT_OBJC_BRIDGING_HEADER = "MyMind/TOTP/MyMind-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

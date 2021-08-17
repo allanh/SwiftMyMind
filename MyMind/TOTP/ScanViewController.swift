@@ -64,11 +64,19 @@ final class ScanViewController: UIViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-//        let string = "00yIC3PIZ/ZScC5Vwg2TFR8eXhKfZhVSSc/mtYJI8MAgp+wBxdIFvW17oMMLlSK7Ho5qtI2HuTMz2sQh8fmAY2hU2UPIOTPv5p+QuLVtvN1AS8nK56Gh/wH32KXXDS21Xl"// production sam lai
-//        let string = "00ADB1iGsn1jvWxnGtKSoj59plRI10N/ok6DN8i5qX3neupnFdmvnN6ti9ADusrV6Uy9lzyOpbYOkx4zimcgUjgikFBp8QIBV3Y3QyeyjhbLfbZubDfpzPljuHQjjWIziv"// alpha
-//        let string = "00yIC3PIZ/ZScC5Vwg2TFR8eXhKfZhVSScBz5kHxqXZQb8hgFv2wbX4lj/fHdxZkeyYj0MIzgvuarqv/sWbKLTl6Kzwi4GOk/TVXSqPiGm7UYHasOKQQ7v4B9jBeDrSEQuA3ffWbi7h6Q=" // demo
-//        let string = "00prqa3Y1IJyAAjkavCTMa0//neIbPtOzq0WQ0KFm+50suD+ljTQqpMKQ4iA/j4gxsbZ8fka91SJ9yFmtjzpkHH3Eikvwn4gU4+/Kf8tHmcSPlSXnvFoREa4hNn1+d/zfr" //production
-//        handleReceive(string)
+        #if targetEnvironment(simulator)
+            #if ALPHA
+            let string = "00ADB1iGsn1jvWxnGtKSoj59plRI10N/ok6DN8i5qX3neupnFdmvnN6lZax4V/ip7i+t/d7niQOh3WahGXgsdCJCkFBp8QIBV3l+tffPxzMH7qij6sW05OBsl9kWDvDCv8"// alpha(admin1Lv1o)
+            handleReceive(string)
+            #elseif DEMO
+            let string = "00yIC3PIZ/ZScC5Vwg2TFR8eXhKfZhVSScBz5kHxqXZQb8hgFv2wbX4lj/fHdxZkeyvGWUyQzQE62QquUIsaGg684mgt25Li//VXSqPiGm7UYYq3lP9xoOUnlURwdHFFk4A3ffWbi7h6Q=" // demo(allan.shih)
+            handleReceive(string)
+            #elseif PRODUCTION
+            let string = "00yIC3PIZ/ZScC5Vwg2TFR8eXhKfZhVSScBz5kHxqXZQb8hgFv2wbX4lj/fHdxZkeyr03YW3+TW+y54YUFqak1LaOhkc+89O3rVXSqPiGm7UYipOvQVKF9SDxtH2Fgyb1YA3ffWbi7h6Q=" // production(allan.shih)
+//            let string = "00yIC3PIZ/ZScC5Vwg2TFR8eXhKfZhVSSc/mtYJI8MAgp+wBxdIFvW17oMMLlSK7Ho5qtI2HuTMz2sQh8fmAY2hU2UPIOTPv5p+QuLVtvN1AS8nK56Gh/wH32KXXDS21Xl"// production sam lai
+            handleReceive(string)
+            #endif
+        #endif
     }
     // MARK: - Methods
     private func startReading() {
@@ -145,6 +153,12 @@ extension ScanViewController: AVCaptureMetadataOutputObjectsDelegate {
     }
 
     private func handleReceive(_ value: String) {
+        #if targetEnvironment(simulator)
+        if let delegate = delegate, delegate.scanViewController(self, validate: value) {
+            delegate.scanViewController(self, didReceive: value)
+            return
+        }
+        #else
         do {
             captureSession?.stopRunning()
             let uuid = try KeychainHelper.default.readItem(key: .uuid, valueType: String.self)
@@ -163,7 +177,6 @@ extension ScanViewController: AVCaptureMetadataOutputObjectsDelegate {
                         .done {
                             self.stopRunning()
                             delegate.scanViewController(self, didReceive: value)
-                            self.navigationController?.popViewController(animated: true)
                         }
                         .ensure { self.isNetworkProcessing = false }
                         .catch { error in
@@ -178,6 +191,7 @@ extension ScanViewController: AVCaptureMetadataOutputObjectsDelegate {
                 self.captureSession?.startRunning()
             }
         }
+        #endif
     }
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
         guard
