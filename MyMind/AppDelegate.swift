@@ -15,6 +15,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         setUpNavigationBarAppearance()
         FirebaseApp.configure()
+
+        Messaging.messaging().delegate = self
+        UNUserNotificationCenter.current().delegate = self
+        let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound, .provisional]
+        UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { granted, error in
+            print(granted)
+        }
+        application.registerForRemoteNotifications()
         do {
             _ = try KeychainHelper.default.readItem(key: .uuid, valueType: String.self)
         } catch {
@@ -53,5 +61,51 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
+        print("APNs token retrieved: \(deviceTokenString)")
+        Messaging.messaging().apnsToken = deviceToken
+    }
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        print("Unable to register for remote notifications: \(error.localizedDescription)")
+    }
 }
 
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([])
+    }
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        
+        print("**** didReceive ***")
+    }
+}
+extension AppDelegate: MessagingDelegate {
+    public func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
+        print("Firebase did refresh registration token: \(String(describing: fcmToken))")
+        // Register to udn push center.
+        var info: RegistrationInfo = RegistrationInfo(token: fcmToken ?? "")
+        let userStore = KeychainUserSessionDataStore()
+        let session = userStore.readUserSession()
+        if let id = session?.customerInfo.id {
+            info.company = String(id)
+        }
+        if let id = session?.businessInfo.id {
+            info.business = String(id)
+        }
+        if let id = session?.partnerInfo.id {
+            info.partnerID = String(id)
+        }
+        if let id = session?.employeeInfo.id {
+            info.id = String(id)
+        }
+        MyMindPushAPIService.shared.registration(with: info)
+            .done { registration in
+                print("registration complete with id = \(registration.id) isCreated = \(registration.isCreated)")
+            }
+            .catch { error in
+                print(error.localizedDescription)
+            }
+    }
+
+}

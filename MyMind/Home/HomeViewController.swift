@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Firebase
 protocol NavigationActionDelegate: AnyObject {
     func didCancel()
 }
@@ -77,7 +76,6 @@ final class HomeViewController: UIViewController {
         }
     }
     var authorization: Authorization?
-    var remoteConfig: RemoteConfig!
     /// Must set on main thread
     private var isNetworkProcessing: Bool = false {
         didSet {
@@ -271,16 +269,9 @@ final class HomeViewController: UIViewController {
         super.viewDidLoad()
         navigationItem.backButtonTitle = ""
         title = "首頁"
-        remoteConfig = RemoteConfig.remoteConfig()
-        let settings = RemoteConfigSettings()
-        settings.minimumFetchInterval = 0
-        remoteConfig.configSettings = settings
         collectionView.register(HomeCollectionViewHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HomeHeader")
         collectionView.register(HomeCollectionViewSwitchContentHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HomeSwitchContentHeader")
-        remoteConfig.fetch { status, error in
-            self.remoteConfig.activate()
-            self.loadHomeData()
-        }
+        loadHomeData()
     }
 }
 /// UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout

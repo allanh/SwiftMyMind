@@ -10,7 +10,7 @@ import Foundation
 enum ServiceType {
     case auth
     case dos
-    case time
+    case push
 }
 
 fileprivate enum Version: String {
@@ -46,12 +46,19 @@ extension Endpoint {
         return ""
     }()
 
+    static let pushURL: String = {
+        if let url = Bundle.main.infoDictionary?["PushServerURL"] as? String {
+            return url
+        }
+        return ""
+    }()
+    
     var url: URL {
         var components: URLComponents?
         switch serviceType {
         case .auth: components = URLComponents(string: Endpoint.baseAuthURL)
         case .dos: components = URLComponents(string: Endpoint.baseURL)
-        case .time: components = URLComponents(string: "https://www.google.com")
+        case .push: components = URLComponents(string: Endpoint.pushURL)
         }
 
         components?.path = path
@@ -296,5 +303,8 @@ extension Endpoint {
             URLQueryItem(name: "order_by", value: order)
         ]
         return Endpoint(path: "/api/admin/\(version)/dashboard/order_sale_by_vendor", queryItems: items)
+    }
+    static var registration: Self {
+        Endpoint(path: "/api/v1/external/push/device", serviceType: .push)
     }
 }

@@ -33,6 +33,12 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>使用相機掃描 QR 碼，取得登入驗證碼</string>
+	<key>PushAppKey</key>
+	<string>$(PUSH_KEY)</string>
+	<key>PushKey</key>
+	<string>$(PUSH_KEY)</string>
+	<key>PushServerURL</key>
+	<string>$(PUSH_SERVER_URL)</string>
 	<key>ServerURL</key>
 	<string>$(SERVER_URL)</string>
 	<key>UIApplicationSceneManifest</key>

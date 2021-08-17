@@ -27,6 +27,8 @@
 		5280D6EF26C122A7004363C6 /* UIAlertAction+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5280D6EE26C122A7004363C6 /* UIAlertAction+.swift */; };
 		5280D6F326C25A6F004363C6 /* MyMindUUIDDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5280D6F226C25A6F004363C6 /* MyMindUUIDDescriptionView.swift */; };
 		5280D6F726C4F90E004363C6 /* PurchasedProductsInfoRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5280D6F626C4F90E004363C6 /* PurchasedProductsInfoRootView.swift */; };
+		528A697A26CBADC200FC3387 /* Alpha in Resources */ = {isa = PBXBuildFile; fileRef = 528A697926CBADC200FC3387 /* Alpha */; };
+		528A697C26CBADD600FC3387 /* Release in Resources */ = {isa = PBXBuildFile; fileRef = 528A697B26CBADD600FC3387 /* Release */; };
 		5293EE9C269A8AEB001A9754 /* HorizontalCellSizePagingFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5293EE9B269A8AEB001A9754 /* HorizontalCellSizePagingFlowLayout.swift */; };
 		5293EE9E269A8F5B001A9754 /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5293EE9D269A8F5B001A9754 /* Report.swift */; };
 		5293EEA0269A9DBC001A9754 /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5293EE9F269A9DBC001A9754 /* HomeModel.swift */; };
@@ -56,8 +58,8 @@
 		52C2CBE6269ED0D5002A2BA9 /* SaleReportCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C2CBE5269ED0D5002A2BA9 /* SaleReportCollectionViewCell.swift */; };
 		52C2CBE926A01B70002A2BA9 /* DashedLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C2CBE826A01B70002A2BA9 /* DashedLineView.swift */; };
 		52C2CBED26A04243002A2BA9 /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C2CBEC26A04243002A2BA9 /* MainPageViewController.swift */; };
+		52CB080226CB8B15003F79DB /* MyMindPushAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CB080126CB8B15003F79DB /* MyMindPushAPIService.swift */; };
 		52D7249F268D62BC00B00585 /* MyMindPurchaseReviewAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D7249E268D62BC00B00585 /* MyMindPurchaseReviewAPIService.swift */; };
-		52D724A4268DBD6400B00585 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 52D724A3268DBD6400B00585 /* GoogleService-Info.plist */; };
 		52E1EDF726A6D29900506010 /* ServerTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E1EDF626A6D29900506010 /* ServerTime.swift */; };
 		52E505FE26A531B4000E5116 /* ResendOTPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E505FD26A531B4000E5116 /* ResendOTPViewController.swift */; };
 		52E5060026A532D7000E5116 /* ResendOTPViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E505FF26A532D7000E5116 /* ResendOTPViewModel.swift */; };
@@ -301,6 +303,8 @@
 		5280D6EE26C122A7004363C6 /* UIAlertAction+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertAction+.swift"; sourceTree = "<group>"; };
 		5280D6F226C25A6F004363C6 /* MyMindUUIDDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMindUUIDDescriptionView.swift; sourceTree = "<group>"; };
 		5280D6F626C4F90E004363C6 /* PurchasedProductsInfoRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasedProductsInfoRootView.swift; sourceTree = "<group>"; };
+		528A697926CBADC200FC3387 /* Alpha */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Alpha; sourceTree = "<group>"; };
+		528A697B26CBADD600FC3387 /* Release */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Release; sourceTree = "<group>"; };
 		5293EE9B269A8AEB001A9754 /* HorizontalCellSizePagingFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalCellSizePagingFlowLayout.swift; sourceTree = "<group>"; };
 		5293EE9D269A8F5B001A9754 /* Report.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Report.swift; sourceTree = "<group>"; };
 		5293EE9F269A9DBC001A9754 /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
@@ -330,8 +334,9 @@
 		52C2CBE5269ED0D5002A2BA9 /* SaleReportCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaleReportCollectionViewCell.swift; sourceTree = "<group>"; };
 		52C2CBE826A01B70002A2BA9 /* DashedLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashedLineView.swift; sourceTree = "<group>"; };
 		52C2CBEC26A04243002A2BA9 /* MainPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageViewController.swift; sourceTree = "<group>"; };
+		52CB080026CB6323003F79DB /* MyMind.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MyMind.entitlements; sourceTree = "<group>"; };
+		52CB080126CB8B15003F79DB /* MyMindPushAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMindPushAPIService.swift; sourceTree = "<group>"; };
 		52D7249E268D62BC00B00585 /* MyMindPurchaseReviewAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMindPurchaseReviewAPIService.swift; sourceTree = "<group>"; };
-		52D724A3268DBD6400B00585 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		52E1EDF626A6D29900506010 /* ServerTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerTime.swift; sourceTree = "<group>"; };
 		52E505FD26A531B4000E5116 /* ResendOTPViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResendOTPViewController.swift; sourceTree = "<group>"; };
 		52E505FF26A532D7000E5116 /* ResendOTPViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResendOTPViewModel.swift; sourceTree = "<group>"; };
@@ -807,6 +812,9 @@
 		A44A5A6C25F9B0D200995823 /* MyMind */ = {
 			isa = PBXGroup;
 			children = (
+				528A697B26CBADD600FC3387 /* Release */,
+				528A697926CBADC200FC3387 /* Alpha */,
+				52CB080026CB6323003F79DB /* MyMind.entitlements */,
 				52944E2426982B1D006CC865 /* Home */,
 				5246E47026901BC8005C11EC /* Setting */,
 				A4793C932604768200AD280C /* Sign In */,
@@ -824,7 +832,6 @@
 				A44A5A7825F9B0D300995823 /* LaunchScreen.storyboard */,
 				A44A5A7B25F9B0D300995823 /* Info.plist */,
 				A456701126845D14009598AE /* RootTabBarController.swift */,
-				52D724A3268DBD6400B00585 /* GoogleService-Info.plist */,
 				52C2CBEC26A04243002A2BA9 /* MainPageViewController.swift */,
 				524AB12B26A80913003D1E92 /* Demo-Info.plist */,
 				5277788226A80DF500CF4E07 /* Production-Info.plist */,
@@ -1017,6 +1024,7 @@
 				52D7249E268D62BC00B00585 /* MyMindPurchaseReviewAPIService.swift */,
 				52B15CB92691BAFC0010FCED /* MyMindEmployeeAPIService.swift */,
 				52944E222697FCFD006CC865 /* MyMindDashboardAPIService.swift */,
+				52CB080126CB8B15003F79DB /* MyMindPushAPIService.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -1179,6 +1187,7 @@
 				A44A5A6725F9B0D200995823 /* Frameworks */,
 				A44A5A6825F9B0D200995823 /* Resources */,
 				E51B057EE87CB516D0017E0A /* [CP] Embed Pods Frameworks */,
+				528A697E26CBB71B00FC3387 /* GoogleServiceInfo */,
 			);
 			buildRules = (
 			);
@@ -1278,6 +1287,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				97547CC32681D8FF001859A8 /* PurchaseLogInfoViewController.xib in Resources */,
+				528A697C26CBADD600FC3387 /* Release in Resources */,
 				A4BCA0CF267C98B500E3B274 /* PurchaseOrderInfoViewController.xib in Resources */,
 				A44A5A7A25F9B0D300995823 /* LaunchScreen.storyboard in Resources */,
 				A40EBFDF2671F7A100A4863D /* PickPurchaseReviewerViewController.xib in Resources */,
@@ -1288,11 +1298,11 @@
 				52282373268EB41400A66340 /* PurchaseBriefReviewingCollectionViewCell.xib in Resources */,
 				527E11C12692C38D00FB8B01 /* PurchaseReviewingApplyInfoViewController.xib in Resources */,
 				A40EBFDA2671AD4900A4863D /* PurchaseApplyInfoViewController.xib in Resources */,
+				528A697A26CBADC200FC3387 /* Alpha in Resources */,
 				A4CBD8B7266A2CF200B19119 /* ProductMaterialSuggestionInfoTableViewCell.xib in Resources */,
 				A43E850A268C081B008C8369 /* SecretTableViewCell.xib in Resources */,
 				A44A5A7525F9B0D200995823 /* Main.storyboard in Resources */,
 				A456700A26830BAB009598AE /* PurchasedProductInfoTableViewCell.xib in Resources */,
-				52D724A4268DBD6400B00585 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1357,6 +1367,24 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
+		};
+		528A697E26CBB71B00FC3387 /* GoogleServiceInfo */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = GoogleServiceInfo;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif [ \"${CONFIGURATION}\" = \"Release\" ]; then\ncp \"${PROJECT_DIR}/MyMind/Release/GoogleService-Info.plist\" \"${CONFIGURATION_BUILD_DIR}/MyMind.app/GoogleService-Info.plist\"\nelif [ \"${CONFIGURATION}\" = \"Alpha\" ]; then\ncp \"${PROJECT_DIR}/MyMind/Alpha/GoogleService-Info.plist\" \"${CONFIGURATION_BUILD_DIR}/MyMind.app/GoogleService-Info.plist\"\nelif [ \"${CONFIGURATION}\" = \"Debug\" ]; then\ncp \"${PROJECT_DIR}/MyMind/Alpha/GoogleService-Info.plist\" \"${CONFIGURATION_BUILD_DIR}/MyMind.app/GoogleService-Info.plist\"\nelif [ \"${CONFIGURATION}\" = \"Demo\" ]; then\ncp \"${PROJECT_DIR}/MyMind/Release/GoogleService-Info.plist\" \"${CONFIGURATION_BUILD_DIR}/MyMind.app/GoogleService-Info.plist\"\nelse\ncp \"${PROJECT_DIR}/MyMind/Alpha/GoogleService-Info.plist\" \"${CONFIGURATION_BUILD_DIR}/MyMind.app/GoogleService-Info.plist\"\nfi\n\n";
 		};
 		7193E3825CC6FAD2274E5955 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1595,6 +1623,7 @@
 				A43F428F2643866F00A246CC /* PurchaseListFilterViewController.swift in Sources */,
 				5280D6EB26C1226E004363C6 /* UIAlertController+.swift in Sources */,
 				A4793CA72604873B00AD280C /* SignInRootView.swift in Sources */,
+				52CB080226CB8B15003F79DB /* MyMindPushAPIService.swift in Sources */,
 				A43E0B6F260DC66D005FC6CE /* UIControl+.swift in Sources */,
 				A46BA1DD263AAD2A0075E8C8 /* OrganizeOptionView.swift in Sources */,
 				A43E0B63260D7CA4005FC6CE /* NiblessViewController.swift in Sources */,
@@ -1782,6 +1811,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				AUTH_SERVER_URL = "http://api-alpha-auth.udnshopping.com";
+				CODE_SIGN_ENTITLEMENTS = MyMind/MyMind.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CRYPTO = 9Edv7aN6h2ZUpK6V6SmHmugm;
 				CURRENT_PROJECT_VERSION = 7;
@@ -1794,6 +1824,8 @@
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.shopping.udi.MyMind.gamma;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUSH_KEY = kPcqmOhEJ6caWdwu0Skk7dpoFTUXB7CJK4UknfV5tHc;
+				PUSH_SERVER_URL = "http://api-alpha-subsystem.udnshopping.com";
 				SERVER_URL = "http://api-gke-alpha-dos.udnshopping.com";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG GAMMA";
 				SWIFT_OBJC_BRIDGING_HEADER = "MyMind/TOTP/MyMind-Bridging-Header.h";
@@ -1911,6 +1943,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				AUTH_SERVER_URL = "https://api-demo-auth.udicommerce.com";
+				CODE_SIGN_ENTITLEMENTS = MyMind/MyMind.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CRYPTO = tAGsC6LLLFU2TwHBzvqLFjms;
 				CURRENT_PROJECT_VERSION = 7;
@@ -1923,6 +1956,8 @@
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.shopping.udi.MyMind.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUSH_KEY = "f6fnHfjjPERLsl5YcEntYDFpXCGVKnkNAIz4O2GSYtI=";
+				PUSH_SERVER_URL = "https://api-subsystem.udnshopping.com";
 				SERVER_URL = "https://demo-mymind.udicommerce.com";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEMO;
 				SWIFT_OBJC_BRIDGING_HEADER = "MyMind/TOTP/MyMind-Bridging-Header.h";
@@ -2101,6 +2136,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				AUTH_SERVER_URL = "http://api-beta-auth.udnshopping.com";
+				CODE_SIGN_ENTITLEMENTS = MyMind/MyMind.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CRYPTO = 9Edv7aN6h2ZUpK6V6SmHmugm;
 				CURRENT_PROJECT_VERSION = 7;
@@ -2113,6 +2149,8 @@
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.shopping.udi.MyMind.debug;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUSH_KEY = kPcqmOhEJ6caWdwu0Skk7dpoFTUXB7CJK4UknfV5tHc;
+				PUSH_SERVER_URL = "http://api-beta-subsystem.udnshopping.com";
 				SERVER_URL = "http://api-beta-dos.udnshopping.com";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG BETA";
 				SWIFT_OBJC_BRIDGING_HEADER = "MyMind/TOTP/MyMind-Bridging-Header.h";
@@ -2131,6 +2169,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				AUTH_SERVER_URL = "https://api-auth.udicommerce.com";
+				CODE_SIGN_ENTITLEMENTS = MyMind/MyMind.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CRYPTO = tAGsC6LLLFU2TwHBzvqLFjms;
 				CURRENT_PROJECT_VERSION = 7;
@@ -2143,6 +2182,8 @@
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.shopping.udi.MyMind;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUSH_KEY = "f6fnHfjjPERLsl5YcEntYDFpXCGVKnkNAIz4O2GSYtI=";
+				PUSH_SERVER_URL = "https://api-subsystem.udnshopping.com";
 				SERVER_URL = "https://api-mymind.udicommerce.com";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = PRODUCTION;
 				SWIFT_OBJC_BRIDGING_HEADER = "MyMind/TOTP/MyMind-Bridging-Header.h";
@@ -2310,6 +2351,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				AUTH_SERVER_URL = "http://api-alpha-auth.udnshopping.com";
+				CODE_SIGN_ENTITLEMENTS = MyMind/MyMind.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CRYPTO = 9Edv7aN6h2ZUpK6V6SmHmugm;
 				CURRENT_PROJECT_VERSION = 7;
@@ -2322,6 +2364,8 @@
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.shopping.udi.MyMind.alpha;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUSH_KEY = kPcqmOhEJ6caWdwu0Skk7dpoFTUXB7CJK4UknfV5tHc;
+				PUSH_SERVER_URL = "http://api-alpha-subsystem.udnshopping.com";
 				SERVER_URL = "http://api-gke-alpha-dos.udnshopping.com";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG ALPHA";
 				SWIFT_OBJC_BRIDGING_HEADER = "MyMind/TOTP/MyMind-Bridging-Header.h";

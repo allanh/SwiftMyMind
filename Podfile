@@ -23,6 +23,7 @@ target 'MyMind' do
     pod 'Kingfisher', '~> 6.0'
     pod 'SwiftOTP'
     pod 'Firebase/RemoteConfig'
+    pod 'Firebase/Messaging'
 
   target 'MyMindTests' do
     inherit! :search_paths
