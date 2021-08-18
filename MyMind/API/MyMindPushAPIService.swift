@@ -30,27 +30,13 @@ struct RegistrationInfo {
     var business: String?
     var partnerID: String?
 
-    init(token: String, id: String? = nil, name: String? = nil, company: String? = nil, business: String? = nil, partnerID: String? = nil) {
+    init(token: String) {
         self.token = token
-        self.id = id
-        self.name = name
-        self.company = company
-        self.business = business
-        self.partnerID = partnerID
-    }
-    init(token: String, session: UserSession?) {
-        self.token = token
-        if let id = session?.customerInfo.id {
-            self.company = String(id)
-        }
-        if let id = session?.businessInfo.id {
-            self.business = String(id)
-        }
-        if let id = session?.partnerInfo.id {
-            self.partnerID = String(id)
-        }
-        if let id = session?.employeeInfo.id {
-            self.id = String(id)
+        if let session = KeychainUserSessionDataStore().readUserSession() {
+            self.company = String(session.customerInfo.id)
+            self.business = String(session.businessInfo.id)
+            self.partnerID = String(session.partnerInfo.id)
+            self.id = String(session.employeeInfo.id)
         }
     }
 }
@@ -102,5 +88,15 @@ class MyMindPushAPIService: PromiseKitAPIService {
         let request = request(endPoint: .registration, httpMethod: "PUT", httpHeader: ["APPKEY": MyMindPushAPIService.pushAppKey()], httpBody: body)
         return sendRequest(request: request)
     }
-
+    
+    func openMessage(with token: String, messageID: String) -> Promise<Void> {
+        let json: [String: Any] = [
+            "device_token": token,
+            "is_open": true
+        ]
+        
+        let body = try? JSONSerialization.data(withJSONObject: json)
+        let request = request(endPoint: .openMessage(messageID: messageID), httpMethod: "PUT", httpHeader: ["APPKEY": MyMindPushAPIService.pushAppKey()], httpBody: body)
+        return sendRequest(request: request)
+    }
 }

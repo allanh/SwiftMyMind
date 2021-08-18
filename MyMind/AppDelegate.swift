@@ -78,20 +78,44 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         
         print("**** didReceive ***")
+        let userInfo = response.notification.request.content.userInfo
+        let messageID = userInfo["message_id"] as? String
+
+        if let messageID = userInfo["message_id"] as? String {
+            Messaging.messaging().token { token, error in
+                if let error = error {
+                    print("Error fetching remote instance ID for sending open status to server: \(error.localizedDescription)")
+                } else if let token = token {
+                    MyMindPushAPIService.shared.openMessage(with: token, messageID: messageID)
+                        .done { registration in
+                            print("success")
+                        }
+                        .catch { error in
+                            print(error.localizedDescription)
+                        }
+
+                }
+            }
+        }
     }
 }
 extension AppDelegate: MessagingDelegate {
     public func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         print("Firebase did refresh registration token: \(String(describing: fcmToken))")
         // Register to udn push center.
-        let info: RegistrationInfo = RegistrationInfo(token: fcmToken ?? "", session: KeychainUserSessionDataStore().readUserSession())
-        MyMindPushAPIService.shared.registration(with: info)
-            .done { registration in
-                print("registration complete with id = \(registration.id) isCreated = \(registration.isCreated)")
-            }
-            .catch { error in
+        if let token = fcmToken {
+            do {
+                try KeychainHelper.default.saveItem(token, for: .token)
+                MyMindPushAPIService.shared.registration(with: RegistrationInfo(token: token))
+                    .done { registration in
+                        print(registration)
+                    }
+                    .catch { error in
+                        print(error.localizedDescription)
+                    }
+            } catch {
                 print(error.localizedDescription)
             }
+        }
     }
-
 }

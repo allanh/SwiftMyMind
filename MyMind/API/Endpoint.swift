@@ -304,7 +304,12 @@ extension Endpoint {
         ]
         return Endpoint(path: "/api/admin/\(version)/dashboard/order_sale_by_vendor", queryItems: items)
     }
+    
     static var registration: Self {
         Endpoint(path: "/api/v1/external/push/device", serviceType: .push)
+    }
+    
+    static func openMessage(messageID: String) -> Self {
+        return Endpoint(path: "/api/v1/external/push/message/\(messageID)/is_open", serviceType: .push)
     }
 }
