@@ -224,7 +224,7 @@ class SignInRootView: NiblessView {
     
     let resendOTPButton: UIButton = UIButton {
         let attributedString = NSAttributedString(
-            string: "重綁驗證碼",
+            string: "重綁OTP驗證碼",
             attributes: [
                 NSAttributedString.Key.font: UIFont.pingFangTCRegular(ofSize: 14),
                 NSAttributedString.Key.foregroundColor: UIColor(hex: "306ab2"),

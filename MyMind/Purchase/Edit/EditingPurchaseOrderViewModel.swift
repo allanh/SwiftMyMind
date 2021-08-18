@@ -19,7 +19,7 @@ protocol EditingPurchaseOrderService {
 class EditingPurchaseOrderViewModel {
     enum View {
         case purchasedProducts(viewModels: BehaviorRelay<[SuggestionProductMaterialViewModel]>)
-        case purhcaseList
+        case purhcaseList(message: String)
         case purchasedProductInfos(infos: [PurchaseOrder.ProductInfo])
         case error(error: Error)
     }
@@ -111,7 +111,7 @@ class EditingPurchaseOrderViewModel {
                 self?.isNetworkProcessing.accept(false)
             }
             .done { [unowned self] _ in
-                self.navigation(with: .purhcaseList)
+                self.navigation(with: .purhcaseList(message: (self.reviewing) ? "審查通過": "申請送出"))
             }
             .catch { error in
                 print(error.localizedDescription)
@@ -131,7 +131,7 @@ class EditingPurchaseOrderViewModel {
                 self?.isNetworkProcessing.accept(false)
             }
             .done { [unowned self] _ in
-                self.navigation(with: .purhcaseList)
+                self.navigation(with: .purhcaseList(message: "已\(action.description)"))
             }
             .catch { error in
                 print(error.localizedDescription)

@@ -66,7 +66,7 @@ final class ScanViewController: UIViewController {
         super.viewDidAppear(animated)
         #if targetEnvironment(simulator)
             #if ALPHA
-            let string = "00ADB1iGsn1jvWxnGtKSoj59plRI10N/ok6DN8i5qX3neupnFdmvnN6lZax4V/ip7i+t/d7niQOh3WahGXgsdCJCkFBp8QIBV3l+tffPxzMH7qij6sW05OBsl9kWDvDCv8"// alpha(admin1Lv1o)
+            let string = "00ADB1iGsn1jvWxnGtKSoj59plRI10N/ok6DN8i5qX3neupnFdmvnN6mlW3j8fka6Y90pu8CGfqg9MzszBfq+XJSkFBp8QIBV3aFCvqb2/KILn1d38Z/ASBe/83V3BWjX4"// alpha(admin1Lv1o)
             handleReceive(string)
             #elseif DEMO
             let string = "00yIC3PIZ/ZScC5Vwg2TFR8eXhKfZhVSScBz5kHxqXZQb8hgFv2wbX4lj/fHdxZkeyvGWUyQzQE62QquUIsaGg684mgt25Li//VXSqPiGm7UYYq3lP9xoOUnlURwdHFFk4A3ffWbi7h6Q=" // demo(allan.shih)

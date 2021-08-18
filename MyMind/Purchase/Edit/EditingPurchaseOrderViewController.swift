@@ -191,9 +191,16 @@ final class EditingPurchaseOrderViewController: NiblessViewController {
 
     private func navigation(with view: EditingPurchaseOrderViewModel.View) {
         switch view {
-        case .purhcaseList:
-            navigationController?.popViewController(animated: true)
-            delegate?.didFinished(true)
+        case .purhcaseList(let message):
+            if message.contains("已退回") {
+                ToastView.showIn(self, message: message, iconName: "success", at: .center) {
+                    self.navigationController?.popViewController(animated: true)
+                    self.delegate?.didFinished(true)
+                }
+            } else {
+                navigationController?.popViewController(animated: true)
+                delegate?.didFinished(true)
+            }
         case .purchasedProducts(let viewModels):
             let viewModel = EditablePickedProductsInfoViewModel(pickedProductMaterialViewModels: viewModels)
             let viewController = EditablePickedProductsInfoViewController(viewModel: viewModel)
@@ -271,18 +278,7 @@ final class EditingPurchaseOrderViewController: NiblessViewController {
     }
     @objc
     private func disagreeButtonDidTapped(_ sender: UIButton) {
-        if let contentView = navigationController?.view {
-            let alertView = CustomAlertView(frame: contentView.bounds, title: "確定退回嗎？", descriptions: "退回後，需要重新審核，是否確認退回？")
-            alertView.confirmButton.addAction { [weak self] in
-                guard let self = self else { return }
-                alertView.removeFromSuperview()
-                self.viewModel.sendReturnRequest()
-            }
-            alertView.cancelButton.addAction {
-                alertView.removeFromSuperview()
-            }
-            contentView.addSubview(alertView)
-        }
+        viewModel.sendReturnRequest()
     }
 }
 // MARK: - Collection view data source

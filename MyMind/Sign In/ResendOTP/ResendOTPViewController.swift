@@ -62,7 +62,7 @@ class ResendOTPViewController: NiblessViewController {
         viewModel.successMessage
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [unowned self] in
-                ToastView.showIn(self, message: $0, iconName: "success") {
+                ToastView.showIn(self, message: $0, iconName: "success", at: .center) {
                     navigationController?.popViewController(animated: true)
                 }
             })

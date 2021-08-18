@@ -70,7 +70,7 @@ class ResendOTPRootView: NiblessView {
 
     private let resendOTPTitleLabel: UILabel = UILabel {
         $0.font = UIFont.pingFangTCSemibold(ofSize: 16)
-        $0.text = "補發 OTP QR Code"
+        $0.text = "重綁OTP驗證碼"
         $0.textColor = UIColor(hex: "545454")
         $0.backgroundColor = .clear
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -85,7 +85,7 @@ class ResendOTPRootView: NiblessView {
     }
     private let description1Label: UILabel = UILabel {
         $0.font = UIFont.pingFangTCRegular(ofSize: 12)
-        $0.text = "請輸入以下資料，我們將重新發送【帳號綁定 OTP驗證通知信】"
+        $0.text = "請輸入以下資料，我們將重新發送【帳號綁定OTP驗證通知信】，原先綁定的驗證碼將會失效"
         $0.numberOfLines = 0
         $0.textColor = UIColor(hex: "545454")
         $0.backgroundColor = .clear

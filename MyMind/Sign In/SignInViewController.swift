@@ -167,7 +167,7 @@ class SignInViewController: NiblessViewController {
         viewModel.userSession
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [unowned self] _ in
-                ToastView.showIn(self, message: "登入成功", iconName: "success")
+                ToastView.showIn(self, message: "登入成功", iconName: "success", at: .center)
                 do {
                     let token = try KeychainHelper.default.readItem(key: .token, valueType: String.self)
                     MyMindPushAPIService.shared.registration(with: RegistrationInfo(token: token))
