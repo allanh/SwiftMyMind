@@ -193,7 +193,7 @@ final class EditingPurchaseOrderViewController: NiblessViewController {
         switch view {
         case .purhcaseList(let message):
             if message.contains("已退回") {
-                ToastView.showIn(self, message: message, iconName: "success") {
+                ToastView.showIn(self, message: message, iconName: "success", at: .center) {
                     self.navigationController?.popViewController(animated: true)
                     self.delegate?.didFinished(true)
                 }

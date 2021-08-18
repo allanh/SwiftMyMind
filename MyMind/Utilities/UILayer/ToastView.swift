@@ -10,6 +10,9 @@ import UIKit
 
 class ToastView: NiblessView {
 
+    enum Position {
+        case top, center, bottom
+    }
     private let imageView: UIImageView = UIImageView {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
@@ -25,25 +28,22 @@ class ToastView: NiblessView {
     static var sharedView: ToastView?
 
     // MARK: - Methods
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        constructViewHierarchy()
-        activateConstraints()
-        backgroundColor = UIColor.black.withAlphaComponent(0.7)
-        layer.cornerRadius = 4
-    }
 
-    private func constructViewHierarchy() {
-        addSubview(imageView)
+    private func constructViewHierarchy(_ position: Position) {
+        if position == .center {
+            addSubview(imageView)
+        }
         addSubview(label)
     }
 
-    private func activateConstraints() {
-        activateConstraintsImageView()
-        activateConstraintsLabel()
+    private func activateConstraints(_ position: Position) {
+        if position == .center {
+            activateConstraintsImageView()
+        }
+        activateConstraintsLabel(position)
     }
     
-    static func showIn(_ viewController: UIViewController, message: String, iconName: String = "error", completion: (() -> Void)? = nil) {
+    static func showIn(_ viewController: UIViewController, message: String, iconName: String = "error", at position:Position = .bottom, completion: (() -> Void)? = nil) {
         var displayVC = viewController
 
         if let tabController = viewController as? UITabBarController {
@@ -53,22 +53,44 @@ class ToastView: NiblessView {
         if sharedView == nil {
             sharedView = ToastView()
         }
+        sharedView?.imageView.removeFromSuperview()
+        sharedView?.label.removeFromSuperview()
+        sharedView?.constructViewHierarchy(position)
+        sharedView?.activateConstraints(position)
+        switch position {
+        case .center:
+            sharedView?.backgroundColor = UIColor.black.withAlphaComponent(0.7)
+            sharedView?.layer.cornerRadius = 4
+            sharedView?.label.textAlignment = .center
+        case .top, .bottom:
+            sharedView?.backgroundColor = UIColor(hex: "323232")
+            sharedView?.layer.cornerRadius = 0
+            sharedView?.layer.shadowOffset = CGSize(width: 0, height: 3)
+            sharedView?.layer.shadowColor = UIColor.black.withAlphaComponent(0.5).cgColor
+            sharedView?.label.textAlignment = .left
+        }
 
         let image = UIImage(named: iconName)
         sharedView?.imageView.image = image
         sharedView?.label.text = message
 
         if sharedView?.superview == nil {
-            let defaultSize = CGSize(width: 110, height: 110)
-            let defaultLabelHeight: CGFloat = 20
-            let labelHeight = message.height(withConstrainedWidth: 100, font: UIFont.pingFangTCRegular(ofSize: 14))
-            let finalHeight = defaultSize.height - defaultLabelHeight + labelHeight
+            switch position {
+            case .center:
+                let defaultSize = CGSize(width: 110, height: 110)
+                let defaultLabelHeight: CGFloat = 20
+                let labelHeight = message.height(withConstrainedWidth: 100, font: UIFont.pingFangTCRegular(ofSize: 14))
+                let finalHeight = defaultSize.height - defaultLabelHeight + labelHeight
 
-            let x = displayVC.view.bounds.width/2.0 - defaultSize.width/2.0
-            let y = displayVC.view.bounds.height/2.0 - finalHeight/2.0
-            sharedView?.frame = CGRect(origin: CGPoint(x: x, y: y), size: CGSize(width: defaultSize.width, height: finalHeight))
+                let x = displayVC.view.bounds.width/2.0 - defaultSize.width/2.0
+                let y = displayVC.view.bounds.height/2.0 - finalHeight/2.0
+                sharedView?.frame = CGRect(origin: CGPoint(x: x, y: y), size: CGSize(width: defaultSize.width, height: finalHeight))
+            case .top:
+                sharedView?.frame = CGRect(origin: CGPoint(x: 16, y: 16), size: CGSize(width: displayVC.view.bounds.width-32, height: 48))
+            case .bottom:
+                sharedView?.frame = CGRect(origin: CGPoint(x: 16, y: displayVC.view.bounds.height-48-16), size: CGSize(width: displayVC.view.bounds.width-32, height: 48))
+            }
             sharedView?.alpha = 0
-
             displayVC.view.addSubview(sharedView!)
             sharedView?.fadeIn()
 
@@ -118,13 +140,23 @@ extension ToastView {
         ])
     }
 
-    private func activateConstraintsLabel() {
-        let top = label.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 7)
-        let centerX = label.centerXAnchor.constraint(equalTo: centerXAnchor)
-        let width = label.widthAnchor.constraint(equalToConstant: 100)
+    private func activateConstraintsLabel(_ position: Position) {
+        switch position {
+        case .center:
+            let top = label.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 7)
+            let centerX = label.centerXAnchor.constraint(equalTo: centerXAnchor)
+            let width = label.widthAnchor.constraint(equalToConstant: 100)
 
-        NSLayoutConstraint.activate([
-            top, centerX, width
-        ])
+            NSLayoutConstraint.activate([
+                top, centerX, width
+            ])
+        case .top, .bottom:
+            let centerY = label.centerYAnchor.constraint(equalTo: centerYAnchor)
+            let leading = label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16)
+
+            NSLayoutConstraint.activate([
+                leading, centerY
+            ])
+        }
     }
 }

@@ -144,7 +144,7 @@ class SettingViewController: UIViewController {
                     self.isNetworkProcessing = false
                 }
                 .done {_ in 
-                    ToastView.showIn(self, message: "修改成功", iconName: "success")
+                    ToastView.showIn(self, message: "修改成功", iconName: "success", at: .center)
                 }
                 .catch { error in
                     ToastView.showIn(self, message: error.localizedDescription)
