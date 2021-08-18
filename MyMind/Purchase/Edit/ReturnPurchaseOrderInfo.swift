@@ -9,8 +9,17 @@
 import Foundation
 
 struct ReturnPurchaseOrderParameterInfo: Codable {
-    enum ActionType: String, Codable {
+    enum ActionType: String, Codable, CustomStringConvertible {
         case VOID, REVOKED, RETURN
+        var description: String {
+            get {
+                switch self {
+                case .VOID: return "作廢"
+                case .REVOKED: return "撤回"
+                case .RETURN: return "退回"
+                }
+            }
+        }
     }
     let action: ActionType
     let remark: String
