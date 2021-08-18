@@ -84,21 +84,7 @@ extension AppDelegate: MessagingDelegate {
     public func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         print("Firebase did refresh registration token: \(String(describing: fcmToken))")
         // Register to udn push center.
-        var info: RegistrationInfo = RegistrationInfo(token: fcmToken ?? "")
-        let userStore = KeychainUserSessionDataStore()
-        let session = userStore.readUserSession()
-        if let id = session?.customerInfo.id {
-            info.company = String(id)
-        }
-        if let id = session?.businessInfo.id {
-            info.business = String(id)
-        }
-        if let id = session?.partnerInfo.id {
-            info.partnerID = String(id)
-        }
-        if let id = session?.employeeInfo.id {
-            info.id = String(id)
-        }
+        let info: RegistrationInfo = RegistrationInfo(token: fcmToken ?? "", session: KeychainUserSessionDataStore().readUserSession())
         MyMindPushAPIService.shared.registration(with: info)
             .done { registration in
                 print("registration complete with id = \(registration.id) isCreated = \(registration.isCreated)")

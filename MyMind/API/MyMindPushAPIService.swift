@@ -38,6 +38,21 @@ struct RegistrationInfo {
         self.business = business
         self.partnerID = partnerID
     }
+    init(token: String, session: UserSession?) {
+        self.token = token
+        if let id = session?.customerInfo.id {
+            self.company = String(id)
+        }
+        if let id = session?.businessInfo.id {
+            self.business = String(id)
+        }
+        if let id = session?.partnerInfo.id {
+            self.partnerID = String(id)
+        }
+        if let id = session?.employeeInfo.id {
+            self.id = String(id)
+        }
+    }
 }
 extension RegistrationInfo: Encodable {
     func encode(to encoder: Encoder) throws {
