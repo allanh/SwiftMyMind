@@ -46,15 +46,15 @@ class ForgotPasswordViewModel {
     }
 
     func validateInputInfo() -> Bool {
-        let storeIDResult = signInValidationService.validateStoreID(forgotPasswordInfo.storeID)
+        let storeIDResult = signInValidationService.validate(forgotPasswordInfo.storeID)
         storeIDValidationResult.accept(storeIDResult)
 
-        let accountResult = signInValidationService.validateAccount(forgotPasswordInfo.account)
+        let accountResult = signInValidationService.validate(forgotPasswordInfo.account)
         accountValidationResult.accept(accountResult)
 
-        let emailResult = signInValidationService.validateEmail(forgotPasswordInfo.email)
+        let emailResult = signInValidationService.validate(forgotPasswordInfo.email)
         emailValidationResult.accept(emailResult)
-        let captchaValueResult = signInValidationService.validateCaptchaValue(forgotPasswordInfo.captchaValue ?? "")
+        let captchaValueResult = signInValidationService.validate(forgotPasswordInfo.captchaValue ?? "")
         captchaValueValidationResult.accept(captchaValueResult)
 
         var result: Bool = false

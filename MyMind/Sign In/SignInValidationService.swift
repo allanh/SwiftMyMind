@@ -15,11 +15,19 @@ enum ValidationResult: Equatable {
 
 struct SignInValidatoinService {
 
+    func validate(_ value: String) -> ValidationResult {
+        if value.count == 0 {
+            return .invalid("此欄位必填")
+        }
+        return .valid
+    }
+    /*
     func validateStoreID(_ storeID: String) -> ValidationResult {
         let count = storeID.count
         if count == 0 {
             return .invalid("此欄位必填")
         }
+        return .valid
         if count < 6 || count > 20 {
             return .invalid("請輸入 6~20 個半形英文/數字")
         }
@@ -44,6 +52,7 @@ struct SignInValidatoinService {
         if count == 0 {
             return .invalid("此欄位必填")
         }
+        return .valid
         if count < 6 || count > 20 {
             return .invalid("請輸入 6~20 個半形英文/數字/符號'.'")
         }
@@ -68,6 +77,7 @@ struct SignInValidatoinService {
         if count == 0 {
             return .invalid("此欄位必填")
         }
+        return .valid
         if count < 6 || count > 20 {
             return .invalid("請輸入 6~20 個半形英文/數字/特殊符號")
         }
@@ -94,11 +104,12 @@ struct SignInValidatoinService {
             return .invalid("驗證碼長度為5碼")
         }
     }
-
+*/
     func validateEmail(_ email: String) -> ValidationResult {
         let isValid = email.range(
             of: #"^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$"#,
             options: [.regularExpression, .caseInsensitive]) != nil
         return isValid ? .valid : .invalid("Email 輸入格式錯誤")
     }
+
 }
