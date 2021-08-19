@@ -68,7 +68,7 @@ struct Registration: Codable {
         case id = "device_id", isCreated = "is_created"
     }
     let id: String
-    let isCreated: String
+    let isCreated: Bool
 }
 class MyMindPushAPIService: PromiseKitAPIService {
     static func pushAppKey()-> String {

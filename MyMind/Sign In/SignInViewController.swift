@@ -175,7 +175,12 @@ class SignInViewController: NiblessViewController {
                             print(registration)
                         })
                         .catch { error in
-                            print(error)
+                            switch error {
+                            case APIError.serviceError(let message):
+                                ToastView.showIn(self, message: message)
+                            default:
+                                ToastView.showIn(self, message: error.localizedDescription)
+                            }
                         }
                 
                 } catch {}

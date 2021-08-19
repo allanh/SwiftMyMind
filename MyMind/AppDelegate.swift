@@ -79,7 +79,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         
         print("**** didReceive ***")
         let userInfo = response.notification.request.content.userInfo
-        let messageID = userInfo["message_id"] as? String
 
         if let messageID = userInfo["message_id"] as? String {
             Messaging.messaging().token { token, error in
@@ -111,7 +110,12 @@ extension AppDelegate: MessagingDelegate {
                         print(registration)
                     }
                     .catch { error in
-                        print(error.localizedDescription)
+                        switch error {
+                        case APIError.serviceError(let message):
+                            print(message)
+                        default:
+                            print(error.localizedDescription)
+                        }
                     }
             } catch {
                 print(error.localizedDescription)
