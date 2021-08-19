@@ -314,16 +314,15 @@ extension ResendOTPRootView {
     }
     private func activateConstraintsBackgroundImageView() {
         let top = backgroundImageView.topAnchor
-            .constraint(equalTo: topAnchor)
-        let height = backgroundImageView.heightAnchor
-            .constraint(equalToConstant: 181)
+            .constraint(equalTo: topAnchor, constant: -1)
         let leading = backgroundImageView.leadingAnchor
             .constraint(equalTo: leadingAnchor)
         let trailing = backgroundImageView.trailingAnchor
             .constraint(equalTo: trailingAnchor)
+        backgroundImageView.addConstraint(NSLayoutConstraint.init(item: backgroundImageView, attribute: .height, relatedBy: .equal, toItem: backgroundImageView, attribute: .width, multiplier: 181/375, constant: 0))
 
         NSLayoutConstraint.activate([
-            top, height, leading, trailing
+            top, leading, trailing
         ])
     }
     private func activateConstraintsBackgroundTitleLabel() {
