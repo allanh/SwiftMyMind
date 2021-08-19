@@ -192,9 +192,7 @@ class ResendOTPRootView: NiblessView {
         $0.setTitleColor(UIColor(hex: "b4b4b4"), for: .disabled)
         $0.titleLabel?.font = UIFont.pingFangTCSemibold(ofSize: 16)
         $0.backgroundColor = UIColor(hex: "004477")
-        $0.layer.cornerRadius = 10
-//        $0.layer.shadowColor = UIColor(hex: "ea6120").withAlphaComponent(0.5).cgColor
-//        $0.layer.shadowOffset = CGSize(width: 0, height: 3)
+        $0.layer.cornerRadius = 4
     }
 
     // MARK: - Methods
@@ -425,7 +423,7 @@ extension ResendOTPRootView {
 
     private func activateConstraintsResendOTPTitleLabel() {
         let top = resendOTPTitleLabel.topAnchor
-            .constraint(equalTo: titleGradientView.bottomAnchor, constant: 30)
+            .constraint(equalTo: titleGradientView.bottomAnchor, constant: 16)
         let leading = resendOTPTitleLabel.leadingAnchor
             .constraint(equalTo: contentView.leadingAnchor, constant: 20)
         let height = resendOTPTitleLabel.heightAnchor
@@ -437,7 +435,7 @@ extension ResendOTPRootView {
     }
     private func activateConstraintsBullet1Label() {
         let top = bullet1Label.topAnchor
-            .constraint(equalTo: resendOTPTitleLabel.bottomAnchor, constant: 15)
+            .constraint(equalTo: resendOTPTitleLabel.bottomAnchor, constant: 8)
         let leading = bullet1Label.leadingAnchor
             .constraint(equalTo: resendOTPTitleLabel.leadingAnchor)
         let width = bullet1Label.widthAnchor

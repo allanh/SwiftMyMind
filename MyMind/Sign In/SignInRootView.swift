@@ -204,14 +204,12 @@ class SignInRootView: NiblessView {
         $0.setTitleColor(UIColor(hex: "b4b4b4"), for: .disabled)
         $0.titleLabel?.font = UIFont.pingFangTCSemibold(ofSize: 16)
         $0.backgroundColor = UIColor(hex: "004477")
-        $0.layer.cornerRadius = 10
-//        $0.layer.shadowColor = UIColor(hex: "ea6120").withAlphaComponent(0.5).cgColor
-//        $0.layer.shadowOffset = CGSize(width: 0, height: 3)
+        $0.layer.cornerRadius = 4
     }
 
     let resetPasswordButton: UIButton = UIButton {
         let attributedString = NSAttributedString(
-            string: "忘記密碼",
+            string: "忘記密碼？",
             attributes: [
                 NSAttributedString.Key.font: UIFont.pingFangTCRegular(ofSize: 14),
                 NSAttributedString.Key.foregroundColor: UIColor(hex: "306ab2"),
@@ -398,7 +396,7 @@ extension SignInRootView {
     }
     private func activateConstraintsBackgroundImageView() {
         let top = backgroundImageView.topAnchor
-            .constraint(equalTo: topAnchor)
+            .constraint(equalTo: backgroundView.topAnchor)
         let height = backgroundImageView.heightAnchor
             .constraint(equalToConstant: 181)
         let leading = backgroundImageView.leadingAnchor
@@ -518,7 +516,7 @@ extension SignInRootView {
     
     private func activateConstraintsStackView() {
         let top = inputStackView.topAnchor
-            .constraint(equalTo: titleGradientView.bottomAnchor, constant: 30)
+            .constraint(equalTo: titleGradientView.bottomAnchor, constant: 16)
         let leading = inputStackView.leadingAnchor
             .constraint(equalTo: contentView.leadingAnchor, constant: 20)
         let trailing = inputStackView.trailingAnchor
@@ -541,7 +539,7 @@ extension SignInRootView {
         let top = exclamationImageView.topAnchor
             .constraint(equalTo: rememberAccountButton.bottomAnchor, constant: 10)
         let leading = exclamationImageView.leadingAnchor
-            .constraint(equalTo: rememberAccountButton.leadingAnchor)
+            .constraint(equalTo: inputStackView.leadingAnchor)
         let width = exclamationImageView.widthAnchor
             .constraint(equalToConstant: 16)
         let height = exclamationImageView.heightAnchor
@@ -570,7 +568,7 @@ extension SignInRootView {
         let top = rememberAccountButton.topAnchor
             .constraint(equalTo: inputStackView.bottomAnchor)
         let leading = rememberAccountButton.leadingAnchor
-            .constraint(equalTo: inputStackView.leadingAnchor)
+            .constraint(equalTo: inputStackView.leadingAnchor, constant: -4)
         let width = rememberAccountButton.widthAnchor
             .constraint(equalToConstant: 90)
         let height = rememberAccountButton.heightAnchor
@@ -600,13 +598,11 @@ extension SignInRootView {
                 .constraint(equalTo: signInButton.bottomAnchor, constant: 8)
             let leading = resetPasswordButton.leadingAnchor
                 .constraint(equalTo: inputStackView.leadingAnchor)
-            let width = resetPasswordButton.widthAnchor
-                .constraint(equalToConstant: 64)
             let height = resetPasswordButton.heightAnchor
                 .constraint(equalToConstant: 20)
 
             NSLayoutConstraint.activate([
-                top, leading, width, height
+                top, leading, height
             ])
         }
     }
