@@ -34,6 +34,7 @@ final class ScanViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "My Mind 買賣 OTP"
+        addCustomBackNavigationItem()
         let status = AVCaptureDevice.authorizationStatus(for: .video)
         if status != .authorized {
             AVCaptureDevice.requestAccess(for: .video) { [weak self] granted in

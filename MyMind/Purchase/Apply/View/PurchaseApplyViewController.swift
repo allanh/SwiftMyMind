@@ -41,6 +41,7 @@ final class PurchaseApplyViewController: NiblessViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        addCustomBackNavigationItem()
         title = "採購申請"
         navigationItem.backButtonTitle = ""
         view.backgroundColor = .white

@@ -59,7 +59,7 @@ extension ErrorHandler {
         )
         let signInViewController = SignInViewController(viewModel: viewModel)
         topMostViewController?.navigationController?.popToRootViewController(animated: false)
-        topMostViewController?.navigationController?.show(signInViewController, sender: self)
+        topMostViewController?.show(signInViewController, sender: self)
     }
     
     private func showStaticPage(_ controller: UIViewController, page: StaticView) {

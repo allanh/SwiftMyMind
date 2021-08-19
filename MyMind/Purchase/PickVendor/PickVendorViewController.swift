@@ -28,6 +28,7 @@ final class PickVendorViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        addCustomBackNavigationItem()
         title = "請選擇供應商"
         navigationItem.backButtonTitle = ""
         configTableView()

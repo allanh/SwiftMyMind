@@ -34,6 +34,7 @@ class ProductMaterialSuggestionInfoTableViewController: UITableViewController {
         super.viewDidLoad()
 
 //        title = "建議採購資訊"
+        addCustomBackNavigationItem()
         tableView.register(UINib(nibName: String(describing: ProductMaterialSuggestionInfoTableViewCell.self), bundle: nil), forCellReuseIdentifier: String(describing: ProductMaterialSuggestionInfoTableViewCell.self))
         tableView.rowHeight = 44
         tableView.separatorStyle = .none

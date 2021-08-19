@@ -98,6 +98,7 @@ class EditablePickedProductsInfoViewController: NiblessViewController {
 
         view.backgroundColor = .white
 
+        addCustomBackNavigationItem()
         title = "採購SKU資訊"
         navigationItem.backButtonTitle = ""
         wireToViewModel()
