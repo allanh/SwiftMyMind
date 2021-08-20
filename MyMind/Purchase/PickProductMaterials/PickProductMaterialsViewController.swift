@@ -31,6 +31,7 @@ class PickProductMaterialsViewController: NiblessViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        addCustomBackNavigationItem()
         navigationItem.backButtonTitle = ""
         configTableView()
         subscribeViewModel()

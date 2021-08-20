@@ -25,6 +25,7 @@ final class RootTabBarController: UITabBarController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        addCustomBackNavigationItem()
         title = "My Mind 買賣後台"
         navigationItem.backButtonTitle = ""
         generateHomeViewController()

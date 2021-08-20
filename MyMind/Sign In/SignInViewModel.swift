@@ -75,16 +75,16 @@ class SignInViewModel {
 
     func validateSignInInfo() -> Bool {
         var valid = false
-        let storeIDResult = signInValidationService.validateStoreID(signInInfo.storeID)
+        let storeIDResult = signInValidationService.validate(signInInfo.storeID)
         storeIDValidationResult.accept(storeIDResult)
 
-        let accountResult = signInValidationService.validateAccount(signInInfo.account)
+        let accountResult = signInValidationService.validate(signInInfo.account)
         accountValidationResult.accept(accountResult)
 
-        let passwordResult = signInValidationService.validatePassword(signInInfo.password)
+        let passwordResult = signInValidationService.validate(signInInfo.password)
         passwordValidationResult.accept(passwordResult)
 
-        let captchaValueResult = signInValidationService.validateCaptchaValue(signInInfo.captchaValue ?? "")
+        let captchaValueResult = signInValidationService.validate(signInInfo.captchaValue ?? "")
         captchaValueValidationResult.accept(captchaValueResult)
         
         if !otpEnabled {

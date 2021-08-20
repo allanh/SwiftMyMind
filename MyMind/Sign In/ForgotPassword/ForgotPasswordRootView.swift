@@ -203,9 +203,7 @@ class ForgotPasswordRootView: NiblessView {
         $0.setTitleColor(UIColor(hex: "b4b4b4"), for: .disabled)
         $0.titleLabel?.font = UIFont.pingFangTCSemibold(ofSize: 16)
         $0.backgroundColor = UIColor(hex: "004477")
-        $0.layer.cornerRadius = 10
-//        $0.layer.shadowColor = UIColor(hex: "ea6120").withAlphaComponent(0.5).cgColor
-//        $0.layer.shadowOffset = CGSize(width: 0, height: 3)
+        $0.layer.cornerRadius = 4
     }
 
     // MARK: - Methods
@@ -330,7 +328,7 @@ class ForgotPasswordRootView: NiblessView {
 
     func resetScrollViewContentInsets() {
         let scrollViewBounds = scrollView.bounds
-        let contentViewHeight: CGFloat = 515
+        let contentViewHeight: CGFloat = 495
 
         var insets = UIEdgeInsets.zero
         insets.top = scrollViewBounds.height / 2.0
@@ -366,16 +364,14 @@ extension ForgotPasswordRootView {
     }
     private func activateConstraintsBackgroundImageView() {
         let top = backgroundImageView.topAnchor
-            .constraint(equalTo: topAnchor)
-        let height = backgroundImageView.heightAnchor
-            .constraint(equalToConstant: 181)
+            .constraint(equalTo: topAnchor, constant: -1)
         let leading = backgroundImageView.leadingAnchor
             .constraint(equalTo: leadingAnchor)
         let trailing = backgroundImageView.trailingAnchor
             .constraint(equalTo: trailingAnchor)
-
+        
         NSLayoutConstraint.activate([
-            top, height, leading, trailing
+            top, leading, trailing
         ])
     }
     private func activateConstraintsBackgroundTitleLabel() {
@@ -486,7 +482,7 @@ extension ForgotPasswordRootView {
 
     private func activateConstraintsResetPasswordTitleLabel() {
         let top = resetPasswordTitleLabel.topAnchor
-            .constraint(equalTo: titleGradientView.bottomAnchor, constant: 30)
+            .constraint(equalTo: titleGradientView.bottomAnchor, constant: 16)
         let leading = resetPasswordTitleLabel.leadingAnchor
             .constraint(equalTo: contentView.leadingAnchor, constant: 20)
         let height = resetPasswordTitleLabel.heightAnchor
@@ -499,7 +495,7 @@ extension ForgotPasswordRootView {
 
     private func activateConstraintsResetPasswordDescriptionLabel() {
         let top = resetPasswordDescriptionLabel.topAnchor
-            .constraint(equalTo: resetPasswordTitleLabel.bottomAnchor, constant: 15)
+            .constraint(equalTo: resetPasswordTitleLabel.bottomAnchor, constant: 8)
         let leading = resetPasswordDescriptionLabel.leadingAnchor
             .constraint(equalTo: resetPasswordTitleLabel.leadingAnchor)
         let height = resetPasswordDescriptionLabel.heightAnchor

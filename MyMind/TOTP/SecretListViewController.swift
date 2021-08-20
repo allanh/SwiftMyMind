@@ -20,6 +20,7 @@ class SecretListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        addCustomBackNavigationItem()
         title = "My Mind 買賣 OTP"
         navigationItem.backButtonTitle = ""
         tableView.register(SecretTableViewCell.nib, forCellReuseIdentifier: SecretTableViewCell.reuseIdentifier)

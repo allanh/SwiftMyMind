@@ -57,6 +57,7 @@ final class PurchaseCompletedApplyViewController: NiblessViewController {
     // MARK: - View life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        addCustomBackNavigationItem()
         navigationItem.backButtonTitle = ""
         view.backgroundColor = .white
         constructViewHierarchy()

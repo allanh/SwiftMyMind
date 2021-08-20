@@ -28,6 +28,7 @@ class PurchasedProductsInfoViewController: NiblessViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        addCustomBackNavigationItem()
         title = "採購SKU資訊"
         navigationItem.backButtonTitle = ""
         rootView.tableView.register(

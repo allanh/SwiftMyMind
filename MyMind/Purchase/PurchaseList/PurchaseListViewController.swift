@@ -67,9 +67,9 @@ final class PurchaseListViewController: NiblessViewController {
         super.viewDidLoad()
 
         view.backgroundColor = .white
+        addCustomBackNavigationItem()
         title = (reviewing) ? "審核採購申請" : "採購申請單列表"
         navigationItem.backButtonTitle = ""
-//        addCloseButton()
         configTableView()
         configCollectionView()
         loadPurchaseList(purchaseListQueryInfo: purchaseListQueryInfo)

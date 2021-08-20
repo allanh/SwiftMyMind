@@ -76,6 +76,7 @@ final class EditingPurchaseOrderViewController: NiblessViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        addCustomBackNavigationItem()
         navigationItem.backButtonTitle = ""
         title = reviewing ? "審核採購申請" :"編輯採購申請"
         view.backgroundColor = .systemBackground

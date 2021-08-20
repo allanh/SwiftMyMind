@@ -43,28 +43,4 @@ struct Account: Codable {
         }
         return status
     }
-/*
-        employee_id    String
-        管理員序號
-
-          account    String
-        管理員帳號
-
-          name    String
-        管理員姓名
-
-          email    String
-        Email
-
-          mobile    String
-        手機
-
-          ip    String
-        最近登入IP
-
-          last_login_at    String
-        最近登入時間
-
-          updated_at
- */
 }

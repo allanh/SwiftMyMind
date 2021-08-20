@@ -36,13 +36,13 @@ class ResendOTPViewModel {
     }
 
     func validateInputInfo() -> Bool {
-        let storeIDResult = signInValidationService.validateStoreID(resendOTPInfo.storeID)
+        let storeIDResult = signInValidationService.validate(resendOTPInfo.storeID)
         storeIDValidationResult.accept(storeIDResult)
 
-        let accountResult = signInValidationService.validateAccount(resendOTPInfo.account)
+        let accountResult = signInValidationService.validate(resendOTPInfo.account)
         accountValidationResult.accept(accountResult)
 
-        let passwordResult = signInValidationService.validatePassword(resendOTPInfo.password)
+        let passwordResult = signInValidationService.validate(resendOTPInfo.password)
         passwordValidationResult.accept(passwordResult)
 
         let result = storeIDResult == .valid
