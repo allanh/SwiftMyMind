@@ -593,7 +593,7 @@ extension SignInRootView {
             ])
         } else {
             let top = resetPasswordButton.topAnchor
-                .constraint(equalTo: signInButton.bottomAnchor, constant: 8)
+                .constraint(equalTo: signInButton.bottomAnchor, constant: 16)
             let leading = resetPasswordButton.leadingAnchor
                 .constraint(equalTo: inputStackView.leadingAnchor)
             let height = resetPasswordButton.heightAnchor
@@ -680,7 +680,7 @@ extension SignInRootView {
 
     private func activateConstraintsSignInButton() {
         let top = signInButton.topAnchor
-            .constraint(equalTo: (!viewModel.otpEnabled) ? captchaInputView.bottomAnchor : confirmTimeLabel.bottomAnchor, constant: 20)
+            .constraint(equalTo: (!viewModel.otpEnabled) ? captchaInputView.bottomAnchor : confirmTimeLabel.bottomAnchor, constant: 8)
         let leading = signInButton.leadingAnchor
             .constraint(equalTo: inputStackView.leadingAnchor)
         let trailing = signInButton.trailingAnchor
