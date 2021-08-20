@@ -449,7 +449,7 @@ extension ForgotPasswordRootView {
         let leading = titleGradientView.leadingAnchor
             .constraint(equalTo: contentView.leadingAnchor)
         let width = titleGradientView.widthAnchor
-            .constraint(equalToConstant: 98)
+            .constraint(equalToConstant: 100)
         let height = titleGradientView.heightAnchor
             .constraint(equalToConstant: 28)
 
