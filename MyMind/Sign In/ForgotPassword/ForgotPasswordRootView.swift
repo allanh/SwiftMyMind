@@ -328,7 +328,7 @@ class ForgotPasswordRootView: NiblessView {
 
     func resetScrollViewContentInsets() {
         let scrollViewBounds = scrollView.bounds
-        let contentViewHeight: CGFloat = 515
+        let contentViewHeight: CGFloat = 495
 
         var insets = UIEdgeInsets.zero
         insets.top = scrollViewBounds.height / 2.0
@@ -370,8 +370,6 @@ extension ForgotPasswordRootView {
         let trailing = backgroundImageView.trailingAnchor
             .constraint(equalTo: trailingAnchor)
         
-        backgroundImageView.addConstraint(NSLayoutConstraint.init(item: backgroundImageView, attribute: .height, relatedBy: .equal, toItem: backgroundImageView, attribute: .width, multiplier: 181/375, constant: 0))
-
         NSLayoutConstraint.activate([
             top, leading, trailing
         ])

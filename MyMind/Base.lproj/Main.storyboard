@@ -531,9 +531,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="main_page_background" translatesAutoresizingMaskIntoConstraints="NO" id="b6b-ac-VA0">
-                                <rect key="frame" x="0.0" y="68.000000000000014" width="428" height="238.33333333333337"/>
+                                <rect key="frame" x="0.0" y="86.999999999999986" width="428" height="206.66666666666663"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="b6b-ac-VA0" secondAttribute="height" multiplier="325:181" id="CN7-ce-D0g"/>
+                                    <constraint firstAttribute="width" secondItem="b6b-ac-VA0" secondAttribute="height" multiplier="375:181" id="CN7-ce-D0g"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="最懂你的電商智慧夥伴" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bLR-S1-C05">
@@ -657,7 +657,7 @@
                             <constraint firstItem="bbE-JG-HsP" firstAttribute="leading" secondItem="bLR-S1-C05" secondAttribute="leading" id="fmR-UU-0UC"/>
                             <constraint firstItem="MHu-CN-NUh" firstAttribute="trailing" secondItem="dEb-Y1-7aJ" secondAttribute="trailing" constant="25" id="gkG-0K-zJ2"/>
                             <constraint firstItem="bbE-JG-HsP" firstAttribute="top" secondItem="bLR-S1-C05" secondAttribute="bottom" constant="3" id="muj-K8-HUB"/>
-                            <constraint firstItem="b6b-ac-VA0" firstAttribute="top" secondItem="MHu-CN-NUh" secondAttribute="top" constant="-20" id="oma-OK-KM9"/>
+                            <constraint firstItem="b6b-ac-VA0" firstAttribute="top" secondItem="MHu-CN-NUh" secondAttribute="top" constant="-1" id="oma-OK-KM9"/>
                             <constraint firstItem="MHu-CN-NUh" firstAttribute="trailing" secondItem="bLR-S1-C05" secondAttribute="trailing" constant="25" id="qcP-me-abs"/>
                             <constraint firstItem="bLR-S1-C05" firstAttribute="top" secondItem="MHu-CN-NUh" secondAttribute="top" constant="20" id="riy-wR-epA"/>
                             <constraint firstItem="b6b-ac-VA0" firstAttribute="leading" secondItem="MHu-CN-NUh" secondAttribute="leading" id="vCY-VM-Xhn"/>
