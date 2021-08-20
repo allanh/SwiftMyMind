@@ -399,9 +399,9 @@ extension ResendOTPRootView {
         let leading = titleGradientView.leadingAnchor
             .constraint(equalTo: contentView.leadingAnchor)
         let width = titleGradientView.widthAnchor
-            .constraint(equalToConstant: 126)
+            .constraint(equalToConstant: 100)
         let height = titleGradientView.heightAnchor
-            .constraint(equalToConstant: 30)
+            .constraint(equalToConstant: 28)
 
         NSLayoutConstraint.activate([
             top, leading, width, height
@@ -411,11 +411,11 @@ extension ResendOTPRootView {
     private func activateConstraintsTitleLabel() {
         let centerY = titleLabel.centerYAnchor
             .constraint(equalTo: titleGradientView.centerYAnchor)
-        let trailing = titleLabel.trailingAnchor
-            .constraint(equalTo: titleGradientView.trailingAnchor, constant: -12)
+        let centerX = titleLabel.centerXAnchor
+            .constraint(equalTo: titleGradientView.centerXAnchor)
 
         NSLayoutConstraint.activate([
-            centerY, trailing
+            centerY, centerX
         ])
     }
 
