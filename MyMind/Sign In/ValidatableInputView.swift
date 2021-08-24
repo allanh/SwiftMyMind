@@ -45,10 +45,10 @@ class ValidatableInputView: UIView {
         addSubview(errorMessageLabel)
     }
 
-    func activateConstraints() {
+    func activateConstraints(_ hasIndicator: Bool = true) {
         activateConstraintsTextField()
-        activateConstraintsIndicatorImageView()
-        activateConstraintsErrorMessageLabel(true)
+        activateConstraintsIndicatorImageView(hasIndicator)
+        activateConstraintsErrorMessageLabel(hasIndicator)
     }
 
     func showError(with message: String, indicator: UIImage? = nil) {
@@ -56,9 +56,10 @@ class ValidatableInputView: UIView {
         errorMessageLabel.text = message
         errorMessageLabel.isHidden = false
         indicatorImageView.image = indicator
-        indicatorImageView.isHidden = (indicator == nil) ? true : false
-        errorMessageLabel.removeConstraints(errorMessageLabel.constraints)
-        activateConstraintsErrorMessageLabel(indicator != nil)
+        indicatorImageView.isHidden = indicator == nil
+        removeConstraints(constraints)
+        indicatorImageView.removeConstraints(indicatorImageView.constraints)
+        activateConstraints(indicator != nil)
     }
 
     func clearError() {
@@ -80,10 +81,10 @@ extension ValidatableInputView {
         ])
     }
     
-    private func activateConstraintsIndicatorImageView() {
+    private func activateConstraintsIndicatorImageView(_ hasIndicator: Bool) {
         let top = indicatorImageView.topAnchor.constraint(equalTo: textField.bottomAnchor)
         let leading = indicatorImageView.leadingAnchor.constraint(equalTo: leadingAnchor)
-        let width = indicatorImageView.widthAnchor.constraint(equalToConstant: 16)
+        let width = indicatorImageView.widthAnchor.constraint(equalToConstant: hasIndicator ? 16 : 0)
         let height = indicatorImageView.heightAnchor.constraint(equalToConstant: 16)
 
         NSLayoutConstraint.activate([
@@ -103,7 +104,7 @@ extension ValidatableInputView {
             ])
         } else {
             let top = errorMessageLabel.topAnchor.constraint(equalTo: textField.bottomAnchor)
-            let leading = errorMessageLabel.leadingAnchor.constraint(equalTo: leadingAnchor)
+            let leading = errorMessageLabel.leadingAnchor.constraint(equalTo: indicatorImageView.trailingAnchor, constant: 0)
             let trailing = errorMessageLabel.trailingAnchor.constraint(equalTo: trailingAnchor)
             let bottom = errorMessageLabel.bottomAnchor.constraint(equalTo: bottomAnchor)
 

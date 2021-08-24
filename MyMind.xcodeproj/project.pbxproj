@@ -1822,14 +1822,14 @@
 				CODE_SIGN_ENTITLEMENTS = MyMind/MyMind.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CRYPTO = 9Edv7aN6h2ZUpK6V6SmHmugm;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = NCP4JUG36Z;
 				INFOPLIST_FILE = MyMind/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.shopping.udi.MyMind.gamma;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PUSH_KEY = kPcqmOhEJ6caWdwu0Skk7dpoFTUXB7CJK4UknfV5tHc;
@@ -1954,14 +1954,14 @@
 				CODE_SIGN_ENTITLEMENTS = MyMind/MyMind.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CRYPTO = tAGsC6LLLFU2TwHBzvqLFjms;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = NCP4JUG36Z;
 				INFOPLIST_FILE = MyMind/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.shopping.udi.MyMind.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PUSH_KEY = "f6fnHfjjPERLsl5YcEntYDFpXCGVKnkNAIz4O2GSYtI=";
@@ -2147,14 +2147,14 @@
 				CODE_SIGN_ENTITLEMENTS = MyMind/MyMind.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CRYPTO = 9Edv7aN6h2ZUpK6V6SmHmugm;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = NCP4JUG36Z;
 				INFOPLIST_FILE = MyMind/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.shopping.udi.MyMind.beta;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PUSH_KEY = kPcqmOhEJ6caWdwu0Skk7dpoFTUXB7CJK4UknfV5tHc;
@@ -2180,14 +2180,14 @@
 				CODE_SIGN_ENTITLEMENTS = MyMind/MyMind.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CRYPTO = tAGsC6LLLFU2TwHBzvqLFjms;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = NCP4JUG36Z;
 				INFOPLIST_FILE = MyMind/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.shopping.udi.MyMind;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PUSH_KEY = "f6fnHfjjPERLsl5YcEntYDFpXCGVKnkNAIz4O2GSYtI=";
@@ -2362,14 +2362,14 @@
 				CODE_SIGN_ENTITLEMENTS = MyMind/MyMind.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CRYPTO = 9Edv7aN6h2ZUpK6V6SmHmugm;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = NCP4JUG36Z;
 				INFOPLIST_FILE = MyMind/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.shopping.udi.MyMind.alpha;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PUSH_KEY = kPcqmOhEJ6caWdwu0Skk7dpoFTUXB7CJK4UknfV5tHc;
