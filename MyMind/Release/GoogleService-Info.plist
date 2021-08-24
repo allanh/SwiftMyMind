@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>364613181525-uppc2190kn4pn6qijou592cqgd86079p.apps.googleusercontent.com</string>
+	<string>983311929976-sb1oetgriq68r1vackljs1hjr4vfiaqu.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.364613181525-uppc2190kn4pn6qijou592cqgd86079p</string>
+	<string>com.googleusercontent.apps.983311929976-sb1oetgriq68r1vackljs1hjr4vfiaqu</string>
 	<key>API_KEY</key>
-	<string>AIzaSyBDFFB1JrIZxIei7F8_HvY7chavs50AcsM</string>
+	<string>AIzaSyDNXf6V1RyAvWXhQAiFcjTYMCyZCyvJ0d4</string>
 	<key>GCM_SENDER_ID</key>
-	<string>364613181525</string>
+	<string>983311929976</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.shopping.udi.MyMind</string>
 	<key>PROJECT_ID</key>
-	<string>mymind-dev</string>
+	<string>mymind-app-761e2</string>
 	<key>STORAGE_BUCKET</key>
-	<string>mymind-dev.appspot.com</string>
+	<string>mymind-app-761e2.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:364613181525:ios:0bcbd61be14405e988b4dc</string>
+	<string>1:983311929976:ios:75ea13a160a805e4ef538d</string>
 </dict>
 </plist>
