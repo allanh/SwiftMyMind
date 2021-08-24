@@ -10,6 +10,8 @@
 		01FE629A3FE5283B00E20CB8 /* Pods_MyMind.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F231C5BAACFDBA2A1B0E19E /* Pods_MyMind.framework */; };
 		520776A926B50FBC005BA621 /* SignInTransitionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520776A826B50FBC005BA621 /* SignInTransitionDelegate.swift */; };
 		520776AD26B5106D005BA621 /* SignInPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520776AC26B5106D005BA621 /* SignInPresentationController.swift */; };
+		5216399326D49EB6008E7BB9 /* Debug in Resources */ = {isa = PBXBuildFile; fileRef = 5216399226D49EB6008E7BB9 /* Debug */; };
+		5216399526D49F74008E7BB9 /* Demo in Resources */ = {isa = PBXBuildFile; fileRef = 5216399426D49F74008E7BB9 /* Demo */; };
 		52282372268EB41400A66340 /* PurchaseBriefReviewingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52282370268EB41400A66340 /* PurchaseBriefReviewingCollectionViewCell.swift */; };
 		52282373268EB41400A66340 /* PurchaseBriefReviewingCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52282371268EB41400A66340 /* PurchaseBriefReviewingCollectionViewCell.xib */; };
 		522F855626BB85C7002ED473 /* EmptyDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522F855526BB85C7002ED473 /* EmptyDataView.swift */; };
@@ -284,6 +286,8 @@
 		4E97409623994378E4E04B8B /* Pods-MyMind-Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMind-Demo.debug.xcconfig"; path = "Target Support Files/Pods-MyMind-Demo/Pods-MyMind-Demo.debug.xcconfig"; sourceTree = "<group>"; };
 		520776A826B50FBC005BA621 /* SignInTransitionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInTransitionDelegate.swift; sourceTree = "<group>"; };
 		520776AC26B5106D005BA621 /* SignInPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInPresentationController.swift; sourceTree = "<group>"; };
+		5216399226D49EB6008E7BB9 /* Debug */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Debug; sourceTree = "<group>"; };
+		5216399426D49F74008E7BB9 /* Demo */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Demo; sourceTree = "<group>"; };
 		52282370268EB41400A66340 /* PurchaseBriefReviewingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseBriefReviewingCollectionViewCell.swift; sourceTree = "<group>"; };
 		52282371268EB41400A66340 /* PurchaseBriefReviewingCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PurchaseBriefReviewingCollectionViewCell.xib; sourceTree = "<group>"; };
 		522F855526BB85C7002ED473 /* EmptyDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyDataView.swift; sourceTree = "<group>"; };
@@ -812,6 +816,8 @@
 		A44A5A6C25F9B0D200995823 /* MyMind */ = {
 			isa = PBXGroup;
 			children = (
+				5216399426D49F74008E7BB9 /* Demo */,
+				5216399226D49EB6008E7BB9 /* Debug */,
 				528A697B26CBADD600FC3387 /* Release */,
 				528A697926CBADC200FC3387 /* Alpha */,
 				52CB080026CB6323003F79DB /* MyMind.entitlements */,
@@ -1286,6 +1292,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5216399326D49EB6008E7BB9 /* Debug in Resources */,
 				97547CC32681D8FF001859A8 /* PurchaseLogInfoViewController.xib in Resources */,
 				528A697C26CBADD600FC3387 /* Release in Resources */,
 				A4BCA0CF267C98B500E3B274 /* PurchaseOrderInfoViewController.xib in Resources */,
@@ -1295,6 +1302,7 @@
 				97AFE3712667246B002CBE01 /* PurchaseProductSuggestionViewController.xib in Resources */,
 				A489A1B2263FAA7D00832679 /* PurchaseBriefCollectionViewCell.xib in Resources */,
 				A43E850E268C0889008C8369 /* TOTP.storyboard in Resources */,
+				5216399526D49F74008E7BB9 /* Demo in Resources */,
 				52282373268EB41400A66340 /* PurchaseBriefReviewingCollectionViewCell.xib in Resources */,
 				527E11C12692C38D00FB8B01 /* PurchaseReviewingApplyInfoViewController.xib in Resources */,
 				A40EBFDA2671AD4900A4863D /* PurchaseApplyInfoViewController.xib in Resources */,
@@ -2147,7 +2155,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.shopping.udi.MyMind.debug;
+				PRODUCT_BUNDLE_IDENTIFIER = com.shopping.udi.MyMind.beta;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PUSH_KEY = kPcqmOhEJ6caWdwu0Skk7dpoFTUXB7CJK4UknfV5tHc;
 				PUSH_SERVER_URL = "http://api-beta-subsystem.udnshopping.com";
