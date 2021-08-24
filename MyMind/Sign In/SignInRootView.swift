@@ -527,11 +527,11 @@ extension SignInRootView {
 
     private func activateConstraintsInputView() {
         storeIDInputView.heightAnchor
-            .constraint(equalToConstant: 52).isActive = true
+            .constraint(equalToConstant: 56).isActive = true
         accountInputView.heightAnchor
-            .constraint(equalToConstant: 52).isActive = true
+            .constraint(equalToConstant: 56).isActive = true
         passwordInputView.heightAnchor
-            .constraint(equalToConstant: 52).isActive = true
+            .constraint(equalToConstant: 56).isActive = true
     }
     private func activateConstraintsExclamationImageView() {
         let top = exclamationImageView.topAnchor
@@ -688,7 +688,7 @@ extension SignInRootView {
         let height = signInButton.heightAnchor
             .constraint(equalToConstant: 46)
         let bottom = contentView.bottomAnchor
-            .constraint(equalTo: signInButton.bottomAnchor, constant: 61)
+            .constraint(equalTo: signInButton.bottomAnchor, constant: 60)
 
         NSLayoutConstraint.activate([
             top, leading, trailing, height, bottom
