@@ -311,18 +311,25 @@ class ForgotPasswordRootView: NiblessView {
                 self.viewModel.forgotPasswordInfo.email = $0.2
             })
             .disposed(by: bag)
-//            viewModel.date
-//                .subscribe(on: MainScheduler.instance)
-//                .do(onNext: { print($0) })
-//                .map { serverTime -> String in
-//                    var display = serverTime.time
-//                    display.removeLast(3)
-//                    display = display.replacingOccurrences(of: "-", with: "/")
-//                    return display
-//                }
-//                .bind(to: timeLabel.rx.text)
-//                .disposed(by: bag)
         }
+        storeIDInputView.textField.rx.controlEvent(.editingDidEnd)
+            .subscribe(onNext: { [unowned self] _ in
+                viewModel.validateStoreID()
+            })
+            .disposed(by: bag)
+        
+        accountInputView.textField.rx.controlEvent(.editingDidEnd)
+            .subscribe(onNext: { [unowned self] _ in
+                viewModel.validateAccount()
+            })
+            .disposed(by: bag)
+        
+        emailInputView.textField.rx.controlEvent(.editingDidEnd)
+            .subscribe(onNext: { [unowned self] _ in
+                viewModel.validateEmail()
+            })
+            .disposed(by: bag)
+
         confirmButton.addTarget(viewModel, action: #selector(ForgotPasswordViewModel.confirmSendEmail), for: .touchUpInside)
     }
 
