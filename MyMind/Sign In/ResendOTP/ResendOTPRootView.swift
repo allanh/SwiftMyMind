@@ -273,6 +273,24 @@ class ResendOTPRootView: NiblessView {
             }
             .bind(to: viewModel.isSecureTextEntry)
             .disposed(by: bag)
+        
+        storeIDInputView.textField.rx.controlEvent(.editingDidEnd)
+            .subscribe(onNext: { [unowned self] _ in
+                viewModel.validateStoreID()
+            })
+            .disposed(by: bag)
+        
+        accountInputView.textField.rx.controlEvent(.editingDidEnd)
+            .subscribe(onNext: { [unowned self] _ in
+                viewModel.validateAccount()
+            })
+            .disposed(by: bag)
+        
+        passwordInputView.textField.rx.controlEvent(.editingDidEnd)
+            .subscribe(onNext: { [unowned self] _ in
+                viewModel.validatePassword()
+            })
+            .disposed(by: bag)
 
         confirmButton.addTarget(viewModel, action: #selector(ResendOTPViewModel.confirmSendEmail), for: .touchUpInside)
     }
