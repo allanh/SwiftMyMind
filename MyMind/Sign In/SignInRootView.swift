@@ -355,6 +355,24 @@ class SignInRootView: NiblessView {
             .bind(to: viewModel.isSecureTextEntry)
             .disposed(by: bag)
 
+        storeIDInputView.textField.rx.controlEvent(.editingDidEnd)
+            .subscribe(onNext: { [unowned self] _ in
+                viewModel.validateStoreID()
+            })
+            .disposed(by: bag)
+        
+        accountInputView.textField.rx.controlEvent(.editingDidEnd)
+            .subscribe(onNext: { [unowned self] _ in
+                viewModel.validateAccount()
+            })
+            .disposed(by: bag)
+        
+        passwordInputView.textField.rx.controlEvent(.editingDidEnd)
+            .subscribe(onNext: { [unowned self] _ in
+                viewModel.validatePassword()
+            })
+            .disposed(by: bag)
+        
         signInButton.addTarget(viewModel, action: #selector(viewModel.signIn), for: .touchUpInside)
     }
 
