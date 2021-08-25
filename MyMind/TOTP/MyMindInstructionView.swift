@@ -138,7 +138,7 @@ final class MyMindInstructionView: NiblessView {
         let centerX = titleLabel.centerXAnchor
             .constraint(equalTo: centerXAnchor)
         let top = titleLabel.topAnchor
-            .constraint(equalTo: logoImageView.bottomAnchor, constant: 30)
+            .constraint(equalTo: logoImageView.bottomAnchor, constant: 8)
         let width = titleLabel.widthAnchor
             .constraint(equalTo: widthAnchor, multiplier: 1 / 1.2)
 
@@ -244,11 +244,13 @@ final class MyMindInstructionView: NiblessView {
             .constraint(equalToConstant: 140)
         let height = confirmButton.heightAnchor
             .constraint(equalToConstant: 40)
+        let top = confirmButton.topAnchor
+            .constraint(equalTo: description3Label.bottomAnchor, constant: 25)
         let bottom = confirmButton.bottomAnchor
-            .constraint(equalTo: bottomAnchor, constant: -20)
+            .constraint(equalTo: bottomAnchor, constant: -25)
 
         NSLayoutConstraint.activate([
-            centerX, width, height, bottom
+            centerX, width, height, top, bottom
         ])
     }
 
