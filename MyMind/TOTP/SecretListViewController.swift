@@ -86,7 +86,7 @@ class SecretListViewController: UIViewController {
     }
     private func showQuestionMark() {
         let button = UIButton(type: .custom)
-        button.setImage(UIImage(named: "question_circle"), for: .normal)
+        button.setImage(UIImage(named: "question_circle")?.withRenderingMode(.alwaysTemplate), for: .normal)
         button.addTarget(self, action: #selector(questionButtonDidTapped(_:)), for: .touchUpInside)
         let barButton = UIBarButtonItem(customView: button)
         navigationItem.rightBarButtonItem = barButton
