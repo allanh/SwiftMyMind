@@ -70,12 +70,12 @@ class ForgotPasswordRootView: NiblessView {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    private let timeLabel: UILabel = UILabel {
-        $0.font = UIFont.pingFangTCRegular(ofSize: 14)
-        $0.textColor = UIColor(hex: "545454")
-        $0.backgroundColor = .clear
-        $0.translatesAutoresizingMaskIntoConstraints = false
-    }
+//    private let timeLabel: UILabel = UILabel {
+//        $0.font = UIFont.pingFangTCRegular(ofSize: 14)
+//        $0.textColor = UIColor(hex: "545454")
+//        $0.backgroundColor = .clear
+//        $0.translatesAutoresizingMaskIntoConstraints = false
+//    }
 
     private let resetPasswordTitleLabel: UILabel = UILabel {
         $0.font = UIFont.pingFangTCSemibold(ofSize: 16)
@@ -184,17 +184,17 @@ class ForgotPasswordRootView: NiblessView {
         $0.setImage(image, for: .normal)
     }
     
-    private let exclamationImageView: UIImageView = UIImageView {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.image = UIImage(named: "exclamation_circle")
-    }
-
-    private let confirmTimeLabel: UILabel = UILabel {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.textColor = UIColor(hex: "7f7f7f")
-        $0.text = "請檢視手機時間是否與標準時間同步。"
-        $0.font = .pingFangTCRegular(ofSize: 14)
-    }
+//    private let exclamationImageView: UIImageView = UIImageView {
+//        $0.translatesAutoresizingMaskIntoConstraints = false
+//        $0.image = UIImage(named: "exclamation_circle")
+//    }
+//
+//    private let confirmTimeLabel: UILabel = UILabel {
+//        $0.translatesAutoresizingMaskIntoConstraints = false
+//        $0.textColor = UIColor(hex: "7f7f7f")
+//        $0.text = "請檢視手機時間是否與標準時間同步。"
+//        $0.font = .pingFangTCRegular(ofSize: 14)
+//    }
 
     private let confirmButton: UIButton = UIButton {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -244,9 +244,9 @@ class ForgotPasswordRootView: NiblessView {
             contentView.addSubview(captchaActivityIndicatorView)
             contentView.addSubview(reloadCaptchaButton)
         } else {
-            contentView.addSubview(timeLabel)
-            contentView.addSubview(exclamationImageView)
-            contentView.addSubview(confirmTimeLabel)
+//            contentView.addSubview(timeLabel)
+//            contentView.addSubview(exclamationImageView)
+//            contentView.addSubview(confirmTimeLabel)
         }
         contentView.addSubview(confirmButton)
         addSubview(scrollView)
@@ -272,9 +272,9 @@ class ForgotPasswordRootView: NiblessView {
             activateConstraintsCaptchaActivityIndicatorView()
             activateConstraintsReloadCaptchaButton()
         } else {
-            activateConstraintsTimeLabel()
-            activateConstraintsExclamationImageView()
-            activateConstraintsConfirmTimeLabel()
+//            activateConstraintsTimeLabel()
+//            activateConstraintsExclamationImageView()
+//            activateConstraintsConfirmTimeLabel()
         }
         activateConstraintsConfirmButton()
     }
@@ -311,17 +311,17 @@ class ForgotPasswordRootView: NiblessView {
                 self.viewModel.forgotPasswordInfo.email = $0.2
             })
             .disposed(by: bag)
-            viewModel.date
-                .subscribe(on: MainScheduler.instance)
-                .do(onNext: { print($0) })
-                .map { serverTime -> String in
-                    var display = serverTime.time
-                    display.removeLast(3)
-                    display = display.replacingOccurrences(of: "-", with: "/")
-                    return display
-                }
-                .bind(to: timeLabel.rx.text)
-                .disposed(by: bag)
+//            viewModel.date
+//                .subscribe(on: MainScheduler.instance)
+//                .do(onNext: { print($0) })
+//                .map { serverTime -> String in
+//                    var display = serverTime.time
+//                    display.removeLast(3)
+//                    display = display.replacingOccurrences(of: "-", with: "/")
+//                    return display
+//                }
+//                .bind(to: timeLabel.rx.text)
+//                .disposed(by: bag)
         }
         confirmButton.addTarget(viewModel, action: #selector(ForgotPasswordViewModel.confirmSendEmail), for: .touchUpInside)
     }
@@ -469,16 +469,16 @@ extension ForgotPasswordRootView {
         ])
     }
     
-    private func activateConstraintsTimeLabel() {
-        let centerY = timeLabel.centerYAnchor
-            .constraint(equalTo: titleGradientView.centerYAnchor)
-        let trailing = timeLabel.trailingAnchor
-            .constraint(equalTo: contentView.trailingAnchor, constant: -20)
-
-        NSLayoutConstraint.activate([
-            centerY, trailing
-        ])
-    }
+//    private func activateConstraintsTimeLabel() {
+//        let centerY = timeLabel.centerYAnchor
+//            .constraint(equalTo: titleGradientView.centerYAnchor)
+//        let trailing = timeLabel.trailingAnchor
+//            .constraint(equalTo: contentView.trailingAnchor, constant: -20)
+//
+//        NSLayoutConstraint.activate([
+//            centerY, trailing
+//        ])
+//    }
 
     private func activateConstraintsResetPasswordTitleLabel() {
         let top = resetPasswordTitleLabel.topAnchor
@@ -588,39 +588,39 @@ extension ForgotPasswordRootView {
         ])
     }
 
-    private func activateConstraintsExclamationImageView() {
-        let top = exclamationImageView.topAnchor
-            .constraint(equalTo: inputStackView.bottomAnchor, constant: 10)
-        let leading = exclamationImageView.leadingAnchor
-            .constraint(equalTo: inputStackView.leadingAnchor)
-        let width = exclamationImageView.widthAnchor
-            .constraint(equalToConstant: 16)
-        let height = exclamationImageView.heightAnchor
-            .constraint(equalToConstant: 16)
-
-        NSLayoutConstraint.activate([
-            top, leading, width, height
-        ])
-    }
-
-    private func activateConstraintsConfirmTimeLabel() {
-        let centerY = confirmTimeLabel.centerYAnchor
-            .constraint(equalTo: exclamationImageView.centerYAnchor)
-        let leading = confirmTimeLabel.leadingAnchor
-            .constraint(equalTo: exclamationImageView.trailingAnchor, constant: 4)
-        let trailing = confirmTimeLabel.trailingAnchor
-            .constraint(equalTo: inputStackView.trailingAnchor)
-        let height = confirmTimeLabel.heightAnchor
-            .constraint(equalToConstant: 20)
-
-        NSLayoutConstraint.activate([
-            centerY, leading, trailing, height
-        ])
-    }
+//    private func activateConstraintsExclamationImageView() {
+//        let top = exclamationImageView.topAnchor
+//            .constraint(equalTo: inputStackView.bottomAnchor, constant: 10)
+//        let leading = exclamationImageView.leadingAnchor
+//            .constraint(equalTo: inputStackView.leadingAnchor)
+//        let width = exclamationImageView.widthAnchor
+//            .constraint(equalToConstant: 16)
+//        let height = exclamationImageView.heightAnchor
+//            .constraint(equalToConstant: 16)
+//
+//        NSLayoutConstraint.activate([
+//            top, leading, width, height
+//        ])
+//    }
+//
+//    private func activateConstraintsConfirmTimeLabel() {
+//        let centerY = confirmTimeLabel.centerYAnchor
+//            .constraint(equalTo: exclamationImageView.centerYAnchor)
+//        let leading = confirmTimeLabel.leadingAnchor
+//            .constraint(equalTo: exclamationImageView.trailingAnchor, constant: 4)
+//        let trailing = confirmTimeLabel.trailingAnchor
+//            .constraint(equalTo: inputStackView.trailingAnchor)
+//        let height = confirmTimeLabel.heightAnchor
+//            .constraint(equalToConstant: 20)
+//
+//        NSLayoutConstraint.activate([
+//            centerY, leading, trailing, height
+//        ])
+//    }
 
     private func activateConstraintsConfirmButton() {
         let top = confirmButton.topAnchor
-            .constraint(equalTo: (!viewModel.otpEnabled) ? captchaInputView.bottomAnchor : confirmTimeLabel.bottomAnchor, constant: 8)
+            .constraint(equalTo: inputStackView.bottomAnchor, constant: 4)
         let leading = confirmButton.leadingAnchor
             .constraint(equalTo: inputStackView.leadingAnchor)
         let trailing = confirmButton.trailingAnchor

@@ -68,12 +68,12 @@ class SignInRootView: NiblessView {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
 
-    private let timeLabel: UILabel = UILabel {
-        $0.font = UIFont.pingFangTCRegular(ofSize: 16)
-        $0.textColor = UIColor(hex: "545454")
-        $0.backgroundColor = .clear
-        $0.translatesAutoresizingMaskIntoConstraints = false
-    }
+//    private let timeLabel: UILabel = UILabel {
+//        $0.font = UIFont.pingFangTCRegular(ofSize: 16)
+//        $0.textColor = UIColor(hex: "545454")
+//        $0.backgroundColor = .clear
+//        $0.translatesAutoresizingMaskIntoConstraints = false
+//    }
     private let storeIDInputView: ValidatableInputView = ValidatableInputView {
         $0.textField.attributedPlaceholder = NSAttributedString(
             string: "請輸入商店代號",
@@ -143,16 +143,16 @@ class SignInRootView: NiblessView {
         return stackView
     }()
 
-    private let exclamationImageView: UIImageView = UIImageView {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.image = UIImage(named: "exclamation_circle")
-    }
-    private let confirmTimeLabel: UILabel = UILabel {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.textColor = UIColor(hex: "7f7f7f")
-        $0.text = "請檢視手機時間是否與標準時間同步。"
-        $0.font = .pingFangTCRegular(ofSize: 14)
-    }
+//    private let exclamationImageView: UIImageView = UIImageView {
+//        $0.translatesAutoresizingMaskIntoConstraints = false
+//        $0.image = UIImage(named: "exclamation_circle")
+//    }
+//    private let confirmTimeLabel: UILabel = UILabel {
+//        $0.translatesAutoresizingMaskIntoConstraints = false
+//        $0.textColor = UIColor(hex: "7f7f7f")
+//        $0.text = "請檢視手機時間是否與標準時間同步。"
+//        $0.font = .pingFangTCRegular(ofSize: 14)
+//    }
     private let rememberAccountButton: UIButton = UIButton {
         $0.isSelected = true
         $0.setImage(UIImage(named: "unchecked"), for: .normal)
@@ -266,9 +266,9 @@ class SignInRootView: NiblessView {
             contentView.addSubview(captchaActivityIndicatorView)
             contentView.addSubview(reloadCaptchaButton)
         } else {
-            contentView.addSubview(timeLabel)
-            contentView.addSubview(exclamationImageView)
-            contentView.addSubview(confirmTimeLabel)
+//            contentView.addSubview(timeLabel)
+//            contentView.addSubview(exclamationImageView)
+//            contentView.addSubview(confirmTimeLabel)
             contentView.addSubview(resendOTPButton)
         }
         contentView.addSubview(inputStackView)
@@ -294,9 +294,9 @@ class SignInRootView: NiblessView {
             activateConstraintsCaptchaActivityIndicatorView()
             activateConstraintsReloadCaptchaButton()
         } else {
-            activateConstraintsTimeLabel()
-            activateConstraintsExclamationImageView()
-            activateConstraintsConfirmTimeLabel()
+//            activateConstraintsTimeLabel()
+//            activateConstraintsExclamationImageView()
+//            activateConstraintsConfirmTimeLabel()
             activateConstraintsResendOTPButton()
         }
         activateConstraintsStackView()
@@ -501,16 +501,16 @@ extension SignInRootView {
             centerY, centerX
         ])
     }
-    private func activateConstraintsTimeLabel() {
-        let centerY = timeLabel.centerYAnchor
-            .constraint(equalTo: titleGradientView.centerYAnchor)
-        let trailing = timeLabel.trailingAnchor
-            .constraint(equalTo: contentView.trailingAnchor, constant: -20)
-
-        NSLayoutConstraint.activate([
-            centerY, trailing
-        ])
-    }
+//    private func activateConstraintsTimeLabel() {
+//        let centerY = timeLabel.centerYAnchor
+//            .constraint(equalTo: titleGradientView.centerYAnchor)
+//        let trailing = timeLabel.trailingAnchor
+//            .constraint(equalTo: contentView.trailingAnchor, constant: -20)
+//
+//        NSLayoutConstraint.activate([
+//            centerY, trailing
+//        ])
+//    }
     
     private func activateConstraintsStackView() {
         let top = inputStackView.topAnchor
@@ -533,38 +533,38 @@ extension SignInRootView {
         passwordInputView.heightAnchor
             .constraint(equalToConstant: 56).isActive = true
     }
-    private func activateConstraintsExclamationImageView() {
-        let top = exclamationImageView.topAnchor
-            .constraint(equalTo: rememberAccountButton.bottomAnchor, constant: 10)
-        let leading = exclamationImageView.leadingAnchor
-            .constraint(equalTo: inputStackView.leadingAnchor)
-        let width = exclamationImageView.widthAnchor
-            .constraint(equalToConstant: 16)
-        let height = exclamationImageView.heightAnchor
-            .constraint(equalToConstant: 16)
-
-        NSLayoutConstraint.activate([
-            top, leading, width, height
-        ])
-    }
-    private func activateConstraintsConfirmTimeLabel() {
-        let centerY = confirmTimeLabel.centerYAnchor
-            .constraint(equalTo: exclamationImageView.centerYAnchor)
-        let leading = confirmTimeLabel.leadingAnchor
-            .constraint(equalTo: exclamationImageView.trailingAnchor, constant: 4)
-        let trailing = confirmTimeLabel.trailingAnchor
-            .constraint(equalTo: inputStackView.trailingAnchor)
-        let height = confirmTimeLabel.heightAnchor
-            .constraint(equalToConstant: 20)
-
-        NSLayoutConstraint.activate([
-            centerY, leading, trailing, height
-        ])
-    }
+//    private func activateConstraintsExclamationImageView() {
+//        let top = exclamationImageView.topAnchor
+//            .constraint(equalTo: rememberAccountButton.bottomAnchor, constant: 10)
+//        let leading = exclamationImageView.leadingAnchor
+//            .constraint(equalTo: inputStackView.leadingAnchor)
+//        let width = exclamationImageView.widthAnchor
+//            .constraint(equalToConstant: 16)
+//        let height = exclamationImageView.heightAnchor
+//            .constraint(equalToConstant: 16)
+//
+//        NSLayoutConstraint.activate([
+//            top, leading, width, height
+//        ])
+//    }
+//    private func activateConstraintsConfirmTimeLabel() {
+//        let centerY = confirmTimeLabel.centerYAnchor
+//            .constraint(equalTo: exclamationImageView.centerYAnchor)
+//        let leading = confirmTimeLabel.leadingAnchor
+//            .constraint(equalTo: exclamationImageView.trailingAnchor, constant: 4)
+//        let trailing = confirmTimeLabel.trailingAnchor
+//            .constraint(equalTo: inputStackView.trailingAnchor)
+//        let height = confirmTimeLabel.heightAnchor
+//            .constraint(equalToConstant: 20)
+//
+//        NSLayoutConstraint.activate([
+//            centerY, leading, trailing, height
+//        ])
+//    }
 
     private func activateConstraintsRememberAccountButton() {
         let top = rememberAccountButton.topAnchor
-            .constraint(equalTo: inputStackView.bottomAnchor)
+            .constraint(equalTo: inputStackView.bottomAnchor, constant: 6)
         let leading = rememberAccountButton.leadingAnchor
             .constraint(equalTo: inputStackView.leadingAnchor, constant: -4)
         let width = rememberAccountButton.widthAnchor
@@ -680,7 +680,7 @@ extension SignInRootView {
 
     private func activateConstraintsSignInButton() {
         let top = signInButton.topAnchor
-            .constraint(equalTo: (!viewModel.otpEnabled) ? captchaInputView.bottomAnchor : confirmTimeLabel.bottomAnchor, constant: 8)
+            .constraint(equalTo: (!viewModel.otpEnabled) ? captchaInputView.bottomAnchor : rememberAccountButton.bottomAnchor, constant: 26)
         let leading = signInButton.leadingAnchor
             .constraint(equalTo: inputStackView.leadingAnchor)
         let trailing = signInButton.trailingAnchor
@@ -705,7 +705,7 @@ extension SignInRootView {
         bindViewModelToCaptchaActivityIndicator()
         bindViewModelToPasswordSecureButton()
         bindViewModelToTextFields()
-        bindViewModelToTimeLabel()
+//        bindViewModelToTimeLabel()
     }
 
     private func bindViewModelToRememberAccountButton() {
@@ -844,17 +844,17 @@ extension SignInRootView {
             })
             .disposed(by: bag)
     }
-    private func bindViewModelToTimeLabel() {
-        viewModel.date
-            .subscribe(on: MainScheduler.instance)
-            .do(onNext: { print($0) })
-            .map { serverTime -> String in
-                var display = serverTime.time
-                display.removeLast(3)
-                display = display.replacingOccurrences(of: "-", with: "/")
-                return display
-            }
-            .bind(to: timeLabel.rx.text)
-            .disposed(by: bag)
-    }
+//    private func bindViewModelToTimeLabel() {
+//        viewModel.date
+//            .subscribe(on: MainScheduler.instance)
+//            .do(onNext: { print($0) })
+//            .map { serverTime -> String in
+//                var display = serverTime.time
+//                display.removeLast(3)
+//                display = display.replacingOccurrences(of: "-", with: "/")
+//                return display
+//            }
+//            .bind(to: timeLabel.rx.text)
+//            .disposed(by: bag)
+//    }
 }
