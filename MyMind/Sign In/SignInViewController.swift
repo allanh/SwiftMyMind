@@ -115,7 +115,7 @@ class SignInViewController: NiblessViewController {
                     switch apiError {
                     case .serviceError(let message):
                         if message == "OTP驗證碼錯誤" {
-                            let alert = UIAlertController(title: "OTP驗證碼已失效", message: "請至信箱開啟「帳號綁定OTP驗證通知信」，並掃描最新的【驗證QR Code】。", preferredStyle: .alert)
+                            let alert = UIAlertController(title: "OTP驗證碼已失效", message: "1.請檢視手機時間與中原標準時間一致\n2.請至信箱查看「帳號綁定OTP驗證通知信」，並確認掃描的QR Code為最新版本」", preferredStyle: .alert)
                             let cancelAction = UIAlertAction(title: "取消", style: .cancel) { action in
                             }
                             let confirmAction = UIAlertAction(title: "確定", style: .default) { action in

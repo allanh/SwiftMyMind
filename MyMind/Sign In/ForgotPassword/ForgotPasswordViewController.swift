@@ -85,7 +85,23 @@ class ForgotPasswordViewController: NiblessViewController {
         viewModel.errorMessage
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [unowned self] in
-                ToastView.showIn(self, message: $0)
+                if $0 == "OTP驗證碼錯誤" {
+                    let alert = UIAlertController(title: "OTP驗證碼已失效", message: "1.請檢視手機時間與中原標準時間一致\n2.請至信箱查看「帳號綁定OTP驗證通知信」，並確認掃描的QR Code為最新版本」", preferredStyle: .alert)
+                    let cancelAction = UIAlertAction(title: "取消", style: .cancel) { action in
+                    }
+                    let confirmAction = UIAlertAction(title: "確定", style: .default) { action in
+                        let storyboard: UIStoryboard = UIStoryboard(name: "TOTP", bundle: nil)
+                        if let viewController = storyboard.instantiateViewController(withIdentifier: "SecretListViewControllerNavi") as? UINavigationController, let totpViewController = viewController.topViewController as? SecretListViewController {
+                            totpViewController.scanViewControllerDelegate = self
+                            show(totpViewController, sender: self)
+                        }
+                   }
+                    alert.addAction(cancelAction)
+                    alert.addAction(confirmAction)
+                    present(alert, animated: true, completion: nil)
+                } else {
+                    ToastView.showIn(self, message: $0)
+                }
             })
             .disposed(by: bag)
     }
