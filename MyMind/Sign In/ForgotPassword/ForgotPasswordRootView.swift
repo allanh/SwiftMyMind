@@ -400,7 +400,7 @@ extension ForgotPasswordRootView {
         let top = scrollView.topAnchor
             .constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 90)
         let bottom = scrollView.bottomAnchor
-            .constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -24)
+            .constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -47)
         let leading = scrollView.leadingAnchor
             .constraint(equalTo: leadingAnchor, constant: 25)
         let trailing = scrollView.trailingAnchor
