@@ -16,13 +16,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setUpNavigationBarAppearance()
         FirebaseApp.configure()
 
+        #if !targetEnvironment(simulator)
         Messaging.messaging().delegate = self
         UNUserNotificationCenter.current().delegate = self
         let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound, .provisional]
         UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { granted, error in
-            print(granted)
+            if let error = error {
+                print(error.localizedDescription)
+            }
         }
         application.registerForRemoteNotifications()
+        #endif
         do {
             _ = try KeychainHelper.default.readItem(key: .uuid, valueType: String.self)
         } catch {
