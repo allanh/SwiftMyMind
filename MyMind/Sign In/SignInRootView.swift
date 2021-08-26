@@ -357,19 +357,19 @@ class SignInRootView: NiblessView {
 
         storeIDInputView.textField.rx.controlEvent(.editingDidEnd)
             .subscribe(onNext: { [unowned self] _ in
-                viewModel.validateStoreID()
+                _ = viewModel.validateSignInInfo()
             })
             .disposed(by: bag)
         
         accountInputView.textField.rx.controlEvent(.editingDidEnd)
             .subscribe(onNext: { [unowned self] _ in
-                viewModel.validateAccount()
+                _ = viewModel.validateSignInInfo()
             })
             .disposed(by: bag)
         
         passwordInputView.textField.rx.controlEvent(.editingDidEnd)
             .subscribe(onNext: { [unowned self] _ in
-                viewModel.validatePassword()
+                _ = viewModel.validateSignInInfo()
             })
             .disposed(by: bag)
         
@@ -449,7 +449,7 @@ extension SignInRootView {
 
     private func activateConstraintsScrollView() {
         let top = scrollView.topAnchor
-            .constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 90)
+            .constraint(equalTo: backgroundDescriptionLabel.bottomAnchor, constant: 15)
         let bottom = scrollView.bottomAnchor
             .constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -26)
         let leading = scrollView.leadingAnchor

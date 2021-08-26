@@ -104,18 +104,6 @@ class SignInViewModel {
         return valid
     }
 
-    func validateStoreID() {
-        let storeIDResult = signInValidationService.validate(signInInfo.storeID)
-        storeIDValidationResult.accept(storeIDResult)
-    }
-    func validateAccount() {
-        let accountResult = signInValidationService.validate(signInInfo.account)
-        accountValidationResult.accept(accountResult)
-    }
-    func validatePassword() {
-        let passwordResult = signInValidationService.validate(signInInfo.password)
-        passwordValidationResult.accept(passwordResult)
-    }
     @objc
     func signIn() {
         

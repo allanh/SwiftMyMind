@@ -314,19 +314,19 @@ class ForgotPasswordRootView: NiblessView {
         }
         storeIDInputView.textField.rx.controlEvent(.editingDidEnd)
             .subscribe(onNext: { [unowned self] _ in
-                viewModel.validateStoreID()
+                _ = viewModel.validateInputInfo()
             })
             .disposed(by: bag)
         
         accountInputView.textField.rx.controlEvent(.editingDidEnd)
             .subscribe(onNext: { [unowned self] _ in
-                viewModel.validateAccount()
+                _ = viewModel.validateInputInfo()
             })
             .disposed(by: bag)
         
         emailInputView.textField.rx.controlEvent(.editingDidEnd)
             .subscribe(onNext: { [unowned self] _ in
-                viewModel.validateEmail()
+                _ = viewModel.validateInputInfo()
             })
             .disposed(by: bag)
 
@@ -405,7 +405,7 @@ extension ForgotPasswordRootView {
     }
     private func activateConstraintsScrollView() {
         let top = scrollView.topAnchor
-            .constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 90)
+            .constraint(equalTo: backgroundDescriptionLabel.bottomAnchor, constant: 15)
         let bottom = scrollView.bottomAnchor
             .constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -47)
         let leading = scrollView.leadingAnchor

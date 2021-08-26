@@ -35,19 +35,6 @@ class ResendOTPViewModel {
         self.signInValidationService = signInValidationService
     }
     
-    func validateStoreID() {
-        let storeIDResult = signInValidationService.validate(resendOTPInfo.storeID)
-        storeIDValidationResult.accept(storeIDResult)
-    }
-    func validateAccount() {
-        let accountResult = signInValidationService.validate(resendOTPInfo.account)
-        accountValidationResult.accept(accountResult)
-    }
-    func validatePassword() {
-        let passwordResult = signInValidationService.validate(resendOTPInfo.password)
-        passwordValidationResult.accept(passwordResult)
-    }
-
     func validateInputInfo() -> Bool {
         let storeIDResult = signInValidationService.validate(resendOTPInfo.storeID)
         storeIDValidationResult.accept(storeIDResult)

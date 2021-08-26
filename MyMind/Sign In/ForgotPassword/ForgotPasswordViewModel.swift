@@ -45,19 +45,6 @@ class ForgotPasswordViewModel {
         self.otpEnabled = otpEnabled
     }
 
-    func validateStoreID() {
-        let storeIDResult = signInValidationService.validate(forgotPasswordInfo.storeID)
-        storeIDValidationResult.accept(storeIDResult)
-    }
-    func validateAccount() {
-        let accountResult = signInValidationService.validate(forgotPasswordInfo.account)
-        accountValidationResult.accept(accountResult)
-    }
-    func validateEmail() {
-        let emailResult = signInValidationService.validate(forgotPasswordInfo.email)
-        emailValidationResult.accept(emailResult)
-    }
-
     func validateInputInfo() -> Bool {
         let storeIDResult = signInValidationService.validate(forgotPasswordInfo.storeID)
         storeIDValidationResult.accept(storeIDResult)
