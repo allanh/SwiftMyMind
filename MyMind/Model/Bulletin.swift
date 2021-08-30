@@ -11,9 +11,6 @@ struct Bulletin: Codable {
     enum BulletinType: String, Codable {
         case SYSTEM, NEW_FEATURE, OPTIMIZATION, NEWS, POLICY
     }
-    enum BulletinLevel: String, Codable {
-        case NORMAL, IMPORTANT
-    }
     private enum CodingKeys: String, CodingKey {
         case title, type, importance
         case top = "is_top"
@@ -23,7 +20,7 @@ struct Bulletin: Codable {
     }
     let title: String
     let type: BulletinType
-    let importance: BulletinLevel
+    let importance: Importance
     let top: Bool
     let descriptions: String
     let start: String

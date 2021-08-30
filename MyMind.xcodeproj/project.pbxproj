@@ -50,6 +50,9 @@
 		52B15CBA2691BAFC0010FCED /* MyMindEmployeeAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B15CB92691BAFC0010FCED /* MyMindEmployeeAPIService.swift */; };
 		52B8749026DC7C38008F3CF2 /* BulletinCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B8748F26DC7C38008F3CF2 /* BulletinCollectionViewCell.swift */; };
 		52B8749226DC88EA008F3CF2 /* Bulletin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B8749126DC88EA008F3CF2 /* Bulletin.swift */; };
+		52B8749426DCBE74008F3CF2 /* MyMindAnnouncementAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B8749326DCBE74008F3CF2 /* MyMindAnnouncementAPIService.swift */; };
+		52B8749626DCBFA1008F3CF2 /* Announcement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B8749526DCBFA1008F3CF2 /* Announcement.swift */; };
+		52B8749826DCC3A5008F3CF2 /* UIBarButtonItem+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B8749726DCC3A5008F3CF2 /* UIBarButtonItem+.swift */; };
 		52C2CBD0269BE52B002A2BA9 /* TodaySaleReportCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C2CBCF269BE52B002A2BA9 /* TodaySaleReportCollectionViewCell.swift */; };
 		52C2CBD2269BE6BC002A2BA9 /* TodaySaleInfoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C2CBD1269BE6BC002A2BA9 /* TodaySaleInfoCollectionViewCell.swift */; };
 		52C2CBD4269BED72002A2BA9 /* SaleReportInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C2CBD3269BED72002A2BA9 /* SaleReportInfoView.swift */; };
@@ -332,6 +335,9 @@
 		52B15CB92691BAFC0010FCED /* MyMindEmployeeAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMindEmployeeAPIService.swift; sourceTree = "<group>"; };
 		52B8748F26DC7C38008F3CF2 /* BulletinCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletinCollectionViewCell.swift; sourceTree = "<group>"; };
 		52B8749126DC88EA008F3CF2 /* Bulletin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bulletin.swift; sourceTree = "<group>"; };
+		52B8749326DCBE74008F3CF2 /* MyMindAnnouncementAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMindAnnouncementAPIService.swift; sourceTree = "<group>"; };
+		52B8749526DCBFA1008F3CF2 /* Announcement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Announcement.swift; sourceTree = "<group>"; };
+		52B8749726DCC3A5008F3CF2 /* UIBarButtonItem+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+.swift"; sourceTree = "<group>"; };
 		52C2CBCF269BE52B002A2BA9 /* TodaySaleReportCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodaySaleReportCollectionViewCell.swift; sourceTree = "<group>"; };
 		52C2CBD1269BE6BC002A2BA9 /* TodaySaleInfoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodaySaleInfoCollectionViewCell.swift; sourceTree = "<group>"; };
 		52C2CBD3269BED72002A2BA9 /* SaleReportInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaleReportInfoView.swift; sourceTree = "<group>"; };
@@ -948,6 +954,7 @@
 				52E5060126A5337A000E5116 /* ResendOTPInfo.swift */,
 				52E1EDF626A6D29900506010 /* ServerTime.swift */,
 				52B8749126DC88EA008F3CF2 /* Bulletin.swift */,
+				52B8749526DCBFA1008F3CF2 /* Announcement.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1006,6 +1013,7 @@
 				5280D6EA26C1226E004363C6 /* UIAlertController+.swift */,
 				5280D6EE26C122A7004363C6 /* UIAlertAction+.swift */,
 				52A289F326D8CB4100084893 /* UIView+copy.swift */,
+				52B8749726DCC3A5008F3CF2 /* UIBarButtonItem+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1043,6 +1051,7 @@
 				52B15CB92691BAFC0010FCED /* MyMindEmployeeAPIService.swift */,
 				52944E222697FCFD006CC865 /* MyMindDashboardAPIService.swift */,
 				52CB080126CB8B15003F79DB /* MyMindPushAPIService.swift */,
+				52B8749326DCBE74008F3CF2 /* MyMindAnnouncementAPIService.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -1503,11 +1512,13 @@
 				A43E8516268C0928008C8369 /* InformationTableViewController.swift in Sources */,
 				A4567006268307DD009598AE /* PurchasedProductsInfoViewController.swift in Sources */,
 				A49CF8C526030CEE00AFC170 /* MyMindAuthService.swift in Sources */,
+				52B8749826DCC3A5008F3CF2 /* UIBarButtonItem+.swift in Sources */,
 				A4F2D011265D0770004D8D6D /* ProductMaterialsFilterViewModel.swift in Sources */,
 				52944E2D269976C9006CC865 /* ToDoInfoHeaderView.swift in Sources */,
 				A457AEB22660A34A0029DDBB /* PickPurchaseStatusViewModel.swift in Sources */,
 				5280D6F726C4F90E004363C6 /* PurchasedProductsInfoRootView.swift in Sources */,
 				52C2CBDA269D6325002A2BA9 /* IndicatorSwitchContentHeaderView.swift in Sources */,
+				52B8749426DCBE74008F3CF2 /* MyMindAnnouncementAPIService.swift in Sources */,
 				A4F2D00F265D063B004D8D6D /* ProductMaterialsFilterViewController.swift in Sources */,
 				52B8749026DC7C38008F3CF2 /* BulletinCollectionViewCell.swift in Sources */,
 				52944E332699CEF0006CC865 /* ToDoListCollectionViewCell.swift in Sources */,
@@ -1585,6 +1596,7 @@
 				A4BDC7BE260B418E005C33A5 /* SignInAccountInfo.swift in Sources */,
 				A439BD372637E42F004F47C8 /* MyMindPurchaseAPIService.swift in Sources */,
 				A405410B264A575E00E2D21B /* UITextField+.swift in Sources */,
+				52B8749626DCBFA1008F3CF2 /* Announcement.swift in Sources */,
 				52944E2F2699CE02006CC865 /* IndicatorHeaderView.swift in Sources */,
 				A439B5412609D61C002352C2 /* String+.swift in Sources */,
 				A4BCA0C8267C73DF00E3B274 /* RecipientInfo.swift in Sources */,

@@ -304,16 +304,19 @@ extension Endpoint {
         ]
         return Endpoint(path: "/api/admin/\(version)/dashboard/order_sale_by_vendor", queryItems: items)
     }
-    
-    static var registration: Self {
-        Endpoint(path: "/api/v1/external/push/device", serviceType: .push)
-    }
-    
-    static func openMessage(messageID: String) -> Self {
-        return Endpoint(path: "/api/v1/external/push/message/\(messageID)/is_open", serviceType: .push)
-    }
-    
     static func bulletins(number: Int) -> Self {
         return Endpoint(path: "/api/admin/v1/dashboard/announcement", queryItems: [URLQueryItem(name: "take", value: String(number))])
     }
+    // push
+    static var registration: Self {
+        Endpoint(path: "/api/v1/external/push/device", serviceType: .push)
+    }
+    static func openMessage(messageID: String) -> Self {
+        return Endpoint(path: "/api/v1/external/push/message/\(messageID)/is_open", serviceType: .push)
+    }
+    // notification
+    static func notifications(number: Int) -> Self {
+        return Endpoint(path: "/api/admin/v1/notification", queryItems: [URLQueryItem(name: "take", value: String(number))])
+    }
+
 }
