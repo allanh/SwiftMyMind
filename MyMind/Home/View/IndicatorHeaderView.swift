@@ -126,5 +126,5 @@ extension IndicatorHeaderView {
     }
 }
 protocol IndicatorSwitchContentHeaderViewDelegate: AnyObject {
-    func contentNeedSwitch(to index: Int, for section: Int)
+    func contentNeedSwitch(to index: Int, for section: Section)
 }

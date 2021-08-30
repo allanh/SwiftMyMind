@@ -10,13 +10,23 @@ import UIKit
 protocol NavigationActionDelegate: AnyObject {
     func didCancel()
 }
+enum Section: Int, CaseIterable {
+    case bulliten = 0
+    case todo
+    case today
+    case thirtyDays
+    case sevenDaysSKU
+    case sevenDaysSetSKU
+    case sevenDaysSaleAmount
+    case sevenDaysGrossProfit
+}
 typealias FunctionControlInfo = (type: MainFunctoinType, imageName: String, title: String)
-typealias SwitcherInfo = (firstTitle: String, secondTitle: String, current: Int, section: Int)
+typealias SwitcherInfo = (firstTitle: String, secondTitle: String, current: Int, section: Section)
 final class HomeViewController: UIViewController {
 
     private var saleReportSortOrder: SKURankingReport.SKURankingReportSortOrder = .TOTAL_SALE_QUANTITY {
         didSet {
-            collectionView.reloadSections([2])
+            collectionView.reloadSections([Section.thirtyDays.rawValue])
         }
     }
     private var skuRankingSortOrder: SKURankingReport.SKURankingReportSortOrder = .TOTAL_SALE_QUANTITY {
@@ -39,40 +49,45 @@ final class HomeViewController: UIViewController {
             loadGrossProfitRankingReportList()
         }
     }
-    private var headerInfos: [(title: String, info: SwitcherInfo)] = [("待辦事項", ("", "", 0, 0)), ("", ("", "", 0, 1)), ("近30日銷售數量", ("銷售數量", "銷售總額", 0, 2)), ("近7日SKU銷售排行", ("銷售數量", "銷售總額", 0, 3)), ("近7日加工組合SKU銷售排行", ("銷售數量", "銷售總額", 0, 4)), ("近7日銷售金額佔比", ("通路", "供應商", 0, 5)), ("近7日銷售毛利佔比", ("通路", "供應商", 0, 6))]
+    private var headerInfos: [(title: String, info: SwitcherInfo)] = [("", ("", "", 0, Section.bulliten)), ("待辦事項", ("", "", 0, Section.todo)), ("", ("", "", 0, Section.today)), ("近30日銷售數量", ("銷售數量", "銷售總額", 0, Section.thirtyDays)), ("近7日SKU銷售排行", ("銷售數量", "銷售總額", 0, Section.sevenDaysSKU)), ("近7日加工組合SKU銷售排行", ("銷售數量", "銷售總額", 0, Section.sevenDaysSetSKU)), ("近7日銷售金額佔比", ("通路", "供應商", 0, Section.sevenDaysSaleAmount)), ("近7日銷售毛利佔比", ("通路", "供應商", 0, Section.sevenDaysGrossProfit))]
+    private var bulletins: BulletinList? {
+        didSet {
+            collectionView.reloadSections([Section.bulliten.rawValue])
+        }
+    }
     private var toDoList: ToDoList? {
         didSet {
-            collectionView.reloadSections([0])
+            collectionView.reloadSections([Section.todo.rawValue])
         }
     }
     private var saleReports: SaleReports? {
         didSet {
-            collectionView.reloadSections([1])
+            collectionView.reloadSections([Section.today.rawValue])
         }
     }
     private var saleReportList: SaleReportList? {
         didSet {
-            collectionView.reloadSections([2])
+            collectionView.reloadSections([Section.thirtyDays.rawValue])
         }
     }
     private var skuRankingReportList: SKURankingReportList? {
         didSet {
-            collectionView.reloadSections([3])
+            collectionView.reloadSections([Section.sevenDaysSKU.rawValue])
         }
     }
     private var setSKURankingReportList: SKURankingReportList? {
         didSet {
-            collectionView.reloadSections([4])
+            collectionView.reloadSections([Section.sevenDaysSetSKU.rawValue])
         }
     }
     private var saleRankingReportList: SaleRankingReportList? {
         didSet {
-            collectionView.reloadSections([5])
+            collectionView.reloadSections([Section.sevenDaysSaleAmount.rawValue])
         }
     }
     private var grossProfitRankingReportList: SaleRankingReportList? {
         didSet {
-            collectionView.reloadSections([6])
+            collectionView.reloadSections([Section.sevenDaysGrossProfit.rawValue])
         }
     }
     var authorization: Authorization?
@@ -88,20 +103,36 @@ final class HomeViewController: UIViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
     private func loadHomeData() {
-        loadToDoList()
-        loadTodaySaleReports()
-        loadSaleReportList()
-        loadSKURankingReportList()
-        loadSetSKURankingReportList()
-        loadSaleRankingReportList()
-        loadGrossProfitRankingReportList()
+        loadBulletins()
+//        loadToDoList()
+//        loadTodaySaleReports()
+//        loadSaleReportList()
+//        loadSKURankingReportList()
+//        loadSetSKURankingReportList()
+//        loadSaleRankingReportList()
+//        loadGrossProfitRankingReportList()
     }
     private func handlerError(_ error: Error) {
         if let apiError = error as? APIError {
             _ = ErrorHandler.shared.handle(apiError)
         } else {
-            ToastView.showIn(self, message: error.localizedDescription)
+            ToastView.showIn(self.tabBarController ?? self, message: error.localizedDescription)
         }
+    }
+    private func loadBulletins() {
+        let dashboardLoader = MyMindDashboardAPIService.shared
+
+        dashboardLoader.bulletins()
+            .done { bulletins in
+                self.bulletins = bulletins
+            }
+            .ensure {
+                self.isNetworkProcessing = false
+            }
+            .catch { error in
+                self.bulletins = nil
+                self.handlerError(error)
+            }
     }
     private func loadToDoList() {
         if let authorization = authorization {
@@ -278,18 +309,23 @@ final class HomeViewController: UIViewController {
 extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 7
+        return Section.allCases.count
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch section {
-        case 0, 1, 2, 3, 4, 5, 6: return 1
+        case Section.todo.rawValue, Section.today.rawValue, Section.thirtyDays.rawValue, Section.sevenDaysSKU.rawValue, Section.sevenDaysSetSKU.rawValue,
+        Section.sevenDaysSaleAmount.rawValue, Section.sevenDaysGrossProfit.rawValue :
+            return 1
+        case Section.bulliten.rawValue:
+            return 1
+//        case 0, 1, 2, 3, 4, 5, 6: return 1
         default: return 0//return remoteConfig["otp_enable"].boolValue ? 4 : 3
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch indexPath.section {
-        case 0:
+        case Section.todo.rawValue:
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ToDoListCollectionViewCell", for: indexPath) as? ToDoListCollectionViewCell {
                 if let items = toDoList?.items, items.count > 0 {
                     cell.config(with: items)
@@ -299,39 +335,45 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
                 return cell
             }
             return UICollectionViewCell()
-        case 1:
+        case Section.today.rawValue:
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TodaySaleReportCollectionViewCell", for: indexPath) as? TodaySaleReportCollectionViewCell {
                 cell.config(with: saleReports)
                 return cell
             }
             return UICollectionViewCell()
-        case 2:
+        case Section.thirtyDays.rawValue:
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SaleReportCollectionViewCell", for: indexPath) as? SaleReportCollectionViewCell {
                 cell.config(with: saleReportList, order: saleReportSortOrder)
                 return cell
             }
             return UICollectionViewCell()
-        case 3:
+        case Section.sevenDaysSKU.rawValue:
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SKURankingCollectionViewCell", for: indexPath) as? SKURankingCollectionViewCell {
                 cell.config(with: skuRankingReportList, order: skuRankingSortOrder)
                 return cell
             }
             return UICollectionViewCell()
-        case 4:
+        case Section.sevenDaysSetSKU.rawValue:
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SKURankingCollectionViewCell", for: indexPath) as? SKURankingCollectionViewCell {
                 cell.config(with: setSKURankingReportList, order: setSKURankingSortOrder)
                 return cell
             }
             return UICollectionViewCell()
-        case 5:
+        case Section.sevenDaysSaleAmount.rawValue:
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SaleRankingCollectionViewCell", for: indexPath) as? SaleRankingCollectionViewCell {
                 cell.config(with: saleRankingReportList, devider: amountRankingDevider, profit: false)
                 return cell
             }
             return UICollectionViewCell()
-        case 6:
+        case Section.sevenDaysGrossProfit.rawValue:
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SaleRankingCollectionViewCell", for: indexPath) as? SaleRankingCollectionViewCell {
                 cell.config(with: grossProfitRankingReportList, devider: grossProfitRankingDevider, profit: true)
+                return cell
+            }
+            return UICollectionViewCell()
+        case Section.bulliten.rawValue:
+            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BulletinCollectionViewCell", for: indexPath) as? BulletinCollectionViewCell {
+//                cell.marqueeView.dataSource = self
                 return cell
             }
             return UICollectionViewCell()
@@ -341,14 +383,19 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = collectionView.bounds.width
-        return CGSize(width: width, height: width*0.75)
+        switch indexPath.section {
+        case Section.bulliten.rawValue:
+            return CGSize(width: collectionView.bounds.width, height: 24)
+        default:
+            let width = collectionView.bounds.width
+            return CGSize(width: width, height: width*0.75)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         let width = collectionView.bounds.width
         switch section {
-        case 1:
+        case Section.bulliten.rawValue, Section.today.rawValue:
             return .zero
         default:
             return CGSize(width: width, height: 50)
@@ -356,7 +403,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     }
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         if kind == UICollectionView.elementKindSectionHeader {
-            if indexPath.section == 0 {
+            if indexPath.section == Section.todo.rawValue {
                 if let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HomeHeader", for: indexPath) as? HomeCollectionViewHeaderView {
                     headerView.config(with: 6, title: headerInfos[indexPath.section].title)
                     return headerView
@@ -364,7 +411,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
             } else {
                 if let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HomeSwitchContentHeader", for: indexPath) as? HomeCollectionViewSwitchContentHeaderView {
                     var title = headerInfos[indexPath.section].title
-                    if indexPath.section == 2, saleReportSortOrder == .TOTAL_SALE_AMOUNT {
+                    if indexPath.section == Section.thirtyDays.rawValue, saleReportSortOrder == .TOTAL_SALE_AMOUNT {
                         title = "近30日銷售總額"
                     }
                     headerView.config(with: 6, title: title, switcher: headerInfos[indexPath.section].info, delegate: self)
@@ -377,6 +424,17 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     }
     func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
         return false
+    }
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        switch indexPath.section {
+        case Section.bulliten.rawValue:
+            if let bulletinCell = cell as? BulletinCollectionViewCell {
+                bulletinCell.marqueeView.dataSource = self
+                bulletinCell.marqueeView.startAnimateMarqueeDuration(2.5, delay: 0.4, completion: nil)
+            }
+        default:
+            break
+        }
     }
     
 //    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -404,24 +462,45 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
 }
 /// IndicatorSwitchContentHeaderViewDelegate
 extension HomeViewController: IndicatorSwitchContentHeaderViewDelegate {
-    func contentNeedSwitch(to index: Int, for section: Int) {
-        headerInfos[section].info.current = index
+    func contentNeedSwitch(to index: Int, for section: Section) {
+        headerInfos[section.rawValue].info.current = index
         switch section {
-        case 2:
+        case Section.thirtyDays:
             saleReportSortOrder = (index == 0) ? .TOTAL_SALE_QUANTITY : .TOTAL_SALE_AMOUNT
-        case 3:
+        case Section.sevenDaysSKU:
             skuRankingSortOrder = (index == 0) ? .TOTAL_SALE_QUANTITY : .TOTAL_SALE_AMOUNT
-        case 4:
+        case Section.sevenDaysSetSKU:
             setSKURankingSortOrder = (index == 0) ? .TOTAL_SALE_QUANTITY : .TOTAL_SALE_AMOUNT
-        case 5:
+        case Section.sevenDaysSaleAmount:
             amountRankingDevider = (index == 0) ? .store : .vendor
-        case 6:
+        case Section.sevenDaysGrossProfit:
             grossProfitRankingDevider = (index == 0) ? .store : .vendor
         default:
-            collectionView.reloadSections([section])
+            collectionView.reloadSections([section.rawValue])
             
         }
     }
+}
+extension HomeViewController: UDNSKInteractiveMarqueeViewDataSource {
+    func interactiveMarqueeView(_ marqueeView: UDNSKInteractiveMarqueeView, contentViewAt indexPath: IndexPath) -> UIView {
+        let label: UILabel = UILabel {
+            $0.text = bulletins?.items[indexPath.row].title
+            $0.textColor = .white
+            $0.backgroundColor = .red
+            $0.frame = CGRect(origin: .zero, size: CGSize(width: marqueeView.bounds.width, height: 24))
+        }
+        return label
+    }
+    
+    func numberOfMarquees(in marqueeView: UDNSKInteractiveMarqueeView) -> Int {
+        return bulletins?.items.count ?? 0
+    }
+    
+    func direction(of marqueeView: UDNSKInteractiveMarqueeView) -> UDNSKInteractiveMarqueeView.ScrollDirection {
+        .left
+    }
+    
+    
 }
 /// SettingViewControllerDelegate
 //extension HomeViewController: SettingViewControllerDelegate {
