@@ -312,4 +312,8 @@ extension Endpoint {
     static func openMessage(messageID: String) -> Self {
         return Endpoint(path: "/api/v1/external/push/message/\(messageID)/is_open", serviceType: .push)
     }
+    
+    static func bulletins(number: Int) -> Self {
+        return Endpoint(path: "/api/admin/v1/dashboard/announcement", queryItems: [URLQueryItem(name: "take", value: String(number))])
+    }
 }

@@ -104,13 +104,13 @@ final class HomeViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     private func loadHomeData() {
         loadBulletins()
-//        loadToDoList()
-//        loadTodaySaleReports()
-//        loadSaleReportList()
-//        loadSKURankingReportList()
-//        loadSetSKURankingReportList()
-//        loadSaleRankingReportList()
-//        loadGrossProfitRankingReportList()
+        loadToDoList()
+        loadTodaySaleReports()
+        loadSaleReportList()
+        loadSKURankingReportList()
+        loadSetSKURankingReportList()
+        loadSaleRankingReportList()
+        loadGrossProfitRankingReportList()
     }
     private func handlerError(_ error: Error) {
         if let apiError = error as? APIError {
@@ -317,9 +317,8 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         Section.sevenDaysSaleAmount.rawValue, Section.sevenDaysGrossProfit.rawValue :
             return 1
         case Section.bulliten.rawValue:
-            return 1
-//        case 0, 1, 2, 3, 4, 5, 6: return 1
-        default: return 0//return remoteConfig["otp_enable"].boolValue ? 4 : 3
+            return bulletins?.items.count ?? 0 > 0 ? 1 : 0
+        default: return 0
         }
     }
     
@@ -430,7 +429,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         case Section.bulliten.rawValue:
             if let bulletinCell = cell as? BulletinCollectionViewCell {
                 bulletinCell.marqueeView.dataSource = self
-                bulletinCell.marqueeView.startAnimateMarqueeDuration(2.5, delay: 0.4, completion: nil)
+                bulletinCell.marqueeView.startAnimateMarqueeDuration(8, delay: 0.4, completion: nil)
             }
         default:
             break
@@ -485,8 +484,8 @@ extension HomeViewController: UDNSKInteractiveMarqueeViewDataSource {
     func interactiveMarqueeView(_ marqueeView: UDNSKInteractiveMarqueeView, contentViewAt indexPath: IndexPath) -> UIView {
         let label: UILabel = UILabel {
             $0.text = bulletins?.items[indexPath.row].title
-            $0.textColor = .white
-            $0.backgroundColor = .red
+            $0.textColor = .label
+            $0.backgroundColor = UIColor(hex: "fefbe8")
             $0.frame = CGRect(origin: .zero, size: CGSize(width: marqueeView.bounds.width, height: 24))
         }
         return label
@@ -502,29 +501,7 @@ extension HomeViewController: UDNSKInteractiveMarqueeViewDataSource {
     
     
 }
-/// SettingViewControllerDelegate
-//extension HomeViewController: SettingViewControllerDelegate {
-//    func didSignOut() {
-//        self.navigationController?.popViewController(animated: true)
-//        let scene = UIApplication.shared.connectedScenes.first
-//        if let sceneDelegate : SceneDelegate = (scene?.delegate as? SceneDelegate) {
-//            let viewModel = SignInViewModel(
-//                userSessionRepository: MyMindUserSessionRepository.shared,
-//                signInValidationService: SignInValidatoinService(),
-//                lastSignInInfoDataStore: MyMindLastSignInInfoDataStore()
-//            )
-//            let signInViewController = SignInViewController(viewModel: viewModel)
-//            sceneDelegate.window?.rootViewController = signInViewController
-//        }
-//    }
-//}
-///// NavigationActionDelegate
-//extension HomeViewController: NavigationActionDelegate {
-//    func didCancel() {
-//        self.navigationController?.popViewController(animated: true)
-//    }
-//}
-
+/*
 final class ActionCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -562,3 +539,4 @@ final class ActionCollectionViewCell: UICollectionViewCell {
         titleLabel.text = info.title
     }
 }
+*/
