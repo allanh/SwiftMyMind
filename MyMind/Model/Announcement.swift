@@ -7,9 +7,11 @@
 //
 
 import Foundation
+// MARK: -Importance
 enum Importance: String, Codable {
     case NORMAL, IMPORTANT
 }
+// MARK: -Announcement
 struct Announcement: Codable {
     enum NotificationType: String, Codable {
         case ANNOUNCEMENT
@@ -31,6 +33,7 @@ struct Announcement: Codable {
     let readed: String?
     let id: Int
 }
+// MARK: -AnnouncementList
 struct AnnouncementList: Codable {
     let items: [Announcement]
     let unreaded: Int

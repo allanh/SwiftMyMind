@@ -7,6 +7,7 @@
 //
 
 import Foundation
+// MARK: -Bulletin
 struct Bulletin: Codable {
     enum BulletinType: String, Codable {
         case SYSTEM, NEW_FEATURE, OPTIMIZATION, NEWS, POLICY
@@ -26,6 +27,7 @@ struct Bulletin: Codable {
     let start: String
     let id: Int
 }
+// MARK: -BulletinList
 struct BulletinList: Codable {
     let items: [Bulletin]
     private enum CodingKeys: String, CodingKey {

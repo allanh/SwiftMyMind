@@ -53,6 +53,8 @@
 		52B8749426DCBE74008F3CF2 /* MyMindAnnouncementAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B8749326DCBE74008F3CF2 /* MyMindAnnouncementAPIService.swift */; };
 		52B8749626DCBFA1008F3CF2 /* Announcement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B8749526DCBFA1008F3CF2 /* Announcement.swift */; };
 		52B8749826DCC3A5008F3CF2 /* UIBarButtonItem+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B8749726DCC3A5008F3CF2 /* UIBarButtonItem+.swift */; };
+		52B8749A26DCE71D008F3CF2 /* RegistrationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B8749926DCE71D008F3CF2 /* RegistrationInfo.swift */; };
+		52B8749C26DCE7A2008F3CF2 /* Registration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B8749B26DCE7A2008F3CF2 /* Registration.swift */; };
 		52C2CBD0269BE52B002A2BA9 /* TodaySaleReportCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C2CBCF269BE52B002A2BA9 /* TodaySaleReportCollectionViewCell.swift */; };
 		52C2CBD2269BE6BC002A2BA9 /* TodaySaleInfoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C2CBD1269BE6BC002A2BA9 /* TodaySaleInfoCollectionViewCell.swift */; };
 		52C2CBD4269BED72002A2BA9 /* SaleReportInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C2CBD3269BED72002A2BA9 /* SaleReportInfoView.swift */; };
@@ -338,6 +340,8 @@
 		52B8749326DCBE74008F3CF2 /* MyMindAnnouncementAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMindAnnouncementAPIService.swift; sourceTree = "<group>"; };
 		52B8749526DCBFA1008F3CF2 /* Announcement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Announcement.swift; sourceTree = "<group>"; };
 		52B8749726DCC3A5008F3CF2 /* UIBarButtonItem+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+.swift"; sourceTree = "<group>"; };
+		52B8749926DCE71D008F3CF2 /* RegistrationInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationInfo.swift; sourceTree = "<group>"; };
+		52B8749B26DCE7A2008F3CF2 /* Registration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Registration.swift; sourceTree = "<group>"; };
 		52C2CBCF269BE52B002A2BA9 /* TodaySaleReportCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodaySaleReportCollectionViewCell.swift; sourceTree = "<group>"; };
 		52C2CBD1269BE6BC002A2BA9 /* TodaySaleInfoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodaySaleInfoCollectionViewCell.swift; sourceTree = "<group>"; };
 		52C2CBD3269BED72002A2BA9 /* SaleReportInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaleReportInfoView.swift; sourceTree = "<group>"; };
@@ -955,6 +959,8 @@
 				52E1EDF626A6D29900506010 /* ServerTime.swift */,
 				52B8749126DC88EA008F3CF2 /* Bulletin.swift */,
 				52B8749526DCBFA1008F3CF2 /* Announcement.swift */,
+				52B8749926DCE71D008F3CF2 /* RegistrationInfo.swift */,
+				52B8749B26DCE7A2008F3CF2 /* Registration.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1540,6 +1546,7 @@
 				97547CC52681DC4C001859A8 /* PurchaseCompletedApplyViewController.swift in Sources */,
 				A4DD410926427DD5007B2A41 /* MyMindAutoCompleteAPIService.swift in Sources */,
 				52D7249F268D62BC00B00585 /* MyMindPurchaseReviewAPIService.swift in Sources */,
+				52B8749C26DCE7A2008F3CF2 /* Registration.swift in Sources */,
 				A4054107264A1B7400E2D21B /* DropDownView.swift in Sources */,
 				A4793C7A2604534100AD280C /* SignInInfo.swift in Sources */,
 				52B8749226DC88EA008F3CF2 /* Bulletin.swift in Sources */,
@@ -1627,6 +1634,7 @@
 				52C2CBE926A01B70002A2BA9 /* DashedLineView.swift in Sources */,
 				52944E312699CE8B006CC865 /* ToDoInfoCollectionViewCell.swift in Sources */,
 				52C2CBED26A04243002A2BA9 /* MainPageViewController.swift in Sources */,
+				52B8749A26DCE71D008F3CF2 /* RegistrationInfo.swift in Sources */,
 				A47AB49A265E4DA400FE3CFA /* SearchMaterialNamesViewController.swift in Sources */,
 				52944E2726982B88006CC865 /* ToDoInfoView.swift in Sources */,
 				97B117432656064300242428 /* SingleLabelTableViewCell.swift in Sources */,
