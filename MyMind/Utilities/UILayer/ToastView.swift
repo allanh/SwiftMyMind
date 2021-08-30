@@ -49,6 +49,10 @@ class ToastView: NiblessView {
         if let tabController = viewController as? UITabBarController {
           displayVC = tabController.selectedViewController ?? viewController
         }
+        var bottomOffset: CGFloat = 0
+        if let tabBarController = displayVC.tabBarController {
+            bottomOffset = tabBarController.tabBar.bounds.height
+        }
 
         if sharedView == nil {
             sharedView = ToastView()
@@ -88,7 +92,7 @@ class ToastView: NiblessView {
             case .top:
                 sharedView?.frame = CGRect(origin: CGPoint(x: 16, y: 16), size: CGSize(width: displayVC.view.bounds.width-32, height: 48))
             case .bottom:
-                sharedView?.frame = CGRect(origin: CGPoint(x: 16, y: displayVC.view.bounds.height-48-16), size: CGSize(width: displayVC.view.bounds.width-32, height: 48))
+                sharedView?.frame = CGRect(origin: CGPoint(x: 16, y: displayVC.view.bounds.height-bottomOffset-48), size: CGSize(width: displayVC.view.bounds.width-32, height: 48))
             }
             sharedView?.alpha = 0
             displayVC.view.addSubview(sharedView!)
