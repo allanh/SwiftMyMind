@@ -46,6 +46,7 @@ extension UDNSKInteractiveMarqueeViewDelegate {
         print(indexPath)
     }
 }
+private var key: Void?
 
 open class UDNSKInteractiveMarqueeView : UIScrollView & UIScrollViewDelegate {
     
@@ -72,11 +73,12 @@ open class UDNSKInteractiveMarqueeView : UIScrollView & UIScrollViewDelegate {
     private var offset: CGPoint = CGPoint.zero
     private var currentIndex: Int = 0
     
-    let key = "indexPath"
     private func contentView(at indexPath:IndexPath) -> UIView {
         if cachedContentViews[indexPath.row] == nil {
-            cachedContentViews[indexPath.row] = (self.dataSource?.interactiveMarqueeView(self, contentViewAt: indexPath))!
-            objc_setAssociatedObject(cachedContentViews[indexPath.row]!, key, indexPath, .OBJC_ASSOCIATION_RETAIN);
+            if let view = dataSource?.interactiveMarqueeView(self, contentViewAt: indexPath) {
+                objc_setAssociatedObject(view, &key, indexPath, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+                cachedContentViews[indexPath.row] = view
+            }
         }
         return cachedContentViews[indexPath.row] as! UIView
     }
@@ -228,7 +230,7 @@ open class UDNSKInteractiveMarqueeView : UIScrollView & UIScrollViewDelegate {
             var indexPath: IndexPath?
             for subview in subviews {
                 if subview.layer.frame.contains(recognizer.location(in: self)) {
-                    indexPath = (objc_getAssociatedObject(subview, key) as! IndexPath)
+                    indexPath = objc_getAssociatedObject(subview, &key) as? IndexPath
                     break
                 }
             }
@@ -268,8 +270,6 @@ open class UDNSKInteractiveMarqueeView : UIScrollView & UIScrollViewDelegate {
     func initialize() -> Void {
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(tap(recognizer:)))
         addGestureRecognizer(tapRecognizer)
-        let panRecognizer = UITapGestureRecognizer(target: self, action: #selector(pan(recognizer:)))
-        addGestureRecognizer(panRecognizer)
     }
     override public init(frame: CGRect) {
         super.init(frame: frame)

@@ -107,6 +107,24 @@ final class HomeViewController: UIViewController {
     }
 
     @IBOutlet weak var collectionView: UICollectionView!
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        navigationItem.backButtonTitle = ""
+        title = "首頁"
+        collectionView.register(HomeCollectionViewHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HomeHeader")
+        collectionView.register(HomeCollectionViewSwitchContentHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HomeSwitchContentHeader")
+        loadHomeData()
+    }
+}
+// MARK: data loading
+extension HomeViewController {
+    private func handlerError(_ error: Error) {
+        if let apiError = error as? APIError {
+            _ = ErrorHandler.shared.handle(apiError)
+        } else {
+            ToastView.showIn(self.tabBarController ?? self, message: error.localizedDescription)
+        }
+    }
     private func loadHomeData() {
         loadAnnouncements()
         loadBulletins()
@@ -117,13 +135,6 @@ final class HomeViewController: UIViewController {
         loadSetSKURankingReportList()
         loadSaleRankingReportList()
         loadGrossProfitRankingReportList()
-    }
-    private func handlerError(_ error: Error) {
-        if let apiError = error as? APIError {
-            _ = ErrorHandler.shared.handle(apiError)
-        } else {
-            ToastView.showIn(self.tabBarController ?? self, message: error.localizedDescription)
-        }
     }
     private func loadBulletins() {
         let dashboardLoader = MyMindDashboardAPIService.shared
@@ -316,16 +327,8 @@ final class HomeViewController: UIViewController {
                 }
         }
     }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        navigationItem.backButtonTitle = ""
-        title = "首頁"
-        collectionView.register(HomeCollectionViewHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HomeHeader")
-        collectionView.register(HomeCollectionViewSwitchContentHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HomeSwitchContentHeader")
-        loadHomeData()
-    }
 }
+// MARK: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout
 /// UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout
 extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
@@ -393,7 +396,6 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
             return UICollectionViewCell()
         case Section.bulliten.rawValue:
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BulletinCollectionViewCell", for: indexPath) as? BulletinCollectionViewCell {
-//                cell.marqueeView.dataSource = self
                 return cell
             }
             return UICollectionViewCell()
@@ -450,6 +452,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         case Section.bulliten.rawValue:
             if let bulletinCell = cell as? BulletinCollectionViewCell {
                 bulletinCell.marqueeView.dataSource = self
+                bulletinCell.marqueeView.marqueeDelegate = self
                 bulletinCell.marqueeView.startAnimateMarqueeDuration(8, delay: 0.4, completion: nil)
             }
         default:
@@ -480,6 +483,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
 //        }
 //    }
 }
+// MARK: IndicatorSwitchContentHeaderViewDelegate
 /// IndicatorSwitchContentHeaderViewDelegate
 extension HomeViewController: IndicatorSwitchContentHeaderViewDelegate {
     func contentNeedSwitch(to index: Int, for section: Section) {
@@ -501,7 +505,8 @@ extension HomeViewController: IndicatorSwitchContentHeaderViewDelegate {
         }
     }
 }
-extension HomeViewController: UDNSKInteractiveMarqueeViewDataSource {
+// MARK: UDNSKInteractiveMarqueeViewDataSource
+extension HomeViewController: UDNSKInteractiveMarqueeViewDataSource, UDNSKInteractiveMarqueeViewDelegate {
     func interactiveMarqueeView(_ marqueeView: UDNSKInteractiveMarqueeView, contentViewAt indexPath: IndexPath) -> UIView {
         let label: UILabel = UILabel {
             $0.text = bulletins?.items[indexPath.row].title
@@ -519,7 +524,9 @@ extension HomeViewController: UDNSKInteractiveMarqueeViewDataSource {
     func direction(of marqueeView: UDNSKInteractiveMarqueeView) -> UDNSKInteractiveMarqueeView.ScrollDirection {
         .left
     }
-    
+    func interactiveMarqueeView(_ marqueeView: UDNSKInteractiveMarqueeView, didSelectItemAt indexPath: IndexPath) {
+        print(bulletins?.items[indexPath.row].id)
+    }
     
 }
 /*
