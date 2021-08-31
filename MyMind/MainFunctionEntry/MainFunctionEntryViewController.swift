@@ -15,6 +15,7 @@ enum MainFunctoinType: String {
     case revenueChart = "營收報表"
     case systemSetting = "系統設定"
     case accountSetting = "帳號設定"
+    case announcement = "公告"
 }
 
 final class MainFunctionEntryViewController: NiblessViewController {
@@ -61,6 +62,7 @@ final class MainFunctionEntryViewController: NiblessViewController {
         creatFuncitonControls()
         constructStackViews()
         activateConstraintsStackView()
+        functionControlInfos.append((.announcement, "home"))
     }
 
     override func viewDidLayoutSubviews() {
@@ -135,7 +137,8 @@ final class MainFunctionEntryViewController: NiblessViewController {
                 settingViewController.delegate = self
                 show(settingViewController, sender: nil)
             }
-
+        case .announcement:
+            show(AnnouncementListViewController(announcementListLoader: MyMindAnnouncementAPIService.shared), sender: nil)
         default:
             print(sender.functionType)
         }

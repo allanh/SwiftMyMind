@@ -97,6 +97,19 @@
 		97B1174126550C5E00242428 /* PickSortTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B1174026550C5E00242428 /* PickSortTypeView.swift */; };
 		97B117432656064300242428 /* SingleLabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B117422656064300242428 /* SingleLabelTableViewCell.swift */; };
 		97B11745265650BA00242428 /* PickProductMaterailsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B11744265650BA00242428 /* PickProductMaterailsViewModelTests.swift */; };
+		9CEFCA4B26DE171100506308 /* PIckAnnouncementTypeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEFCA3B26DE171100506308 /* PIckAnnouncementTypeViewModel.swift */; };
+		9CEFCA4C26DE171100506308 /* AnnouncementAutoCompleteAdapters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEFCA3C26DE171100506308 /* AnnouncementAutoCompleteAdapters.swift */; };
+		9CEFCA4D26DE171100506308 /* MyMindAnnouncementAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEFCA3D26DE171100506308 /* MyMindAnnouncementAPIService.swift */; };
+		9CEFCA4E26DE171100506308 /* AnnouncementListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEFCA3E26DE171100506308 /* AnnouncementListViewController.swift */; };
+		9CEFCA4F26DE171100506308 /* AnnouncementListLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEFCA3F26DE171100506308 /* AnnouncementListLoader.swift */; };
+		9CEFCA5026DE171100506308 /* Announcement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEFCA4026DE171100506308 /* Announcement.swift */; };
+		9CEFCA5126DE171100506308 /* AnnouncementBriefTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEFCA4226DE171100506308 /* AnnouncementBriefTableViewCell.swift */; };
+		9CEFCA5226DE171100506308 /* AnnouncementListRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEFCA4326DE171100506308 /* AnnouncementListRootView.swift */; };
+		9CEFCA5326DE171100506308 /* AnnouncementFilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEFCA4526DE171100506308 /* AnnouncementFilterViewModel.swift */; };
+		9CEFCA5426DE171100506308 /* AnnouncementQueryDateSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEFCA4726DE171100506308 /* AnnouncementQueryDateSelectionViewController.swift */; };
+		9CEFCA5526DE171100506308 /* AnnouncementTypeSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEFCA4826DE171100506308 /* AnnouncementTypeSelectionViewController.swift */; };
+		9CEFCA5626DE171100506308 /* AnnouncementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEFCA4926DE171100506308 /* AnnouncementViewController.swift */; };
+		9CEFCA5726DE171100506308 /* AnnouncementListFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEFCA4A26DE171100506308 /* AnnouncementListFilterViewController.swift */; };
 		A4054107264A1B7400E2D21B /* DropDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4054106264A1B7400E2D21B /* DropDownView.swift */; };
 		A4054109264A270C00E2D21B /* DispatchQueue+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4054108264A270C00E2D21B /* DispatchQueue+.swift */; };
 		A405410B264A575E00E2D21B /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A405410A264A575E00E2D21B /* UITextField+.swift */; };
@@ -383,6 +396,19 @@
 		97B117422656064300242428 /* SingleLabelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleLabelTableViewCell.swift; sourceTree = "<group>"; };
 		97B11744265650BA00242428 /* PickProductMaterailsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickProductMaterailsViewModelTests.swift; sourceTree = "<group>"; };
 		995D83B093740C937418E4D8 /* Pods-MyMind.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMind.debug.xcconfig"; path = "Target Support Files/Pods-MyMind/Pods-MyMind.debug.xcconfig"; sourceTree = "<group>"; };
+		9CEFCA3B26DE171100506308 /* PIckAnnouncementTypeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PIckAnnouncementTypeViewModel.swift; sourceTree = "<group>"; };
+		9CEFCA3C26DE171100506308 /* AnnouncementAutoCompleteAdapters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnouncementAutoCompleteAdapters.swift; sourceTree = "<group>"; };
+		9CEFCA3D26DE171100506308 /* MyMindAnnouncementAPIService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyMindAnnouncementAPIService.swift; sourceTree = "<group>"; };
+		9CEFCA3E26DE171100506308 /* AnnouncementListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnouncementListViewController.swift; sourceTree = "<group>"; };
+		9CEFCA3F26DE171100506308 /* AnnouncementListLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnouncementListLoader.swift; sourceTree = "<group>"; };
+		9CEFCA4026DE171100506308 /* Announcement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Announcement.swift; sourceTree = "<group>"; };
+		9CEFCA4226DE171100506308 /* AnnouncementBriefTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnouncementBriefTableViewCell.swift; sourceTree = "<group>"; };
+		9CEFCA4326DE171100506308 /* AnnouncementListRootView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnouncementListRootView.swift; sourceTree = "<group>"; };
+		9CEFCA4526DE171100506308 /* AnnouncementFilterViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnouncementFilterViewModel.swift; sourceTree = "<group>"; };
+		9CEFCA4726DE171100506308 /* AnnouncementQueryDateSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnouncementQueryDateSelectionViewController.swift; sourceTree = "<group>"; };
+		9CEFCA4826DE171100506308 /* AnnouncementTypeSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnouncementTypeSelectionViewController.swift; sourceTree = "<group>"; };
+		9CEFCA4926DE171100506308 /* AnnouncementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnouncementViewController.swift; sourceTree = "<group>"; };
+		9CEFCA4A26DE171100506308 /* AnnouncementListFilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnouncementListFilterViewController.swift; sourceTree = "<group>"; };
 		9EC0CD9940AAFA7DE4332638 /* Pods-MyMind.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMind.release.xcconfig"; path = "Target Support Files/Pods-MyMind/Pods-MyMind.release.xcconfig"; sourceTree = "<group>"; };
 		A4054106264A1B7400E2D21B /* DropDownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownView.swift; sourceTree = "<group>"; };
 		A4054108264A270C00E2D21B /* DispatchQueue+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+.swift"; sourceTree = "<group>"; };
@@ -724,6 +750,50 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		9CEFCA3A26DE171100506308 /* Announcement */ = {
+			isa = PBXGroup;
+			children = (
+				9CEFCA4126DE171100506308 /* View */,
+				9CEFCA4426DE171100506308 /* Filter */,
+				9CEFCA4926DE171100506308 /* AnnouncementViewController.swift */,
+				9CEFCA3E26DE171100506308 /* AnnouncementListViewController.swift */,
+				9CEFCA4026DE171100506308 /* Announcement.swift */,
+				9CEFCA3C26DE171100506308 /* AnnouncementAutoCompleteAdapters.swift */,
+				9CEFCA3F26DE171100506308 /* AnnouncementListLoader.swift */,
+				9CEFCA3B26DE171100506308 /* PIckAnnouncementTypeViewModel.swift */,
+				9CEFCA3D26DE171100506308 /* MyMindAnnouncementAPIService.swift */,
+			);
+			path = Announcement;
+			sourceTree = "<group>";
+		};
+		9CEFCA4126DE171100506308 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9CEFCA4226DE171100506308 /* AnnouncementBriefTableViewCell.swift */,
+				9CEFCA4326DE171100506308 /* AnnouncementListRootView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		9CEFCA4426DE171100506308 /* Filter */ = {
+			isa = PBXGroup;
+			children = (
+				9CEFCA4526DE171100506308 /* AnnouncementFilterViewModel.swift */,
+				9CEFCA4626DE171100506308 /* Controller */,
+			);
+			path = Filter;
+			sourceTree = "<group>";
+		};
+		9CEFCA4626DE171100506308 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				9CEFCA4726DE171100506308 /* AnnouncementQueryDateSelectionViewController.swift */,
+				9CEFCA4826DE171100506308 /* AnnouncementTypeSelectionViewController.swift */,
+				9CEFCA4A26DE171100506308 /* AnnouncementListFilterViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		A40EBFDB2671AD5000A4863D /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -821,10 +891,11 @@
 				528A697B26CBADD600FC3387 /* Release */,
 				528A697926CBADC200FC3387 /* Alpha */,
 				52CB080026CB6323003F79DB /* MyMind.entitlements */,
+				9CEFCA3A26DE171100506308 /* Announcement */,
+				A47F39CB263A58DA00A3097C /* Purchase */,
 				52944E2426982B1D006CC865 /* Home */,
 				5246E47026901BC8005C11EC /* Setting */,
 				A4793C932604768200AD280C /* Sign In */,
-				A47F39CB263A58DA00A3097C /* Purchase */,
 				A4AF79F52637B110002B04F6 /* MainFunctionEntry */,
 				A4793C9426047C6500AD280C /* Utilities */,
 				A49CF92E26034D1900AFC170 /* APICache */,
@@ -1532,6 +1603,7 @@
 				A49CF92A26034BEA00AFC170 /* CaptchaSession.swift in Sources */,
 				A4BDC7B4260B10E2005C33A5 /* SignInValidationService.swift in Sources */,
 				A43F42952643C75C00A246CC /* FilterSideMenuBottomView.swift in Sources */,
+				9CEFCA4F26DE171100506308 /* AnnouncementListLoader.swift in Sources */,
 				A442A16F266F797500AAB1ED /* Reviewer.swift in Sources */,
 				52C2CBDE269D643B002A2BA9 /* SKURankingInfoView.swift in Sources */,
 				A48389B4260869940044C09E /* SignInViewModel.swift in Sources */,
@@ -1553,6 +1625,7 @@
 				A405410D264A670100E2D21B /* MultiSelectableDropDownTableViewCell.swift in Sources */,
 				97AFE37326673535002CBE01 /* PurchaseSuggestionViewController.swift in Sources */,
 				A457AEB42660F5F80029DDBB /* StageProgressView.swift in Sources */,
+				9CEFCA5126DE171100506308 /* AnnouncementBriefTableViewCell.swift in Sources */,
 				A48389AF2608360A0044C09E /* SignInViewController.swift in Sources */,
 				5293EEA0269A9DBC001A9754 /* HomeModel.swift in Sources */,
 				A4D50AB02645129E007B07D6 /* AutoCompleteSearchRootView.swift in Sources */,
@@ -1565,14 +1638,17 @@
 				527E11C02692C38D00FB8B01 /* PurchaseReviewingApplyInfoViewController.swift in Sources */,
 				A48389BE260876770044C09E /* AuthService.swift in Sources */,
 				A464876C268968920053E6F5 /* ScanViewController.swift in Sources */,
+				9CEFCA5526DE171100506308 /* AnnouncementTypeSelectionViewController.swift in Sources */,
 				A4CBD8A52664E10800B19119 /* VendorSelectionTableViewCell.swift in Sources */,
 				A442A16D266F780C00AAB1ED /* Warehouse.swift in Sources */,
 				A457AEB02660A31F0029DDBB /* PickDatesViewModel.swift in Sources */,
 				A4BDC7BE260B418E005C33A5 /* SignInAccountInfo.swift in Sources */,
+				9CEFCA5726DE171100506308 /* AnnouncementListFilterViewController.swift in Sources */,
 				A439BD372637E42F004F47C8 /* MyMindPurchaseAPIService.swift in Sources */,
 				A405410B264A575E00E2D21B /* UITextField+.swift in Sources */,
 				52944E2F2699CE02006CC865 /* IndicatorHeaderView.swift in Sources */,
 				A439B5412609D61C002352C2 /* String+.swift in Sources */,
+				9CEFCA4B26DE171100506308 /* PIckAnnouncementTypeViewModel.swift in Sources */,
 				A4BCA0C8267C73DF00E3B274 /* RecipientInfo.swift in Sources */,
 				A4CBD8AF2669D18F00B19119 /* PurchaseSuggestionViewModel.swift in Sources */,
 				A43E0B65260D7CA4005FC6CE /* NiblessView.swift in Sources */,
@@ -1585,6 +1661,7 @@
 				52F564272693F14200171032 /* ErrorHandler.swift in Sources */,
 				52C2CBD8269C4D4E002A2BA9 /* SaleReportInfoItemView.swift in Sources */,
 				A456701226845D14009598AE /* RootTabBarController.swift in Sources */,
+				9CEFCA4C26DE171100506308 /* AnnouncementAutoCompleteAdapters.swift in Sources */,
 				52282372268EB41400A66340 /* PurchaseBriefReviewingCollectionViewCell.swift in Sources */,
 				52E5060026A532D7000E5116 /* ResendOTPViewModel.swift in Sources */,
 				A464877E2689BBD60053E6F5 /* EditingPurchaseOrderViewController.swift in Sources */,
@@ -1602,12 +1679,14 @@
 				52C2CBED26A04243002A2BA9 /* MainPageViewController.swift in Sources */,
 				A47AB49A265E4DA400FE3CFA /* SearchMaterialNamesViewController.swift in Sources */,
 				52944E2726982B88006CC865 /* ToDoInfoView.swift in Sources */,
+				9CEFCA5426DE171100506308 /* AnnouncementQueryDateSelectionViewController.swift in Sources */,
 				97B117432656064300242428 /* SingleLabelTableViewCell.swift in Sources */,
 				A4ACEDC526490E25008724E4 /* SelectedQueryCollectionViewCell.swift in Sources */,
 				A4B55E4F265B538F002E1880 /* KeychainUserSessionDataStore.swift in Sources */,
 				A4CBD8A72664E1E800B19119 /* VendorInfoLoader.swift in Sources */,
 				A494D9D02670CE0E008658F8 /* PurchaseReviewerListLoader.swift in Sources */,
 				A494D9CC2670CD68008658F8 /* ApplyPurchaseParameterInfo.swift in Sources */,
+				9CEFCA4D26DE171100506308 /* MyMindAnnouncementAPIService.swift in Sources */,
 				A456701426845D87009598AE /* HomeViewController.swift in Sources */,
 				97AFE3662665E7DD002CBE01 /* ProductMaterialDetail.swift in Sources */,
 				527E11C32693084B00FB8B01 /* ReturnPurchaseOrderInfo.swift in Sources */,
@@ -1624,6 +1703,7 @@
 				A439B53C2609CDC3002352C2 /* ToastView.swift in Sources */,
 				A43E8513268C08FC008C8369 /* UDISecretRepository.swift in Sources */,
 				52E505FE26A531B4000E5116 /* ResendOTPViewController.swift in Sources */,
+				9CEFCA5226DE171100506308 /* AnnouncementListRootView.swift in Sources */,
 				A44A5A6E25F9B0D200995823 /* AppDelegate.swift in Sources */,
 				52C2CBE2269E8950002A2BA9 /* SKURankingInfoItemView.swift in Sources */,
 				52944E2B26997680006CC865 /* GridentCircleView.swift in Sources */,
@@ -1646,11 +1726,13 @@
 				A415920F260C796500FD3989 /* ForgotPasswordRootView.swift in Sources */,
 				A489A1AC263FA7C900832679 /* TriangleView.swift in Sources */,
 				A489A1B4263FC9D600832679 /* UICollectionView+.swift in Sources */,
+				9CEFCA4E26DE171100506308 /* AnnouncementListViewController.swift in Sources */,
 				A4BC88C52679CB8100956B95 /* EditablePickedProductsInfoViewModel.swift in Sources */,
 				A40EBFDE2671F7A100A4863D /* PickPurchaseReviewerViewController.swift in Sources */,
 				A4CBD8B1266A2ABA00B19119 /* ProductMaterialSuggestionInfoTableViewController.swift in Sources */,
 				5293EE9C269A8AEB001A9754 /* HorizontalCellSizePagingFlowLayout.swift in Sources */,
 				97547CBF2681C5B6001859A8 /* LogInfoView.swift in Sources */,
+				9CEFCA5326DE171100506308 /* AnnouncementFilterViewModel.swift in Sources */,
 				52C2CBD0269BE52B002A2BA9 /* TodaySaleReportCollectionViewCell.swift in Sources */,
 				A43E850C268C083C008C8369 /* SecretListViewController.swift in Sources */,
 				A40EBFD92671AD4900A4863D /* PurchaseApplyInfoViewController.swift in Sources */,
@@ -1659,6 +1741,7 @@
 				97B117392654B8FC00242428 /* PickProductMaterialsViewController.swift in Sources */,
 				52C2CBE0269E890B002A2BA9 /* NoDataView.swift in Sources */,
 				A47AB496265DF53200FE3CFA /* ContainerTableViewCell.swift in Sources */,
+				9CEFCA5626DE171100506308 /* AnnouncementViewController.swift in Sources */,
 				52E5060426A53572000E5116 /* ResendOTPRootView.swift in Sources */,
 				A45E69C5264B89A300AADB44 /* CustomClearButtonPositionTextField.swift in Sources */,
 				A49CF8B6260301DE00AFC170 /* Endpoint.swift in Sources */,
@@ -1678,6 +1761,7 @@
 				A4BCA0C6267C70FD00E3B274 /* PurchaseOrder.swift in Sources */,
 				A44A5A7025F9B0D200995823 /* SceneDelegate.swift in Sources */,
 				A4793CBB260490A600AD280C /* UIColor+.swift in Sources */,
+				9CEFCA5026DE171100506308 /* Announcement.swift in Sources */,
 				527E11BB2692A05900FB8B01 /* Authorization.swift in Sources */,
 				5280D6EF26C122A7004363C6 /* UIAlertAction+.swift in Sources */,
 				A494D9CE2670CDC1008658F8 /* PickPurchaseReviewerViewModel.swift in Sources */,
@@ -1823,14 +1907,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				CRYPTO = 9Edv7aN6h2ZUpK6V6SmHmugm;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = NCP4JUG36Z;
+				DEVELOPMENT_TEAM = 9H772B9TV8;
 				INFOPLIST_FILE = MyMind/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.shopping.udi.MyMind.gamma;
+				PRODUCT_BUNDLE_IDENTIFIER = com.shopping.udi.MyMind.gamma1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PUSH_KEY = kPcqmOhEJ6caWdwu0Skk7dpoFTUXB7CJK4UknfV5tHc;
 				PUSH_SERVER_URL = "http://api-alpha-subsystem.udnshopping.com";
@@ -1955,14 +2039,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				CRYPTO = tAGsC6LLLFU2TwHBzvqLFjms;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = NCP4JUG36Z;
+				DEVELOPMENT_TEAM = 9H772B9TV8;
 				INFOPLIST_FILE = MyMind/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.shopping.udi.MyMind.demo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.shopping.udi.MyMind.demo1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PUSH_KEY = "f6fnHfjjPERLsl5YcEntYDFpXCGVKnkNAIz4O2GSYtI=";
 				PUSH_SERVER_URL = "https://api-subsystem.udnshopping.com";
@@ -2148,14 +2232,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				CRYPTO = 9Edv7aN6h2ZUpK6V6SmHmugm;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = NCP4JUG36Z;
+				DEVELOPMENT_TEAM = 9H772B9TV8;
 				INFOPLIST_FILE = MyMind/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.shopping.udi.MyMind.beta;
+				PRODUCT_BUNDLE_IDENTIFIER = com.shopping.udi.MyMind.beta1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PUSH_KEY = kPcqmOhEJ6caWdwu0Skk7dpoFTUXB7CJK4UknfV5tHc;
 				PUSH_SERVER_URL = "http://api-beta-subsystem.udnshopping.com";
@@ -2181,14 +2265,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				CRYPTO = tAGsC6LLLFU2TwHBzvqLFjms;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = NCP4JUG36Z;
+				DEVELOPMENT_TEAM = 9H772B9TV8;
 				INFOPLIST_FILE = MyMind/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.shopping.udi.MyMind;
+				PRODUCT_BUNDLE_IDENTIFIER = com.shopping.udi.MyMind1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PUSH_KEY = "f6fnHfjjPERLsl5YcEntYDFpXCGVKnkNAIz4O2GSYtI=";
 				PUSH_SERVER_URL = "https://api-subsystem.udnshopping.com";
@@ -2363,14 +2447,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				CRYPTO = 9Edv7aN6h2ZUpK6V6SmHmugm;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = NCP4JUG36Z;
+				DEVELOPMENT_TEAM = 9H772B9TV8;
 				INFOPLIST_FILE = MyMind/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.shopping.udi.MyMind.alpha;
+				PRODUCT_BUNDLE_IDENTIFIER = com.shopping.udi.MyMind.alpha1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PUSH_KEY = kPcqmOhEJ6caWdwu0Skk7dpoFTUXB7CJK4UknfV5tHc;
 				PUSH_SERVER_URL = "http://api-alpha-subsystem.udnshopping.com";

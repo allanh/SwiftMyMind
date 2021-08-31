@@ -122,7 +122,15 @@ extension Endpoint {
         }
         return Endpoint(path: "/api/admin/\(version)/purchase", queryItems: urlQueryItems)
     }
-
+    static func announcementList(with partnerID: String, announcementListQueryInfo: AnnouncementListQueryInfo? = nil) -> Self {
+        var urlQueryItems: [URLQueryItem] = []
+        urlQueryItems.append(URLQueryItem(name: "partner_id", value: partnerID))
+        if let query = announcementListQueryInfo {
+            urlQueryItems.append(contentsOf: query.quertItems)
+            return Endpoint(path: "/api/admin/\(version)/announcement",queryItems: urlQueryItems)
+        }
+        return Endpoint(path: "/api/admin/\(version)/announcement",queryItems: urlQueryItems)
+    }
     static func purchaseWarehouseList(partnerID: String) -> Self {
         let item = URLQueryItem(name: "partner_id", value: partnerID)
         return Endpoint(path: "/api/admin/\(version)/purchase/warehouse", queryItems: [item])
