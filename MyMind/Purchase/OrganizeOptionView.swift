@@ -85,6 +85,27 @@ final class OrganizeOptionView: NiblessView {
         activateConstraintsSeparatorViews()
         if displayType.contains(.layout) { activateConstraintsLayoutButton() }
     }
+    // 建立 OrganizeOptionView
+    func setupForAnnouncement() {
+        constructViewHierarchyForAnnouncement()
+        activateConstraintsForAnnouncement()
+    }
+    // 建立 OrganizeOption 中所有的 View
+    func constructViewHierarchyForAnnouncement() {
+        addSubview(topSeparatorView)
+        stackView.addSubview(firstSeparatorView)
+        stackView.addSubview(filterButton)
+        stackView.addSubview(sortButton)
+        addSubview(stackView)
+    }
+    // 建立 OrganizeOption 中所有的 Constraints
+    func activateConstraintsForAnnouncement() {
+        activateConstraintsStackView()
+        activateConstraintsTopSeparatorViewForAnnouncement()
+        activateConstraintsSortButtonForAnnouncement()
+        activateConstraintsFilterButtonForAnnouncement()
+        activatConstaintsFirstSeparatorView()
+    }
 }
 extension OrganizeOptionView {
     private func activateConstraintsTopSeparatorView() {
@@ -172,6 +193,51 @@ extension OrganizeOptionView {
 
         NSLayoutConstraint.activate([
             width, height
+        ])
+    }
+    // 按鈕間的分隔線
+    private func activatConstaintsFirstSeparatorView() {
+        firstSeparatorView.translatesAutoresizingMaskIntoConstraints = false
+        let centerX = firstSeparatorView.centerXAnchor.constraint(equalTo: stackView.centerXAnchor)
+        let centerY = firstSeparatorView.centerYAnchor.constraint(equalTo: stackView.centerYAnchor)
+        let width = firstSeparatorView.widthAnchor.constraint(equalToConstant: 2)
+        let height = firstSeparatorView.heightAnchor.constraint(equalToConstant: 20)
+        
+        NSLayoutConstraint.activate([
+            centerX, centerY, width, height
+        ])
+    }
+    // Stack View 上面的分隔線
+    private func activateConstraintsTopSeparatorViewForAnnouncement() {
+        topSeparatorView.translatesAutoresizingMaskIntoConstraints = false
+        let width = topSeparatorView.widthAnchor.constraint(equalTo: stackView.widthAnchor)
+        let top = topSeparatorView.topAnchor.constraint(equalTo: stackView.topAnchor)
+        let height = topSeparatorView.heightAnchor.constraint(equalToConstant: 2)
+        
+        NSLayoutConstraint.activate([
+            top, width, height
+        ])
+    }
+    // SortButton constraints
+    private func activateConstraintsSortButtonForAnnouncement() {
+        sortButton.translatesAutoresizingMaskIntoConstraints = false
+        let centerY = sortButton.centerYAnchor.constraint(equalTo: stackView.centerYAnchor)
+        let leading = sortButton.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: 50)
+        let trailing = sortButton.trailingAnchor.constraint(equalTo: firstSeparatorView.leadingAnchor, constant: -50)
+        
+        NSLayoutConstraint.activate([
+            centerY, leading, trailing
+        ])
+    }
+    // FilterButton constraints
+    private func activateConstraintsFilterButtonForAnnouncement() {
+        filterButton.translatesAutoresizingMaskIntoConstraints = false
+        let centerY = filterButton.centerYAnchor.constraint(equalTo: stackView.centerYAnchor)
+        let leading = filterButton.leadingAnchor.constraint(equalTo: firstSeparatorView.leadingAnchor, constant: 50)
+        let trailing = filterButton.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: -50)
+        
+        NSLayoutConstraint.activate([
+            centerY, trailing, leading
         ])
     }
 }

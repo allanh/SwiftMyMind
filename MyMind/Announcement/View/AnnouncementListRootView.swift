@@ -22,7 +22,7 @@ final class AnnouncementListRootView: NiblessView {
         let optionView = OrganizeOptionView()
         
         optionView.displayType = [.sort, .filter]
-        optionView.setupPractice()
+        optionView.setupForAnnouncement()
         return optionView
     }()
     

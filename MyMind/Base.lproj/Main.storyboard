@@ -670,6 +670,22 @@
             </objects>
             <point key="canvasLocation" x="218.84057971014494" y="448.66071428571428"/>
         </scene>
+        <!--Announcement View Controller-->
+        <scene sceneID="xLk-gj-LWt">
+            <objects>
+                <viewController id="hYN-Tc-nbW" customClass="AnnouncementViewController" customModule="MyMind" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="l4e-Qd-TqX">
+                        <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="KLB-UQ-90D"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="bZH-5g-l2M"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LUQ-DK-7jr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-693" y="1165"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="E8K-fg-FHl">
             <objects>
