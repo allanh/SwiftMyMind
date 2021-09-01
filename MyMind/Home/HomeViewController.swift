@@ -114,7 +114,6 @@ final class HomeViewController: UIViewController {
         collectionView.register(HomeCollectionViewHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HomeHeader")
         collectionView.register(HomeCollectionViewSwitchContentHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HomeSwitchContentHeader")
         loadHomeData()
-//        loadAnnouncements()
     }
 }
 // MARK: data loading
@@ -128,7 +127,7 @@ extension HomeViewController {
     }
     private func loadHomeData() {
         loadNotifications()
-        loadBulletins()
+//        loadBulletins()
         loadToDoList()
         loadTodaySaleReports()
         loadSaleReportList()
@@ -460,7 +459,10 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         return UICollectionReusableView()
     }
     func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return false
+        switch indexPath.section {
+        case Section.sevenDaysSKU.rawValue, Section.sevenDaysSetSKU.rawValue, Section.sevenDaysSaleAmount.rawValue, Section.sevenDaysGrossProfit.rawValue: return false
+        default: return false
+        }
     }
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         switch indexPath.section {
@@ -475,28 +477,20 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         }
     }
     
-//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        switch indexPath.item {
-//        case 0:
-//            let purchaseListViewController = PurchaseListViewController(purchaseListLoader: MyMindPurchaseAPIService.shared)
-//            show(purchaseListViewController, sender: nil)
-//        case 1:
-//            let purchaseListViewController = PurchaseListViewController(purchaseListLoader: MyMindPurchaseReviewAPIService.shared, reviewing: true)
-//            show(purchaseListViewController, sender: nil)
-//        case 2:
-//            if let settingViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "Setting") as? SettingViewController {
-//                settingViewController.delegate = self
-//                show(settingViewController, sender: nil)
-//            }
-//            break
-//        case 3:
-//            let storyboard: UIStoryboard = UIStoryboard(name: "TOTP", bundle: nil)
-//            let viewController = storyboard.instantiateViewController(withIdentifier: "SecretListViewControllerNavi")
-//            present(viewController, animated: true, completion: nil)
-//        default:
-//            break
-//        }
-//    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        switch indexPath.section {
+        case Section.sevenDaysSKU.rawValue:
+            print("seven days SKU ranking \(skuRankingSortOrder)")
+        case Section.sevenDaysSetSKU.rawValue:
+            print("seven days set SKU ranking \(setSKURankingSortOrder)")
+        case Section.sevenDaysSaleAmount.rawValue:
+            print("seven days set sale amount detail \(amountRankingDevider)")
+        case Section.sevenDaysGrossProfit.rawValue:
+            print("seven days set gross profit detail \(grossProfitRankingDevider)")
+        default:
+            print(indexPath)
+        }
+    }
 }
 // MARK: IndicatorSwitchContentHeaderViewDelegate
 /// IndicatorSwitchContentHeaderViewDelegate
@@ -541,6 +535,7 @@ extension HomeViewController: UDNSKInteractiveMarqueeViewDataSource, UDNSKIntera
     }
     func interactiveMarqueeView(_ marqueeView: UDNSKInteractiveMarqueeView, didSelectItemAt indexPath: IndexPath) {
         print(bulletins?.items[indexPath.row].id)
+        #warning("show single bulletin")
     }
     
 }
