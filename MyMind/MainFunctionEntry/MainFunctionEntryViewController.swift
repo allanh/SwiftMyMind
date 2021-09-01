@@ -56,7 +56,6 @@ final class MainFunctionEntryViewController: NiblessViewController {
 
             }
         }
-        functionControlInfos.append((.accountSetting, "account_setting_icon"))
         constructViewHeirarchy()
         creatFuncitonControls()
         constructStackViews()
@@ -130,23 +129,22 @@ final class MainFunctionEntryViewController: NiblessViewController {
             present(viewController, animated: true, completion: nil)
         case .purchaseReview:
             show(PurchaseListViewController(purchaseListLoader: MyMindPurchaseReviewAPIService.shared, reviewing: true), sender: nil)
-        case .accountSetting:
-            if let settingViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "Setting") as? SettingViewController {
-                settingViewController.delegate = self
-                show(settingViewController, sender: nil)
-            }
-
+//        case .accountSetting:
+//            if let settingViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "Setting") as? SettingViewController {
+//                settingViewController.delegate = self
+//                show(settingViewController, sender: nil)
+//            }
         default:
             print(sender.functionType)
         }
     }
 
 }
-extension MainFunctionEntryViewController: MixedDelegate {
-    func didSignOut() {
-        self.navigationController?.popToRootViewController(animated: true)
-    }
-    func didCancel() {
-        self.navigationController?.popViewController(animated: true)
-    }
-}
+//extension MainFunctionEntryViewController: MixedDelegate {
+//    func didSignOut() {
+//        self.navigationController?.popToRootViewController(animated: true)
+//    }
+//    func didCancel() {
+//        self.navigationController?.popViewController(animated: true)
+//    }
+//}

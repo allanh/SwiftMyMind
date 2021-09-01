@@ -32,12 +32,18 @@ final class RootTabBarController: UITabBarController {
         addRightBarItem()
         generateHomeViewController()
         generateMainFunctionEntryViewController()
+        generateAccountViewController()
         viewControllers = contentViewControlelrs
     }
 
+    @objc
+    private func showAnnouncement(_ sender: Any?) {
+        print("showAnnouncement")
+    }
     private func addRightBarItem() {
         let button = UIButton(type: .custom)
-        button.setImage(UIImage(named: "question_circle")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        button.setImage(UIImage(named: "bell")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        button.addTarget(self, action: #selector(showAnnouncement(_:)), for: .touchUpInside)
         let barButton = UIBarButtonItem(customView: button)
         navigationItem.rightBarButtonItem = barButton
     }
@@ -46,13 +52,11 @@ final class RootTabBarController: UITabBarController {
             viewController.authorization = authorization
             viewController.tabBarItem.image = UIImage(named: "home")
             viewController.tabBarItem.title = "首頁"
-//            let navigationViewController = UINavigationController(rootViewController: viewController)
             contentViewControlelrs.append(viewController)
        } else {
             let viewController = HomeViewController()
             viewController.tabBarItem.image = UIImage(named: "home")
             viewController.tabBarItem.title = "首頁"
-//            let navigationViewController = UINavigationController(rootViewController: viewController)
             contentViewControlelrs.append(viewController)
         }
     }
@@ -60,10 +64,18 @@ final class RootTabBarController: UITabBarController {
     private func generateMainFunctionEntryViewController() {
         let viewController = MainFunctionEntryViewController()
         viewController.authorization = authorization
-        viewController.tabBarItem.image = UIImage(named: "main_function")
+        viewController.tabBarItem.image = UIImage(named: "functions")
         viewController.tabBarItem.title = "功能"
-//        let navigationViewController = UINavigationController(rootViewController: viewController)
         contentViewControlelrs.append(viewController)
+    }
+    
+    private func generateAccountViewController() {
+        if let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "Setting") as? SettingViewController {
+            viewController.delegate = self
+            viewController.tabBarItem.image = UIImage(named: "account_icon")
+            viewController.tabBarItem.title = "帳號"
+            contentViewControlelrs.append(viewController)
+        }
     }
 }
 extension RootTabBarController: UITabBarControllerDelegate {
@@ -73,5 +85,13 @@ extension RootTabBarController: UITabBarControllerDelegate {
         } else {
             navigationItem.rightBarButtonItem = nil
         }
+    }
+}
+extension RootTabBarController: MixedDelegate {
+    func didSignOut() {
+        self.navigationController?.popToRootViewController(animated: true)
+    }
+    func didCancel() {
+        self.navigationController?.popViewController(animated: true)
     }
 }
