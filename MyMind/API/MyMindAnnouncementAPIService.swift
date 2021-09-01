@@ -31,7 +31,7 @@ class MyMindAnnouncementAPIService: PromiseKitAPIService {
         return sendRequest(request: request)
     }
     
-    func announcements(info: AnnouncementInfo) -> Promise<AnnouncementList> {
+    func announcements(info: AnnouncementInfo? = nil) -> Promise<AnnouncementList> {
         guard let userSession = userSessionDataStore.readUserSession() else {
             return .init(error: APIError.noAccessTokenError)
         }

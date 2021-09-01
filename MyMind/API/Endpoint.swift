@@ -319,8 +319,8 @@ extension Endpoint {
         return Endpoint(path: "/api/admin/\(version)/notification", queryItems: [URLQueryItem(name: "take", value: String(number))])
     }
     // announcement
-    static func announcements(info: AnnouncementInfo) -> Self {
-        return Endpoint(path: "/api/admin/\(version)/announcement", queryItems: info.queryItems)
+    static func announcements(info: AnnouncementInfo?) -> Self {
+        return Endpoint(path: "/api/admin/\(version)/announcement", queryItems: info?.queryItems ?? [])
     }
     static func announcement(for id: Int) -> Self {
         return Endpoint(path: "/api/admin/\(version)/announcement/\(id)")

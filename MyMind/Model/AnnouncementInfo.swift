@@ -8,19 +8,19 @@
 
 import Foundation
 // MARK: -AnnouncementInfo
-struct AnnouncementInfo {
+class AnnouncementInfo {
     enum AnnouncementOrder: String, Codable {
         case STARTED_AT
     }
-    let title: String?
-    let type: AnnouncementType?
-    let top: Bool?
-    let start: Date?
-    let end: Date?
-    let order: AnnouncementOrder?
-    let sort: SortOrder?
-    let current: Int?
-    let limit: Int?
+    var title: String? = nil
+    var type: AnnouncementType? = nil
+    var top: Bool? = nil
+    var start: Date? = nil
+    var end: Date? = nil
+    var order: AnnouncementOrder? = nil
+    var sort: SortOrder? = nil
+    var current: Int? = nil
+    var limit: Int? = nil
     var queryItems: [URLQueryItem] {
         get {
             var items: [URLQueryItem] = []
