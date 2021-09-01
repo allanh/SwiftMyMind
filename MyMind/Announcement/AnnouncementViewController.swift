@@ -14,16 +14,16 @@ class AnnouncementViewController: UIViewController {
 
 
     // MARK: - UI
-    // scrollView
+
     private let scrollView: UIScrollView = UIScrollView {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.showsVerticalScrollIndicator = false // 顯示垂直滾動條
     }
-    // contentView
+
     private let contentView: UIView = UIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
-    // 種類標籤
+
     private let typeLabel: UILabel = UILabel {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.layer.borderWidth = 1
@@ -34,7 +34,7 @@ class AnnouncementViewController: UIViewController {
         $0.textAlignment = NSTextAlignment.center
         $0.font = .pingFangTCRegular(ofSize: 14)
     }
-    // 內容標籤
+
     private let contentLabel: UILabel = UILabel {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.textColor = .black
@@ -42,7 +42,7 @@ class AnnouncementViewController: UIViewController {
         $0.text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
         $0.font = .pingFangTCRegular(ofSize: 14)
     }
-    // 時間標籤
+
     let timeLabel: UILabel = UILabel {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.textColor = UIColor(hex: "b4b4b4")
@@ -76,7 +76,7 @@ class AnnouncementViewController: UIViewController {
 }
     // MARK: - Layouts
 extension AnnouncementViewController {
-    // scrollview layout
+
     private func activateConstraintsScrollView() {
         let top = scrollView.topAnchor.constraint(equalTo: view.topAnchor)
         let trailing = scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
@@ -87,7 +87,7 @@ extension AnnouncementViewController {
             top, trailing, leading, bottom
         ])
     }
-    // contentView layout
+
     private func activateConstraintsContentView() {
         let width = contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor)
         let top = contentView.topAnchor.constraint(equalTo: scrollView.topAnchor)
@@ -100,7 +100,7 @@ extension AnnouncementViewController {
         ])
         
     }
-    // 種類標籤 layout
+
     func activateConstraintsTypeLabel() {
         let top = typeLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 15)
         let leading = typeLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15)
@@ -109,7 +109,7 @@ extension AnnouncementViewController {
             top, leading
         ])
     }
-    // 時間標籤 layout
+
     func activateConstraintsTimeLabel() {
         let top = timeLabel.topAnchor.constraint(equalTo: typeLabel.bottomAnchor, constant: 10)
         let leading = timeLabel.leadingAnchor.constraint(equalTo: typeLabel.leadingAnchor)
@@ -118,13 +118,16 @@ extension AnnouncementViewController {
             top, leading
         ])
         }
-    // 內容標籤 layout
+
     func activateConstraintsContentLabel() {
         let top = contentLabel.topAnchor.constraint(equalTo: timeLabel.bottomAnchor, constant: 15)
         let leading = contentLabel.leadingAnchor.constraint(equalTo: timeLabel.leadingAnchor)
         let trailing = contentLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15)
-       // let 
+        let bottom = contentLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 15)
         
+        NSLayoutConstraint.activate([
+            top, leading, trailing, bottom
+        ])
     }
 
 }

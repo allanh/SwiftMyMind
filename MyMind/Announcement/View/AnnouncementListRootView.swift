@@ -55,10 +55,10 @@ private extension AnnouncementListRootView {
     // Table View constraints
     private func activeConstraintsTableView() {
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        let top = tableView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor)
+        let top = tableView.topAnchor.constraint(equalTo: organizeOptionView.bottomAnchor)
         let leading = tableView.leadingAnchor.constraint(equalTo: leadingAnchor)
         let trailing = tableView.trailingAnchor.constraint(equalTo: trailingAnchor)
-        let bottom = tableView.bottomAnchor.constraint(equalTo: organizeOptionView.topAnchor)
+        let bottom = tableView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
         NSLayoutConstraint.activate([
             top, leading, trailing, bottom
         ])
@@ -67,13 +67,13 @@ private extension AnnouncementListRootView {
     // OrganizeOptionview constraints
     private func activeConstraintsOptionOrganizeOptionView() {
         organizeOptionView.translatesAutoresizingMaskIntoConstraints = false
+        let top = organizeOptionView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor)
         let leading = organizeOptionView.leadingAnchor.constraint(equalTo: leadingAnchor)
-        let bottom = organizeOptionView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
         let trailing = organizeOptionView.trailingAnchor.constraint(equalTo: trailingAnchor)
-        let height = organizeOptionView.heightAnchor.constraint(equalToConstant: 40)
+        let height = organizeOptionView.heightAnchor.constraint(equalToConstant: 30)
         
         NSLayoutConstraint.activate([
-            leading, bottom, trailing, height
+            top, leading, trailing, height
         ])
     }
     

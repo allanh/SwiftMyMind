@@ -13,7 +13,7 @@ class AnnouncementListViewController: NiblessViewController {
     
     var rootView:  AnnouncementListRootView { view as! AnnouncementListRootView }
     
-    var reviewing: Bool = true
+    var reviewing: Bool 
     
     private lazy var emptyListView: EmptyDataView = {
         return EmptyDataView(frame: rootView.tableView.bounds)
@@ -67,7 +67,7 @@ class AnnouncementListViewController: NiblessViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        title = "系統公告"
+        title = "公告訊息"
         configTableView()
         loadAnnouncementList(announcementListQueryInfo: announcementListQueryInfo)
         addButtonActions()
@@ -151,13 +151,13 @@ class AnnouncementListViewController: NiblessViewController {
     private func didPickSortType(sortType: AnnouncementListQueryInfo.OrderReference) {
         announcementListQueryInfo.orderReference = sortType
         refreshFetchAnnouncementList(query: announcementListQueryInfo)
-        rootView.organizeOptionView.sortButton.setTitle(sortType.description, for: .normal)
+        rootView.organizeOptionView.announcementSortButton.setTitle(sortType.description, for: .normal)
         pickSortTypeView.hide()
     }
     
     private func addButtonActions() {
-        rootView.organizeOptionView.sortButton.addTarget(self, action: #selector(sortButtonDidTapped(_:)), for: .touchUpInside)
-        rootView.organizeOptionView.filterButton.addTarget(self, action: #selector(filterButtonDidTapped), for: .touchUpInside)
+        rootView.organizeOptionView.announcementSortButton.addTarget(self, action: #selector(sortButtonDidTapped(_:)), for: .touchUpInside)
+        rootView.organizeOptionView.announcementFilterButton.addTarget(self, action: #selector(filterButtonDidTapped), for: .touchUpInside)
     }
     
     @objc
