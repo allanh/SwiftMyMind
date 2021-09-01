@@ -169,8 +169,8 @@ extension HomeViewController {
     }
 //    private func loadAnnouncements() {
 //        let announcementLoader = MyMindAnnouncementAPIService.shared
-//        
-//        announcementLoader.announcements(info: AnnouncementInfo(title: "現在時間", type: nil, top: nil, start: nil, end: nil, order: nil, sort: nil, current: nil, limit: nil))
+//        let info = AnnouncementInfo()
+//        announcementLoader.announcements(info: info)
 //            .done { announcements in
 //                print(announcements)
 //            }
