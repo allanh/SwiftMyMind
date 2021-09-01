@@ -68,6 +68,10 @@ final class MainFunctionEntryViewController: NiblessViewController {
         super.viewDidLayoutSubviews()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.barTintColor = UIColor(hex: "060d32")
+    }
     private func constructViewHeirarchy() {
         view.addSubview(stackView)
     }
