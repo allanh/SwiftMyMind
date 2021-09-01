@@ -21,7 +21,7 @@ class SignInViewController: NiblessViewController {
     }
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        .darkContent
+        .lightContent
     }
 
     init(viewModel: SignInViewModel) {

@@ -8,6 +8,9 @@
 
 import UIKit
 class PurchasedProductsInfoViewController: NiblessViewController {
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        .lightContent
+    }
     var productInfos: [PurchaseOrder.ProductInfo] = []
     var totalCost: Float {
         get {

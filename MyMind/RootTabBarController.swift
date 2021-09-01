@@ -7,9 +7,11 @@
 //
 
 import UIKit
-
 final class RootTabBarController: UITabBarController {
 
+    override var childForStatusBarStyle: UIViewController? {
+        return selectedViewController
+    }
     private var contentViewControlelrs: [UIViewController] = []
     var authorization: Authorization?
     convenience init() {

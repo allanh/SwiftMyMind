@@ -24,6 +24,9 @@ typealias FunctionControlInfo = (type: MainFunctoinType, imageName: String, titl
 typealias SwitcherInfo = (firstTitle: String, secondTitle: String, current: Int, section: Section)
 final class HomeViewController: UIViewController {
 
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        .lightContent
+    }
     private var saleReportSortOrder: SKURankingReport.SKURankingReportSortOrder = .TOTAL_SALE_QUANTITY {
         didSet {
             collectionView.reloadSections([Section.thirtyDays.rawValue])

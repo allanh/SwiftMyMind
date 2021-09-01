@@ -9,6 +9,9 @@
 import UIKit
 
 class ProductMaterialSuggestionInfoTableViewController: UITableViewController {
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        .lightContent
+    }
 
     typealias PurchaseSuggestionInfoItem = (title: String, content: String)
 

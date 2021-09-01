@@ -13,6 +13,9 @@ protocol EditingPurchaseOrderViewControllerDelegate: AnyObject {
     func didFinished(_ success: Bool)
 }
 final class EditingPurchaseOrderViewController: NiblessViewController {
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        .lightContent
+    }
 
     weak var delegate: EditingPurchaseOrderViewControllerDelegate?
     let reviewing: Bool

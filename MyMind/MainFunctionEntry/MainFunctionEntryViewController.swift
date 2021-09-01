@@ -18,7 +18,9 @@ enum MainFunctoinType: String {
 }
 
 final class MainFunctionEntryViewController: NiblessViewController {
-    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        .lightContent
+    }
     typealias FunctionControlInfo = (type: MainFunctoinType, imageName: String)
     private var functionControls: [MainFunctionControl] = []
 //    private var functionControls: [UIView] = []

@@ -8,6 +8,9 @@
 import UIKit
 
 class SecretListViewController: UIViewController {
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        .lightContent
+    }
     // MARK: - Properties
     let repository: UDISecretRepository = UDISecretRepository(dataStore: UserDefaultSecretDataStore.init())
 

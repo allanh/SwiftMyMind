@@ -28,6 +28,9 @@ enum PurchaseQueryType: String, CustomStringConvertible, CaseIterable {
 }
 
 class PurchaseListFilterViewController: NiblessViewController {
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        .lightContent
+    }
     private let scrollView: UIScrollView = UIScrollView {
         $0.backgroundColor = .white
         $0.showsHorizontalScrollIndicator = false

@@ -10,6 +10,9 @@ import UIKit
 import RxSwift
 
 class ProductMaterialsFilterViewController: NiblessViewController {
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        .lightContent
+    }
     // MARK: - Properties
     private let scrollView: UIScrollView = UIScrollView {
         $0.backgroundColor = .white

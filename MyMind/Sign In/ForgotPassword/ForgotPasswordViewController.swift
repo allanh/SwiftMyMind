@@ -10,6 +10,9 @@ import UIKit
 import RxSwift
 
 class ForgotPasswordViewController: NiblessViewController {
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        .lightContent
+    }
 
     let viewModel: ForgotPasswordViewModel
     private var didLayoutRootView: Bool = false
