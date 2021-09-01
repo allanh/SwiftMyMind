@@ -24,7 +24,7 @@ extension UIBarButtonItem {
         var badgeSize: CGSize = .zero
         switch type {
         case .dot:
-            badgeSize = number > 0 ? CGSize(width: 10, height: 10) : .zero
+            badgeSize = number > 0 ? CGSize(width: 8, height: 8) : .zero
         case .number:
             displayString = number > 99 ? "99+" : String(number)
             let displayStringSize = (displayString as NSString).size(withAttributes: [.font:  UIFont.pingFangTCSemibold(ofSize: 12)])
@@ -57,17 +57,17 @@ extension UIBarButtonItem {
         button.addSubview(badgeLabel)
         switch position {
         case .rightTop:
-            badgeLabel.trailingAnchor.constraint(equalTo: button.trailingAnchor, constant: (type == .dot) ? 3 : 0).isActive = true
-            badgeLabel.topAnchor.constraint(equalTo: button.topAnchor, constant: -3).isActive = true
+            badgeLabel.trailingAnchor.constraint(equalTo: button.trailingAnchor, constant: (type == .dot) ? -2 : 0).isActive = true
+            badgeLabel.topAnchor.constraint(equalTo: button.topAnchor, constant: -2).isActive = true
         case .leftTop:
-            badgeLabel.leadingAnchor.constraint(equalTo: button.leadingAnchor, constant: (type == .dot) ? -3 : 0).isActive = true
-            badgeLabel.topAnchor.constraint(equalTo: button.topAnchor, constant: -3).isActive = true
+            badgeLabel.leadingAnchor.constraint(equalTo: button.leadingAnchor, constant: (type == .dot) ? -2 : 0).isActive = true
+            badgeLabel.topAnchor.constraint(equalTo: button.topAnchor, constant: -2).isActive = true
         case .leftBottom:
-            badgeLabel.leadingAnchor.constraint(equalTo: button.leadingAnchor, constant: (type == .dot) ? -3 : 0).isActive = true
-            badgeLabel.bottomAnchor.constraint(equalTo: button.bottomAnchor, constant: 3).isActive = true
+            badgeLabel.leadingAnchor.constraint(equalTo: button.leadingAnchor, constant: (type == .dot) ? -2 : 0).isActive = true
+            badgeLabel.bottomAnchor.constraint(equalTo: button.bottomAnchor, constant: 2).isActive = true
         case .rightBottom:
-            badgeLabel.trailingAnchor.constraint(equalTo: button.trailingAnchor, constant: (type == .dot) ? 3 : 0).isActive = true
-            badgeLabel.bottomAnchor.constraint(equalTo: button.bottomAnchor, constant: 3).isActive = true
+            badgeLabel.trailingAnchor.constraint(equalTo: button.trailingAnchor, constant: (type == .dot) ? -2 : 0).isActive = true
+            badgeLabel.bottomAnchor.constraint(equalTo: button.bottomAnchor, constant: 2).isActive = true
         }
         badgeLabel.widthAnchor.constraint(equalToConstant: badgeSize.width).isActive = true
         badgeLabel.heightAnchor.constraint(equalToConstant: badgeSize.height).isActive = true
