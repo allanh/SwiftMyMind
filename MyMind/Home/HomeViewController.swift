@@ -55,9 +55,9 @@ final class HomeViewController: UIViewController {
             collectionView.reloadSections([Section.bulliten.rawValue])
         }
     }
-    private var announcements: AnnouncementList? {
+    private var notifications: MyMindNotificationList? {
         didSet {
-            tabBarController?.navigationItem.rightBarButtonItem?.updateBadge(number: announcements?.unreaded ?? 0)
+            tabBarController?.navigationItem.rightBarButtonItem?.updateBadge(number: notifications?.unreaded ?? 0)
         }
     }
     private var toDoList: ToDoList? {
@@ -114,6 +114,7 @@ final class HomeViewController: UIViewController {
         collectionView.register(HomeCollectionViewHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HomeHeader")
         collectionView.register(HomeCollectionViewSwitchContentHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HomeSwitchContentHeader")
         loadHomeData()
+//        loadAnnouncements()
     }
 }
 // MARK: data loading
@@ -126,7 +127,7 @@ extension HomeViewController {
         }
     }
     private func loadHomeData() {
-        loadAnnouncements()
+        loadNotifications()
         loadBulletins()
         loadToDoList()
         loadTodaySaleReports()
@@ -151,21 +152,35 @@ extension HomeViewController {
                 self.handlerError(error)
             }
     }
-    private func loadAnnouncements() {
+    private func loadNotifications() {
         let announcementLoader = MyMindAnnouncementAPIService.shared
         
-        announcementLoader.announcements()
-            .done { announcements in
-                self.announcements = announcements
+        announcementLoader.notifications()
+            .done { notifications in
+                self.notifications = notifications
             }
             .ensure {
                 self.isNetworkProcessing = false
             }
             .catch { error in
-                self.announcements = nil
+                self.notifications = nil
                 self.handlerError(error)
             }
     }
+//    private func loadAnnouncements() {
+//        let announcementLoader = MyMindAnnouncementAPIService.shared
+//        
+//        announcementLoader.announcements(info: AnnouncementInfo(title: "現在時間", type: nil, top: nil, start: nil, end: nil, order: nil, sort: nil, current: nil, limit: nil))
+//            .done { announcements in
+//                print(announcements)
+//            }
+//            .ensure {
+//                self.isNetworkProcessing = false
+//            }
+//            .catch { error in
+//                self.handlerError(error)
+//            }
+//    }
     private func loadToDoList() {
         if let authorization = authorization {
             isNetworkProcessing = true

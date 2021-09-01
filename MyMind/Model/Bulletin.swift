@@ -9,9 +9,6 @@
 import Foundation
 // MARK: -Bulletin
 struct Bulletin: Codable {
-    enum BulletinType: String, Codable {
-        case SYSTEM, NEW_FEATURE, OPTIMIZATION, NEWS, POLICY
-    }
     private enum CodingKeys: String, CodingKey {
         case title, type, importance
         case top = "is_top"
@@ -20,7 +17,7 @@ struct Bulletin: Codable {
         case id = "announcement_id"
     }
     let title: String
-    let type: BulletinType
+    let type: AnnouncementType
     let importance: Importance
     let top: Bool
     let descriptions: String

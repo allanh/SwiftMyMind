@@ -98,7 +98,7 @@ extension Endpoint {
         Endpoint(path: "/employee/device_id", serviceType: .auth)
     }
     static var authorization: Self {
-        Endpoint(path: "/api/admin/v1/authorization", serviceType: .dos)
+        Endpoint(path: "/api/admin/\(version)/authorization", serviceType: .dos)
     }
 
     static var me: Self {
@@ -305,18 +305,24 @@ extension Endpoint {
         return Endpoint(path: "/api/admin/\(version)/dashboard/order_sale_by_vendor", queryItems: items)
     }
     static func bulletins(number: Int) -> Self {
-        return Endpoint(path: "/api/admin/v1/dashboard/announcement", queryItems: [URLQueryItem(name: "take", value: String(number))])
+        return Endpoint(path: "/api/admin/\(version)/dashboard/announcement", queryItems: [URLQueryItem(name: "take", value: String(number))])
     }
     // push
     static var registration: Self {
-        Endpoint(path: "/api/v1/external/push/device", serviceType: .push)
+        Endpoint(path: "/api/\(version)/external/push/device", serviceType: .push)
     }
     static func openMessage(messageID: String) -> Self {
-        return Endpoint(path: "/api/v1/external/push/message/\(messageID)/is_open", serviceType: .push)
+        return Endpoint(path: "/api/\(version)/external/push/message/\(messageID)/is_open", serviceType: .push)
     }
     // notification
     static func notifications(number: Int) -> Self {
-        return Endpoint(path: "/api/admin/v1/notification", queryItems: [URLQueryItem(name: "take", value: String(number))])
+        return Endpoint(path: "/api/admin/\(version)/notification", queryItems: [URLQueryItem(name: "take", value: String(number))])
     }
-
+    // announcement
+    static func announcements(info: AnnouncementInfo) -> Self {
+        return Endpoint(path: "/api/admin/\(version)/announcement", queryItems: info.queryItems)
+    }
+    static func announcement(for id: Int) -> Self {
+        return Endpoint(path: "/api/admin/\(version)/announcement/\(id)")
+    }
 }

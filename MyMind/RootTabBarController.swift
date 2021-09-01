@@ -28,7 +28,6 @@ final class RootTabBarController: UITabBarController {
         addCustomBackNavigationItem()
         title = "My Mind 買賣後台"
         navigationItem.backButtonTitle = ""
-        delegate = self
         addRightBarItem()
         generateHomeViewController()
         generateMainFunctionEntryViewController()
@@ -75,15 +74,6 @@ final class RootTabBarController: UITabBarController {
             viewController.tabBarItem.image = UIImage(named: "account_icon")
             viewController.tabBarItem.title = "帳號"
             contentViewControlelrs.append(viewController)
-        }
-    }
-}
-extension RootTabBarController: UITabBarControllerDelegate {
-    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-        if viewController.isKind(of: HomeViewController.self) {
-            addRightBarItem()
-        } else {
-            navigationItem.rightBarButtonItem = nil
         }
     }
 }

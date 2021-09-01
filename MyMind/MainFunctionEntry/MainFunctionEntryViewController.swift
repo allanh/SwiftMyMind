@@ -138,7 +138,6 @@ final class MainFunctionEntryViewController: NiblessViewController {
             print(sender.functionType)
         }
     }
-
 }
 //extension MainFunctionEntryViewController: MixedDelegate {
 //    func didSignOut() {
