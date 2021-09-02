@@ -58,6 +58,7 @@ final class OrganizeOptionView: NiblessView {
     }
     
     let announcementSortButton: UIButton = UIButton {
+        $0.isSelected = false
         $0.titleLabel?.font = .pingFangTCRegular(ofSize: 14)
         $0.setTitleColor(.init(hex: "4c4c4c"), for: .normal)
         $0.setImage(UIImage(named: "sort"), for: .normal)
@@ -65,14 +66,17 @@ final class OrganizeOptionView: NiblessView {
         $0.layer.cornerRadius = 15
         $0.semanticContentAttribute = .forceRightToLeft
         $0.backgroundColor = UIColor(hex: "f2f2f2")
+        $0.setTitleColor(UIColor(hex: "004477"), for: .selected)
     }
     
     let annoucementIsTopButton: UIButton = UIButton {
+        $0.isSelected = false
         $0.titleLabel?.font = .pingFangTCRegular(ofSize: 14)
         $0.setTitleColor(.init(hex: "4c4c4c"), for: .normal)
         $0.setTitle("釘選", for: .normal)
         $0.layer.cornerRadius = 15
         $0.backgroundColor = UIColor(hex: "f2f2f2")
+        $0.setTitleColor(UIColor(hex: "004477"), for: .selected)
     }
     
     var displayType: DisplayType = .all
@@ -112,12 +116,12 @@ final class OrganizeOptionView: NiblessView {
         activateConstraintsSeparatorViews()
         if displayType.contains(.layout) { activateConstraintsLayoutButton() }
     }
-    // 建立 OrganizeOptionView
+
     func setupForAnnouncement() {
         constructViewHierarchyForAnnouncement()
         activateConstraintsForAnnouncement()
     }
-    // 建立 OrganizeOption 中所有的 View
+
     func constructViewHierarchyForAnnouncement() {
         stackView.addSubview(announcementFilterButton)
         stackView.addSubview(announcementSortButton)
@@ -125,7 +129,7 @@ final class OrganizeOptionView: NiblessView {
         stackView.addSubview(topSeparatorView)
         stackView.addSubview(annoucementIsTopButton)
     }
-    // 建立 OrganizeOption 中所有的 Constraints
+
     func activateConstraintsForAnnouncement() {
         activateConstraintsStackView()
         activateConstraintsSortButtonForAnnouncement()
@@ -222,7 +226,7 @@ extension OrganizeOptionView {
             width, height
         ])
     }
-    // 按鈕間的分隔線
+
     private func activatConstaintsFirstSeparatorView() {
         firstSeparatorView.translatesAutoresizingMaskIntoConstraints = false
         let centerX = firstSeparatorView.centerXAnchor.constraint(equalTo: stackView.centerXAnchor)
@@ -234,7 +238,7 @@ extension OrganizeOptionView {
             centerX, centerY, width, height
         ])
     }
-    // Stack View 上面的分隔線
+
     private func activateConstraintsSortButtonForAnnouncement() {
         announcementSortButton.translatesAutoresizingMaskIntoConstraints = false
         let centerY = announcementSortButton.centerYAnchor
@@ -248,7 +252,7 @@ extension OrganizeOptionView {
             centerY, leading, width
         ])
     }
-    // announcementFilterButton constraints
+
     private func activateConstraintsFilterButtonForAnnouncement() {
         announcementFilterButton.translatesAutoresizingMaskIntoConstraints = false
         let centerY = announcementFilterButton.centerYAnchor
@@ -263,7 +267,7 @@ extension OrganizeOptionView {
             centerY, trailing, height, width
         ])
     }
-    // seperator between tableview and optionview
+
     private func activateConstraintsSeparatorView() {
         topSeparatorView.translatesAutoresizingMaskIntoConstraints = false
         let top = topSeparatorView.topAnchor
@@ -279,7 +283,7 @@ extension OrganizeOptionView {
             top, leading, trailing, height
         ])
     }
-    // isTopButtonForAnnouncement constraints
+
     private func activateConstraintsIsTopButtonForAnnouncement() {
         annoucementIsTopButton.translatesAutoresizingMaskIntoConstraints = false
         let centerY = annoucementIsTopButton.centerYAnchor

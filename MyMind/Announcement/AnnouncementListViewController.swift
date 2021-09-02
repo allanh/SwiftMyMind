@@ -10,7 +10,6 @@ import UIKit
 import NVActivityIndicatorView
 class AnnouncementListViewController: NiblessViewController {
     // MARK: - Properties
-    
     var rootView:  AnnouncementListRootView { view as! AnnouncementListRootView }
     
     var reviewing: Bool 
@@ -156,8 +155,10 @@ class AnnouncementListViewController: NiblessViewController {
     }
     
     private func addButtonActions() {
-        rootView.organizeOptionView.announcementSortButton.addTarget(self, action: #selector(sortButtonDidTapped(_:)), for: .touchUpInside)
+     //   rootView.organizeOptionView.announcementSortButton.addTarget(self, action: #selector(sortButtonDidTapped(_:)), for: .touchUpInside)
         rootView.organizeOptionView.announcementFilterButton.addTarget(self, action: #selector(filterButtonDidTapped), for: .touchUpInside)
+        rootView.organizeOptionView.annoucementIsTopButton.addTarget(self, action: #selector(isTopButtonDidTapped(_:)), for: .touchUpInside)
+        rootView.organizeOptionView.announcementSortButton.addTarget(self, action: #selector(sortButtonColorDidTapped(_:)), for: .touchUpInside)
     }
     
     @objc
@@ -184,7 +185,29 @@ class AnnouncementListViewController: NiblessViewController {
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated: true, completion: nil)
     }
-    
+    @objc
+    private func isTopButtonDidTapped(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        let isTopButton = rootView.organizeOptionView.annoucementIsTopButton
+        if  isTopButton.isSelected == true {
+            isTopButton.layer.borderWidth = 1
+            isTopButton.layer.borderColor = UIColor(hex: "004477").cgColor
+        } else {
+            isTopButton.layer.borderWidth = 0
+        }
+    }
+    @objc
+    private func sortButtonColorDidTapped(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        let sortButton = rootView.organizeOptionView.announcementSortButton
+        if  sortButton.isSelected == true {
+            sortButton.layer.borderWidth = 1
+            sortButton.layer.borderColor = UIColor(hex: "004477").cgColor
+        } else {
+            sortButton.layer.borderWidth = 0
+        }
+    }
+
 }
 // MARK: - Table view delegate
 extension AnnouncementListViewController: UITableViewDelegate, UITableViewDataSource {

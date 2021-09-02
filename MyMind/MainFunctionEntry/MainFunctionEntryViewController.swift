@@ -58,11 +58,11 @@ final class MainFunctionEntryViewController: NiblessViewController {
             }
         }
         functionControlInfos.append((.accountSetting, "account_setting_icon"))
+        functionControlInfos.append((.announcement, "calendar_icon"))
         constructViewHeirarchy()
         creatFuncitonControls()
         constructStackViews()
         activateConstraintsStackView()
-        functionControlInfos.append((.announcement, "home"))
     }
 
     override func viewDidLayoutSubviews() {

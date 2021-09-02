@@ -21,7 +21,7 @@ final class AnnouncementListRootView: NiblessView {
     lazy var organizeOptionView: OrganizeOptionView = {
         let optionView = OrganizeOptionView()
         
-        optionView.displayType = [.sort, .filter]
+     //   optionView.displayType = [.sort, .filter]
         optionView.setupForAnnouncement()
         return optionView
     }()
@@ -70,7 +70,7 @@ private extension AnnouncementListRootView {
         let top = organizeOptionView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor)
         let leading = organizeOptionView.leadingAnchor.constraint(equalTo: leadingAnchor)
         let trailing = organizeOptionView.trailingAnchor.constraint(equalTo: trailingAnchor)
-        let height = organizeOptionView.heightAnchor.constraint(equalToConstant: 30)
+        let height = organizeOptionView.heightAnchor.constraint(equalToConstant: 48)
         
         NSLayoutConstraint.activate([
             top, leading, trailing, height

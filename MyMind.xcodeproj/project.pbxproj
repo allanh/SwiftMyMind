@@ -97,6 +97,10 @@
 		97B1174126550C5E00242428 /* PickSortTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B1174026550C5E00242428 /* PickSortTypeView.swift */; };
 		97B117432656064300242428 /* SingleLabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B117422656064300242428 /* SingleLabelTableViewCell.swift */; };
 		97B11745265650BA00242428 /* PickProductMaterailsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B11744265650BA00242428 /* PickProductMaterailsViewModelTests.swift */; };
+		9C926AE526E0B04B0067C61E /* FilterBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C926AE426E0B04B0067C61E /* FilterBottomView.swift */; };
+		9C926AE726E0BF980067C61E /* AutoCompleteSearchTitleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C926AE626E0BF980067C61E /* AutoCompleteSearchTitleViewController.swift */; };
+		9C926AE926E0C1E40067C61E /* AutoCompleteTitleSerchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C926AE826E0C1E40067C61E /* AutoCompleteTitleSerchView.swift */; };
+		9C926AEB26E0C9990067C61E /* AutoCompleteTitleSearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C926AEA26E0C9990067C61E /* AutoCompleteTitleSearchModel.swift */; };
 		9CEFCA4B26DE171100506308 /* PIckAnnouncementTypeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEFCA3B26DE171100506308 /* PIckAnnouncementTypeViewModel.swift */; };
 		9CEFCA4C26DE171100506308 /* AnnouncementAutoCompleteAdapters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEFCA3C26DE171100506308 /* AnnouncementAutoCompleteAdapters.swift */; };
 		9CEFCA4D26DE171100506308 /* MyMindAnnouncementAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEFCA3D26DE171100506308 /* MyMindAnnouncementAPIService.swift */; };
@@ -396,6 +400,10 @@
 		97B117422656064300242428 /* SingleLabelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleLabelTableViewCell.swift; sourceTree = "<group>"; };
 		97B11744265650BA00242428 /* PickProductMaterailsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickProductMaterailsViewModelTests.swift; sourceTree = "<group>"; };
 		995D83B093740C937418E4D8 /* Pods-MyMind.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMind.debug.xcconfig"; path = "Target Support Files/Pods-MyMind/Pods-MyMind.debug.xcconfig"; sourceTree = "<group>"; };
+		9C926AE426E0B04B0067C61E /* FilterBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterBottomView.swift; sourceTree = "<group>"; };
+		9C926AE626E0BF980067C61E /* AutoCompleteSearchTitleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoCompleteSearchTitleViewController.swift; sourceTree = "<group>"; };
+		9C926AE826E0C1E40067C61E /* AutoCompleteTitleSerchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoCompleteTitleSerchView.swift; sourceTree = "<group>"; };
+		9C926AEA26E0C9990067C61E /* AutoCompleteTitleSearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoCompleteTitleSearchModel.swift; sourceTree = "<group>"; };
 		9CEFCA3B26DE171100506308 /* PIckAnnouncementTypeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PIckAnnouncementTypeViewModel.swift; sourceTree = "<group>"; };
 		9CEFCA3C26DE171100506308 /* AnnouncementAutoCompleteAdapters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnouncementAutoCompleteAdapters.swift; sourceTree = "<group>"; };
 		9CEFCA3D26DE171100506308 /* MyMindAnnouncementAPIService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyMindAnnouncementAPIService.swift; sourceTree = "<group>"; };
@@ -750,13 +758,22 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		9C926AE326E0B0210067C61E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9C926AE426E0B04B0067C61E /* FilterBottomView.swift */,
+				9C926AE826E0C1E40067C61E /* AutoCompleteTitleSerchView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		9CEFCA3A26DE171100506308 /* Announcement */ = {
 			isa = PBXGroup;
 			children = (
 				9CEFCA4126DE171100506308 /* View */,
 				9CEFCA4426DE171100506308 /* Filter */,
-				9CEFCA4926DE171100506308 /* AnnouncementViewController.swift */,
 				9CEFCA3E26DE171100506308 /* AnnouncementListViewController.swift */,
+				9CEFCA4926DE171100506308 /* AnnouncementViewController.swift */,
 				9CEFCA4026DE171100506308 /* Announcement.swift */,
 				9CEFCA3C26DE171100506308 /* AnnouncementAutoCompleteAdapters.swift */,
 				9CEFCA3F26DE171100506308 /* AnnouncementListLoader.swift */,
@@ -778,8 +795,10 @@
 		9CEFCA4426DE171100506308 /* Filter */ = {
 			isa = PBXGroup;
 			children = (
-				9CEFCA4526DE171100506308 /* AnnouncementFilterViewModel.swift */,
 				9CEFCA4626DE171100506308 /* Controller */,
+				9C926AE326E0B0210067C61E /* View */,
+				9C926AEA26E0C9990067C61E /* AutoCompleteTitleSearchModel.swift */,
+				9CEFCA4526DE171100506308 /* AnnouncementFilterViewModel.swift */,
 			);
 			path = Filter;
 			sourceTree = "<group>";
@@ -790,6 +809,7 @@
 				9CEFCA4726DE171100506308 /* AnnouncementQueryDateSelectionViewController.swift */,
 				9CEFCA4826DE171100506308 /* AnnouncementTypeSelectionViewController.swift */,
 				9CEFCA4A26DE171100506308 /* AnnouncementListFilterViewController.swift */,
+				9C926AE626E0BF980067C61E /* AutoCompleteSearchTitleViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1606,11 +1626,13 @@
 				9CEFCA4F26DE171100506308 /* AnnouncementListLoader.swift in Sources */,
 				A442A16F266F797500AAB1ED /* Reviewer.swift in Sources */,
 				52C2CBDE269D643B002A2BA9 /* SKURankingInfoView.swift in Sources */,
+				9C926AE926E0C1E40067C61E /* AutoCompleteTitleSerchView.swift in Sources */,
 				A48389B4260869940044C09E /* SignInViewModel.swift in Sources */,
 				5246E4742690385C005C11EC /* Account.swift in Sources */,
 				A43E0B6A260D84FB005FC6CE /* NVActivityIndicatorView+Rx.swift in Sources */,
 				A494D9C82670CC75008658F8 /* PurchaseApplyViewModel.swift in Sources */,
 				A464876E268969010053E6F5 /* ScannerOverlayPreviewLayer.swift in Sources */,
+				9C926AE726E0BF980067C61E /* AutoCompleteSearchTitleViewController.swift in Sources */,
 				A4CBD8A92664E2AF00B19119 /* VendorInfo.swift in Sources */,
 				A47AB498265E00B300FE3CFA /* AutoCompleteSearchViewController.swift in Sources */,
 				A4ACEDC72649374B008724E4 /* UIWindow+.swift in Sources */,
@@ -1691,6 +1713,7 @@
 				97AFE3662665E7DD002CBE01 /* ProductMaterialDetail.swift in Sources */,
 				527E11C32693084B00FB8B01 /* ReturnPurchaseOrderInfo.swift in Sources */,
 				A4159204260C394F00FD3989 /* UIButton+.swift in Sources */,
+				9C926AE526E0B04B0067C61E /* FilterBottomView.swift in Sources */,
 				A4CBD8A32664900100B19119 /* PickVendorViewController.swift in Sources */,
 				A439B52C26099AA1002352C2 /* UIViewController+.swift in Sources */,
 				52C2CBD4269BED72002A2BA9 /* SaleReportInfoView.swift in Sources */,
@@ -1699,6 +1722,7 @@
 				A47F39CD263A58F700A3097C /* PurchaseListViewController.swift in Sources */,
 				A4B55E4B265B4749002E1880 /* MyMindUserSessionRepository.swift in Sources */,
 				97AFE3702667246B002CBE01 /* PurchaseProductSuggestionViewController.swift in Sources */,
+				9C926AEB26E0C9990067C61E /* AutoCompleteTitleSearchModel.swift in Sources */,
 				A4F2D013265D07C7004D8D6D /* AutoCompleteSearchViewModel.swift in Sources */,
 				A439B53C2609CDC3002352C2 /* ToastView.swift in Sources */,
 				A43E8513268C08FC008C8369 /* UDISecretRepository.swift in Sources */,

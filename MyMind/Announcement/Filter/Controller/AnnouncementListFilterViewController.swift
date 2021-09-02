@@ -34,7 +34,7 @@ class AnnouncementListFilterViewController: NiblessViewController {
         $0.backgroundColor = .white
     }
     
-    private let bottomView: FilterSideMenuBottomView = FilterSideMenuBottomView {
+    private let bottomView: FilterBottomView = FilterBottomView {
         $0.backgroundColor = .white
     }
     
@@ -131,14 +131,22 @@ class AnnouncementListFilterViewController: NiblessViewController {
         navigationItem.title = "篩選條件"
         let closeButton = UIButton()
         closeButton.setImage(UIImage(named: "close"), for: .normal)
+        closeButton.tintColor = .white
         closeButton.addTarget(self, action: #selector(closeButtonDidTapped(_:)), for: .touchUpInside)
-        let barItem = UIBarButtonItem(customView: closeButton)
-        navigationItem.setRightBarButton(barItem, animated: true)
+        let leftBarItem = UIBarButtonItem(customView: closeButton)
+        navigationItem.setLeftBarButton(leftBarItem, animated: true)
+        
+        let cleanButton = UIButton()
+        cleanButton.setTitle("清除", for: .normal)
+        cleanButton.setTitleColor(.white, for: .normal)
+        cleanButton.addTarget(self, action: #selector(cleanButtonDidTapped(_:)), for: .touchUpInside)
+        let rightBarItem = UIBarButtonItem(customView: cleanButton)
+        navigationItem.setRightBarButton(rightBarItem, animated: true)
     }
     
     private func configBottomView() {
         bottomView.confirmButton.addTarget(self, action: #selector(confirmButtonDidTapped(_:)), for: .touchUpInside)
-        bottomView.cancelButton.addTarget(self, action: #selector(cleanButtonDidTapped(_:)), for: .touchUpInside)
+//        bottomView.cancelButton.addTarget(self, action: #selector(cleanButtonDidTapped(_:)), for: .touchUpInside)
     }
     
     @objc
