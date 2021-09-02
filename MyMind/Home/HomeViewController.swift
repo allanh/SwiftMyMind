@@ -58,11 +58,6 @@ final class HomeViewController: UIViewController {
             collectionView.reloadSections([Section.bulliten.rawValue])
         }
     }
-    private var notifications: MyMindNotificationList? {
-        didSet {
-            tabBarController?.navigationItem.rightBarButtonItem?.updateBadge(number: notifications?.unreaded ?? 0)
-        }
-    }
     private var toDoList: ToDoList? {
         didSet {
             collectionView.reloadSections([Section.todo.rawValue])
@@ -129,7 +124,6 @@ extension HomeViewController {
         }
     }
     private func loadHomeData() {
-        loadNotifications()
 //        loadBulletins()
         loadToDoList()
         loadTodaySaleReports()
@@ -151,21 +145,6 @@ extension HomeViewController {
             }
             .catch { error in
                 self.bulletins = nil
-                self.handlerError(error)
-            }
-    }
-    private func loadNotifications() {
-        let announcementLoader = MyMindAnnouncementAPIService.shared
-        
-        announcementLoader.notifications()
-            .done { notifications in
-                self.notifications = notifications
-            }
-            .ensure {
-                self.isNetworkProcessing = false
-            }
-            .catch { error in
-                self.notifications = nil
                 self.handlerError(error)
             }
     }
