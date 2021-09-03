@@ -149,9 +149,9 @@ class SignInViewController: NiblessViewController {
                 }
                 let confirmAction = UIAlertAction(title: "確定", style: .default) { action in
                     let storyboard: UIStoryboard = UIStoryboard(name: "TOTP", bundle: nil)
-                    if let viewController = storyboard.instantiateViewController(withIdentifier: "SecretListViewControllerNavi") as? UINavigationController, let totpViewController = viewController.topViewController as? SecretListViewController {
-                        totpViewController.scanViewControllerDelegate = self
-                        show(totpViewController, sender: self)
+                    if let viewController = storyboard.instantiateViewController(identifier: "SecretListViewController") as? SecretListViewController {
+                        viewController.scanViewControllerDelegate = self
+                        show(viewController, sender: self)
                     }
                }
                 alert.addAction(cancelAction)
