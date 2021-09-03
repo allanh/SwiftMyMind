@@ -15,7 +15,11 @@ class AnnouncementFilterViewModel {
     let didUpdateQueryInfo:  (AnnouncementListQueryInfo) -> Void
     let service: AutoCompleteAPIService
     
-    lazy var announcementTitleViewModel:AutoCompleteSearchViewModel = {
+//    lazy var announcementTitleViewModel:AutoCompleteSearchViewModel = {
+//        makeViewModelForTitle()
+//    }()
+    
+    lazy var announcementTitleViewModel:AutoCompleteTitleSearchModel = {
         makeViewModelForTitle()
     }()
     
@@ -95,6 +99,13 @@ extension AnnouncementFilterViewModel {
         let adapter =
             RxTitleAutoCompletItemViewModelAdapter(service: service)
         let viewModel = AutoCompleteSearchViewModel(title: "公告標題", placeholder: "請輸入", loader: adapter)
+        return viewModel
+    }
+    
+    private func makeViewModelForTitle() -> AutoCompleteTitleSearchModel {
+        let adapter =
+            RxTitleAutoCompletItemViewModelAdapter(service: service)
+        let viewModel = AutoCompleteTitleSearchModel(placeholder: "請輸入公告標題", loader: adapter)
         return viewModel
     }
         

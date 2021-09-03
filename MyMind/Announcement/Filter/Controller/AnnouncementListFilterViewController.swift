@@ -109,12 +109,17 @@ class AnnouncementListFilterViewController: NiblessViewController {
         addChild(viewControler)
         viewControler.didMove(toParent: self)
     }
+    // MARK: - ******
+//    private func addAutoSearchViewControllerAsChild(with viewModel: AutoCompleteSearchViewModel){
+//        let viewController = AutoCompleteSearchViewController(viewModel: viewModel)
+//        addViewControllerAsChild(viewController)
+//    }
     
-    private func addAutoSearchViewControllerAsChild(with viewModel: AutoCompleteSearchViewModel){
-        let viewController = AutoCompleteSearchViewController(viewModel: viewModel)
+    private func addAutoSearchViewControllerAsChild(with viewModel: AutoCompleteTitleSearchModel){
+        let viewController = AutoCompleteSearchTitleViewController(viewModel: viewModel)
         addViewControllerAsChild(viewController)
     }
-    
+    //MARK: - ******
     private func constructViewHierarchy() {
         scrollView.addSubview(contentView)
         view.addSubview(scrollView)
@@ -146,7 +151,6 @@ class AnnouncementListFilterViewController: NiblessViewController {
     
     private func configBottomView() {
         bottomView.confirmButton.addTarget(self, action: #selector(confirmButtonDidTapped(_:)), for: .touchUpInside)
-//        bottomView.cancelButton.addTarget(self, action: #selector(cleanButtonDidTapped(_:)), for: .touchUpInside)
     }
     
     @objc

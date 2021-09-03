@@ -20,8 +20,7 @@ struct AutoCompleteTitleSearchModel {
     let isDropDownViewPresenting: BehaviorRelay<Bool> = .init(value: false)
     let bag: DisposeBag = DisposeBag()
 
-    init(title: String,
-         placeholder: String,
+    init(placeholder: String,
          loader: RxAutoCompleteItemViewModelLoader) {
 //        self.title = title
         self.placeholder = placeholder
@@ -53,8 +52,5 @@ struct AutoCompleteTitleSearchModel {
     }
 }
 
-struct AutoCompleteItemsViewModel: Equatable {
-    let representTitle: String
-    let identifier: String
-}
+
 

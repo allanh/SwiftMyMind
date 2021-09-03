@@ -15,17 +15,17 @@ class AutoCompleteSearchTitleViewController: NiblessViewController {
     var rootView: AutoCompleteTitleSerchView {
         view as! AutoCompleteTitleSerchView
     }
-    // dropdownview
-//    lazy var dropDownView: DropDownView<AutoCompleteItemsViewModel, MultiSelectableDropDownTableViewCell> {
-//        let dropDownView = DropDownView(dataSource: viewModel.autoCompleteItemViewModels) { [unowned self] (cell: MultiSelectableDropDownTableViewCell, item) in
-//            self.configCellForDropDown(cell: cell, item: item)
-//        } selectHamder: {
-//
-//        }
-//
-//        ret
-    
-    
+
+    lazy var dropDownView: DropDownView<AutoCompleteItemViewModel, MultiSelectableDropDownTableViewCell> = {
+        let dropDownView = DropDownView(dataSource: viewModel.autoCompleteItemViewModels.value) { [unowned self] (cell: MultiSelectableDropDownTableViewCell, item) in
+            self.configCellForDropDown(cell: cell, item: item)
+        } selectHandler: { [unowned self] item in
+            self.viewModel.pickItemViewModel(itemViewModel: item)
+        }
+        dropDownView.topInset = 5
+        dropDownView.shouldReloadItemWhenSelect = true
+        return dropDownView
+    }()
     
     //MARK: - View life cycle
     override func loadView() {
@@ -37,11 +37,11 @@ class AutoCompleteSearchTitleViewController: NiblessViewController {
         configCollectionView()
         bindToViewModel()
         subscribeToViewModel()
-        
+        dropDownView.anchorView = rootView.textField
     }
     
     override func viewDidLayoutSubviews() {
-        
+        updateCollectionView()
     }
     //MARK: - Methods
     init(viewModel:  AutoCompleteTitleSearchModel) {
@@ -56,19 +56,55 @@ class AutoCompleteSearchTitleViewController: NiblessViewController {
     }
     
     private func updateCollectionView() {
-        
+        rootView.collectionView.reloadData()
+        rootView.layoutIfNeeded()
+        rootView.collectionViewHeightAnchor.constant = rootView.collectionView.contentSize.height
     }
     
     private func bindToViewModel() {
+        rootView.textField.rx.text.orEmpty
+            .throttle(.milliseconds(200), scheduler: MainScheduler.instance)
+            .bind(to: viewModel.searchTerm)
+            .disposed(by: bag)
         
+        rootView.textField.rx.controlEvent(.editingChanged)
+            .map{_ in true }
+            .bind(to: viewModel.isDropDownViewPresenting)
+            .disposed(by: bag)
+        
+        rootView.textField.rx.controlEvent(.editingDidEnd)
+            .map { false }
+            .bind(to: viewModel.isDropDownViewPresenting)
+            .disposed(by: bag)
     }
     
     private func subscribeToViewModel() {
+        viewModel.pickedItemViewModels
+            .subscribe(onNext: { [unowned self] _ in
+                self.updateCollectionView()
+            })
+            .disposed(by: bag)
         
-    }
+        viewModel.isDropDownViewPresenting
+            .subscribe(onNext: { [unowned self] shouldShow in
+                switch shouldShow {
+                case true:  self.dropDownView.show()
+                case false: self.dropDownView.hide()
+                }
+            })
+            .disposed(by: bag)
+        
+        viewModel.autoCompleteItemViewModels
+            .subscribe(on: MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] items in
+                dropDownView.dataSource = items
+            })
+            .disposed(by: bag)
+        }
     
-    private func configCellForDropDown() {
-        
+    private func configCellForDropDown(cell: MultiSelectableDropDownTableViewCell, item:AutoCompleteItemViewModel) {
+        let isSelected = viewModel.pickedItemViewModels.value.contains(item)
+        cell.checkBoxButton.isSelected = isSelected
     }
     
     @objc
@@ -79,6 +115,7 @@ class AutoCompleteSearchTitleViewController: NiblessViewController {
         let item = viewModel.pickedItemViewModels.value[indexPath.item]
         viewModel.pickItemViewModel(itemViewModel: item)
     }
+    
 }
 extension AutoCompleteSearchTitleViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

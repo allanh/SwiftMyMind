@@ -101,6 +101,7 @@
 		9C926AE726E0BF980067C61E /* AutoCompleteSearchTitleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C926AE626E0BF980067C61E /* AutoCompleteSearchTitleViewController.swift */; };
 		9C926AE926E0C1E40067C61E /* AutoCompleteTitleSerchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C926AE826E0C1E40067C61E /* AutoCompleteTitleSerchView.swift */; };
 		9C926AEB26E0C9990067C61E /* AutoCompleteTitleSearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C926AEA26E0C9990067C61E /* AutoCompleteTitleSearchModel.swift */; };
+		9C926AED26E1CE000067C61E /* AutoCompleteTypeSearchRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C926AEC26E1CE000067C61E /* AutoCompleteTypeSearchRootViewController.swift */; };
 		9CEFCA4B26DE171100506308 /* PIckAnnouncementTypeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEFCA3B26DE171100506308 /* PIckAnnouncementTypeViewModel.swift */; };
 		9CEFCA4C26DE171100506308 /* AnnouncementAutoCompleteAdapters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEFCA3C26DE171100506308 /* AnnouncementAutoCompleteAdapters.swift */; };
 		9CEFCA4D26DE171100506308 /* MyMindAnnouncementAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEFCA3D26DE171100506308 /* MyMindAnnouncementAPIService.swift */; };
@@ -404,6 +405,7 @@
 		9C926AE626E0BF980067C61E /* AutoCompleteSearchTitleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoCompleteSearchTitleViewController.swift; sourceTree = "<group>"; };
 		9C926AE826E0C1E40067C61E /* AutoCompleteTitleSerchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoCompleteTitleSerchView.swift; sourceTree = "<group>"; };
 		9C926AEA26E0C9990067C61E /* AutoCompleteTitleSearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoCompleteTitleSearchModel.swift; sourceTree = "<group>"; };
+		9C926AEC26E1CE000067C61E /* AutoCompleteTypeSearchRootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoCompleteTypeSearchRootViewController.swift; sourceTree = "<group>"; };
 		9CEFCA3B26DE171100506308 /* PIckAnnouncementTypeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PIckAnnouncementTypeViewModel.swift; sourceTree = "<group>"; };
 		9CEFCA3C26DE171100506308 /* AnnouncementAutoCompleteAdapters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnouncementAutoCompleteAdapters.swift; sourceTree = "<group>"; };
 		9CEFCA3D26DE171100506308 /* MyMindAnnouncementAPIService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyMindAnnouncementAPIService.swift; sourceTree = "<group>"; };
@@ -806,9 +808,10 @@
 		9CEFCA4626DE171100506308 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				9CEFCA4726DE171100506308 /* AnnouncementQueryDateSelectionViewController.swift */,
+				9C926AEC26E1CE000067C61E /* AutoCompleteTypeSearchRootViewController.swift */,
 				9CEFCA4826DE171100506308 /* AnnouncementTypeSelectionViewController.swift */,
 				9CEFCA4A26DE171100506308 /* AnnouncementListFilterViewController.swift */,
+				9CEFCA4726DE171100506308 /* AnnouncementQueryDateSelectionViewController.swift */,
 				9C926AE626E0BF980067C61E /* AutoCompleteSearchTitleViewController.swift */,
 			);
 			path = Controller;
@@ -1766,6 +1769,7 @@
 				52C2CBE0269E890B002A2BA9 /* NoDataView.swift in Sources */,
 				A47AB496265DF53200FE3CFA /* ContainerTableViewCell.swift in Sources */,
 				9CEFCA5626DE171100506308 /* AnnouncementViewController.swift in Sources */,
+				9C926AED26E1CE000067C61E /* AutoCompleteTypeSearchRootViewController.swift in Sources */,
 				52E5060426A53572000E5116 /* ResendOTPRootView.swift in Sources */,
 				A45E69C5264B89A300AADB44 /* CustomClearButtonPositionTextField.swift in Sources */,
 				A49CF8B6260301DE00AFC170 /* Endpoint.swift in Sources */,
