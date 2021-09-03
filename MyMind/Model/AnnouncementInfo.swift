@@ -31,7 +31,7 @@ class AnnouncementInfo {
                 items.append(URLQueryItem(name: "type", value: type.rawValue))
             }
             if let top = top {
-                items.append(URLQueryItem(name: "is_top", value: top ? "true" : "false"))
+                items.append(URLQueryItem(name: "is_current_top", value: top ? "true" : "false"))
             }
             let formatter = DateFormatter {
                 $0.dateFormat = "yyyy-MM-dd"

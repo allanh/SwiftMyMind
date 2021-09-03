@@ -15,7 +15,7 @@ struct MyMindNotification: Codable {
     private enum CodingKeys: String, CodingKey {
         case title, type, importance
         case subTitle = "sub_title"
-        case top = "is_top"
+        case top = "is_current_top"
         case started = "started_at"
         case readed = "read_at"
         case id = "notification_id"

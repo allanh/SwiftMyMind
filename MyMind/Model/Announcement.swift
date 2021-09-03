@@ -18,7 +18,7 @@ enum AnnouncementType: String, Codable {
 struct Announcement: Codable {
     private enum CodingKeys: String, CodingKey {
         case title, type, importance, content
-        case top = "is_top"
+        case top = "is_current_top"
         case started = "started_at"
         case readed = "read_at"
         case id = "announcement_id"
