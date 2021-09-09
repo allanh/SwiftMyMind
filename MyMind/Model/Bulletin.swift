@@ -11,7 +11,7 @@ import Foundation
 struct Bulletin: Codable {
     private enum CodingKeys: String, CodingKey {
         case title, type, importance
-        case top = "is_top"
+        case top = "is_current_top"
         case descriptions = "short_content"
         case start = "started_at"
         case id = "announcement_id"
