@@ -220,7 +220,9 @@ class AnnouncementListFilterView: NiblessView {
         }
         constructViews()
         activateConstraints()
-        backgroundColor = .systemBackground
+        backgroundColor = .white
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(closeButtonDidTapped(_:)))
+        backgroundView.addGestureRecognizer(tapGestureRecognizer)
         hierarchyNotReady = false
     }
 
