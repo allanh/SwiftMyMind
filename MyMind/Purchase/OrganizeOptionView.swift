@@ -66,8 +66,10 @@ final class OrganizeOptionView: NiblessView {
         $0.setTitle("發布時間", for: .normal)
         $0.layer.cornerRadius = 15
         $0.semanticContentAttribute = .forceRightToLeft
-        $0.backgroundColor = UIColor(hex: "f2f2f2")
+        $0.backgroundColor = UIColor(hex: "f1f8fe")
         $0.setTitleColor(UIColor(hex: "004477"), for: .selected)
+        $0.layer.borderWidth = 1
+        $0.layer.borderColor = UIColor(hex: "004477").cgColor
     }
     
     let annoucementIsTopButton: UIButton = UIButton {

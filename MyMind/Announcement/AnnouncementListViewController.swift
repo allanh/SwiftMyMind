@@ -218,13 +218,11 @@ class AnnouncementListViewController: NiblessViewController {
         sender.isSelected = !sender.isSelected
         let sortButton = rootView.organizeOptionView.announcementSortButton
         if  sortButton.isSelected == true {
-            sortButton.layer.borderWidth = 1
-            sortButton.layer.borderColor = UIColor(hex: "004477").cgColor
-            sortButton.backgroundColor = UIColor(hex: "f1f8fe")
+            announcementListQueryInfo.sort = .ascending
         } else {
-            sortButton.layer.borderWidth = 0
-            sortButton.backgroundColor = UIColor(hex: "f2f2f2")
+            announcementListQueryInfo.sort = .decending
         }
+        refreshFetchAnnouncementList(query: announcementListQueryInfo)
     }
 
 }
