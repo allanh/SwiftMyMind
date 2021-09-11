@@ -13,8 +13,9 @@ final class AnnouncementListRootView: NiblessView {
     // var reviewing: Bool = false
     
     let tableView: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .plain)
+        let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.contentInsetAdjustmentBehavior = .never
+        tableView.sectionHeaderHeight = .leastNormalMagnitude
         return tableView
     }()
     

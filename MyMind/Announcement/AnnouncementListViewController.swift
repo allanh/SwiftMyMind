@@ -90,11 +90,12 @@ class AnnouncementListViewController: NiblessViewController {
         super.init()
     }
     private func configTableView() {
-        rootView.tableView.separatorColor = .black
+        rootView.tableView.separatorColor = UIColor(hex:"e5e5e5")
         rootView.tableView.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
         rootView.tableView.delegate = self
         rootView.tableView.dataSource = self
         rootView.tableView.registerCell(AnnouncementBriefTableViewCell.self)
+        
     }
     
     private func configPickSortTypeView() {
@@ -253,7 +254,9 @@ extension AnnouncementListViewController: UITableViewDelegate, UITableViewDataSo
             viewController.id = announcementList?.items[indexPath.row].id ?? 0
             show(viewController, sender: self)
         }
-
+    }
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return .leastNormalMagnitude
     }
 }
 extension AnnouncementListViewController: AnnouncementListFilterViewDelegate {
