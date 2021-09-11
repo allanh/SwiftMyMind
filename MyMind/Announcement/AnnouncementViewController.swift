@@ -30,6 +30,9 @@ class AnnouncementViewController: UIViewController {
     private let formatter: DateFormatter = DateFormatter {
         $0.dateFormat = "yyyy/MM/dd hh:mm"
     }
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        .lightContent
+    }
     // MARK: - UI
 
     private let scrollView: UIScrollView = UIScrollView {
@@ -92,6 +95,7 @@ class AnnouncementViewController: UIViewController {
         timeLabel.text = formatter.string(from: announcement?.started ?? Date())
         titleLabel.text = announcement?.title
         contentLabel.text = announcement?.content
+        title = announcement?.type.description
     }
     // MARK: - Life cycle
     override func viewDidLoad() {
@@ -159,7 +163,7 @@ extension AnnouncementViewController {
         ])
     }
     func activateConstraintsTimeLabel() {
-        let leading = timeLabel.leadingAnchor.constraint(equalTo: typeLabel.leadingAnchor, constant: 8)
+        let leading = timeLabel.leadingAnchor.constraint(equalTo: typeLabel.trailingAnchor, constant: 8)
         let centerY = timeLabel.centerYAnchor.constraint(equalTo: typeLabel.centerYAnchor)
         
         NSLayoutConstraint.activate([
