@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "MyMind_Assets.xcassets_sort.imageset_sort.png",
+      "filename" : "iconOtherSort14PxUp.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "MyMind_Assets.xcassets_sort.imageset_sort@2x.png",
+      "filename" : "iconOtherSort14PxUp@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "MyMind_Assets.xcassets_sort.imageset_sort@3x.png",
+      "filename" : "iconOtherSort14PxUp@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

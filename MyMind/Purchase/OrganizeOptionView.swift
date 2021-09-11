@@ -62,7 +62,8 @@ final class OrganizeOptionView: NiblessView {
         $0.isSelected = false
         $0.titleLabel?.font = .pingFangTCRegular(ofSize: 14)
         $0.setTitleColor(.init(hex: "4c4c4c"), for: .normal)
-        $0.setImage(UIImage(named: "sort"), for: .normal)
+        $0.setImage(UIImage(named: "announcement_sort"), for: .normal)
+        $0.setImage(UIImage(named: "announcement_sort_selected"), for: .selected)
         $0.setTitle("發布時間", for: .normal)
         $0.layer.cornerRadius = 15
         $0.semanticContentAttribute = .forceRightToLeft

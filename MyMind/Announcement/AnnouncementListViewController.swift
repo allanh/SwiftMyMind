@@ -126,7 +126,6 @@ class AnnouncementListViewController: NiblessViewController {
         } else {
             self.announcementList = announcementList
         }
-        self.announcementList = nil
         announcementListQueryInfo.current = announcementList.currentPageNumber
         announcementListQueryInfo.limit = announcementList.itemsPerPage
         if let announcementList = self.announcementList, announcementList.items.count > 0 {
