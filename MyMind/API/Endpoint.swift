@@ -98,7 +98,7 @@ extension Endpoint {
         Endpoint(path: "/employee/device_id", serviceType: .auth)
     }
     static var authorization: Self {
-        Endpoint(path: "/api/admin/v1/authorization", serviceType: .dos)
+        Endpoint(path: "/api/admin/\(version)/authorization", serviceType: .dos)
     }
 
     static var me: Self {
@@ -122,15 +122,15 @@ extension Endpoint {
         }
         return Endpoint(path: "/api/admin/\(version)/purchase", queryItems: urlQueryItems)
     }
-    static func announcementList(with partnerID: String, announcementListQueryInfo: AnnouncementListQueryInfo? = nil) -> Self {
-        var urlQueryItems: [URLQueryItem] = []
-        urlQueryItems.append(URLQueryItem(name: "partner_id", value: partnerID))
-        if let query = announcementListQueryInfo {
-            urlQueryItems.append(contentsOf: query.quertItems)
-            return Endpoint(path: "/api/admin/\(version)/announcement",queryItems: urlQueryItems)
-        }
-        return Endpoint(path: "/api/admin/\(version)/announcement",queryItems: urlQueryItems)
-    }
+//    static func announcementList(with partnerID: String, announcementListQueryInfo: AnnouncementListQueryInfo? = nil) -> Self {
+//        var urlQueryItems: [URLQueryItem] = []
+//        urlQueryItems.append(URLQueryItem(name: "partner_id", value: partnerID))
+//        if let query = announcementListQueryInfo {
+//            urlQueryItems.append(contentsOf: query.quertItems)
+//            return Endpoint(path: "/api/admin/\(version)/announcement",queryItems: urlQueryItems)
+//        }
+//        return Endpoint(path: "/api/admin/\(version)/announcement",queryItems: urlQueryItems)
+//    }
     static func purchaseWarehouseList(partnerID: String) -> Self {
         let item = URLQueryItem(name: "partner_id", value: partnerID)
         return Endpoint(path: "/api/admin/\(version)/purchase/warehouse", queryItems: [item])
@@ -312,12 +312,25 @@ extension Endpoint {
         ]
         return Endpoint(path: "/api/admin/\(version)/dashboard/order_sale_by_vendor", queryItems: items)
     }
-    
-    static var registration: Self {
-        Endpoint(path: "/api/v1/external/push/device", serviceType: .push)
+    static func bulletins(number: Int) -> Self {
+        return Endpoint(path: "/api/admin/\(version)/dashboard/announcement", queryItems: [URLQueryItem(name: "take", value: String(number))])
     }
-    
+    // push
+    static var registration: Self {
+        Endpoint(path: "/api/\(version)/external/push/device", serviceType: .push)
+    }
     static func openMessage(messageID: String) -> Self {
-        return Endpoint(path: "/api/v1/external/push/message/\(messageID)/is_open", serviceType: .push)
+        return Endpoint(path: "/api/\(version)/external/push/message/\(messageID)/is_open", serviceType: .push)
+    }
+    // notification
+    static func notifications(number: Int) -> Self {
+        return Endpoint(path: "/api/admin/\(version)/notification", queryItems: [URLQueryItem(name: "take", value: String(number))])
+    }
+    // announcement
+    static func announcements(info: AnnouncementListQueryInfo?) -> Self {
+        return Endpoint(path: "/api/admin/\(version)/announcement", queryItems: info?.queryItems ?? [])
+    }
+    static func announcement(for id: Int) -> Self {
+        return Endpoint(path: "/api/admin/\(version)/announcement/\(id)")
     }
 }

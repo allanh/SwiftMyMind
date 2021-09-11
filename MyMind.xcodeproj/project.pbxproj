@@ -19,6 +19,7 @@
 		5246E4742690385C005C11EC /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5246E4732690385C005C11EC /* Account.swift */; };
 		5246E4772690A2A4005C11EC /* CustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5246E4762690A2A4005C11EC /* CustomAlertView.swift */; };
 		524AB04826A802BA003D1E92 /* MyMindEmptySecretView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524AB04726A802BA003D1E92 /* MyMindEmptySecretView.swift */; };
+		526364CA26EAF65D00C26FE4 /* FilterViewToggleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526364C926EAF65D00C26FE4 /* FilterViewToggleButton.swift */; };
 		527E11BB2692A05900FB8B01 /* Authorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527E11BA2692A05900FB8B01 /* Authorization.swift */; };
 		527E11BD2692A0D500FB8B01 /* OptionSet+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527E11BC2692A0D500FB8B01 /* OptionSet+.swift */; };
 		527E11C02692C38D00FB8B01 /* PurchaseReviewingApplyInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527E11BE2692C38D00FB8B01 /* PurchaseReviewingApplyInfoViewController.swift */; };
@@ -45,7 +46,18 @@
 		52944E312699CE8B006CC865 /* ToDoInfoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52944E302699CE8B006CC865 /* ToDoInfoCollectionViewCell.swift */; };
 		52944E332699CEF0006CC865 /* ToDoListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52944E322699CEF0006CC865 /* ToDoListCollectionViewCell.swift */; };
 		52944E352699CFC1006CC865 /* HomeCollectionViewHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52944E342699CFC1006CC865 /* HomeCollectionViewHeaderView.swift */; };
+		52A289F226D8C9C800084893 /* UDNSKMarqueeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A289F126D8C9C700084893 /* UDNSKMarqueeView.swift */; };
+		52A289F426D8CB4100084893 /* UIView+copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A289F326D8CB4100084893 /* UIView+copy.swift */; };
 		52B15CBA2691BAFC0010FCED /* MyMindEmployeeAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B15CB92691BAFC0010FCED /* MyMindEmployeeAPIService.swift */; };
+		52B8749026DC7C38008F3CF2 /* BulletinCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B8748F26DC7C38008F3CF2 /* BulletinCollectionViewCell.swift */; };
+		52B8749226DC88EA008F3CF2 /* Bulletin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B8749126DC88EA008F3CF2 /* Bulletin.swift */; };
+		52B8749426DCBE74008F3CF2 /* MyMindAnnouncementAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B8749326DCBE74008F3CF2 /* MyMindAnnouncementAPIService.swift */; };
+		52B8749626DCBFA1008F3CF2 /* Announcement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B8749526DCBFA1008F3CF2 /* Announcement.swift */; };
+		52B8749826DCC3A5008F3CF2 /* UIBarButtonItem+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B8749726DCC3A5008F3CF2 /* UIBarButtonItem+.swift */; };
+		52B8749A26DCE71D008F3CF2 /* RegistrationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B8749926DCE71D008F3CF2 /* RegistrationInfo.swift */; };
+		52B8749C26DCE7A2008F3CF2 /* Registration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B8749B26DCE7A2008F3CF2 /* Registration.swift */; };
+		52B8749E26DF3627008F3CF2 /* AnnouncementListQueryInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B8749D26DF3627008F3CF2 /* AnnouncementListQueryInfo.swift */; };
+		52B874A026DF364F008F3CF2 /* MyMindNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B8749F26DF364F008F3CF2 /* MyMindNotification.swift */; };
 		52C2CBD0269BE52B002A2BA9 /* TodaySaleReportCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C2CBCF269BE52B002A2BA9 /* TodaySaleReportCollectionViewCell.swift */; };
 		52C2CBD2269BE6BC002A2BA9 /* TodaySaleInfoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C2CBD1269BE6BC002A2BA9 /* TodaySaleInfoCollectionViewCell.swift */; };
 		52C2CBD4269BED72002A2BA9 /* SaleReportInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C2CBD3269BED72002A2BA9 /* SaleReportInfoView.swift */; };
@@ -62,6 +74,9 @@
 		52C2CBED26A04243002A2BA9 /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C2CBEC26A04243002A2BA9 /* MainPageViewController.swift */; };
 		52CB080226CB8B15003F79DB /* MyMindPushAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CB080126CB8B15003F79DB /* MyMindPushAPIService.swift */; };
 		52D7249F268D62BC00B00585 /* MyMindPurchaseReviewAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D7249E268D62BC00B00585 /* MyMindPurchaseReviewAPIService.swift */; };
+		52DD927826E9BB2500987536 /* AnnouncementListLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEFCA3F26DE171100506308 /* AnnouncementListLoader.swift */; };
+		52DD927A26E9EF0900987536 /* AnnouncementListFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DD927926E9EF0900987536 /* AnnouncementListFilterView.swift */; };
+		52DD927C26E9F5AB00987536 /* AnnouncementFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DD927B26E9F5AB00987536 /* AnnouncementFilterViewController.swift */; };
 		52E1EDF726A6D29900506010 /* ServerTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E1EDF626A6D29900506010 /* ServerTime.swift */; };
 		52E505FE26A531B4000E5116 /* ResendOTPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E505FD26A531B4000E5116 /* ResendOTPViewController.swift */; };
 		52E5060026A532D7000E5116 /* ResendOTPViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E505FF26A532D7000E5116 /* ResendOTPViewModel.swift */; };
@@ -104,17 +119,12 @@
 		9C926AED26E1CE000067C61E /* AutoCompleteTypeSearchRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C926AEC26E1CE000067C61E /* AutoCompleteTypeSearchRootViewController.swift */; };
 		9CEFCA4B26DE171100506308 /* PIckAnnouncementTypeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEFCA3B26DE171100506308 /* PIckAnnouncementTypeViewModel.swift */; };
 		9CEFCA4C26DE171100506308 /* AnnouncementAutoCompleteAdapters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEFCA3C26DE171100506308 /* AnnouncementAutoCompleteAdapters.swift */; };
-		9CEFCA4D26DE171100506308 /* MyMindAnnouncementAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEFCA3D26DE171100506308 /* MyMindAnnouncementAPIService.swift */; };
 		9CEFCA4E26DE171100506308 /* AnnouncementListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEFCA3E26DE171100506308 /* AnnouncementListViewController.swift */; };
-		9CEFCA4F26DE171100506308 /* AnnouncementListLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEFCA3F26DE171100506308 /* AnnouncementListLoader.swift */; };
-		9CEFCA5026DE171100506308 /* Announcement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEFCA4026DE171100506308 /* Announcement.swift */; };
 		9CEFCA5126DE171100506308 /* AnnouncementBriefTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEFCA4226DE171100506308 /* AnnouncementBriefTableViewCell.swift */; };
 		9CEFCA5226DE171100506308 /* AnnouncementListRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEFCA4326DE171100506308 /* AnnouncementListRootView.swift */; };
-		9CEFCA5326DE171100506308 /* AnnouncementFilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEFCA4526DE171100506308 /* AnnouncementFilterViewModel.swift */; };
 		9CEFCA5426DE171100506308 /* AnnouncementQueryDateSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEFCA4726DE171100506308 /* AnnouncementQueryDateSelectionViewController.swift */; };
 		9CEFCA5526DE171100506308 /* AnnouncementTypeSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEFCA4826DE171100506308 /* AnnouncementTypeSelectionViewController.swift */; };
 		9CEFCA5626DE171100506308 /* AnnouncementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEFCA4926DE171100506308 /* AnnouncementViewController.swift */; };
-		9CEFCA5726DE171100506308 /* AnnouncementListFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEFCA4A26DE171100506308 /* AnnouncementListFilterViewController.swift */; };
 		A4054107264A1B7400E2D21B /* DropDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4054106264A1B7400E2D21B /* DropDownView.swift */; };
 		A4054109264A270C00E2D21B /* DispatchQueue+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4054108264A270C00E2D21B /* DispatchQueue+.swift */; };
 		A405410B264A575E00E2D21B /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A405410A264A575E00E2D21B /* UITextField+.swift */; };
@@ -314,6 +324,7 @@
 		5246E4762690A2A4005C11EC /* CustomAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertView.swift; sourceTree = "<group>"; };
 		524AB04726A802BA003D1E92 /* MyMindEmptySecretView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMindEmptySecretView.swift; sourceTree = "<group>"; };
 		524AB12B26A80913003D1E92 /* Demo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Demo-Info.plist"; path = "/Users/nelson/Program/BitBucket/mymind/Demo-Info.plist"; sourceTree = "<absolute>"; };
+		526364C926EAF65D00C26FE4 /* FilterViewToggleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewToggleButton.swift; sourceTree = "<group>"; };
 		5277788226A80DF500CF4E07 /* Production-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Production-Info.plist"; path = "/Users/nelson/Program/BitBucket/mymind/Production-Info.plist"; sourceTree = "<absolute>"; };
 		527E11BA2692A05900FB8B01 /* Authorization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authorization.swift; sourceTree = "<group>"; };
 		527E11BC2692A0D500FB8B01 /* OptionSet+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OptionSet+.swift"; sourceTree = "<group>"; };
@@ -341,7 +352,18 @@
 		52944E302699CE8B006CC865 /* ToDoInfoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoInfoCollectionViewCell.swift; sourceTree = "<group>"; };
 		52944E322699CEF0006CC865 /* ToDoListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListCollectionViewCell.swift; sourceTree = "<group>"; };
 		52944E342699CFC1006CC865 /* HomeCollectionViewHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewHeaderView.swift; sourceTree = "<group>"; };
+		52A289F126D8C9C700084893 /* UDNSKMarqueeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UDNSKMarqueeView.swift; sourceTree = "<group>"; };
+		52A289F326D8CB4100084893 /* UIView+copy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+copy.swift"; sourceTree = "<group>"; };
 		52B15CB92691BAFC0010FCED /* MyMindEmployeeAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMindEmployeeAPIService.swift; sourceTree = "<group>"; };
+		52B8748F26DC7C38008F3CF2 /* BulletinCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletinCollectionViewCell.swift; sourceTree = "<group>"; };
+		52B8749126DC88EA008F3CF2 /* Bulletin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bulletin.swift; sourceTree = "<group>"; };
+		52B8749326DCBE74008F3CF2 /* MyMindAnnouncementAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMindAnnouncementAPIService.swift; sourceTree = "<group>"; };
+		52B8749526DCBFA1008F3CF2 /* Announcement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Announcement.swift; sourceTree = "<group>"; };
+		52B8749726DCC3A5008F3CF2 /* UIBarButtonItem+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+.swift"; sourceTree = "<group>"; };
+		52B8749926DCE71D008F3CF2 /* RegistrationInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationInfo.swift; sourceTree = "<group>"; };
+		52B8749B26DCE7A2008F3CF2 /* Registration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Registration.swift; sourceTree = "<group>"; };
+		52B8749D26DF3627008F3CF2 /* AnnouncementListQueryInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementListQueryInfo.swift; sourceTree = "<group>"; };
+		52B8749F26DF364F008F3CF2 /* MyMindNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMindNotification.swift; sourceTree = "<group>"; };
 		52C2CBCF269BE52B002A2BA9 /* TodaySaleReportCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodaySaleReportCollectionViewCell.swift; sourceTree = "<group>"; };
 		52C2CBD1269BE6BC002A2BA9 /* TodaySaleInfoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodaySaleInfoCollectionViewCell.swift; sourceTree = "<group>"; };
 		52C2CBD3269BED72002A2BA9 /* SaleReportInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaleReportInfoView.swift; sourceTree = "<group>"; };
@@ -359,6 +381,8 @@
 		52CB080026CB6323003F79DB /* MyMind.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MyMind.entitlements; sourceTree = "<group>"; };
 		52CB080126CB8B15003F79DB /* MyMindPushAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMindPushAPIService.swift; sourceTree = "<group>"; };
 		52D7249E268D62BC00B00585 /* MyMindPurchaseReviewAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMindPurchaseReviewAPIService.swift; sourceTree = "<group>"; };
+		52DD927926E9EF0900987536 /* AnnouncementListFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementListFilterView.swift; sourceTree = "<group>"; };
+		52DD927B26E9F5AB00987536 /* AnnouncementFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementFilterViewController.swift; sourceTree = "<group>"; };
 		52E1EDF626A6D29900506010 /* ServerTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerTime.swift; sourceTree = "<group>"; };
 		52E505FD26A531B4000E5116 /* ResendOTPViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResendOTPViewController.swift; sourceTree = "<group>"; };
 		52E505FF26A532D7000E5116 /* ResendOTPViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResendOTPViewModel.swift; sourceTree = "<group>"; };
@@ -658,6 +682,7 @@
 		52944E2526982B2C006CC865 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				52A289F126D8C9C700084893 /* UDNSKMarqueeView.swift */,
 				52944E2626982B88006CC865 /* ToDoInfoView.swift */,
 				52944E2826997654006CC865 /* ToDoItemView.swift */,
 				52944E2A2699767F006CC865 /* GridentCircleView.swift */,
@@ -678,6 +703,7 @@
 				52C2CBE3269E9F20002A2BA9 /* SaleRankingCollectionViewCell.swift */,
 				52C2CBE5269ED0D5002A2BA9 /* SaleReportCollectionViewCell.swift */,
 				52C2CBE826A01B70002A2BA9 /* DashedLineView.swift */,
+				52B8748F26DC7C38008F3CF2 /* BulletinCollectionViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -790,6 +816,8 @@
 			children = (
 				9CEFCA4226DE171100506308 /* AnnouncementBriefTableViewCell.swift */,
 				9CEFCA4326DE171100506308 /* AnnouncementListRootView.swift */,
+				52DD927926E9EF0900987536 /* AnnouncementListFilterView.swift */,
+				526364C926EAF65D00C26FE4 /* FilterViewToggleButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -813,6 +841,7 @@
 				9CEFCA4A26DE171100506308 /* AnnouncementListFilterViewController.swift */,
 				9CEFCA4726DE171100506308 /* AnnouncementQueryDateSelectionViewController.swift */,
 				9C926AE626E0BF980067C61E /* AutoCompleteSearchTitleViewController.swift */,
+				52DD927B26E9F5AB00987536 /* AnnouncementFilterViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1031,6 +1060,12 @@
 				5293EE9F269A9DBC001A9754 /* HomeModel.swift */,
 				52E5060126A5337A000E5116 /* ResendOTPInfo.swift */,
 				52E1EDF626A6D29900506010 /* ServerTime.swift */,
+				52B8749126DC88EA008F3CF2 /* Bulletin.swift */,
+				52B8749526DCBFA1008F3CF2 /* Announcement.swift */,
+				52B8749926DCE71D008F3CF2 /* RegistrationInfo.swift */,
+				52B8749B26DCE7A2008F3CF2 /* Registration.swift */,
+				52B8749D26DF3627008F3CF2 /* AnnouncementListQueryInfo.swift */,
+				52B8749F26DF364F008F3CF2 /* MyMindNotification.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1088,6 +1123,8 @@
 				5293EEA1269AF20F001A9754 /* Date+.swift */,
 				5280D6EA26C1226E004363C6 /* UIAlertController+.swift */,
 				5280D6EE26C122A7004363C6 /* UIAlertAction+.swift */,
+				52A289F326D8CB4100084893 /* UIView+copy.swift */,
+				52B8749726DCC3A5008F3CF2 /* UIBarButtonItem+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1125,6 +1162,7 @@
 				52B15CB92691BAFC0010FCED /* MyMindEmployeeAPIService.swift */,
 				52944E222697FCFD006CC865 /* MyMindDashboardAPIService.swift */,
 				52CB080126CB8B15003F79DB /* MyMindPushAPIService.swift */,
+				52B8749326DCBE74008F3CF2 /* MyMindAnnouncementAPIService.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -1585,12 +1623,15 @@
 				A43E8516268C0928008C8369 /* InformationTableViewController.swift in Sources */,
 				A4567006268307DD009598AE /* PurchasedProductsInfoViewController.swift in Sources */,
 				A49CF8C526030CEE00AFC170 /* MyMindAuthService.swift in Sources */,
+				52B8749826DCC3A5008F3CF2 /* UIBarButtonItem+.swift in Sources */,
 				A4F2D011265D0770004D8D6D /* ProductMaterialsFilterViewModel.swift in Sources */,
 				52944E2D269976C9006CC865 /* ToDoInfoHeaderView.swift in Sources */,
 				A457AEB22660A34A0029DDBB /* PickPurchaseStatusViewModel.swift in Sources */,
 				5280D6F726C4F90E004363C6 /* PurchasedProductsInfoRootView.swift in Sources */,
 				52C2CBDA269D6325002A2BA9 /* IndicatorSwitchContentHeaderView.swift in Sources */,
+				52B8749426DCBE74008F3CF2 /* MyMindAnnouncementAPIService.swift in Sources */,
 				A4F2D00F265D063B004D8D6D /* ProductMaterialsFilterViewController.swift in Sources */,
+				52B8749026DC7C38008F3CF2 /* BulletinCollectionViewCell.swift in Sources */,
 				52944E332699CEF0006CC865 /* ToDoListCollectionViewCell.swift in Sources */,
 				A47F39DF263A67E200A3097C /* UITableView+.swift in Sources */,
 				5293EEA2269AF20F001A9754 /* Date+.swift in Sources */,
@@ -1599,6 +1640,7 @@
 				52B15CBA2691BAFC0010FCED /* MyMindEmployeeAPIService.swift in Sources */,
 				A4CBD8B6266A2CF200B19119 /* ProductMaterialSuggestionInfoTableViewCell.swift in Sources */,
 				97B117342653AF1E00242428 /* ProductMaterialQueryInfo.swift in Sources */,
+				52B8749E26DF3627008F3CF2 /* AnnouncementListQueryInfo.swift in Sources */,
 				A44E8FDB265F82F80090D467 /* PurchaseAutoCompleteAdapters.swift in Sources */,
 				A43F4291264388E400A246CC /* SideMenuPresentable.swift in Sources */,
 				A4159214260C861F00FD3989 /* ForgotPasswordViewController.swift in Sources */,
@@ -1610,8 +1652,11 @@
 				97547CC52681DC4C001859A8 /* PurchaseCompletedApplyViewController.swift in Sources */,
 				A4DD410926427DD5007B2A41 /* MyMindAutoCompleteAPIService.swift in Sources */,
 				52D7249F268D62BC00B00585 /* MyMindPurchaseReviewAPIService.swift in Sources */,
+				52B8749C26DCE7A2008F3CF2 /* Registration.swift in Sources */,
 				A4054107264A1B7400E2D21B /* DropDownView.swift in Sources */,
 				A4793C7A2604534100AD280C /* SignInInfo.swift in Sources */,
+				52B8749226DC88EA008F3CF2 /* Bulletin.swift in Sources */,
+				52DD927C26E9F5AB00987536 /* AnnouncementFilterViewController.swift in Sources */,
 				A4705B9126020E5700B30CE6 /* Response.swift in Sources */,
 				52C2CBD6269C4CED002A2BA9 /* MyMindSaleReportRatioNumberFormatter.swift in Sources */,
 				A4DD410B26428927007B2A41 /* AutoCompleteInfo.swift in Sources */,
@@ -1626,7 +1671,6 @@
 				A49CF92A26034BEA00AFC170 /* CaptchaSession.swift in Sources */,
 				A4BDC7B4260B10E2005C33A5 /* SignInValidationService.swift in Sources */,
 				A43F42952643C75C00A246CC /* FilterSideMenuBottomView.swift in Sources */,
-				9CEFCA4F26DE171100506308 /* AnnouncementListLoader.swift in Sources */,
 				A442A16F266F797500AAB1ED /* Reviewer.swift in Sources */,
 				52C2CBDE269D643B002A2BA9 /* SKURankingInfoView.swift in Sources */,
 				9C926AE926E0C1E40067C61E /* AutoCompleteTitleSerchView.swift in Sources */,
@@ -1638,6 +1682,7 @@
 				9C926AE726E0BF980067C61E /* AutoCompleteSearchTitleViewController.swift in Sources */,
 				A4CBD8A92664E2AF00B19119 /* VendorInfo.swift in Sources */,
 				A47AB498265E00B300FE3CFA /* AutoCompleteSearchViewController.swift in Sources */,
+				526364CA26EAF65D00C26FE4 /* FilterViewToggleButton.swift in Sources */,
 				A4ACEDC72649374B008724E4 /* UIWindow+.swift in Sources */,
 				A43E0B64260D7CA4005FC6CE /* NiblessNavigationController.swift in Sources */,
 				A494D9CA2670CCFC008658F8 /* ApplyPuchaseService.swift in Sources */,
@@ -1651,6 +1696,7 @@
 				97AFE37326673535002CBE01 /* PurchaseSuggestionViewController.swift in Sources */,
 				A457AEB42660F5F80029DDBB /* StageProgressView.swift in Sources */,
 				9CEFCA5126DE171100506308 /* AnnouncementBriefTableViewCell.swift in Sources */,
+				52DD927826E9BB2500987536 /* AnnouncementListLoader.swift in Sources */,
 				A48389AF2608360A0044C09E /* SignInViewController.swift in Sources */,
 				5293EEA0269A9DBC001A9754 /* HomeModel.swift in Sources */,
 				A4D50AB02645129E007B07D6 /* AutoCompleteSearchRootView.swift in Sources */,
@@ -1668,15 +1714,16 @@
 				A442A16D266F780C00AAB1ED /* Warehouse.swift in Sources */,
 				A457AEB02660A31F0029DDBB /* PickDatesViewModel.swift in Sources */,
 				A4BDC7BE260B418E005C33A5 /* SignInAccountInfo.swift in Sources */,
-				9CEFCA5726DE171100506308 /* AnnouncementListFilterViewController.swift in Sources */,
 				A439BD372637E42F004F47C8 /* MyMindPurchaseAPIService.swift in Sources */,
 				A405410B264A575E00E2D21B /* UITextField+.swift in Sources */,
+				52B8749626DCBFA1008F3CF2 /* Announcement.swift in Sources */,
 				52944E2F2699CE02006CC865 /* IndicatorHeaderView.swift in Sources */,
 				A439B5412609D61C002352C2 /* String+.swift in Sources */,
 				9CEFCA4B26DE171100506308 /* PIckAnnouncementTypeViewModel.swift in Sources */,
 				A4BCA0C8267C73DF00E3B274 /* RecipientInfo.swift in Sources */,
 				A4CBD8AF2669D18F00B19119 /* PurchaseSuggestionViewModel.swift in Sources */,
 				A43E0B65260D7CA4005FC6CE /* NiblessView.swift in Sources */,
+				52A289F226D8C9C800084893 /* UDNSKMarqueeView.swift in Sources */,
 				97547CBD2680957D001859A8 /* PurchaseSuggestionInfosLoader.swift in Sources */,
 				A4F2D015265D088B004D8D6D /* ProductMaterialAutoCompleteAdapters.swift in Sources */,
 				A4DD410726425496007B2A41 /* PromiseKitAPIService.swift in Sources */,
@@ -1702,6 +1749,7 @@
 				52C2CBE926A01B70002A2BA9 /* DashedLineView.swift in Sources */,
 				52944E312699CE8B006CC865 /* ToDoInfoCollectionViewCell.swift in Sources */,
 				52C2CBED26A04243002A2BA9 /* MainPageViewController.swift in Sources */,
+				52B8749A26DCE71D008F3CF2 /* RegistrationInfo.swift in Sources */,
 				A47AB49A265E4DA400FE3CFA /* SearchMaterialNamesViewController.swift in Sources */,
 				52944E2726982B88006CC865 /* ToDoInfoView.swift in Sources */,
 				9CEFCA5426DE171100506308 /* AnnouncementQueryDateSelectionViewController.swift in Sources */,
@@ -1711,7 +1759,6 @@
 				A4CBD8A72664E1E800B19119 /* VendorInfoLoader.swift in Sources */,
 				A494D9D02670CE0E008658F8 /* PurchaseReviewerListLoader.swift in Sources */,
 				A494D9CC2670CD68008658F8 /* ApplyPurchaseParameterInfo.swift in Sources */,
-				9CEFCA4D26DE171100506308 /* MyMindAnnouncementAPIService.swift in Sources */,
 				A456701426845D87009598AE /* HomeViewController.swift in Sources */,
 				97AFE3662665E7DD002CBE01 /* ProductMaterialDetail.swift in Sources */,
 				527E11C32693084B00FB8B01 /* ReturnPurchaseOrderInfo.swift in Sources */,
@@ -1729,6 +1776,7 @@
 				A4F2D013265D07C7004D8D6D /* AutoCompleteSearchViewModel.swift in Sources */,
 				A439B53C2609CDC3002352C2 /* ToastView.swift in Sources */,
 				A43E8513268C08FC008C8369 /* UDISecretRepository.swift in Sources */,
+				52A289F426D8CB4100084893 /* UIView+copy.swift in Sources */,
 				52E505FE26A531B4000E5116 /* ResendOTPViewController.swift in Sources */,
 				9CEFCA5226DE171100506308 /* AnnouncementListRootView.swift in Sources */,
 				A44A5A6E25F9B0D200995823 /* AppDelegate.swift in Sources */,
@@ -1755,14 +1803,15 @@
 				A489A1B4263FC9D600832679 /* UICollectionView+.swift in Sources */,
 				9CEFCA4E26DE171100506308 /* AnnouncementListViewController.swift in Sources */,
 				A4BC88C52679CB8100956B95 /* EditablePickedProductsInfoViewModel.swift in Sources */,
+				52B874A026DF364F008F3CF2 /* MyMindNotification.swift in Sources */,
 				A40EBFDE2671F7A100A4863D /* PickPurchaseReviewerViewController.swift in Sources */,
 				A4CBD8B1266A2ABA00B19119 /* ProductMaterialSuggestionInfoTableViewController.swift in Sources */,
 				5293EE9C269A8AEB001A9754 /* HorizontalCellSizePagingFlowLayout.swift in Sources */,
 				97547CBF2681C5B6001859A8 /* LogInfoView.swift in Sources */,
-				9CEFCA5326DE171100506308 /* AnnouncementFilterViewModel.swift in Sources */,
 				52C2CBD0269BE52B002A2BA9 /* TodaySaleReportCollectionViewCell.swift in Sources */,
 				A43E850C268C083C008C8369 /* SecretListViewController.swift in Sources */,
 				A40EBFD92671AD4900A4863D /* PurchaseApplyInfoViewController.swift in Sources */,
+				52DD927A26E9EF0900987536 /* AnnouncementListFilterView.swift in Sources */,
 				A47F39D5263A5A9B00A3097C /* PurchaseBriefTableViewCell.swift in Sources */,
 				A489A1B1263FAA7D00832679 /* PurchaseBriefCollectionViewCell.swift in Sources */,
 				97B117392654B8FC00242428 /* PickProductMaterialsViewController.swift in Sources */,
@@ -1789,7 +1838,6 @@
 				A4BCA0C6267C70FD00E3B274 /* PurchaseOrder.swift in Sources */,
 				A44A5A7025F9B0D200995823 /* SceneDelegate.swift in Sources */,
 				A4793CBB260490A600AD280C /* UIColor+.swift in Sources */,
-				9CEFCA5026DE171100506308 /* Announcement.swift in Sources */,
 				527E11BB2692A05900FB8B01 /* Authorization.swift in Sources */,
 				5280D6EF26C122A7004363C6 /* UIAlertAction+.swift in Sources */,
 				A494D9CE2670CDC1008658F8 /* PickPurchaseReviewerViewModel.swift in Sources */,

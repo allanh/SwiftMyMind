@@ -43,8 +43,32 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="10"/>
                                 </collectionViewFlowLayout>
                                 <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="BulletinCollectionViewCell" id="XLc-0E-3Lz" customClass="BulletinCollectionViewCell" customModule="MyMind" customModuleProvider="target">
+                                        <rect key="frame" x="24" y="0.0" width="350" height="49"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="gAi-Vj-OMM">
+                                            <rect key="frame" x="0.0" y="0.0" width="350" height="49"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mtk-63-9mU" customClass="UDNSKInteractiveMarqueeView" customModule="MyMind" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="350" height="49"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Mtk-63-9mU" firstAttribute="top" secondItem="gAi-Vj-OMM" secondAttribute="top" id="4Qc-37-Oll"/>
+                                                <constraint firstAttribute="trailing" secondItem="Mtk-63-9mU" secondAttribute="trailing" id="Quj-2c-lCc"/>
+                                                <constraint firstItem="Mtk-63-9mU" firstAttribute="leading" secondItem="gAi-Vj-OMM" secondAttribute="leading" id="Rsm-SU-R5R"/>
+                                                <constraint firstAttribute="bottom" secondItem="Mtk-63-9mU" secondAttribute="bottom" id="t3G-ei-1yf"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                        <size key="customSize" width="350" height="49"/>
+                                        <connections>
+                                            <outlet property="marqueeView" destination="Mtk-63-9mU" id="VXy-Vg-6y8"/>
+                                        </connections>
+                                    </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SaleReportCollectionViewCell" id="5re-E6-mqc" customClass="SaleReportCollectionViewCell" customModule="MyMind" customModuleProvider="target">
-                                        <rect key="frame" x="21" y="0.0" width="356" height="298"/>
+                                        <rect key="frame" x="21" y="59" width="356" height="298"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="fCs-oG-46x">
                                             <rect key="frame" x="0.0" y="0.0" width="356" height="298"/>
@@ -68,7 +92,7 @@
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SaleRankingCollectionViewCell" id="b5P-M5-o9I" customClass="SaleRankingCollectionViewCell" customModule="MyMind" customModuleProvider="target">
-                                        <rect key="frame" x="20.666666666666668" y="308" width="357" height="311"/>
+                                        <rect key="frame" x="20.666666666666668" y="367" width="357" height="311"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="JgU-PI-bCO">
                                             <rect key="frame" x="0.0" y="0.0" width="357" height="311"/>
@@ -87,7 +111,7 @@
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SKURankingCollectionViewCell" id="4Ts-Ig-zsC" customClass="SKURankingCollectionViewCell" customModule="MyMind" customModuleProvider="target">
-                                        <rect key="frame" x="18.666666666666668" y="629" width="361" height="318"/>
+                                        <rect key="frame" x="18.666666666666668" y="688" width="361" height="318"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="xor-pT-8AI">
                                             <rect key="frame" x="0.0" y="0.0" width="361" height="318"/>
@@ -96,7 +120,7 @@
                                         <size key="customSize" width="361" height="318"/>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ToDoListCollectionViewCell" id="chd-sF-Jh4" customClass="ToDoListCollectionViewCell" customModule="MyMind" customModuleProvider="target">
-                                        <rect key="frame" x="20" y="957" width="358" height="267"/>
+                                        <rect key="frame" x="20" y="1016" width="358" height="267"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" id="y6w-uT-ggo">
                                             <rect key="frame" x="0.0" y="0.0" width="358" height="267"/>
@@ -132,7 +156,7 @@
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="TodaySaleReportCollectionViewCell" id="24v-0e-cfv" customClass="TodaySaleReportCollectionViewCell" customModule="MyMind" customModuleProvider="target">
-                                        <rect key="frame" x="20" y="1234" width="358" height="267"/>
+                                        <rect key="frame" x="20" y="1293" width="358" height="267"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" id="Rkj-vK-kSS">
                                             <rect key="frame" x="0.0" y="0.0" width="358" height="267"/>
@@ -168,7 +192,7 @@
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ActionCollectionViewCell" id="LTg-Lk-Nvk" customClass="ActionCollectionViewCell" customModule="MyMind" customModuleProvider="target">
-                                        <rect key="frame" x="135" y="1511" width="128" height="128"/>
+                                        <rect key="frame" x="135" y="1570" width="128" height="128"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" id="8Zw-pg-cEs">
                                             <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
@@ -234,7 +258,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h3w-To-Min" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="960.86956521739137" y="448.66071428571428"/>
+            <point key="canvasLocation" x="960.28037383177559" y="448.38012958963287"/>
         </scene>
         <!--Setting View Controller-->
         <scene sceneID="ij0-0d-Vvz">
@@ -668,12 +692,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zD6-7A-YKc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="218.84057971014494" y="448.66071428571428"/>
+            <point key="canvasLocation" x="218.69158878504672" y="448.38012958963287"/>
         </scene>
         <!--Announcement View Controller-->
         <scene sceneID="xLk-gj-LWt">
             <objects>
-                <viewController id="hYN-Tc-nbW" customClass="AnnouncementViewController" customModule="MyMind" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AnnouncementViewController" id="hYN-Tc-nbW" customClass="AnnouncementViewController" customModule="MyMind" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="l4e-Qd-TqX">
                         <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -686,10 +710,63 @@
             </objects>
             <point key="canvasLocation" x="-693" y="1165"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Announcement Filter View Controller-->
+        <scene sceneID="l9g-Id-km5">
+            <objects>
+                <viewController storyboardIdentifier="AnnouncementFilterViewController" id="sZ6-y6-eLD" customClass="AnnouncementFilterViewController" customModule="MyMind" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="PfG-iC-0cM">
+                        <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F5U-Av-S38">
+                                <rect key="frame" x="64" y="44" width="364" height="848"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="請輸入公告標題" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="aYn-0N-3kX">
+                                        <rect key="frame" x="16" y="24" width="332" height="32"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="32" id="d4D-Pt-cY5"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="類別" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vQM-VL-9ep">
+                                        <rect key="frame" x="16" y="78" width="28" height="20"/>
+                                        <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="14"/>
+                                        <color key="textColor" red="0.32941176470588235" green="0.32941176470588235" blue="0.32941176470588235" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="aYn-0N-3kX" firstAttribute="top" secondItem="F5U-Av-S38" secondAttribute="top" constant="24" id="664-vf-1Nc"/>
+                                    <constraint firstItem="vQM-VL-9ep" firstAttribute="top" secondItem="aYn-0N-3kX" secondAttribute="bottom" constant="22" id="8hy-Eq-TKM"/>
+                                    <constraint firstItem="vQM-VL-9ep" firstAttribute="leading" secondItem="aYn-0N-3kX" secondAttribute="leading" id="VoF-HU-fb2"/>
+                                    <constraint firstItem="aYn-0N-3kX" firstAttribute="leading" secondItem="F5U-Av-S38" secondAttribute="leading" constant="16" id="dQ1-nq-1Ng"/>
+                                    <constraint firstAttribute="trailing" secondItem="aYn-0N-3kX" secondAttribute="trailing" constant="16" id="nBW-Ji-a9c"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="0xL-bI-Z4e"/>
+                        <color key="backgroundColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="0xL-bI-Z4e" firstAttribute="trailing" secondItem="F5U-Av-S38" secondAttribute="trailing" id="5OI-zP-ucU"/>
+                            <constraint firstItem="0xL-bI-Z4e" firstAttribute="bottom" secondItem="F5U-Av-S38" secondAttribute="bottom" id="C6B-Z0-1QG"/>
+                            <constraint firstItem="F5U-Av-S38" firstAttribute="leading" secondItem="0xL-bI-Z4e" secondAttribute="leading" constant="64" id="V29-Py-o2B"/>
+                            <constraint firstItem="F5U-Av-S38" firstAttribute="top" secondItem="0xL-bI-Z4e" secondAttribute="top" id="crE-aQ-bLh"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="titleTextField" destination="aYn-0N-3kX" id="fA7-tC-QKL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iXc-qw-kKJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="145.79439252336448" y="1163.7149028077754"/>
+        </scene>
+        <!--My Mind Navigation Controller-->
         <scene sceneID="E8K-fg-FHl">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="lKQ-72-LHe" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="lKQ-72-LHe" customClass="MyMindNavigationController" customModule="MyMind" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="w3b-zS-kQG">
                         <rect key="frame" x="0.0" y="44" width="428" height="44"/>

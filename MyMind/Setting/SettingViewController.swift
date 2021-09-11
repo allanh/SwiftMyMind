@@ -13,6 +13,10 @@ protocol SettingViewControllerDelegate: AnyObject {
 typealias MixedDelegate = SettingViewControllerDelegate & NavigationActionDelegate
 class SettingViewController: UIViewController {
 
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+
     weak var delegate: MixedDelegate?
 
     @IBOutlet weak var scrollView: UIScrollView!

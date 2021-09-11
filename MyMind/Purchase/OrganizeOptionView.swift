@@ -49,10 +49,11 @@ final class OrganizeOptionView: NiblessView {
         $0.backgroundColor = .init(hex: "e5e5e5")
     }
     
-    let announcementFilterButton: UIButton = UIButton {
+    let announcementFilterButton: FilterViewToggleButton = FilterViewToggleButton {
         $0.titleLabel?.font = .pingFangTCRegular(ofSize: 14)
         $0.setTitleColor(.init(hex: "4c4c4c"), for: .normal)
         $0.setImage(UIImage(named: "filter"), for: .normal)
+        $0.setImage(UIImage(named: "filter_selected"), for: .selected)
         $0.layer.cornerRadius = 15
         $0.backgroundColor = UIColor(hex: "f2f2f2")
     }

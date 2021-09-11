@@ -10,6 +10,9 @@ import UIKit
 import RxSwift
 
 class EditablePickedProductsInfoViewController: NiblessViewController {
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        .lightContent
+    }
     enum Section {
         case main
     }

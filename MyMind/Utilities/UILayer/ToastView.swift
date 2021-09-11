@@ -49,6 +49,10 @@ class ToastView: NiblessView {
         if let tabController = viewController as? UITabBarController {
           displayVC = tabController.selectedViewController ?? viewController
         }
+        var bottomOffset: CGFloat = 0
+        if let tabBarController = displayVC.tabBarController {
+            bottomOffset = tabBarController.tabBar.bounds.height
+        }
 
         if sharedView == nil {
             sharedView = ToastView()
@@ -86,9 +90,19 @@ class ToastView: NiblessView {
                 let y = displayVC.view.bounds.height/2.0 - finalHeight/2.0
                 sharedView?.frame = CGRect(origin: CGPoint(x: x, y: y), size: CGSize(width: defaultSize.width, height: finalHeight))
             case .top:
-                sharedView?.frame = CGRect(origin: CGPoint(x: 16, y: 16), size: CGSize(width: displayVC.view.bounds.width-32, height: 48))
+                let width = displayVC.view.bounds.width-32
+                let defaultSize = CGSize(width: width, height: 48)
+                let defaultLabelHeight: CGFloat = 20
+                let labelHeight = message.height(withConstrainedWidth: width, font: UIFont.pingFangTCRegular(ofSize: 14))
+                let finalHeight = defaultSize.height - defaultLabelHeight + labelHeight
+                sharedView?.frame = CGRect(origin: CGPoint(x: 16, y: 16), size: CGSize(width:width, height: finalHeight))
             case .bottom:
-                sharedView?.frame = CGRect(origin: CGPoint(x: 16, y: displayVC.view.bounds.height-48-16), size: CGSize(width: displayVC.view.bounds.width-32, height: 48))
+                let width = displayVC.view.bounds.width-32
+                let defaultSize = CGSize(width: width, height: 48)
+                let defaultLabelHeight: CGFloat = 20
+                let labelHeight = message.height(withConstrainedWidth: width, font: UIFont.pingFangTCRegular(ofSize: 14))
+                let finalHeight = defaultSize.height - defaultLabelHeight + labelHeight
+                sharedView?.frame = CGRect(origin: CGPoint(x: 16, y: displayVC.view.bounds.height-bottomOffset-finalHeight), size: CGSize(width: width, height: finalHeight))
             }
             sharedView?.alpha = 0
             displayVC.view.addSubview(sharedView!)
@@ -153,9 +167,10 @@ extension ToastView {
         case .top, .bottom:
             let centerY = label.centerYAnchor.constraint(equalTo: centerYAnchor)
             let leading = label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16)
+            let trailing = label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16)
 
             NSLayoutConstraint.activate([
-                leading, centerY
+                leading, centerY, trailing
             ])
         }
     }

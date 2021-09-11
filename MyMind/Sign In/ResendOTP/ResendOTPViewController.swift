@@ -10,6 +10,9 @@ import UIKit
 import RxSwift
 
 class ResendOTPViewController: NiblessViewController {
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        .lightContent
+    }
     let viewModel: ResendOTPViewModel
     private var didLayoutRootView: Bool = false
     let bag: DisposeBag = DisposeBag()

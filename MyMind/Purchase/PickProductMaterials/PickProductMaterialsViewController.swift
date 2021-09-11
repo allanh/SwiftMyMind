@@ -11,6 +11,9 @@ import RxSwift
 
 class PickProductMaterialsViewController: NiblessViewController {
 
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        .lightContent
+    }
     var rootView: PickProductMaterialsRootView {
         view as! PickProductMaterialsRootView
     }
@@ -91,7 +94,7 @@ class PickProductMaterialsViewController: NiblessViewController {
             }
 
             let viewController = ProductMaterialsFilterViewController(viewModel: viewModel)
-            let navigationController = UINavigationController(rootViewController: viewController)
+            let navigationController = MyMindNavigationController(rootViewController: viewController)
             navigationController.modalPresentationStyle = .fullScreen
             present(navigationController, animated: true, completion: nil)
         case .suggestion:

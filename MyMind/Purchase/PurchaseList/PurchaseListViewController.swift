@@ -10,6 +10,9 @@ import UIKit
 import NVActivityIndicatorView
 
 final class PurchaseListViewController: NiblessViewController {
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        .lightContent
+    }
     // MARK: - Properties
     var rootView: PurchaseListRootView { view as! PurchaseListRootView }
     var reviewing: Bool
@@ -219,7 +222,7 @@ final class PurchaseListViewController: NiblessViewController {
         }
         let viewController = PurchaseListFilterViewController(viewModel: viewModel)
 
-        let navigationController = UINavigationController(rootViewController: viewController)
+        let navigationController = MyMindNavigationController(rootViewController: viewController)
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated: true, completion: nil)
     }

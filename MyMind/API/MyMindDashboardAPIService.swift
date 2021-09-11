@@ -89,4 +89,16 @@ final class MyMindDashboardAPIService: PromiseKitAPIService {
         )
         return sendRequest(request: request)
     }
+    func bulletins(number: Int = 3) -> Promise<BulletinList> {
+        guard let userSession = userSessionDataStore.readUserSession() else {
+            return .init(error: APIError.noAccessTokenError)
+        }
+        let endpoint = Endpoint.bulletins(number: number)
+
+        let request = request(
+            endPoint: endpoint,
+            httpHeader: ["Authorization": "Bearer \(userSession.token)"]
+        )
+        return sendRequest(request: request)
+    }
 }

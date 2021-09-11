@@ -258,7 +258,7 @@ extension AutoCompleteTypeSearchRootViewController{
         let leading = seperatorView.leadingAnchor
             .constraint(equalTo: view.leadingAnchor,constant: 16)
         let trailing = seperatorView.trailingAnchor
-            .constraint(equalTo: view.trailingAnchor, constant: <#T##CGFloat#>)
+            .constraint(equalTo: view.trailingAnchor, constant: -16)
         let bottom = seperatorView.bottomAnchor
             .constraint(equalTo: view.bottomAnchor)
         

@@ -56,12 +56,12 @@ class AnnouncementFilterViewModel {
         
         startedAtViewModel.startDate
             .subscribe(onNext: { [unowned self] date in
-                self.queryInfo.startedAtFrom = date
+                self.queryInfo.start = date
             }).disposed(by: bag)
         
         startedAtViewModel.endDate
             .subscribe(onNext: {[unowned self] date in
-                self.queryInfo.startedAtTo = date
+                self.queryInfo.end = date
             })
             .disposed(by: bag)
         
@@ -80,8 +80,8 @@ class AnnouncementFilterViewModel {
     }
 
     func updateCurrentQueryForStartedAt() {
-        startedAtViewModel.startDate.accept(queryInfo.startedAtFrom)
-        startedAtViewModel.endDate.accept(queryInfo.startedAtTo)
+        startedAtViewModel.startDate.accept(queryInfo.start)
+        startedAtViewModel.endDate.accept(queryInfo.end)
     }
     
     func cleanQueryInfo(){

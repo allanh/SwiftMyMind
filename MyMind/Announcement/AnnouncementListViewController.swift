@@ -17,11 +17,16 @@ class AnnouncementListViewController: NiblessViewController {
     private lazy var emptyListView: EmptyDataView = {
         return EmptyDataView(frame: rootView.tableView.bounds)
     }()
-    
-    lazy var pickSortTypeView: PickSortTypeView<AnnouncementListQueryInfo.OrderReference, SingleLabelTableViewCell> = {
+    private lazy var filter: AnnouncementListFilterView = {
+        return AnnouncementListFilterView(frame: CGRect(x: rootView.bounds.width, y: 0, width: 0, height: rootView.bounds.size.height))
+    }()
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        .lightContent
+    }
+    lazy var pickSortTypeView: PickSortTypeView<AnnouncementListQueryInfo.AnnouncementOrder, SingleLabelTableViewCell> = {
         if reviewing {
-            let pickSortView = PickSortTypeView<AnnouncementListQueryInfo.OrderReference, SingleLabelTableViewCell>.init(
-                dataSource: [AnnouncementListQueryInfo.OrderReference.startedAt]) { [unowned self] sortType, cell in
+            let pickSortView = PickSortTypeView<AnnouncementListQueryInfo.AnnouncementOrder, SingleLabelTableViewCell>.init(
+                dataSource: [AnnouncementListQueryInfo.AnnouncementOrder.STARTED_AT]) { [unowned self] sortType, cell in
                 self.configSortCell(cell, item: sortType)
             } cellSelectHandler: { [unowned self] sortType in
                 self.didPickSortType(sortType: sortType)
@@ -29,8 +34,8 @@ class AnnouncementListViewController: NiblessViewController {
             pickSortView.tableView.separatorStyle = .none
             return pickSortView
         } else {
-            let pickSortView = PickSortTypeView<AnnouncementListQueryInfo.OrderReference, SingleLabelTableViewCell>.init(
-                dataSource: AnnouncementListQueryInfo.OrderReference.allCases) { [unowned self] sortType, cell in
+            let pickSortView = PickSortTypeView<AnnouncementListQueryInfo.AnnouncementOrder, SingleLabelTableViewCell>.init(
+                dataSource: AnnouncementListQueryInfo.AnnouncementOrder.allCases) { [unowned self] sortType, cell in
                 self.configSortCell(cell, item: sortType)
             } cellSelectHandler: { [unowned self] sortType in
                 self.didPickSortType(sortType: sortType)
@@ -43,7 +48,11 @@ class AnnouncementListViewController: NiblessViewController {
     
     let announcementListLoader: AnnouncementListLoader
     
-    private var announcementList: AnnouncementList?
+    private var announcementList: AnnouncementList? {
+        didSet {
+            rootView.tableView.reloadData()
+        }
+    }
     
     var announcementListQueryInfo: AnnouncementListQueryInfo = .defaultQuery()
     
@@ -67,8 +76,10 @@ class AnnouncementListViewController: NiblessViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         title = "公告訊息"
+        navigationItem.backButtonTitle = ""
+        navigationController?.navigationBar.barTintColor = UIColor(hex: "004477")
         configTableView()
-        loadAnnouncementList(announcementListQueryInfo: announcementListQueryInfo)
+        loadAnnouncementList(query: announcementListQueryInfo)
         addButtonActions()
     }
     
@@ -80,6 +91,7 @@ class AnnouncementListViewController: NiblessViewController {
     }
     private func configTableView() {
         rootView.tableView.separatorColor = .black
+        rootView.tableView.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
         rootView.tableView.delegate = self
         rootView.tableView.dataSource = self
         rootView.tableView.registerCell(AnnouncementBriefTableViewCell.self)
@@ -98,14 +110,13 @@ class AnnouncementListViewController: NiblessViewController {
         ])
     }
     
-    private func loadAnnouncementList(announcementListQueryInfo: AnnouncementListQueryInfo? = nil) {
+    private func loadAnnouncementList(query: AnnouncementListQueryInfo? = nil) {
         isNetworkProcessing = true
-        announcementListLoader.loadAnnouncementList(with: announcementListQueryInfo).done { announcementList in
+        announcementListLoader.announcements(with: announcementListQueryInfo).done { announcementList in
             self.handleSucuessFetchAnnouncementList(announcementList)
         }.ensure {
             self.isNetworkProcessing = false
-        }
-//         .catch(handleErrorForFetchAnnouncementList)
+        }.catch(handleErrorForFetchAnnouncementList)
     }
     
     private func handleSucuessFetchAnnouncementList(_ announcementList: AnnouncementList) {
@@ -114,7 +125,8 @@ class AnnouncementListViewController: NiblessViewController {
         } else {
             self.announcementList = announcementList
         }
-        announcementListQueryInfo.updateCurrentPageInfo(with: announcementList)
+        announcementListQueryInfo.current = announcementList.currentPageNumber
+        announcementListQueryInfo.limit = announcementList.itemsPerPage
         if self.announcementList?.items.count == 0 {
             rootView.tableView.addSubview(emptyListView)
         } else {
@@ -134,21 +146,20 @@ class AnnouncementListViewController: NiblessViewController {
     }
     
     private func refreshFetchAnnouncementList(query: AnnouncementListQueryInfo?) {
-        var refreshQuery = query
-        refreshQuery?.pageNumber = 1
+        query?.current = 1
         announcementList = nil
-        loadAnnouncementList(announcementListQueryInfo: refreshQuery)
+        loadAnnouncementList(query: query)
     }
     
-    private func configSortCell(_ cell: SingleLabelTableViewCell, item: AnnouncementListQueryInfo.OrderReference) {
+    private func configSortCell(_ cell: SingleLabelTableViewCell, item: AnnouncementListQueryInfo.AnnouncementOrder) {
         cell.titleLabel.text = item.description
-        let isSelected = self.announcementListQueryInfo.orderReference == item
+        let isSelected = self.announcementListQueryInfo.order == item
         let textColor = isSelected ? UIColor(hex: "004477") : UIColor(hex: "4c4c4c")
         cell.titleLabel.textColor = textColor
     }
     
-    private func didPickSortType(sortType: AnnouncementListQueryInfo.OrderReference) {
-        announcementListQueryInfo.orderReference = sortType
+    private func didPickSortType(sortType: AnnouncementListQueryInfo.AnnouncementOrder) {
+        announcementListQueryInfo.order = sortType
         refreshFetchAnnouncementList(query: announcementListQueryInfo)
         rootView.organizeOptionView.announcementSortButton.setTitle(sortType.description, for: .normal)
         pickSortTypeView.hide()
@@ -176,14 +187,14 @@ class AnnouncementListViewController: NiblessViewController {
     
     @objc
     private func filterButtonDidTapped(_ sender: UIButton) {
-        let viewModel = AnnouncementFilterViewModel(service: MyMindAutoCompleteAPIService(userSessionDataStore: KeychainUserSessionDataStore()), queryInfo: announcementListQueryInfo) { [ weak self] queryInfo in
-            self?.announcementListQueryInfo = queryInfo
-            self?.refreshFetchAnnouncementList(query: queryInfo)
+        filter.frame = CGRect(x: view.bounds.width, y: 0, width: 0, height: view.bounds.size.height)
+        view.addSubview(filter)
+        filter.delegate = self
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut) {
+            self.filter.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.size.height)
+        } completion: { _ in
+            print("done")
         }
-        let viewController = AnnouncementListFilterViewController(viewModel: viewModel)
-        let navigationController = UINavigationController(rootViewController: viewController)
-        navigationController.modalPresentationStyle = .fullScreen
-        present(navigationController, animated: true, completion: nil)
     }
     @objc
     private func isTopButtonDidTapped(_ sender: UIButton) {
@@ -192,9 +203,14 @@ class AnnouncementListViewController: NiblessViewController {
         if  isTopButton.isSelected == true {
             isTopButton.layer.borderWidth = 1
             isTopButton.layer.borderColor = UIColor(hex: "004477").cgColor
+            isTopButton.backgroundColor = UIColor(hex: "f1f8fe")
+            announcementListQueryInfo.top = true
         } else {
+            isTopButton.backgroundColor = UIColor(hex: "f2f2f2")
             isTopButton.layer.borderWidth = 0
+            announcementListQueryInfo.top = nil
         }
+        refreshFetchAnnouncementList(query: announcementListQueryInfo)
     }
     @objc
     private func sortButtonColorDidTapped(_ sender: UIButton) {
@@ -203,8 +219,10 @@ class AnnouncementListViewController: NiblessViewController {
         if  sortButton.isSelected == true {
             sortButton.layer.borderWidth = 1
             sortButton.layer.borderColor = UIColor(hex: "004477").cgColor
+            sortButton.backgroundColor = UIColor(hex: "f1f8fe")
         } else {
             sortButton.layer.borderWidth = 0
+            sortButton.backgroundColor = UIColor(hex: "f2f2f2")
         }
     }
 
@@ -213,20 +231,54 @@ class AnnouncementListViewController: NiblessViewController {
 extension AnnouncementListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return announcementList?.items.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        100
+        96
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeReusableCell(AnnouncementBriefTableViewCell.self, for: indexPath) as? AnnouncementBriefTableViewCell else {
             fatalError("wrong cell identifier")
         }
-        cell.construct()
+        if let item = announcementList?.items[indexPath.row] {
+            cell.construct(with: item)
+        }
         return cell
     }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
+        if let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "AnnouncementViewController") as? AnnouncementViewController {
+            viewController.id = announcementList?.items[indexPath.row].id ?? 0
+            show(viewController, sender: self)
+        }
+
+    }
+}
+extension AnnouncementListViewController: AnnouncementListFilterViewDelegate {
+    func didCancelFilter(_ view: AnnouncementListFilterView) {
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut) {
+            self.filter.frame = CGRect(x: self.rootView.bounds.width, y: 0, width: 0, height: self.rootView.bounds.size.height)
+        } completion: { _ in
+            self.filter.removeFromSuperview()
+        }
+    }
     
-    
+    func filterView(_ view: AnnouncementListFilterView, didFilterWith info: AnnouncementListQueryInfo) {
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut) {
+            self.filter.frame = CGRect(x: self.rootView.bounds.width, y: 0, width: 0, height: self.rootView.bounds.size.height)
+        } completion: { _ in
+            self.filter.removeFromSuperview()
+            if info != self.announcementListQueryInfo {
+                self.rootView.organizeOptionView.announcementFilterButton.isSelected = info.isModified
+                self.announcementListQueryInfo = AnnouncementListQueryInfo.defaultQuery()
+                self.announcementListQueryInfo.title = info.title
+                self.announcementListQueryInfo.type = info.type
+                self.announcementListQueryInfo.start = info.start
+                self.announcementListQueryInfo.end = info.end
+                self.refreshFetchAnnouncementList(query: self.announcementListQueryInfo)
+            }
+        }
+    }
 }

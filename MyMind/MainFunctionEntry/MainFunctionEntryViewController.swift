@@ -19,7 +19,9 @@ enum MainFunctoinType: String {
 }
 
 final class MainFunctionEntryViewController: NiblessViewController {
-    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        .lightContent
+    }
     typealias FunctionControlInfo = (type: MainFunctoinType, imageName: String)
     private var functionControls: [MainFunctionControl] = []
 //    private var functionControls: [UIView] = []
@@ -57,7 +59,6 @@ final class MainFunctionEntryViewController: NiblessViewController {
 
             }
         }
-        functionControlInfos.append((.accountSetting, "account_setting_icon"))
         functionControlInfos.append((.announcement, "calendar_icon"))
         constructViewHeirarchy()
         creatFuncitonControls()
@@ -69,6 +70,10 @@ final class MainFunctionEntryViewController: NiblessViewController {
         super.viewDidLayoutSubviews()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.barTintColor = UIColor(hex: "060d32")
+    }
     private func constructViewHeirarchy() {
         view.addSubview(stackView)
     }
@@ -132,24 +137,23 @@ final class MainFunctionEntryViewController: NiblessViewController {
             present(viewController, animated: true, completion: nil)
         case .purchaseReview:
             show(PurchaseListViewController(purchaseListLoader: MyMindPurchaseReviewAPIService.shared, reviewing: true), sender: nil)
-        case .accountSetting:
-            if let settingViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "Setting") as? SettingViewController {
-                settingViewController.delegate = self
-                show(settingViewController, sender: nil)
-            }
         case .announcement:
             show(AnnouncementListViewController(announcementListLoader: MyMindAnnouncementAPIService.shared), sender: nil)
+//        case .accountSetting:
+//            if let settingViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "Setting") as? SettingViewController {
+//                settingViewController.delegate = self
+//                show(settingViewController, sender: nil)
+//            }
         default:
             print(sender.functionType)
         }
     }
-
 }
-extension MainFunctionEntryViewController: MixedDelegate {
-    func didSignOut() {
-        self.navigationController?.popToRootViewController(animated: true)
-    }
-    func didCancel() {
-        self.navigationController?.popViewController(animated: true)
-    }
-}
+//extension MainFunctionEntryViewController: MixedDelegate {
+//    func didSignOut() {
+//        self.navigationController?.popToRootViewController(animated: true)
+//    }
+//    func didCancel() {
+//        self.navigationController?.popViewController(animated: true)
+//    }
+//}

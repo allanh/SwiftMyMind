@@ -11,8 +11,25 @@ import UIKit
 class AnnouncementViewController: UIViewController {
     
     // MARK: - Properties
-
-
+    var id: Int = 0
+    private var isNetworkProcessing: Bool = true {
+        didSet {
+            switch isNetworkProcessing {
+            case true: startAnimatingActivityIndicator()
+            case false: stopAnimatinActivityIndicator()
+            }
+        }
+    }
+    private var announcement: Announcement? = nil {
+        didSet {
+            constructViewHierarchy()
+            activateConstraints()
+            setup()
+        }
+    }
+    private let formatter: DateFormatter = DateFormatter {
+        $0.dateFormat = "yyyy/MM/dd hh:mm"
+    }
     // MARK: - UI
 
     private let scrollView: UIScrollView = UIScrollView {
@@ -26,35 +43,40 @@ class AnnouncementViewController: UIViewController {
 
     private let typeLabel: UILabel = UILabel {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.layer.borderWidth = 1
-        $0.layer.cornerRadius = 5
-        $0.layer.borderColor = UIColor.orange.cgColor
-        $0.textColor = .orange
-        $0.text = "類別"
+        $0.layer.cornerRadius = 8
+        $0.backgroundColor = UIColor(hex: "004477")
+        $0.textColor = .white
         $0.textAlignment = NSTextAlignment.center
-        $0.font = .pingFangTCRegular(ofSize: 14)
+        $0.font = .pingFangTCRegular(ofSize: 12)
+        $0.clipsToBounds = true
+    }
+    private let timeLabel: UILabel = UILabel {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.textColor = UIColor(hex: "b4b4b4")
+        $0.font = .pingFangTCRegular(ofSize: 12)
+    }
+    private let titleLabel: UILabel = UILabel {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.textColor = UIColor(hex: "545454")
+        $0.font = .pingFangTCSemibold(ofSize: 16)
+        $0.numberOfLines = 0
     }
 
     private let contentLabel: UILabel = UILabel {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.textColor = .black
-        $0.numberOfLines = 2
-        $0.text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+        $0.numberOfLines = 0
+//        $0.text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
         $0.font = .pingFangTCRegular(ofSize: 14)
     }
 
-    let timeLabel: UILabel = UILabel {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.textColor = UIColor(hex: "b4b4b4")
-        $0.text = "(2020/5/6 05:06)"
-        $0.font = .pingFangTCRegular(ofSize: 12)
-    }
     // MARK: - Methods
     private func constructViewHierarchy() {
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
+        contentView.addSubview(typeLabel)
         contentView.addSubview(timeLabel)
-        contentView.addSubview(timeLabel)
+        contentView.addSubview(titleLabel)
         contentView.addSubview(contentLabel)
     }
     
@@ -63,13 +85,33 @@ class AnnouncementViewController: UIViewController {
         activateConstraintsContentView()
         activateConstraintsTypeLabel()
         activateConstraintsTimeLabel()
+        activateConstraintsTitleLabel()
         activateConstraintsContentLabel()
     }
-    
+    private func setup() {
+        typeLabel.text = announcement?.type.description
+        timeLabel.text = formatter.string(from: announcement?.started ?? Date())
+        titleLabel.text = announcement?.title
+        contentLabel.text = announcement?.content
+    }
     // MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        isNetworkProcessing = true
+        MyMindAnnouncementAPIService.shared.announcement(for: id)
+            .ensure {
+                self.isNetworkProcessing = false
+            }
+            .done { announcement in
+                self.announcement = announcement
+            }
+            .catch { error in
+                if let apiError = error as? APIError {
+                    _ = ErrorHandler.shared.handle(apiError)
+                } else {
+                    ToastView.showIn(self, message: error.localizedDescription)
+                }
+            }
     }
     
 
@@ -102,28 +144,44 @@ extension AnnouncementViewController {
     }
 
     func activateConstraintsTypeLabel() {
-        let top = typeLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 15)
-        let leading = typeLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15)
+        let size = ((announcement?.type.description ?? "") as NSString).size(withAttributes: [.font: typeLabel.font as Any])
+
+        let top = typeLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16)
+        let leading = typeLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16)
+        let width = typeLabel.widthAnchor.constraint(equalToConstant: size.width+16)
+        let height = typeLabel.heightAnchor.constraint(equalToConstant: 16)
         
+        NSLayoutConstraint.activate([
+            top, leading, width, height
+        ])
+
         NSLayoutConstraint.activate([
             top, leading
         ])
     }
-
     func activateConstraintsTimeLabel() {
-        let top = timeLabel.topAnchor.constraint(equalTo: typeLabel.bottomAnchor, constant: 10)
-        let leading = timeLabel.leadingAnchor.constraint(equalTo: typeLabel.leadingAnchor)
+        let leading = timeLabel.leadingAnchor.constraint(equalTo: typeLabel.leadingAnchor, constant: 8)
+        let centerY = timeLabel.centerYAnchor.constraint(equalTo: typeLabel.centerYAnchor)
         
         NSLayoutConstraint.activate([
-            top, leading
+            centerY, leading
         ])
-        }
+    }
+    func activateConstraintsTitleLabel() {
+        let leading = titleLabel.leadingAnchor.constraint(equalTo: typeLabel.leadingAnchor)
+        let trailing = titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16)
+        let top = titleLabel.topAnchor.constraint(equalTo: typeLabel.bottomAnchor, constant: 16)
+        
+        NSLayoutConstraint.activate([
+            trailing, leading, top
+        ])
+    }
 
     func activateConstraintsContentLabel() {
-        let top = contentLabel.topAnchor.constraint(equalTo: timeLabel.bottomAnchor, constant: 15)
-        let leading = contentLabel.leadingAnchor.constraint(equalTo: timeLabel.leadingAnchor)
-        let trailing = contentLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15)
-        let bottom = contentLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 15)
+        let top = contentLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8)
+        let leading = contentLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor)
+        let trailing = contentLabel.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor)
+        let bottom = contentLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)
         
         NSLayoutConstraint.activate([
             top, leading, trailing, bottom

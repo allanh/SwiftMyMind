@@ -10,6 +10,9 @@ import UIKit
 import RxSwift
 
 final class PurchaseApplyViewController: NiblessViewController {
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        .lightContent
+    }
     // MARK: - Properties
     let viewModel: PurchaseApplyViewModel
 

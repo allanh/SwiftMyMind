@@ -9,6 +9,9 @@
 import UIKit
 
 final class PurchaseCompletedApplyViewController: NiblessViewController {
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        .lightContent
+    }
     // MARK: - Properties
     private var contentViewControllers: [UIViewController] = []
 

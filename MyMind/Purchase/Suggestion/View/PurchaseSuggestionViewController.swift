@@ -12,7 +12,9 @@ import RxRelay
 import PromiseKit
 
 class PurchaseSuggestionViewController: NiblessViewController {
-
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        .lightContent
+    }
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.sectionHeadersPinToVisibleBounds = true

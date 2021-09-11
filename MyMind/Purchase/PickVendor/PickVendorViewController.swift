@@ -11,6 +11,9 @@ import PromiseKit
 import RxSwift
 
 final class PickVendorViewController: UITableViewController {
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        .lightContent
+    }
     // MARK: - Properties
     let searchTextFieldView: AutoCompleteSearchRootView = AutoCompleteSearchRootView {
         $0.backgroundColor = .white

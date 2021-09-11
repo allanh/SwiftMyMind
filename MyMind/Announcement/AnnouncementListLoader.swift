@@ -10,5 +10,5 @@ import Foundation
 import PromiseKit
 
 protocol AnnouncementListLoader {
-    func loadAnnouncementList(with announcementListQueryInfo: AnnouncementListQueryInfo?) -> Promise<AnnouncementList>
+    func announcements(with info: AnnouncementListQueryInfo?) -> Promise<AnnouncementList>
 }

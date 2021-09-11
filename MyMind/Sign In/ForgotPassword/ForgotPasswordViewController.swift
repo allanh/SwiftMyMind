@@ -10,6 +10,9 @@ import UIKit
 import RxSwift
 
 class ForgotPasswordViewController: NiblessViewController {
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        .lightContent
+    }
 
     let viewModel: ForgotPasswordViewModel
     private var didLayoutRootView: Bool = false
@@ -66,9 +69,9 @@ class ForgotPasswordViewController: NiblessViewController {
             .observe(on: MainScheduler.instance)
             .subscribe({ [unowned self] info in
                 let storyboard: UIStoryboard = UIStoryboard(name: "TOTP", bundle: nil)
-                if let viewController = storyboard.instantiateViewController(withIdentifier: "SecretListViewControllerNavi") as? UINavigationController, let totpViewController = viewController.topViewController as? SecretListViewController {
-                    totpViewController.scanViewControllerDelegate = self
-                    show(totpViewController, sender: self)
+                if let viewController = storyboard.instantiateViewController(identifier: "SecretListViewController") as? SecretListViewController {
+                    viewController.scanViewControllerDelegate = self
+                    show(viewController, sender: self)
                 }
             })
             .disposed(by: bag)
