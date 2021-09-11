@@ -15,7 +15,7 @@ class AnnouncementListViewController: NiblessViewController {
     var reviewing: Bool 
     
     private lazy var emptyListView: EmptyDataView = {
-        return EmptyDataView(frame: rootView.tableView.bounds)
+        return EmptyDataView(frame: rootView.tableView.bounds, icon: "no_announcement", description: "目前尚未有公告訊息", font: .pingFangTCRegular(ofSize: 14), color: UIColor(hex: "7f7f7f"))
     }()
     private lazy var filter: AnnouncementListFilterView = {
         return AnnouncementListFilterView(frame: CGRect(x: rootView.bounds.width, y: 0, width: 0, height: rootView.bounds.size.height))
@@ -126,15 +126,15 @@ class AnnouncementListViewController: NiblessViewController {
         } else {
             self.announcementList = announcementList
         }
+        self.announcementList = nil
         announcementListQueryInfo.current = announcementList.currentPageNumber
         announcementListQueryInfo.limit = announcementList.itemsPerPage
-        if self.announcementList?.items.count == 0 {
-            rootView.tableView.addSubview(emptyListView)
-        } else {
+        if let announcementList = self.announcementList, announcementList.items.count > 0 {
             emptyListView.removeFromSuperview()
             rootView.tableView.reloadData()
+        } else {
+            rootView.tableView.addSubview(emptyListView)
         }
-        
     }
     
     private func handleErrorForFetchAnnouncementList(_ error: Error) {

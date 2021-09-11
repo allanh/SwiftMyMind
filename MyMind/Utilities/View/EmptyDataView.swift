@@ -10,32 +10,31 @@ import UIKit
 class EmptyDataView: NiblessView {
     private let imageView: UIImageView = UIImageView {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.image = UIImage(named: "empty")
     }
     private let label: UILabel = UILabel {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.textColor = UIColor(hex:"848484")
-        $0.font = .pingFangTCRegular(ofSize: 16)
-        $0.text = "尚無資料"
     }
-    override init(frame: CGRect) {
+    init(frame: CGRect, icon: String = "empty", description: String = "尚無資料", font: UIFont = .pingFangTCRegular(ofSize: 16), color: UIColor = UIColor(hex: "848484")) {
         super.init(frame: frame)
         self.backgroundColor = .white
         addSubview(imageView)
         addSubview(label)
+        imageView.image = UIImage(named: icon)
+        label.font = font
+        label.text = description
+        label.textColor = color
         activateConstraintsImageView()
         activateConstraintsLabel()
     }
     private func activateConstraintsImageView() {
-        let centerY = imageView.centerYAnchor.constraint(equalTo: centerYAnchor)
+        let centerY = imageView.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -18)
         let centerX = imageView.centerXAnchor.constraint(equalTo: centerXAnchor)
-
         NSLayoutConstraint.activate([
             centerY, centerX
         ])
     }
     private func activateConstraintsLabel() {
-        let top = label.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 10)
+        let top = label.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 16)
         let centerX = label.centerXAnchor.constraint(equalTo: centerXAnchor)
 
         NSLayoutConstraint.activate([
