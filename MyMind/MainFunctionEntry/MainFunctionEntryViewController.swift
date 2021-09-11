@@ -59,7 +59,7 @@ final class MainFunctionEntryViewController: NiblessViewController {
 
             }
         }
-        functionControlInfos.append((.announcement, "calendar_icon"))
+//        functionControlInfos.append((.announcement, "calendar_icon"))
         constructViewHeirarchy()
         creatFuncitonControls()
         constructStackViews()

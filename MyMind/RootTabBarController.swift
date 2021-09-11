@@ -12,11 +12,6 @@ final class RootTabBarController: UITabBarController {
     override var childForStatusBarStyle: UIViewController? {
         return selectedViewController
     }
-//    private var notifications: MyMindNotificationList? {
-//        didSet {
-//            navigationItem.rightBarButtonItem?.updateBadge(number: notifications?.unreaded ?? 0)
-//        }
-//    }
     private var contentViewControlelrs: [UIViewController] = []
     var authorization: Authorization?
     convenience init() {
@@ -47,10 +42,8 @@ final class RootTabBarController: UITabBarController {
         announcementLoader.notifications()
             .done { notifications in
                 self.navigationItem.rightBarButtonItem?.updateBadge(number: notifications.unreaded)
-//                self.notifications = notifications
             }
             .catch { error in
-//                self.notifications = nil
                 ToastView.showIn(self, message: error.localizedDescription)
             }
     }
@@ -61,7 +54,7 @@ final class RootTabBarController: UITabBarController {
     }
     @objc
     private func showAnnouncement(_ sender: Any?) {
-        print("showAnnouncement")
+        show(AnnouncementListViewController(announcementListLoader: MyMindAnnouncementAPIService.shared), sender: nil)
     }
     private func addRightBarItem() {
         let button = UIButton(type: .custom)
