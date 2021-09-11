@@ -187,11 +187,11 @@ class AnnouncementListViewController: NiblessViewController {
     
     @objc
     private func filterButtonDidTapped(_ sender: UIButton) {
-        filter.frame = CGRect(x: view.bounds.width, y: 0, width: 0, height: view.bounds.size.height)
+        filter.frame = CGRect(x: view.bounds.width, y: 0, width: view.bounds.width, height: view.bounds.height)
         view.addSubview(filter)
         filter.delegate = self
         UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut) {
-            self.filter.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.size.height)
+            self.filter.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height)
         } completion: { _ in
             print("done")
         }
@@ -258,8 +258,8 @@ extension AnnouncementListViewController: UITableViewDelegate, UITableViewDataSo
 }
 extension AnnouncementListViewController: AnnouncementListFilterViewDelegate {
     func didCancelFilter(_ view: AnnouncementListFilterView) {
-        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut) {
-            self.filter.frame = CGRect(x: self.rootView.bounds.width, y: 0, width: 0, height: self.rootView.bounds.size.height)
+        UIView.animate(withDuration: 0.5, delay: 0, options: [.curveEaseInOut, .beginFromCurrentState]) {
+            self.filter.frame = CGRect(x: self.view.bounds.width, y: 0, width: view.bounds.width, height: self.view.bounds.height)
         } completion: { _ in
             self.filter.removeFromSuperview()
         }
@@ -267,7 +267,7 @@ extension AnnouncementListViewController: AnnouncementListFilterViewDelegate {
     
     func filterView(_ view: AnnouncementListFilterView, didFilterWith info: AnnouncementListQueryInfo) {
         UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut) {
-            self.filter.frame = CGRect(x: self.rootView.bounds.width, y: 0, width: 0, height: self.rootView.bounds.size.height)
+            self.filter.frame = CGRect(x: self.view.bounds.width, y: 0, width: view.bounds.width, height: self.view.bounds.height)
         } completion: { _ in
             self.filter.removeFromSuperview()
             if info != self.announcementListQueryInfo {
