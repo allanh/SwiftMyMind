@@ -10,9 +10,7 @@ import UIKit
 
 extension UIBarButtonItem {
     func updateBadge(number: Int, type: UIView.BadgeType = .dot, position: UIView.BadgePosition = .rightTop) {
-        guard let button = customView as? UIButton,
-              number > 0
-        else { return }
+        guard let button = customView as? UIButton else { return }
         button.updateBadge(number: number, type: type, position: position)
     }
 }
