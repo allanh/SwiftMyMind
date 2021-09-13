@@ -241,7 +241,7 @@ extension AnnouncementListViewController: UITableViewDelegate, UITableViewDataSo
             fatalError("wrong cell identifier")
         }
         if let item = announcementList?.items[indexPath.row] {
-            cell.construct(with: item)
+            cell.construct(with: item, marked: announcementListQueryInfo.title)
         }
         return cell
     }

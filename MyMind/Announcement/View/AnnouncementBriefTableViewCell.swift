@@ -7,7 +7,6 @@
 //
 
 import UIKit
-
 class AnnouncementBriefTableViewCell: UITableViewCell {
     // 種類圖片
     let typeImageView: UIImageView = UIImageView {
@@ -28,9 +27,7 @@ class AnnouncementBriefTableViewCell: UITableViewCell {
     // 內容標籤
     let contentLabel: UILabel = UILabel {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.textColor = UIColor(hex: "545454")
         $0.numberOfLines = 2
-        $0.font = .pingFangTCRegular(ofSize: 14)
     }
     // 時間標籤
     let timeLabel: UILabel = UILabel {
@@ -48,7 +45,7 @@ class AnnouncementBriefTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     // 建立所有的 View & Layout
-    func construct(with item: Announcement) {
+    func construct(with item: Announcement, marked: String? = nil) {
         contentView.backgroundColor = item.readed == nil ? UIColor(hex: "f1f8fe"): .white
         constructViewHierarchy()
         let size = (item.type.description as NSString).size(withAttributes: [.font: typeLabel.font as Any])
@@ -61,7 +58,15 @@ class AnnouncementBriefTableViewCell: UITableViewCell {
             $0.dateFormat = "yyyy-MM-dd HH:mm:ss"
         }
         timeLabel.text = formatter.string(from: item.started)
-        contentLabel.text = item.title
+        let attributedString = NSMutableAttributedString(string: item.title, attributes: [.font: UIFont.pingFangTCRegular(ofSize: 14), .foregroundColor: UIColor(hex: "545454")])
+        if let marked = marked {
+            let ranges = item.title.ranges(of: marked, options: .caseInsensitive)
+            print(ranges)
+            for range in ranges {
+                attributedString.addAttributes([.foregroundColor : UIColor(hex: "004477")], range: range.nsRange(in: item.title))
+            }
+        }
+        contentLabel.attributedText = attributedString
     }
     // 建立所有的 View
     func constructViewHierarchy() {
