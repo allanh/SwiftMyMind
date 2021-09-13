@@ -55,7 +55,7 @@ class AnnouncementBriefTableViewCell: UITableViewCell {
         activateConstraints(size)
         typeImageView.image = UIImage(named: item.imageName)
         typeImageView.backgroundColor = item.iconBackground
-
+        item.readed == nil ? typeImageView.updateBadge(number: 1) : typeImageView.updateBadge(number: 0)
         typeLabel.text = item.type.description
         let formatter = DateFormatter {
             $0.dateFormat = "yyyy-MM-dd HH:mm:ss"
