@@ -18,7 +18,7 @@ class AnnouncementBriefTableViewCell: UITableViewCell {
     let typeLabel: UILabel = UILabel {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.layer.cornerRadius = 8
-        $0.backgroundColor = UIColor(hex: "004477")
+        $0.backgroundColor = .prussianBlue
         $0.textColor = .white
         $0.textAlignment = NSTextAlignment.center
         $0.font = .pingFangTCRegular(ofSize: 12)
@@ -61,9 +61,8 @@ class AnnouncementBriefTableViewCell: UITableViewCell {
         let attributedString = NSMutableAttributedString(string: item.title, attributes: [.font: UIFont.pingFangTCRegular(ofSize: 14), .foregroundColor: UIColor(hex: "545454")])
         if let marked = marked {
             let ranges = item.title.ranges(of: marked, options: .caseInsensitive)
-            print(ranges)
             for range in ranges {
-                attributedString.addAttributes([.foregroundColor : UIColor(hex: "004477")], range: range.nsRange(in: item.title))
+                attributedString.addAttributes([.foregroundColor : UIColor.prussianBlue], range: range.nsRange(in: item.title))
             }
         }
         contentLabel.attributedText = attributedString

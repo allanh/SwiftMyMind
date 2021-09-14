@@ -202,7 +202,7 @@ class ForgotPasswordRootView: NiblessView {
         $0.setTitleColor(UIColor.white, for: .normal)
         $0.setTitleColor(UIColor(hex: "b4b4b4"), for: .disabled)
         $0.titleLabel?.font = UIFont.pingFangTCSemibold(ofSize: 16)
-        $0.backgroundColor = UIColor(hex: "004477")
+        $0.backgroundColor = .prussianBlue
         $0.layer.cornerRadius = 4
     }
 

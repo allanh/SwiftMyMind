@@ -29,7 +29,7 @@ class PurchaseSuggestionViewController: NiblessViewController {
     }()
 
     let nextStepButton: UIButton = UIButton {
-        $0.backgroundColor = UIColor(hex: "004477")
+        $0.backgroundColor = .prussianBlue
         $0.setTitleColor(.white, for: .normal)
         $0.setTitle("下一步", for: .normal)
         $0.titleLabel?.font = .pingFangTCSemibold(ofSize: 16)

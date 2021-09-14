@@ -36,13 +36,13 @@ final class PurchaseCompletedApplyViewController: NiblessViewController {
 
     let backToHomeButton: UIButton = UIButton {
         $0.backgroundColor = .white
-        $0.setTitleColor(UIColor(hex: "004477"), for: .normal)
+        $0.setTitleColor(.prussianBlue, for: .normal)
         $0.setTitle("回首頁", for: .normal)
         $0.titleLabel?.font = .pingFangTCSemibold(ofSize: 16)
     }
 
     let backToListButton: UIButton = UIButton {
-        $0.backgroundColor = UIColor(hex: "004477")
+        $0.backgroundColor = .prussianBlue
         $0.setTitleColor(.white, for: .normal)
         $0.setTitle("回採購管理", for: .normal)
         $0.titleLabel?.font = .pingFangTCSemibold(ofSize: 16)

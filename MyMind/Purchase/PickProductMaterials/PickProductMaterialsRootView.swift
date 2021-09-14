@@ -26,7 +26,7 @@ class PickProductMaterialsRootView: NiblessView {
         $0.titleLabel?.font = .pingFangTCSemibold(ofSize: 16)
         $0.setTitle("下一步", for: .normal)
         $0.setTitleColor(.white, for: .normal)
-        $0.backgroundColor = UIColor(hex: "004477")
+        $0.backgroundColor = .prussianBlue
     }
 
     lazy var pickSortTypeView: PickSortTypeView<ProductMaterialQueryInfo.SortType, SingleLabelTableViewCell> = {
@@ -34,7 +34,7 @@ class PickProductMaterialsRootView: NiblessView {
             dataSource: ProductMaterialQueryInfo.SortType.allCases) { [unowned self] sortType, cell in
             cell.titleLabel.text = sortType.description
             let isSelected = self.viewModel.currentQueryInfo.sortType == sortType
-            let textColor = isSelected ? UIColor(hex: "004477") : UIColor(hex: "4c4c4c")
+            let textColor = isSelected ? .prussianBlue : UIColor(hex: "4c4c4c")
             cell.titleLabel.textColor = textColor
         } cellSelectHandler: { [unowned self] sortType in
             self.viewModel.currentSortType.accept(sortType)

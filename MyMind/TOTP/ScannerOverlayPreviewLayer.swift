@@ -35,7 +35,7 @@ public class ScannerOverlayPreviewLayer: AVCaptureVideoPreviewLayer {
         $0.backgroundColor = UIColor.white.cgColor
     }
     private let textLayer: CATextLayer = CATextLayer {
-        $0.foregroundColor = UIColor(hex: "004477").cgColor
+        $0.foregroundColor = UIColor.prussianBlue.cgColor
         $0.font = UIFont.pingFangTCSemibold(ofSize: 16)
         $0.fontSize = 16
         $0.alignmentMode = .center

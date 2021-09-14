@@ -23,9 +23,9 @@ class AutoCompleteTypeSearchRootViewController: NiblessViewController {
     let systemButton: UIButton = UIButton {
         $0.isSelected = false
         $0.setTitle("系統", for: .normal)
-        $0.setTitleColor(UIColor(hex: "7f7f7f"), for: .normal)
+        $0.setTitleColor(.brownGrey, for: .normal)
         $0.setTitleColor(.white, for: .selected)
-        $0.backgroundColor = UIColor(hex: "f2f2f2")
+        $0.backgroundColor = .veryLightPink
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 4
     }
@@ -33,9 +33,9 @@ class AutoCompleteTypeSearchRootViewController: NiblessViewController {
     let featureButton: UIButton = UIButton {
         $0.isSelected = false
         $0.setTitle("功能", for: .normal)
-        $0.setTitleColor(UIColor(hex: "7f7f7f"), for: .normal)
+        $0.setTitleColor(.brownGrey, for: .normal)
         $0.setTitleColor(.white, for: .selected)
-        $0.backgroundColor = UIColor(hex: "f2f2f2")
+        $0.backgroundColor = .veryLightPink
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 4
     }
@@ -43,9 +43,9 @@ class AutoCompleteTypeSearchRootViewController: NiblessViewController {
     let optimizationButton: UIButton = UIButton {
         $0.isSelected = false
         $0.setTitle("優化", for: .normal)
-        $0.setTitleColor(UIColor(hex: "7f7f7f"), for: .normal)
+        $0.setTitleColor(.brownGrey, for: .normal)
         $0.setTitleColor(.white, for: .selected)
-        $0.backgroundColor = UIColor(hex: "f2f2f2")
+        $0.backgroundColor = .veryLightPink
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 4
     }
@@ -53,9 +53,9 @@ class AutoCompleteTypeSearchRootViewController: NiblessViewController {
     let platformNewsButton: UIButton = UIButton {
         $0.isSelected = false
         $0.setTitle("平台消息", for: .normal)
-        $0.setTitleColor(UIColor(hex: "7f7f7f"), for: .normal)
+        $0.setTitleColor(.brownGrey, for: .normal)
         $0.setTitleColor(.white, for: .selected)
-        $0.backgroundColor = UIColor(hex: "f2f2f2")
+        $0.backgroundColor = .veryLightPink
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 4
     }
@@ -63,9 +63,9 @@ class AutoCompleteTypeSearchRootViewController: NiblessViewController {
     let policyButton: UIButton = UIButton {
         $0.isSelected = false
         $0.setTitle("政策", for: .normal)
-        $0.setTitleColor(UIColor(hex: "7f7f7f"), for: .normal)
+        $0.setTitleColor(.brownGrey, for: .normal)
         $0.setTitleColor(.white, for: .selected)
-        $0.backgroundColor = UIColor(hex: "f2f2f2")
+        $0.backgroundColor = .veryLightPink
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 4
     }
@@ -146,9 +146,9 @@ class AutoCompleteTypeSearchRootViewController: NiblessViewController {
     private func buttonsDidTapped(_ sender: UIButton){
         sender.isSelected = !sender.isSelected
         if sender.isSelected == true {
-            sender.backgroundColor = UIColor(hex: "004477")
+            sender.backgroundColor = .prussianBlue
         } else {
-            sender.backgroundColor = UIColor(hex: "f2f2f2")
+            sender.backgroundColor = .veryLightPink
         }
     }
 }

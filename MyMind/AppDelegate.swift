@@ -13,7 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        setUpNavigationBarAppearance()
+        setUpAppearance()
         FirebaseApp.configure()
 
         #if !targetEnvironment(simulator)
@@ -43,7 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
-    private func setUpNavigationBarAppearance() {
+    private func setUpAppearance() {
         UINavigationBar.appearance().tintColor = .white
         UINavigationBar.appearance().barTintColor = UIColor(hex: "060d32")
         UINavigationBar.appearance().isTranslucent = false
@@ -51,6 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             .foregroundColor: UIColor.white,
             .font: UIFont.pingFangTCSemibold(ofSize: 18)
         ]
+        UITabBar.appearance().tintColor = .prussianBlue
     }
 
     // MARK: UISceneSession Lifecycle

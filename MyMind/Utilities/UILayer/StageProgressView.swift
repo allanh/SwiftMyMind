@@ -18,7 +18,7 @@ class StageProgressView: NiblessView {
     var lineHieght: CGFloat = 8
     var textFont: UIFont = .systemFont(ofSize: 14)
     var textHeight: CGFloat = 20
-    var isProgressedColor: UIColor = UIColor(hex: "004477")
+    var isProgressedColor: UIColor = .prussianBlue
     var isNotProgressedColor: UIColor = .gray
     private let adjustedMidYSpace: CGFloat = 10
 

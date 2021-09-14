@@ -55,7 +55,7 @@ final class OrganizeOptionView: NiblessView {
         $0.setImage(UIImage(named: "filter"), for: .normal)
         $0.setImage(UIImage(named: "filter_selected"), for: .selected)
         $0.layer.cornerRadius = 15
-        $0.backgroundColor = UIColor(hex: "f2f2f2")
+        $0.backgroundColor = .veryLightPink
     }
     
     let announcementSortButton: UIButton = UIButton {
@@ -68,9 +68,9 @@ final class OrganizeOptionView: NiblessView {
         $0.layer.cornerRadius = 15
         $0.semanticContentAttribute = .forceRightToLeft
         $0.backgroundColor = UIColor(hex: "f1f8fe")
-        $0.setTitleColor(UIColor(hex: "004477"), for: .selected)
+        $0.setTitleColor(.prussianBlue, for: .selected)
         $0.layer.borderWidth = 1
-        $0.layer.borderColor = UIColor(hex: "004477").cgColor
+        $0.layer.borderColor = UIColor.prussianBlue.cgColor
     }
     
     let annoucementIsTopButton: UIButton = UIButton {
@@ -79,8 +79,8 @@ final class OrganizeOptionView: NiblessView {
         $0.setTitleColor(.init(hex: "4c4c4c"), for: .normal)
         $0.setTitle("釘選", for: .normal)
         $0.layer.cornerRadius = 15
-        $0.backgroundColor = UIColor(hex: "f2f2f2")
-        $0.setTitleColor(UIColor(hex: "004477"), for: .selected)
+        $0.backgroundColor = .veryLightPink
+        $0.setTitleColor(.prussianBlue, for: .selected)
     }
     
     var displayType: DisplayType = .all

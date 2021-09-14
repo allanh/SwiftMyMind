@@ -16,7 +16,7 @@ final class MyMindInstructionView: NiblessView {
     private let titleLabel: UILabel = UILabel {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = .pingFangTCSemibold(ofSize: 16)
-        $0.textColor = UIColor(hex:"004477")
+        $0.textColor = .prussianBlue
         $0.text = "My Mind 買賣 OTP"
         $0.textAlignment = .center
     }

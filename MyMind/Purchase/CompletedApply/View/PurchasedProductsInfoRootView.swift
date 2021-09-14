@@ -23,27 +23,27 @@ class PurchasedProductsInfoRootView: NiblessView {
     }
     private let costTitleLabel: UILabel = UILabel {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.textColor = UIColor(hex: "7f7f7f")
+        $0.textColor = .brownGrey
         $0.font = .pingFangTCSemibold(ofSize: 14)
         $0.textAlignment = .right
         $0.text = "未稅 $"
     }
     private let costLabel: UILabel = UILabel {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.textColor = UIColor(hex: "7f7f7f")
+        $0.textColor = .brownGrey
         $0.font = .pingFangTCSemibold(ofSize: 14)
         $0.textAlignment = .right
     }
     private let taxTitleLabel: UILabel = UILabel {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.textColor = UIColor(hex: "7f7f7f")
+        $0.textColor = .brownGrey
         $0.font = .pingFangTCSemibold(ofSize: 14)
         $0.textAlignment = .right
         $0.text = "稅額 $"
     }
     private let taxLabel: UILabel = UILabel {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.textColor = UIColor(hex: "7f7f7f")
+        $0.textColor = .brownGrey
         $0.font = .pingFangTCSemibold(ofSize: 14)
         $0.textAlignment = .right
     }

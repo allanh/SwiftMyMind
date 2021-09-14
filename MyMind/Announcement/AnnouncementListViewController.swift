@@ -15,7 +15,7 @@ class AnnouncementListViewController: NiblessViewController {
     var reviewing: Bool 
     
     private lazy var emptyListView: EmptyDataView = {
-        return EmptyDataView(frame: rootView.tableView.bounds, icon: "no_announcement", description: "目前尚未有公告訊息", font: .pingFangTCRegular(ofSize: 14), color: UIColor(hex: "7f7f7f"))
+        return EmptyDataView(frame: rootView.tableView.bounds, icon: "no_announcement", description: "目前尚未有公告訊息", font: .pingFangTCRegular(ofSize: 14), color: .brownGrey)
     }()
     private lazy var filter: AnnouncementListFilterView = {
         return AnnouncementListFilterView(frame: CGRect(x: rootView.bounds.width, y: 0, width: 0, height: rootView.bounds.size.height))
@@ -77,7 +77,7 @@ class AnnouncementListViewController: NiblessViewController {
         view.backgroundColor = .white
         title = "公告訊息"
         navigationItem.backButtonTitle = ""
-        navigationController?.navigationBar.barTintColor = UIColor(hex: "004477")
+        navigationController?.navigationBar.barTintColor = .prussianBlue
         configTableView()
         loadAnnouncementList(query: announcementListQueryInfo)
         addButtonActions()
@@ -154,7 +154,7 @@ class AnnouncementListViewController: NiblessViewController {
     private func configSortCell(_ cell: SingleLabelTableViewCell, item: AnnouncementListQueryInfo.AnnouncementOrder) {
         cell.titleLabel.text = item.description
         let isSelected = self.announcementListQueryInfo.order == item
-        let textColor = isSelected ? UIColor(hex: "004477") : UIColor(hex: "4c4c4c")
+        let textColor = isSelected ? .prussianBlue : UIColor(hex: "4c4c4c")
         cell.titleLabel.textColor = textColor
     }
     
@@ -202,11 +202,11 @@ class AnnouncementListViewController: NiblessViewController {
         let isTopButton = rootView.organizeOptionView.annoucementIsTopButton
         if  isTopButton.isSelected == true {
             isTopButton.layer.borderWidth = 1
-            isTopButton.layer.borderColor = UIColor(hex: "004477").cgColor
+            isTopButton.layer.borderColor = UIColor.prussianBlue.cgColor
             isTopButton.backgroundColor = UIColor(hex: "f1f8fe")
             announcementListQueryInfo.top = true
         } else {
-            isTopButton.backgroundColor = UIColor(hex: "f2f2f2")
+            isTopButton.backgroundColor = .veryLightPink
             isTopButton.layer.borderWidth = 0
             announcementListQueryInfo.top = nil
         }

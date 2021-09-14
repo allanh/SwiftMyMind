@@ -80,13 +80,13 @@ class AnnouncementListFilterView: NiblessView {
     private let closeButton: UIButton = UIButton {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.setImage(UIImage(named: "close")?.withRenderingMode(.alwaysTemplate), for: .normal)
-        $0.tintColor = UIColor(hex: "004477")
+        $0.tintColor = .prussianBlue
         $0.addTarget(self, action: #selector(closeButtonDidTapped(_:)), for: .touchUpInside)
     }
     private let resetButton: UIButton = UIButton {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.setTitle("重置", for: .normal)
-        $0.setTitleColor(UIColor(hex: "004477"), for: .normal)
+        $0.setTitleColor(.prussianBlue, for: .normal)
         $0.titleLabel?.font = .pingFangTCRegular(ofSize: 14)
         $0.addTarget(self, action: #selector(resetButtonDidTapped(_:)), for: .touchUpInside)
     }
@@ -197,7 +197,7 @@ class AnnouncementListFilterView: NiblessView {
     }
     private let searchButton: UIButton = UIButton {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.backgroundColor = UIColor(hex: "004477")
+        $0.backgroundColor = .prussianBlue
         $0.setTitleColor(.white, for: .normal)
         $0.setTitle("搜尋", for: .normal)
         $0.titleLabel?.font = .pingFangTCSemibold(ofSize: 24)
@@ -245,10 +245,10 @@ extension AnnouncementListFilterView {
                 $0.setTitle(type.description, for: .normal)
                 $0.layer.cornerRadius = 16
                 $0.titleLabel?.font = .pingFangTCRegular(ofSize: 14)
-                $0.setTitleColor(UIColor(hex:"7f7f7f"), for: .normal)
+                $0.setTitleColor(.brownGrey, for: .normal)
                 $0.setTitleColor(.white, for: .selected)
                 $0.titleEdgeInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
-                $0.backgroundColor = UIColor(hex: "f2f2f2")
+                $0.backgroundColor = .veryLightPink
                 $0.addTarget(self, action: #selector(buttonDidTapped(_:)), for: .touchUpInside)
                 objc_setAssociatedObject($0, &handle, type, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
             }

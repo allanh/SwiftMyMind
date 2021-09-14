@@ -12,7 +12,7 @@ class SideMenuTopBarView: NiblessView {
     // MARK: - Properties
     private let titleLabel: UILabel = UILabel {
         $0.font = .pingFangTCSemibold(ofSize: 18)
-        $0.textColor = UIColor(hex: "004477")
+        $0.textColor = .prussianBlue
         $0.text = "篩選條件"
     }
 

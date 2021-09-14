@@ -12,7 +12,7 @@ class LogInfoView: NiblessView {
     private let dotView: UIView = UIView {
         $0.layer.cornerRadius = 10
         $0.layer.borderWidth = 5
-        $0.layer.borderColor = UIColor(hex: "004477").cgColor
+        $0.layer.borderColor = UIColor.prussianBlue.cgColor
     }
 
     private let progressLineView: UIView = UIView {
@@ -20,7 +20,7 @@ class LogInfoView: NiblessView {
     }
 
     private let timeStampLabel: UILabel = UILabel {
-        $0.textColor = UIColor(hex: "004477")
+        $0.textColor = .prussianBlue
         $0.font = .pingFangTCSemibold(ofSize: 14)
     }
 

@@ -9,9 +9,11 @@
 import UIKit
 
 class FilterViewToggleButton: UIButton {
+    var selectedBackground: UIColor = .prussianBlue
+    var normalBackground: UIColor = .veryLightPink
     override var isSelected: Bool {
         didSet {
-            backgroundColor = isSelected ? UIColor(hex: "004477") : UIColor(hex: "f2f2f2")
+            backgroundColor = isSelected ? selectedBackground : normalBackground
         }
     }
     /*

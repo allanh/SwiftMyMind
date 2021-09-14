@@ -158,7 +158,7 @@ class SignInRootView: NiblessView {
         $0.setImage(UIImage(named: "unchecked"), for: .normal)
         $0.setTitle(" 記住帳號", for: .normal)
         $0.titleLabel?.font = UIFont.pingFangTCRegular(ofSize: 14)
-        $0.setTitleColor(UIColor(hex: "7f7f7f"), for: .normal)
+        $0.setTitleColor(.brownGrey, for: .normal)
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
 
@@ -203,7 +203,7 @@ class SignInRootView: NiblessView {
         $0.setTitleColor(UIColor.white, for: .normal)
         $0.setTitleColor(UIColor(hex: "b4b4b4"), for: .disabled)
         $0.titleLabel?.font = UIFont.pingFangTCSemibold(ofSize: 16)
-        $0.backgroundColor = UIColor(hex: "004477")
+        $0.backgroundColor = .prussianBlue
         $0.layer.cornerRadius = 4
     }
 
@@ -759,7 +759,7 @@ extension SignInRootView {
         viewModel.signInButtonEnabled
             .asDriver(onErrorJustReturn: true)
             .do(onNext: { [unowned self] in
-                let backgroundColor: UIColor = $0 ? UIColor(hex: "004477") : UIColor(hex: "f2f2f2")
+                let backgroundColor: UIColor = $0 ? .prussianBlue : .veryLightPink
                 self.signInButton.backgroundColor = backgroundColor
             })
             .drive(signInButton.rx.isEnabled)

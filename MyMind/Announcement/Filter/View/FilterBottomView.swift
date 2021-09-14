@@ -16,7 +16,7 @@ class FilterBottomView: NiblessView {
     }
     let confirmButton: UIButton = UIButton {
         $0.setTitle("搜尋", for: .normal)
-        $0.backgroundColor = UIColor(hex: "004477")
+        $0.backgroundColor = .prussianBlue
         $0.tintColor = .white
         $0.setTitleColor(.white, for: .normal)
         $0.clipsToBounds = true

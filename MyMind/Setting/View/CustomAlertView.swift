@@ -45,7 +45,7 @@ class CustomAlertView: NiblessView {
     }
     private let alertDescriptionsLabel: UILabel = UILabel {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.textColor = UIColor(hex: "7f7f7f")
+        $0.textColor = .brownGrey
         $0.font = .pingFangTCRegular(ofSize: 14)
         $0.numberOfLines = 2
     }

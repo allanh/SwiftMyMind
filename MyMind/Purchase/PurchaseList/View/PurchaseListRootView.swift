@@ -29,7 +29,7 @@ final class PurchaseListRootView: NiblessView {
 
     let createButton: UIButton = UIButton {
         $0.setImage(UIImage(named: "plus"), for: .normal)
-        $0.backgroundColor = UIColor(hex: "004477")
+        $0.backgroundColor = .prussianBlue
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 20
     }

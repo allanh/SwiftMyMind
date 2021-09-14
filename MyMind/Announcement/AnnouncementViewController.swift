@@ -47,7 +47,7 @@ class AnnouncementViewController: UIViewController {
     private let typeLabel: UILabel = UILabel {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.layer.cornerRadius = 8
-        $0.backgroundColor = UIColor(hex: "004477")
+        $0.backgroundColor = .prussianBlue
         $0.textColor = .white
         $0.textAlignment = NSTextAlignment.center
         $0.font = .pingFangTCRegular(ofSize: 12)

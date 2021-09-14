@@ -37,19 +37,19 @@ final class EditingPurchaseOrderViewController: NiblessViewController {
     }()
 
     let defaultButton: UIButton = UIButton {
-        $0.backgroundColor = UIColor(hex: "004477")
+        $0.backgroundColor = .prussianBlue
         $0.setTitleColor(.white, for: .normal)
 //        $0.setTitle("撒回", for: .normal)
         $0.titleLabel?.font = .pingFangTCSemibold(ofSize: 16)
     }
     let alternativeButton: UIButton = UIButton {
         $0.backgroundColor = .white
-        $0.setTitleColor(UIColor(hex: "004477"), for: .normal)
+        $0.setTitleColor(.prussianBlue, for: .normal)
 //        $0.setTitle("返回", for: .normal)
         $0.titleLabel?.font = .pingFangTCSemibold(ofSize: 16)
         let topBorder = UIView(frame: CGRect(x: 0, y: 0, width: $0.frame.width, height: 1))
         topBorder.translatesAutoresizingMaskIntoConstraints = false
-        topBorder.backgroundColor = UIColor(hex: "004477")
+        topBorder.backgroundColor = .prussianBlue
         $0.addSubview(topBorder)
         topBorder.topAnchor.constraint(equalTo: $0.topAnchor).isActive = true
         topBorder.leadingAnchor.constraint(equalTo: $0.leadingAnchor).isActive = true

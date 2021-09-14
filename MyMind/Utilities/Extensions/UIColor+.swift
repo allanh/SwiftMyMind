@@ -36,3 +36,21 @@ extension UIColor {
         )
     }
 }
+/// Color palette
+extension UIColor {
+    static var prussianBlue: UIColor {
+        get {
+            return UIColor(hex: "004477")
+        }
+    }
+    static var veryLightPink: UIColor {
+        get {
+            return UIColor(hex: "f2f2f2")
+        }
+    }
+    static var brownGrey: UIColor {
+        get {
+            return UIColor(hex: "7f7f7f")
+        }
+    }
+}

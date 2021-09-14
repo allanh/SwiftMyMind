@@ -34,7 +34,7 @@ final class PurchaseApplyViewController: NiblessViewController {
     }()
 
     let saveButton: UIButton = UIButton {
-        $0.backgroundColor = UIColor(hex: "004477")
+        $0.backgroundColor = .prussianBlue
         $0.setTitleColor(.white, for: .normal)
         $0.setTitle("儲存", for: .normal)
         $0.titleLabel?.font = .pingFangTCSemibold(ofSize: 16)
