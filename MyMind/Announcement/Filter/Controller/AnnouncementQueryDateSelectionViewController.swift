@@ -13,7 +13,7 @@ class AnnouncementQueryDateSelectionViewController: NiblessViewController {
     // 發布時間 Label
     private let titleLabel: UILabel = UILabel {
         $0.font = .pingFangTCRegular(ofSize: 18)
-        $0.textColor = UIColor(hex: "4xc4c4c")
+        $0.textColor = .veryDarkGray
     }
     // 開始日期 TextField
     let firstTextField: CustomClearButtonPositionTextField = CustomClearButtonPositionTextField {
