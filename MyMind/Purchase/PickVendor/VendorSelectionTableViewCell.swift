@@ -11,7 +11,7 @@ import UIKit
 final class VendorSelectionTableViewCell: UITableViewCell {
     let titleLabel: UILabel = UILabel {
         $0.font = .pingFangTCRegular(ofSize: 16)
-        $0.textColor = UIColor(hex: "4c4c4c")
+        $0.textColor = .veryDarkGray
     }
 
     let arrowImageView: UIImageView = UIImageView {

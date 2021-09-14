@@ -64,9 +64,9 @@ class SettingViewController: UIViewController {
     }
     private func clearErrorMessage() {
         nameErrorLabel.text = nil
-        nameTextField.layer.borderColor = UIColor(hex: "cccccc").cgColor
+        nameTextField.layer.borderColor = UIColor.lightGray.cgColor
         emailErrorLabel.text = nil
-        emailTextField.layer.borderColor = UIColor(hex: "cccccc").cgColor
+        emailTextField.layer.borderColor = UIColor.lightGray.cgColor
     }
     override func viewDidLoad() {
         super.viewDidLoad()

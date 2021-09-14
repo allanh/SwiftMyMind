@@ -19,7 +19,7 @@ class StaticView: NiblessView {
     private let titleLabel: UILabel = UILabel {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = UIFont.pingFangTCSemibold(ofSize: 18)
-        $0.textColor = UIColor(hex: "545454")
+        $0.textColor = .emperor
         $0.numberOfLines = 0
         $0.textAlignment = .center
     }

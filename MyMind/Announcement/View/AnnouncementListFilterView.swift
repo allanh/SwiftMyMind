@@ -92,7 +92,7 @@ class AnnouncementListFilterView: NiblessView {
     }
     private let titleSeparator: UIView = UIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.backgroundColor = UIColor(hex: "e5e5e5")
+        $0.backgroundColor = .mercury
     }
     private let titleTextField: UITextField = UITextField {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -101,11 +101,11 @@ class AnnouncementListFilterView: NiblessView {
         $0.placeholder = "請輸入公告標題"
         $0.layer.cornerRadius = 4
         $0.layer.borderWidth = 1
-        $0.layer.borderColor = UIColor(hex: "cccccc").cgColor
+        $0.layer.borderColor = UIColor.lightGray.cgColor
         let containerView = UIView()
         containerView.frame = CGRect(origin: .zero, size: .init(width: 35, height: 25))
         let iconImageView = UIImageView(image: UIImage(named: "search")?.withRenderingMode(.alwaysTemplate))
-        iconImageView.tintColor = UIColor(hex: "cccccc")
+        iconImageView.tintColor = .lightGray
         iconImageView.frame = CGRect(origin: .zero, size: .init(width: 25, height: 25))
         containerView.addSubview(iconImageView)
         $0.leftView = containerView
@@ -115,18 +115,18 @@ class AnnouncementListFilterView: NiblessView {
     private let kindTitleLabel: UILabel = UILabel {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = .pingFangTCSemibold(ofSize: 14)
-        $0.textColor = UIColor(hex: "545454")
+        $0.textColor = .emperor
         $0.text = "類別"
     }
     private var buttons: [FilterViewToggleButton] = []
     private let separator: UIView = UIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.backgroundColor = UIColor(hex: "e5e5e5")
+        $0.backgroundColor = .mercury
     }
     private let timeTitleLabel: UILabel = UILabel {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = .pingFangTCSemibold(ofSize: 14)
-        $0.textColor = UIColor(hex: "545454")
+        $0.textColor = .emperor
         $0.text = "發佈時間"
     }
     private let startTimeTextField: UITextField = UITextField {
@@ -136,7 +136,7 @@ class AnnouncementListFilterView: NiblessView {
         $0.placeholder = "開始日期"
         $0.layer.cornerRadius = 4
         $0.layer.borderWidth = 1
-        $0.layer.borderColor = UIColor(hex: "cccccc").cgColor
+        $0.layer.borderColor = UIColor.lightGray.cgColor
         let leftContainerView = UIView()
         leftContainerView.frame = CGRect(origin: .zero, size: .init(width: 10, height: 32))
         $0.leftView = leftContainerView
@@ -167,7 +167,7 @@ class AnnouncementListFilterView: NiblessView {
         $0.placeholder = "結束日期"
         $0.layer.cornerRadius = 4
         $0.layer.borderWidth = 1
-        $0.layer.borderColor = UIColor(hex: "cccccc").cgColor
+        $0.layer.borderColor = UIColor.lightGray.cgColor
         let leftContainerView = UIView()
         leftContainerView.frame = CGRect(origin: .zero, size: .init(width: 10, height: 32))
         $0.leftView = leftContainerView
@@ -193,7 +193,7 @@ class AnnouncementListFilterView: NiblessView {
     }
     private let bottomSeparator: UIView = UIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.backgroundColor = UIColor(hex: "e5e5e5")
+        $0.backgroundColor = .mercury
     }
     private let searchButton: UIButton = UIButton {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -206,11 +206,11 @@ class AnnouncementListFilterView: NiblessView {
     }
     private let bottomLine: UIView = UIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.backgroundColor = UIColor(hex: "e5e5e5")
+        $0.backgroundColor = .mercury
     }
     private let rightLine: UIView = UIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.backgroundColor = UIColor(hex: "e5e5e5")
+        $0.backgroundColor = .mercury
     }
     var hierarchyNotReady: Bool = true
     override func didMoveToSuperview() {

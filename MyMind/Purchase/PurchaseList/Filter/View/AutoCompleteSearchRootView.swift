@@ -12,12 +12,12 @@ class AutoCompleteSearchRootView: NiblessView {
     // MARK: - Properties
     let titleLabel: UILabel = UILabel {
         $0.font = .pingFangTCSemibold(ofSize: 18)
-        $0.textColor = UIColor(hex: "4c4c4c")
+        $0.textColor = .veryDarkGray
     }
 
     let textField: CustomClearButtonPositionTextField = CustomClearButtonPositionTextField {
         $0.font = .pingFangTCRegular(ofSize: 14)
-        $0.textColor = UIColor(hex: "4c4c4c")
+        $0.textColor = .veryDarkGray
         $0.setLeftPaddingPoints(10)
         $0.layer.cornerRadius = 4
         $0.layer.borderWidth = 1

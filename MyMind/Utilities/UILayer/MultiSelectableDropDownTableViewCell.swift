@@ -17,7 +17,7 @@ class MultiSelectableDropDownTableViewCell: UITableViewCell {
     let titleLabel: UILabel = {
         let label = UILabel()
         label.font = .pingFangTCRegular(ofSize: 14)
-        label.textColor = UIColor(hex: "4c4c4c")
+        label.textColor = .veryDarkGray
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()

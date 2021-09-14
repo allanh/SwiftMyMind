@@ -90,7 +90,7 @@ class AnnouncementListViewController: NiblessViewController {
         super.init()
     }
     private func configTableView() {
-        rootView.tableView.separatorColor = UIColor(hex:"e5e5e5")
+        rootView.tableView.separatorColor = .mercury
         rootView.tableView.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
         rootView.tableView.delegate = self
         rootView.tableView.dataSource = self
@@ -154,8 +154,7 @@ class AnnouncementListViewController: NiblessViewController {
     private func configSortCell(_ cell: SingleLabelTableViewCell, item: AnnouncementListQueryInfo.AnnouncementOrder) {
         cell.titleLabel.text = item.description
         let isSelected = self.announcementListQueryInfo.order == item
-        let textColor = isSelected ? .prussianBlue : UIColor(hex: "4c4c4c")
-        cell.titleLabel.textColor = textColor
+        cell.titleLabel.textColor = isSelected ? .prussianBlue : .veryDarkGray
     }
     
     private func didPickSortType(sortType: AnnouncementListQueryInfo.AnnouncementOrder) {

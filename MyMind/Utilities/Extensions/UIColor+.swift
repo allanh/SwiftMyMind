@@ -58,4 +58,20 @@ extension UIColor {
             return UIColor(hex: "b4b4b4")
         }
     }
+    static var emperor: UIColor {
+        get {
+            return UIColor(hex: "545454")
+        }
+    }
+    static var mercury: UIColor {
+        get {
+            return UIColor(hex: "e5e5e5")
+            
+        }
+    }
+    static var veryDarkGray: UIColor {
+        get {
+            return UIColor(hex: "4c4c4c")
+        }
+    }
 }

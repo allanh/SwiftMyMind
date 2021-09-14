@@ -80,7 +80,7 @@ class ForgotPasswordRootView: NiblessView {
     private let resetPasswordTitleLabel: UILabel = UILabel {
         $0.font = UIFont.pingFangTCSemibold(ofSize: 16)
         $0.text = "重設密碼"
-        $0.textColor = UIColor(hex: "545454")
+        $0.textColor = .emperor
         $0.backgroundColor = .clear
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
@@ -88,7 +88,7 @@ class ForgotPasswordRootView: NiblessView {
     private let resetPasswordDescriptionLabel: UILabel = UILabel {
         $0.font = UIFont.pingFangTCRegular(ofSize: 12)
         $0.text = "輸入以下資料，我們將發送重設密碼連結"
-        $0.textColor = UIColor(hex: "545454")
+        $0.textColor = .emperor
         $0.backgroundColor = .clear
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
@@ -98,7 +98,7 @@ class ForgotPasswordRootView: NiblessView {
             string: "請輸入商店代號",
             attributes: [.foregroundColor: UIColor.brownGrey2]
         )
-        $0.textField.textColor = UIColor(hex: "545454")
+        $0.textField.textColor = .emperor
         let image = UIImage(named: "company")
         let containerView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 30, height: 30)))
         let imageView = UIImageView(frame: CGRect(x: 8, y: containerView.frame.midY-7, width: 14, height: 14))
@@ -114,7 +114,7 @@ class ForgotPasswordRootView: NiblessView {
             string: "請輸入管理員帳號",
             attributes: [.foregroundColor: UIColor.brownGrey2]
         )
-        $0.textField.textColor = UIColor(hex: "545454")
+        $0.textField.textColor = .emperor
         let image = UIImage(named: "id")
         let containerView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 30, height: 30)))
         let imageView = UIImageView(frame: CGRect(x: 8, y: containerView.frame.midY-7, width: 14, height: 14))
@@ -130,7 +130,7 @@ class ForgotPasswordRootView: NiblessView {
             string: "請輸入Email",
             attributes: [.foregroundColor: UIColor.brownGrey2]
         )
-        $0.textField.textColor = UIColor(hex: "545454")
+        $0.textField.textColor = .emperor
         let image = UIImage(named: "email")
         let containerView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 30, height: 30)))
         let imageView = UIImageView(frame: CGRect(x: 8, y: containerView.frame.midY-7, width: 14, height: 14))
@@ -154,7 +154,7 @@ class ForgotPasswordRootView: NiblessView {
             string: "請輸入驗證碼",
             attributes: [.foregroundColor: UIColor.brownGrey2]
         )
-        $0.textField.textColor = UIColor(hex: "545454")
+        $0.textField.textColor = .emperor
         let image = UIImage(named: "security")
         let containerView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 30, height: 30)))
         let imageView = UIImageView(frame: CGRect(x: 8, y: containerView.frame.midY-7, width: 14, height: 14))
@@ -199,8 +199,8 @@ class ForgotPasswordRootView: NiblessView {
     private let confirmButton: UIButton = UIButton {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.setTitle("確定", for: .normal)
-        $0.setTitleColor(UIColor.white, for: .normal)
-        $0.setTitleColor(UIColor(hex: "b4b4b4"), for: .disabled)
+        $0.setTitleColor(.white, for: .normal)
+        $0.setTitleColor(.brownGrey2, for: .disabled)
         $0.titleLabel?.font = UIFont.pingFangTCSemibold(ofSize: 16)
         $0.backgroundColor = .prussianBlue
         $0.layer.cornerRadius = 4

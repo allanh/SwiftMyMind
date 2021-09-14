@@ -26,7 +26,7 @@ final class MyMindUUIDDescriptionView: NiblessView {
     private let bullet1Label: UILabel = UILabel {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = UIFont.pingFangTCRegular(ofSize: 14)
-        $0.textColor = UIColor(hex: "545454")
+        $0.textColor = .emperor
         $0.backgroundColor = .clear
         $0.text = "1."
     }
@@ -36,12 +36,12 @@ final class MyMindUUIDDescriptionView: NiblessView {
         $0.numberOfLines = 0
         $0.textAlignment = .left
         $0.text = "一個QR Code僅限綁定一支手機。"
-        $0.textColor = UIColor(hex: "545454")
+        $0.textColor = .emperor
     }
     private let bullet2Label: UILabel = UILabel {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = UIFont.pingFangTCRegular(ofSize: 14)
-        $0.textColor = UIColor(hex: "545454")
+        $0.textColor = .emperor
         $0.backgroundColor = .clear
         $0.text = "2."
     }
@@ -51,7 +51,7 @@ final class MyMindUUIDDescriptionView: NiblessView {
         $0.numberOfLines = 0
         $0.textAlignment = .left
         $0.text = "若刪除APP、清除資料、系統重設或系統升級，請到登入頁面右下角點選【重綁驗證碼】。"
-        $0.textColor = UIColor(hex: "545454")
+        $0.textColor = .emperor
     }
     private let uuidLabel: UILabel = UILabel {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -71,7 +71,7 @@ final class MyMindUUIDDescriptionView: NiblessView {
     private let uuidDescriptionLabel: UILabel = UILabel {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = UIFont.pingFangTCRegular(ofSize: 14)
-        $0.textColor = UIColor(hex: "545454")
+        $0.textColor = .emperor
         $0.backgroundColor = .clear
         $0.numberOfLines = 0
         $0.textAlignment = .center

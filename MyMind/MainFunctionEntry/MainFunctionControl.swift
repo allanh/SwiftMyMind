@@ -38,7 +38,7 @@ final class MainFunctionControl: UIControl {
 
     let titleLabel: UILabel = UILabel {
         $0.font = .pingFangTCRegular(ofSize: 14)
-        $0.textColor = UIColor(hex: "545454")
+        $0.textColor = .emperor
         $0.backgroundColor = .white
         $0.textAlignment = .center
         $0.isUserInteractionEnabled = false

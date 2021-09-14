@@ -28,7 +28,7 @@ final class MyMindInstructionView: NiblessView {
     private let bullet1Label: UILabel = UILabel {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = UIFont.pingFangTCRegular(ofSize: 14)
-        $0.textColor = UIColor(hex: "545454")
+        $0.textColor = .emperor
         $0.backgroundColor = .clear
         $0.text = "1."
     }
@@ -38,12 +38,12 @@ final class MyMindInstructionView: NiblessView {
         $0.numberOfLines = 0
         $0.textAlignment = .left
         $0.text = "請點選下方「開始掃描」按鈕來掃描「帳號綁定 OTP 驗證通知信」內的【驗證 QR Code】"
-        $0.textColor = UIColor(hex: "545454")
+        $0.textColor = .emperor
     }
     private let bullet2Label: UILabel = UILabel {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = UIFont.pingFangTCRegular(ofSize: 14)
-        $0.textColor = UIColor(hex: "545454")
+        $0.textColor = .emperor
         $0.backgroundColor = .clear
         $0.text = "2."
     }
@@ -53,12 +53,12 @@ final class MyMindInstructionView: NiblessView {
         $0.numberOfLines = 0
         $0.textAlignment = .left
         $0.text = "掃描成功後即綁定完成，會出現六位數字的動態驗證碼，並於每 60 秒更換一次。"
-        $0.textColor = UIColor(hex: "545454")
+        $0.textColor = .emperor
     }
     private let bullet3Label: UILabel = UILabel {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = UIFont.pingFangTCRegular(ofSize: 14)
-        $0.textColor = UIColor(hex: "545454")
+        $0.textColor = .emperor
         $0.backgroundColor = .clear
         $0.text = "3."
     }
@@ -68,7 +68,7 @@ final class MyMindInstructionView: NiblessView {
         $0.numberOfLines = 0
         $0.textAlignment = .left
         $0.text = "在 My Mind 買賣後台登入時，輸入這六位數字的動態驗證碼，即可完成登入。"
-        $0.textColor = UIColor(hex: "545454")
+        $0.textColor = .emperor
     }
 
     let confirmButton: UIButton = UIButton {

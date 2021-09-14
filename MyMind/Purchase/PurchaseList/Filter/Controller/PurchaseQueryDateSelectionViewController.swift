@@ -13,13 +13,13 @@ class PurchaseQueryDateSelectionViewController: NiblessViewController {
     // MARK: UI
     private let titleLabel: UILabel = UILabel {
         $0.font = .pingFangTCSemibold(ofSize: 18)
-        $0.textColor = UIColor(hex: "4c4c4c")
+        $0.textColor = .veryDarkGray
     }
 
     let firstTextField: CustomClearButtonPositionTextField = CustomClearButtonPositionTextField {
         $0.clearButtonMode = .whileEditing
         $0.font = .pingFangTCRegular(ofSize: 14)
-        $0.textColor = UIColor(hex: "4c4c4c")
+        $0.textColor = .veryDarkGray
         $0.setLeftPaddingPoints(10)
         $0.layer.cornerRadius = 4
         $0.layer.borderWidth = 1
@@ -38,7 +38,7 @@ class PurchaseQueryDateSelectionViewController: NiblessViewController {
     let secondTextField: CustomClearButtonPositionTextField = CustomClearButtonPositionTextField {
         $0.clearButtonMode = .whileEditing
         $0.font = .pingFangTCRegular(ofSize: 14)
-        $0.textColor = UIColor(hex: "4c4c4c")
+        $0.textColor = .veryDarkGray
         $0.setLeftPaddingPoints(10)
         $0.layer.cornerRadius = 4
         $0.layer.borderWidth = 1

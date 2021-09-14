@@ -11,7 +11,7 @@ import UIKit
 class SelectedQueryCollectionViewCell: UICollectionViewCell {
     private let contentLabel: UILabel = UILabel {
         $0.font = .pingFangTCRegular(ofSize: 14)
-        $0.textColor = UIColor(hex: "4c4c4c")
+        $0.textColor = .veryDarkGray
     }
 
     let deleteButton: UIButton = UIButton {

@@ -34,8 +34,7 @@ class PickProductMaterialsRootView: NiblessView {
             dataSource: ProductMaterialQueryInfo.SortType.allCases) { [unowned self] sortType, cell in
             cell.titleLabel.text = sortType.description
             let isSelected = self.viewModel.currentQueryInfo.sortType == sortType
-            let textColor = isSelected ? .prussianBlue : UIColor(hex: "4c4c4c")
-            cell.titleLabel.textColor = textColor
+            cell.titleLabel.textColor = isSelected ? .prussianBlue : .veryDarkGray
         } cellSelectHandler: { [unowned self] sortType in
             self.viewModel.currentSortType.accept(sortType)
             self.pickSortTypeView.hide()

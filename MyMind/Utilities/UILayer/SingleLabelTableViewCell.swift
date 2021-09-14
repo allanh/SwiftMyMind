@@ -12,7 +12,7 @@ class SingleLabelTableViewCell: UITableViewCell {
 
     let titleLabel: UILabel = UILabel {
         $0.font = .pingFangTCRegular(ofSize: 14)
-        $0.textColor = UIColor(hex: "4c4c4c")
+        $0.textColor = .veryDarkGray
     }
 
     private var viewHierarchyNotReady: Bool = true

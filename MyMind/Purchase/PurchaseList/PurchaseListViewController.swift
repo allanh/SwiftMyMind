@@ -180,8 +180,7 @@ final class PurchaseListViewController: NiblessViewController {
     private func configSortCell(_ cell: SingleLabelTableViewCell, item: PurchaseListQueryInfo.OrderReference) {
         cell.titleLabel.text = item.description
         let isSelected = self.purchaseListQueryInfo.orderReference == item
-        let textColor = isSelected ? .prussianBlue : UIColor(hex: "4c4c4c")
-        cell.titleLabel.textColor = textColor
+        cell.titleLabel.textColor = isSelected ? .prussianBlue : .veryDarkGray
     }
 
     private func didPickSortType(sortType: PurchaseListQueryInfo.OrderReference) {

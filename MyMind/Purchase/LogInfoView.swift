@@ -41,7 +41,7 @@ class LogInfoView: NiblessView {
     }
 
     private let noteTextView: UITextView = UITextView {
-        $0.textColor = UIColor(hex: "B4B4B4")
+        $0.textColor = .brownGrey2
         $0.font = .pingFangTCRegular(ofSize: 14)
         $0.textAlignment = .left
         $0.isScrollEnabled = false

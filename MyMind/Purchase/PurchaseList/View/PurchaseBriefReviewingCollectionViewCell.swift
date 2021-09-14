@@ -23,7 +23,7 @@ class PurchaseBriefReviewingCollectionViewCell: UICollectionViewCell {
         // Initialization code
         backgroundBorderView.layer.cornerRadius = 4
         backgroundBorderView.layer.borderWidth = 1
-        backgroundBorderView.layer.borderColor = UIColor(hex: "e5e5e5").cgColor
+        backgroundBorderView.layer.borderColor = UIColor.mercury.cgColor
     }
 
     func config(with purchaseBrief: PurchaseBrief) {

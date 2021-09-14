@@ -17,7 +17,7 @@ final class OrganizeOptionView: NiblessView {
         static let all: Self = [.sort, .filter, .layout]
     }
     let topSeparatorView: UIView = UIView{
-        $0.backgroundColor = .init(hex: "e5e5e5")
+        $0.backgroundColor = .mercury
     }
 
     let stackView: UIStackView = UIStackView {
@@ -26,13 +26,13 @@ final class OrganizeOptionView: NiblessView {
 
     let sortButton: UIButton = UIButton {
         $0.titleLabel?.font = .pingFangTCRegular(ofSize: 14)
-        $0.setTitleColor(.init(hex: "4c4c4c"), for: .normal)
+        $0.setTitleColor(.veryDarkGray, for: .normal)
         $0.setImage(UIImage(named: "sort"), for: .normal)
     }
 
     let filterButton: UIButton = UIButton {
         $0.titleLabel?.font = .pingFangTCRegular(ofSize: 14)
-        $0.setTitleColor(.init(hex: "4c4c4c"), for: .normal)
+        $0.setTitleColor(.veryDarkGray, for: .normal)
         $0.setImage(UIImage(named: "filter"), for: .normal)
        // $0.setTitle("篩選條件", for: .normal)
     }
@@ -42,16 +42,16 @@ final class OrganizeOptionView: NiblessView {
     }
 
     let firstSeparatorView: UIView = UIView {
-        $0.backgroundColor = .init(hex: "e5e5e5")
+        $0.backgroundColor = .mercury
     }
 
     let secondSeparatorView: UIView = UIView {
-        $0.backgroundColor = .init(hex: "e5e5e5")
+        $0.backgroundColor = .mercury
     }
     
     let announcementFilterButton: FilterViewToggleButton = FilterViewToggleButton {
         $0.titleLabel?.font = .pingFangTCRegular(ofSize: 14)
-        $0.setTitleColor(.init(hex: "4c4c4c"), for: .normal)
+        $0.setTitleColor(.veryDarkGray, for: .normal)
         $0.setImage(UIImage(named: "filter"), for: .normal)
         $0.setImage(UIImage(named: "filter_selected"), for: .selected)
         $0.layer.cornerRadius = 15
@@ -61,7 +61,7 @@ final class OrganizeOptionView: NiblessView {
     let announcementSortButton: UIButton = UIButton {
         $0.isSelected = false
         $0.titleLabel?.font = .pingFangTCRegular(ofSize: 14)
-        $0.setTitleColor(.init(hex: "4c4c4c"), for: .normal)
+        $0.setTitleColor(.veryDarkGray, for: .normal)
         $0.setImage(UIImage(named: "announcement_sort"), for: .normal)
         $0.setImage(UIImage(named: "announcement_sort_selected"), for: .selected)
         $0.setTitle("發布時間", for: .normal)
@@ -76,7 +76,7 @@ final class OrganizeOptionView: NiblessView {
     let annoucementIsTopButton: UIButton = UIButton {
         $0.isSelected = false
         $0.titleLabel?.font = .pingFangTCRegular(ofSize: 14)
-        $0.setTitleColor(.init(hex: "4c4c4c"), for: .normal)
+        $0.setTitleColor(.veryDarkGray, for: .normal)
         $0.setTitle("釘選", for: .normal)
         $0.layer.cornerRadius = 15
         $0.backgroundColor = .veryLightPink

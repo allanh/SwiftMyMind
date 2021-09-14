@@ -148,9 +148,9 @@ final class PickPurchaseReviewerViewController: UIViewController {
         pickReviewerTextField.layer.cornerRadius = 4
         pickReviewerTextField.setLeftPaddingPoints(10)
         pickReviewerTextField.font = .pingFangTCRegular(ofSize: 14)
-        pickReviewerTextField.textColor = UIColor(hex: "4c4c4c")
+        pickReviewerTextField.textColor = .veryDarkGray
         pickReviewerTextField.placeholder = "請選擇"
-        pickReviewerLabel.textColor = UIColor(hex: "4c4c4c")
+        pickReviewerLabel.textColor = .veryDarkGray
         pickReviewerTextField.isHidden = !editable
         pickReviewerLabel.isHidden = editable
     }
@@ -158,7 +158,7 @@ final class PickPurchaseReviewerViewController: UIViewController {
     private func updatePickReviewerTextFieldLayout(with validationStatus: ValidationResult) {
         switch validationStatus {
         case .valid:
-            pickReviewerTextField.layer.borderColor = UIColor.init(hex: "cccccc").cgColor
+            pickReviewerTextField.layer.borderColor = UIColor.lightGray.cgColor
             pickReviewerErrorLabel.isHidden = true
         case .invalid(let message):
             pickReviewerTextField.layer.borderColor = UIColor.systemRed.cgColor
@@ -170,7 +170,7 @@ final class PickPurchaseReviewerViewController: UIViewController {
     private func updateNoteTextViewLayout(with validationStatus: ValidationResult) {
         switch validationStatus {
         case .valid:
-            noteTextView.layer.borderColor = UIColor.init(hex: "cccccc").cgColor
+            noteTextView.layer.borderColor = UIColor.lightGray.cgColor
             noteErrorLabel.isHidden = true
         case .invalid(let message):
             noteTextView.layer.borderColor = UIColor.systemRed.cgColor

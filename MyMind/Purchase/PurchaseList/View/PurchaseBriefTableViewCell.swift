@@ -39,12 +39,12 @@ class PurchaseBriefTableViewCell: UITableViewCell {
     }
 
     let createdDateLabel: UILabel = UILabel {
-        $0.textColor = UIColor(hex: "b4b4b4")
+        $0.textColor = .brownGrey2
         $0.font = .pingFangTCRegular(ofSize: 12)
     }
 
     let expectStorageDateLabel: UILabel = UILabel {
-        $0.textColor = UIColor(hex: "b4b4b4")
+        $0.textColor = .brownGrey2
         $0.font = .pingFangTCRegular(ofSize: 12)
     }
     let statusLabel: UILabel = UILabel {

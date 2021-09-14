@@ -36,11 +36,11 @@ class AnnouncementFilterViewController: UIViewController {
         navigationItem.rightBarButtonItem = rightBarButton
         titleTextField.layer.cornerRadius = 4
         titleTextField.layer.borderWidth = 1
-        titleTextField.layer.borderColor = UIColor(hex: "cccccc").cgColor
+        titleTextField.layer.borderColor = UIColor.lightGray.cgColor
         let containerView = UIView()
         containerView.frame = CGRect(origin: .zero, size: .init(width: 35, height: 25))
         let iconImageView = UIImageView(image: UIImage(named: "search")?.withRenderingMode(.alwaysTemplate))
-        iconImageView.tintColor = UIColor(hex: "cccccc")
+        iconImageView.tintColor = .lightGray
         iconImageView.frame = CGRect(origin: .zero, size: .init(width: 25, height: 25))
         containerView.addSubview(iconImageView)
         titleTextField.leftView = containerView

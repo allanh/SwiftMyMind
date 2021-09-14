@@ -195,7 +195,7 @@ final class PurchaseApplyInfoViewController: UIViewController {
             textField.layer.cornerRadius = 4
             textField.setLeftPaddingPoints(10)
             textField.font = .pingFangTCRegular(ofSize: 14)
-            textField.textColor = UIColor(hex: "4c4c4c")
+            textField.textColor = .veryDarkGray
             textField.delegate = self
             textField.placeholder = "請選擇"
             let imageName: String = textField == expectStorageDateTextField ? "calendar_icon" : "search"
@@ -227,7 +227,7 @@ final class PurchaseApplyInfoViewController: UIViewController {
     private func updateExpectStorageDateTextFieldLayout(validationStatus: ValidationResult) {
         switch validationStatus {
         case .valid:
-            expectStorageDateTextField.layer.borderColor = UIColor.init(hex: "cccccc").cgColor
+            expectStorageDateTextField.layer.borderColor = UIColor.lightGray.cgColor
             expectStorageDateErrorLabel.isHidden = true
         case .invalid(let message):
             expectStorageDateTextField.layer.borderColor = UIColor.systemRed.cgColor
@@ -239,7 +239,7 @@ final class PurchaseApplyInfoViewController: UIViewController {
     private func updateWarehoseTextFieldLayout(validationStatus: ValidationResult) {
         switch validationStatus {
         case .valid:
-            warehouseTextField.layer.borderColor = UIColor.init(hex: "cccccc").cgColor
+            warehouseTextField.layer.borderColor = UIColor.lightGray.cgColor
             warehouseErrorLabel.isHidden = true
         case .invalid(let message):
             warehouseTextField.layer.borderColor = UIColor.systemRed.cgColor

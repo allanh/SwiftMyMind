@@ -14,7 +14,7 @@ class ValidatableInputView: UIView {
         $0.layer.cornerRadius = 4
         $0.borderStyle = .none
         $0.layer.borderWidth = 1
-        $0.layer.borderColor = UIColor(hex: "cccccc").cgColor
+        $0.layer.borderColor = UIColor.lightGray.cgColor
         $0.font = UIFont.pingFangTCRegular(ofSize: 14)
     }
 
@@ -63,7 +63,7 @@ class ValidatableInputView: UIView {
     }
 
     func clearError() {
-        textField.layer.borderColor = UIColor(hex: "cccccc").cgColor
+        textField.layer.borderColor = UIColor.lightGray.cgColor
         errorMessageLabel.isHidden = true
         indicatorImageView.isHidden = true
     }

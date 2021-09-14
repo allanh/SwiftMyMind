@@ -60,7 +60,7 @@ class AnnouncementViewController: UIViewController {
     }
     private let titleLabel: UILabel = UILabel {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.textColor = UIColor(hex: "545454")
+        $0.textColor = .emperor
         $0.font = .pingFangTCSemibold(ofSize: 16)
         $0.numberOfLines = 0
     }

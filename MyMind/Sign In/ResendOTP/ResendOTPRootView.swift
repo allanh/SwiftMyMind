@@ -71,7 +71,7 @@ class ResendOTPRootView: NiblessView {
     private let resendOTPTitleLabel: UILabel = UILabel {
         $0.font = UIFont.pingFangTCSemibold(ofSize: 16)
         $0.text = "重綁OTP驗證碼"
-        $0.textColor = UIColor(hex: "545454")
+        $0.textColor = .emperor
         $0.backgroundColor = .clear
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
@@ -79,7 +79,7 @@ class ResendOTPRootView: NiblessView {
     private let bullet1Label: UILabel = UILabel {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = UIFont.pingFangTCRegular(ofSize: 12)
-        $0.textColor = UIColor(hex: "545454")
+        $0.textColor = .emperor
         $0.backgroundColor = .clear
         $0.text = "1."
     }
@@ -87,14 +87,14 @@ class ResendOTPRootView: NiblessView {
         $0.font = UIFont.pingFangTCRegular(ofSize: 12)
         $0.text = "填寫資料並按下確定後，您將收到系統發送的通知信，而原綁定驗證碼將立即失效，無法使用"
         $0.numberOfLines = 0
-        $0.textColor = UIColor(hex: "545454")
+        $0.textColor = .emperor
         $0.backgroundColor = .clear
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     private let bullet2Label: UILabel = UILabel {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = UIFont.pingFangTCRegular(ofSize: 12)
-        $0.textColor = UIColor(hex: "545454")
+        $0.textColor = .emperor
         $0.backgroundColor = .clear
         $0.text = "2."
     }
@@ -102,7 +102,7 @@ class ResendOTPRootView: NiblessView {
         $0.font = UIFont.pingFangTCRegular(ofSize: 12)
         $0.text = "請掃描信中QR Code，並綁定新的OTP驗證碼"
         $0.numberOfLines = 0
-        $0.textColor = UIColor(hex: "545454")
+        $0.textColor = .emperor
         $0.backgroundColor = .clear
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
@@ -111,7 +111,7 @@ class ResendOTPRootView: NiblessView {
             string: "請輸入商店代號",
             attributes: [.foregroundColor: UIColor.brownGrey2]
         )
-        $0.textField.textColor = UIColor(hex: "545454")
+        $0.textField.textColor = .emperor
         let image = UIImage(named: "company")
         let containerView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 30, height: 30)))
         let imageView = UIImageView(frame: CGRect(x: 8, y: containerView.frame.midY-7, width: 14, height: 14))
@@ -127,7 +127,7 @@ class ResendOTPRootView: NiblessView {
             string: "請輸入管理員帳號",
             attributes: [.foregroundColor: UIColor.brownGrey2]
         )
-        $0.textField.textColor = UIColor(hex: "545454")
+        $0.textField.textColor = .emperor
         let image = UIImage(named: "id")
         let containerView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 30, height: 30)))
         let imageView = UIImageView(frame: CGRect(x: 8, y: containerView.frame.midY-7, width: 14, height: 14))
@@ -148,7 +148,7 @@ class ResendOTPRootView: NiblessView {
             string: "請輸入密碼",
             attributes: [.foregroundColor: UIColor.brownGrey2]
         )
-        $0.textField.textColor = UIColor(hex: "545454")
+        $0.textField.textColor = .emperor
         let image = UIImage(named: "lock")
         let leftContainerView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 30, height: 30)))
         let imageView = UIImageView(frame: CGRect(x: 8, y: leftContainerView.frame.midY-7, width: 14, height: 14))
@@ -188,8 +188,8 @@ class ResendOTPRootView: NiblessView {
     private let confirmButton: UIButton = UIButton {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.setTitle("確定", for: .normal)
-        $0.setTitleColor(UIColor.white, for: .normal)
-        $0.setTitleColor(UIColor(hex: "b4b4b4"), for: .disabled)
+        $0.setTitleColor(.white, for: .normal)
+        $0.setTitleColor(.brownGrey2, for: .disabled)
         $0.titleLabel?.font = UIFont.pingFangTCSemibold(ofSize: 16)
         $0.backgroundColor = .prussianBlue
         $0.layer.cornerRadius = 4

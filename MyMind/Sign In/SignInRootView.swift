@@ -79,7 +79,7 @@ class SignInRootView: NiblessView {
             string: "請輸入商店代號",
             attributes: [.foregroundColor: UIColor.brownGrey2]
         )
-        $0.textField.textColor = UIColor(hex: "545454")
+        $0.textField.textColor = .emperor
         let image = UIImage(named: "company")
         let containerView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 30, height: 30)))
         let imageView = UIImageView(frame: CGRect(x: 8, y: containerView.frame.midY-7, width: 14, height: 14))
@@ -95,7 +95,7 @@ class SignInRootView: NiblessView {
             string: "請輸入管理員帳號",
             attributes: [.foregroundColor: UIColor.brownGrey2]
         )
-        $0.textField.textColor = UIColor(hex: "545454")
+        $0.textField.textColor = .emperor
         let image = UIImage(named: "id")
         let containerView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 30, height: 30)))
         let imageView = UIImageView(frame: CGRect(x: 8, y: containerView.frame.midY-7, width: 14, height: 14))
@@ -117,7 +117,7 @@ class SignInRootView: NiblessView {
             string: "請輸入密碼",
             attributes: [.foregroundColor: UIColor.brownGrey2]
         )
-        $0.textField.textColor = UIColor(hex: "545454")
+        $0.textField.textColor = .emperor
         let image = UIImage(named: "lock")
         let leftContainerView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 30, height: 30)))
         let imageView = UIImageView(frame: CGRect(x: 8, y: leftContainerView.frame.midY-7, width: 14, height: 14))
@@ -167,7 +167,7 @@ class SignInRootView: NiblessView {
             string: "請輸入驗證碼",
             attributes: [.foregroundColor: UIColor.brownGrey2]
         )
-        $0.textField.textColor = UIColor(hex: "545454")
+        $0.textField.textColor = .emperor
         let image = UIImage(named: "security")
         let containerView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 30, height: 30)))
         let imageView = UIImageView(frame: CGRect(x: 8, y: containerView.frame.midY-7, width: 14, height: 14))

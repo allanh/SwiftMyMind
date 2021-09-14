@@ -63,7 +63,7 @@ class PurchaseProductSuggestionViewController: UIViewController {
         let textFields = [purchaseCostPerItemTextField, purchaseQuantityTextField, totalPurchaseCostTextField]
         textFields.forEach({
             $0?.font = .pingFangTCRegular(ofSize: 14)
-            $0?.textColor = UIColor(hex: "4c4c4c")
+            $0?.textColor = .veryDarkGray
             $0?.setLeftPaddingPoints(10)
             $0?.layer.cornerRadius = 4
             $0?.layer.borderWidth = 1

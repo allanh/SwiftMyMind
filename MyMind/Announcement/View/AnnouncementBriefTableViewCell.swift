@@ -58,7 +58,7 @@ class AnnouncementBriefTableViewCell: UITableViewCell {
             $0.dateFormat = "yyyy-MM-dd HH:mm:ss"
         }
         timeLabel.text = formatter.string(from: item.started)
-        let attributedString = NSMutableAttributedString(string: item.title, attributes: [.font: UIFont.pingFangTCRegular(ofSize: 14), .foregroundColor: UIColor(hex: "545454")])
+        let attributedString = NSMutableAttributedString(string: item.title, attributes: [.font: UIFont.pingFangTCRegular(ofSize: 14), .foregroundColor: UIColor.emperor])
         if let marked = marked {
             let ranges = item.title.ranges(of: marked, options: .caseInsensitive)
             for range in ranges {

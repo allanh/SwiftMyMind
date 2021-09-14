@@ -20,7 +20,7 @@ class PickProductMaterialTableViewCell: UITableViewCell {
 
     let titleLabel: UILabel = UILabel {
         $0.font = .pingFangTCSemibold(ofSize: 16)
-        $0.textColor = UIColor(hex: "4c4c4c")
+        $0.textColor = .veryDarkGray
     }
 
     let numberLabel: UILabel = UILabel {

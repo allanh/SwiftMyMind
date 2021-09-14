@@ -27,11 +27,11 @@ class PurchasedProductInfoTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         productImageView.layer.borderWidth = 1
-        productImageView.layer.borderColor = UIColor(hex: "cccccc").cgColor
+        productImageView.layer.borderColor = UIColor.lightGray.cgColor
         productImageView.layer.cornerRadius = 4
 
         containerView.layer.borderWidth = 1
-        containerView.layer.borderColor = UIColor(hex: "cccccc").cgColor
+        containerView.layer.borderColor = UIColor.lightGray.cgColor
         containerView.layer.cornerRadius = 4    }
 
     override func prepareForReuse() {

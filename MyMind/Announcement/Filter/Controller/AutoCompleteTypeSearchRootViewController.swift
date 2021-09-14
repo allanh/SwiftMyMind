@@ -13,7 +13,7 @@ class AutoCompleteTypeSearchRootViewController: NiblessViewController {
     // MARK: - View
     let titleLable: UILabel = UILabel {
         $0.font = .pingFangTCRegular(ofSize: 18)
-        $0.textColor = UIColor(hex: "4c4c4c")
+        $0.textColor = .veryDarkGray
     }
     
     let contentview: UIView = UIView {

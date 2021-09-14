@@ -17,14 +17,14 @@ final class MyMindEmptySecretView: NiblessView {
     private let noDataLabel: UILabel = UILabel {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = .pingFangTCRegular(ofSize: 14)
-        $0.textColor = UIColor(hex:"b4b4b4")
+        $0.textColor = .brownGrey2
         $0.text = "目前還沒有任何資料⋯⋯"
     }
 
     private let scanLabel: UILabel = UILabel {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = .pingFangTCSemibold(ofSize: 18)
-        $0.textColor = UIColor(hex:"b4b4b4")
+        $0.textColor = .brownGrey2
         $0.text = "按下右下角的相機\n開始掃描驗證 QR Code 吧！"
         $0.numberOfLines = 0
     }
