@@ -53,4 +53,9 @@ extension UIColor {
             return UIColor(hex: "7f7f7f")
         }
     }
+    static var brownGrey2: UIColor {
+        get {
+            return UIColor(hex: "b4b4b4")
+        }
+    }
 }

@@ -77,7 +77,7 @@ class SignInRootView: NiblessView {
     private let storeIDInputView: ValidatableInputView = ValidatableInputView {
         $0.textField.attributedPlaceholder = NSAttributedString(
             string: "請輸入商店代號",
-            attributes: [.foregroundColor: UIColor(hex: "b4b4b4")]
+            attributes: [.foregroundColor: UIColor.brownGrey2]
         )
         $0.textField.textColor = UIColor(hex: "545454")
         let image = UIImage(named: "company")
@@ -93,7 +93,7 @@ class SignInRootView: NiblessView {
     private let accountInputView: ValidatableInputView = ValidatableInputView {
         $0.textField.attributedPlaceholder = NSAttributedString(
             string: "請輸入管理員帳號",
-            attributes: [.foregroundColor: UIColor(hex: "b4b4b4")]
+            attributes: [.foregroundColor: UIColor.brownGrey2]
         )
         $0.textField.textColor = UIColor(hex: "545454")
         let image = UIImage(named: "id")
@@ -115,7 +115,7 @@ class SignInRootView: NiblessView {
     private lazy var passwordInputView: ValidatableInputView = ValidatableInputView {
         $0.textField.attributedPlaceholder = NSAttributedString(
             string: "請輸入密碼",
-            attributes: [.foregroundColor: UIColor(hex: "b4b4b4")]
+            attributes: [.foregroundColor: UIColor.brownGrey2]
         )
         $0.textField.textColor = UIColor(hex: "545454")
         let image = UIImage(named: "lock")
@@ -165,7 +165,7 @@ class SignInRootView: NiblessView {
     private let captchaInputView: ValidatableInputView = ValidatableInputView {
         $0.textField.attributedPlaceholder = NSAttributedString(
             string: "請輸入驗證碼",
-            attributes: [.foregroundColor: UIColor(hex: "b4b4b4")]
+            attributes: [.foregroundColor: UIColor.brownGrey2]
         )
         $0.textField.textColor = UIColor(hex: "545454")
         let image = UIImage(named: "security")
@@ -200,8 +200,8 @@ class SignInRootView: NiblessView {
     let signInButton: UIButton = UIButton {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.setTitle("確定", for: .normal)
-        $0.setTitleColor(UIColor.white, for: .normal)
-        $0.setTitleColor(UIColor(hex: "b4b4b4"), for: .disabled)
+        $0.setTitleColor(.white, for: .normal)
+        $0.setTitleColor(.brownGrey2, for: .disabled)
         $0.titleLabel?.font = UIFont.pingFangTCSemibold(ofSize: 16)
         $0.backgroundColor = .prussianBlue
         $0.layer.cornerRadius = 4

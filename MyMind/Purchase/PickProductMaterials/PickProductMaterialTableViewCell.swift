@@ -25,7 +25,7 @@ class PickProductMaterialTableViewCell: UITableViewCell {
 
     let numberLabel: UILabel = UILabel {
         $0.font = .pingFangTCRegular(ofSize: 14)
-        $0.textColor = UIColor(hex: "b4b4b4")
+        $0.textColor = .brownGrey2
     }
 
     let checkBoxButton: UIButton = UIButton {

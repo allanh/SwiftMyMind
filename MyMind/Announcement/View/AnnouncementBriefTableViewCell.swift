@@ -32,7 +32,7 @@ class AnnouncementBriefTableViewCell: UITableViewCell {
     // 時間標籤
     let timeLabel: UILabel = UILabel {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.textColor = UIColor(hex: "b4b4b4")
+        $0.textColor = .brownGrey2
         $0.font = .pingFangTCRegular(ofSize: 12)
     }
     

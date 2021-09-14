@@ -109,7 +109,7 @@ class ResendOTPRootView: NiblessView {
     private let storeIDInputView: ValidatableInputView = ValidatableInputView {
         $0.textField.attributedPlaceholder = NSAttributedString(
             string: "請輸入商店代號",
-            attributes: [.foregroundColor: UIColor(hex: "b4b4b4")]
+            attributes: [.foregroundColor: UIColor.brownGrey2]
         )
         $0.textField.textColor = UIColor(hex: "545454")
         let image = UIImage(named: "company")
@@ -125,7 +125,7 @@ class ResendOTPRootView: NiblessView {
     private let accountInputView: ValidatableInputView = ValidatableInputView {
         $0.textField.attributedPlaceholder = NSAttributedString(
             string: "請輸入管理員帳號",
-            attributes: [.foregroundColor: UIColor(hex: "b4b4b4")]
+            attributes: [.foregroundColor: UIColor.brownGrey2]
         )
         $0.textField.textColor = UIColor(hex: "545454")
         let image = UIImage(named: "id")
@@ -146,7 +146,7 @@ class ResendOTPRootView: NiblessView {
     private lazy var passwordInputView: ValidatableInputView = ValidatableInputView {
         $0.textField.attributedPlaceholder = NSAttributedString(
             string: "請輸入密碼",
-            attributes: [.foregroundColor: UIColor(hex: "b4b4b4")]
+            attributes: [.foregroundColor: UIColor.brownGrey2]
         )
         $0.textField.textColor = UIColor(hex: "545454")
         let image = UIImage(named: "lock")
