@@ -38,7 +38,7 @@ extension UIView {
         guard number > 0 else { return }
         
         let badgeLabel: UILabel = UILabel {
-            $0.backgroundColor = .red
+            $0.backgroundColor = UIColor(hex: "f5222d")
             $0.clipsToBounds = true
             $0.layer.cornerRadius = badgeSize.height/2
             $0.textColor = .white
@@ -51,8 +51,8 @@ extension UIView {
         addSubview(badgeLabel)
         switch position {
         case .rightTop:
-            badgeLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: (type == .dot) ? -2 : 0).isActive = true
-            badgeLabel.topAnchor.constraint(equalTo: topAnchor, constant: -2).isActive = true
+            badgeLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: (type == .dot) ? 0 : 0).isActive = true
+            badgeLabel.topAnchor.constraint(equalTo: topAnchor, constant: 0).isActive = true
         case .leftTop:
             badgeLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: (type == .dot) ? -2 : 0).isActive = true
             badgeLabel.topAnchor.constraint(equalTo: topAnchor, constant: -2).isActive = true

@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "iconTopMenuNotification20Px.png",
+      "filename" : "iconBasicNotification.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "iconTopMenuNotification20Px@2x.png",
+      "filename" : "iconBasicNotification@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "iconTopMenuNotification20Px@3x.png",
+      "filename" : "iconBasicNotification@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
