@@ -38,7 +38,7 @@ extension UIView {
         guard number > 0 else { return }
         
         let badgeLabel: UILabel = UILabel {
-            $0.backgroundColor = UIColor(hex: "f5222d")
+            $0.backgroundColor = .vividRed
             $0.clipsToBounds = true
             $0.layer.cornerRadius = badgeSize.height/2
             $0.textColor = .white

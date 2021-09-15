@@ -67,7 +67,7 @@ struct Announcement: Codable {
                 return .webOrange.withAlphaComponent(0.1)
             } else {
                 if importance == .IMPORTANT {
-                    return UIColor(hex: "f5222D").withAlphaComponent(0.1)
+                    return .vividRed.withAlphaComponent(0.1)
                 } else {
                     return UIColor(hex: "1fa1dd").withAlphaComponent(0.1)
                 }

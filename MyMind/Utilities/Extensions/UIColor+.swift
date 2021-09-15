@@ -215,4 +215,9 @@ extension UIColor {
             return UIColor(hex: "384053")
         }
     }
+    static var vividRed: UIColor {
+        get {
+            return UIColor(hex: "f5222d")
+        }
+    }
 }

@@ -24,7 +24,7 @@ class ValidatableInputView: UIView {
     private let errorMessageLabel: UILabel = UILabel {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = UIFont.pingFangTCRegular(ofSize: 12)
-        $0.textColor = UIColor(hex: "f5222d")
+        $0.textColor = .vividRed
         $0.isHidden = true
     }
 
@@ -52,7 +52,7 @@ class ValidatableInputView: UIView {
     }
 
     func showError(with message: String, indicator: UIImage? = nil) {
-        textField.layer.borderColor = UIColor(hex: "f5222d").cgColor
+        textField.layer.borderColor = UIColor.vividRed.cgColor
         errorMessageLabel.text = message
         errorMessageLabel.isHidden = false
         indicatorImageView.image = indicator
