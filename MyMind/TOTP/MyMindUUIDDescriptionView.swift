@@ -20,7 +20,7 @@ final class MyMindUUIDDescriptionView: NiblessView {
     private let titleLabel: UILabel = UILabel {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.text = "My Mind 買賣 OTP"
-        $0.textColor = UIColor(hex: "1c4373")
+        $0.textColor = .biscay
         $0.font = .pingFangTCSemibold(ofSize: 16)
     }
     private let bullet1Label: UILabel = UILabel {
@@ -56,7 +56,7 @@ final class MyMindUUIDDescriptionView: NiblessView {
     private let uuidLabel: UILabel = UILabel {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = UIFont.pingFangTCRegular(ofSize: 14)
-        $0.textColor = UIColor(hex: "1c4373")
+        $0.textColor = .biscay
         $0.backgroundColor = .clear
         $0.numberOfLines = 0
         $0.textAlignment = .center
@@ -89,7 +89,7 @@ final class MyMindUUIDDescriptionView: NiblessView {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.setTitle("確定", for: .normal)
         $0.titleLabel?.font = .pingFangTCSemibold(ofSize: 16)
-        $0.setTitleColor(UIColor(hex: "1c4373"), for: .normal)
+        $0.setTitleColor(.biscay, for: .normal)
         $0.backgroundColor = .white
         $0.layer.cornerRadius = 10
         $0.addTarget(self, action: #selector(confirm), for: .touchUpInside)

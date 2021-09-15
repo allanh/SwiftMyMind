@@ -33,7 +33,7 @@ class EditablePickedProductsInfoViewController: NiblessViewController {
     }
     private let summaryLabel: UILabel = UILabel {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.textColor = UIColor(hex: "434343")
+        $0.textColor = .tundora
         $0.font = .pingFangTCSemibold(ofSize: 16)
     }
     private let costTitleLabel: UILabel = UILabel {
@@ -66,14 +66,14 @@ class EditablePickedProductsInfoViewController: NiblessViewController {
     }
    private let totalTitleLabel: UILabel = UILabel {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.textColor = UIColor(hex: "3758a8")
+        $0.textColor = .azure
         $0.font = .pingFangTCSemibold(ofSize: 14)
         $0.textAlignment = .right
         $0.text = "合計(含稅) $"
     }
     private let totalLabel: UILabel = UILabel {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.textColor = UIColor(hex: "3758a8")
+        $0.textColor = .azure
         $0.font = .pingFangTCSemibold(ofSize: 14)
         $0.textAlignment = .right
         $0.text = "total"

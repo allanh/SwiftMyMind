@@ -25,18 +25,18 @@ class LogInfoView: NiblessView {
     }
 
     private let createrLabel: UILabel = UILabel {
-        $0.textColor = UIColor(hex: "434343")
+        $0.textColor = .tundora
         $0.font = .pingFangTCRegular(ofSize: 14)
     }
 
     private let createrNameLabel: UILabel = UILabel {
-        $0.textColor = UIColor(hex: "434343")
+        $0.textColor = .tundora
         $0.font = .pingFangTCRegular(ofSize: 14)
     }
     
     private let statusLabel: UILabel = UILabel {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.textColor = UIColor(hex: "434343")
+        $0.textColor = .tundora
         $0.font = .pingFangTCRegular(ofSize: 14)
     }
 

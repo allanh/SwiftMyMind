@@ -18,7 +18,7 @@ class ForgotPasswordRootView: NiblessView {
 
     private let backgroundView: UIView = UIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.backgroundColor = UIColor(hex: "f2f2f4")
+        $0.backgroundColor = .athensGray
     }
     private let backgroundImageView: UIImageView = UIImageView {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -55,7 +55,7 @@ class ForgotPasswordRootView: NiblessView {
     }
 
     private let titleGradientView: GradientView = {
-        let view = GradientView(gradientStartColor: UIColor(hex: "f5a700"), gradientEndColor: UIColor(hex: "f5a700"))
+        let view = GradientView(gradientStartColor: .webOrange, gradientEndColor: .webOrange)
         view.layer.cornerRadius = 10
         view.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMaxXMaxYCorner]
         view.translatesAutoresizingMaskIntoConstraints = false

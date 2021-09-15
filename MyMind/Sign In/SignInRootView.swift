@@ -16,7 +16,7 @@ class SignInRootView: NiblessView {
 
     private let backgroundView: UIView = UIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.backgroundColor = UIColor(hex: "f2f2f4")
+        $0.backgroundColor = .athensGray
     }
     private let backgroundImageView: UIImageView = UIImageView {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -53,7 +53,7 @@ class SignInRootView: NiblessView {
     }
 
     private let titleGradientView: GradientView = {
-        let view = GradientView(gradientStartColor: UIColor(hex: "f5a700"), gradientEndColor: UIColor(hex: "f5a700"))// 245 167 0
+        let view = GradientView(gradientStartColor: .webOrange, gradientEndColor: .webOrange)
         view.layer.cornerRadius = 10
         view.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMaxXMaxYCorner]
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -212,9 +212,9 @@ class SignInRootView: NiblessView {
             string: "忘記密碼？",
             attributes: [
                 NSAttributedString.Key.font: UIFont.pingFangTCRegular(ofSize: 14),
-                NSAttributedString.Key.foregroundColor: UIColor(hex: "306ab2"),
+                NSAttributedString.Key.foregroundColor: UIColor.lochmara,
                 NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue,
-                NSAttributedString.Key.underlineColor: UIColor(hex: "306ab2")
+                NSAttributedString.Key.underlineColor: UIColor.lochmara
             ])
         $0.setAttributedTitle(attributedString, for: .normal)
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -225,9 +225,9 @@ class SignInRootView: NiblessView {
             string: "重綁OTP驗證碼",
             attributes: [
                 NSAttributedString.Key.font: UIFont.pingFangTCRegular(ofSize: 14),
-                NSAttributedString.Key.foregroundColor: UIColor(hex: "306ab2"),
+                NSAttributedString.Key.foregroundColor: UIColor.lochmara,
                 NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue,
-                NSAttributedString.Key.underlineColor: UIColor(hex: "306ab2")
+                NSAttributedString.Key.underlineColor: UIColor.lochmara
             ])
         $0.setAttributedTitle(attributedString, for: .normal)
         $0.translatesAutoresizingMaskIntoConstraints = false

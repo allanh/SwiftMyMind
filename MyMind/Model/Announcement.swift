@@ -61,11 +61,10 @@ struct Announcement: Codable {
             }
         }
     }
-    //241 248 254
     var iconBackground: UIColor {
         get {
             if top {
-                return UIColor(hex: "f5a700").withAlphaComponent(0.1)
+                return .webOrange.withAlphaComponent(0.1)
             } else {
                 if importance == .IMPORTANT {
                     return UIColor(hex: "f5222D").withAlphaComponent(0.1)

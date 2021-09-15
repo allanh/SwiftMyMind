@@ -51,7 +51,7 @@ class CustomAlertView: NiblessView {
     }
     let confirmButton: UIButton = UIButton {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.backgroundColor = UIColor(hex: "384053")
+        $0.backgroundColor = .oxfordBlue
         $0.setTitleColor(.white, for: .normal)
         $0.setTitle("確定", for: .normal)
         $0.layer.cornerRadius = 4
@@ -63,8 +63,8 @@ class CustomAlertView: NiblessView {
         $0.backgroundColor = .white
         $0.layer.cornerRadius = 4
         $0.layer.borderWidth = 1
-        $0.layer.borderColor = UIColor(hex: "384053").cgColor
-        $0.setTitleColor(UIColor(hex: "384053"), for: .normal)
+        $0.layer.borderColor = UIColor.oxfordBlue.cgColor
+        $0.setTitleColor(.oxfordBlue, for: .normal)
         $0.setTitle("取消", for: .normal)
         $0.titleLabel?.font = .pingFangTCSemibold(ofSize: 16)
     }
