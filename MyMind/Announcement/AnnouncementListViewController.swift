@@ -18,7 +18,21 @@ class AnnouncementListViewController: NiblessViewController {
         return EmptyDataView(frame: rootView.tableView.bounds, icon: "no_announcement", description: "目前尚未有公告訊息", font: .pingFangTCRegular(ofSize: 14), color: .brownGrey)
     }()
     private lazy var filter: AnnouncementListFilterView = {
-        return AnnouncementListFilterView(frame: CGRect(x: rootView.bounds.width, y: 0, width: 0, height: rootView.bounds.size.height))
+        return AnnouncementListFilterView(frame: CGRect(x: rootView.bounds.width, y: 0, width: 0, height: rootView.bounds.size.height), model: AnnouncementListFilterModel(queryInfo: announcementListQueryInfo, didUpdateQueryInfo: { info in
+            UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut) {
+                self.filter.frame = CGRect(x: self.view.bounds.width, y: 0, width: self.view.bounds.width, height: self.view.bounds.height)
+            } completion: { _ in
+                self.filter.removeFromSuperview()
+                    self.rootView.organizeOptionView.announcementFilterButton.isSelected = info.isModified
+                    self.refreshFetchAnnouncementList(query: self.announcementListQueryInfo)
+            }
+        }, didCancelUpdate: {
+            UIView.animate(withDuration: 0.5, delay: 0, options: [.curveEaseInOut, .beginFromCurrentState]) {
+                self.filter.frame = CGRect(x: self.view.bounds.width, y: 0, width: self.view.bounds.width, height: self.view.bounds.height)
+            } completion: { _ in
+                self.filter.removeFromSuperview()
+            }
+        }))
     }()
     override var preferredStatusBarStyle: UIStatusBarStyle {
         .lightContent
@@ -188,7 +202,7 @@ class AnnouncementListViewController: NiblessViewController {
     private func filterButtonDidTapped(_ sender: UIButton) {
         filter.frame = CGRect(x: view.bounds.width, y: 0, width: view.bounds.width, height: view.bounds.height)
         view.addSubview(filter)
-        filter.delegate = self
+//        filter.delegate = self
         UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut) {
             self.filter.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height)
         } completion: { _ in
@@ -255,29 +269,22 @@ extension AnnouncementListViewController: UITableViewDelegate, UITableViewDataSo
         return .leastNormalMagnitude
     }
 }
-extension AnnouncementListViewController: AnnouncementListFilterViewDelegate {
-    func didCancelFilter(_ view: AnnouncementListFilterView) {
-        UIView.animate(withDuration: 0.5, delay: 0, options: [.curveEaseInOut, .beginFromCurrentState]) {
-            self.filter.frame = CGRect(x: self.view.bounds.width, y: 0, width: view.bounds.width, height: self.view.bounds.height)
-        } completion: { _ in
-            self.filter.removeFromSuperview()
-        }
-    }
-    
-    func filterView(_ view: AnnouncementListFilterView, didFilterWith info: AnnouncementListQueryInfo) {
-        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut) {
-            self.filter.frame = CGRect(x: self.view.bounds.width, y: 0, width: view.bounds.width, height: self.view.bounds.height)
-        } completion: { _ in
-            self.filter.removeFromSuperview()
-            if info != self.announcementListQueryInfo {
-                self.rootView.organizeOptionView.announcementFilterButton.isSelected = info.isModified
-                self.announcementListQueryInfo = AnnouncementListQueryInfo.defaultQuery()
-                self.announcementListQueryInfo.title = info.title
-                self.announcementListQueryInfo.type = info.type
-                self.announcementListQueryInfo.start = info.start
-                self.announcementListQueryInfo.end = info.end
-                self.refreshFetchAnnouncementList(query: self.announcementListQueryInfo)
-            }
-        }
-    }
-}
+//extension AnnouncementListViewController: AnnouncementListFilterViewDelegate {
+//    func didCancelFilter(_ view: AnnouncementListFilterView) {
+//        UIView.animate(withDuration: 0.5, delay: 0, options: [.curveEaseInOut, .beginFromCurrentState]) {
+//            self.filter.frame = CGRect(x: self.view.bounds.width, y: 0, width: view.bounds.width, height: self.view.bounds.height)
+//        } completion: { _ in
+//            self.filter.removeFromSuperview()
+//        }
+//    }
+//
+//    func filterView(_ view: AnnouncementListFilterView, didFilterWith info: AnnouncementListQueryInfo) {
+//        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut) {
+//            self.filter.frame = CGRect(x: self.view.bounds.width, y: 0, width: view.bounds.width, height: self.view.bounds.height)
+//        } completion: { _ in
+//            self.filter.removeFromSuperview()
+//                self.rootView.organizeOptionView.announcementFilterButton.isSelected = info.isModified
+//                self.refreshFetchAnnouncementList(query: self.announcementListQueryInfo)
+//        }
+//    }
+//}

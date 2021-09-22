@@ -50,6 +50,7 @@
 		52944E352699CFC1006CC865 /* HomeCollectionViewHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52944E342699CFC1006CC865 /* HomeCollectionViewHeaderView.swift */; };
 		52A289F226D8C9C800084893 /* UDNSKMarqueeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A289F126D8C9C700084893 /* UDNSKMarqueeView.swift */; };
 		52A289F426D8CB4100084893 /* UIView+copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A289F326D8CB4100084893 /* UIView+copy.swift */; };
+		52AC22A226FACA04003AF437 /* AnnouncementListFilterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52AC22A126FACA04003AF437 /* AnnouncementListFilterModel.swift */; };
 		52B15CBA2691BAFC0010FCED /* MyMindEmployeeAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B15CB92691BAFC0010FCED /* MyMindEmployeeAPIService.swift */; };
 		52B8749026DC7C38008F3CF2 /* BulletinCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B8748F26DC7C38008F3CF2 /* BulletinCollectionViewCell.swift */; };
 		52B8749226DC88EA008F3CF2 /* Bulletin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B8749126DC88EA008F3CF2 /* Bulletin.swift */; };
@@ -358,6 +359,7 @@
 		52944E342699CFC1006CC865 /* HomeCollectionViewHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewHeaderView.swift; sourceTree = "<group>"; };
 		52A289F126D8C9C700084893 /* UDNSKMarqueeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UDNSKMarqueeView.swift; sourceTree = "<group>"; };
 		52A289F326D8CB4100084893 /* UIView+copy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+copy.swift"; sourceTree = "<group>"; };
+		52AC22A126FACA04003AF437 /* AnnouncementListFilterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementListFilterModel.swift; sourceTree = "<group>"; };
 		52B15CB92691BAFC0010FCED /* MyMindEmployeeAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMindEmployeeAPIService.swift; sourceTree = "<group>"; };
 		52B8748F26DC7C38008F3CF2 /* BulletinCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletinCollectionViewCell.swift; sourceTree = "<group>"; };
 		52B8749126DC88EA008F3CF2 /* Bulletin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bulletin.swift; sourceTree = "<group>"; };
@@ -1070,6 +1072,7 @@
 				52B8749B26DCE7A2008F3CF2 /* Registration.swift */,
 				52B8749D26DF3627008F3CF2 /* AnnouncementListQueryInfo.swift */,
 				52B8749F26DF364F008F3CF2 /* MyMindNotification.swift */,
+				52AC22A126FACA04003AF437 /* AnnouncementListFilterModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1761,6 +1764,7 @@
 				9CEFCA5426DE171100506308 /* AnnouncementQueryDateSelectionViewController.swift in Sources */,
 				97B117432656064300242428 /* SingleLabelTableViewCell.swift in Sources */,
 				A4ACEDC526490E25008724E4 /* SelectedQueryCollectionViewCell.swift in Sources */,
+				52AC22A226FACA04003AF437 /* AnnouncementListFilterModel.swift in Sources */,
 				A4B55E4F265B538F002E1880 /* KeychainUserSessionDataStore.swift in Sources */,
 				A4CBD8A72664E1E800B19119 /* VendorInfoLoader.swift in Sources */,
 				528AEF8126EF5D94004EC51C /* RangeExpression+.swift in Sources */,

@@ -31,7 +31,7 @@ class AnnouncementListQueryInfo {
     var queryItems: [URLQueryItem] {
         get {
             var items: [URLQueryItem] = []
-            if let title = title {
+            if let title = title, !title.isEmpty {
                 items.append(URLQueryItem(name: "title", value: title))
             }
             if let type = type {

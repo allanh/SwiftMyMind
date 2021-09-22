@@ -7,63 +7,32 @@
 //
 
 import UIKit
-protocol AnnouncementListFilterViewDelegate {
-    func didCancelFilter(_ view: AnnouncementListFilterView)
-    func filterView(_ view: AnnouncementListFilterView, didFilterWith info: AnnouncementListQueryInfo)
-}
+import RxSwift
+
 class AnnouncementListFilterView: NiblessView {
-    @objc
-    private func closeButtonDidTapped(_ sender: UIButton) {
-        delegate?.didCancelFilter(self)
-    }
-    @objc
-    private func resetButtonDidTapped(_ sender: UIButton) {
-        titleTextField.text = nil
-        startTimeTextField.text = nil
-        endTimeTextField.text = nil
+    private func reset() {
+        model.reset()
         for button in buttons {
             button.isSelected = false
         }
     }
-    @objc
-    private func buttonDidTapped(_ sender: UIButton) {
-        let selected = sender.isSelected
-        for button in buttons {
-            button.isSelected = false
+    private func updateDate(_ date: Date?) {
+        if startTimeTextField.isFirstResponder {
+            model.startDate.accept(date)
+        } else {
+            model.endDate.accept(date)
         }
-        sender.isSelected = !selected
-    }
-    @objc
-    private func startDateChanged(_ sender: UIDatePicker) {
-        startTimeTextField.text = formatter.string(from: sender.date)
-        (endTimeTextField.inputView as? UIDatePicker)?.minimumDate = sender.date
-    }
-    @objc
-    private func endDateChanged(_ sender: UIDatePicker) {
-        endTimeTextField.text = formatter.string(from: sender.date)
-    }
-    @objc
-    private func searchButtonDidTapped(_ sender: UIButton) {
-        let info = AnnouncementListQueryInfo()
-        if let text = titleTextField.text, !text.isEmpty {
-            info.title = text
-        }
-        info.start = formatter.date(from: startTimeTextField.text ?? "")
-        info.end = formatter.date(from: endTimeTextField.text ?? "")
-        let selected = buttons.first { button in
-            button.isSelected
-        }
-        if let selectedButton = selected {
-            if let type = objc_getAssociatedObject(selectedButton, &handle) as? AnnouncementType {
-                info.type = type
-            }
-        }
-        delegate?.filterView(self, didFilterWith: info)
     }
     private let formatter: DateFormatter = DateFormatter {
         $0.dateFormat = "yyyy-MM-dd"
     }
-    var delegate: AnnouncementListFilterViewDelegate?
+    let model: AnnouncementListFilterModel
+    var hierarchyNotReady: Bool = true
+    let bag: DisposeBag = DisposeBag()
+    init(frame: CGRect = .zero, model: AnnouncementListFilterModel) {
+        self.model = model
+        super.init(frame: frame)
+    }
     private let backgroundView: UIView = UIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.backgroundColor = .black.withAlphaComponent(0.5)
@@ -81,14 +50,12 @@ class AnnouncementListFilterView: NiblessView {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.setImage(UIImage(named: "close")?.withRenderingMode(.alwaysTemplate), for: .normal)
         $0.tintColor = .prussianBlue
-        $0.addTarget(self, action: #selector(closeButtonDidTapped(_:)), for: .touchUpInside)
     }
     private let resetButton: UIButton = UIButton {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.setTitle("重置", for: .normal)
         $0.setTitleColor(.prussianBlue, for: .normal)
         $0.titleLabel?.font = .pingFangTCRegular(ofSize: 14)
-        $0.addTarget(self, action: #selector(resetButtonDidTapped(_:)), for: .touchUpInside)
     }
     private let titleSeparator: UIView = UIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -150,15 +117,6 @@ class AnnouncementListFilterView: NiblessView {
         rightContainerView.addSubview(iconImageView)
         $0.rightView = rightContainerView
         $0.rightViewMode = .always
-        let datePicker: UIDatePicker = UIDatePicker {
-            $0.datePickerMode = .date
-            if #available(iOS 14.0, *) {
-                $0.preferredDatePickerStyle = .wheels
-            }
-            $0.maximumDate = Date()
-            $0.addTarget(self, action: #selector(startDateChanged(_:)), for: .valueChanged)
-        }
-        $0.inputView = datePicker
     }
     private let endTimeTextField: UITextField = UITextField {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -181,15 +139,6 @@ class AnnouncementListFilterView: NiblessView {
         rightContainerView.addSubview(iconImageView)
         $0.rightView = rightContainerView
         $0.rightViewMode = .always
-        let datePicker: UIDatePicker = UIDatePicker {
-            $0.datePickerMode = .date
-            if #available(iOS 14.0, *) {
-                $0.preferredDatePickerStyle = .wheels
-            }
-            $0.maximumDate = Date()
-            $0.addTarget(self, action: #selector(endDateChanged(_:)), for: .valueChanged)
-        }
-        $0.inputView = datePicker
     }
     private let bottomSeparator: UIView = UIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -202,7 +151,6 @@ class AnnouncementListFilterView: NiblessView {
         $0.setTitle("搜尋", for: .normal)
         $0.titleLabel?.font = .pingFangTCSemibold(ofSize: 24)
         $0.layer.cornerRadius = 4
-        $0.addTarget(self, action: #selector(searchButtonDidTapped(_:)), for: .touchUpInside)
     }
     private let bottomLine: UIView = UIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -212,18 +160,104 @@ class AnnouncementListFilterView: NiblessView {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.backgroundColor = .mercury
     }
-    var hierarchyNotReady: Bool = true
+    private let datePicker: UIDatePicker = UIDatePicker {
+        $0.datePickerMode = .date
+        if #available(iOS 14.0, *) {
+            $0.preferredDatePickerStyle = .wheels
+        }
+    }
     override func didMoveToSuperview() {
         super.didMoveToSuperview()
         guard hierarchyNotReady else {
           return
         }
         constructViews()
+        startTimeTextField.inputView = datePicker
+        endTimeTextField.inputView = datePicker
         activateConstraints()
+        subscribe()
+        binding()
         backgroundColor = .white
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(closeButtonDidTapped(_:)))
-        backgroundView.addGestureRecognizer(tapGestureRecognizer)
         hierarchyNotReady = false
+    }
+    private func subscribe() {
+        titleTextField.rx.text.orEmpty.subscribe(onNext: { [unowned self] string in
+            self.model.title.accept(string)
+        })
+        .disposed(by: bag)
+        buttons.forEach { button in
+            button.rx.tap
+                .subscribe(onNext: { [unowned self] in
+                    self.model.type.accept(objc_getAssociatedObject(button, &handle) as? AnnouncementType)
+                })
+                .disposed(by: bag)
+        }
+        resetButton.rx.tap
+            .subscribe(onNext: { [unowned self] in
+                self.reset()
+            })
+            .disposed(by: bag)
+        
+        closeButton.rx.tap
+            .subscribe(onNext: { [unowned self] in
+                model.didCancelUpdate()
+            })
+            .disposed(by: bag)
+        
+        searchButton.rx.tap
+            .subscribe(onNext: { [unowned self] in
+                model.didUpdateQueryInfo(model.queryInfo)
+            })
+            .disposed(by: bag)
+
+        datePicker.rx.date
+            .skip(1)
+            .subscribe(onNext: { [unowned self] date in
+                self.updateDate(date)
+            })
+            .disposed(by: bag)
+        let tapGestureRecognizer = UITapGestureRecognizer()
+        backgroundView.addGestureRecognizer(tapGestureRecognizer)
+        tapGestureRecognizer.rx.event
+            .subscribe(onNext: { [unowned self] recognizer in
+                self.model.didCancelUpdate()
+            })
+            .disposed(by: bag)
+    }
+
+    private func binding() {
+        model.title
+            .bind(to: titleTextField.rx.text)
+            .disposed(by: bag)
+        model.startDate
+            .map { [unowned self] date in
+                if let startDate = date {
+                    return self.formatter.string(from: startDate)
+                } else {
+                    return ""
+                }
+            }
+            .bind(to: startTimeTextField.rx.text)
+            .disposed(by: bag)
+        model.endDate
+            .map { [unowned self] date in
+                if let endDate = date {
+                    return self.formatter.string(from: endDate)
+                } else {
+                    return ""
+                }
+            }
+            .bind(to: endTimeTextField.rx.text)
+            .disposed(by: bag)
+        let selectedButton = Observable.from (
+          buttons.map { button in button.rx.tap.map { button } }
+        ).merge()
+        buttons.reduce(Disposables.create()) { disposable, button in
+            let subscription = selectedButton.map { $0 == button }
+                .bind(to: button.rx.isSelected)
+            return Disposables.create(disposable, subscription)
+        }
+        .disposed(by: bag)
     }
 
 }
@@ -249,7 +283,7 @@ extension AnnouncementListFilterView {
                 $0.setTitleColor(.white, for: .selected)
                 $0.titleEdgeInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
                 $0.backgroundColor = .veryLightPink
-                $0.addTarget(self, action: #selector(buttonDidTapped(_:)), for: .touchUpInside)
+                $0.isSelected = type == model.queryInfo.type
                 objc_setAssociatedObject($0, &handle, type, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
             }
             contentView.addSubview(button)
