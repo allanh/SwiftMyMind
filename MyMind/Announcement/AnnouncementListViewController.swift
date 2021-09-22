@@ -91,19 +91,15 @@ class AnnouncementListViewController: NiblessViewController {
         view.backgroundColor = .white
         title = "公告訊息"
         navigationItem.backButtonTitle = ""
-        if #available(iOS 15, *) {
-            let appearance = UINavigationBarAppearance()
-            appearance.configureWithOpaqueBackground()
-            appearance.titleTextAttributes = [
-                .foregroundColor: UIColor.white,
-                .font: UIFont.pingFangTCSemibold(ofSize: 18)
-            ]
-            appearance.backgroundColor = .prussianBlue
-            navigationController?.navigationBar.standardAppearance = appearance
-            navigationController?.navigationBar.scrollEdgeAppearance = appearance
-        } else {
-            navigationController?.navigationBar.barTintColor = .prussianBlue
-        }
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.titleTextAttributes = [
+            .foregroundColor: UIColor.white,
+            .font: UIFont.pingFangTCSemibold(ofSize: 18)
+        ]
+        appearance.backgroundColor = .prussianBlue
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
 
         configTableView()
         loadAnnouncementList(query: announcementListQueryInfo)

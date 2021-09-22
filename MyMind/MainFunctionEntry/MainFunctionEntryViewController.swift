@@ -81,11 +81,7 @@ final class MainFunctionEntryViewController: NiblessViewController {
     private let columns = 2
     private func activateConstraintsStackView() {
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        var constant: CGFloat = 20
-        if  #available(iOS 15, *) {
-            constant = 84
-        }
-        let top = stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: constant)
+        let top = stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20)
         let centerX = stackView.centerXAnchor
             .constraint(equalTo: view.centerXAnchor)
         let width = stackView.widthAnchor
