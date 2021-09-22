@@ -45,14 +45,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     private func setUpAppearance() {
         let appearance = UINavigationBarAppearance()
-        let navigationBar = UINavigationBar()
         appearance.configureWithOpaqueBackground()
         appearance.titleTextAttributes = [
             .foregroundColor: UIColor.white,
             .font: UIFont.pingFangTCSemibold(ofSize: 18)
         ]
         appearance.backgroundColor = UIColor(hex: "060d32")
-        navigationBar.standardAppearance = appearance
+        UINavigationBar.appearance().standardAppearance = appearance
         UINavigationBar.appearance().tintColor = .white
         UINavigationBar.appearance().scrollEdgeAppearance = appearance
         UITabBar.appearance().tintColor = .prussianBlue
