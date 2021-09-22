@@ -44,13 +44,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     private func setUpAppearance() {
-        UINavigationBar.appearance().tintColor = .white
-        UINavigationBar.appearance().barTintColor = UIColor(hex: "060d32")
-        UINavigationBar.appearance().isTranslucent = false
-        UINavigationBar.appearance().titleTextAttributes = [
-            .foregroundColor: UIColor.white,
-            .font: UIFont.pingFangTCSemibold(ofSize: 18)
-        ]
+        if #available(iOS 15, *) {
+            let appearance = UINavigationBarAppearance()
+            let navigationBar = UINavigationBar()
+            appearance.configureWithOpaqueBackground()
+            appearance.titleTextAttributes = [
+                .foregroundColor: UIColor.white,
+                .font: UIFont.pingFangTCSemibold(ofSize: 18)
+            ]
+            appearance.backgroundColor = UIColor(hex: "060d32")
+            navigationBar.standardAppearance = appearance
+            UINavigationBar.appearance().tintColor = .white
+            UINavigationBar.appearance().scrollEdgeAppearance = appearance
+        } else {
+            UINavigationBar.appearance().tintColor = .white
+            UINavigationBar.appearance().barTintColor = UIColor(hex: "060d32")
+            UINavigationBar.appearance().isTranslucent = false
+            UINavigationBar.appearance().titleTextAttributes = [
+                .foregroundColor: UIColor.white,
+                .font: UIFont.pingFangTCSemibold(ofSize: 18)
+            ]
+        }
         UITabBar.appearance().tintColor = .prussianBlue
     }
 

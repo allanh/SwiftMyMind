@@ -72,7 +72,6 @@ final class MainFunctionEntryViewController: NiblessViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.navigationBar.barTintColor = UIColor(hex: "060d32")
     }
     private func constructViewHeirarchy() {
         view.addSubview(stackView)
@@ -82,7 +81,11 @@ final class MainFunctionEntryViewController: NiblessViewController {
     private let columns = 2
     private func activateConstraintsStackView() {
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        let top = stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20)
+        var constant: CGFloat = 20
+        if  #available(iOS 15, *) {
+            constant = 84
+        }
+        let top = stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: constant)
         let centerX = stackView.centerXAnchor
             .constraint(equalTo: view.centerXAnchor)
         let width = stackView.widthAnchor
