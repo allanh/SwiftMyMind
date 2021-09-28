@@ -41,24 +41,29 @@ public struct KeychainHelper {
             throw KeychainError.unexpectedItemData
         }
 
-        var querey = keychainQuery(key: key.rawValue)
-
-        var status = SecItemCopyMatching(querey as CFDictionary, nil)
+        var query: [String: AnyObject] = [:]
+        if let appIdPrefix = Bundle.main.infoDictionary!["AppIdentifierPrefix"] as? String {
+            let accessGroup = "com.shopping.udi.MyMind.sharedItems"
+            query = keychainQuery(key: key.rawValue, accessGroup: appIdPrefix+accessGroup)
+        } else {
+            query = keychainQuery(key: key.rawValue)
+        }
+        var status = SecItemCopyMatching(query as CFDictionary, nil)
 
         switch status {
         case errSecSuccess:
             var attributesToUpdate = [String: AnyObject]()
             attributesToUpdate[kSecValueData as String] = encodedData as AnyObject?
 
-            status = SecItemUpdate(querey as CFDictionary, attributesToUpdate as CFDictionary)
+            status = SecItemUpdate(query as CFDictionary, attributesToUpdate as CFDictionary)
 
             if status != errSecSuccess {
                 throw error(from: status)
             }
         case errSecItemNotFound:
-            querey[kSecValueData as String] = encodedData as AnyObject?
+            query[kSecValueData as String] = encodedData as AnyObject?
 
-            let status = SecItemAdd(querey as CFDictionary, nil)
+            let status = SecItemAdd(query as CFDictionary, nil)
 
             guard status == noErr else { throw error(from: status) }
         default:
@@ -67,7 +72,13 @@ public struct KeychainHelper {
     }
 
     public func readItem<T: Codable>(key: KeychainKeys, valueType: T.Type) throws -> T {
-        var query = keychainQuery(key: key.rawValue)
+        var query: [String: AnyObject] = [:]
+        if let appIdPrefix = Bundle.main.infoDictionary!["AppIdentifierPrefix"] as? String {
+            let accessGroup = "com.shopping.udi.MyMind.sharedItems"
+            query = keychainQuery(key: key.rawValue, accessGroup: appIdPrefix+accessGroup)
+        } else {
+            query = keychainQuery(key: key.rawValue)
+        }
         query[kSecMatchLimit as String] = kSecMatchLimitOne
         query[kSecReturnAttributes as String] = kCFBooleanTrue
         query[kSecReturnData as String] = kCFBooleanTrue
@@ -103,11 +114,21 @@ public struct KeychainHelper {
      */
     public func removeItem(key: KeychainKeys?) throws {
         let query: [String: AnyObject]
-        if let key = key {
-            query = keychainQuery(key: key.rawValue, accessGroup: nil)
+        if let appIdPrefix = Bundle.main.infoDictionary!["AppIdentifierPrefix"] as? String {
+            let accessGroup = "com.shopping.udi.MyMind.sharedItems"
+            if let key = key {
+                query = keychainQuery(key: key.rawValue, accessGroup: appIdPrefix+accessGroup)
+            } else {
+                query = keychainQuery(key: nil, accessGroup: appIdPrefix+accessGroup)
+            }
         } else {
-            query = keychainQuery()
+            if let key = key {
+                query = keychainQuery(key: key.rawValue)
+            } else {
+                query = keychainQuery(key: nil)
+            }
         }
+
         let status = SecItemDelete(query as CFDictionary)
 
         guard status == noErr || status == errSecItemNotFound else {
@@ -163,7 +184,8 @@ public struct KeychainHelper {
                                     kSecMatchLimit as String: kSecMatchLimitOne,
                                     kSecReturnAttributes as String: true,
                                     kSecUseOperationPrompt as String: "使用帳號密碼登入",
-                                    kSecReturnData as String: true]
+                                    kSecReturnData as String: true,
+                                    kSecAttrAccessGroup as String: "com.shopping.udi.MyMind.sharedItems"]
         var item: CFTypeRef?
         let status = SecItemCopyMatching(query as CFDictionary, &item)
         guard status != errSecItemNotFound else { throw KeychainError.noValueFound }
@@ -180,7 +202,8 @@ public struct KeychainHelper {
 
     func deleteBiometryInfo() throws {
         let query: [String: Any] = [kSecClass as String: kSecClassInternetPassword,
-                                    kSecAttrServer as String: service]
+                                    kSecAttrServer as String: service,
+                                    kSecAttrAccessGroup as String: "com.shopping.udi.MyMind.sharedItems"]
 
         let status = SecItemDelete(query as CFDictionary)
         guard status == errSecSuccess || status == errSecItemNotFound else { throw error(from: status) }

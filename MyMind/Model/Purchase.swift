@@ -277,9 +277,3 @@ extension PurchaseList: Decodable {
     }
 }
 
-protocol MultiplePageList {
-    var totalAmountOfItems: Int { get }
-    var totalAmountOfPages: Int { get }
-    var itemsPerPage: Int { get }
-    var currentPageNumber: Int { get }
-}

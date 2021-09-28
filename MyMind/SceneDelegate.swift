@@ -70,5 +70,49 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
     }
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        if let context = URLContexts.first {
+            Presenter.shared.handle(context.url)
+        }
+    }
 }
-
+/// Presenter
+class Presenter {
+    static let shared = Presenter()
+    func handle(_ url: URL) {
+        let scene = UIApplication.shared.connectedScenes.first
+        if let sceneDelegate : SceneDelegate = (scene?.delegate as? SceneDelegate) {
+            if url.scheme == "mymindwidget" {
+                switch url.host {
+                case "otp" :
+                    let rootViewController = sceneDelegate.window?.rootViewController
+                    if let navigationController = rootViewController as? UINavigationController {
+                        navigationController.popToRootViewController(animated: false)
+                        if let topViewController = navigationController.topViewController as? MainPageViewController {
+                            topViewController.otp()
+                        }
+                    }
+                case "dashboard":
+                    let rootViewController = sceneDelegate.window?.rootViewController
+                    if let navigationController = rootViewController as? UINavigationController {
+                        navigationController.popToRootViewController(animated: false)
+                        if let topViewController = navigationController.topViewController as? MainPageViewController {
+                            topViewController.section = Section.thirtyDays.rawValue
+                            topViewController.myMind()
+                        }
+                    }
+                case "login":
+                    let rootViewController = sceneDelegate.window?.rootViewController
+                    if let navigationController = rootViewController as? UINavigationController {
+                        navigationController.popToRootViewController(animated: false)
+                        if let topViewController = navigationController.topViewController as? MainPageViewController {
+                            topViewController.myMind()
+                        }
+                    }
+                default:
+                    break
+                }
+            }
+        }
+    }
+}

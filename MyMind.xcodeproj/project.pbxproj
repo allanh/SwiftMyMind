@@ -19,6 +19,26 @@
 		5246E4742690385C005C11EC /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5246E4732690385C005C11EC /* Account.swift */; };
 		5246E4772690A2A4005C11EC /* CustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5246E4762690A2A4005C11EC /* CustomAlertView.swift */; };
 		524AB04826A802BA003D1E92 /* MyMindEmptySecretView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524AB04726A802BA003D1E92 /* MyMindEmptySecretView.swift */; };
+		5260FB8826FD6912003BB399 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5260FB8726FD6912003BB399 /* WidgetKit.framework */; };
+		5260FB8A26FD6912003BB399 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5260FB8926FD6912003BB399 /* SwiftUI.framework */; };
+		5260FB8D26FD6913003BB399 /* MyMind_Widgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5260FB8C26FD6913003BB399 /* MyMind_Widgets.swift */; };
+		5260FB8F26FD6916003BB399 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5260FB8E26FD6916003BB399 /* Assets.xcassets */; };
+		5260FB9426FD6916003BB399 /* MyMind WidgetsExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 5260FB8626FD6912003BB399 /* MyMind WidgetsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		5260FB9B26FD76D1003BB399 /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5293EE9D269A8F5B001A9754 /* Report.swift */; };
+		5260FB9C26FD81E5003BB399 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5293EEA1269AF20F001A9754 /* Date+.swift */; };
+		5260FB9D26FD81ED003BB399 /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4793CB026048BB600AD280C /* UIFont+.swift */; };
+		5261E43E270171C400B81BCE /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BDC7B8260B3E0A005C33A5 /* KeychainHelper.swift */; };
+		5261E43F270171E600B81BCE /* UserSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4793C7E2604573700AD280C /* UserSession.swift */; };
+		5261E441270172E900B81BCE /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49CF8BF260306D200AFC170 /* APIError.swift */; };
+		5261E442270172FE00B81BCE /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4705B9026020E5700B30CE6 /* Response.swift */; };
+		5261E4432701745700B81BCE /* Authorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527E11BA2692A05900FB8B01 /* Authorization.swift */; };
+		5261E444270176CA00B81BCE /* ToDo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52944E202697F798006CC865 /* ToDo.swift */; };
+		5261E445270177BC00B81BCE /* MyMindNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B8749F26DF364F008F3CF2 /* MyMindNotification.swift */; };
+		5261E44627017A2E00B81BCE /* Announcement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B8749526DCBFA1008F3CF2 /* Announcement.swift */; };
+		5261E4472701800200B81BCE /* OptionSet+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527E11BC2692A0D500FB8B01 /* OptionSet+.swift */; };
+		5261E4482701802900B81BCE /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4793CBA260490A600AD280C /* UIColor+.swift */; };
+		5261E44B270180A900B81BCE /* MultiPageList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5261E44A270180A900B81BCE /* MultiPageList.swift */; };
+		5261E44C270180A900B81BCE /* MultiPageList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5261E44A270180A900B81BCE /* MultiPageList.swift */; };
 		526364CA26EAF65D00C26FE4 /* FilterViewToggleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526364C926EAF65D00C26FE4 /* FilterViewToggleButton.swift */; };
 		527E11BB2692A05900FB8B01 /* Authorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527E11BA2692A05900FB8B01 /* Authorization.swift */; };
 		527E11BD2692A0D500FB8B01 /* OptionSet+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527E11BC2692A0D500FB8B01 /* OptionSet+.swift */; };
@@ -88,6 +108,7 @@
 		52E5060626A6BF4D000E5116 /* MyMindInstructionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E5060526A6BF4C000E5116 /* MyMindInstructionView.swift */; };
 		52F564272693F14200171032 /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F564262693F14100171032 /* ErrorHandler.swift */; };
 		52F5642A269408A300171032 /* StaticView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F56429269408A300171032 /* StaticView.swift */; };
+		5BC0E11222146C7052C603A6 /* Pods_MyMind_WidgetsExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A361A99A693B9377D0DD1CD /* Pods_MyMind_WidgetsExtension.framework */; };
 		97547CB8268039C6001859A8 /* PurchaseListLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97547CB7268039C6001859A8 /* PurchaseListLoader.swift */; };
 		97547CBB2680787E001859A8 /* ProductMaterialListLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97547CBA2680787E001859A8 /* ProductMaterialListLoader.swift */; };
 		97547CBD2680957D001859A8 /* PurchaseSuggestionInfosLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97547CBC2680957D001859A8 /* PurchaseSuggestionInfosLoader.swift */; };
@@ -288,6 +309,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		5260FB9126FD6916003BB399 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A44A5A6225F9B0D200995823 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5260FB8526FD6912003BB399;
+			remoteInfo = "MyMind WidgetsExtension";
+		};
 		A44A5A8125F9B0D300995823 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A44A5A6225F9B0D200995823 /* Project object */;
@@ -304,8 +332,24 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		5260FB9326FD6916003BB399 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				5260FB9426FD6916003BB399 /* MyMind WidgetsExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		00B96F7611AC87973EF3208B /* Pods-MyMind WidgetsExtension.demo.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMind WidgetsExtension.demo.xcconfig"; path = "Target Support Files/Pods-MyMind WidgetsExtension/Pods-MyMind WidgetsExtension.demo.xcconfig"; sourceTree = "<group>"; };
 		13CCE330B89D7786D5D97F51 /* Pods-MyMindTests.alpha.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMindTests.alpha.xcconfig"; path = "Target Support Files/Pods-MyMindTests/Pods-MyMindTests.alpha.xcconfig"; sourceTree = "<group>"; };
+		1A361A99A693B9377D0DD1CD /* Pods_MyMind_WidgetsExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyMind_WidgetsExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A4AA838BC0B3D93EAEAC627 /* Pods-MyMind-MyMindUITests.gamma.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMind-MyMindUITests.gamma.xcconfig"; path = "Target Support Files/Pods-MyMind-MyMindUITests/Pods-MyMind-MyMindUITests.gamma.xcconfig"; sourceTree = "<group>"; };
 		342A86D10E509DC8A0C0719F /* Pods-MyMind-MyMindUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMind-MyMindUITests.debug.xcconfig"; path = "Target Support Files/Pods-MyMind-MyMindUITests/Pods-MyMind-MyMindUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		34F89462B27B89078B3D4902 /* Pods-MyMind-Demo.alpha.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMind-Demo.alpha.xcconfig"; path = "Target Support Files/Pods-MyMind-Demo/Pods-MyMind-Demo.alpha.xcconfig"; sourceTree = "<group>"; };
@@ -327,6 +371,14 @@
 		5246E4762690A2A4005C11EC /* CustomAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertView.swift; sourceTree = "<group>"; };
 		524AB04726A802BA003D1E92 /* MyMindEmptySecretView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMindEmptySecretView.swift; sourceTree = "<group>"; };
 		524AB12B26A80913003D1E92 /* Demo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Demo-Info.plist"; path = "/Users/nelson/Program/BitBucket/mymind/Demo-Info.plist"; sourceTree = "<absolute>"; };
+		5260FB8626FD6912003BB399 /* MyMind WidgetsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "MyMind WidgetsExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5260FB8726FD6912003BB399 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		5260FB8926FD6912003BB399 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		5260FB8C26FD6913003BB399 /* MyMind_Widgets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMind_Widgets.swift; sourceTree = "<group>"; };
+		5260FB8E26FD6916003BB399 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5260FB9026FD6916003BB399 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5261E44A270180A900B81BCE /* MultiPageList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiPageList.swift; sourceTree = "<group>"; };
+		5261E44D2701AD5300B81BCE /* MyMind WidgetsExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "MyMind WidgetsExtension.entitlements"; sourceTree = "<group>"; };
 		526364C926EAF65D00C26FE4 /* FilterViewToggleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewToggleButton.swift; sourceTree = "<group>"; };
 		5277788226A80DF500CF4E07 /* Production-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Production-Info.plist"; path = "/Users/nelson/Program/BitBucket/mymind/Production-Info.plist"; sourceTree = "<absolute>"; };
 		527E11BA2692A05900FB8B01 /* Authorization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authorization.swift; sourceTree = "<group>"; };
@@ -612,16 +664,30 @@
 		A4F2D014265D088B004D8D6D /* ProductMaterialAutoCompleteAdapters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductMaterialAutoCompleteAdapters.swift; sourceTree = "<group>"; };
 		A4F2D016265D08D3004D8D6D /* SearchMaterialNamesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMaterialNamesViewModel.swift; sourceTree = "<group>"; };
 		AF55CB693B35A8A94A1AFB95 /* Pods-MyMind-MyMindUITests.demo.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMind-MyMindUITests.demo.xcconfig"; path = "Target Support Files/Pods-MyMind-MyMindUITests/Pods-MyMind-MyMindUITests.demo.xcconfig"; sourceTree = "<group>"; };
+		B910FFB64F93E557D74E744C /* Pods-MyMind WidgetsExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMind WidgetsExtension.debug.xcconfig"; path = "Target Support Files/Pods-MyMind WidgetsExtension/Pods-MyMind WidgetsExtension.debug.xcconfig"; sourceTree = "<group>"; };
 		C001C85B3856800C20B59128 /* Pods-MyMindTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMindTests.release.xcconfig"; path = "Target Support Files/Pods-MyMindTests/Pods-MyMindTests.release.xcconfig"; sourceTree = "<group>"; };
 		C35ECDE517A2C6A01C3E7141 /* Pods_MyMindTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyMindTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9EC33AD66AB1E6F6EF4FE95 /* Pods_MyMind_Production.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyMind_Production.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E186406F3C9384E5CCE45DB3 /* Pods-MyMind WidgetsExtension.gamma.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMind WidgetsExtension.gamma.xcconfig"; path = "Target Support Files/Pods-MyMind WidgetsExtension/Pods-MyMind WidgetsExtension.gamma.xcconfig"; sourceTree = "<group>"; };
 		E25AAB6EA5C26973AD34A35E /* Pods-MyMind-Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMind-Demo.release.xcconfig"; path = "Target Support Files/Pods-MyMind-Demo/Pods-MyMind-Demo.release.xcconfig"; sourceTree = "<group>"; };
 		E49F69076277FB451FD989B6 /* Pods-MyMind.demo.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMind.demo.xcconfig"; path = "Target Support Files/Pods-MyMind/Pods-MyMind.demo.xcconfig"; sourceTree = "<group>"; };
+		F0A63AC0055ECC1320AB3459 /* Pods-MyMind WidgetsExtension.alpha.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMind WidgetsExtension.alpha.xcconfig"; path = "Target Support Files/Pods-MyMind WidgetsExtension/Pods-MyMind WidgetsExtension.alpha.xcconfig"; sourceTree = "<group>"; };
+		F0B98855B716F06EEA9CE8DA /* Pods-MyMind WidgetsExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMind WidgetsExtension.release.xcconfig"; path = "Target Support Files/Pods-MyMind WidgetsExtension/Pods-MyMind WidgetsExtension.release.xcconfig"; sourceTree = "<group>"; };
 		F90876C4DDDB82506EFF5B36 /* Pods-MyMindTests.gamma.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMindTests.gamma.xcconfig"; path = "Target Support Files/Pods-MyMindTests/Pods-MyMindTests.gamma.xcconfig"; sourceTree = "<group>"; };
 		FFB65D5CF31423593D05EAF9 /* Pods-MyMind.gamma.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMind.gamma.xcconfig"; path = "Target Support Files/Pods-MyMind/Pods-MyMind.gamma.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		5260FB8326FD6912003BB399 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5260FB8A26FD6912003BB399 /* SwiftUI.framework in Frameworks */,
+				5260FB8826FD6912003BB399 /* WidgetKit.framework in Frameworks */,
+				5BC0E11222146C7052C603A6 /* Pods_MyMind_WidgetsExtension.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A44A5A6725F9B0D200995823 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -665,6 +731,16 @@
 				5246E4762690A2A4005C11EC /* CustomAlertView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		5260FB8B26FD6913003BB399 /* MyMind Widgets */ = {
+			isa = PBXGroup;
+			children = (
+				5260FB8C26FD6913003BB399 /* MyMind_Widgets.swift */,
+				5260FB8E26FD6916003BB399 /* Assets.xcassets */,
+				5260FB9026FD6916003BB399 /* Info.plist */,
+			);
+			path = "MyMind Widgets";
 			sourceTree = "<group>";
 		};
 		5293EE9A269A8AC0001A9754 /* Layout */ = {
@@ -922,9 +998,11 @@
 		A44A5A6125F9B0D200995823 = {
 			isa = PBXGroup;
 			children = (
+				5261E44D2701AD5300B81BCE /* MyMind WidgetsExtension.entitlements */,
 				A44A5A6C25F9B0D200995823 /* MyMind */,
 				A44A5A8325F9B0D300995823 /* MyMindTests */,
 				A44A5A8E25F9B0D300995823 /* MyMindUITests */,
+				5260FB8B26FD6913003BB399 /* MyMind Widgets */,
 				A44A5A6B25F9B0D200995823 /* Products */,
 				FE90B85D82B6B4639CD1A164 /* Pods */,
 				E7E3945A97ADB2DD58A2DA48 /* Frameworks */,
@@ -937,6 +1015,7 @@
 				A44A5A6A25F9B0D200995823 /* MyMind.app */,
 				A44A5A8025F9B0D300995823 /* MyMindTests.xctest */,
 				A44A5A8B25F9B0D300995823 /* MyMindUITests.xctest */,
+				5260FB8626FD6912003BB399 /* MyMind WidgetsExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1073,6 +1152,7 @@
 				52B8749D26DF3627008F3CF2 /* AnnouncementListQueryInfo.swift */,
 				52B8749F26DF364F008F3CF2 /* MyMindNotification.swift */,
 				52AC22A126FACA04003AF437 /* AnnouncementListFilterModel.swift */,
+				5261E44A270180A900B81BCE /* MultiPageList.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1290,6 +1370,9 @@
 				C35ECDE517A2C6A01C3E7141 /* Pods_MyMindTests.framework */,
 				6D795DE7991B001D5F99673C /* Pods_MyMind_Demo.framework */,
 				D9EC33AD66AB1E6F6EF4FE95 /* Pods_MyMind_Production.framework */,
+				5260FB8726FD6912003BB399 /* WidgetKit.framework */,
+				5260FB8926FD6912003BB399 /* SwiftUI.framework */,
+				1A361A99A693B9377D0DD1CD /* Pods_MyMind_WidgetsExtension.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1318,6 +1401,11 @@
 				AF55CB693B35A8A94A1AFB95 /* Pods-MyMind-MyMindUITests.demo.xcconfig */,
 				F90876C4DDDB82506EFF5B36 /* Pods-MyMindTests.gamma.xcconfig */,
 				39809ECD90D525C7264665CC /* Pods-MyMindTests.demo.xcconfig */,
+				B910FFB64F93E557D74E744C /* Pods-MyMind WidgetsExtension.debug.xcconfig */,
+				F0A63AC0055ECC1320AB3459 /* Pods-MyMind WidgetsExtension.alpha.xcconfig */,
+				E186406F3C9384E5CCE45DB3 /* Pods-MyMind WidgetsExtension.gamma.xcconfig */,
+				F0B98855B716F06EEA9CE8DA /* Pods-MyMind WidgetsExtension.release.xcconfig */,
+				00B96F7611AC87973EF3208B /* Pods-MyMind WidgetsExtension.demo.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -1325,6 +1413,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		5260FB8526FD6912003BB399 /* MyMind WidgetsExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5260FB9A26FD6916003BB399 /* Build configuration list for PBXNativeTarget "MyMind WidgetsExtension" */;
+			buildPhases = (
+				F3E038044BBE717C6D9515B7 /* [CP] Check Pods Manifest.lock */,
+				5260FB8226FD6912003BB399 /* Sources */,
+				5260FB8326FD6912003BB399 /* Frameworks */,
+				5260FB8426FD6912003BB399 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "MyMind WidgetsExtension";
+			productName = "MyMind WidgetsExtension";
+			productReference = 5260FB8626FD6912003BB399 /* MyMind WidgetsExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		A44A5A6925F9B0D200995823 /* MyMind */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A44A5A9425F9B0D300995823 /* Build configuration list for PBXNativeTarget "MyMind" */;
@@ -1335,10 +1441,12 @@
 				A44A5A6825F9B0D200995823 /* Resources */,
 				E51B057EE87CB516D0017E0A /* [CP] Embed Pods Frameworks */,
 				528A697E26CBB71B00FC3387 /* GoogleServiceInfo */,
+				5260FB9326FD6916003BB399 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				5260FB9226FD6916003BB399 /* PBXTargetDependency */,
 			);
 			name = MyMind;
 			productName = MyMind;
@@ -1391,10 +1499,13 @@
 		A44A5A6225F9B0D200995823 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1240;
+				LastSwiftUpdateCheck = 1300;
 				LastUpgradeCheck = 1240;
 				ORGANIZATIONNAME = "United Digital Intelligence";
 				TargetAttributes = {
+					5260FB8526FD6912003BB399 = {
+						CreatedOnToolsVersion = 13.0;
+					};
 					A44A5A6925F9B0D200995823 = {
 						CreatedOnToolsVersion = 12.4;
 					};
@@ -1424,11 +1535,20 @@
 				A44A5A6925F9B0D200995823 /* MyMind */,
 				A44A5A7F25F9B0D300995823 /* MyMindTests */,
 				A44A5A8A25F9B0D300995823 /* MyMindUITests */,
+				5260FB8526FD6912003BB399 /* MyMind WidgetsExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		5260FB8426FD6912003BB399 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5260FB8F26FD6916003BB399 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A44A5A6825F9B0D200995823 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1596,6 +1716,28 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MyMind/Pods-MyMind-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		F3E038044BBE717C6D9515B7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MyMind WidgetsExtension-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		F4A5080B72293B16E08CC3F0 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1616,6 +1758,28 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		5260FB8226FD6912003BB399 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5260FB9D26FD81ED003BB399 /* UIFont+.swift in Sources */,
+				5261E4472701800200B81BCE /* OptionSet+.swift in Sources */,
+				5261E44C270180A900B81BCE /* MultiPageList.swift in Sources */,
+				5261E44627017A2E00B81BCE /* Announcement.swift in Sources */,
+				5260FB9C26FD81E5003BB399 /* Date+.swift in Sources */,
+				5261E444270176CA00B81BCE /* ToDo.swift in Sources */,
+				5260FB8D26FD6913003BB399 /* MyMind_Widgets.swift in Sources */,
+				5261E442270172FE00B81BCE /* Response.swift in Sources */,
+				5261E43F270171E600B81BCE /* UserSession.swift in Sources */,
+				5261E441270172E900B81BCE /* APIError.swift in Sources */,
+				5261E445270177BC00B81BCE /* MyMindNotification.swift in Sources */,
+				5261E43E270171C400B81BCE /* KeychainHelper.swift in Sources */,
+				5260FB9B26FD76D1003BB399 /* Report.swift in Sources */,
+				5261E4432701745700B81BCE /* Authorization.swift in Sources */,
+				5261E4482701802900B81BCE /* UIColor+.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A44A5A6625F9B0D200995823 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1701,6 +1865,7 @@
 				520776A926B50FBC005BA621 /* SignInTransitionDelegate.swift in Sources */,
 				97AFE36926661750002CBE01 /* SuggestionProductMaterialViewModel.swift in Sources */,
 				A4BDC7B9260B3E0A005C33A5 /* KeychainHelper.swift in Sources */,
+				5261E44B270180A900B81BCE /* MultiPageList.swift in Sources */,
 				A405410D264A670100E2D21B /* MultiSelectableDropDownTableViewCell.swift in Sources */,
 				97AFE37326673535002CBE01 /* PurchaseSuggestionViewController.swift in Sources */,
 				A457AEB42660F5F80029DDBB /* StageProgressView.swift in Sources */,
@@ -1889,6 +2054,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		5260FB9226FD6916003BB399 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5260FB8526FD6912003BB399 /* MyMind WidgetsExtension */;
+			targetProxy = 5260FB9126FD6916003BB399 /* PBXContainerItemProxy */;
+		};
 		A44A5A8225F9B0D300995823 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = A44A5A6925F9B0D200995823 /* MyMind */;
@@ -2188,6 +2358,166 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = MyMind;
+			};
+			name = Demo;
+		};
+		5260FB9526FD6916003BB399 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B910FFB64F93E557D74E744C /* Pods-MyMind WidgetsExtension.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_ENTITLEMENTS = "MyMind WidgetsExtension.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = NCP4JUG36Z;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "MyMind Widgets/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "MyMind Widgets";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2021 United Digital Intelligence. All rights reserved.";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.shopping.udi.MyMind.beta.MyMind-Widgets";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SERVER_URL = "http://api-beta-dos.udnshopping.com";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		5260FB9626FD6916003BB399 /* Alpha */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F0A63AC0055ECC1320AB3459 /* Pods-MyMind WidgetsExtension.alpha.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_ENTITLEMENTS = "MyMind WidgetsExtension.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = NCP4JUG36Z;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "MyMind Widgets/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "MyMind Widgets";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2021 United Digital Intelligence. All rights reserved.";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.shopping.udi.MyMind.alpha.MyMind-Widgets";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SERVER_URL = "http://api-gke-alpha-dos.udnshopping.com";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Alpha;
+		};
+		5260FB9726FD6916003BB399 /* Gamma */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E186406F3C9384E5CCE45DB3 /* Pods-MyMind WidgetsExtension.gamma.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_ENTITLEMENTS = "MyMind WidgetsExtension.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = NCP4JUG36Z;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "MyMind Widgets/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "MyMind Widgets";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2021 United Digital Intelligence. All rights reserved.";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.shopping.udi.MyMind.gamma.MyMind-Widgets";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SERVER_URL = "http://api-gke-alpha-dos.udnshopping.com";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Gamma;
+		};
+		5260FB9826FD6916003BB399 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F0B98855B716F06EEA9CE8DA /* Pods-MyMind WidgetsExtension.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_ENTITLEMENTS = "MyMind WidgetsExtension.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = NCP4JUG36Z;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "MyMind Widgets/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "MyMind Widgets";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2021 United Digital Intelligence. All rights reserved.";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.shopping.udi.MyMind.MyMind-Widgets";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SERVER_URL = "https://api-mymind.udicommerce.com";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		5260FB9926FD6916003BB399 /* Demo */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 00B96F7611AC87973EF3208B /* Pods-MyMind WidgetsExtension.demo.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_ENTITLEMENTS = "MyMind WidgetsExtension.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = NCP4JUG36Z;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "MyMind Widgets/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "MyMind Widgets";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2021 United Digital Intelligence. All rights reserved.";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.shopping.udi.MyMind.demo.MyMind-Widgets";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SERVER_URL = "https://demo-mymind.udicommerce.com";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Demo;
 		};
@@ -2602,6 +2932,18 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		5260FB9A26FD6916003BB399 /* Build configuration list for PBXNativeTarget "MyMind WidgetsExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5260FB9526FD6916003BB399 /* Debug */,
+				5260FB9626FD6916003BB399 /* Alpha */,
+				5260FB9726FD6916003BB399 /* Gamma */,
+				5260FB9826FD6916003BB399 /* Release */,
+				5260FB9926FD6916003BB399 /* Demo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		A44A5A6525F9B0D200995823 /* Build configuration list for PBXProject "MyMind" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

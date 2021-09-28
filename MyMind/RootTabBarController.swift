@@ -14,11 +14,13 @@ final class RootTabBarController: UITabBarController {
     }
     private var contentViewControlelrs: [UIViewController] = []
     var authorization: Authorization?
+    var section: Int?
     convenience init() {
-        self.init(authorization: nil)
+        self.init(authorization: nil, section: nil)
         }
-    init(authorization: Authorization?) {
+    init(authorization: Authorization?, section: Int?) {
         self.authorization = authorization
+        self.section = section
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -75,6 +77,7 @@ final class RootTabBarController: UITabBarController {
     private func generateHomeViewController() {
         if let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "Home") as? HomeViewController {
             viewController.authorization = authorization
+            viewController.section = section
             viewController.tabBarItem.image = UIImage(named: "home")
             viewController.tabBarItem.title = "首頁"
             contentViewControlelrs.append(viewController)

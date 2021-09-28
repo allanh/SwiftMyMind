@@ -24,6 +24,7 @@ typealias FunctionControlInfo = (type: MainFunctoinType, imageName: String, titl
 typealias SwitcherInfo = (firstTitle: String, secondTitle: String, current: Int, section: Section)
 final class HomeViewController: UIViewController {
 
+    var section: Int?
     override var preferredStatusBarStyle: UIStatusBarStyle {
         .lightContent
     }
@@ -52,45 +53,59 @@ final class HomeViewController: UIViewController {
             loadGrossProfitRankingReportList()
         }
     }
+    private func scrollThenReset(_ match: Int) {
+        if let section = section, section == match {
+            self.section = nil
+            collectionView.scrollToItem(at: IndexPath(item: 0, section: section), at: .centeredVertically, animated: false)
+        }
+    }
     private var headerInfos: [(title: String, info: SwitcherInfo)] = [("", ("", "", 0, Section.bulliten)), ("待辦事項", ("", "", 0, Section.todo)), ("", ("", "", 0, Section.today)), ("近30日銷售數量", ("銷售數量", "銷售總額", 0, Section.thirtyDays)), ("近7日SKU銷售排行", ("銷售數量", "銷售總額", 0, Section.sevenDaysSKU)), ("近7日加工組合SKU銷售排行", ("銷售數量", "銷售總額", 0, Section.sevenDaysSetSKU)), ("近7日銷售金額佔比", ("通路", "供應商", 0, Section.sevenDaysSaleAmount)), ("近7日銷售毛利佔比", ("通路", "供應商", 0, Section.sevenDaysGrossProfit))]
     private var bulletins: BulletinList? {
         didSet {
             collectionView.reloadSections([Section.bulliten.rawValue])
+            scrollThenReset(Section.bulliten.rawValue)
         }
     }
     private var toDoList: ToDoList? {
         didSet {
             collectionView.reloadSections([Section.todo.rawValue])
+            scrollThenReset(Section.todo.rawValue)
         }
     }
     private var saleReports: SaleReports? {
         didSet {
             collectionView.reloadSections([Section.today.rawValue])
+            scrollThenReset(Section.today.rawValue)
         }
     }
     private var saleReportList: SaleReportList? {
         didSet {
             collectionView.reloadSections([Section.thirtyDays.rawValue])
+            scrollThenReset(Section.thirtyDays.rawValue)
         }
     }
     private var skuRankingReportList: SKURankingReportList? {
         didSet {
             collectionView.reloadSections([Section.sevenDaysSKU.rawValue])
+            scrollThenReset(Section.sevenDaysSKU.rawValue)
         }
     }
     private var setSKURankingReportList: SKURankingReportList? {
         didSet {
             collectionView.reloadSections([Section.sevenDaysSetSKU.rawValue])
+            scrollThenReset(Section.sevenDaysSetSKU.rawValue)
         }
     }
     private var saleRankingReportList: SaleRankingReportList? {
         didSet {
             collectionView.reloadSections([Section.sevenDaysSaleAmount.rawValue])
+            scrollThenReset(Section.sevenDaysSaleAmount.rawValue)
         }
     }
     private var grossProfitRankingReportList: SaleRankingReportList? {
         didSet {
             collectionView.reloadSections([Section.sevenDaysGrossProfit.rawValue])
+            scrollThenReset(Section.sevenDaysGrossProfit.rawValue)
         }
     }
     var authorization: Authorization?
