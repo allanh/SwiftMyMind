@@ -13,6 +13,18 @@ import RxSwift
 @testable import MyMind
 
 class MockAutoCompleteAPIService: AutoCompleteAPIService {
+    func productMaterialBrandNameAutoComplete(searchTerm: String, vendorID: String?) -> Promise<AutoCompleteList> {
+        return deffered.promise
+    }
+    
+    func announcementTitleAutoComplete(searchTerm: String) -> Promise<AutoCompleteList> {
+        return deffered.promise
+    }
+    
+    func announcementTypeAutoComplete(searchTerm: String) -> Promise<AutoCompleteList> {
+        return deffered.promise
+    }
+    
     let deffered = Promise<AutoCompleteList>.pending()
 
     func purchaseNumberAutoComplete(searchTerm: String) -> Promise<AutoCompleteList> {

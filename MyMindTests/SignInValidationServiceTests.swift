@@ -25,49 +25,49 @@ class SignInValidationServiceTests: XCTestCase {
 
     func test_valid_storeID() {
         let storeID = "AA0002"
-        let result = sut.validateStoreID(storeID)
+        let result = sut.validate(storeID)
         XCTAssertEqual(result, .valid)
     }
 
     func test_inValid_storeID() {
         let storeID = "AA0"
-        let result = sut.validateStoreID(storeID)
+        let result = sut.validate(storeID)
         XCTAssertEqual(result, .invalid("企業帳號長度為5~8碼"))
     }
 
     func test_valid_account() {
         let account = "tommy"
-        let result = sut.validateAccount(account)
+        let result = sut.validate(account)
         XCTAssertEqual(result, .valid)
     }
 
     func test_inValid_account() {
         let account = "A0"
-        let result = sut.validateAccount(account)
+        let result = sut.validate(account)
         XCTAssertEqual(result, .invalid("使用者帳號長度為3~20碼"))
     }
 
     func test_valid_password() {
         let password = "123456"
-        let result = sut.validatePassword(password)
+        let result = sut.validate(password)
         XCTAssertEqual(result, .valid)
     }
 
     func test_inValid_password() {
         let password = "123"
-        let result = sut.validatePassword(password)
+        let result = sut.validate(password)
         XCTAssertEqual(result, .invalid("密碼長度為6~20碼，英文字母需區分大小寫"))
     }
 
     func test_valid_captchaValue() {
         let captcha = "43312"
-        let result = sut.validateCaptchaValue(captcha)
+        let result = sut.validate(captcha)
         XCTAssertEqual(result, .valid)
     }
 
     func test_inValid_captchaValue() {
         let captcha = "123"
-        let result = sut.validateCaptchaValue(captcha)
+        let result = sut.validate(captcha)
         XCTAssertEqual(result, .invalid("驗證碼長度為5碼"))
     }
 
