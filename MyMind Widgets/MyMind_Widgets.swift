@@ -136,6 +136,55 @@ extension SaleReportList {
         
         return data
     }
+    func chartPath(width: CGFloat, height: CGFloat, maxY: CGFloat) -> Path {
+        var path = Path()
+        let heightRatio = height/maximumAmount
+        let toDate: Date = Date().yesterday
+        let fromDate: Date = toDate.thirtyDaysBefore
+        let offset = Calendar.current.dateComponents([.day], from: fromDate, to: toDate).day!
+        var salePoints: [CGPoint] = (0..<offset).map { (i) -> CGPoint in
+            return CGPoint(x: CGFloat(CGFloat(i)*width)+10, y: 0)
+        }
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        for report in reports {
+            if let date = report.date {
+                let components = Calendar.current.dateComponents([.day], from: fromDate, to: formatter.date(from: date)!)
+                salePoints[components.day!].y += CGFloat(report.saleAmount)*heightRatio
+            }
+        }
+        salePoints = salePoints.map { origin in
+            return CGPoint(x: origin.x, y: maxY - origin.y)
+        }
+//        for index in 0..<salePoints.count {
+//            salePoints[index].y = maxY - salePoints[index].y
+//        }
+        var previousPoint: CGPoint?
+        var isFirst = true
+        for index in 0..<salePoints.count {
+            let point = salePoints[index]
+            if let previousPoint = previousPoint {
+                let midPoint = CGPoint(
+                    x: (point.x + previousPoint.x) / 2,
+                    y: (point.y + previousPoint.y) / 2
+                )
+                if isFirst {
+                    path.addLine(to: midPoint)
+                    isFirst = false
+                } else if index == salePoints.count - 1{
+                    path.addQuadCurve(to: point, control: midPoint)
+                } else {
+                    path.addQuadCurve(to: midPoint, control: previousPoint)
+                }
+            }
+            else {
+                path.move(to: point)
+            }
+            previousPoint = point
+        }
+//        path.addLines(salePoints)
+        return path
+    }
 }
 extension LineChartView {
     convenience init(frame: CGRect, entry: Provider.Entry) {
@@ -269,33 +318,6 @@ class NetworkManager {
         }
         return request
     }
-//    func sendRequest<T: Decodable>(_ request: URLRequest, completionHandler: @escaping (Result<T, Error>) -> Void) {
-//
-//        let task = URLSession.shared.dataTask(with: request) { data, _, error in
-//            guard error == nil else {
-//                print(error?.localizedDescription as Any)
-//                completionHandler(Result.failure(error!))
-//                return
-//            }
-//
-//            guard let jsonData = data else {
-//                completionHandler(Result.failure(APIError.dataNotFoundError))
-//                return
-//            }
-//
-//            do {
-//                let response = try JSONDecoder().decode(Response<T>.self, from: jsonData)
-//                guard let item = response.data else {
-//                    completionHandler(Result.failure(APIError.dataNotFoundError))
-//                    return
-//                }
-//                completionHandler(Result.success(item))
-//            } catch {
-//                completionHandler(Result.failure(APIError.parseError))
-//            }
-//        }
-//        task.resume()
-//    }
 
     func authorization(completion: @escaping (Authorization?, Bool) -> ()) {
         guard let userSession = readUserSession() else {
@@ -488,6 +510,115 @@ struct SimpleEntry: TimelineEntry {
     let toDoCount: Int?
     let announcementCount: Int?
 }
+///
+/// Chart View
+struct ChartView : View {
+    let reportList: SaleReportList?
+    @State var labels: [String] = ["", "", ""]
+//    let labels: [String] //= ["11/01","12/01","1/1"]
+    var body : some View {
+        ZStack {
+            GeometryReader { geo in
+                let frame = geo.frame(in: .named("chart parent"))
+                if let reportList = reportList {
+                    Rectangle()
+                        .fill(LinearGradient(colors: [Color(red: 255.0/255.0, green: 0.0/255.0, blue: 0.0/255.0), Color(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0)], startPoint: .top, endPoint: .bottom))
+                        .clipShape(reportList.chartPath(width: (frame.size.width-20)/29, height: frame.size.height, maxY: frame.maxY))
+                        .blendMode(.overlay)
+                    Path { path in
+                        path = reportList.chartPath(width: (frame.size.width-20)/29, height: frame.size.height, maxY: frame.maxY)
+                    }
+                    .stroke(Color.blue, lineWidth: 2)
+                }
+                
+                Path { path in
+                    path.move(to: CGPoint(x: frame.minX, y: frame.minY))
+                    path.addLine(to: CGPoint(x: frame.minX, y: frame.maxY))
+                }
+                .stroke(Color.gray, lineWidth: 1)
+                Path { path in
+                    path.move(to: CGPoint(x: frame.minX+(frame.size.width-20)/3, y: frame.minY))
+                    path.addLine(to: CGPoint(x: frame.minX+(frame.size.width-20)/3, y: frame.maxY))
+                }
+                .stroke(Color.gray, lineWidth: 1)
+                Path { path in
+                    path.move(to: CGPoint(x: frame.minX+(frame.size.width-20)/1.5, y: frame.minY))
+                    path.addLine(to: CGPoint(x: frame.minX+(frame.size.width-20)/1.5, y: frame.maxY))
+                }
+                .stroke(Color.gray, lineWidth: 1)
+                Path { path in
+                    path.move(to: CGPoint(x: frame.maxX-20, y: frame.minY))
+                    path.addLine(to: CGPoint(x: frame.maxX-20, y: frame.maxY))
+                }
+                .stroke(Color.gray, lineWidth: 1)
+                HStack {
+                    Text(labels[0])
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity)
+                        .onAppear {
+                            let formatter = DateFormatter()
+                            formatter.dateFormat = "M/d"
+                            let date = Calendar.current.date(byAdding: .day, value: 5, to: Date().thirtyDaysBefore)!
+                            labels[0] = formatter.string(from: date)
+                        }
+                    Text(labels[1])
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity)
+                        .onAppear {
+                            let formatter = DateFormatter()
+                            formatter.dateFormat = "M/d"
+                            let date = Calendar.current.date(byAdding: .day, value: 15, to: Date().thirtyDaysBefore)!
+                            labels[1] = formatter.string(from: date)
+                        }
+                    Text(labels[2])
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity)
+                        .onAppear {
+                            let formatter = DateFormatter()
+                            formatter.dateFormat = "M/d"
+                            let date = Calendar.current.date(byAdding: .day, value: 25, to: Date().thirtyDaysBefore)!
+                            labels[2] = formatter.string(from: date)
+                        }
+                }
+                .frame(width: frame.size.width-20)
+                .offset(x: 10, y: 0)
+            }
+        }
+        .padding(.trailing, 10)
+        .padding(.leading, 10)
+        .coordinateSpace(name: "chart parent")
+    }
+}
+///  Indicator View
+struct IndicatorView : View {
+    let count: Int?
+    let title: String
+    let colors: [Color]
+    var body : some View {
+        HStack {
+            Rectangle()
+                .fill(LinearGradient(colors: colors, startPoint: .top, endPoint: .bottom))
+                .blendMode(.overlay)
+                .frame(width: 6)
+                .cornerRadius(3)
+            VStack(alignment: .leading) {
+                Text(title)
+                    .font(.custom("PingFangTC-Regular", size: 14))
+                    .foregroundColor(.white)
+                if let count = count {
+                    Text("\(count)")
+                        .font(.custom("PingFangTC-Semibold", size: 24))
+                        .foregroundColor(.white)
+
+                } else {
+                    Text("-")
+                        .font(.custom("PingFangTC-Semibold", size: 24))
+                        .foregroundColor(.white)
+                }
+            }
+        }
+    }
+}
 /// Entry View
 struct MyMind_WidgetsEntryView : View {
     @Environment(\.widgetFamily) var family: WidgetFamily
@@ -502,129 +633,115 @@ struct MyMind_WidgetsEntryView : View {
     var body: some View {
         switch family {
         case .systemMedium:
-            HStack {
-                Image(systemName: "bell")
-                    .resizable()
-                    .frame(width: 40, alignment: .topLeading)
-                    .background(Color.purple)
-                    .cornerRadius(16)
-                Link(destination: URL(string: "mymindwidget://otp")!) {
-                    VStack {
-                        Spacer(minLength: 30)
-                        Image(systemName: "camera.fill")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .foregroundColor(.white)
-                            .frame(height: 36, alignment: .center)
-                            .padding(.leading, 18)
-                            .padding(.trailing, 18)
-                        Spacer(minLength: 30)
-                        Text("OTP")
-                            .font(.custom("PingFangTC-Semibold", size: 20))
-                            .foregroundColor(.white)
+            VStack {
+                HStack {
+                    Text("MyMind")
+                        .frame(height: 24, alignment: .topLeading)
+                        .font(.custom("PingFangTC-Semibold", size: 14))
+                        .foregroundColor(.white)
+                        .padding(.leading, 16)
+                        .padding(.top, 20)
+                    Spacer()
+                }
+                if entry.isLogin {
+                    Spacer(minLength: 20)
+                    HStack {
+                        IndicatorView(count: entry.toDoCount, title: "代辦事項", colors: [Color(red: 139.0/255.0, green: 134.0/255.0, blue: 196.0/255.0), Color(red: 112.0/255.0, green: 107.0/255.0, blue: 178.0/255.0)])
+                            .frame(maxWidth: .infinity)
                         Spacer()
+                        IndicatorView(count: entry.announcementCount, title: "公告通知", colors: [Color(red: 195.0/255.0, green: 117.0/255.0, blue: 121.0/255.0), Color(red: 160.0/255.0, green: 75.0/255.0, blue: 99.0/255.0)])
+                            .frame(maxWidth: .infinity)
+                        Spacer()
+                        Link(destination: URL(string: "mymindwidget://otp")!) {
+                            HStack {
+                                Image(systemName: "bell")
+                                    .foregroundColor(.white)
+                                Text("OTP")
+                                    .font(.custom("PingFangTC-Semibold", size: 24))
+                                    .foregroundColor(.white)
+                            }
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 48)
+                            .background(Color.blue)
+                            .cornerRadius(16)
+                        }
                     }
-                    .frame(width: 80, alignment: .leading)
-                    .background(.orange)
-                    .cornerRadius(16)
+                    .frame(maxHeight: .infinity)
+                    .padding(.trailing, 16)
+                    .padding(.leading, 16)
+                    .padding(.bottom, 20)
+                } else {
+                    Spacer()
+                    HStack {
+                        Link(destination: URL(string: "mymindwidget://login")!) {
+                            HStack {
+                                Spacer()
+                                Image(systemName: "exclamationmark.triangle.fill")
+                                    .resizable()
+                                    .frame(width: 48, height: 48, alignment: .center)
+                                    .foregroundColor(Color.orange)
+                                VStack {
+                                    Text("尚未連線請先行登入")
+                                        .font(.custom("PingFangTC-Semibold", size: 15))
+                                        .foregroundColor(.white)
+                                        .multilineTextAlignment(.center)
+                                        .frame(maxHeight: .infinity)
+                                    Text("登入")
+                                        .font(.custom("PingFangTC-Regular", size: 12))
+                                        .foregroundColor(.white)
+                                        .padding(.leading, 10)
+                                        .padding(.trailing, 10)
+                                        .overlay(RoundedRectangle(cornerRadius: 8).stroke(.yellow, lineWidth: 2))
+                                }
+                                Spacer()
+                            }
+                            .frame(width: 185)
+                        }
+                        Spacer()
+                        Link(destination: URL(string: "mymindwidget://otp")!) {
+                            HStack {
+                                Image(systemName: "bell")
+                                    .foregroundColor(.white)
+                                Text("OTP")
+                                    .font(.custom("PingFangTC-Semibold", size: 24))
+                                    .foregroundColor(.white)
+                            }
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 48)
+                            .background(Color.blue)
+                            .cornerRadius(16)
+                        }
+                    }
+                    .frame(maxHeight: .infinity)
+                    .padding(.trailing, 16)
+                    .padding(.leading, 16)
+                    .padding(.bottom, 20)
                 }
                 Spacer()
-                if entry.isLogin {
-                    VStack {
-                        Spacer()
-                        if let toDoCount = entry.toDoCount {
-                            Text("\(toDoCount)")
-                                .font(.custom("PingFangTC-Semibold", size: 32))
-                                .frame(width: 80, alignment: .center)
-                                .foregroundColor(.white)
-
-                        } else {
-                            Text("-")
-                                .font(.custom("PingFangTC-Semibold", size: 32))
-                                .foregroundColor(.white)
-                        }
-                        Spacer()
-                        Text("代辦事項")
-                            .font(.custom("PingFangTC-Regular", size: 16))
-                            .foregroundColor(.white)
-                        Spacer()
-                    }
-                    .frame(width: 80, alignment: .leading)
-                    .background(.green)
-                    .cornerRadius(16)
-                    Spacer()
-                    VStack {
-                        Spacer()
-                        if let announcementCount = entry.announcementCount {
-                            Text("\(announcementCount)")
-                                .font(.custom("PingFangTC-Semibold", size: 32))
-                                .frame(width: 80, alignment: .center)
-                                .foregroundColor(.white)
-
-                        } else {
-                            Text("-")
-                                .font(.custom("PingFangTC-Semibold", size: 32))
-                                .foregroundColor(.white)
-                                .padding(.leading, 30.5)
-                                .padding(.trailing, 30.5)
-                        }
-                        Spacer()
-                        Text("公告通知")
-                            .font(.custom("PingFangTC-Regular", size: 16))
-                            .foregroundColor(.white)
-                        Spacer()
-                    }
-                    .frame(width: 80, alignment: .leading)
-                    .background(.red)
-                    .cornerRadius(16)
-                    Spacer()
-                } else {
-                    Link(destination: URL(string: "mymindwidget://login")!) {
-                        HStack {
-                            Spacer()
-                            Image(systemName: "exclamationmark.triangle.fill")
-                                .resizable()
-                                .frame(width: 48, height: 48, alignment: .center)
-                                .foregroundColor(Color.orange)
-                            VStack {
-                                Spacer(minLength: 20)
-                                Text("尚未連線請先行登入")
-                                    .font(.custom("PingFangTC-Semibold", size: 18))
-                                    .multilineTextAlignment(.center)
-                                Text("登入")
-                                    .font(.custom("PingFangTC-Regular", size: 16))
-                                    .padding(.leading, 10)
-                                    .padding(.trailing, 10)
-                                    .overlay(RoundedRectangle(cornerRadius: 8).stroke(.yellow, lineWidth: 2))
-                                Spacer(minLength: 20)
-                            }
-                            Spacer()
-                        }
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .background(Color.mint)
-                        .cornerRadius(20)
-                        .overlay(RoundedRectangle(cornerRadius: 18).stroke(.white, lineWidth: 4))
-                   }
-                    Spacer()
-                }
             }
-            .background(.gray)
+            .frame(maxWidth: .infinity)
+            .background(LinearGradient(colors: [Color(UIColor(hex: "133150")), .black], startPoint: .top, endPoint: .bottom))
         case .systemLarge:
             VStack {
-                Image(systemName: "bell")
-                    .resizable()
-                    .frame(height: 26, alignment: .topLeading)
-                    .background(Color.purple)
-                    .cornerRadius(8)
+                Spacer()
+                HStack {
+                    Text("近30日銷售數據")
+                        .frame(height: 24, alignment: .topLeading)
+                        .font(.custom("PingFangTC-Regular", size: 14))
+                        .foregroundColor(.white)
+                        .padding(.leading, 16)
+                        .padding(.top, 20)
+                    Spacer()
+                    Text("MyMind")
+                        .frame(height: 24, alignment: .topTrailing)
+                        .font(.custom("PingFangTC-Semibold", size: 14))
+                        .foregroundColor(.white)
+                        .padding(.trailing, 16)
+                        .padding(.top, 20)
+                }
                 Spacer()
                 if entry.isLogin {
-                    Link(destination: URL(string: "mymindwidget://dashboard")!) {
-                        Image(uiImage: viewValue().image ?? UIImage())
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(alignment: .center)
-                    }
-                    Spacer(minLength: 30)
+                    ChartView(reportList: entry.reportList)
                 } else {
                     Link(destination: URL(string: "mymindwidget://login")!) {
                         HStack {
@@ -633,79 +750,53 @@ struct MyMind_WidgetsEntryView : View {
                                 .frame(width: 48, height: 48, alignment: .center)
                                 .foregroundColor(Color.orange)
                             VStack {
-                                Spacer(minLength: 20)
+                                Spacer(minLength: 60)
                                 Text("尚未連線請先行登入")
                                     .font(.custom("PingFangTC-Semibold", size: 18))
+                                    .foregroundColor(.white)
                                 Spacer()
                                 Text("登入")
                                     .font(.custom("PingFangTC-Regular", size: 16))
+                                    .foregroundColor(.white)
                                     .padding(.leading, 10)
                                     .padding(.trailing, 10)
                                     .overlay(RoundedRectangle(cornerRadius: 8).stroke(.yellow, lineWidth: 2))
-                                Spacer(minLength: 20)
+                                Spacer(minLength: 60)
                             }
                         }
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                     }
-                    Spacer(minLength: 60)
                 }
+                Spacer(minLength: 20)
                 HStack {
+                    IndicatorView(count: entry.toDoCount, title: "代辦事項", colors: [Color(red: 139.0/255.0, green: 134.0/255.0, blue: 196.0/255.0), Color(red: 112.0/255.0, green: 107.0/255.0, blue: 178.0/255.0)])
+                        .frame(maxWidth: .infinity)
+                    Spacer()
+                    IndicatorView(count: entry.announcementCount, title: "公告通知", colors: [Color(red: 195.0/255.0, green: 117.0/255.0, blue: 121.0/255.0), Color(red: 160.0/255.0, green: 75.0/255.0, blue: 99.0/255.0)])
+                        .frame(maxWidth: .infinity)
                     Spacer()
                     Link(destination: URL(string: "mymindwidget://otp")!) {
                         HStack {
-                            Image(systemName: "camera.fill")
+                            Image(systemName: "bell")
                                 .foregroundColor(.white)
-                                .frame(width: 24, height: 24, alignment: .center)
                             Text("OTP")
-                                .font(.custom("PingFangTC-Semibold", size: 20))
-                                .foregroundColor(.white)
-                        }
-                        .frame(width: 80, height: 45, alignment: .center)
-                        .background(.orange)
-                        .cornerRadius(8)
-                    }
-                    Spacer()
-                    HStack {
-                        if let toDoCount = entry.toDoCount {
-                            Text("\(toDoCount)")
-                                .font(.custom("PingFangTC-Semibold", size: 24))
-                                .foregroundColor(.white)
-
-                        } else {
-                            Text("-")
                                 .font(.custom("PingFangTC-Semibold", size: 24))
                                 .foregroundColor(.white)
                         }
-                        Text("代辦事項")
-                            .font(.custom("PingFangTC-Regular", size: 16))
-                            .foregroundColor(.white)
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 48)
+                        .background(Color.blue)
+                        .cornerRadius(16)
                     }
-                    .frame(width: 80, height: 45, alignment: .center)
-                    .background(.green)
-                    .cornerRadius(8)
-                    Spacer()
-                    HStack {
-                        if let announcementCount = entry.announcementCount {
-                            Text("\(announcementCount)")
-                                .font(.custom("PingFangTC-Semibold", size: 24))
-                                .foregroundColor(.white)
-
-                        } else {
-                            Text("-")
-                                .font(.custom("PingFangTC-Semibold", size: 24))
-                                .foregroundColor(.white)
-                        }
-                        Text("公告通知")
-                            .font(.custom("PingFangTC-Regular", size: 16))
-                            .foregroundColor(.white)
-                    }
-                    .frame(width: 80, height: 45, alignment: .center)
-                    .background(.red)
-                    .cornerRadius(8)
-                    Spacer()
-                }.frame(maxWidth: .infinity)
-                Spacer(minLength: 20)
+                }
+                .frame(height: 48)
+                .padding(.trailing, 16)
+                .padding(.leading, 16)
+                .padding(.bottom, 20)
+                Spacer()
             }
+            .frame(maxWidth: .infinity)
+            .background(LinearGradient(colors: [Color(UIColor(hex: "133150")), .black], startPoint: .top, endPoint: .bottom))
         default:
             Text("not available")
         }
