@@ -77,6 +77,12 @@ struct SaleReportList: Codable {
             return Double(max(maximunSaleAmount, maximunCanceledAmount, maximunReturnAmount))
         }
     }
+    var totalSaleAmount: Double {
+        get {
+            let result = reports.map({$0.saleAmount}).reduce(0, +)
+            return Double(result)
+        }
+    }
 }
 // MARK: -- SaleReports --
 struct SaleReports {
