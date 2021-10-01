@@ -45,146 +45,142 @@ extension UIView {
     }
 }
 extension SaleReportList {
-    func lineChartData(order: SKURankingReport.SKURankingReportSortOrder) -> LineChartData {
-        let toDate: Date = Date().yesterday
-        let fromDate: Date = toDate.thirtyDaysBefore
-        let offset = Calendar.current.dateComponents([.day], from: fromDate, to: toDate).day!
-        let saleEntries: [ChartDataEntry] = (0..<offset).map { (i) -> ChartDataEntry in
-            return ChartDataEntry(x: Double(i), y: 0, data: Calendar.current.date(byAdding: .day, value: i, to: fromDate))
-        }
-        let canceledEntries: [ChartDataEntry] = (0..<offset).map { (i) -> ChartDataEntry in
-            return ChartDataEntry(x: Double(i), y: 0, data: Calendar.current.date(byAdding: .day, value: i, to: fromDate))
-        }
-        let returnedEntries: [ChartDataEntry] = (0..<offset).map { (i) -> ChartDataEntry in
-            return ChartDataEntry(x: Double(i), y: 0, data: Calendar.current.date(byAdding: .day, value: i, to: fromDate))
-        }
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        for report in reports {
-            if let date = report.date {
-                let components = Calendar.current.dateComponents([.day], from: fromDate, to: formatter.date(from: date)!)
-                switch order {
-                case .TOTAL_SALE_QUANTITY:
-                    saleEntries[components.day!].y += Double(report.saleQuantity)
-                    canceledEntries[components.day!].y += Double(report.canceledQuantity)
-                    returnedEntries[components.day!].y += Double(report.returnQuantity)
-                case .TOTAL_SALE_AMOUNT:
-                    saleEntries[components.day!].y += Double(report.saleAmount)
-                    canceledEntries[components.day!].y += Double(report.canceledAmount)
-                    returnedEntries[components.day!].y += Double(report.returnAmount)
-                }
-            }
-        }
-
-        let saleSet = LineChartDataSet(entries: saleEntries, label: (order == .TOTAL_SALE_QUANTITY) ? "銷售數量" : "銷售總額")
-        saleSet.setColor(.systemGreen)
-        saleSet.drawCircleHoleEnabled = false
-        saleSet.drawCirclesEnabled = false
-        saleSet.drawIconsEnabled = false
-
-        let canceledSet = LineChartDataSet(entries: canceledEntries, label: (order == .TOTAL_SALE_QUANTITY) ? "取消數量" : "取消總額")
-        canceledSet.drawCircleHoleEnabled = false
-        canceledSet.drawCirclesEnabled = false
-        canceledSet.setColor(.systemGray)
-        canceledSet.drawIconsEnabled = false
-
-        
-        let returnedSet = LineChartDataSet(entries: returnedEntries, label: (order == .TOTAL_SALE_QUANTITY) ? "銷退數量" : "銷退總額")
-        returnedSet.setColor(.systemOrange)
-        returnedSet.drawCirclesEnabled = false
-        returnedSet.drawCircleHoleEnabled = false
-        returnedSet.drawIconsEnabled = false
-
-        let data: LineChartData = LineChartData(dataSets: [saleSet, canceledSet, returnedSet])
-        
-        return data
-    }
-    static func emptyLineChartData(order: SKURankingReport.SKURankingReportSortOrder) -> LineChartData{
-        let toDate: Date = Date()
-        let fromDate: Date = toDate.thirtyDaysBefore
-        let offset = Calendar.current.dateComponents([.day], from: fromDate, to: toDate).day!
-        let saleEntries: [ChartDataEntry] = (0..<offset).map { (i) -> ChartDataEntry in
-            return ChartDataEntry(x: Double(i), y: 0, data: Calendar.current.date(byAdding: .day, value: i, to: fromDate))
-        }
-        let canceledEntries: [ChartDataEntry] = (0..<offset).map { (i) -> ChartDataEntry in
-            return ChartDataEntry(x: Double(i), y: 0, data: Calendar.current.date(byAdding: .day, value: i, to: fromDate))
-        }
-        let returnedEntries: [ChartDataEntry] = (0..<offset).map { (i) -> ChartDataEntry in
-            return ChartDataEntry(x: Double(i), y: 0, data: Calendar.current.date(byAdding: .day, value: i, to: fromDate))
-        }
-
-        let saleSet = LineChartDataSet(entries: saleEntries, label: (order == .TOTAL_SALE_QUANTITY) ? "銷售數量" : "銷售總額")
-        saleSet.setColor(.systemGreen)
-        saleSet.drawCircleHoleEnabled = false
-        saleSet.drawCirclesEnabled = false
-        saleSet.drawIconsEnabled = false
-
-        let canceledSet = LineChartDataSet(entries: canceledEntries, label: (order == .TOTAL_SALE_QUANTITY) ? "取消數量" : "取消總額")
-        canceledSet.drawCircleHoleEnabled = false
-        canceledSet.drawCirclesEnabled = false
-        canceledSet.setColor(.systemGray)
-        canceledSet.drawIconsEnabled = false
-
-        
-        let returnedSet = LineChartDataSet(entries: returnedEntries, label: (order == .TOTAL_SALE_QUANTITY) ? "銷退數量" : "銷退總額")
-        returnedSet.setColor(.systemOrange)
-        returnedSet.drawCirclesEnabled = false
-        returnedSet.drawCircleHoleEnabled = false
-        returnedSet.drawIconsEnabled = false
-
-        let data: LineChartData = LineChartData(dataSets: [saleSet, canceledSet, returnedSet])
-        
-        return data
-    }
-    func chartPath(width: CGFloat, height: CGFloat, maxY: CGFloat) -> Path {
-        var path = Path()
-        let heightRatio = height/maximumAmount
-        let toDate: Date = Date().yesterday
-        let fromDate: Date = toDate.thirtyDaysBefore
-        let offset = Calendar.current.dateComponents([.day], from: fromDate, to: toDate).day!
-        var salePoints: [CGPoint] = (0..<offset).map { (i) -> CGPoint in
-            return CGPoint(x: CGFloat(CGFloat(i)*width)+10, y: 0)
-        }
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        for report in reports {
-            if let date = report.date {
-                let components = Calendar.current.dateComponents([.day], from: fromDate, to: formatter.date(from: date)!)
-                salePoints[components.day!].y += CGFloat(report.saleAmount)*heightRatio
-            }
-        }
-        salePoints = salePoints.map { origin in
-            return CGPoint(x: origin.x, y: maxY - origin.y)
-        }
-//        for index in 0..<salePoints.count {
-//            salePoints[index].y = maxY - salePoints[index].y
+//    func lineChartData(order: SKURankingReport.SKURankingReportSortOrder) -> LineChartData {
+//        let toDate: Date = Date().yesterday
+//        let fromDate: Date = toDate.thirtyDaysBefore
+//        let offset = Calendar.current.dateComponents([.day], from: fromDate, to: toDate).day!
+//        let saleEntries: [ChartDataEntry] = (0..<offset).map { (i) -> ChartDataEntry in
+//            return ChartDataEntry(x: Double(i), y: 0, data: Calendar.current.date(byAdding: .day, value: i, to: fromDate))
 //        }
-        var previousPoint: CGPoint?
-        var isFirst = true
-        for index in 0..<salePoints.count {
-            let point = salePoints[index]
-            if let previousPoint = previousPoint {
-                let midPoint = CGPoint(
-                    x: (point.x + previousPoint.x) / 2,
-                    y: (point.y + previousPoint.y) / 2
-                )
-                if isFirst {
-                    path.addLine(to: midPoint)
-                    isFirst = false
-                } else if index == salePoints.count - 1{
-                    path.addQuadCurve(to: point, control: midPoint)
-                } else {
-                    path.addQuadCurve(to: midPoint, control: previousPoint)
-                }
-            }
-            else {
-                path.move(to: point)
-            }
-            previousPoint = point
-        }
-//        path.addLines(salePoints)
-        return path
-    }
+//        let canceledEntries: [ChartDataEntry] = (0..<offset).map { (i) -> ChartDataEntry in
+//            return ChartDataEntry(x: Double(i), y: 0, data: Calendar.current.date(byAdding: .day, value: i, to: fromDate))
+//        }
+//        let returnedEntries: [ChartDataEntry] = (0..<offset).map { (i) -> ChartDataEntry in
+//            return ChartDataEntry(x: Double(i), y: 0, data: Calendar.current.date(byAdding: .day, value: i, to: fromDate))
+//        }
+//        let formatter = DateFormatter()
+//        formatter.dateFormat = "yyyy-MM-dd"
+//        for report in reports {
+//            if let date = report.date {
+//                let components = Calendar.current.dateComponents([.day], from: fromDate, to: formatter.date(from: date)!)
+//                switch order {
+//                case .TOTAL_SALE_QUANTITY:
+//                    saleEntries[components.day!].y += Double(report.saleQuantity)
+//                    canceledEntries[components.day!].y += Double(report.canceledQuantity)
+//                    returnedEntries[components.day!].y += Double(report.returnQuantity)
+//                case .TOTAL_SALE_AMOUNT:
+//                    saleEntries[components.day!].y += Double(report.saleAmount)
+//                    canceledEntries[components.day!].y += Double(report.canceledAmount)
+//                    returnedEntries[components.day!].y += Double(report.returnAmount)
+//                }
+//            }
+//        }
+//
+//        let saleSet = LineChartDataSet(entries: saleEntries, label: (order == .TOTAL_SALE_QUANTITY) ? "銷售數量" : "銷售總額")
+//        saleSet.setColor(.systemGreen)
+//        saleSet.drawCircleHoleEnabled = false
+//        saleSet.drawCirclesEnabled = false
+//        saleSet.drawIconsEnabled = false
+//
+//        let canceledSet = LineChartDataSet(entries: canceledEntries, label: (order == .TOTAL_SALE_QUANTITY) ? "取消數量" : "取消總額")
+//        canceledSet.drawCircleHoleEnabled = false
+//        canceledSet.drawCirclesEnabled = false
+//        canceledSet.setColor(.systemGray)
+//        canceledSet.drawIconsEnabled = false
+//
+//
+//        let returnedSet = LineChartDataSet(entries: returnedEntries, label: (order == .TOTAL_SALE_QUANTITY) ? "銷退數量" : "銷退總額")
+//        returnedSet.setColor(.systemOrange)
+//        returnedSet.drawCirclesEnabled = false
+//        returnedSet.drawCircleHoleEnabled = false
+//        returnedSet.drawIconsEnabled = false
+//
+//        let data: LineChartData = LineChartData(dataSets: [saleSet, canceledSet, returnedSet])
+//
+//        return data
+//    }
+//    static func emptyLineChartData(order: SKURankingReport.SKURankingReportSortOrder) -> LineChartData{
+//        let toDate: Date = Date()
+//        let fromDate: Date = toDate.thirtyDaysBefore
+//        let offset = Calendar.current.dateComponents([.day], from: fromDate, to: toDate).day!
+//        let saleEntries: [ChartDataEntry] = (0..<offset).map { (i) -> ChartDataEntry in
+//            return ChartDataEntry(x: Double(i), y: 0, data: Calendar.current.date(byAdding: .day, value: i, to: fromDate))
+//        }
+//        let canceledEntries: [ChartDataEntry] = (0..<offset).map { (i) -> ChartDataEntry in
+//            return ChartDataEntry(x: Double(i), y: 0, data: Calendar.current.date(byAdding: .day, value: i, to: fromDate))
+//        }
+//        let returnedEntries: [ChartDataEntry] = (0..<offset).map { (i) -> ChartDataEntry in
+//            return ChartDataEntry(x: Double(i), y: 0, data: Calendar.current.date(byAdding: .day, value: i, to: fromDate))
+//        }
+//
+//        let saleSet = LineChartDataSet(entries: saleEntries, label: (order == .TOTAL_SALE_QUANTITY) ? "銷售數量" : "銷售總額")
+//        saleSet.setColor(.systemGreen)
+//        saleSet.drawCircleHoleEnabled = false
+//        saleSet.drawCirclesEnabled = false
+//        saleSet.drawIconsEnabled = false
+//
+//        let canceledSet = LineChartDataSet(entries: canceledEntries, label: (order == .TOTAL_SALE_QUANTITY) ? "取消數量" : "取消總額")
+//        canceledSet.drawCircleHoleEnabled = false
+//        canceledSet.drawCirclesEnabled = false
+//        canceledSet.setColor(.systemGray)
+//        canceledSet.drawIconsEnabled = false
+//
+//
+//        let returnedSet = LineChartDataSet(entries: returnedEntries, label: (order == .TOTAL_SALE_QUANTITY) ? "銷退數量" : "銷退總額")
+//        returnedSet.setColor(.systemOrange)
+//        returnedSet.drawCirclesEnabled = false
+//        returnedSet.drawCircleHoleEnabled = false
+//        returnedSet.drawIconsEnabled = false
+//
+//        let data: LineChartData = LineChartData(dataSets: [saleSet, canceledSet, returnedSet])
+//
+//        return data
+//    }
+//    func chartPath(width: CGFloat, height: CGFloat, maxY: CGFloat) -> Path {
+//        var path = Path()
+//        let heightRatio = height/maximumAmount
+//        let toDate: Date = Date().yesterday
+//        let fromDate: Date = toDate.thirtyDaysBefore
+//        let offset = Calendar.current.dateComponents([.day], from: fromDate, to: toDate).day!
+//        var salePoints: [CGPoint] = (0..<offset).map { (i) -> CGPoint in
+//            return CGPoint(x: CGFloat(CGFloat(i)*width)+10, y: 0)
+//        }
+//        let formatter = DateFormatter()
+//        formatter.dateFormat = "yyyy-MM-dd"
+//        for report in reports {
+//            if let date = report.date {
+//                let components = Calendar.current.dateComponents([.day], from: fromDate, to: formatter.date(from: date)!)
+//                salePoints[components.day!].y += CGFloat(report.saleAmount)*heightRatio
+//            }
+//        }
+//        salePoints = salePoints.map { origin in
+//            return CGPoint(x: origin.x, y: maxY - origin.y)
+//        }
+//        var previousPoint: CGPoint?
+//        var isFirst = true
+//        for index in 0..<salePoints.count {
+//            let point = salePoints[index]
+//            if let previousPoint = previousPoint {
+//                let midPoint = CGPoint(
+//                    x: (point.x + previousPoint.x) / 2,
+//                    y: (point.y + previousPoint.y) / 2
+//                )
+//                if isFirst {
+//                    path.addLine(to: midPoint)
+//                    isFirst = false
+//                } else if index == salePoints.count - 1{
+//                    path.addQuadCurve(to: point, control: midPoint)
+//                } else {
+//                    path.addQuadCurve(to: midPoint, control: previousPoint)
+//                }
+//            }
+//            else {
+//                path.move(to: point)
+//            }
+//            previousPoint = point
+//        }
+//        return path
+//    }
     var points: [CGPoint] {
         get {
             let toDate: Date = Date().yesterday
@@ -478,16 +474,16 @@ class NetworkManager {
 }
 /// widget
 struct Provider: TimelineProvider {
-    func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), isLogin: true, maximumAmount: 1, totalAmount: 0, points: [], toDoCount: nil, announcementCount: nil)
+    func placeholder(in context: Context) -> MyMindEntry {
+        MyMindEntry(date: Date(), isLogin: true, maximumAmount: 1, totalAmount: 0, points: [], toDoCount: nil, announcementCount: nil)
     }
 
-    func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        let entry = SimpleEntry(date: Date(), isLogin: true, maximumAmount: 1, totalAmount: 0, points: [], toDoCount: nil, announcementCount: nil)
+    func getSnapshot(in context: Context, completion: @escaping (MyMindEntry) -> ()) {
+        let entry = MyMindEntry(date: Date(), isLogin: true, maximumAmount: 1, totalAmount: 0, points: [], toDoCount: nil, announcementCount: nil)
         completion(entry)
     }
 
-    func getTimeline(in context: Context, completion: @escaping (Timeline<SimpleEntry>) -> ()) {
+    func getTimeline(in context: Context, completion: @escaping (Timeline<MyMindEntry>) -> ()) {
         print("Get Time Line")
         let nextUpdateDate = Calendar.current.date(byAdding: .minute, value: 5, to: Date())!
         NetworkManager.shared.authorization { authorization, success in
@@ -495,14 +491,14 @@ struct Provider: TimelineProvider {
                 NetworkManager.shared.saleReportList { reportList in
                     NetworkManager.shared.toDoCount(with: authorization?.navigations.description ?? "") { toDoCount in
                         NetworkManager.shared.announcementCount { announcementCount in
-                            let entry = SimpleEntry(date: Date(), isLogin: true, maximumAmount: reportList?.maximumAmount ?? 1, totalAmount: reportList?.totalSaleAmount ?? 0,  points: reportList?.points ?? [], toDoCount: toDoCount, announcementCount: announcementCount)
+                            let entry = MyMindEntry(date: Date(), isLogin: true, maximumAmount: reportList?.maximumAmount ?? 1, totalAmount: reportList?.totalSaleAmount ?? 0,  points: reportList?.points ?? [], toDoCount: toDoCount, announcementCount: announcementCount)
                             let timeline = Timeline(entries: [entry], policy: .after(nextUpdateDate))
                             completion(timeline)
                         }
                     }
                 }
             } else {
-                let entry = SimpleEntry(date: Date(), isLogin: false, maximumAmount: 1, totalAmount: 0, points: [], toDoCount: nil, announcementCount: nil)
+                let entry = MyMindEntry(date: Date(), isLogin: false, maximumAmount: 1, totalAmount: 0, points: [], toDoCount: nil, announcementCount: nil)
                 let timeline = Timeline(entries: [entry], policy: .after(nextUpdateDate))
                 completion(timeline)
             }
@@ -521,8 +517,8 @@ struct Provider: TimelineProvider {
 //        completion(timeline)
     }
 }
-/// Entry
-struct SimpleEntry: TimelineEntry {
+/// MyMindEntry
+struct MyMindEntry: TimelineEntry {
     let date: Date
     let isLogin: Bool
     let maximumAmount: CGFloat
@@ -605,7 +601,7 @@ struct SimpleEntry: TimelineEntry {
 ///
 /// Chart View
 struct ChartView : View {
-    let entry: SimpleEntry
+    let entry: MyMindEntry
     @State var labels: [String] = ["", "", ""]
     var body : some View {
         ZStack {
@@ -865,7 +861,7 @@ struct MyMind_WidgetsEntryView : View {
                         }
                         .frame(maxWidth: .infinity)
                         .frame(height: 48)
-                        .background(Color.blue)
+                        .background(Color(red: 0.0/255.0, green: 68.0/255.0, blue: 119.0/255.0))
                         .cornerRadius(16)
                         .blendMode(.sourceAtop)
                     }
@@ -901,15 +897,15 @@ struct MyMind_Widgets: Widget {
 struct MyMind_Widgets_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            MyMind_WidgetsEntryView(entry: SimpleEntry(date: Date(), isLogin: true, maximumAmount: 1, totalAmount: 0, points: [], toDoCount: 20, announcementCount: nil))
+            MyMind_WidgetsEntryView(entry: MyMindEntry(date: Date(), isLogin: true, maximumAmount: 1, totalAmount: 0, points: [], toDoCount: 20, announcementCount: nil))
                 .previewContext(WidgetPreviewContext(family: .systemMedium))
-            MyMind_WidgetsEntryView(entry: SimpleEntry(date: Date(), isLogin: false, maximumAmount: 1, totalAmount: 0, points: [], toDoCount: nil, announcementCount: nil))
+            MyMind_WidgetsEntryView(entry: MyMindEntry(date: Date(), isLogin: false, maximumAmount: 1, totalAmount: 0, points: [], toDoCount: nil, announcementCount: nil))
                 .previewContext(WidgetPreviewContext(family: .systemMedium))
-            MyMind_WidgetsEntryView(entry: SimpleEntry(date: Date(), isLogin: true, maximumAmount: 100, totalAmount: 1280, points: [CGPoint(x: 0, y: 10), CGPoint(x: 1, y: 25), CGPoint(x: 2, y: 50), CGPoint(x: 3, y: 60), CGPoint(x: 4, y: 100), CGPoint(x: 5, y: 45), CGPoint(x: 6, y: 75), CGPoint(x: 7, y: 30), CGPoint(x: 8, y: 10), CGPoint(x: 9, y: 70), CGPoint(x: 10, y: 60)], toDoCount: 20, announcementCount: nil))
+            MyMind_WidgetsEntryView(entry: MyMindEntry(date: Date(), isLogin: true, maximumAmount: 100, totalAmount: 1280, points: [CGPoint(x: 0, y: 10), CGPoint(x: 1, y: 25), CGPoint(x: 2, y: 50), CGPoint(x: 3, y: 60), CGPoint(x: 4, y: 100), CGPoint(x: 5, y: 45), CGPoint(x: 6, y: 75), CGPoint(x: 7, y: 30), CGPoint(x: 8, y: 10), CGPoint(x: 9, y: 70), CGPoint(x: 10, y: 60)], toDoCount: 20, announcementCount: nil))
                 .previewContext(WidgetPreviewContext(family: .systemLarge))
-            MyMind_WidgetsEntryView(entry: SimpleEntry(date: Date(), isLogin: false, maximumAmount: 1, totalAmount: 0, points: [], toDoCount: nil, announcementCount: nil))
+            MyMind_WidgetsEntryView(entry: MyMindEntry(date: Date(), isLogin: false, maximumAmount: 1, totalAmount: 0, points: [], toDoCount: nil, announcementCount: nil))
                 .previewContext(WidgetPreviewContext(family: .systemLarge))
-            MyMind_WidgetsEntryView(entry: SimpleEntry(date: Date(), isLogin: true, maximumAmount: 1, totalAmount: 0, points: [], toDoCount: nil, announcementCount: nil))
+            MyMind_WidgetsEntryView(entry: MyMindEntry(date: Date(), isLogin: true, maximumAmount: 1, totalAmount: 0, points: [], toDoCount: nil, announcementCount: nil))
                 .previewContext(WidgetPreviewContext(family: .systemSmall))
         }
     }
