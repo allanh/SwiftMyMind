@@ -54,6 +54,12 @@
 		528A697C26CBADD600FC3387 /* Release in Resources */ = {isa = PBXBuildFile; fileRef = 528A697B26CBADD600FC3387 /* Release */; };
 		528AEF7F26EF3DF4004EC51C /* UIView+Badge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528AEF7E26EF3DF4004EC51C /* UIView+Badge.swift */; };
 		528AEF8126EF5D94004EC51C /* RangeExpression+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528AEF8026EF5D94004EC51C /* RangeExpression+.swift */; };
+		528C86BF2707063C0084BB27 /* Report+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528C86BE2707063C0084BB27 /* Report+.swift */; };
+		528C86C1270707950084BB27 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528C86C0270707940084BB27 /* NetworkManager.swift */; };
+		528C86C3270709230084BB27 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528C86C2270709230084BB27 /* ChartView.swift */; };
+		528C86C527070A160084BB27 /* IndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528C86C427070A160084BB27 /* IndicatorView.swift */; };
+		528C86C727070AF30084BB27 /* IconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528C86C627070AF30084BB27 /* IconView.swift */; };
+		528C86C927070B140084BB27 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528C86C827070B140084BB27 /* LoginView.swift */; };
 		5293EE9C269A8AEB001A9754 /* HorizontalCellSizePagingFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5293EE9B269A8AEB001A9754 /* HorizontalCellSizePagingFlowLayout.swift */; };
 		5293EE9E269A8F5B001A9754 /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5293EE9D269A8F5B001A9754 /* Report.swift */; };
 		5293EEA0269A9DBC001A9754 /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5293EE9F269A9DBC001A9754 /* HomeModel.swift */; };
@@ -395,6 +401,12 @@
 		528A697B26CBADD600FC3387 /* Release */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Release; sourceTree = "<group>"; };
 		528AEF7E26EF3DF4004EC51C /* UIView+Badge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Badge.swift"; sourceTree = "<group>"; };
 		528AEF8026EF5D94004EC51C /* RangeExpression+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RangeExpression+.swift"; sourceTree = "<group>"; };
+		528C86BE2707063C0084BB27 /* Report+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Report+.swift"; sourceTree = "<group>"; };
+		528C86C0270707940084BB27 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		528C86C2270709230084BB27 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
+		528C86C427070A160084BB27 /* IndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatorView.swift; sourceTree = "<group>"; };
+		528C86C627070AF30084BB27 /* IconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconView.swift; sourceTree = "<group>"; };
+		528C86C827070B140084BB27 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		5293EE9B269A8AEB001A9754 /* HorizontalCellSizePagingFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalCellSizePagingFlowLayout.swift; sourceTree = "<group>"; };
 		5293EE9D269A8F5B001A9754 /* Report.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Report.swift; sourceTree = "<group>"; };
 		5293EE9F269A9DBC001A9754 /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
@@ -739,6 +751,12 @@
 				5260FB8C26FD6913003BB399 /* MyMind_Widgets.swift */,
 				5260FB8E26FD6916003BB399 /* Assets.xcassets */,
 				5260FB9026FD6916003BB399 /* Info.plist */,
+				528C86BE2707063C0084BB27 /* Report+.swift */,
+				528C86C0270707940084BB27 /* NetworkManager.swift */,
+				528C86C2270709230084BB27 /* ChartView.swift */,
+				528C86C427070A160084BB27 /* IndicatorView.swift */,
+				528C86C627070AF30084BB27 /* IconView.swift */,
+				528C86C827070B140084BB27 /* LoginView.swift */,
 			);
 			path = "MyMind Widgets";
 			sourceTree = "<group>";
@@ -1762,21 +1780,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				528C86C527070A160084BB27 /* IndicatorView.swift in Sources */,
 				5260FB9D26FD81ED003BB399 /* UIFont+.swift in Sources */,
 				5261E4472701800200B81BCE /* OptionSet+.swift in Sources */,
 				5261E44C270180A900B81BCE /* MultiPageList.swift in Sources */,
 				5261E44627017A2E00B81BCE /* Announcement.swift in Sources */,
+				528C86C727070AF30084BB27 /* IconView.swift in Sources */,
 				5260FB9C26FD81E5003BB399 /* Date+.swift in Sources */,
+				528C86C3270709230084BB27 /* ChartView.swift in Sources */,
 				5261E444270176CA00B81BCE /* ToDo.swift in Sources */,
 				5260FB8D26FD6913003BB399 /* MyMind_Widgets.swift in Sources */,
 				5261E442270172FE00B81BCE /* Response.swift in Sources */,
 				5261E43F270171E600B81BCE /* UserSession.swift in Sources */,
 				5261E441270172E900B81BCE /* APIError.swift in Sources */,
+				528C86C1270707950084BB27 /* NetworkManager.swift in Sources */,
 				5261E445270177BC00B81BCE /* MyMindNotification.swift in Sources */,
+				528C86C927070B140084BB27 /* LoginView.swift in Sources */,
 				5261E43E270171C400B81BCE /* KeychainHelper.swift in Sources */,
 				5260FB9B26FD76D1003BB399 /* Report.swift in Sources */,
 				5261E4432701745700B81BCE /* Authorization.swift in Sources */,
 				5261E4482701802900B81BCE /* UIColor+.swift in Sources */,
+				528C86BF2707063C0084BB27 /* Report+.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

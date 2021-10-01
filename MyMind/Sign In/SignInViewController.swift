@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import WidgetKit
 import RxSwift
 import NVActivityIndicatorView
 
@@ -185,6 +186,9 @@ class SignInViewController: NiblessViewController {
                         }
                 
                 } catch {}
+                if #available(iOS 14.0, *) {
+                    WidgetCenter.shared.reloadTimelines(ofKind: "MyMind_Widgets")
+                }
                 showHomePage()
             })
             .disposed(by: bag)

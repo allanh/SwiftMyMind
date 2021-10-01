@@ -5,7 +5,7 @@
 //  Created by Barry Chen on 2021/6/24.
 //  Copyright © 2021 United Digital Intelligence. All rights reserved.
 //
-
+import WidgetKit
 import UIKit
 final class RootTabBarController: UITabBarController {
 
@@ -108,6 +108,9 @@ final class RootTabBarController: UITabBarController {
 }
 extension RootTabBarController: MixedDelegate {
     func didSignOut() {
+        if #available(iOS 14.0, *) {
+            WidgetCenter.shared.reloadTimelines(ofKind: "MyMind_Widgets")
+        }
         self.navigationController?.popToRootViewController(animated: true)
     }
     func didCancel() {
