@@ -80,11 +80,11 @@ import Charts
 /// widget
 struct Provider: TimelineProvider {
     func placeholder(in context: Context) -> MyMindEntry {
-        MyMindEntry(date: Date(), isLogin: true, maximumAmount: 1, totalAmount: 0, points: [], toDoCount: nil, announcementCount: nil)
+        MyMindEntry(date: Date(), isLogin: true, maximumAmount: 1, totalAmount: 0, chartDatas: [], toDoCount: nil, announcementCount: nil)
     }
 
     func getSnapshot(in context: Context, completion: @escaping (MyMindEntry) -> ()) {
-        let entry = MyMindEntry(date: Date(), isLogin: true, maximumAmount: 100, totalAmount: 1280, points: [CGPoint(x: 0, y: 20), CGPoint(x: 1, y: 25), CGPoint(x: 2, y: 30), CGPoint(x: 3, y: 40), CGPoint(x: 4, y: 60), CGPoint(x: 5, y: 85), CGPoint(x: 6, y: 75), CGPoint(x: 7, y: 40), CGPoint(x: 8, y: 70), CGPoint(x: 9, y: 20), CGPoint(x: 10, y: 30), CGPoint(x: 11, y: 45), CGPoint(x: 12, y: 50), CGPoint(x: 13, y: 45), CGPoint(x: 14, y: 50), CGPoint(x: 15, y: 45), CGPoint(x: 16, y: 45), CGPoint(x: 17, y: 30), CGPoint(x: 18, y: 20), CGPoint(x: 19, y: 60), CGPoint(x: 20, y: 80), CGPoint(x: 21, y: 100), CGPoint(x: 22, y: 90), CGPoint(x: 23, y: 80), CGPoint(x: 24, y: 70), CGPoint(x: 25, y: 70), CGPoint(x: 26, y: 75), CGPoint(x: 27, y: 75), CGPoint(x: 28, y: 70), CGPoint(x: 29, y: 70)], toDoCount: 198, announcementCount: 7)
+        let entry = MyMindEntry(date: Date(), isLogin: true, maximumAmount: 100, totalAmount: 1280, chartDatas: [ChartData(points: [CGPoint(x: 0, y: 20), CGPoint(x: 1, y: 25), CGPoint(x: 2, y: 30), CGPoint(x: 3, y: 40), CGPoint(x: 4, y: 60), CGPoint(x: 5, y: 85), CGPoint(x: 6, y: 75), CGPoint(x: 7, y: 40), CGPoint(x: 8, y: 70), CGPoint(x: 9, y: 20), CGPoint(x: 10, y: 30), CGPoint(x: 11, y: 45), CGPoint(x: 12, y: 50), CGPoint(x: 13, y: 45), CGPoint(x: 14, y: 50), CGPoint(x: 15, y: 45), CGPoint(x: 16, y: 45), CGPoint(x: 17, y: 30), CGPoint(x: 18, y: 20), CGPoint(x: 19, y: 60), CGPoint(x: 20, y: 80), CGPoint(x: 21, y: 100), CGPoint(x: 22, y: 90), CGPoint(x: 23, y: 80), CGPoint(x: 24, y: 70), CGPoint(x: 25, y: 70), CGPoint(x: 26, y: 75), CGPoint(x: 27, y: 75), CGPoint(x: 28, y: 70), CGPoint(x: 29, y: 70)], fill: LinearGradient(stops: [.init(color:  Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.8), location: 0), .init(color: Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.5), location: 0.3), .init(color: Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.0), location: 1)], startPoint: .top, endPoint: .bottom), stroke: Color(red: 127.0/255.0, green: 194.0/255.0, blue: 250.0/255.0), strokeWidth: 3)], toDoCount: 198, announcementCount: 7)
         completion(entry)
     }
 
@@ -95,14 +95,14 @@ struct Provider: TimelineProvider {
                 NetworkManager.shared.saleReportList { reportList in
                     NetworkManager.shared.toDoCount(with: authorization?.navigations.description ?? "") { toDoCount in
                         NetworkManager.shared.announcementCount { announcementCount in
-                            let entry = MyMindEntry(date: Date(), isLogin: true, maximumAmount: reportList?.maximumAmount ?? 1, totalAmount: reportList?.totalSaleAmount ?? 0,  points: reportList?.points ?? [], toDoCount: toDoCount, announcementCount: announcementCount)
+                            let entry = MyMindEntry(date: Date(), isLogin: true, maximumAmount: reportList?.maximumAmount ?? 1, totalAmount: reportList?.totalSaleAmount ?? 0, chartDatas: [ChartData(points: reportList?.points(for: .TOTAL_SALE_AMOUNT)[.sale] ?? [], fill: LinearGradient(stops: [.init(color:  Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.8), location: 0), .init(color: Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.5), location: 0.3), .init(color: Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.0), location: 1)], startPoint: .top, endPoint: .bottom), stroke: Color(red: 127.0/255.0, green: 194.0/255.0, blue: 250.0/255.0), strokeWidth: 3) ], toDoCount: toDoCount, announcementCount: announcementCount)
                             let timeline = Timeline(entries: [entry], policy: .after(nextUpdateDate))
                             completion(timeline)
                         }
                     }
                 }
             } else {
-                let entry = MyMindEntry(date: Date(), isLogin: false, maximumAmount: 1, totalAmount: 0, points: [], toDoCount: nil, announcementCount: nil)
+                let entry = MyMindEntry(date: Date(), isLogin: false, maximumAmount: 1, totalAmount: 0, chartDatas: [], toDoCount: nil, announcementCount: nil)
                 let timeline = Timeline(entries: [entry], policy: .after(nextUpdateDate))
                 completion(timeline)
             }
@@ -115,80 +115,83 @@ struct MyMindEntry: TimelineEntry {
     let isLogin: Bool
     let maximumAmount: CGFloat
     let totalAmount: CGFloat
-    let points: [CGPoint]
+    let chartDatas: [ChartData]
+//    let pointsSet: [SaleReportList.SaleReportPointsType:[CGPoint]]
     let toDoCount: Int?
     let announcementCount: Int?
-    func path(with frame: CGRect) -> Path {
-        var path = Path()
-        let heightRatio: CGFloat = frame.size.height/maximumAmount
-        let itemWidth = frame.size.width/CGFloat((points.count > 1) ? points.count - 1 : 1)
-        let drawPoints = points.map { origin in
-            return CGPoint(x: (origin.x*itemWidth), y: frame.maxY - (origin.y*heightRatio))
-        }
-        var previousPoint: CGPoint?
-        var isFirst = true
-        for index in 0..<drawPoints.count {
-            let point = drawPoints[index]
-            if let previousPoint = previousPoint {
-                let midPoint = CGPoint(
-                    x: (point.x + previousPoint.x) / 2,
-                    y: (point.y + previousPoint.y) / 2
-                )
-                if isFirst {
-                    path.addLine(to: midPoint)
-                    isFirst = false
-                } else if index == drawPoints.count - 1{
-                    path.addQuadCurve(to: point, control: midPoint)
-                } else {
-                    path.addQuadCurve(to: midPoint, control: previousPoint)
-                }
-            }
-            else {
-                path.move(to: point)
-            }
-            previousPoint = point
-        }
-        return path
-    }
-    func closePath(with frame: CGRect) -> Path {
-        var path = Path()
-        let heightRatio: CGFloat = frame.size.height/maximumAmount
-        let itemWidth = frame.size.width/CGFloat((points.count > 1) ? points.count - 1 : 1)
-        let drawPoints = points.map { origin in
-            return CGPoint(x: (origin.x*itemWidth), y: frame.maxY - (origin.y*heightRatio))
-        }
-        var previousPoint: CGPoint?
-        var isFirst = true
-        for index in 0..<drawPoints.count {
-            let point = drawPoints[index]
-            if let previousPoint = previousPoint {
-                let midPoint = CGPoint(
-                    x: (point.x + previousPoint.x) / 2,
-                    y: (point.y + previousPoint.y) / 2
-                )
-                if isFirst {
-                    path.addLine(to: midPoint)
-                    isFirst = false
-                } else if index == drawPoints.count - 1{
-                    path.addQuadCurve(to: point, control: midPoint)
-                } else {
-                    path.addQuadCurve(to: midPoint, control: previousPoint)
-                }
-            }
-            else {
-                if point.y != frame.maxY {
-                    path.move(to: CGPoint(x: frame.minX, y: frame.maxY))
-                    path.addLine(to: point)
-                } else {
-                    path.move(to: point)
-                }
-            }
-            previousPoint = point
-        }
-        path.addLine(to: CGPoint(x: frame.maxX, y: frame.maxY))
-        path.addLine(to: CGPoint(x: frame.minX, y: frame.maxY))
-        return path
-    }
+//    func path(with frame: CGRect, type: SaleReportList.SaleReportPointsType) -> Path {
+//        var path = Path()
+//        let heightRatio: CGFloat = frame.size.height/maximumAmount
+//        let points: [CGPoint] = pointsSet[type] ?? []
+//        let itemWidth = frame.size.width/CGFloat((points.count > 1) ? points.count - 1 : 1)
+//        let drawPoints = points.map { origin in
+//            return CGPoint(x: (origin.x*itemWidth), y: frame.maxY - (origin.y*heightRatio))
+//        }
+//        var previousPoint: CGPoint?
+//        var isFirst = true
+//        for index in 0..<drawPoints.count {
+//            let point = drawPoints[index]
+//            if let previousPoint = previousPoint {
+//                let midPoint = CGPoint(
+//                    x: (point.x + previousPoint.x) / 2,
+//                    y: (point.y + previousPoint.y) / 2
+//                )
+//                if isFirst {
+//                    path.addLine(to: midPoint)
+//                    isFirst = false
+//                } else if index == drawPoints.count - 1{
+//                    path.addQuadCurve(to: point, control: midPoint)
+//                } else {
+//                    path.addQuadCurve(to: midPoint, control: previousPoint)
+//                }
+//            }
+//            else {
+//                path.move(to: point)
+//            }
+//            previousPoint = point
+//        }
+//        return path
+//    }
+//    func closePath(with frame: CGRect, type: SaleReportList.SaleReportPointsType) -> Path {
+//        var path = Path()
+//        let heightRatio: CGFloat = frame.size.height/maximumAmount
+//        let points: [CGPoint] = pointsSet[type] ?? []
+//        let itemWidth = frame.size.width/CGFloat((points.count > 1) ? points.count - 1 : 1)
+//        let drawPoints = points.map { origin in
+//            return CGPoint(x: (origin.x*itemWidth), y: frame.maxY - (origin.y*heightRatio))
+//        }
+//        var previousPoint: CGPoint?
+//        var isFirst = true
+//        for index in 0..<drawPoints.count {
+//            let point = drawPoints[index]
+//            if let previousPoint = previousPoint {
+//                let midPoint = CGPoint(
+//                    x: (point.x + previousPoint.x) / 2,
+//                    y: (point.y + previousPoint.y) / 2
+//                )
+//                if isFirst {
+//                    path.addLine(to: midPoint)
+//                    isFirst = false
+//                } else if index == drawPoints.count - 1{
+//                    path.addQuadCurve(to: point, control: midPoint)
+//                } else {
+//                    path.addQuadCurve(to: midPoint, control: previousPoint)
+//                }
+//            }
+//            else {
+//                if point.y != frame.maxY {
+//                    path.move(to: CGPoint(x: frame.minX, y: frame.maxY))
+//                    path.addLine(to: point)
+//                } else {
+//                    path.move(to: point)
+//                }
+//            }
+//            previousPoint = point
+//        }
+//        path.addLine(to: CGPoint(x: frame.maxX, y: frame.maxY))
+//        path.addLine(to: CGPoint(x: frame.minX, y: frame.maxY))
+//        return path
+//    }
 }
 /// Entry View
 struct MyMind_WidgetsEntryView : View {
@@ -233,7 +236,7 @@ struct MyMind_WidgetsEntryView : View {
             VStack {
                 Spacer()
                 HStack {
-                    if entry.points.count > 1 {
+                    if let points = entry.chartDatas.first?.points, points.count > 1 {
                         Text("近30日銷售數據")
                             .frame(height: 24, alignment: .topLeading)
                             .font(.custom("PingFangTC-Regular", size: 12))
@@ -258,7 +261,7 @@ struct MyMind_WidgetsEntryView : View {
                             .font(.custom("PingFangTC-Semibold", size: 24))
                             .foregroundColor(.white)
                             .blendMode(.sourceAtop)
-                        ChartView(entry: entry)
+                        ChartView(datas: entry.chartDatas, provisionColor: Color(red: 59.0/255.0, green: 82.0/255.0, blue: 105.0/255.0), provisionWidth: 1, maximum: entry.maximumAmount)
                             .blendMode(.sourceAtop)
                     }
                     .padding(.trailing, 20)
@@ -326,15 +329,15 @@ struct MyMind_Widgets: Widget {
 struct MyMind_Widgets_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            MyMind_WidgetsEntryView(entry: MyMindEntry(date: Date(), isLogin: true, maximumAmount: 1, totalAmount: 0, points: [], toDoCount: 20, announcementCount: nil))
+            MyMind_WidgetsEntryView(entry: MyMindEntry(date: Date(), isLogin: true, maximumAmount: 1, totalAmount: 0, chartDatas: [], toDoCount: 20, announcementCount: nil))
                 .previewContext(WidgetPreviewContext(family: .systemMedium))
-            MyMind_WidgetsEntryView(entry: MyMindEntry(date: Date(), isLogin: false, maximumAmount: 1, totalAmount: 0, points: [], toDoCount: nil, announcementCount: nil))
+            MyMind_WidgetsEntryView(entry: MyMindEntry(date: Date(), isLogin: false, maximumAmount: 1, totalAmount: 0, chartDatas: [], toDoCount: nil, announcementCount: nil))
                 .previewContext(WidgetPreviewContext(family: .systemMedium))
-            MyMind_WidgetsEntryView(entry: MyMindEntry(date: Date(), isLogin: true, maximumAmount: 100, totalAmount: 1280, points: [CGPoint(x: 0, y: 20), CGPoint(x: 1, y: 25), CGPoint(x: 2, y: 30), CGPoint(x: 3, y: 40), CGPoint(x: 4, y: 60), CGPoint(x: 5, y: 85), CGPoint(x: 6, y: 75), CGPoint(x: 7, y: 40), CGPoint(x: 8, y: 70), CGPoint(x: 9, y: 20), CGPoint(x: 10, y: 30), CGPoint(x: 11, y: 45), CGPoint(x: 12, y: 50), CGPoint(x: 13, y: 45), CGPoint(x: 14, y: 50), CGPoint(x: 15, y: 45), CGPoint(x: 16, y: 45), CGPoint(x: 17, y: 30), CGPoint(x: 18, y: 20), CGPoint(x: 19, y: 60), CGPoint(x: 20, y: 80), CGPoint(x: 21, y: 100), CGPoint(x: 22, y: 90), CGPoint(x: 23, y: 80), CGPoint(x: 24, y: 70), CGPoint(x: 25, y: 70), CGPoint(x: 26, y: 75), CGPoint(x: 27, y: 75), CGPoint(x: 28, y: 70), CGPoint(x: 29, y: 70)], toDoCount: 198, announcementCount: 7))
+            MyMind_WidgetsEntryView(entry: MyMindEntry(date: Date(), isLogin: true, maximumAmount: 100, totalAmount: 1280, chartDatas: [ChartData(points: [CGPoint(x: 0, y: 20), CGPoint(x: 1, y: 25), CGPoint(x: 2, y: 30), CGPoint(x: 3, y: 40), CGPoint(x: 4, y: 60), CGPoint(x: 5, y: 85), CGPoint(x: 6, y: 75), CGPoint(x: 7, y: 40), CGPoint(x: 8, y: 70), CGPoint(x: 9, y: 20), CGPoint(x: 10, y: 30), CGPoint(x: 11, y: 45), CGPoint(x: 12, y: 50), CGPoint(x: 13, y: 45), CGPoint(x: 14, y: 50), CGPoint(x: 15, y: 45), CGPoint(x: 16, y: 45), CGPoint(x: 17, y: 30), CGPoint(x: 18, y: 20), CGPoint(x: 19, y: 60), CGPoint(x: 20, y: 80), CGPoint(x: 21, y: 100), CGPoint(x: 22, y: 90), CGPoint(x: 23, y: 80), CGPoint(x: 24, y: 70), CGPoint(x: 25, y: 70), CGPoint(x: 26, y: 75), CGPoint(x: 27, y: 75), CGPoint(x: 28, y: 70), CGPoint(x: 29, y: 70)], fill: LinearGradient(stops: [.init(color:  Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.8), location: 0), .init(color: Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.5), location: 0.3), .init(color: Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.0), location: 1)], startPoint: .top, endPoint: .bottom), stroke: Color(red: 127.0/255.0, green: 194.0/255.0, blue: 250.0/255.0), strokeWidth: 3)], toDoCount: 198, announcementCount: 7))
                 .previewContext(WidgetPreviewContext(family: .systemLarge))
-            MyMind_WidgetsEntryView(entry: MyMindEntry(date: Date(), isLogin: false, maximumAmount: 1, totalAmount: 0, points: [], toDoCount: nil, announcementCount: nil))
+            MyMind_WidgetsEntryView(entry: MyMindEntry(date: Date(), isLogin: false, maximumAmount: 1, totalAmount: 0, chartDatas: [], toDoCount: nil, announcementCount: nil))
                 .previewContext(WidgetPreviewContext(family: .systemLarge))
-            MyMind_WidgetsEntryView(entry: MyMindEntry(date: Date(), isLogin: true, maximumAmount: 1, totalAmount: 0, points: [], toDoCount: nil, announcementCount: nil))
+            MyMind_WidgetsEntryView(entry: MyMindEntry(date: Date(), isLogin: true, maximumAmount: 1, totalAmount: 0, chartDatas: [], toDoCount: nil, announcementCount: nil))
                 .previewContext(WidgetPreviewContext(family: .systemSmall))
         }
     }

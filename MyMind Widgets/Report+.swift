@@ -9,25 +9,61 @@
 import Foundation
 import SwiftUI
 extension SaleReportList {
-    var points: [CGPoint] {
-        get {
-            let toDate: Date = Date().yesterday
-            let fromDate: Date = toDate.thirtyDaysBefore
-            let offset = Calendar.current.dateComponents([.day], from: fromDate, to: toDate).day!
-            var salePoints: [CGPoint] = (0..<offset).map { (i) -> CGPoint in
-                return CGPoint(x: CGFloat(i), y: 0)
-            }
-            let formatter = DateFormatter()
-            formatter.dateFormat = "yyyy-MM-dd"
-            for report in reports {
-                if let date = report.date {
-                    let components = Calendar.current.dateComponents([.day], from: fromDate, to: formatter.date(from: date)!)
+    enum SaleReportPointsType {
+        case sale, cancel, returned
+    }
+    func points(for order: SKURankingReport.SKURankingReportSortOrder) -> [SaleReportPointsType: [CGPoint]] {
+        let toDate: Date = Date().yesterday
+        let fromDate: Date = toDate.thirtyDaysBefore
+        let offset = Calendar.current.dateComponents([.day], from: fromDate, to: toDate).day!
+
+        var salePoints: [CGPoint] = (0..<offset).map { (i) -> CGPoint in
+            return CGPoint(x: CGFloat(i), y: 0)
+        }
+        var canceledPoints: [CGPoint] = (0..<offset).map { (i) -> CGPoint in
+            return CGPoint(x: CGFloat(i), y: 0)
+        }
+        var returnedPoints: [CGPoint] = (0..<offset).map { (i) -> CGPoint in
+            return CGPoint(x: CGFloat(i), y: 0)
+        }
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        for report in reports {
+            if let date = report.date {
+                let components = Calendar.current.dateComponents([.day], from: fromDate, to: formatter.date(from: date)!)
+                if order == .TOTAL_SALE_AMOUNT {
                     salePoints[components.day!].y += CGFloat(report.saleAmount)
+                    canceledPoints[components.day!].y += CGFloat(report.canceledAmount)
+                    returnedPoints[components.day!].y += CGFloat(report.returnAmount)
+                } else {
+                    salePoints[components.day!].y += CGFloat(report.saleQuantity)
+                    canceledPoints[components.day!].y += CGFloat(report.canceledQuantity)
+                    returnedPoints[components.day!].y += CGFloat(report.returnQuantity)
                 }
             }
-            return salePoints
         }
+        return [.sale: salePoints, .cancel: canceledPoints, .returned: returnedPoints]
     }
+//    var points: [CGPoint] {
+//        get {
+//            let toDate: Date = Date().yesterday
+//            let fromDate: Date = toDate.thirtyDaysBefore
+//            let offset = Calendar.current.dateComponents([.day], from: fromDate, to: toDate).day!
+//            var salePoints: [CGPoint] = (0..<offset).map { (i) -> CGPoint in
+//                return CGPoint(x: CGFloat(i), y: 0)
+//            }
+//            let formatter = DateFormatter()
+//            formatter.dateFormat = "yyyy-MM-dd"
+//            for report in reports {
+//                if let date = report.date {
+//                    let components = Calendar.current.dateComponents([.day], from: fromDate, to: formatter.date(from: date)!)
+//                    salePoints[components.day!].y += CGFloat(report.saleAmount)
+//                }
+//            }
+//            return salePoints
+//        }
+//    }
 }
 //extension SaleReportList {
 //    func lineChartData(order: SKURankingReport.SKURankingReportSortOrder) -> LineChartData {
