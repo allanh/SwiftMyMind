@@ -1,5 +1,5 @@
 //
-//  ChartView.swift
+//  UDILineChart.swift
 //  MyMind WidgetsExtension
 //
 //  Created by Nelson Chan on 2021/10/1.
@@ -7,7 +7,7 @@
 //
 
 import SwiftUI
-struct ChartData {
+struct UDILineChartData {
     let points: [CGPoint]
     let fill: LinearGradient
     let stroke: Color
@@ -86,8 +86,8 @@ struct ChartData {
 
 }
 /// Chart View
-struct ChartView : View {
-    let datas: [ChartData]
+struct UDILineChartView : View {
+    let datas: [UDILineChartData]
     let provisionColor: Color
     let provisionWidth: CGFloat
     let maximum: CGFloat
