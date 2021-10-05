@@ -134,7 +134,8 @@ struct ChartView : View {
                 }
                 HStack {
                     Text(labels[0])
-                        .foregroundColor(.white)
+                        .foregroundColor(Color(white: 180.0/255, opacity: 1.0))
+                        .font(.custom("PingFangTC-Regular", size: 12))
                         .frame(maxWidth: .infinity)
                         .onAppear {
                             let formatter = DateFormatter()
@@ -143,7 +144,8 @@ struct ChartView : View {
                             labels[0] = formatter.string(from: date)
                         }
                     Text(labels[1])
-                        .foregroundColor(.white)
+                        .foregroundColor(Color(white: 180.0/255, opacity: 1.0))
+                        .font(.custom("PingFangTC-Regular", size: 12))
                         .frame(maxWidth: .infinity)
                         .onAppear {
                             let formatter = DateFormatter()
@@ -152,7 +154,8 @@ struct ChartView : View {
                             labels[1] = formatter.string(from: date)
                         }
                     Text(labels[2])
-                        .foregroundColor(.white)
+                        .foregroundColor(Color(white: 180.0/255, opacity: 1.0))
+                        .font(.custom("PingFangTC-Regular", size: 12))
                         .frame(maxWidth: .infinity)
                         .onAppear {
                             let formatter = DateFormatter()
