@@ -107,6 +107,7 @@ struct UDIPieChartView : View {
                     }
                 }
             }
+            .padding(.bottom)
             .background(Color.white)
         }
     }
@@ -139,7 +140,7 @@ struct UDIPieChartView : View {
 
 struct UDIPieChartView_Previews: PreviewProvider {
     static var previews: some View {
-        UDIPieChartView(data: UDIPieChartData(slices: [UDIPieSliceData(ratio: 0.3, title: "Yahoo", color: .red), UDIPieSliceData(ratio: 0.4, title: "Shoppe", color: .green), UDIPieSliceData(ratio: 0.3, title: "PCHome", color: .blue)], borderColor: .white, holeRatio: 0.5, title: "供應商"), showDescription: true)
+        UDIPieChartView(data: UDIPieChartData(slices: [UDIPieSliceData(ratio: 0.15, title: "Yahoo", color: .red), UDIPieSliceData(ratio: 0.2, title: "Shoppe", color: .green), UDIPieSliceData(ratio: 0.15, title: "PCHome", color: .blue), UDIPieSliceData(ratio: 0.2, title: "MoMo", color: .orange), UDIPieSliceData(ratio: 0.15, title: "Friday", color: .purple), UDIPieSliceData(ratio: 0.15, title: "Other", color: .gray)], borderColor: .white, holeRatio: 0.5, title: "供應商"), showDescription: true)
             .background(Color.black)
     }
 }
