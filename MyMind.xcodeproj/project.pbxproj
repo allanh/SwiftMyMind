@@ -56,7 +56,7 @@
 		528AEF8126EF5D94004EC51C /* RangeExpression+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528AEF8026EF5D94004EC51C /* RangeExpression+.swift */; };
 		528C86BF2707063C0084BB27 /* Report+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528C86BE2707063C0084BB27 /* Report+.swift */; };
 		528C86C1270707950084BB27 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528C86C0270707940084BB27 /* NetworkManager.swift */; };
-		528C86C3270709230084BB27 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528C86C2270709230084BB27 /* ChartView.swift */; };
+		528C86C3270709230084BB27 /* UDILineChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528C86C2270709230084BB27 /* UDILineChart.swift */; };
 		528C86C527070A160084BB27 /* IndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528C86C427070A160084BB27 /* IndicatorView.swift */; };
 		528C86C727070AF30084BB27 /* IconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528C86C627070AF30084BB27 /* IconView.swift */; };
 		528C86C927070B140084BB27 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528C86C827070B140084BB27 /* LoginView.swift */; };
@@ -78,6 +78,11 @@
 		52A289F426D8CB4100084893 /* UIView+copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A289F326D8CB4100084893 /* UIView+copy.swift */; };
 		52AC22A226FACA04003AF437 /* AnnouncementListFilterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52AC22A126FACA04003AF437 /* AnnouncementListFilterModel.swift */; };
 		52B15CBA2691BAFC0010FCED /* MyMindEmployeeAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B15CB92691BAFC0010FCED /* MyMindEmployeeAPIService.swift */; };
+		52B62539270AE04B00E03220 /* Report+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528C86BE2707063C0084BB27 /* Report+.swift */; };
+		52B6253A270AE04F00E03220 /* UDILineChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528C86C2270709230084BB27 /* UDILineChart.swift */; };
+		52B6253B270BFCC800E03220 /* IconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528C86C627070AF30084BB27 /* IconView.swift */; };
+		52B6253E270C306E00E03220 /* UDIPieChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B6253D270C306E00E03220 /* UDIPieChart.swift */; };
+		52B6253F270C306E00E03220 /* UDIPieChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B6253D270C306E00E03220 /* UDIPieChart.swift */; };
 		52B8749026DC7C38008F3CF2 /* BulletinCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B8748F26DC7C38008F3CF2 /* BulletinCollectionViewCell.swift */; };
 		52B8749226DC88EA008F3CF2 /* Bulletin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B8749126DC88EA008F3CF2 /* Bulletin.swift */; };
 		52B8749426DCBE74008F3CF2 /* MyMindAnnouncementAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B8749326DCBE74008F3CF2 /* MyMindAnnouncementAPIService.swift */; };
@@ -403,7 +408,7 @@
 		528AEF8026EF5D94004EC51C /* RangeExpression+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RangeExpression+.swift"; sourceTree = "<group>"; };
 		528C86BE2707063C0084BB27 /* Report+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Report+.swift"; sourceTree = "<group>"; };
 		528C86C0270707940084BB27 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
-		528C86C2270709230084BB27 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
+		528C86C2270709230084BB27 /* UDILineChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UDILineChart.swift; sourceTree = "<group>"; };
 		528C86C427070A160084BB27 /* IndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatorView.swift; sourceTree = "<group>"; };
 		528C86C627070AF30084BB27 /* IconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconView.swift; sourceTree = "<group>"; };
 		528C86C827070B140084BB27 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -425,6 +430,7 @@
 		52A289F326D8CB4100084893 /* UIView+copy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+copy.swift"; sourceTree = "<group>"; };
 		52AC22A126FACA04003AF437 /* AnnouncementListFilterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementListFilterModel.swift; sourceTree = "<group>"; };
 		52B15CB92691BAFC0010FCED /* MyMindEmployeeAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMindEmployeeAPIService.swift; sourceTree = "<group>"; };
+		52B6253D270C306E00E03220 /* UDIPieChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UDIPieChart.swift; sourceTree = "<group>"; };
 		52B8748F26DC7C38008F3CF2 /* BulletinCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletinCollectionViewCell.swift; sourceTree = "<group>"; };
 		52B8749126DC88EA008F3CF2 /* Bulletin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bulletin.swift; sourceTree = "<group>"; };
 		52B8749326DCBE74008F3CF2 /* MyMindAnnouncementAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMindAnnouncementAPIService.swift; sourceTree = "<group>"; };
@@ -753,10 +759,6 @@
 				5260FB9026FD6916003BB399 /* Info.plist */,
 				528C86BE2707063C0084BB27 /* Report+.swift */,
 				528C86C0270707940084BB27 /* NetworkManager.swift */,
-				528C86C2270709230084BB27 /* ChartView.swift */,
-				528C86C427070A160084BB27 /* IndicatorView.swift */,
-				528C86C627070AF30084BB27 /* IconView.swift */,
-				528C86C827070B140084BB27 /* LoginView.swift */,
 			);
 			path = "MyMind Widgets";
 			sourceTree = "<group>";
@@ -806,6 +808,18 @@
 				52B8748F26DC7C38008F3CF2 /* BulletinCollectionViewCell.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		52B6253C270C302200E03220 /* SwiftUIView */ = {
+			isa = PBXGroup;
+			children = (
+				528C86C2270709230084BB27 /* UDILineChart.swift */,
+				528C86C427070A160084BB27 /* IndicatorView.swift */,
+				528C86C627070AF30084BB27 /* IconView.swift */,
+				528C86C827070B140084BB27 /* LoginView.swift */,
+				52B6253D270C306E00E03220 /* UDIPieChart.swift */,
+			);
+			path = SwiftUIView;
 			sourceTree = "<group>";
 		};
 		52E505FC26A53189000E5116 /* ResendOTP */ = {
@@ -1194,6 +1208,7 @@
 		A4793C9426047C6500AD280C /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				52B6253C270C302200E03220 /* SwiftUIView */,
 				52F564282694086500171032 /* View */,
 				A4BDC7B2260B0F34005C33A5 /* UILayer */,
 				A4793C9D26047DA300AD280C /* Extensions */,
@@ -1787,9 +1802,10 @@
 				5261E44627017A2E00B81BCE /* Announcement.swift in Sources */,
 				528C86C727070AF30084BB27 /* IconView.swift in Sources */,
 				5260FB9C26FD81E5003BB399 /* Date+.swift in Sources */,
-				528C86C3270709230084BB27 /* ChartView.swift in Sources */,
+				528C86C3270709230084BB27 /* UDILineChart.swift in Sources */,
 				5261E444270176CA00B81BCE /* ToDo.swift in Sources */,
 				5260FB8D26FD6913003BB399 /* MyMind_Widgets.swift in Sources */,
+				52B6253F270C306E00E03220 /* UDIPieChart.swift in Sources */,
 				5261E442270172FE00B81BCE /* Response.swift in Sources */,
 				5261E43F270171E600B81BCE /* UserSession.swift in Sources */,
 				5261E441270172E900B81BCE /* APIError.swift in Sources */,
@@ -1835,6 +1851,7 @@
 				A4BCA0CA267C802B00E3B274 /* PurchaseOrderLoader.swift in Sources */,
 				527E11BD2692A0D500FB8B01 /* OptionSet+.swift in Sources */,
 				52B15CBA2691BAFC0010FCED /* MyMindEmployeeAPIService.swift in Sources */,
+				52B6253B270BFCC800E03220 /* IconView.swift in Sources */,
 				A4CBD8B6266A2CF200B19119 /* ProductMaterialSuggestionInfoTableViewCell.swift in Sources */,
 				97B117342653AF1E00242428 /* ProductMaterialQueryInfo.swift in Sources */,
 				52B8749E26DF3627008F3CF2 /* AnnouncementListQueryInfo.swift in Sources */,
@@ -1862,6 +1879,7 @@
 				52944E2926997654006CC865 /* ToDoItemView.swift in Sources */,
 				A4BDC79E260ADFC5005C33A5 /* UIViewController+Rx.swift in Sources */,
 				52944E212697F798006CC865 /* ToDo.swift in Sources */,
+				52B6253E270C306E00E03220 /* UDIPieChart.swift in Sources */,
 				A4CF09B32636C36800439D5F /* UIView+shadow.swift in Sources */,
 				A4793CAC260488E800AD280C /* Declarative.swift in Sources */,
 				A405410F264A758B00E2D21B /* PurchaseStatusSelectionViewController.swift in Sources */,
@@ -1936,6 +1954,7 @@
 				52E5060026A532D7000E5116 /* ResendOTPViewModel.swift in Sources */,
 				A464877E2689BBD60053E6F5 /* EditingPurchaseOrderViewController.swift in Sources */,
 				A464877A26899DEF0053E6F5 /* EditingPurchaseOrderViewModel.swift in Sources */,
+				52B6253A270AE04F00E03220 /* UDILineChart.swift in Sources */,
 				97B117372653B1AF00242428 /* PickProductMaterialsViewModel.swift in Sources */,
 				A4793CB126048BB600AD280C /* UIFont+.swift in Sources */,
 				A4648774268970750053E6F5 /* UDI3DESCryptor.swift in Sources */,
@@ -1951,6 +1970,7 @@
 				A47AB49A265E4DA400FE3CFA /* SearchMaterialNamesViewController.swift in Sources */,
 				52944E2726982B88006CC865 /* ToDoInfoView.swift in Sources */,
 				9CEFCA5426DE171100506308 /* AnnouncementQueryDateSelectionViewController.swift in Sources */,
+				52B62539270AE04B00E03220 /* Report+.swift in Sources */,
 				97B117432656064300242428 /* SingleLabelTableViewCell.swift in Sources */,
 				A4ACEDC526490E25008724E4 /* SelectedQueryCollectionViewCell.swift in Sources */,
 				52AC22A226FACA04003AF437 /* AnnouncementListFilterModel.swift in Sources */,
