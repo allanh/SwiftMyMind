@@ -426,7 +426,7 @@ extension SignInRootView {
     }
     private func activateConstraintsBackgroundTitleLabel() {
         let top = backgroundTitleLabel.topAnchor
-            .constraint(equalTo: topAnchor, constant: 20)
+            .constraint(equalTo: backgroundView.topAnchor, constant: 20)
         let height = backgroundTitleLabel.heightAnchor
             .constraint(equalToConstant: 33)
         let leading = backgroundTitleLabel.leadingAnchor
@@ -601,13 +601,11 @@ extension SignInRootView {
                 .constraint(equalTo: inputStackView.bottomAnchor, constant: 8)
             let trailing = resetPasswordButton.trailingAnchor
                 .constraint(equalTo: inputStackView.trailingAnchor)
-            let width = resetPasswordButton.widthAnchor
-                .constraint(equalToConstant: 64)
             let height = resetPasswordButton.heightAnchor
                 .constraint(equalToConstant: 20)
 
             NSLayoutConstraint.activate([
-                top, trailing, width, height
+                top, trailing, height
             ])
         } else {
             let top = resetPasswordButton.topAnchor

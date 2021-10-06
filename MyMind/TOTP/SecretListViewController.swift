@@ -49,6 +49,7 @@ class SecretListViewController: UIViewController {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.backgroundColor = UIColor(hex:"ff7d2c")
         $0.tintColor = .white
+        $0.adjustsImageWhenHighlighted = false
         $0.addTarget(self, action: #selector(cameraBarButtonDidTapped), for: .touchUpInside)
     }
     // MARK: - Methods
@@ -69,10 +70,11 @@ class SecretListViewController: UIViewController {
         instructionView = MyMindInstructionView()
 
         view.addSubview(instructionView!)
-        instructionView?.topAnchor.constraint(equalTo: view.topAnchor, constant: 114).isActive = true
+        instructionView?.topAnchor.constraint(equalTo: view.topAnchor, constant: 154).isActive = true
         instructionView?.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25).isActive = true
         instructionView?.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25).isActive = true
-        instructionView?.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -40).isActive = true
+        instructionView?.heightAnchor.constraint(equalToConstant: 464).isActive = true
+//        instructionView?.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -40).isActive = true
         
         instructionView!.confirmButton.addTarget(self, action: #selector(cameraBarButtonDidTapped), for: .touchUpInside)
         instructionView!.layoutIfNeeded()
