@@ -80,6 +80,7 @@ final class MyMindInstructionView: NiblessView {
         $0.setImage(UIImage(named: "camera")?.withRenderingMode(.alwaysTemplate), for: .normal)
         $0.backgroundColor = UIColor(hex:"ff7d2c")
         $0.layer.cornerRadius = 10
+        $0.adjustsImageWhenHighlighted = false
     }
 
     // MARK: - Methods
@@ -127,7 +128,7 @@ final class MyMindInstructionView: NiblessView {
         let centerX = logoImageView.centerXAnchor
             .constraint(equalTo: centerXAnchor)
         let top = logoImageView.topAnchor
-            .constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 25)
+            .constraint(equalTo: topAnchor, constant: 25)
         let width = logoImageView.widthAnchor.constraint(equalToConstant: 100)
         let height = logoImageView.heightAnchor.constraint(equalToConstant: 100)
         NSLayoutConstraint.activate([
@@ -141,9 +142,11 @@ final class MyMindInstructionView: NiblessView {
             .constraint(equalTo: logoImageView.bottomAnchor, constant: 8)
         let width = titleLabel.widthAnchor
             .constraint(equalTo: widthAnchor, multiplier: 1 / 1.2)
+        let height = titleLabel.heightAnchor
+            .constraint(equalToConstant: 24)
 
         NSLayoutConstraint.activate([
-            centerX, top, width
+            centerX, top, width, height
         ])
     }
     
@@ -168,9 +171,11 @@ final class MyMindInstructionView: NiblessView {
             .constraint(equalTo: seperator.bottomAnchor, constant: 12)
         let width = bullet1Label.widthAnchor
             .constraint(equalToConstant: 15)
+        let height = bullet1Label.heightAnchor
+            .constraint(equalToConstant: 20)
 
         NSLayoutConstraint.activate([
-            leading, top, width
+            leading, top, width, height
         ])
     }
 
@@ -243,14 +248,12 @@ final class MyMindInstructionView: NiblessView {
         let width = confirmButton.widthAnchor
             .constraint(equalToConstant: 140)
         let height = confirmButton.heightAnchor
-            .constraint(equalToConstant: 40)
+            .constraint(equalToConstant: 44)
         let top = confirmButton.topAnchor
             .constraint(equalTo: description3Label.bottomAnchor, constant: 25)
-        let bottom = confirmButton.bottomAnchor
-            .constraint(equalTo: bottomAnchor, constant: -25)
 
         NSLayoutConstraint.activate([
-            centerX, width, height, top, bottom
+            centerX, width, height, top
         ])
     }
 
