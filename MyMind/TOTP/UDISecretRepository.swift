@@ -39,12 +39,14 @@ extension SecretRepository {
         }
 
         var finalSecrets: [Secret] = []
+        var needAdd = true
         for index in 0..<sameUserSecrets.count {
             var secret: Secret = sameUserSecrets[index]
             let result: ComparisonResult = secret.registerDate?.compare(newSecretRegisterDate) ?? .orderedSame
             switch result {
             case .orderedSame:
                 secretToAdd.isValid = secret.isValid
+                needAdd = false
             case .orderedDescending:
                 secretToAdd.isValid = false
                 secret.isValid = true
@@ -54,7 +56,9 @@ extension SecretRepository {
             }
             finalSecrets.append(secret)
         }
-        finalSecrets.append(secretToAdd)
+        if needAdd {
+            finalSecrets.append(secretToAdd)
+        }
         return finalSecrets
     }
 }
