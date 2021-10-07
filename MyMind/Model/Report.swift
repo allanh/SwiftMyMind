@@ -49,38 +49,81 @@ struct SaleReportList: Codable {
         case reports = "detail"
     }
     let reports: [SaleReport]
-    var maximumQuantity: Double {
+    var maximumSaleQuantity: Int {
+        return reports.sorted {
+            $0.saleQuantity > $1.saleQuantity
+        }.first?.saleQuantity ?? 0
+    }
+    var totalSaleQuantity: Double {
         get {
-            let maximunSaleQuantity: Int = reports.sorted {
-                $0.saleQuantity > $1.saleQuantity
-            }.first?.saleQuantity ?? 0
-            let maximunCanceledQuantity: Int = reports.sorted {
-                $0.canceledQuantity > $1.canceledQuantity
-            }.first?.canceledQuantity ?? 0
-            let maximunReturnQuantity: Int = reports.sorted {
-                $0.returnQuantity > $1.returnQuantity
-            }.first?.returnQuantity ?? 0
-            return Double(max(maximunSaleQuantity, maximunCanceledQuantity, maximunReturnQuantity))
+            let result = reports.map({$0.saleQuantity}).reduce(0, +)
+            return Double(result)
         }
     }
-    var maximumAmount: Double {
+    var maximumCanceledQuantity: Int {
+        return reports.sorted {
+            $0.canceledQuantity > $1.canceledQuantity
+        }.first?.canceledQuantity ?? 0
+    }
+    var totalCanceledQuantity: Double {
         get {
-            let maximunSaleAmount: Float = reports.sorted {
-                $0.saleAmount > $1.saleAmount
-            }.first?.saleAmount ?? 0
-            let maximunCanceledAmount: Float = reports.sorted {
-                $0.canceledAmount > $1.canceledAmount
-            }.first?.canceledAmount ?? 0
-            let maximunReturnAmount: Float = reports.sorted {
-                $0.returnAmount > $1.returnAmount
-            }.first?.returnAmount ?? 0
-            return Double(max(maximunSaleAmount, maximunCanceledAmount, maximunReturnAmount))
+            let result = reports.map({$0.canceledQuantity}).reduce(0, +)
+            return Double(result)
         }
+    }
+    var maximumReturnQuantity: Int {
+        return reports.sorted {
+            $0.returnQuantity > $1.returnQuantity
+        }.first?.returnQuantity ?? 0
+    }
+    var totalReturnQuantity: Double {
+        get {
+            let result = reports.map({$0.returnQuantity}).reduce(0, +)
+            return Double(result)
+        }
+    }
+    var maximumQuantity: Double {
+        get {
+            return Double(max(maximumSaleQuantity, maximumCanceledQuantity, maximumReturnQuantity))
+        }
+    }
+    
+    var maximumSaleAmount: Float {
+        return reports.sorted {
+            $0.saleAmount > $1.saleAmount
+        }.first?.saleAmount ?? 0
     }
     var totalSaleAmount: Double {
         get {
             let result = reports.map({$0.saleAmount}).reduce(0, +)
             return Double(result)
+        }
+    }
+    var maximumCanceledAmount: Float {
+        return reports.sorted {
+            $0.canceledAmount > $1.canceledAmount
+        }.first?.canceledAmount ?? 0
+    }
+    var totalCanceledAmount: Double {
+        get {
+            let result = reports.map({$0.canceledAmount}).reduce(0, +)
+            return Double(result)
+        }
+    }
+    var maximumReturnAmount: Float {
+        return reports.sorted {
+            $0.returnAmount > $1.returnAmount
+        }.first?.returnAmount ?? 0
+    }
+    var totalReturnAmount: Double {
+        get {
+            let result = reports.map({$0.returnAmount}).reduce(0, +)
+            return Double(result)
+        }
+    }
+    var maximumAmount: Double {
+        get {
+            return Double(max(maximumSaleAmount, maximumCanceledAmount, maximumReturnAmount))
         }
     }
 }

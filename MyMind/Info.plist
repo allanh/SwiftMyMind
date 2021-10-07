@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>AppIdentifierPrefix</key>
+	<string>$(AppIdentifierPrefix)</string>
 	<key>AuthServerURL</key>
 	<string>$(AUTH_SERVER_URL)</string>
 	<key>CFBundleDevelopmentRegion</key>
@@ -33,6 +35,10 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>使用相機掃描 QR 碼，取得登入驗證碼</string>
+	<key>NSUserActivityTypes</key>
+	<array>
+		<string>SelectChartIntent</string>
+	</array>
 	<key>PushAppKey</key>
 	<string>$(PUSH_KEY)</string>
 	<key>PushKey</key>
@@ -87,7 +93,5 @@
 	<string>Light</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
-	<key>AppIdentifierPrefix</key>
-	<string>$(AppIdentifierPrefix)</string>
 </dict>
 </plist>

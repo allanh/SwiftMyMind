@@ -32,14 +32,16 @@ extension SaleReportList {
         for report in reports {
             if let date = report.date {
                 let components = Calendar.current.dateComponents([.day], from: fromDate, to: formatter.date(from: date)!)
-                if order == .TOTAL_SALE_AMOUNT {
-                    salePoints[components.day!].y += CGFloat(report.saleAmount)
-                    canceledPoints[components.day!].y += CGFloat(report.canceledAmount)
-                    returnedPoints[components.day!].y += CGFloat(report.returnAmount)
-                } else {
-                    salePoints[components.day!].y += CGFloat(report.saleQuantity)
-                    canceledPoints[components.day!].y += CGFloat(report.canceledQuantity)
-                    returnedPoints[components.day!].y += CGFloat(report.returnQuantity)
+                if let day = components.day, day < offset {
+                    if order == .TOTAL_SALE_AMOUNT {
+                        salePoints[day].y += CGFloat(report.saleAmount)
+                        canceledPoints[day].y += CGFloat(report.canceledAmount)
+                        returnedPoints[day].y += CGFloat(report.returnAmount)
+                    } else {
+                        salePoints[day].y += CGFloat(report.saleQuantity)
+                        canceledPoints[day].y += CGFloat(report.canceledQuantity)
+                        returnedPoints[day].y += CGFloat(report.returnQuantity)
+                    }
                 }
             }
         }

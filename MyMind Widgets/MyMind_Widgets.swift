@@ -8,88 +8,16 @@
 
 import WidgetKit
 import SwiftUI
-import Charts
-/// value formatter
-//class LineChartLeftAxisValueFormatter: IAxisValueFormatter {
-//    static let shared: LineChartLeftAxisValueFormatter = .init()
-//
-//    func stringForValue(_ value: Double, axis: AxisBase?) -> String {
-//        let formatter = NumberFormatter()
-//        formatter.numberStyle = .decimal
-//        formatter.maximumFractionDigits = 2
-//        return formatter.string(from: NSNumber(value: value)) ?? ""
-//    }
-//}
-//class LineChartBottomAxisValueFormatter: IAxisValueFormatter {
-//    static let shared: LineChartBottomAxisValueFormatter = .init()
-//    func stringForValue(_ value: Double, axis: AxisBase?) -> String {
-//        let date = Date()
-//        let formatter = DateFormatter()
-//        formatter.dateFormat = "MM-dd"
-//        return formatter.string(from: date)
-//    }
-//}
-/// extension
-//extension UIView {
-//    var image: UIImage? {
-//        get {
-//            UIGraphicsBeginImageContextWithOptions(bounds.size, isOpaque, 0.0)
-//            defer { UIGraphicsEndImageContext() }
-//            if let context = UIGraphicsGetCurrentContext() {
-//                layer.render(in: context)
-//                let image = UIGraphicsGetImageFromCurrentImageContext()
-//                return image
-//            }
-//            return nil
-//        }
-//    }
-//}
-//extension LineChartView {
-//    convenience init(frame: CGRect, entry: Provider.Entry) {
-//        self.init(frame: frame)
-//        self.backgroundColor = .white
-//        self.drawGridBackgroundEnabled = false
-//        self.chartDescription?.enabled = false
-//
-//        let leftAxis = self.leftAxis
-//        leftAxis.drawGridLinesEnabled = true
-//        leftAxis.axisMaximum = 10000
-//        leftAxis.axisMinimum = 0
-//        leftAxis.valueFormatter = LineChartLeftAxisValueFormatter.shared
-//
-//        let xAxis = self.xAxis
-//        xAxis.labelPosition = .bottom
-//        xAxis.labelFont = .pingFangTCRegular(ofSize: 10)
-//        xAxis.drawGridLinesEnabled = false
-//        xAxis.granularity = 1
-//        xAxis.labelCount = 7
-//        xAxis.valueFormatter = LineChartBottomAxisValueFormatter.shared
-//
-//        self.rightAxis.enabled = false
-//        self.legend.form = .line
-//        if let reportList = entry.reportList, reportList.reports.count > 0 {
-//            let maximum = reportList.maximumAmount
-//            leftAxis.axisMaximum = maximum + maximum/10
-//            self.data = reportList.lineChartData(order: SKURankingReport.SKURankingReportSortOrder.TOTAL_SALE_AMOUNT)
-//        } else {
-//            leftAxis.axisMaximum = 10000
-//            self.data = SaleReportList.emptyLineChartData(order: SKURankingReport.SKURankingReportSortOrder.TOTAL_SALE_AMOUNT)
-//        }
-//    }
-//}
-/// widget
+import Intents
+/// Static Widget configuration provider
 struct Provider: TimelineProvider {
-    func placeholder(in context: Context) -> MyMindEntry {
-        MyMindEntry(date: Date(), isLogin: true, maximumAmount: 1, totalAmount: 0, chartDatas: [], toDoCount: nil, announcementCount: nil)
-    }
-
     func getSnapshot(in context: Context, completion: @escaping (MyMindEntry) -> ()) {
         let entry = MyMindEntry(date: Date(), isLogin: true, maximumAmount: 100, totalAmount: 1280, chartDatas: [UDILineChartData(points: [CGPoint(x: 0, y: 20), CGPoint(x: 1, y: 25), CGPoint(x: 2, y: 30), CGPoint(x: 3, y: 40), CGPoint(x: 4, y: 60), CGPoint(x: 5, y: 85), CGPoint(x: 6, y: 75), CGPoint(x: 7, y: 40), CGPoint(x: 8, y: 70), CGPoint(x: 9, y: 20), CGPoint(x: 10, y: 30), CGPoint(x: 11, y: 45), CGPoint(x: 12, y: 50), CGPoint(x: 13, y: 45), CGPoint(x: 14, y: 50), CGPoint(x: 15, y: 45), CGPoint(x: 16, y: 45), CGPoint(x: 17, y: 30), CGPoint(x: 18, y: 20), CGPoint(x: 19, y: 60), CGPoint(x: 20, y: 80), CGPoint(x: 21, y: 100), CGPoint(x: 22, y: 90), CGPoint(x: 23, y: 80), CGPoint(x: 24, y: 70), CGPoint(x: 25, y: 70), CGPoint(x: 26, y: 75), CGPoint(x: 27, y: 75), CGPoint(x: 28, y: 70), CGPoint(x: 29, y: 70)], fill: LinearGradient(stops: [.init(color:  Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.8), location: 0), .init(color: Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.5), location: 0.3), .init(color: Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.0), location: 1)], startPoint: .top, endPoint: .bottom), stroke: Color(red: 127.0/255.0, green: 194.0/255.0, blue: 250.0/255.0), strokeWidth: 3)], toDoCount: 198, announcementCount: 7)
         completion(entry)
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<MyMindEntry>) -> ()) {
-        let nextUpdateDate = Calendar.current.date(byAdding: .hour, value: 1, to: Date())!
+        let nextUpdateDate = Calendar.current.date(byAdding: .minute, value: 10, to: Date())!
         NetworkManager.shared.authorization { authorization, success in
             if success {
                 NetworkManager.shared.saleReportList { reportList in
@@ -108,6 +36,70 @@ struct Provider: TimelineProvider {
             }
         }
     }
+    func placeholder(in context: Context) -> MyMindEntry {
+        MyMindEntry(date: Date(), isLogin: true, maximumAmount: 1, totalAmount: 0, chartDatas: [], toDoCount: nil, announcementCount: nil)
+    }
+}
+/// intent widget configuration provider
+struct ChartProvider: IntentTimelineProvider {
+    typealias Entry = MyMindEntry
+    typealias Intent = SelectChartIntent
+
+    func getSnapshot(for configuration: SelectChartIntent, in context: Context, completion: @escaping (MyMindEntry) -> Void) {
+        let entry = MyMindEntry(date: Date(), isLogin: true, maximumAmount: 100, totalAmount: 1280, chartDatas: [UDILineChartData(points: [CGPoint(x: 0, y: 20), CGPoint(x: 1, y: 25), CGPoint(x: 2, y: 30), CGPoint(x: 3, y: 40), CGPoint(x: 4, y: 60), CGPoint(x: 5, y: 85), CGPoint(x: 6, y: 75), CGPoint(x: 7, y: 40), CGPoint(x: 8, y: 70), CGPoint(x: 9, y: 20), CGPoint(x: 10, y: 30), CGPoint(x: 11, y: 45), CGPoint(x: 12, y: 50), CGPoint(x: 13, y: 45), CGPoint(x: 14, y: 50), CGPoint(x: 15, y: 45), CGPoint(x: 16, y: 45), CGPoint(x: 17, y: 30), CGPoint(x: 18, y: 20), CGPoint(x: 19, y: 60), CGPoint(x: 20, y: 80), CGPoint(x: 21, y: 100), CGPoint(x: 22, y: 90), CGPoint(x: 23, y: 80), CGPoint(x: 24, y: 70), CGPoint(x: 25, y: 70), CGPoint(x: 26, y: 75), CGPoint(x: 27, y: 75), CGPoint(x: 28, y: 70), CGPoint(x: 29, y: 70)], fill: LinearGradient(stops: [.init(color:  Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.8), location: 0), .init(color: Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.5), location: 0.3), .init(color: Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.0), location: 1)], startPoint: .top, endPoint: .bottom), stroke: Color(red: 127.0/255.0, green: 194.0/255.0, blue: 250.0/255.0), strokeWidth: 3)], toDoCount: 198, announcementCount: 7)
+        completion(entry)
+    }
+    
+    func getTimeline(for configuration: SelectChartIntent, in context: Context, completion: @escaping (Timeline<MyMindEntry>) -> Void) {
+        let nextUpdateDate = Calendar.current.date(byAdding: .minute, value: 10, to: Date())!
+        NetworkManager.shared.authorization { authorization, success in
+            if success {
+                NetworkManager.shared.saleReportList { reportList in
+                    NetworkManager.shared.toDoCount(with: authorization?.navigations.description ?? "") { toDoCount in
+                        NetworkManager.shared.announcementCount { announcementCount in
+                            var points: [CGPoint] = []
+                            var maximum: CGFloat = 1
+                            var total: CGFloat = 0
+                            switch configuration.chart {
+                            case .saleAmount: points = reportList?.points(for: .TOTAL_SALE_AMOUNT)[.sale] ?? []
+                                maximum = max(CGFloat(reportList?.maximumSaleAmount ?? 1), 1)
+                                total = reportList?.totalSaleAmount ?? 0
+                            case .canceledAmount: points = reportList?.points(for: .TOTAL_SALE_AMOUNT)[.cancel] ?? []
+                                maximum = max (CGFloat(reportList?.maximumCanceledAmount ?? 1), 1)
+                                total = reportList?.totalCanceledAmount ?? 0
+                            case .returnedAmount: points = reportList?.points(for: .TOTAL_SALE_AMOUNT)[.returned] ?? []
+                                maximum = max(CGFloat(reportList?.maximumReturnAmount ?? 1), 1)
+                                total = reportList?.totalReturnAmount ?? 0
+                            case .saleQuantity: points = reportList?.points(for: .TOTAL_SALE_QUANTITY)[.sale] ?? []
+                                maximum = max(CGFloat(reportList?.maximumSaleQuantity ?? 1), 1)
+                                total = reportList?.totalSaleQuantity ?? 0
+                            case .canceledQuanity: points = reportList?.points(for: .TOTAL_SALE_QUANTITY)[.cancel] ?? []
+                                maximum = max(CGFloat(reportList?.maximumCanceledQuantity ?? 1), 1)
+                                total = reportList?.totalCanceledQuantity ?? 0
+                            case .returnedQuantity: points = reportList?.points(for: .TOTAL_SALE_QUANTITY)[.returned] ?? []
+                                maximum = max(CGFloat(reportList?.maximumReturnQuantity ?? 1), 1)
+                                total = reportList?.totalReturnQuantity ?? 0
+                            default: points = reportList?.points(for: .TOTAL_SALE_AMOUNT)[.sale] ?? []
+                                maximum = max(CGFloat(reportList?.maximumSaleAmount ?? 1), 1)
+                                total = reportList?.totalSaleAmount ?? 0
+                            }
+                            let entry = MyMindEntry(date: Date(), isLogin: true, maximumAmount: maximum, totalAmount: total, chartDatas: [UDILineChartData(points:  points, fill: LinearGradient(stops: [.init(color:  Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.8), location: 0), .init(color: Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.5), location: 0.3), .init(color: Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.0), location: 1)], startPoint: .top, endPoint: .bottom), stroke: Color(red: 127.0/255.0, green: 194.0/255.0, blue: 250.0/255.0), strokeWidth: 3) ], toDoCount: toDoCount, announcementCount: announcementCount)
+                            let timeline = Timeline(entries: [entry], policy: .after(nextUpdateDate))
+                            completion(timeline)
+                        }
+                    }
+                }
+            } else {
+                let entry = MyMindEntry(date: Date(), isLogin: false, maximumAmount: 1, totalAmount: 0, chartDatas: [], toDoCount: nil, announcementCount: nil)
+                let timeline = Timeline(entries: [entry], policy: .after(nextUpdateDate))
+                completion(timeline)
+            }
+        }
+    }
+    
+    func placeholder(in context: Context) -> MyMindEntry {
+        MyMindEntry(date: Date(), isLogin: true, maximumAmount: 1, totalAmount: 0, chartDatas: [], toDoCount: nil, announcementCount: nil)
+    }
 }
 /// MyMindEntry
 struct MyMindEntry: TimelineEntry {
@@ -116,93 +108,13 @@ struct MyMindEntry: TimelineEntry {
     let maximumAmount: CGFloat
     let totalAmount: CGFloat
     let chartDatas: [UDILineChartData]
-//    let pointsSet: [SaleReportList.SaleReportPointsType:[CGPoint]]
     let toDoCount: Int?
     let announcementCount: Int?
-//    func path(with frame: CGRect, type: SaleReportList.SaleReportPointsType) -> Path {
-//        var path = Path()
-//        let heightRatio: CGFloat = frame.size.height/maximumAmount
-//        let points: [CGPoint] = pointsSet[type] ?? []
-//        let itemWidth = frame.size.width/CGFloat((points.count > 1) ? points.count - 1 : 1)
-//        let drawPoints = points.map { origin in
-//            return CGPoint(x: (origin.x*itemWidth), y: frame.maxY - (origin.y*heightRatio))
-//        }
-//        var previousPoint: CGPoint?
-//        var isFirst = true
-//        for index in 0..<drawPoints.count {
-//            let point = drawPoints[index]
-//            if let previousPoint = previousPoint {
-//                let midPoint = CGPoint(
-//                    x: (point.x + previousPoint.x) / 2,
-//                    y: (point.y + previousPoint.y) / 2
-//                )
-//                if isFirst {
-//                    path.addLine(to: midPoint)
-//                    isFirst = false
-//                } else if index == drawPoints.count - 1{
-//                    path.addQuadCurve(to: point, control: midPoint)
-//                } else {
-//                    path.addQuadCurve(to: midPoint, control: previousPoint)
-//                }
-//            }
-//            else {
-//                path.move(to: point)
-//            }
-//            previousPoint = point
-//        }
-//        return path
-//    }
-//    func closePath(with frame: CGRect, type: SaleReportList.SaleReportPointsType) -> Path {
-//        var path = Path()
-//        let heightRatio: CGFloat = frame.size.height/maximumAmount
-//        let points: [CGPoint] = pointsSet[type] ?? []
-//        let itemWidth = frame.size.width/CGFloat((points.count > 1) ? points.count - 1 : 1)
-//        let drawPoints = points.map { origin in
-//            return CGPoint(x: (origin.x*itemWidth), y: frame.maxY - (origin.y*heightRatio))
-//        }
-//        var previousPoint: CGPoint?
-//        var isFirst = true
-//        for index in 0..<drawPoints.count {
-//            let point = drawPoints[index]
-//            if let previousPoint = previousPoint {
-//                let midPoint = CGPoint(
-//                    x: (point.x + previousPoint.x) / 2,
-//                    y: (point.y + previousPoint.y) / 2
-//                )
-//                if isFirst {
-//                    path.addLine(to: midPoint)
-//                    isFirst = false
-//                } else if index == drawPoints.count - 1{
-//                    path.addQuadCurve(to: point, control: midPoint)
-//                } else {
-//                    path.addQuadCurve(to: midPoint, control: previousPoint)
-//                }
-//            }
-//            else {
-//                if point.y != frame.maxY {
-//                    path.move(to: CGPoint(x: frame.minX, y: frame.maxY))
-//                    path.addLine(to: point)
-//                } else {
-//                    path.move(to: point)
-//                }
-//            }
-//            previousPoint = point
-//        }
-//        path.addLine(to: CGPoint(x: frame.maxX, y: frame.maxY))
-//        path.addLine(to: CGPoint(x: frame.minX, y: frame.maxY))
-//        return path
-//    }
 }
 /// Entry View
 struct MyMind_WidgetsEntryView : View {
     @Environment(\.widgetFamily) var family: WidgetFamily
     var entry: Provider.Entry
-//    lazy var view = LineChartView(frame: CGRect(x: 0, y: 0, width: 320, height: 180), entry: entry)
-//    func viewValue() -> some UIView {
-//        var mutatableSelf = self
-//        return mutatableSelf.view
-//    }
-
     @ViewBuilder
     var body: some View {
         switch family {
@@ -312,9 +224,9 @@ struct MyMind_WidgetsEntryView : View {
         }
     }
 }
-@main
-struct MyMind_Widgets: Widget {
-    let kind: String = "MyMind_Widgets"
+/// widget
+struct MyMind_Widget: Widget {
+    let kind: String = "MyMind_Widget"
 
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
@@ -322,10 +234,31 @@ struct MyMind_Widgets: Widget {
         }
         .configurationDisplayName("MyMind")
         .description("Show MyMind Important Infos.")
-        .supportedFamilies([.systemLarge, .systemMedium])
+        .supportedFamilies([.systemMedium])
     }
 }
+struct MyMind_ChartWidget: Widget {
+    let kind: String = "MyMind_ChartWidget"
 
+    var body: some WidgetConfiguration {
+        IntentConfiguration(kind: kind, intent: SelectChartIntent.self, provider: ChartProvider()) { entry in
+            MyMind_WidgetsEntryView(entry: entry)
+        }
+        .configurationDisplayName("MyMind")
+        .description("Show MyMind Important Infos.")
+        .supportedFamilies([.systemLarge])
+    }
+}
+/// widget bundle
+@main
+struct MyMind_Widgets: WidgetBundle {
+    @WidgetBundleBuilder
+    var body: some Widget {
+        MyMind_Widget()
+        MyMind_ChartWidget()
+    }
+}
+/// preview
 struct MyMind_Widgets_Previews: PreviewProvider {
     static var previews: some View {
         Group {

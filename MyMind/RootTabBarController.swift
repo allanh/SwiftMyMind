@@ -109,7 +109,8 @@ final class RootTabBarController: UITabBarController {
 extension RootTabBarController: MixedDelegate {
     func didSignOut() {
         if #available(iOS 14.0, *) {
-            WidgetCenter.shared.reloadTimelines(ofKind: "MyMind_Widgets")
+            WidgetCenter.shared.reloadTimelines(ofKind: "MyMind_Widget")
+            WidgetCenter.shared.reloadTimelines(ofKind: "MyMind_ChartWidget")
         }
         self.navigationController?.popToRootViewController(animated: true)
     }
