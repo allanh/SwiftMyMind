@@ -17,7 +17,7 @@ struct Provider: TimelineProvider {
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<MyMindEntry>) -> ()) {
-        let nextUpdateDate = Calendar.current.date(byAdding: .minute, value: 10, to: Date())!
+        let nextUpdateDate = Calendar.current.date(byAdding: .hour, value: 1, to: Date())!
         NetworkManager.shared.authorization { authorization, success in
             if success {
                 NetworkManager.shared.saleReportList { reportList in
@@ -51,7 +51,7 @@ struct ChartProvider: IntentTimelineProvider {
     }
     
     func getTimeline(for configuration: SelectChartIntent, in context: Context, completion: @escaping (Timeline<MyMindEntry>) -> Void) {
-        let nextUpdateDate = Calendar.current.date(byAdding: .minute, value: 10, to: Date())!
+        let nextUpdateDate = Calendar.current.date(byAdding: .day, value: 1, to: Date())!
         NetworkManager.shared.authorization { authorization, success in
             if success {
                 NetworkManager.shared.saleReportList { reportList in
@@ -60,30 +60,53 @@ struct ChartProvider: IntentTimelineProvider {
                             var points: [CGPoint] = []
                             var maximum: CGFloat = 1
                             var total: CGFloat = 0
-                            switch configuration.chart {
-                            case .saleAmount: points = reportList?.points(for: .TOTAL_SALE_AMOUNT)[.sale] ?? []
-                                maximum = max(CGFloat(reportList?.maximumSaleAmount ?? 1), 1)
-                                total = reportList?.totalSaleAmount ?? 0
-                            case .canceledAmount: points = reportList?.points(for: .TOTAL_SALE_AMOUNT)[.cancel] ?? []
-                                maximum = max (CGFloat(reportList?.maximumCanceledAmount ?? 1), 1)
-                                total = reportList?.totalCanceledAmount ?? 0
-                            case .returnedAmount: points = reportList?.points(for: .TOTAL_SALE_AMOUNT)[.returned] ?? []
-                                maximum = max(CGFloat(reportList?.maximumReturnAmount ?? 1), 1)
-                                total = reportList?.totalReturnAmount ?? 0
-                            case .saleQuantity: points = reportList?.points(for: .TOTAL_SALE_QUANTITY)[.sale] ?? []
-                                maximum = max(CGFloat(reportList?.maximumSaleQuantity ?? 1), 1)
-                                total = reportList?.totalSaleQuantity ?? 0
-                            case .canceledQuanity: points = reportList?.points(for: .TOTAL_SALE_QUANTITY)[.cancel] ?? []
-                                maximum = max(CGFloat(reportList?.maximumCanceledQuantity ?? 1), 1)
-                                total = reportList?.totalCanceledQuantity ?? 0
-                            case .returnedQuantity: points = reportList?.points(for: .TOTAL_SALE_QUANTITY)[.returned] ?? []
-                                maximum = max(CGFloat(reportList?.maximumReturnQuantity ?? 1), 1)
-                                total = reportList?.totalReturnQuantity ?? 0
-                            default: points = reportList?.points(for: .TOTAL_SALE_AMOUNT)[.sale] ?? []
-                                maximum = max(CGFloat(reportList?.maximumSaleAmount ?? 1), 1)
-                                total = reportList?.totalSaleAmount ?? 0
+                            if let reportList = reportList {
+                                switch configuration.source {
+                                case .saleAmount: points = reportList.points(for: .TOTAL_SALE_AMOUNT)[.sale] ?? []
+                                    maximum = CGFloat(reportList.maximumSaleAmount)
+                                    if maximum == 0 {
+                                        maximum = 10000
+                                    }
+                                   total = max(reportList.totalSaleAmount, 0)
+                                case .canceledAmount: points = reportList.points(for: .TOTAL_SALE_AMOUNT)[.cancel] ?? []
+                                    maximum = CGFloat(reportList.maximumCanceledAmount)
+                                    if maximum == 0 {
+                                        maximum = 10000
+                                    }
+                                    total = max(reportList.totalCanceledAmount, 0)
+                                case .returnedAmount: points = reportList.points(for: .TOTAL_SALE_AMOUNT)[.returned] ?? []
+                                    maximum = CGFloat(reportList.maximumReturnAmount)
+                                    if maximum == 0 {
+                                        maximum = 10000
+                                    }
+                                    total = max(reportList.totalReturnAmount, 0)
+                                case .saleQuantity: points = reportList.points(for: .TOTAL_SALE_QUANTITY)[.sale] ?? []
+                                    maximum = CGFloat(reportList.maximumSaleQuantity)
+                                    if maximum == 0 {
+                                        maximum = 1000
+                                    }
+                                    total = max(reportList.totalSaleQuantity, 0)
+                                case .canceledQuanity: points = reportList.points(for: .TOTAL_SALE_QUANTITY)[.cancel] ?? []
+                                    maximum = CGFloat(reportList.maximumCanceledQuantity)
+                                    if maximum == 0 {
+                                        maximum = 1000
+                                    }
+                                    total = max(reportList.totalCanceledQuantity, 0)
+                                case .returnedQuantity: points = reportList.points(for: .TOTAL_SALE_QUANTITY)[.returned] ?? []
+                                    maximum = CGFloat(reportList.maximumReturnQuantity)
+                                    if maximum == 0 {
+                                        maximum = 1000
+                                    }
+                                    total = max(reportList.totalReturnQuantity, 0)
+                                default: points = reportList.points(for: .TOTAL_SALE_AMOUNT)[.sale] ?? []
+                                    maximum = CGFloat(reportList.maximumSaleAmount)
+                                    if maximum == 0 {
+                                        maximum = 1000
+                                    }
+                                    total = max(reportList.totalSaleAmount, 0)
+                                }
                             }
-                            let entry = MyMindEntry(date: Date(), isLogin: true, maximumAmount: maximum, totalAmount: total, chartDatas: [UDILineChartData(points:  points, fill: LinearGradient(stops: [.init(color:  Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.8), location: 0), .init(color: Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.5), location: 0.3), .init(color: Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.0), location: 1)], startPoint: .top, endPoint: .bottom), stroke: Color(red: 127.0/255.0, green: 194.0/255.0, blue: 250.0/255.0), strokeWidth: 3) ], toDoCount: toDoCount, announcementCount: announcementCount)
+                            let entry = MyMindEntry(date: Date(), isLogin: true, maximumAmount: maximum, totalAmount: total, chartDatas: [UDILineChartData(points:  points, fill: LinearGradient(stops: [.init(color:  Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.8), location: 0), .init(color: Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.5), location: 0.3), .init(color: Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.0), location: 1)], startPoint: .top, endPoint: .bottom), stroke: Color(red: 127.0/255.0, green: 194.0/255.0, blue: 250.0/255.0), strokeWidth: configuration.strokeWidth as? CGFloat ?? 3) ], toDoCount: toDoCount, announcementCount: announcementCount)
                             let timeline = Timeline(entries: [entry], policy: .after(nextUpdateDate))
                             completion(timeline)
                         }
