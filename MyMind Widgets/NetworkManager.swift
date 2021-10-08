@@ -137,6 +137,47 @@ class NetworkManager {
         }
         task.resume()
     }
+    func todayReport(completion: @escaping (SaleReports?) -> ()) {
+        guard let userSession = readUserSession() else {
+            completion(nil)
+            return
+        }
+        let end = Date()
+        let request = request(
+            url: saleReport(partnerID: "\(userSession.partnerInfo.id)", start: end, end: end, type: .byType),
+            httpHeader: ["Authorization": "Bearer \(userSession.token)"]
+        )
+        let task = URLSession.shared.dataTask(with: request) { data, _, error in
+            guard error == nil else {
+                print(error?.localizedDescription as Any)
+                completion(nil)
+                return
+            }
+
+            guard let jsonData = data else {
+                completion(nil)
+                return
+            }
+            do {
+                let response = try JSONDecoder().decode(Response<SaleReportList>.self, from: jsonData)
+                guard let item = response.data else {
+                    completion(nil)
+                    return
+                }
+                let todayTransformedSaleReport = item.reports.first {
+                    $0.type == .TRANSFORMED
+                }
+                let todayShippedSaleReport = item.reports.first {
+                    $0.type == .SHIPPED
+                }
+
+                completion(SaleReports(todayTransformedSaleReport: todayTransformedSaleReport, todayShippedSaleReport: todayShippedSaleReport, yesterdayTransformedSaleReport: nil, yesterdayShippedSaleReport: nil))
+            } catch {
+                completion(nil)
+            }
+        }
+        task.resume()
+    }
     func saleReportList(completion: @escaping (SaleReportList?) -> ()) {
         guard let userSession = readUserSession() else {
             completion(nil)

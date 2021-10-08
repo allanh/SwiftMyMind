@@ -12,7 +12,7 @@ import Intents
 /// Static Widget configuration provider
 struct Provider: TimelineProvider {
     func getSnapshot(in context: Context, completion: @escaping (MyMindEntry) -> ()) {
-        let entry = MyMindEntry(date: Date(), isLogin: true, maximumAmount: 100, totalAmount: 1280, chartDatas: [UDILineChartData(points: [CGPoint(x: 0, y: 20), CGPoint(x: 1, y: 25), CGPoint(x: 2, y: 30), CGPoint(x: 3, y: 40), CGPoint(x: 4, y: 60), CGPoint(x: 5, y: 85), CGPoint(x: 6, y: 75), CGPoint(x: 7, y: 40), CGPoint(x: 8, y: 70), CGPoint(x: 9, y: 20), CGPoint(x: 10, y: 30), CGPoint(x: 11, y: 45), CGPoint(x: 12, y: 50), CGPoint(x: 13, y: 45), CGPoint(x: 14, y: 50), CGPoint(x: 15, y: 45), CGPoint(x: 16, y: 45), CGPoint(x: 17, y: 30), CGPoint(x: 18, y: 20), CGPoint(x: 19, y: 60), CGPoint(x: 20, y: 80), CGPoint(x: 21, y: 100), CGPoint(x: 22, y: 90), CGPoint(x: 23, y: 80), CGPoint(x: 24, y: 70), CGPoint(x: 25, y: 70), CGPoint(x: 26, y: 75), CGPoint(x: 27, y: 75), CGPoint(x: 28, y: 70), CGPoint(x: 29, y: 70)], fill: LinearGradient(stops: [.init(color:  Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.8), location: 0), .init(color: Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.5), location: 0.3), .init(color: Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.0), location: 1)], startPoint: .top, endPoint: .bottom), stroke: Color(red: 127.0/255.0, green: 194.0/255.0, blue: 250.0/255.0), strokeWidth: 3)], toDoCount: 198, announcementCount: 7)
+        let entry = MyMindEntry(date: Date(), isLogin: true, source: nil, maximumAmount: 100, totalAmount: 102560, todayAmount: 2560, chartDatas: [UDILineChartData(points: [CGPoint(x: 0, y: 20), CGPoint(x: 1, y: 25), CGPoint(x: 2, y: 30), CGPoint(x: 3, y: 40), CGPoint(x: 4, y: 60), CGPoint(x: 5, y: 85), CGPoint(x: 6, y: 75), CGPoint(x: 7, y: 40), CGPoint(x: 8, y: 70), CGPoint(x: 9, y: 20), CGPoint(x: 10, y: 30), CGPoint(x: 11, y: 45), CGPoint(x: 12, y: 50), CGPoint(x: 13, y: 45), CGPoint(x: 14, y: 50), CGPoint(x: 15, y: 45), CGPoint(x: 16, y: 45), CGPoint(x: 17, y: 30), CGPoint(x: 18, y: 20), CGPoint(x: 19, y: 60), CGPoint(x: 20, y: 80), CGPoint(x: 21, y: 100), CGPoint(x: 22, y: 90), CGPoint(x: 23, y: 80), CGPoint(x: 24, y: 70), CGPoint(x: 25, y: 70), CGPoint(x: 26, y: 75), CGPoint(x: 27, y: 75), CGPoint(x: 28, y: 70), CGPoint(x: 29, y: 70)], fill: LinearGradient(stops: [.init(color:  Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.8), location: 0), .init(color: Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.5), location: 0.3), .init(color: Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.0), location: 1)], startPoint: .top, endPoint: .bottom), stroke: Color(red: 127.0/255.0, green: 194.0/255.0, blue: 250.0/255.0), strokeWidth: 3)], toDoCount: 198, announcementCount: 7)
         completion(entry)
     }
 
@@ -23,21 +23,21 @@ struct Provider: TimelineProvider {
                 NetworkManager.shared.saleReportList { reportList in
                     NetworkManager.shared.toDoCount(with: authorization?.navigations.description ?? "") { toDoCount in
                         NetworkManager.shared.announcementCount { announcementCount in
-                            let entry = MyMindEntry(date: Date(), isLogin: true, maximumAmount: reportList?.maximumAmount ?? 1, totalAmount: reportList?.totalSaleAmount ?? 0, chartDatas: [UDILineChartData(points: reportList?.points(for: .TOTAL_SALE_AMOUNT)[.sale] ?? [], fill: LinearGradient(stops: [.init(color:  Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.8), location: 0), .init(color: Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.5), location: 0.3), .init(color: Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.0), location: 1)], startPoint: .top, endPoint: .bottom), stroke: Color(red: 127.0/255.0, green: 194.0/255.0, blue: 250.0/255.0), strokeWidth: 3) ], toDoCount: toDoCount, announcementCount: announcementCount)
+                            let entry = MyMindEntry(date: Date(), isLogin: true, source: nil, maximumAmount: reportList?.maximumAmount ?? 1, totalAmount: reportList?.totalSaleAmount ?? 0, todayAmount: 0, chartDatas: [UDILineChartData(points: reportList?.points(for: .TOTAL_SALE_AMOUNT)[.sale] ?? [], fill: LinearGradient(stops: [.init(color:  Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.8), location: 0), .init(color: Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.5), location: 0.3), .init(color: Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.0), location: 1)], startPoint: .top, endPoint: .bottom), stroke: Color(red: 127.0/255.0, green: 194.0/255.0, blue: 250.0/255.0), strokeWidth: 3) ], toDoCount: toDoCount, announcementCount: announcementCount)
                             let timeline = Timeline(entries: [entry], policy: .after(nextUpdateDate))
                             completion(timeline)
                         }
                     }
                 }
             } else {
-                let entry = MyMindEntry(date: Date(), isLogin: false, maximumAmount: 1, totalAmount: 0, chartDatas: [], toDoCount: nil, announcementCount: nil)
+                let entry = MyMindEntry(date: Date(), isLogin: false, source: nil, maximumAmount: 1, totalAmount: 0, todayAmount: 0, chartDatas: [], toDoCount: nil, announcementCount: nil)
                 let timeline = Timeline(entries: [entry], policy: .after(nextUpdateDate))
                 completion(timeline)
             }
         }
     }
     func placeholder(in context: Context) -> MyMindEntry {
-        MyMindEntry(date: Date(), isLogin: true, maximumAmount: 1, totalAmount: 0, chartDatas: [], toDoCount: nil, announcementCount: nil)
+        MyMindEntry(date: Date(), isLogin: true, source: nil, maximumAmount: 1, totalAmount: 0, todayAmount: 0, chartDatas: [], toDoCount: nil, announcementCount: nil)
     }
 }
 /// intent widget configuration provider
@@ -46,7 +46,7 @@ struct ChartProvider: IntentTimelineProvider {
     typealias Intent = SelectChartIntent
 
     func getSnapshot(for configuration: SelectChartIntent, in context: Context, completion: @escaping (MyMindEntry) -> Void) {
-        let entry = MyMindEntry(date: Date(), isLogin: true, maximumAmount: 100, totalAmount: 1280, chartDatas: [UDILineChartData(points: [CGPoint(x: 0, y: 20), CGPoint(x: 1, y: 25), CGPoint(x: 2, y: 30), CGPoint(x: 3, y: 40), CGPoint(x: 4, y: 60), CGPoint(x: 5, y: 85), CGPoint(x: 6, y: 75), CGPoint(x: 7, y: 40), CGPoint(x: 8, y: 70), CGPoint(x: 9, y: 20), CGPoint(x: 10, y: 30), CGPoint(x: 11, y: 45), CGPoint(x: 12, y: 50), CGPoint(x: 13, y: 45), CGPoint(x: 14, y: 50), CGPoint(x: 15, y: 45), CGPoint(x: 16, y: 45), CGPoint(x: 17, y: 30), CGPoint(x: 18, y: 20), CGPoint(x: 19, y: 60), CGPoint(x: 20, y: 80), CGPoint(x: 21, y: 100), CGPoint(x: 22, y: 90), CGPoint(x: 23, y: 80), CGPoint(x: 24, y: 70), CGPoint(x: 25, y: 70), CGPoint(x: 26, y: 75), CGPoint(x: 27, y: 75), CGPoint(x: 28, y: 70), CGPoint(x: 29, y: 70)], fill: LinearGradient(stops: [.init(color:  Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.8), location: 0), .init(color: Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.5), location: 0.3), .init(color: Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.0), location: 1)], startPoint: .top, endPoint: .bottom), stroke: Color(red: 127.0/255.0, green: 194.0/255.0, blue: 250.0/255.0), strokeWidth: 3)], toDoCount: 198, announcementCount: 7)
+        let entry = MyMindEntry(date: Date(), isLogin: true, source: .saleAmount, maximumAmount: 100, totalAmount: 102560, todayAmount: 2560, chartDatas: [UDILineChartData(points: [CGPoint(x: 0, y: 20), CGPoint(x: 1, y: 25), CGPoint(x: 2, y: 30), CGPoint(x: 3, y: 40), CGPoint(x: 4, y: 60), CGPoint(x: 5, y: 85), CGPoint(x: 6, y: 75), CGPoint(x: 7, y: 40), CGPoint(x: 8, y: 70), CGPoint(x: 9, y: 20), CGPoint(x: 10, y: 30), CGPoint(x: 11, y: 45), CGPoint(x: 12, y: 50), CGPoint(x: 13, y: 45), CGPoint(x: 14, y: 50), CGPoint(x: 15, y: 45), CGPoint(x: 16, y: 45), CGPoint(x: 17, y: 30), CGPoint(x: 18, y: 20), CGPoint(x: 19, y: 60), CGPoint(x: 20, y: 80), CGPoint(x: 21, y: 100), CGPoint(x: 22, y: 90), CGPoint(x: 23, y: 80), CGPoint(x: 24, y: 70), CGPoint(x: 25, y: 70), CGPoint(x: 26, y: 75), CGPoint(x: 27, y: 75), CGPoint(x: 28, y: 70), CGPoint(x: 29, y: 70)], fill: LinearGradient(stops: [.init(color:  Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.8), location: 0), .init(color: Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.5), location: 0.3), .init(color: Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.0), location: 1)], startPoint: .top, endPoint: .bottom), stroke: Color(red: 127.0/255.0, green: 194.0/255.0, blue: 250.0/255.0), strokeWidth: 3)], toDoCount: 198, announcementCount: 7)
         completion(entry)
     }
     
@@ -57,63 +57,116 @@ struct ChartProvider: IntentTimelineProvider {
                 NetworkManager.shared.saleReportList { reportList in
                     NetworkManager.shared.toDoCount(with: authorization?.navigations.description ?? "") { toDoCount in
                         NetworkManager.shared.announcementCount { announcementCount in
-                            var points: [CGPoint] = []
-                            var maximum: CGFloat = 1
-                            var total: CGFloat = 0
-                            if let reportList = reportList {
-                                switch configuration.source {
-                                case .saleAmount: points = reportList.points(for: .TOTAL_SALE_AMOUNT)[.sale] ?? []
-                                    maximum = CGFloat(reportList.maximumSaleAmount)
-                                    if maximum == 0 {
-                                        maximum = 10000
+                            NetworkManager.shared.todayReport { reportOfToday in
+                                var points: [CGPoint] = []
+                                var maximum: CGFloat = 1
+                                var total: CGFloat = 0
+                                var today: CGFloat = 0
+                                var source: SourceType?
+                                if let reportList = reportList {
+                                    switch configuration.source {
+                                    case .saleAmount: points = reportList.points(for: .TOTAL_SALE_AMOUNT)[.sale] ?? []
+                                        maximum = CGFloat(reportList.maximumSaleAmount)
+                                        if maximum == 0 {
+                                            maximum = 10000
+                                        }
+                                        total = max(reportList.totalSaleAmount, 0)
+                                        if let shipped = reportOfToday?.todayShippedSaleReport {
+                                            today += CGFloat(shipped.saleAmount)
+                                        }
+                                        if let transformed = reportOfToday?.todayTransformedSaleReport {
+                                            today += CGFloat(transformed.saleAmount)
+                                        }
+                                        source = .saleAmount
+                                    case .canceledAmount: points = reportList.points(for: .TOTAL_SALE_AMOUNT)[.cancel] ?? []
+                                        maximum = CGFloat(reportList.maximumCanceledAmount)
+                                        if maximum == 0 {
+                                            maximum = 10000
+                                        }
+                                        total = max(reportList.totalCanceledAmount, 0)
+                                        if let shipped = reportOfToday?.todayShippedSaleReport {
+                                            today += CGFloat(shipped.canceledAmount)
+                                        }
+                                        if let transformed = reportOfToday?.todayTransformedSaleReport {
+                                            today += CGFloat(transformed.canceledAmount)
+                                        }
+                                        source = .cancelAmount
+                                    case .returnedAmount: points = reportList.points(for: .TOTAL_SALE_AMOUNT)[.returned] ?? []
+                                        maximum = CGFloat(reportList.maximumReturnAmount)
+                                        if maximum == 0 {
+                                            maximum = 10000
+                                        }
+                                        total = max(reportList.totalReturnAmount, 0)
+                                        if let shipped = reportOfToday?.todayShippedSaleReport {
+                                            today += CGFloat(shipped.returnAmount)
+                                        }
+                                        if let transformed = reportOfToday?.todayTransformedSaleReport {
+                                            today += CGFloat(transformed.returnAmount)
+                                        }
+                                        source = .returnedAmount
+                                    case .saleQuantity: points = reportList.points(for: .TOTAL_SALE_QUANTITY)[.sale] ?? []
+                                        maximum = CGFloat(reportList.maximumSaleQuantity)
+                                        if maximum == 0 {
+                                            maximum = 1000
+                                        }
+                                        total = max(reportList.totalSaleQuantity, 0)
+                                        if let shipped = reportOfToday?.todayShippedSaleReport {
+                                            today += CGFloat(shipped.saleQuantity)
+                                        }
+                                        if let transformed = reportOfToday?.todayTransformedSaleReport {
+                                            today += CGFloat(transformed.saleQuantity)
+                                        }
+                                        source = .saleQuantity
+                                    case .canceledQuanity: points = reportList.points(for: .TOTAL_SALE_QUANTITY)[.cancel] ?? []
+                                        maximum = CGFloat(reportList.maximumCanceledQuantity)
+                                        if maximum == 0 {
+                                            maximum = 1000
+                                        }
+                                        total = max(reportList.totalCanceledQuantity, 0)
+                                        if let shipped = reportOfToday?.todayShippedSaleReport {
+                                            today += CGFloat(shipped.canceledQuantity)
+                                        }
+                                        if let transformed = reportOfToday?.todayTransformedSaleReport {
+                                            today += CGFloat(transformed.canceledQuantity)
+                                        }
+                                        source = .cancelQuantity
+                                    case .returnedQuantity: points = reportList.points(for: .TOTAL_SALE_QUANTITY)[.returned] ?? []
+                                        maximum = CGFloat(reportList.maximumReturnQuantity)
+                                        if maximum == 0 {
+                                            maximum = 1000
+                                        }
+                                        total = max(reportList.totalReturnQuantity, 0)
+                                        if let shipped = reportOfToday?.todayShippedSaleReport {
+                                            today += CGFloat(shipped.returnQuantity)
+                                        }
+                                        if let transformed = reportOfToday?.todayTransformedSaleReport {
+                                            today += CGFloat(transformed.returnQuantity)
+                                        }
+                                        source = .returnedQuantity
+                                    default: points = reportList.points(for: .TOTAL_SALE_AMOUNT)[.sale] ?? []
+                                        maximum = CGFloat(reportList.maximumSaleAmount)
+                                        if maximum == 0 {
+                                            maximum = 1000
+                                        }
+                                        total = max(reportList.totalSaleAmount, 0)
+                                        if let shipped = reportOfToday?.todayShippedSaleReport {
+                                            today += CGFloat(shipped.saleAmount)
+                                        }
+                                        if let transformed = reportOfToday?.todayTransformedSaleReport {
+                                            today += CGFloat(transformed.saleAmount)
+                                        }
+                                        source = .saleAmount
                                     }
-                                   total = max(reportList.totalSaleAmount, 0)
-                                case .canceledAmount: points = reportList.points(for: .TOTAL_SALE_AMOUNT)[.cancel] ?? []
-                                    maximum = CGFloat(reportList.maximumCanceledAmount)
-                                    if maximum == 0 {
-                                        maximum = 10000
-                                    }
-                                    total = max(reportList.totalCanceledAmount, 0)
-                                case .returnedAmount: points = reportList.points(for: .TOTAL_SALE_AMOUNT)[.returned] ?? []
-                                    maximum = CGFloat(reportList.maximumReturnAmount)
-                                    if maximum == 0 {
-                                        maximum = 10000
-                                    }
-                                    total = max(reportList.totalReturnAmount, 0)
-                                case .saleQuantity: points = reportList.points(for: .TOTAL_SALE_QUANTITY)[.sale] ?? []
-                                    maximum = CGFloat(reportList.maximumSaleQuantity)
-                                    if maximum == 0 {
-                                        maximum = 1000
-                                    }
-                                    total = max(reportList.totalSaleQuantity, 0)
-                                case .canceledQuanity: points = reportList.points(for: .TOTAL_SALE_QUANTITY)[.cancel] ?? []
-                                    maximum = CGFloat(reportList.maximumCanceledQuantity)
-                                    if maximum == 0 {
-                                        maximum = 1000
-                                    }
-                                    total = max(reportList.totalCanceledQuantity, 0)
-                                case .returnedQuantity: points = reportList.points(for: .TOTAL_SALE_QUANTITY)[.returned] ?? []
-                                    maximum = CGFloat(reportList.maximumReturnQuantity)
-                                    if maximum == 0 {
-                                        maximum = 1000
-                                    }
-                                    total = max(reportList.totalReturnQuantity, 0)
-                                default: points = reportList.points(for: .TOTAL_SALE_AMOUNT)[.sale] ?? []
-                                    maximum = CGFloat(reportList.maximumSaleAmount)
-                                    if maximum == 0 {
-                                        maximum = 1000
-                                    }
-                                    total = max(reportList.totalSaleAmount, 0)
                                 }
+                                let entry = MyMindEntry(date: Date(), isLogin: true, source: source, maximumAmount: maximum, totalAmount: total, todayAmount: today, chartDatas: [UDILineChartData(points:  points, fill: LinearGradient(stops: [.init(color:  Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.8), location: 0), .init(color: Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.5), location: 0.3), .init(color: Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.0), location: 1)], startPoint: .top, endPoint: .bottom), stroke: Color(red: 127.0/255.0, green: 194.0/255.0, blue: 250.0/255.0), strokeWidth: configuration.strokeWidth as? CGFloat ?? 3) ], toDoCount: toDoCount, announcementCount: announcementCount)
+                                let timeline = Timeline(entries: [entry], policy: .after(nextUpdateDate))
+                                completion(timeline)
                             }
-                            let entry = MyMindEntry(date: Date(), isLogin: true, maximumAmount: maximum, totalAmount: total, chartDatas: [UDILineChartData(points:  points, fill: LinearGradient(stops: [.init(color:  Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.8), location: 0), .init(color: Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.5), location: 0.3), .init(color: Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.0), location: 1)], startPoint: .top, endPoint: .bottom), stroke: Color(red: 127.0/255.0, green: 194.0/255.0, blue: 250.0/255.0), strokeWidth: configuration.strokeWidth as? CGFloat ?? 3) ], toDoCount: toDoCount, announcementCount: announcementCount)
-                            let timeline = Timeline(entries: [entry], policy: .after(nextUpdateDate))
-                            completion(timeline)
                         }
                     }
                 }
             } else {
-                let entry = MyMindEntry(date: Date(), isLogin: false, maximumAmount: 1, totalAmount: 0, chartDatas: [], toDoCount: nil, announcementCount: nil)
+                let entry = MyMindEntry(date: Date(), isLogin: false, source: .saleAmount, maximumAmount: 1, totalAmount: 0, todayAmount: 0, chartDatas: [], toDoCount: nil, announcementCount: nil)
                 let timeline = Timeline(entries: [entry], policy: .after(nextUpdateDate))
                 completion(timeline)
             }
@@ -121,15 +174,44 @@ struct ChartProvider: IntentTimelineProvider {
     }
     
     func placeholder(in context: Context) -> MyMindEntry {
-        MyMindEntry(date: Date(), isLogin: true, maximumAmount: 1, totalAmount: 0, chartDatas: [], toDoCount: nil, announcementCount: nil)
+        MyMindEntry(date: Date(), isLogin: true, source: .saleAmount, maximumAmount: 1, totalAmount: 0, todayAmount: 0, chartDatas: [], toDoCount: nil, announcementCount: nil)
+    }
+}
+enum SourceType: CustomStringConvertible {
+    case saleAmount, cancelAmount, returnedAmount, saleQuantity, cancelQuantity, returnedQuantity
+    var description: String {
+        get {
+            switch self {
+            case .saleAmount: return "近30日銷售總額"
+            case .cancelAmount: return "近30日銷售取消總額"
+            case .returnedAmount: return "近30日銷退總額"
+            case .saleQuantity: return "近30日銷售總數"
+            case .cancelQuantity: return "近30日銷售取消總數"
+            case .returnedQuantity: return "近30日銷退總數"
+            }
+        }
+    }
+    var todayDescription: String {
+        get {
+            switch self {
+            case .saleAmount: return "今日銷售總額"
+            case .cancelAmount: return "今日銷售取消總額"
+            case .returnedAmount: return "今日銷退總額"
+            case .saleQuantity: return "今日銷售總數"
+            case .cancelQuantity: return "今日銷售取消總數"
+            case .returnedQuantity: return "今日銷退總數"
+            }
+        }
     }
 }
 /// MyMindEntry
 struct MyMindEntry: TimelineEntry {
     let date: Date
     let isLogin: Bool
+    let source: SourceType?
     let maximumAmount: CGFloat
     let totalAmount: CGFloat
+    let todayAmount: CGFloat
     let chartDatas: [UDILineChartData]
     let toDoCount: Int?
     let announcementCount: Int?
@@ -138,6 +220,12 @@ struct MyMindEntry: TimelineEntry {
 struct MyMind_WidgetsEntryView : View {
     @Environment(\.widgetFamily) var family: WidgetFamily
     var entry: Provider.Entry
+    var formatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.maximumFractionDigits = 2
+        return formatter
+    }()
     @ViewBuilder
     var body: some View {
         switch family {
@@ -170,32 +258,52 @@ struct MyMind_WidgetsEntryView : View {
         case .systemLarge:
             VStack {
                 Spacer()
-                HStack {
-                    if let points = entry.chartDatas.first?.points, points.count > 1 {
-                        Text("近30日銷售數據")
-                            .frame(height: 24, alignment: .topLeading)
-                            .font(.custom("PingFangTC-Regular", size: 12))
-                            .foregroundColor(Color(white: 1.0, opacity: 0.65))
-                            .padding(.leading, 16)
-                            .padding(.top, 20)
-                            .blendMode(.sourceAtop)
-                    }
-                    Spacer()
-                    Text("MyMind")
-                        .frame(height: 24, alignment: .topTrailing)
-                        .font(.custom("PingFangTC-Semibold", size: 12))
-                        .foregroundColor(.white)
-                        .padding(.trailing, 16)
-                        .padding(.top, 20)
+                HStack (alignment: .top, spacing: 0) {
+                    Image("logo")
                         .blendMode(.sourceAtop)
+                        .padding(.top, 16)
+                    Spacer()
+                    if entry.isLogin {
+                        if let points = entry.chartDatas.first?.points, points.count > 1, let title = entry.source?.description {
+                            Spacer()
+                            VStack(alignment:.trailing, spacing: 0) {
+                                Text(title)
+                                    .font(.custom("PingFangTC-Regular", size: 12))
+                                    .foregroundColor(Color(white: 1.0, opacity: 0.65))
+                                    .blendMode(.sourceAtop)
+                                Text(formatter.string(from: NSNumber( value: entry.totalAmount)) ?? "")
+                                    .font(.custom("PingFangTC-Semibold", size: 18))
+                                    .foregroundColor(.white)
+                                    .blendMode(.sourceAtop)
+                            }
+                            .frame(maxWidth: .infinity)
+                            .padding(.top, 10)
+                            .padding(.bottom, 16)
+                        }
+                        if let title = entry.source?.todayDescription {
+                            VStack(alignment: .trailing, spacing: 0) {
+                                Text(title)
+                                    .font(.custom("PingFangTC-Regular", size: 12))
+                                    .foregroundColor(Color(white: 1.0, opacity: 0.65))
+                                    .blendMode(.sourceAtop)
+                                Text(formatter.string(from: NSNumber( value: entry.todayAmount)) ?? "")
+                                    .font(.custom("PingFangTC-Semibold", size: 18))
+                                    .foregroundColor(.white)
+                                    .blendMode(.sourceAtop)
+                            }
+                            .frame(maxWidth: .infinity)
+                            .padding(.top, 10)
+                            .padding(.bottom, 16)
+                            .background(Color(white: 0, opacity: 0.5))
+                            .cornerRadius(8)
+                        }
+                    }
                 }
+                .padding(.leading, 20)
+                .padding(.top, 8)
                 Spacer()
                 if entry.isLogin {
                     VStack(alignment: .leading) {
-                        Text(String(format: "%.2f", entry.totalAmount))
-                            .font(.custom("PingFangTC-Semibold", size: 24))
-                            .foregroundColor(.white)
-                            .blendMode(.sourceAtop)
                         UDILineChartView(datas: entry.chartDatas, provisionColor: Color(red: 59.0/255.0, green: 82.0/255.0, blue: 105.0/255.0), provisionWidth: 1, maximum: entry.maximumAmount)
                             .blendMode(.sourceAtop)
                     }
@@ -285,15 +393,15 @@ struct MyMind_Widgets: WidgetBundle {
 struct MyMind_Widgets_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            MyMind_WidgetsEntryView(entry: MyMindEntry(date: Date(), isLogin: true, maximumAmount: 1, totalAmount: 0, chartDatas: [], toDoCount: 20, announcementCount: nil))
+            MyMind_WidgetsEntryView(entry: MyMindEntry(date: Date(), isLogin: true, source: nil, maximumAmount: 1, totalAmount: 0, todayAmount: 0, chartDatas: [], toDoCount: 20, announcementCount: nil))
                 .previewContext(WidgetPreviewContext(family: .systemMedium))
-            MyMind_WidgetsEntryView(entry: MyMindEntry(date: Date(), isLogin: false, maximumAmount: 1, totalAmount: 0, chartDatas: [], toDoCount: nil, announcementCount: nil))
+            MyMind_WidgetsEntryView(entry: MyMindEntry(date: Date(), isLogin: false, source: nil, maximumAmount: 1, totalAmount: 0, todayAmount: 0, chartDatas: [], toDoCount: nil, announcementCount: nil))
                 .previewContext(WidgetPreviewContext(family: .systemMedium))
-            MyMind_WidgetsEntryView(entry: MyMindEntry(date: Date(), isLogin: true, maximumAmount: 100, totalAmount: 1280, chartDatas: [UDILineChartData(points: [CGPoint(x: 0, y: 20), CGPoint(x: 1, y: 25), CGPoint(x: 2, y: 30), CGPoint(x: 3, y: 40), CGPoint(x: 4, y: 60), CGPoint(x: 5, y: 85), CGPoint(x: 6, y: 75), CGPoint(x: 7, y: 40), CGPoint(x: 8, y: 70), CGPoint(x: 9, y: 20), CGPoint(x: 10, y: 30), CGPoint(x: 11, y: 45), CGPoint(x: 12, y: 50), CGPoint(x: 13, y: 45), CGPoint(x: 14, y: 50), CGPoint(x: 15, y: 45), CGPoint(x: 16, y: 45), CGPoint(x: 17, y: 30), CGPoint(x: 18, y: 20), CGPoint(x: 19, y: 60), CGPoint(x: 20, y: 80), CGPoint(x: 21, y: 100), CGPoint(x: 22, y: 90), CGPoint(x: 23, y: 80), CGPoint(x: 24, y: 70), CGPoint(x: 25, y: 70), CGPoint(x: 26, y: 75), CGPoint(x: 27, y: 75), CGPoint(x: 28, y: 70), CGPoint(x: 29, y: 70)], fill: LinearGradient(stops: [.init(color:  Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.8), location: 0), .init(color: Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.5), location: 0.3), .init(color: Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.0), location: 1)], startPoint: .top, endPoint: .bottom), stroke: Color(red: 127.0/255.0, green: 194.0/255.0, blue: 250.0/255.0), strokeWidth: 3)], toDoCount: 198, announcementCount: 7))
+            MyMind_WidgetsEntryView(entry: MyMindEntry(date: Date(), isLogin: true, source: .saleAmount, maximumAmount: 100, totalAmount: 102560, todayAmount: 1280, chartDatas: [UDILineChartData(points: [CGPoint(x: 0, y: 20), CGPoint(x: 1, y: 25), CGPoint(x: 2, y: 30), CGPoint(x: 3, y: 40), CGPoint(x: 4, y: 60), CGPoint(x: 5, y: 85), CGPoint(x: 6, y: 75), CGPoint(x: 7, y: 40), CGPoint(x: 8, y: 70), CGPoint(x: 9, y: 20), CGPoint(x: 10, y: 30), CGPoint(x: 11, y: 45), CGPoint(x: 12, y: 50), CGPoint(x: 13, y: 45), CGPoint(x: 14, y: 50), CGPoint(x: 15, y: 45), CGPoint(x: 16, y: 45), CGPoint(x: 17, y: 30), CGPoint(x: 18, y: 20), CGPoint(x: 19, y: 60), CGPoint(x: 20, y: 80), CGPoint(x: 21, y: 100), CGPoint(x: 22, y: 90), CGPoint(x: 23, y: 80), CGPoint(x: 24, y: 70), CGPoint(x: 25, y: 70), CGPoint(x: 26, y: 75), CGPoint(x: 27, y: 75), CGPoint(x: 28, y: 70), CGPoint(x: 29, y: 70)], fill: LinearGradient(stops: [.init(color:  Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.8), location: 0), .init(color: Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.5), location: 0.3), .init(color: Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.0), location: 1)], startPoint: .top, endPoint: .bottom), stroke: Color(red: 127.0/255.0, green: 194.0/255.0, blue: 250.0/255.0), strokeWidth: 3)], toDoCount: 198, announcementCount: 7))
                 .previewContext(WidgetPreviewContext(family: .systemLarge))
-            MyMind_WidgetsEntryView(entry: MyMindEntry(date: Date(), isLogin: false, maximumAmount: 1, totalAmount: 0, chartDatas: [], toDoCount: nil, announcementCount: nil))
+            MyMind_WidgetsEntryView(entry: MyMindEntry(date: Date(), isLogin: false, source: nil, maximumAmount: 1, totalAmount: 0, todayAmount: 0, chartDatas: [], toDoCount: nil, announcementCount: nil))
                 .previewContext(WidgetPreviewContext(family: .systemLarge))
-            MyMind_WidgetsEntryView(entry: MyMindEntry(date: Date(), isLogin: true, maximumAmount: 1, totalAmount: 0, chartDatas: [], toDoCount: nil, announcementCount: nil))
+            MyMind_WidgetsEntryView(entry: MyMindEntry(date: Date(), isLogin: true, source: nil, maximumAmount: 1, totalAmount: 0, todayAmount: 0, chartDatas: [], toDoCount: nil, announcementCount: nil))
                 .previewContext(WidgetPreviewContext(family: .systemSmall))
             UDIPieChartView(data: UDIPieChartData(slices: [UDIPieSliceData(ratio: 0.3, title: "Yahoo", color: .red), UDIPieSliceData(ratio: 0.4, title: "Shoppe", color: .green), UDIPieSliceData(ratio: 0.3, title: "PCHome", color: .blue)], borderColor: .white, holeRatio: nil, title: nil), showDescription: false).previewContext(WidgetPreviewContext(family: .systemSmall))
             UDIPieChartView(data: UDIPieChartData(slices: [UDIPieSliceData(ratio: 0.3, title: "Yahoo", color: .red), UDIPieSliceData(ratio: 0.4, title: "Shoppe", color: .green), UDIPieSliceData(ratio: 0.3, title: "PCHome", color: .blue)], borderColor: .white, holeRatio: 0.4, title:"供應商"), showDescription: false).previewContext(WidgetPreviewContext(family: .systemLarge))
