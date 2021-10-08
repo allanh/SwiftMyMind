@@ -52,6 +52,7 @@
 		52A289F426D8CB4100084893 /* UIView+copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A289F326D8CB4100084893 /* UIView+copy.swift */; };
 		52AC22A226FACA04003AF437 /* AnnouncementListFilterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52AC22A126FACA04003AF437 /* AnnouncementListFilterModel.swift */; };
 		52B15CBA2691BAFC0010FCED /* MyMindEmployeeAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B15CB92691BAFC0010FCED /* MyMindEmployeeAPIService.swift */; };
+		52B8734F270FF4BF00102C98 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B8734E270FF4BF00102C98 /* CategoryViewController.swift */; };
 		52B8749026DC7C38008F3CF2 /* BulletinCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B8748F26DC7C38008F3CF2 /* BulletinCollectionViewCell.swift */; };
 		52B8749226DC88EA008F3CF2 /* Bulletin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B8749126DC88EA008F3CF2 /* Bulletin.swift */; };
 		52B8749426DCBE74008F3CF2 /* MyMindAnnouncementAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B8749326DCBE74008F3CF2 /* MyMindAnnouncementAPIService.swift */; };
@@ -361,6 +362,7 @@
 		52A289F326D8CB4100084893 /* UIView+copy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+copy.swift"; sourceTree = "<group>"; };
 		52AC22A126FACA04003AF437 /* AnnouncementListFilterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementListFilterModel.swift; sourceTree = "<group>"; };
 		52B15CB92691BAFC0010FCED /* MyMindEmployeeAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMindEmployeeAPIService.swift; sourceTree = "<group>"; };
+		52B8734E270FF4BF00102C98 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 		52B8748F26DC7C38008F3CF2 /* BulletinCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletinCollectionViewCell.swift; sourceTree = "<group>"; };
 		52B8749126DC88EA008F3CF2 /* Bulletin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bulletin.swift; sourceTree = "<group>"; };
 		52B8749326DCBE74008F3CF2 /* MyMindAnnouncementAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMindAnnouncementAPIService.swift; sourceTree = "<group>"; };
@@ -712,6 +714,14 @@
 				52B8748F26DC7C38008F3CF2 /* BulletinCollectionViewCell.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		52B8734D270FF46800102C98 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				52B8734E270FF4BF00102C98 /* CategoryViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		52E505FC26A53189000E5116 /* ResendOTP */ = {
@@ -1096,6 +1106,7 @@
 		A4793C9426047C6500AD280C /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				52B8734D270FF46800102C98 /* Controller */,
 				52F564282694086500171032 /* View */,
 				A4BDC7B2260B0F34005C33A5 /* UILayer */,
 				A4793C9D26047DA300AD280C /* Extensions */,
@@ -1774,6 +1785,7 @@
 				97AFE3662665E7DD002CBE01 /* ProductMaterialDetail.swift in Sources */,
 				527E11C32693084B00FB8B01 /* ReturnPurchaseOrderInfo.swift in Sources */,
 				A4159204260C394F00FD3989 /* UIButton+.swift in Sources */,
+				52B8734F270FF4BF00102C98 /* CategoryViewController.swift in Sources */,
 				9C926AE526E0B04B0067C61E /* FilterBottomView.swift in Sources */,
 				A4CBD8A32664900100B19119 /* PickVendorViewController.swift in Sources */,
 				A439B52C26099AA1002352C2 /* UIViewController+.swift in Sources */,

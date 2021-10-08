@@ -13,9 +13,10 @@ final class MainFunctionControl: UIControl {
     let functionType: MainFunctoinType
 
     let contentView: UIView = UIView {
-        $0.layer.cornerRadius = 8
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.layer.cornerRadius = 16
         $0.layer.masksToBounds = true
-        $0.backgroundColor = .clear
+        $0.backgroundColor = .white
         $0.isUserInteractionEnabled = false
     }
 
@@ -96,7 +97,6 @@ final class MainFunctionControl: UIControl {
 // MARK: - Layouts
 extension MainFunctionControl {
     func activateConstraintsContentView() {
-        contentView.translatesAutoresizingMaskIntoConstraints = false
         let top = contentView.topAnchor
             .constraint(equalTo: topAnchor)
         let leading = contentView.leadingAnchor
