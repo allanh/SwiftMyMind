@@ -12,6 +12,7 @@
 		520776AD26B5106D005BA621 /* SignInPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520776AC26B5106D005BA621 /* SignInPresentationController.swift */; };
 		5216399326D49EB6008E7BB9 /* Debug in Resources */ = {isa = PBXBuildFile; fileRef = 5216399226D49EB6008E7BB9 /* Debug */; };
 		5216399526D49F74008E7BB9 /* Demo in Resources */ = {isa = PBXBuildFile; fileRef = 5216399426D49F74008E7BB9 /* Demo */; };
+		52268F0A2715885A00D3B593 /* CornerRadiusViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52268F092715885A00D3B593 /* CornerRadiusViewModifier.swift */; };
 		52282372268EB41400A66340 /* PurchaseBriefReviewingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52282370268EB41400A66340 /* PurchaseBriefReviewingCollectionViewCell.swift */; };
 		52282373268EB41400A66340 /* PurchaseBriefReviewingCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52282371268EB41400A66340 /* PurchaseBriefReviewingCollectionViewCell.xib */; };
 		522F855626BB85C7002ED473 /* EmptyDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522F855526BB85C7002ED473 /* EmptyDataView.swift */; };
@@ -373,6 +374,7 @@
 		520776AC26B5106D005BA621 /* SignInPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInPresentationController.swift; sourceTree = "<group>"; };
 		5216399226D49EB6008E7BB9 /* Debug */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Debug; sourceTree = "<group>"; };
 		5216399426D49F74008E7BB9 /* Demo */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Demo; sourceTree = "<group>"; };
+		52268F092715885A00D3B593 /* CornerRadiusViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornerRadiusViewModifier.swift; sourceTree = "<group>"; };
 		52282370268EB41400A66340 /* PurchaseBriefReviewingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseBriefReviewingCollectionViewCell.swift; sourceTree = "<group>"; };
 		52282371268EB41400A66340 /* PurchaseBriefReviewingCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PurchaseBriefReviewingCollectionViewCell.xib; sourceTree = "<group>"; };
 		522F855526BB85C7002ED473 /* EmptyDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyDataView.swift; sourceTree = "<group>"; };
@@ -755,6 +757,7 @@
 				528C86BE2707063C0084BB27 /* Report+.swift */,
 				528C86C0270707940084BB27 /* NetworkManager.swift */,
 				52B62540270D537F00E03220 /* SelectChartIntents.intentdefinition */,
+				52268F092715885A00D3B593 /* CornerRadiusViewModifier.swift */,
 			);
 			path = "MyMind Widgets";
 			sourceTree = "<group>";
@@ -1782,6 +1785,7 @@
 				5261E43E270171C400B81BCE /* KeychainHelper.swift in Sources */,
 				52B62541270D537F00E03220 /* SelectChartIntents.intentdefinition in Sources */,
 				5260FB9B26FD76D1003BB399 /* Report.swift in Sources */,
+				52268F0A2715885A00D3B593 /* CornerRadiusViewModifier.swift in Sources */,
 				5261E4432701745700B81BCE /* Authorization.swift in Sources */,
 				5261E4482701802900B81BCE /* UIColor+.swift in Sources */,
 				528C86BF2707063C0084BB27 /* Report+.swift in Sources */,

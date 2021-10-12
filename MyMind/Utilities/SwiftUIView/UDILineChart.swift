@@ -12,6 +12,7 @@ struct UDILineChartData {
     let fill: LinearGradient
     let stroke: Color
     let strokeWidth: CGFloat
+    static var empty: UDILineChartData = UDILineChartData(points: [], fill: LinearGradient(colors: [], startPoint: .top, endPoint: .bottom), stroke: .clear, strokeWidth: 0)
     func path(with frame: CGRect, maximum: CGFloat) -> Path {
         var path = Path()
         let heightRatio: CGFloat = frame.size.height/maximum
@@ -87,7 +88,7 @@ struct UDILineChartData {
 }
 /// Chart View
 struct UDILineChartView : View {
-    let datas: [UDILineChartData]
+    let data: UDILineChartData
     let provisionColor: Color
     let provisionWidth: CGFloat
     let maximum: CGFloat
@@ -96,13 +97,11 @@ struct UDILineChartView : View {
         ZStack {
             GeometryReader { geo in
                 let frame = geo.frame(in: .named("chart parent"))
-                ForEach(0..<datas.count) { index in
-                    if let data = datas[index], let points = data.points, points.count > 1, let gradient = data.fill {
-                        Rectangle()
-                            .fill(gradient)
-                            .clipShape(data.closePath(with: frame, maximum: maximum))
-                            .blendMode(.sourceAtop)
-                    }
+                if let points = data.points, points.count > 1, let gradient = data.fill {
+                    Rectangle()
+                        .fill(gradient)
+                        .clipShape(data.closePath(with: frame, maximum: maximum))
+                        .blendMode(.sourceAtop)
                 }
                 Path { path in
                     path.move(to: CGPoint(x: frame.minX, y: frame.minY))
@@ -124,13 +123,11 @@ struct UDILineChartView : View {
                     path.addLine(to: CGPoint(x: frame.maxX, y: frame.maxY))
                 }
                 .stroke(provisionColor, lineWidth: provisionWidth)
-                ForEach(0..<datas.count) { index in
-                    if let data = datas[index], let points = data.points, points.count > 1, let color = data.stroke, let width = data.strokeWidth {
-                        Path { path in
-                            path = data.path(with: frame, maximum: maximum)
-                        }
-                        .stroke(color, lineWidth: width)
+                if let points = data.points, points.count > 1, let color = data.stroke, let width = data.strokeWidth {
+                    Path { path in
+                        path = data.path(with: frame, maximum: maximum)
                     }
+                    .stroke(color, lineWidth: width)
                 }
                 HStack {
                     Text(labels[0])
