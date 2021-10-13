@@ -114,21 +114,46 @@ struct FunctionEntryList {
 extension Authorization {
     var entryList: FunctionEntryList {
         get {
-            var entries: [FunctionEntryList.FunctionEntry] = [FunctionEntryList.FunctionEntry(category: .order, items: [.orderSale, .orderReturn, .orderBorrow, .orderPayOff, .orderSupply, .orderExchange])]
-            var entry: FunctionEntryList.FunctionEntry = FunctionEntryList.FunctionEntry(category: .purchase, items: [])
-            if navigations.purchase.contains(.purapp) {
-                entry.items.append(.purchaseApply)
-            }
-            if navigations.purchase.contains(.purrev) {
-                entry.items.append(.purchaseReview)
-            }
-            if entry.items.count > 0 {
-                entries.insert(entry, at: 0)
-            }
-            return FunctionEntryList(entries: entries)
+            return FunctionEntryList(entries: navigations.entries)
         }
     }
 }
+extension Authorization.Navigations {
+    var entries: [FunctionEntryList.FunctionEntry] {
+        get {
+            var entries: [FunctionEntryList.FunctionEntry] = []
+            if purchase.functionEntry.items.count > 0 {
+                entries.append(purchase.functionEntry)
+            }
+            if order.functionEntry.items.count > 0 {
+                entries.append(order.functionEntry)
+            }
+            return entries
+        }
+    }
+}
+extension Authorization.Navigations.Purchase {
+    var functionEntry: FunctionEntryList.FunctionEntry {
+        get {
+            var entry: FunctionEntryList.FunctionEntry = FunctionEntryList.FunctionEntry(category: .purchase, items: [])
+            if contains(.purapp) {
+                entry.items.append(.purchaseApply)
+            }
+            if contains(.purrev) {
+                entry.items.append(.purchaseReview)
+            }
+            return entry
+        }
+    }
+}
+extension Authorization.Navigations.Order {
+    var functionEntry: FunctionEntryList.FunctionEntry {
+        get {
+            return FunctionEntryList.FunctionEntry(category: .order, items: [.orderSale, .orderReturn, .orderBorrow, .orderPayOff, .orderSupply, .orderExchange])
+        }
+    }
+}
+
 final class MainFunctionEntryViewController: NiblessViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         .lightContent
