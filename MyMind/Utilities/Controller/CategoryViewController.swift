@@ -8,7 +8,11 @@
 
 import UIKit
 protocol CategoryViewControllerDelegate: AnyObject {
-    func categoryViewController(_: CategoryViewController, didSelect index: Int)
+    func categoryViewController(_: CategoryViewController, didSelect category: Category)
+}
+protocol Category {
+    var title: String { get }
+    var imageName: String? { get }
 }
 class CategoryViewController: UIViewController {
     typealias CategoryInfo = (title: String, image: String?)
@@ -16,7 +20,7 @@ class CategoryViewController: UIViewController {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.automaticallyAdjustsScrollIndicatorInsets = false
     }
-    private var items: [CategoryInfo] = []
+    private var items: [Category] = []
     private var buttons: [UIButton] = []
     var insets: UIEdgeInsets = .zero
     var interspacing: CGFloat = 0
@@ -27,22 +31,22 @@ class CategoryViewController: UIViewController {
         didSet {
             if oldValue != selectedIndex, buttons.count > selectedIndex {
                 let current = items[selectedIndex]
-                if let _ = current.image {
+                if let _ = current.imageName {
                     buttons[selectedIndex].tintColor = .white
                 }
                 let previous = items[oldValue]
-                if let _ = previous.image {
+                if let _ = previous.imageName {
                     buttons[oldValue].tintColor = .brownGrey
                 }
                 buttons[oldValue].isSelected = false
                 buttons[oldValue].backgroundColor = .white
                 buttons[selectedIndex].isSelected = true
                 buttons[selectedIndex].backgroundColor = .prussianBlue
-                delegate?.categoryViewController(self, didSelect: selectedIndex)
+                delegate?.categoryViewController(self, didSelect: items[selectedIndex])
             }
         }
     }
-    convenience init(items: [CategoryInfo]) {
+    convenience init(items: [Category]) {
         self.init()
         self.items = items
     }
@@ -50,7 +54,6 @@ class CategoryViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        view.backgroundColor = .red
         view.addSubview(scrollView)
             constructButtons()
         activateConstraintsScrollView()
@@ -74,7 +77,7 @@ class CategoryViewController: UIViewController {
             button.addTarget(self, action: #selector(toggleCategory(_:)), for: .touchUpInside)
             button.setTitle(item.title, for: .normal)
             button.titleLabel?.font = font
-            if let image = item.image {
+            if let image = item.imageName {
                 button.setImage(UIImage(named: image)?.withRenderingMode(.alwaysTemplate), for: .normal)
                 button.setImage(UIImage(named: image)?.withRenderingMode(.alwaysTemplate), for: .selected)
                 button.imageEdgeInsets = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
@@ -96,7 +99,7 @@ class CategoryViewController: UIViewController {
             button.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: insets.top).isActive = true
             button.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -insets.bottom).isActive = true
             let lineHeight = "line".height(withConstrainedWidth: .greatestFiniteMagnitude, font: font)
-            let width = item.title.width(withConstrainedHeight: lineHeight, font: font) + itemInsets.left + itemInsets.right + ((item.image == nil) ? 0 : 20)
+            let width = item.title.width(withConstrainedHeight: lineHeight, font: font) + itemInsets.left + itemInsets.right + ((item.imageName == nil) ? 0 : 20)
             button.widthAnchor.constraint(equalToConstant: width).isActive = true
             buttons.append(button)
             previousButton = button

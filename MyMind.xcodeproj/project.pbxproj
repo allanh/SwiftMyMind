@@ -50,6 +50,8 @@
 		52944E352699CFC1006CC865 /* HomeCollectionViewHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52944E342699CFC1006CC865 /* HomeCollectionViewHeaderView.swift */; };
 		52A289F226D8C9C800084893 /* UDNSKMarqueeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A289F126D8C9C700084893 /* UDNSKMarqueeView.swift */; };
 		52A289F426D8CB4100084893 /* UIView+copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A289F326D8CB4100084893 /* UIView+copy.swift */; };
+		52A8DA3A27167B7800CFE78F /* MainFunctionEntryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A8DA3827167B7800CFE78F /* MainFunctionEntryCollectionViewCell.swift */; };
+		52A8DA3B27167B7800CFE78F /* MainFunctionEntryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52A8DA3927167B7800CFE78F /* MainFunctionEntryCollectionViewCell.xib */; };
 		52AC22A226FACA04003AF437 /* AnnouncementListFilterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52AC22A126FACA04003AF437 /* AnnouncementListFilterModel.swift */; };
 		52B15CBA2691BAFC0010FCED /* MyMindEmployeeAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B15CB92691BAFC0010FCED /* MyMindEmployeeAPIService.swift */; };
 		52B8734F270FF4BF00102C98 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B8734E270FF4BF00102C98 /* CategoryViewController.swift */; };
@@ -360,6 +362,8 @@
 		52944E342699CFC1006CC865 /* HomeCollectionViewHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewHeaderView.swift; sourceTree = "<group>"; };
 		52A289F126D8C9C700084893 /* UDNSKMarqueeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UDNSKMarqueeView.swift; sourceTree = "<group>"; };
 		52A289F326D8CB4100084893 /* UIView+copy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+copy.swift"; sourceTree = "<group>"; };
+		52A8DA3827167B7800CFE78F /* MainFunctionEntryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFunctionEntryCollectionViewCell.swift; sourceTree = "<group>"; };
+		52A8DA3927167B7800CFE78F /* MainFunctionEntryCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainFunctionEntryCollectionViewCell.xib; sourceTree = "<group>"; };
 		52AC22A126FACA04003AF437 /* AnnouncementListFilterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementListFilterModel.swift; sourceTree = "<group>"; };
 		52B15CB92691BAFC0010FCED /* MyMindEmployeeAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMindEmployeeAPIService.swift; sourceTree = "<group>"; };
 		52B8734E270FF4BF00102C98 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
@@ -712,6 +716,15 @@
 				52C2CBE5269ED0D5002A2BA9 /* SaleReportCollectionViewCell.swift */,
 				52C2CBE826A01B70002A2BA9 /* DashedLineView.swift */,
 				52B8748F26DC7C38008F3CF2 /* BulletinCollectionViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		52A8DA3727167B3100CFE78F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				52A8DA3827167B7800CFE78F /* MainFunctionEntryCollectionViewCell.swift */,
+				52A8DA3927167B7800CFE78F /* MainFunctionEntryCollectionViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1203,6 +1216,7 @@
 		A4AF79F52637B110002B04F6 /* MainFunctionEntry */ = {
 			isa = PBXGroup;
 			children = (
+				52A8DA3727167B3100CFE78F /* View */,
 				A4AF79F62637B13B002B04F6 /* MainFunctionControl.swift */,
 				A44A5A7125F9B0D200995823 /* MainFunctionEntryViewController.swift */,
 			);
@@ -1444,6 +1458,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				52A8DA3B27167B7800CFE78F /* MainFunctionEntryCollectionViewCell.xib in Resources */,
 				5216399326D49EB6008E7BB9 /* Debug in Resources */,
 				97547CC32681D8FF001859A8 /* PurchaseLogInfoViewController.xib in Resources */,
 				528A697C26CBADD600FC3387 /* Release in Resources */,
@@ -1751,6 +1766,7 @@
 				A43E8510268C08B8008C8369 /* InstructionView.swift in Sources */,
 				97AFE3792668D727002CBE01 /* UIViewController+loadNib.swift in Sources */,
 				52F564272693F14200171032 /* ErrorHandler.swift in Sources */,
+				52A8DA3A27167B7800CFE78F /* MainFunctionEntryCollectionViewCell.swift in Sources */,
 				52C2CBD8269C4D4E002A2BA9 /* SaleReportInfoItemView.swift in Sources */,
 				A456701226845D14009598AE /* RootTabBarController.swift in Sources */,
 				9CEFCA4C26DE171100506308 /* AnnouncementAutoCompleteAdapters.swift in Sources */,
