@@ -9,16 +9,31 @@ import UIKit
 struct FunctionEntryList {
     enum FunctionEntryCategory: Category, CaseIterable {
         case all
-        case purchase
-        case order
+        case product
+        case channel
         case storage
+        case order
+        case vender
+        case purchase
+        case payment
+        case receipt
+        case admin
+        case setting
+
         var title: String {
             get {
                 switch self {
                 case .all: return "全部"
-                case .purchase: return "採購管理"
-                case .order: return "訂單管理"
+                case .product: return "product"
+                case .channel: return "channel"
                 case .storage: return "庫存管理"
+                case .order: return "訂單管理"
+                case .vender: return "vender"
+                case .purchase: return "採購管理"
+                case .payment: return "payment"
+                case .receipt: return "receipt"
+                case .admin: return "admin"
+                case .setting: return "setting"
                 }
             }
         }
@@ -26,9 +41,16 @@ struct FunctionEntryList {
             get {
                 switch self {
                 case .all: return nil
-                case .purchase: return nil
-                case .order: return nil
+                case .product: return nil
+                case .channel: return nil
                 case .storage: return nil
+                case .order: return nil
+                case .vender: return nil
+                case .purchase: return nil
+                case .payment: return nil
+                case .receipt: return nil
+                case .admin: return nil
+                case .setting: return nil
                 }
             }
         }
@@ -122,13 +144,73 @@ extension Authorization.Navigations {
     var entries: [FunctionEntryList.FunctionEntry] {
         get {
             var entries: [FunctionEntryList.FunctionEntry] = []
-            if purchase.functionEntry.items.count > 0 {
-                entries.append(purchase.functionEntry)
+            if product.functionEntry.items.count > 0 {
+                entries.append(product.functionEntry)
+            }
+            if channel.functionEntry.items.count > 0 {
+                entries.append(channel.functionEntry)
+            }
+            if storage.functionEntry.items.count > 0 {
+                entries.append(storage.functionEntry)
             }
             if order.functionEntry.items.count > 0 {
                 entries.append(order.functionEntry)
             }
+            if vender.functionEntry.items.count > 0 {
+                entries.append(vender.functionEntry)
+            }
+            if purchase.functionEntry.items.count > 0 {
+                entries.append(purchase.functionEntry)
+            }
+            if payment.functionEntry.items.count > 0 {
+                entries.append(payment.functionEntry)
+            }
+            if receipt.functionEntry.items.count > 0 {
+                entries.append(receipt.functionEntry)
+            }
+            if admin.functionEntry.items.count > 0 {
+                entries.append(admin.functionEntry)
+            }
+            if setting.functionEntry.items.count > 0 {
+                entries.append(setting.functionEntry)
+            }
             return entries
+        }
+    }
+}
+//
+extension Authorization.Navigations.Product {
+    var functionEntry: FunctionEntryList.FunctionEntry {
+        get {
+            return FunctionEntryList.FunctionEntry(category: .product, items: [])
+        }
+    }
+}
+extension Authorization.Navigations.Channel {
+    var functionEntry: FunctionEntryList.FunctionEntry {
+        get {
+            return FunctionEntryList.FunctionEntry(category: .channel, items: [])
+        }
+    }
+}
+extension Authorization.Navigations.Storage {
+    var functionEntry: FunctionEntryList.FunctionEntry {
+        get {
+            return FunctionEntryList.FunctionEntry(category: .storage, items: [])
+        }
+    }
+}
+extension Authorization.Navigations.Order {
+    var functionEntry: FunctionEntryList.FunctionEntry {
+        get {
+            return FunctionEntryList.FunctionEntry(category: .order, items: [.orderSale, .orderReturn, .orderBorrow, .orderPayOff, .orderSupply, .orderExchange])
+        }
+    }
+}
+extension Authorization.Navigations.Vender {
+    var functionEntry: FunctionEntryList.FunctionEntry {
+        get {
+            return FunctionEntryList.FunctionEntry(category: .vender, items: [])
         }
     }
 }
@@ -146,10 +228,31 @@ extension Authorization.Navigations.Purchase {
         }
     }
 }
-extension Authorization.Navigations.Order {
+extension Authorization.Navigations.Payment {
     var functionEntry: FunctionEntryList.FunctionEntry {
         get {
-            return FunctionEntryList.FunctionEntry(category: .order, items: [.orderSale, .orderReturn, .orderBorrow, .orderPayOff, .orderSupply, .orderExchange])
+            return FunctionEntryList.FunctionEntry(category: .payment, items: [])
+        }
+    }
+}
+extension Authorization.Navigations.Receipt {
+    var functionEntry: FunctionEntryList.FunctionEntry {
+        get {
+            return FunctionEntryList.FunctionEntry(category: .receipt, items: [])
+        }
+    }
+}
+extension Authorization.Navigations.Admin {
+    var functionEntry: FunctionEntryList.FunctionEntry {
+        get {
+            return FunctionEntryList.FunctionEntry(category: .admin, items: [])
+        }
+    }
+}
+extension Authorization.Navigations.Setting {
+    var functionEntry: FunctionEntryList.FunctionEntry {
+        get {
+            return FunctionEntryList.FunctionEntry(category: .setting, items: [])
         }
     }
 }
