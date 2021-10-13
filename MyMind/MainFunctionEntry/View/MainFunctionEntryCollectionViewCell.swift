@@ -34,7 +34,7 @@ class MainFunctionEntryCollectionViewCell: UICollectionViewCell {
 
     }
 
-    func config(with item: MainFunctoinType, category: Category) {
+    func config(with item: FunctionEntryList.FunctionEntry.FunctionEntryItem, category: Category) {
         categoryTitleLabel.text = category.title
         entryTitleLabel.text = item.rawValue
         imageView.image = UIImage(named: item.imageName)

@@ -10,7 +10,7 @@ import UIKit
 
 final class MainFunctionControl: UIControl {
     // MARK: - Properties
-    let functionType: MainFunctoinType
+    let functionType: FunctionEntryList.FunctionEntry.FunctionEntryItem
 
     let contentView: UIView = UIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -45,7 +45,7 @@ final class MainFunctionControl: UIControl {
         $0.isUserInteractionEnabled = false
     }
     // MARK: - Methods
-    init(frame: CGRect = .zero, mainFunctionType: MainFunctoinType) {
+    init(frame: CGRect = .zero, mainFunctionType: FunctionEntryList.FunctionEntry.FunctionEntryItem) {
         functionType = mainFunctionType
         titleLabel.text = functionType.rawValue
         super.init(frame: frame)

@@ -6,93 +6,95 @@
 //
 
 import UIKit
-typealias FunctionControlInfo = (type: MainFunctoinType, category: MainFunctionCategory)
-enum MainFunctoinType: String {
-    case purchaseApply = "採購申請"
-    case purchaseReview = "採購審核"
-    case orderSale = "銷貨單"
-    case orderReturn = "退貨單"
-    case orderBorrow = "借貨單"
-    case orderPayOff = "還貨單"
-    case orderSupply = "補貨單"
-    case orderExchange = "換貨單"
-    case paybill = "付款單"
-    case saleChart = "銷售報表"
-    case revenueChart = "營收報表"
-    case systemSetting = "系統設定"
-    case accountSetting = "帳號設定"
-    case announcement = "公告"
-    var imageName: String {
-        get {
-            switch self {
-            case .purchaseApply: return "purchase.purchase"
-            case .purchaseReview: return "purchase.review"
-            default: return ""
-            }
-        }
-    }
-    var gradient: [UIColor] {
-        get {
-            switch self {
-            case .purchaseApply: return [UIColor(hex: "977df0"), UIColor(hex: "7461f0")]
-            case .purchaseReview: return [UIColor(hex: "1fa1ff"), UIColor(hex: "1fa1ff")]
-            case .orderSale: return [.white, .black]
-            case .orderReturn: return [.red, .green]
-            case .orderBorrow: return [.green, .blue]
-            case .orderPayOff: return [.blue, .yellow]
-            case .orderSupply: return [.yellow, .purple]
-            case .orderExchange: return [.purple, .prussianBlue]
-            default: return []
-            }
-        }
-    }
-}
-enum MainFunctionCategory: Category, CaseIterable {
-    case all
-    case purchase
-    case order
-    case storage
-    var title: String {
-        get {
-            switch self {
-            case .all: return "全部"
-            case .purchase: return "採購管理"
-            case .order: return "訂單管理"
-            case .storage: return "庫存管理"
-            }
-        }
-    }
-    var imageName: String? {
-        get {
-            switch self {
-            case .all: return nil
-            case .purchase: return nil
-            case .order: return nil
-            case .storage: return nil
-            }
-        }
-    }
-}
 struct FunctionEntryList {
-    struct FunctionEntryItem {
-        var category: MainFunctionCategory
-        var items: [MainFunctoinType]
+    enum FunctionEntryCategory: Category, CaseIterable {
+        case all
+        case purchase
+        case order
+        case storage
+        var title: String {
+            get {
+                switch self {
+                case .all: return "全部"
+                case .purchase: return "採購管理"
+                case .order: return "訂單管理"
+                case .storage: return "庫存管理"
+                }
+            }
+        }
+        var imageName: String? {
+            get {
+                switch self {
+                case .all: return nil
+                case .purchase: return nil
+                case .order: return nil
+                case .storage: return nil
+                }
+            }
+        }
     }
-    var entries: [FunctionEntryItem]
-    var allItems: [MainFunctoinType] {
+    struct FunctionEntry {
+        enum FunctionEntryItem: String {
+            //
+            case purchaseApply = "採購申請"
+            case purchaseReview = "採購審核"
+            //
+            case orderSale = "銷貨單"
+            case orderReturn = "退貨單"
+            case orderBorrow = "借貨單"
+            case orderPayOff = "還貨單"
+            case orderSupply = "補貨單"
+            case orderExchange = "換貨單"
+            //
+            case paybill = "付款單"
+            case saleChart = "銷售報表"
+            case revenueChart = "營收報表"
+            case systemSetting = "系統設定"
+            case accountSetting = "帳號設定"
+            case announcement = "公告"
+            var imageName: String {
+                get {
+                    switch self {
+                    case .purchaseApply: return "purchase.purchase"
+                    case .purchaseReview: return "purchase.review"
+                    default: return ""
+                    }
+                }
+            }
+            var gradient: [UIColor] {
+                get {
+                    switch self {
+                    case .purchaseApply: return [UIColor(hex: "977df0"), UIColor(hex: "7461f0")]
+                    case .purchaseReview: return [UIColor(hex: "1fa1ff"), UIColor(hex: "1fa1ff")]
+                    case .orderSale: return [.white, .black]
+                    case .orderReturn: return [.red, .green]
+                    case .orderBorrow: return [.green, .blue]
+                    case .orderPayOff: return [.blue, .yellow]
+                    case .orderSupply: return [.yellow, .purple]
+                    case .orderExchange: return [.purple, .prussianBlue]
+                    default: return []
+                    }
+                }
+            }
+        }
+        var category: FunctionEntryCategory
+        var items: [FunctionEntryItem]
+    }
+    var entries: [FunctionEntry]
+    var allItems: [FunctionEntry.FunctionEntryItem] {
         get {
             return entries.reduce([], {$0 + $1.items})
         }
     }
-    var allCategories: [MainFunctionCategory] {
+    var allCategories: [FunctionEntryCategory] {
         get {
-            var categories: [MainFunctionCategory] = [.all]
+            var categories: [FunctionEntryCategory] = [.all]
             categories.append(contentsOf: entries.map{ $0.category })
             return categories
         }
     }
-    func item(for category: Category, at index: Int) -> MainFunctoinType? {
-        if let mainCategory = category as? MainFunctionCategory {
+    func item(for category: Category, at index: Int) -> FunctionEntry.FunctionEntryItem? {
+        if let mainCategory = category as? FunctionEntryCategory {
             if mainCategory == .all {
                 return allItems[index]
             }
@@ -100,7 +102,7 @@ struct FunctionEntryList {
         }
         return nil
     }
-    func category(for item: MainFunctoinType) -> Category? {
+    func category(for item: FunctionEntry.FunctionEntryItem) -> Category? {
         for entry in entries {
             if entry.items.contains(item) {
                 return entry.category
@@ -109,17 +111,34 @@ struct FunctionEntryList {
         return nil
     }
 }
+extension Authorization {
+    var entryList: FunctionEntryList {
+        get {
+            var entries: [FunctionEntryList.FunctionEntry] = [FunctionEntryList.FunctionEntry(category: .order, items: [.orderSale, .orderReturn, .orderBorrow, .orderPayOff, .orderSupply, .orderExchange])]
+            var entry: FunctionEntryList.FunctionEntry = FunctionEntryList.FunctionEntry(category: .purchase, items: [])
+            if navigations.purchase.contains(.purapp) {
+                entry.items.append(.purchaseApply)
+            }
+            if navigations.purchase.contains(.purrev) {
+                entry.items.append(.purchaseReview)
+            }
+            if entry.items.count > 0 {
+                entries.insert(entry, at: 0)
+            }
+            return FunctionEntryList(entries: entries)
+        }
+    }
+}
 final class MainFunctionEntryViewController: NiblessViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         .lightContent
     }
     var authorization: Authorization?
-    var selectedCategory: Category = MainFunctionCategory.all {
+    var selectedCategory: Category = FunctionEntryList.FunctionEntryCategory.all {
         didSet {
             collectionView.reloadData()
         }
     }
-    private var entryList: FunctionEntryList = FunctionEntryList(entries: [FunctionEntryList.FunctionEntryItem(category: .order, items: [.orderSale, .orderReturn, .orderBorrow, .orderPayOff, .orderSupply, .orderExchange])])
 
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -137,20 +156,6 @@ final class MainFunctionEntryViewController: NiblessViewController {
         view.backgroundColor = UIColor(hex: "f5f6f8")
         self.tabBarItem.title = "功能"
         navigationController?.navigationBar.tintColor = .white
-        if let authorization = authorization {
-            var entries: [FunctionEntryList.FunctionEntryItem] = []
-            var entry: FunctionEntryList.FunctionEntryItem = FunctionEntryList.FunctionEntryItem(category: .purchase, items: [])
-            if authorization.navigations.purchase.contains(.purapp) {
-                entry.items.append(.purchaseApply)
-            }
-            if authorization.navigations.purchase.contains(.purrev) {
-                entry.items.append(.purchaseReview)
-            }
-            if entry.items.count > 0 {
-                entries.append(entry)
-            }
-            entryList.entries.insert(entry, at: 0)
-        }
         collectionView.registerCellFormNib(for: MainFunctionEntryCollectionViewCell.self)
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -158,7 +163,7 @@ final class MainFunctionEntryViewController: NiblessViewController {
         constructViewHeirarchy()
         activateConstraintsCategoryContainer()
         activateConstraintsCollectionView()
-        selectedCategory = MainFunctionCategory.all
+        selectedCategory = FunctionEntryList.FunctionEntryCategory.all
     }
 
     override func viewDidLayoutSubviews() {
@@ -169,7 +174,7 @@ final class MainFunctionEntryViewController: NiblessViewController {
         super.viewWillAppear(animated)
     }
     private func constructViewHeirarchy() {
-        let categoryContainerViewController = CategoryViewController(items: entryList.allCategories)
+        let categoryContainerViewController = CategoryViewController(items: authorization?.entryList.allCategories ?? [])
         categoryContainerViewController.insets = UIEdgeInsets(top: 14, left: 16, bottom: 14, right: 16)
         categoryContainerViewController.interspacing = 8
         categoryContainerViewController.font = .pingFangTCRegular(ofSize: 16)
@@ -233,11 +238,11 @@ extension MainFunctionEntryViewController: CategoryViewControllerDelegate {
 }
 extension MainFunctionEntryViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if let mainCategory = selectedCategory as? MainFunctionCategory {
+        if let mainCategory = selectedCategory as? FunctionEntryList.FunctionEntryCategory {
             if mainCategory == .all {
-                return entryList.allItems.count
+                return authorization?.entryList.allItems.count ?? 0
             }
-            return entryList.entries.first{ $0.category == mainCategory }?.items.count ?? 0
+            return authorization?.entryList.entries.first{ $0.category == mainCategory }?.items.count ?? 0
         }
         return 0
     }
@@ -246,7 +251,7 @@ extension MainFunctionEntryViewController: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(MainFunctionEntryCollectionViewCell.self, for: indexPath) as? MainFunctionEntryCollectionViewCell else {
             fatalError("Wrong cell indentifier or not registered")
         }
-        if let item = entryList.item(for: selectedCategory, at: indexPath.row), let category = entryList.category(for: item) {
+        if let item = authorization?.entryList.item(for: selectedCategory, at: indexPath.row), let category = authorization?.entryList.category(for: item) {
             cell.config(with: item, category: category)
         }
         return cell
