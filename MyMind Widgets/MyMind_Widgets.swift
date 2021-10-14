@@ -51,7 +51,7 @@ struct ChartProvider: IntentTimelineProvider {
     }
     
     func getTimeline(for configuration: SelectChartIntent, in context: Context, completion: @escaping (Timeline<MyMindEntry>) -> Void) {
-        let nextUpdateDate = Calendar.current.date(byAdding: .day, value: 1, to: Date())!
+        let nextUpdateDate = Calendar.current.date(byAdding: .hour, value: 1, to: Date())!
         NetworkManager.shared.authorization { authorization, success in
             if success {
                 NetworkManager.shared.saleReportList { reportList in
