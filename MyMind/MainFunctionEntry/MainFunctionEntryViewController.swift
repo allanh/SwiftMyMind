@@ -94,7 +94,7 @@ struct FunctionEntryList {
                     case .orderPayOff: return [.blue, .yellow]
                     case .orderSupply: return [.yellow, .purple]
                     case .orderExchange: return [.purple, .prussianBlue]
-                    default: return []
+                    default: return [.black, .white]
                     }
                 }
             }
