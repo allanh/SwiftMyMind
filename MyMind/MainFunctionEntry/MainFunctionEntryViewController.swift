@@ -389,7 +389,8 @@ extension MainFunctionEntryViewController: UICollectionViewDataSource {
 }
 extension MainFunctionEntryViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 163, height: 160)
+        let width = (collectionView.bounds.width - 16)/2
+        return CGSize(width: width, height: width*163/160)
     }
     private func handleItemAction(with item: FunctionEntryList.FunctionEntry.FunctionEntryItem) {
         switch item {
