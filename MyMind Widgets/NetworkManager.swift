@@ -137,9 +137,9 @@ class NetworkManager {
         }
         task.resume()
     }
-    func todayReport(completion: @escaping (SaleReports?) -> ()) {
+    func todayReport(completion: @escaping (SaleReports?, Bool) -> ()) {
         guard let userSession = readUserSession() else {
-            completion(nil)
+            completion(nil, false)
             return
         }
         let end = Date()
@@ -150,18 +150,18 @@ class NetworkManager {
         let task = URLSession.shared.dataTask(with: request) { data, _, error in
             guard error == nil else {
                 print(error?.localizedDescription as Any)
-                completion(nil)
+                completion(nil, false)
                 return
             }
 
             guard let jsonData = data else {
-                completion(nil)
+                completion(nil, false)
                 return
             }
             do {
                 let response = try JSONDecoder().decode(Response<SaleReportList>.self, from: jsonData)
                 guard let item = response.data else {
-                    completion(nil)
+                    completion(nil, false)
                     return
                 }
                 let todayTransformedSaleReport = item.reports.first {
@@ -171,16 +171,16 @@ class NetworkManager {
                     $0.type == .SHIPPED
                 }
 
-                completion(SaleReports(todayTransformedSaleReport: todayTransformedSaleReport, todayShippedSaleReport: todayShippedSaleReport, yesterdayTransformedSaleReport: nil, yesterdayShippedSaleReport: nil))
+                completion(SaleReports(todayTransformedSaleReport: todayTransformedSaleReport, todayShippedSaleReport: todayShippedSaleReport, yesterdayTransformedSaleReport: nil, yesterdayShippedSaleReport: nil), true)
             } catch {
-                completion(nil)
+                completion(nil, false)
             }
         }
         task.resume()
     }
-    func saleReportList(completion: @escaping (SaleReportList?) -> ()) {
+    func saleReportList(completion: @escaping (SaleReportList?, Bool) -> ()) {
         guard let userSession = readUserSession() else {
-            completion(nil)
+            completion(nil, false)
             return
         }
         let end = Date()
@@ -191,30 +191,30 @@ class NetworkManager {
         let task = URLSession.shared.dataTask(with: request) { data, _, error in
             guard error == nil else {
                 print(error?.localizedDescription as Any)
-                completion(nil)
+                completion(nil, false)
                 return
             }
 
             guard let jsonData = data else {
-                completion(nil)
+                completion(nil, false)
                 return
             }
             do {
                 let response = try JSONDecoder().decode(Response<SaleReportList>.self, from: jsonData)
                 guard let item = response.data else {
-                    completion(nil)
+                    completion(nil, false)
                     return
                 }
-                completion(item)
+                completion(item, true)
             } catch {
-                completion(nil)
+                completion(nil, false)
             }
         }
         task.resume()
     }
-    func toDoCount(with navigationNo: String, completion: @escaping  (Int?) -> ()) {
+    func toDoCount(with navigationNo: String, completion: @escaping  (Int?, Bool) -> ()) {
         guard let userSession = readUserSession() else {
-            completion(nil)
+            completion(nil, false)
             return
         }
 
@@ -228,30 +228,30 @@ class NetworkManager {
         let task = URLSession.shared.dataTask(with: request) { data, _, error in
             guard error == nil else {
                 print(error?.localizedDescription as Any)
-                completion(nil)
+                completion(nil, false)
                 return
             }
 
             guard let jsonData = data else {
-                completion(nil)
+                completion(nil, false)
                 return
             }
             do {
                 let response = try JSONDecoder().decode(Response<ToDoList>.self, from: jsonData)
                 guard let item = response.data else {
-                    completion(nil)
+                    completion(nil, false)
                     return
                 }
-                completion(item.items.count)
+                completion(item.items.count, true)
             } catch {
-                completion(nil)
+                completion(nil, false)
             }
         }
         task.resume()
     }
-    func announcementCount(completion: @escaping (Int?) -> ()) {
+    func announcementCount(completion: @escaping (Int?, Bool) -> ()) {
         guard let userSession = readUserSession() else {
-            completion(nil)
+            completion(nil, false)
             return
         }
 
@@ -264,23 +264,23 @@ class NetworkManager {
         let task = URLSession.shared.dataTask(with: request) { data, _, error in
             guard error == nil else {
                 print(error?.localizedDescription as Any)
-                completion(nil)
+                completion(nil, false)
                 return
             }
 
             guard let jsonData = data else {
-                completion(nil)
+                completion(nil, false)
                 return
             }
             do {
                 let response = try JSONDecoder().decode(Response<MyMindNotificationList>.self, from: jsonData)
                 guard let item = response.data else {
-                    completion(nil)
+                    completion(nil, false)
                     return
                 }
-                completion(item.unreaded)
+                completion(item.unreaded, true)
             } catch {
-                completion(nil)
+                completion(nil, false)
             }
         }
         task.resume()

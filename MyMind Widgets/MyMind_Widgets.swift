@@ -17,22 +17,44 @@ struct Provider: TimelineProvider {
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<MyMindEntry>) -> ()) {
-        let nextUpdateDate = Calendar.current.date(byAdding: .hour, value: 1, to: Date())!
         NetworkManager.shared.authorization { authorization, success in
-            if success {
-                NetworkManager.shared.saleReportList { reportList in
-                    NetworkManager.shared.toDoCount(with: authorization?.navigations.description ?? "") { toDoCount in
-                        NetworkManager.shared.announcementCount { announcementCount in
-                            let entry = MyMindEntry(date: Date(), isLogin: true, source: nil, maximumAmount: reportList?.maximumAmount ?? 1, totalAmount: reportList?.totalSaleAmount ?? 0, todayAmount: 0, chartData: UDILineChartData(points: reportList?.points(for: .TOTAL_SALE_AMOUNT)[.sale] ?? [], fill: LinearGradient(stops: [.init(color:  Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.8), location: 0), .init(color: Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.5), location: 0.3), .init(color: Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.0), location: 1)], startPoint: .top, endPoint: .bottom), stroke: Color(red: 127.0/255.0, green: 194.0/255.0, blue: 250.0/255.0), strokeWidth: 3), toDoCount: toDoCount, announcementCount: announcementCount)
-                            let timeline = Timeline(entries: [entry], policy: .after(nextUpdateDate))
-                            completion(timeline)
-                        }
-                    }
-                }
-            } else {
+            guard success else {
+                let nextUpdateDate = Calendar.current.date(byAdding: .minute, value: 15, to: Date())!
                 let entry = MyMindEntry(date: Date(), isLogin: false, source: nil, maximumAmount: 1, totalAmount: 0, todayAmount: 0, chartData: .empty, toDoCount: nil, announcementCount: nil)
                 let timeline = Timeline(entries: [entry], policy: .after(nextUpdateDate))
                 completion(timeline)
+                return
+            }
+            NetworkManager.shared.saleReportList { reportList, success in
+                guard success else {
+                    let nextUpdateDate = Calendar.current.date(byAdding: .minute, value: 15, to: Date())!
+                    let entry = MyMindEntry(date: Date(), isLogin: false, source: nil, maximumAmount: 1, totalAmount: 0, todayAmount: 0, chartData: .empty, toDoCount: nil, announcementCount: nil)
+                    let timeline = Timeline(entries: [entry], policy: .after(nextUpdateDate))
+                    completion(timeline)
+                    return
+                }
+                NetworkManager.shared.toDoCount(with: authorization?.navigations.description ?? "") { toDoCount, success in
+                    guard success else {
+                        let nextUpdateDate = Calendar.current.date(byAdding: .minute, value: 15, to: Date())!
+                        let entry = MyMindEntry(date: Date(), isLogin: false, source: nil, maximumAmount: 1, totalAmount: 0, todayAmount: 0, chartData: .empty, toDoCount: nil, announcementCount: nil)
+                        let timeline = Timeline(entries: [entry], policy: .after(nextUpdateDate))
+                        completion(timeline)
+                        return
+                    }
+                    NetworkManager.shared.announcementCount { announcementCount, success in
+                        guard success else {
+                            let nextUpdateDate = Calendar.current.date(byAdding: .minute, value: 15, to: Date())!
+                            let entry = MyMindEntry(date: Date(), isLogin: false, source: nil, maximumAmount: 1, totalAmount: 0, todayAmount: 0, chartData: .empty, toDoCount: nil, announcementCount: nil)
+                            let timeline = Timeline(entries: [entry], policy: .after(nextUpdateDate))
+                            completion(timeline)
+                            return
+                        }
+                        let nextUpdateDate = Calendar.current.date(byAdding: .hour, value: 1, to: Date())!
+                        let entry = MyMindEntry(date: Date(), isLogin: true, source: nil, maximumAmount: reportList?.maximumAmount ?? 1, totalAmount: reportList?.totalSaleAmount ?? 0, todayAmount: 0, chartData: UDILineChartData(points: reportList?.points(for: .TOTAL_SALE_AMOUNT)[.sale] ?? [], fill: LinearGradient(stops: [.init(color:  Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.8), location: 0), .init(color: Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.5), location: 0.3), .init(color: Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.0), location: 1)], startPoint: .top, endPoint: .bottom), stroke: Color(red: 127.0/255.0, green: 194.0/255.0, blue: 250.0/255.0), strokeWidth: 3), toDoCount: toDoCount, announcementCount: announcementCount)
+                        let timeline = Timeline(entries: [entry], policy: .after(nextUpdateDate))
+                        completion(timeline)
+                    }
+                }
             }
         }
     }
@@ -51,138 +73,167 @@ struct ChartProvider: IntentTimelineProvider {
     }
     
     func getTimeline(for configuration: SelectChartIntent, in context: Context, completion: @escaping (Timeline<MyMindEntry>) -> Void) {
-        let nextUpdateDate = Calendar.current.date(byAdding: .hour, value: 1, to: Date())!
         NetworkManager.shared.authorization { authorization, success in
-            if success {
-                NetworkManager.shared.saleReportList { reportList in
-                    NetworkManager.shared.toDoCount(with: authorization?.navigations.description ?? "") { toDoCount in
-                        NetworkManager.shared.announcementCount { announcementCount in
-                            NetworkManager.shared.todayReport { reportOfToday in
-                                var points: [CGPoint] = []
-                                var maximum: CGFloat = 1
-                                var total: CGFloat = 0
-                                var today: CGFloat = 0
-                                var source: SourceType?
-                                if let reportList = reportList {
-                                    switch configuration.source {
-                                    case .saleAmount: points = reportList.points(for: .TOTAL_SALE_AMOUNT)[.sale] ?? []
-                                        maximum = CGFloat(reportList.maximumSaleAmount)
-                                        if maximum == 0 {
-                                            maximum = 10000
-                                        } else {
-                                            maximum += maximum/10
-                                        }
-                                        total = max(reportList.totalSaleAmount, 0)
-                                        if let shipped = reportOfToday?.todayShippedSaleReport {
-                                            today += CGFloat(shipped.saleAmount)
-                                        }
-                                        if let transformed = reportOfToday?.todayTransformedSaleReport {
-                                            today += CGFloat(transformed.saleAmount)
-                                        }
-                                        source = .saleAmount
-                                    case .canceledAmount: points = reportList.points(for: .TOTAL_SALE_AMOUNT)[.cancel] ?? []
-                                        maximum = CGFloat(reportList.maximumCanceledAmount)
-                                        if maximum == 0 {
-                                            maximum = 10000
-                                        } else {
-                                            maximum += maximum/10
-                                        }
-                                        total = max(reportList.totalCanceledAmount, 0)
-                                        if let shipped = reportOfToday?.todayShippedSaleReport {
-                                            today += CGFloat(shipped.canceledAmount)
-                                        }
-                                        if let transformed = reportOfToday?.todayTransformedSaleReport {
-                                            today += CGFloat(transformed.canceledAmount)
-                                        }
-                                        source = .cancelAmount
-                                    case .returnedAmount: points = reportList.points(for: .TOTAL_SALE_AMOUNT)[.returned] ?? []
-                                        maximum = CGFloat(reportList.maximumReturnAmount)
-                                        if maximum == 0 {
-                                            maximum = 10000
-                                        } else {
-                                            maximum += maximum/10
-                                        }
-                                        total = max(reportList.totalReturnAmount, 0)
-                                        if let shipped = reportOfToday?.todayShippedSaleReport {
-                                            today += CGFloat(shipped.returnAmount)
-                                        }
-                                        if let transformed = reportOfToday?.todayTransformedSaleReport {
-                                            today += CGFloat(transformed.returnAmount)
-                                        }
-                                        source = .returnedAmount
-                                    case .saleQuantity: points = reportList.points(for: .TOTAL_SALE_QUANTITY)[.sale] ?? []
-                                        maximum = CGFloat(reportList.maximumSaleQuantity)
-                                        if maximum == 0 {
-                                            maximum = 1000
-                                        } else {
-                                            maximum += maximum/10
-                                        }
-                                        total = max(reportList.totalSaleQuantity, 0)
-                                        if let shipped = reportOfToday?.todayShippedSaleReport {
-                                            today += CGFloat(shipped.saleQuantity)
-                                        }
-                                        if let transformed = reportOfToday?.todayTransformedSaleReport {
-                                            today += CGFloat(transformed.saleQuantity)
-                                        }
-                                        source = .saleQuantity
-                                    case .canceledQuanity: points = reportList.points(for: .TOTAL_SALE_QUANTITY)[.cancel] ?? []
-                                        maximum = CGFloat(reportList.maximumCanceledQuantity)
-                                        if maximum == 0 {
-                                            maximum = 1000
-                                        } else {
-                                            maximum += maximum/10
-                                        }
-                                        total = max(reportList.totalCanceledQuantity, 0)
-                                        if let shipped = reportOfToday?.todayShippedSaleReport {
-                                            today += CGFloat(shipped.canceledQuantity)
-                                        }
-                                        if let transformed = reportOfToday?.todayTransformedSaleReport {
-                                            today += CGFloat(transformed.canceledQuantity)
-                                        }
-                                        source = .cancelQuantity
-                                    case .returnedQuantity: points = reportList.points(for: .TOTAL_SALE_QUANTITY)[.returned] ?? []
-                                        maximum = CGFloat(reportList.maximumReturnQuantity)
-                                        if maximum == 0 {
-                                            maximum = 1000
-                                        } else {
-                                            maximum += maximum/10
-                                        }
-                                        total = max(reportList.totalReturnQuantity, 0)
-                                        if let shipped = reportOfToday?.todayShippedSaleReport {
-                                            today += CGFloat(shipped.returnQuantity)
-                                        }
-                                        if let transformed = reportOfToday?.todayTransformedSaleReport {
-                                            today += CGFloat(transformed.returnQuantity)
-                                        }
-                                        source = .returnedQuantity
-                                    default: points = reportList.points(for: .TOTAL_SALE_AMOUNT)[.sale] ?? []
-                                        maximum = CGFloat(reportList.maximumSaleAmount)
-                                        if maximum == 0 {
-                                            maximum = 1000
-                                        } else {
-                                            maximum += maximum/10
-                                        }
-                                        total = max(reportList.totalSaleAmount, 0)
-                                        if let shipped = reportOfToday?.todayShippedSaleReport {
-                                            today += CGFloat(shipped.saleAmount)
-                                        }
-                                        if let transformed = reportOfToday?.todayTransformedSaleReport {
-                                            today += CGFloat(transformed.saleAmount)
-                                        }
-                                        source = .saleAmount
-                                    }
-                                }
-                                let entry = MyMindEntry(date: Date(), isLogin: true, source: source, maximumAmount: maximum, totalAmount: total, todayAmount: today, chartData: UDILineChartData(points:  points, fill: LinearGradient(stops: [.init(color:  Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.8), location: 0), .init(color: Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.5), location: 0.3), .init(color: Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.0), location: 1)], startPoint: .top, endPoint: .bottom), stroke: Color(red: 127.0/255.0, green: 194.0/255.0, blue: 250.0/255.0), strokeWidth: configuration.strokeWidth as? CGFloat ?? 3), toDoCount: toDoCount, announcementCount: announcementCount)
+            guard success else {
+                let nextUpdateDate = Calendar.current.date(byAdding: .minute, value: 15, to: Date())!
+                let entry = MyMindEntry(date: Date(), isLogin: false, source: nil, maximumAmount: 1, totalAmount: 0, todayAmount: 0, chartData: .empty, toDoCount: nil, announcementCount: nil)
+                let timeline = Timeline(entries: [entry], policy: .after(nextUpdateDate))
+                completion(timeline)
+                return
+            }
+            NetworkManager.shared.saleReportList { reportList, success in
+                guard success else {
+                    let nextUpdateDate = Calendar.current.date(byAdding: .minute, value: 15, to: Date())!
+                    let entry = MyMindEntry(date: Date(), isLogin: false, source: nil, maximumAmount: 1, totalAmount: 0, todayAmount: 0, chartData: .empty, toDoCount: nil, announcementCount: nil)
+                    let timeline = Timeline(entries: [entry], policy: .after(nextUpdateDate))
+                    completion(timeline)
+                    return
+                }
+                NetworkManager.shared.toDoCount(with: authorization?.navigations.description ?? "") { toDoCount, success in
+                    guard success else {
+                        let nextUpdateDate = Calendar.current.date(byAdding: .minute, value: 15, to: Date())!
+                        let entry = MyMindEntry(date: Date(), isLogin: false, source: nil, maximumAmount: 1, totalAmount: 0, todayAmount: 0, chartData: .empty, toDoCount: nil, announcementCount: nil)
+                        let timeline = Timeline(entries: [entry], policy: .after(nextUpdateDate))
+                        completion(timeline)
+                        return
+                    }
+                    NetworkManager.shared.announcementCount { announcementCount, success in
+                        guard success else {
+                            let nextUpdateDate = Calendar.current.date(byAdding: .minute, value: 15, to: Date())!
+                            let entry = MyMindEntry(date: Date(), isLogin: false, source: nil, maximumAmount: 1, totalAmount: 0, todayAmount: 0, chartData: .empty, toDoCount: nil, announcementCount: nil)
+                            let timeline = Timeline(entries: [entry], policy: .after(nextUpdateDate))
+                            completion(timeline)
+                            return
+                        }
+                        NetworkManager.shared.todayReport { reportOfToday, success in
+                            guard success else {
+                                let nextUpdateDate = Calendar.current.date(byAdding: .minute, value: 15, to: Date())!
+                                let entry = MyMindEntry(date: Date(), isLogin: false, source: nil, maximumAmount: 1, totalAmount: 0, todayAmount: 0, chartData: .empty, toDoCount: nil, announcementCount: nil)
                                 let timeline = Timeline(entries: [entry], policy: .after(nextUpdateDate))
                                 completion(timeline)
+                                return
                             }
+                            var points: [CGPoint] = []
+                            var maximum: CGFloat = 1
+                            var total: CGFloat = 0
+                            var today: CGFloat = 0
+                            var source: SourceType?
+                            if let reportList = reportList {
+                                switch configuration.source {
+                                case .saleAmount: points = reportList.points(for: .TOTAL_SALE_AMOUNT)[.sale] ?? []
+                                    maximum = CGFloat(reportList.maximumSaleAmount)
+                                    if maximum == 0 {
+                                        maximum = 10000
+                                    } else {
+                                        maximum += maximum/10
+                                    }
+                                    total = max(reportList.totalSaleAmount, 0)
+                                    if let shipped = reportOfToday?.todayShippedSaleReport {
+                                        today += CGFloat(shipped.saleAmount)
+                                    }
+                                    if let transformed = reportOfToday?.todayTransformedSaleReport {
+                                        today += CGFloat(transformed.saleAmount)
+                                    }
+                                    source = .saleAmount
+                                case .canceledAmount: points = reportList.points(for: .TOTAL_SALE_AMOUNT)[.cancel] ?? []
+                                    maximum = CGFloat(reportList.maximumCanceledAmount)
+                                    if maximum == 0 {
+                                        maximum = 10000
+                                    } else {
+                                        maximum += maximum/10
+                                    }
+                                    total = max(reportList.totalCanceledAmount, 0)
+                                    if let shipped = reportOfToday?.todayShippedSaleReport {
+                                        today += CGFloat(shipped.canceledAmount)
+                                    }
+                                    if let transformed = reportOfToday?.todayTransformedSaleReport {
+                                        today += CGFloat(transformed.canceledAmount)
+                                    }
+                                    source = .cancelAmount
+                                case .returnedAmount: points = reportList.points(for: .TOTAL_SALE_AMOUNT)[.returned] ?? []
+                                    maximum = CGFloat(reportList.maximumReturnAmount)
+                                    if maximum == 0 {
+                                        maximum = 10000
+                                    } else {
+                                        maximum += maximum/10
+                                    }
+                                    total = max(reportList.totalReturnAmount, 0)
+                                    if let shipped = reportOfToday?.todayShippedSaleReport {
+                                        today += CGFloat(shipped.returnAmount)
+                                    }
+                                    if let transformed = reportOfToday?.todayTransformedSaleReport {
+                                        today += CGFloat(transformed.returnAmount)
+                                    }
+                                    source = .returnedAmount
+                                case .saleQuantity: points = reportList.points(for: .TOTAL_SALE_QUANTITY)[.sale] ?? []
+                                    maximum = CGFloat(reportList.maximumSaleQuantity)
+                                    if maximum == 0 {
+                                        maximum = 1000
+                                    } else {
+                                        maximum += maximum/10
+                                    }
+                                    total = max(reportList.totalSaleQuantity, 0)
+                                    if let shipped = reportOfToday?.todayShippedSaleReport {
+                                        today += CGFloat(shipped.saleQuantity)
+                                    }
+                                    if let transformed = reportOfToday?.todayTransformedSaleReport {
+                                        today += CGFloat(transformed.saleQuantity)
+                                    }
+                                    source = .saleQuantity
+                                case .canceledQuanity: points = reportList.points(for: .TOTAL_SALE_QUANTITY)[.cancel] ?? []
+                                    maximum = CGFloat(reportList.maximumCanceledQuantity)
+                                    if maximum == 0 {
+                                        maximum = 1000
+                                    } else {
+                                        maximum += maximum/10
+                                    }
+                                    total = max(reportList.totalCanceledQuantity, 0)
+                                    if let shipped = reportOfToday?.todayShippedSaleReport {
+                                        today += CGFloat(shipped.canceledQuantity)
+                                    }
+                                    if let transformed = reportOfToday?.todayTransformedSaleReport {
+                                        today += CGFloat(transformed.canceledQuantity)
+                                    }
+                                    source = .cancelQuantity
+                                case .returnedQuantity: points = reportList.points(for: .TOTAL_SALE_QUANTITY)[.returned] ?? []
+                                    maximum = CGFloat(reportList.maximumReturnQuantity)
+                                    if maximum == 0 {
+                                        maximum = 1000
+                                    } else {
+                                        maximum += maximum/10
+                                    }
+                                    total = max(reportList.totalReturnQuantity, 0)
+                                    if let shipped = reportOfToday?.todayShippedSaleReport {
+                                        today += CGFloat(shipped.returnQuantity)
+                                    }
+                                    if let transformed = reportOfToday?.todayTransformedSaleReport {
+                                        today += CGFloat(transformed.returnQuantity)
+                                    }
+                                    source = .returnedQuantity
+                                default: points = reportList.points(for: .TOTAL_SALE_AMOUNT)[.sale] ?? []
+                                    maximum = CGFloat(reportList.maximumSaleAmount)
+                                    if maximum == 0 {
+                                        maximum = 1000
+                                    } else {
+                                        maximum += maximum/10
+                                    }
+                                    total = max(reportList.totalSaleAmount, 0)
+                                    if let shipped = reportOfToday?.todayShippedSaleReport {
+                                        today += CGFloat(shipped.saleAmount)
+                                    }
+                                    if let transformed = reportOfToday?.todayTransformedSaleReport {
+                                        today += CGFloat(transformed.saleAmount)
+                                    }
+                                    source = .saleAmount
+                                }
+                            }
+                            let nextUpdateDate = Calendar.current.date(byAdding: .hour, value: 1, to: Date())!
+                            let entry = MyMindEntry(date: Date(), isLogin: true, source: source, maximumAmount: maximum, totalAmount: total, todayAmount: today, chartData: UDILineChartData(points:  points, fill: LinearGradient(stops: [.init(color:  Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.8), location: 0), .init(color: Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.5), location: 0.3), .init(color: Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.0), location: 1)], startPoint: .top, endPoint: .bottom), stroke: Color(red: 127.0/255.0, green: 194.0/255.0, blue: 250.0/255.0), strokeWidth: configuration.strokeWidth as? CGFloat ?? 3), toDoCount: toDoCount, announcementCount: announcementCount)
+                            let timeline = Timeline(entries: [entry], policy: .after(nextUpdateDate))
+                            completion(timeline)
                         }
                     }
                 }
-            } else {
-                let entry = MyMindEntry(date: Date(), isLogin: false, source: .saleAmount, maximumAmount: 1, totalAmount: 0, todayAmount: 0, chartData: UDILineChartData.empty, toDoCount: nil, announcementCount: nil)
-                let timeline = Timeline(entries: [entry], policy: .after(nextUpdateDate))
-                completion(timeline)
             }
         }
     }
@@ -300,8 +351,6 @@ struct MyMind_WidgetsEntryView : View {
                                 }
                                 .frame(width: (geo.size.width-20)/3)
                                 .frame(maxHeight: .infinity)
-//                                .padding(.top, 8)
-//                                .padding(.bottom, 16)
                                 .padding(.leading, (geo.size.width-20)/3)
                             }
                             if let title = entry.source?.todayDescription {
@@ -317,8 +366,6 @@ struct MyMind_WidgetsEntryView : View {
                                 }
                                 .frame(width: (geo.size.width-20)/3+20)
                                 .frame(maxHeight: .infinity)
-//                                .padding(.top, 10)
-//                                .padding(.bottom, 16)
                                 .background(Color(white: 0, opacity: 0.5))
                                 .cornerRadius(8, corners:[.topLeft, .bottomLeft])
                                 .padding(.leading, (geo.size.width-20)*2/3)
