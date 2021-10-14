@@ -391,4 +391,19 @@ extension MainFunctionEntryViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 163, height: 160)
     }
+    private func handleItemAction(with item: FunctionEntryList.FunctionEntry.FunctionEntryItem) {
+        switch item {
+        case .purchaseApply:
+            show(PurchaseListViewController(purchaseListLoader: MyMindPurchaseAPIService.shared), sender: nil)
+        case .purchaseReview:
+            show(PurchaseListViewController(purchaseListLoader: MyMindPurchaseReviewAPIService.shared, reviewing: true), sender: nil)
+        default:
+            print(item)
+        }
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let item = authorization?.entryList.item(for: selectedCategory, at: indexPath.row) {
+            handleItemAction(with: item)
+        }
+    }
 }
