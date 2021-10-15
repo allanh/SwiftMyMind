@@ -12,7 +12,7 @@ import Intents
 /// Static Widget configuration provider
 struct Provider: TimelineProvider {
     func getSnapshot(in context: Context, completion: @escaping (MyMindEntry) -> ()) {
-        let entry = MyMindEntry(date: Date(), isLogin: true, source: nil, maximumAmount: 100, totalAmount: 102560, todayAmount: 2560, chartData: UDILineChartData(points: [CGPoint(x: 0, y: 20), CGPoint(x: 1, y: 25), CGPoint(x: 2, y: 30), CGPoint(x: 3, y: 40), CGPoint(x: 4, y: 60), CGPoint(x: 5, y: 85), CGPoint(x: 6, y: 75), CGPoint(x: 7, y: 40), CGPoint(x: 8, y: 70), CGPoint(x: 9, y: 20), CGPoint(x: 10, y: 30), CGPoint(x: 11, y: 45), CGPoint(x: 12, y: 50), CGPoint(x: 13, y: 45), CGPoint(x: 14, y: 50), CGPoint(x: 15, y: 45), CGPoint(x: 16, y: 45), CGPoint(x: 17, y: 30), CGPoint(x: 18, y: 20), CGPoint(x: 19, y: 60), CGPoint(x: 20, y: 80), CGPoint(x: 21, y: 100), CGPoint(x: 22, y: 90), CGPoint(x: 23, y: 80), CGPoint(x: 24, y: 70), CGPoint(x: 25, y: 70), CGPoint(x: 26, y: 75), CGPoint(x: 27, y: 75), CGPoint(x: 28, y: 70), CGPoint(x: 29, y: 70)], fill: LinearGradient(stops: [.init(color:  Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.8), location: 0), .init(color: Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.5), location: 0.3), .init(color: Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.0), location: 1)], startPoint: .top, endPoint: .bottom), stroke: Color(red: 127.0/255.0, green: 194.0/255.0, blue: 250.0/255.0), strokeWidth: 3), toDoCount: 198, announcementCount: 7)
+        let entry = MyMindEntry.mock
         completion(entry)
     }
 
@@ -20,7 +20,7 @@ struct Provider: TimelineProvider {
         NetworkManager.shared.authorization { authorization, success in
             guard success else {
                 let nextUpdateDate = Calendar.current.date(byAdding: .minute, value: 15, to: Date())!
-                let entry = MyMindEntry(date: Date(), isLogin: false, source: nil, maximumAmount: 1, totalAmount: 0, todayAmount: 0, chartData: .empty, toDoCount: nil, announcementCount: nil)
+                let entry = MyMindEntry.empty
                 let timeline = Timeline(entries: [entry], policy: .after(nextUpdateDate))
                 completion(timeline)
                 return
@@ -28,7 +28,7 @@ struct Provider: TimelineProvider {
             NetworkManager.shared.saleReportList { reportList, success in
                 guard success else {
                     let nextUpdateDate = Calendar.current.date(byAdding: .minute, value: 15, to: Date())!
-                    let entry = MyMindEntry(date: Date(), isLogin: false, source: nil, maximumAmount: 1, totalAmount: 0, todayAmount: 0, chartData: .empty, toDoCount: nil, announcementCount: nil)
+                    let entry = MyMindEntry.empty
                     let timeline = Timeline(entries: [entry], policy: .after(nextUpdateDate))
                     completion(timeline)
                     return
@@ -36,7 +36,7 @@ struct Provider: TimelineProvider {
                 NetworkManager.shared.toDoCount(with: authorization?.navigations.description ?? "") { toDoCount, success in
                     guard success else {
                         let nextUpdateDate = Calendar.current.date(byAdding: .minute, value: 15, to: Date())!
-                        let entry = MyMindEntry(date: Date(), isLogin: false, source: nil, maximumAmount: 1, totalAmount: 0, todayAmount: 0, chartData: .empty, toDoCount: nil, announcementCount: nil)
+                        let entry = MyMindEntry.empty
                         let timeline = Timeline(entries: [entry], policy: .after(nextUpdateDate))
                         completion(timeline)
                         return
@@ -44,15 +44,46 @@ struct Provider: TimelineProvider {
                     NetworkManager.shared.announcementCount { announcementCount, success in
                         guard success else {
                             let nextUpdateDate = Calendar.current.date(byAdding: .minute, value: 15, to: Date())!
-                            let entry = MyMindEntry(date: Date(), isLogin: false, source: nil, maximumAmount: 1, totalAmount: 0, todayAmount: 0, chartData: .empty, toDoCount: nil, announcementCount: nil)
+                            let entry = MyMindEntry.empty
                             let timeline = Timeline(entries: [entry], policy: .after(nextUpdateDate))
                             completion(timeline)
                             return
                         }
-                        let nextUpdateDate = Calendar.current.date(byAdding: .hour, value: 1, to: Date())!
-                        let entry = MyMindEntry(date: Date(), isLogin: true, source: nil, maximumAmount: reportList?.maximumAmount ?? 1, totalAmount: reportList?.totalSaleAmount ?? 0, todayAmount: 0, chartData: UDILineChartData(points: reportList?.points(for: .TOTAL_SALE_AMOUNT)[.sale] ?? [], fill: LinearGradient(stops: [.init(color:  Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.8), location: 0), .init(color: Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.5), location: 0.3), .init(color: Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.0), location: 1)], startPoint: .top, endPoint: .bottom), stroke: Color(red: 127.0/255.0, green: 194.0/255.0, blue: 250.0/255.0), strokeWidth: 3), toDoCount: toDoCount, announcementCount: announcementCount)
-                        let timeline = Timeline(entries: [entry], policy: .after(nextUpdateDate))
-                        completion(timeline)
+                        NetworkManager.shared.todayReport { reportOfToday, success in
+                            guard success else {
+                                let nextUpdateDate = Calendar.current.date(byAdding: .minute, value: 15, to: Date())!
+                                let entry = MyMindEntry.empty
+                                let timeline = Timeline(entries: [entry], policy: .after(nextUpdateDate))
+                                completion(timeline)
+                                return
+                            }
+                            var points: [CGPoint] = []
+                            var maximum: CGFloat = 1
+                            var total: CGFloat = 0
+                            var today: CGFloat = 0
+                            var source: SourceType?
+                            if let reportList = reportList {
+                                points = reportList.points(for: .TOTAL_SALE_AMOUNT)[.sale] ?? []
+                                maximum = CGFloat(reportList.maximumSaleAmount)
+                                if maximum == 0 {
+                                    maximum = 10000
+                                } else {
+                                    maximum += maximum/10
+                                }
+                                total = max(reportList.totalSaleAmount, 0)
+                                if let shipped = reportOfToday?.todayShippedSaleReport {
+                                    today += CGFloat(shipped.saleAmount)
+                                }
+                                if let transformed = reportOfToday?.todayTransformedSaleReport {
+                                    today += CGFloat(transformed.saleAmount)
+                                }
+                                source = .saleAmount
+                            }
+                            let nextUpdateDate = Calendar.current.date(byAdding: .hour, value: 1, to: Date())!
+                            let entry = MyMindEntry(date: Date(), isLogin: true, source: source, maximumAmount: maximum, totalAmount: total, todayAmount: today, chartData: UDILineChartData(points:  points, fill: LinearGradient(stops: [.init(color:  Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.8), location: 0), .init(color: Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.5), location: 0.3), .init(color: Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.0), location: 1)], startPoint: .top, endPoint: .bottom), stroke: Color(red: 127.0/255.0, green: 194.0/255.0, blue: 250.0/255.0), strokeWidth: 3), toDoCount: toDoCount, announcementCount: announcementCount)
+                            let timeline = Timeline(entries: [entry], policy: .after(nextUpdateDate))
+                            completion(timeline)
+                        }
                     }
                 }
             }
@@ -68,7 +99,7 @@ struct ChartProvider: IntentTimelineProvider {
     typealias Intent = SelectChartIntent
 
     func getSnapshot(for configuration: SelectChartIntent, in context: Context, completion: @escaping (MyMindEntry) -> Void) {
-        let entry = MyMindEntry(date: Date(), isLogin: true, source: .saleAmount, maximumAmount: 100, totalAmount: 102560, todayAmount: 2560, chartData: UDILineChartData(points: [CGPoint(x: 0, y: 20), CGPoint(x: 1, y: 25), CGPoint(x: 2, y: 30), CGPoint(x: 3, y: 40), CGPoint(x: 4, y: 60), CGPoint(x: 5, y: 85), CGPoint(x: 6, y: 75), CGPoint(x: 7, y: 40), CGPoint(x: 8, y: 70), CGPoint(x: 9, y: 20), CGPoint(x: 10, y: 30), CGPoint(x: 11, y: 45), CGPoint(x: 12, y: 50), CGPoint(x: 13, y: 45), CGPoint(x: 14, y: 50), CGPoint(x: 15, y: 45), CGPoint(x: 16, y: 45), CGPoint(x: 17, y: 30), CGPoint(x: 18, y: 20), CGPoint(x: 19, y: 60), CGPoint(x: 20, y: 80), CGPoint(x: 21, y: 100), CGPoint(x: 22, y: 90), CGPoint(x: 23, y: 80), CGPoint(x: 24, y: 70), CGPoint(x: 25, y: 70), CGPoint(x: 26, y: 75), CGPoint(x: 27, y: 75), CGPoint(x: 28, y: 70), CGPoint(x: 29, y: 70)], fill: LinearGradient(stops: [.init(color:  Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.8), location: 0), .init(color: Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.5), location: 0.3), .init(color: Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.0), location: 1)], startPoint: .top, endPoint: .bottom), stroke: Color(red: 127.0/255.0, green: 194.0/255.0, blue: 250.0/255.0), strokeWidth: 3), toDoCount: 198, announcementCount: 7)
+        let entry = MyMindEntry.mock
         completion(entry)
     }
     
@@ -76,7 +107,7 @@ struct ChartProvider: IntentTimelineProvider {
         NetworkManager.shared.authorization { authorization, success in
             guard success else {
                 let nextUpdateDate = Calendar.current.date(byAdding: .minute, value: 15, to: Date())!
-                let entry = MyMindEntry(date: Date(), isLogin: false, source: nil, maximumAmount: 1, totalAmount: 0, todayAmount: 0, chartData: .empty, toDoCount: nil, announcementCount: nil)
+                let entry = MyMindEntry.empty
                 let timeline = Timeline(entries: [entry], policy: .after(nextUpdateDate))
                 completion(timeline)
                 return
@@ -84,7 +115,7 @@ struct ChartProvider: IntentTimelineProvider {
             NetworkManager.shared.saleReportList { reportList, success in
                 guard success else {
                     let nextUpdateDate = Calendar.current.date(byAdding: .minute, value: 15, to: Date())!
-                    let entry = MyMindEntry(date: Date(), isLogin: false, source: nil, maximumAmount: 1, totalAmount: 0, todayAmount: 0, chartData: .empty, toDoCount: nil, announcementCount: nil)
+                    let entry = MyMindEntry.empty
                     let timeline = Timeline(entries: [entry], policy: .after(nextUpdateDate))
                     completion(timeline)
                     return
@@ -92,7 +123,7 @@ struct ChartProvider: IntentTimelineProvider {
                 NetworkManager.shared.toDoCount(with: authorization?.navigations.description ?? "") { toDoCount, success in
                     guard success else {
                         let nextUpdateDate = Calendar.current.date(byAdding: .minute, value: 15, to: Date())!
-                        let entry = MyMindEntry(date: Date(), isLogin: false, source: nil, maximumAmount: 1, totalAmount: 0, todayAmount: 0, chartData: .empty, toDoCount: nil, announcementCount: nil)
+                        let entry = MyMindEntry.empty
                         let timeline = Timeline(entries: [entry], policy: .after(nextUpdateDate))
                         completion(timeline)
                         return
@@ -100,7 +131,7 @@ struct ChartProvider: IntentTimelineProvider {
                     NetworkManager.shared.announcementCount { announcementCount, success in
                         guard success else {
                             let nextUpdateDate = Calendar.current.date(byAdding: .minute, value: 15, to: Date())!
-                            let entry = MyMindEntry(date: Date(), isLogin: false, source: nil, maximumAmount: 1, totalAmount: 0, todayAmount: 0, chartData: .empty, toDoCount: nil, announcementCount: nil)
+                            let entry = MyMindEntry.empty
                             let timeline = Timeline(entries: [entry], policy: .after(nextUpdateDate))
                             completion(timeline)
                             return
@@ -108,7 +139,7 @@ struct ChartProvider: IntentTimelineProvider {
                         NetworkManager.shared.todayReport { reportOfToday, success in
                             guard success else {
                                 let nextUpdateDate = Calendar.current.date(byAdding: .minute, value: 15, to: Date())!
-                                let entry = MyMindEntry(date: Date(), isLogin: false, source: nil, maximumAmount: 1, totalAmount: 0, todayAmount: 0, chartData: .empty, toDoCount: nil, announcementCount: nil)
+                                let entry = MyMindEntry.empty
                                 let timeline = Timeline(entries: [entry], policy: .after(nextUpdateDate))
                                 completion(timeline)
                                 return
@@ -239,7 +270,7 @@ struct ChartProvider: IntentTimelineProvider {
     }
     
     func placeholder(in context: Context) -> MyMindEntry {
-        MyMindEntry(date: Date(), isLogin: true, source: .saleAmount, maximumAmount: 1, totalAmount: 0, todayAmount: 0, chartData: UDILineChartData.empty, toDoCount: nil, announcementCount: nil)
+        MyMindEntry(date: Date(), isLogin: true, source: nil, maximumAmount: 1, totalAmount: 0, todayAmount: 0, chartData: UDILineChartData.empty, toDoCount: nil, announcementCount: nil)
     }
 }
 enum SourceType: CustomStringConvertible {
@@ -280,6 +311,8 @@ struct MyMindEntry: TimelineEntry {
     let chartData: UDILineChartData
     let toDoCount: Int?
     let announcementCount: Int?
+    static var mock: MyMindEntry = MyMindEntry(date: Date(), isLogin: true, source: .saleAmount, maximumAmount: 110, totalAmount: 102560, todayAmount: 2560, chartData: UDILineChartData.mock, toDoCount: 198, announcementCount: 7)
+    static var empty: MyMindEntry = MyMindEntry(date: Date(), isLogin: false, source: nil, maximumAmount: 1, totalAmount: 0, todayAmount: 0, chartData: .empty, toDoCount: nil, announcementCount: nil)
 }
 
 extension View {
@@ -448,13 +481,21 @@ struct MyMind_ChartWidget: Widget {
     let kind: String = "MyMind_ChartWidget"
 
     var body: some WidgetConfiguration {
-        IntentConfiguration(kind: kind, intent: SelectChartIntent.self, provider: ChartProvider()) { entry in
+        StaticConfiguration(kind: kind, provider: Provider()) { entry in
             MyMind_WidgetsEntryView(entry: entry)
         }
         .configurationDisplayName("MyMind")
         .description("Show MyMind Important Infos.")
         .supportedFamilies([.systemLarge])
     }
+//    var body: some WidgetConfiguration {
+//        IntentConfiguration(kind: kind, intent: SelectChartIntent.self, provider: ChartProvider()) { entry in
+//            MyMind_WidgetsEntryView(entry: entry)
+//        }
+//        .configurationDisplayName("MyMind")
+//        .description("Show MyMind Important Infos.")
+//        .supportedFamilies([.systemLarge])
+//    }
 }
 /// widget bundle
 @main
@@ -473,7 +514,7 @@ struct MyMind_Widgets_Previews: PreviewProvider {
                 .previewContext(WidgetPreviewContext(family: .systemMedium))
             MyMind_WidgetsEntryView(entry: MyMindEntry(date: Date(), isLogin: false, source: nil, maximumAmount: 1, totalAmount: 0, todayAmount: 0, chartData: .empty, toDoCount: nil, announcementCount: nil))
                 .previewContext(WidgetPreviewContext(family: .systemMedium))
-            MyMind_WidgetsEntryView(entry: MyMindEntry(date: Date(), isLogin: true, source: .saleAmount, maximumAmount: 110, totalAmount: 102560, todayAmount: 1280, chartData: UDILineChartData(points: [CGPoint(x: 0, y: 20), CGPoint(x: 1, y: 25), CGPoint(x: 2, y: 30), CGPoint(x: 3, y: 40), CGPoint(x: 4, y: 60), CGPoint(x: 5, y: 85), CGPoint(x: 6, y: 75), CGPoint(x: 7, y: 40), CGPoint(x: 8, y: 70), CGPoint(x: 9, y: 20), CGPoint(x: 10, y: 30), CGPoint(x: 11, y: 45), CGPoint(x: 12, y: 50), CGPoint(x: 13, y: 45), CGPoint(x: 14, y: 50), CGPoint(x: 15, y: 45), CGPoint(x: 16, y: 45), CGPoint(x: 17, y: 30), CGPoint(x: 18, y: 20), CGPoint(x: 19, y: 60), CGPoint(x: 20, y: 80), CGPoint(x: 21, y: 100), CGPoint(x: 22, y: 90), CGPoint(x: 23, y: 80), CGPoint(x: 24, y: 70), CGPoint(x: 25, y: 70), CGPoint(x: 26, y: 75), CGPoint(x: 27, y: 75), CGPoint(x: 28, y: 70), CGPoint(x: 29, y: 70)], fill: LinearGradient(stops: [.init(color:  Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.8), location: 0), .init(color: Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.5), location: 0.3), .init(color: Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.0), location: 1)], startPoint: .top, endPoint: .bottom), stroke: Color(red: 127.0/255.0, green: 194.0/255.0, blue: 250.0/255.0), strokeWidth: 3), toDoCount: 198, announcementCount: 7))
+            MyMind_WidgetsEntryView(entry: MyMindEntry.mock)
                 .previewContext(WidgetPreviewContext(family: .systemLarge))
             MyMind_WidgetsEntryView(entry: MyMindEntry(date: Date(), isLogin: false, source: nil, maximumAmount: 1, totalAmount: 0, todayAmount: 0, chartData: .empty, toDoCount: nil, announcementCount: nil))
                 .previewContext(WidgetPreviewContext(family: .systemLarge))
