@@ -54,6 +54,11 @@ struct SaleReportList: Codable {
             $0.saleQuantity > $1.saleQuantity
         }.first?.saleQuantity ?? 0
     }
+    var minimumSaleQuantity: Int {
+        return reports.sorted {
+            $0.saleQuantity < $1.saleQuantity
+        }.first?.saleQuantity ?? 0
+    }
     var totalSaleQuantity: Double {
         get {
             let result = reports.map({$0.saleQuantity}).reduce(0, +)
@@ -65,6 +70,11 @@ struct SaleReportList: Codable {
             $0.canceledQuantity > $1.canceledQuantity
         }.first?.canceledQuantity ?? 0
     }
+    var minimumCanceledQuantity: Int {
+        return reports.sorted {
+            $0.canceledQuantity < $1.canceledQuantity
+        }.first?.canceledQuantity ?? 0
+    }
     var totalCanceledQuantity: Double {
         get {
             let result = reports.map({$0.canceledQuantity}).reduce(0, +)
@@ -74,6 +84,11 @@ struct SaleReportList: Codable {
     var maximumReturnQuantity: Int {
         return reports.sorted {
             $0.returnQuantity > $1.returnQuantity
+        }.first?.returnQuantity ?? 0
+    }
+    var minimumReturnQuantity: Int {
+        return reports.sorted {
+            $0.returnQuantity < $1.returnQuantity
         }.first?.returnQuantity ?? 0
     }
     var totalReturnQuantity: Double {
@@ -93,6 +108,11 @@ struct SaleReportList: Codable {
             $0.saleAmount > $1.saleAmount
         }.first?.saleAmount ?? 0
     }
+    var minimumSaleAmount: Float {
+        return reports.sorted {
+            $0.saleAmount < $1.saleAmount
+        }.first?.saleAmount ?? 0
+    }
     var totalSaleAmount: Double {
         get {
             let result = reports.map({$0.saleAmount}).reduce(0, +)
@@ -104,6 +124,11 @@ struct SaleReportList: Codable {
             $0.canceledAmount > $1.canceledAmount
         }.first?.canceledAmount ?? 0
     }
+    var minimumCanceledAmount: Float {
+        return reports.sorted {
+            $0.canceledAmount < $1.canceledAmount
+        }.first?.canceledAmount ?? 0
+    }
     var totalCanceledAmount: Double {
         get {
             let result = reports.map({$0.canceledAmount}).reduce(0, +)
@@ -113,6 +138,11 @@ struct SaleReportList: Codable {
     var maximumReturnAmount: Float {
         return reports.sorted {
             $0.returnAmount > $1.returnAmount
+        }.first?.returnAmount ?? 0
+    }
+    var minimumReturnAmount: Float {
+        return reports.sorted {
+            $0.returnAmount < $1.returnAmount
         }.first?.returnAmount ?? 0
     }
     var totalReturnAmount: Double {

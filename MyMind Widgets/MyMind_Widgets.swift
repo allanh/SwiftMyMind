@@ -58,18 +58,11 @@ struct Provider: TimelineProvider {
                                 return
                             }
                             var points: [CGPoint] = []
-                            var maximum: CGFloat = 1
                             var total: CGFloat = 0
                             var today: CGFloat = 0
                             var source: SourceType?
                             if let reportList = reportList {
                                 points = reportList.points(for: .TOTAL_SALE_AMOUNT)[.sale] ?? []
-                                maximum = CGFloat(reportList.maximumSaleAmount)
-                                if maximum == 0 {
-                                    maximum = 10000
-                                } else {
-                                    maximum += maximum/10
-                                }
                                 total = max(reportList.totalSaleAmount, 0)
                                 if let shipped = reportOfToday?.todayShippedSaleReport {
                                     today += CGFloat(shipped.saleAmount)
@@ -80,7 +73,7 @@ struct Provider: TimelineProvider {
                                 source = .saleAmount
                             }
                             let nextUpdateDate = Calendar.current.date(byAdding: .hour, value: 1, to: Date())!
-                            let entry = MyMindEntry(date: Date(), isLogin: true, source: source, maximumAmount: maximum, totalAmount: total, todayAmount: today, chartData: UDILineChartData(points:  points, fill: LinearGradient(stops: [.init(color:  Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.8), location: 0), .init(color: Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.5), location: 0.3), .init(color: Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.0), location: 1)], startPoint: .top, endPoint: .bottom), stroke: Color(red: 127.0/255.0, green: 194.0/255.0, blue: 250.0/255.0), strokeWidth: 3), toDoCount: toDoCount, announcementCount: announcementCount)
+                            let entry = MyMindEntry(date: Date(), isLogin: true, source: source, totalAmount: total, todayAmount: today, chartData: UDILineChartData(points:  points, fill: LinearGradient(stops: [.init(color:  Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.8), location: 0), .init(color: Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.5), location: 0.3), .init(color: Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.0), location: 1)], startPoint: .top, endPoint: .bottom), stroke: Color(red: 127.0/255.0, green: 194.0/255.0, blue: 250.0/255.0), strokeWidth: 3), toDoCount: toDoCount, announcementCount: announcementCount)
                             let timeline = Timeline(entries: [entry], policy: .after(nextUpdateDate))
                             completion(timeline)
                         }
@@ -90,7 +83,7 @@ struct Provider: TimelineProvider {
         }
     }
     func placeholder(in context: Context) -> MyMindEntry {
-        MyMindEntry(date: Date(), isLogin: true, source: nil, maximumAmount: 1, totalAmount: 0, todayAmount: 0, chartData: .empty, toDoCount: nil, announcementCount: nil)
+        MyMindEntry(date: Date(), isLogin: true, source: nil, totalAmount: 0, todayAmount: 0, chartData: .empty, toDoCount: nil, announcementCount: nil)
     }
 }
 /// intent widget configuration provider
@@ -145,19 +138,12 @@ struct ChartProvider: IntentTimelineProvider {
                                 return
                             }
                             var points: [CGPoint] = []
-                            var maximum: CGFloat = 1
                             var total: CGFloat = 0
                             var today: CGFloat = 0
                             var source: SourceType?
                             if let reportList = reportList {
                                 switch configuration.source {
                                 case .saleAmount: points = reportList.points(for: .TOTAL_SALE_AMOUNT)[.sale] ?? []
-                                    maximum = CGFloat(reportList.maximumSaleAmount)
-                                    if maximum == 0 {
-                                        maximum = 10000
-                                    } else {
-                                        maximum += maximum/10
-                                    }
                                     total = max(reportList.totalSaleAmount, 0)
                                     if let shipped = reportOfToday?.todayShippedSaleReport {
                                         today += CGFloat(shipped.saleAmount)
@@ -167,12 +153,6 @@ struct ChartProvider: IntentTimelineProvider {
                                     }
                                     source = .saleAmount
                                 case .canceledAmount: points = reportList.points(for: .TOTAL_SALE_AMOUNT)[.cancel] ?? []
-                                    maximum = CGFloat(reportList.maximumCanceledAmount)
-                                    if maximum == 0 {
-                                        maximum = 10000
-                                    } else {
-                                        maximum += maximum/10
-                                    }
                                     total = max(reportList.totalCanceledAmount, 0)
                                     if let shipped = reportOfToday?.todayShippedSaleReport {
                                         today += CGFloat(shipped.canceledAmount)
@@ -182,12 +162,6 @@ struct ChartProvider: IntentTimelineProvider {
                                     }
                                     source = .cancelAmount
                                 case .returnedAmount: points = reportList.points(for: .TOTAL_SALE_AMOUNT)[.returned] ?? []
-                                    maximum = CGFloat(reportList.maximumReturnAmount)
-                                    if maximum == 0 {
-                                        maximum = 10000
-                                    } else {
-                                        maximum += maximum/10
-                                    }
                                     total = max(reportList.totalReturnAmount, 0)
                                     if let shipped = reportOfToday?.todayShippedSaleReport {
                                         today += CGFloat(shipped.returnAmount)
@@ -197,12 +171,6 @@ struct ChartProvider: IntentTimelineProvider {
                                     }
                                     source = .returnedAmount
                                 case .saleQuantity: points = reportList.points(for: .TOTAL_SALE_QUANTITY)[.sale] ?? []
-                                    maximum = CGFloat(reportList.maximumSaleQuantity)
-                                    if maximum == 0 {
-                                        maximum = 1000
-                                    } else {
-                                        maximum += maximum/10
-                                    }
                                     total = max(reportList.totalSaleQuantity, 0)
                                     if let shipped = reportOfToday?.todayShippedSaleReport {
                                         today += CGFloat(shipped.saleQuantity)
@@ -212,12 +180,6 @@ struct ChartProvider: IntentTimelineProvider {
                                     }
                                     source = .saleQuantity
                                 case .canceledQuanity: points = reportList.points(for: .TOTAL_SALE_QUANTITY)[.cancel] ?? []
-                                    maximum = CGFloat(reportList.maximumCanceledQuantity)
-                                    if maximum == 0 {
-                                        maximum = 1000
-                                    } else {
-                                        maximum += maximum/10
-                                    }
                                     total = max(reportList.totalCanceledQuantity, 0)
                                     if let shipped = reportOfToday?.todayShippedSaleReport {
                                         today += CGFloat(shipped.canceledQuantity)
@@ -227,12 +189,6 @@ struct ChartProvider: IntentTimelineProvider {
                                     }
                                     source = .cancelQuantity
                                 case .returnedQuantity: points = reportList.points(for: .TOTAL_SALE_QUANTITY)[.returned] ?? []
-                                    maximum = CGFloat(reportList.maximumReturnQuantity)
-                                    if maximum == 0 {
-                                        maximum = 1000
-                                    } else {
-                                        maximum += maximum/10
-                                    }
                                     total = max(reportList.totalReturnQuantity, 0)
                                     if let shipped = reportOfToday?.todayShippedSaleReport {
                                         today += CGFloat(shipped.returnQuantity)
@@ -242,12 +198,6 @@ struct ChartProvider: IntentTimelineProvider {
                                     }
                                     source = .returnedQuantity
                                 default: points = reportList.points(for: .TOTAL_SALE_AMOUNT)[.sale] ?? []
-                                    maximum = CGFloat(reportList.maximumSaleAmount)
-                                    if maximum == 0 {
-                                        maximum = 1000
-                                    } else {
-                                        maximum += maximum/10
-                                    }
                                     total = max(reportList.totalSaleAmount, 0)
                                     if let shipped = reportOfToday?.todayShippedSaleReport {
                                         today += CGFloat(shipped.saleAmount)
@@ -259,7 +209,7 @@ struct ChartProvider: IntentTimelineProvider {
                                 }
                             }
                             let nextUpdateDate = Calendar.current.date(byAdding: .hour, value: 1, to: Date())!
-                            let entry = MyMindEntry(date: Date(), isLogin: true, source: source, maximumAmount: maximum, totalAmount: total, todayAmount: today, chartData: UDILineChartData(points:  points, fill: LinearGradient(stops: [.init(color:  Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.8), location: 0), .init(color: Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.5), location: 0.3), .init(color: Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.0), location: 1)], startPoint: .top, endPoint: .bottom), stroke: Color(red: 127.0/255.0, green: 194.0/255.0, blue: 250.0/255.0), strokeWidth: configuration.strokeWidth as? CGFloat ?? 3), toDoCount: toDoCount, announcementCount: announcementCount)
+                            let entry = MyMindEntry(date: Date(), isLogin: true, source: source, totalAmount: total, todayAmount: today, chartData: UDILineChartData(points:  points, fill: LinearGradient(stops: [.init(color:  Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.8), location: 0), .init(color: Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.5), location: 0.3), .init(color: Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.0), location: 1)], startPoint: .top, endPoint: .bottom), stroke: Color(red: 127.0/255.0, green: 194.0/255.0, blue: 250.0/255.0), strokeWidth: configuration.strokeWidth as? CGFloat ?? 3), toDoCount: toDoCount, announcementCount: announcementCount)
                             let timeline = Timeline(entries: [entry], policy: .after(nextUpdateDate))
                             completion(timeline)
                         }
@@ -270,7 +220,7 @@ struct ChartProvider: IntentTimelineProvider {
     }
     
     func placeholder(in context: Context) -> MyMindEntry {
-        MyMindEntry(date: Date(), isLogin: true, source: nil, maximumAmount: 1, totalAmount: 0, todayAmount: 0, chartData: UDILineChartData.empty, toDoCount: nil, announcementCount: nil)
+        MyMindEntry(date: Date(), isLogin: true, source: nil, totalAmount: 0, todayAmount: 0, chartData: UDILineChartData.empty, toDoCount: nil, announcementCount: nil)
     }
 }
 enum SourceType: CustomStringConvertible {
@@ -305,14 +255,13 @@ struct MyMindEntry: TimelineEntry {
     let date: Date
     let isLogin: Bool
     let source: SourceType?
-    let maximumAmount: CGFloat
     let totalAmount: CGFloat
     let todayAmount: CGFloat
     let chartData: UDILineChartData
     let toDoCount: Int?
     let announcementCount: Int?
-    static var mock: MyMindEntry = MyMindEntry(date: Date(), isLogin: true, source: .saleAmount, maximumAmount: 110, totalAmount: 102560, todayAmount: 2560, chartData: UDILineChartData.mock, toDoCount: 198, announcementCount: 7)
-    static var empty: MyMindEntry = MyMindEntry(date: Date(), isLogin: false, source: nil, maximumAmount: 1, totalAmount: 0, todayAmount: 0, chartData: .empty, toDoCount: nil, announcementCount: nil)
+    static var mock: MyMindEntry = MyMindEntry(date: Date(), isLogin: true, source: .saleAmount, totalAmount: 300697, todayAmount: 8988, chartData: UDILineChartData.mock, toDoCount: 198, announcementCount: 7)
+    static var empty: MyMindEntry = MyMindEntry(date: Date(), isLogin: false, source: nil, totalAmount: 0, todayAmount: 0, chartData: .empty, toDoCount: nil, announcementCount: nil)
 }
 
 extension View {
@@ -411,7 +360,7 @@ struct MyMind_WidgetsEntryView : View {
                 .frame(height: 56)
                 if entry.isLogin {
                     VStack(alignment: .leading) {
-                        UDILineChartView(data: entry.chartData, provisionColor: Color(red: 59.0/255.0, green: 82.0/255.0, blue: 105.0/255.0), provisionWidth: 1, maximum: entry.maximumAmount)
+                        UDILineChartView(data: entry.chartData, provisionColor: Color(red: 59.0/255.0, green: 82.0/255.0, blue: 105.0/255.0), provisionWidth: 1, maximum: entry.chartData.maximum, minimum: entry.chartData.minimum)
                             .blendMode(.sourceAtop)
                     }
                     .padding(.trailing, 20)
@@ -472,8 +421,8 @@ struct MyMind_Widget: Widget {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
             MyMind_WidgetsEntryView(entry: entry)
         }
-        .configurationDisplayName("MyMind")
-        .description("Show MyMind Important Infos.")
+        .configurationDisplayName("My mind買賣")
+        .description("電商多通路營運整合")
         .supportedFamilies([.systemMedium])
     }
 }
@@ -484,8 +433,8 @@ struct MyMind_ChartWidget: Widget {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
             MyMind_WidgetsEntryView(entry: entry)
         }
-        .configurationDisplayName("MyMind")
-        .description("Show MyMind Important Infos.")
+        .configurationDisplayName("My mind買賣")
+        .description("電商多通路營運整合")
         .supportedFamilies([.systemLarge])
     }
 //    var body: some WidgetConfiguration {
@@ -510,15 +459,15 @@ struct MyMind_Widgets: WidgetBundle {
 struct MyMind_Widgets_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            MyMind_WidgetsEntryView(entry: MyMindEntry(date: Date(), isLogin: true, source: nil, maximumAmount: 1, totalAmount: 0, todayAmount: 0, chartData: .empty, toDoCount: 20, announcementCount: nil))
+            MyMind_WidgetsEntryView(entry: MyMindEntry(date: Date(), isLogin: true, source: nil, totalAmount: 0, todayAmount: 0, chartData: .empty, toDoCount: 20, announcementCount: nil))
                 .previewContext(WidgetPreviewContext(family: .systemMedium))
-            MyMind_WidgetsEntryView(entry: MyMindEntry(date: Date(), isLogin: false, source: nil, maximumAmount: 1, totalAmount: 0, todayAmount: 0, chartData: .empty, toDoCount: nil, announcementCount: nil))
+            MyMind_WidgetsEntryView(entry: MyMindEntry(date: Date(), isLogin: false, source: nil, totalAmount: 0, todayAmount: 0, chartData: .empty, toDoCount: nil, announcementCount: nil))
                 .previewContext(WidgetPreviewContext(family: .systemMedium))
             MyMind_WidgetsEntryView(entry: MyMindEntry.mock)
                 .previewContext(WidgetPreviewContext(family: .systemLarge))
-            MyMind_WidgetsEntryView(entry: MyMindEntry(date: Date(), isLogin: false, source: nil, maximumAmount: 1, totalAmount: 0, todayAmount: 0, chartData: .empty, toDoCount: nil, announcementCount: nil))
+            MyMind_WidgetsEntryView(entry: MyMindEntry(date: Date(), isLogin: false, source: nil, totalAmount: 0, todayAmount: 0, chartData: .empty, toDoCount: nil, announcementCount: nil))
                 .previewContext(WidgetPreviewContext(family: .systemLarge))
-            MyMind_WidgetsEntryView(entry: MyMindEntry(date: Date(), isLogin: true, source: nil, maximumAmount: 1, totalAmount: 0, todayAmount: 0, chartData: .empty, toDoCount: nil, announcementCount: nil))
+            MyMind_WidgetsEntryView(entry: MyMindEntry(date: Date(), isLogin: true, source: nil, totalAmount: 0, todayAmount: 0, chartData: .empty, toDoCount: nil, announcementCount: nil))
                 .previewContext(WidgetPreviewContext(family: .systemSmall))
             UDIPieChartView(data: UDIPieChartData(slices: [UDIPieSliceData(ratio: 0.3, title: "Yahoo", color: .red), UDIPieSliceData(ratio: 0.4, title: "Shoppe", color: .green), UDIPieSliceData(ratio: 0.3, title: "PCHome", color: .blue)], borderColor: .white, holeRatio: nil, title: nil), showDescription: false).previewContext(WidgetPreviewContext(family: .systemSmall))
             UDIPieChartView(data: UDIPieChartData(slices: [UDIPieSliceData(ratio: 0.3, title: "Yahoo", color: .red), UDIPieSliceData(ratio: 0.4, title: "Shoppe", color: .green), UDIPieSliceData(ratio: 0.3, title: "PCHome", color: .blue)], borderColor: .white, holeRatio: 0.4, title:"供應商"), showDescription: false).previewContext(WidgetPreviewContext(family: .systemLarge))
