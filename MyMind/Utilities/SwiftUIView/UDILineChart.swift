@@ -17,13 +17,13 @@ struct UDILineChartData {
             if max == 0 {
                 return 1000
             }
-            return max+10
+            return max
         }
     }
     var minimum: CGFloat {
         get {
             let min = points.map{ $0.y }.sorted{ $0 < $1}.first ?? 0
-            return max(min-10, 0)
+            return max(min, 0)
         }
     }
     static var empty: UDILineChartData = UDILineChartData(points: [], fill: LinearGradient(colors: [], startPoint: .top, endPoint: .bottom), stroke: .clear, strokeWidth: 0)
@@ -62,10 +62,10 @@ struct UDILineChartData {
         ], fill: LinearGradient(stops: [.init(color:  Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.8), location: 0), .init(color: Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.5), location: 0.3), .init(color: Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.0), location: 1)], startPoint: .top, endPoint: .bottom), stroke: Color(red: 127.0/255.0, green: 194.0/255.0, blue: 250.0/255.0), strokeWidth: 3)
     func path(with frame: CGRect) -> Path {
         var path = Path()
-        let heightRatio: CGFloat = (frame.size.height-17)/(maximum-minimum)
+        let heightRatio: CGFloat = (frame.size.height-37)/(maximum-minimum)
         let itemWidth = frame.size.width/CGFloat((points.count > 1) ? points.count - 1 : 1)
         let drawPoints = points.map { origin in
-            return CGPoint(x: (origin.x*itemWidth), y: frame.maxY - ((origin.y - minimum)*heightRatio))
+            return CGPoint(x: (origin.x*itemWidth), y: frame.maxY - ((origin.y - minimum)*heightRatio) - 10)
         }
         var previousPoint: CGPoint?
         var isFirst = true
@@ -94,10 +94,10 @@ struct UDILineChartData {
     }
     func closePath(with frame: CGRect) -> Path {
         var path = Path()
-        let heightRatio: CGFloat = (frame.size.height-17)/(maximum-minimum)
+        let heightRatio: CGFloat = (frame.size.height-37)/(maximum-minimum)
         let itemWidth = frame.size.width/CGFloat((points.count > 1) ? points.count - 1 : 1)
         let drawPoints = points.map { origin in
-            return CGPoint(x: (origin.x*itemWidth), y: frame.maxY - ((origin.y - minimum)*heightRatio))
+            return CGPoint(x: (origin.x*itemWidth), y: frame.maxY - ((origin.y - minimum)*heightRatio)-10)
         }
         var previousPoint: CGPoint?
         var isFirst = true
