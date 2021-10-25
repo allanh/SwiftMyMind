@@ -19,21 +19,28 @@ struct IndicatorView : View {
                 .blendMode(.sourceAtop)
                 .frame(width: 4)
                 .cornerRadius(2)
+                .padding(.leading, 10)
             VStack(alignment: .leading) {
                 Text(title)
                     .font(.custom("PingFangTC-Regular", size: 10))
                     .foregroundColor(.white)
                 if let count = count {
-                    Text("\(count)")
-                        .font(.custom("PingFangTC-Semibold", size: 24))
-                        .foregroundColor(.white)
-
+                    if count < 999 {
+                        Text("\(count)")
+                            .font(.custom("PingFangTC-Semibold", size: 24))
+                            .foregroundColor(.white)
+                    } else {
+                        Text("999+")
+                            .font(.custom("PingFangTC-Semibold", size: 24))
+                            .foregroundColor(.white)
+                    }
                 } else {
                     Text("-")
                         .font(.custom("PingFangTC-Semibold", size: 24))
                         .foregroundColor(.white)
                 }
             }
+            Spacer()
         }
     }
 }

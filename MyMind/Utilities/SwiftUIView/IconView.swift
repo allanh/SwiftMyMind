@@ -21,11 +21,16 @@ struct IconView: View {
             Text(title)
                 .font(.custom("PingFangTC-Regular", size: 12))
                 .foregroundColor(.white)
-            if let value = value {
-                Text(value)
-                    .font(.custom("PingFangTC-Semibold", size: 24))
-                    .foregroundColor(.white)
-
+            if let value = value, let number = Int(value)  {
+                if number < 999 {
+                    Text(value)
+                        .font(.custom("PingFangTC-Semibold", size: 24))
+                        .foregroundColor(.white)
+                } else {
+                    Text("999+")
+                        .font(.custom("PingFangTC-Semibold", size: 24))
+                        .foregroundColor(.white)
+                }
             } else {
                 Text("-")
                     .font(.custom("PingFangTC-Semibold", size: 24))

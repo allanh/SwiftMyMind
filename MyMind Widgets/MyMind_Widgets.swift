@@ -330,10 +330,11 @@ struct MyMind_WidgetsEntryView : View {
                                         .foregroundColor(.white)
                                         .blendMode(.sourceAtop)
                                         .padding(.trailing, 6)
+                                        .minimumScaleFactor(0.1)
                                 }
-                                .frame(width: (geo.size.width-20)/3)
+                                .frame(width: (geo.size.width-20)/3+24)
                                 .frame(maxHeight: .infinity)
-                                .padding(.leading, (geo.size.width-20)/3)
+                                .padding(.leading, (geo.size.width-20)/3-24)
                             }
                             if let title = entry.source?.todayDescription {
                                 VStack(alignment: .trailing, spacing: 0) {
@@ -345,6 +346,7 @@ struct MyMind_WidgetsEntryView : View {
                                         .font(.custom("PingFangTC-Semibold", size: 18))
                                         .foregroundColor(.white)
                                         .blendMode(.sourceAtop)
+                                        .minimumScaleFactor(0.1)
                                 }
                                 .frame(width: (geo.size.width-20)/3+20)
                                 .frame(maxHeight: .infinity)
@@ -459,13 +461,13 @@ struct MyMind_Widgets: WidgetBundle {
 struct MyMind_Widgets_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            MyMind_WidgetsEntryView(entry: MyMindEntry(date: Date(), isLogin: true, source: nil, totalAmount: 0, todayAmount: 0, chartData: .empty, toDoCount: 20, announcementCount: nil))
+            MyMind_WidgetsEntryView(entry: MyMindEntry(date: Date(), isLogin: true, source: nil, totalAmount: 0, todayAmount: 0, chartData: .empty, toDoCount: 1000, announcementCount: nil))
                 .previewContext(WidgetPreviewContext(family: .systemMedium))
             MyMind_WidgetsEntryView(entry: MyMindEntry(date: Date(), isLogin: false, source: nil, totalAmount: 0, todayAmount: 0, chartData: .empty, toDoCount: nil, announcementCount: nil))
                 .previewContext(WidgetPreviewContext(family: .systemMedium))
             MyMind_WidgetsEntryView(entry: MyMindEntry.mock)
                 .previewContext(WidgetPreviewContext(family: .systemLarge))
-            MyMind_WidgetsEntryView(entry: MyMindEntry(date: Date(), isLogin: false, source: nil, totalAmount: 0, todayAmount: 0, chartData: .empty, toDoCount: nil, announcementCount: nil))
+            MyMind_WidgetsEntryView(entry: MyMindEntry(date: Date(), isLogin: false, source: nil, totalAmount: 0, todayAmount: 0, chartData: .empty, toDoCount: 1000, announcementCount: 100))
                 .previewContext(WidgetPreviewContext(family: .systemLarge))
             MyMind_WidgetsEntryView(entry: MyMindEntry(date: Date(), isLogin: true, source: nil, totalAmount: 0, todayAmount: 0, chartData: .empty, toDoCount: nil, announcementCount: nil))
                 .previewContext(WidgetPreviewContext(family: .systemSmall))
