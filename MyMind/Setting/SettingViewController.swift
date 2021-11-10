@@ -76,24 +76,6 @@ class SettingViewController: UIViewController {
         attributedString = NSMutableAttributedString(string: "*Email", attributes: [.foregroundColor: UIColor.label])
         attributedString.addAttributes([.foregroundColor : UIColor.red], range: NSRange(location:0,length:1))
         emailTitleLabel.attributedText =  attributedString
-        isNetworkProcessing = true
-        MyMindEmployeeAPIService.shared.me()
-            .ensure {
-                self.isNetworkProcessing = false
-            }
-            .done { [weak self] account in
-                guard let self = self else { return }
-                self.account = account
-            }
-            .catch { [weak self] error in
-                guard let self = self else { return }
-                switch error {
-                case APIError.serviceError(let message):
-                    ToastView.showIn(self, message: message)
-                default:
-                    ToastView.showIn(self, message: error.localizedDescription)
-                }
-            }
 
         // Do any additional setup after loading the view.
     }
@@ -106,33 +88,7 @@ class SettingViewController: UIViewController {
         super.viewWillDisappear(animated)
         removeObservers()
     }
-    @IBAction func signout(_ sender: Any) {
-        if let contentView = navigationController?.view {
-            let alertView = CustomAlertView(frame: contentView.bounds, title: "確定登出嗎？", descriptions: "請確定是否要登出。")
-            alertView.confirmButton.addAction {
-                self.isNetworkProcessing = true
-                MyMindUserSessionRepository.shared.signOut()
-                    .ensure {
-                        self.isNetworkProcessing = false
-                    }
-                    .done { [weak self] in
-                        guard let self = self else { return }
-                        alertView.removeFromSuperview()
-                        self.dismiss(animated: true, completion: nil)
-                        self.delegate?.didSignOut()
-                    }
-                    .catch { [weak self] error in
-                        guard let self = self else { return }
-                        alertView.removeFromSuperview()
-                        ToastView.showIn(self, message: error.localizedDescription)
-                    }
-            }
-            alertView.cancelButton.addAction {
-                alertView.removeFromSuperview()
-            }
-            contentView.addSubview(alertView)
-        }
-    }
+    
     @IBAction func save(_ sender: Any) {
         let newAccount = Account(id: 0, mobile: "", account: "", lastLoginIP: "", lastLoginTime: "", updateTime: "", name: nameTextField.text ?? "", email: emailTextField.text ?? "")
         let status = newAccount.validate()
@@ -143,7 +99,7 @@ class SettingViewController: UIViewController {
                 .ensure {
                     self.isNetworkProcessing = false
                 }
-                .done {_ in 
+                .done {_ in
                     ToastView.showIn(self, message: "修改成功", iconName: "success", at: .center)
                 }
                 .catch { error in
@@ -153,6 +109,7 @@ class SettingViewController: UIViewController {
             showErrorMessage(status)
         }
     }
+    
     @IBAction func back(_ sender: Any) {
         if let contentView = navigationController?.view {
             let alertView = CustomAlertView(frame: contentView.bounds, title: "確定返回嗎？", descriptions: "返回後本頁面資料將無法儲存，\n請確定是否要返回首頁。")

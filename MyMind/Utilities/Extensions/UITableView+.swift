@@ -16,4 +16,10 @@ extension UITableView {
     func dequeReusableCell(_ cellClass: AnyClass, for indexPath: IndexPath) -> UITableViewCell {
         dequeueReusableCell(withIdentifier: String(describing: cellClass), for: indexPath)
     }
+    
+    func deselectSelectedRow(animated: Bool) {
+        if let indexPathForSelectedRow = self.indexPathForSelectedRow {
+            self.deselectRow(at: indexPathForSelectedRow, animated: animated)
+        }
+    }
 }

@@ -15,6 +15,11 @@ class SettingTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        selectedBackgroundView = {
+            let view = UIView.init()
+            view.backgroundColor = UIColor(hex: "F1F8FE")
+            return view
+        }()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

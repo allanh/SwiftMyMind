@@ -20,15 +20,67 @@ class AccountSettingViewController: UIViewController {
     private let serviceInfos: [SettingInfo] = [("帳號資料維護", "account_info_setting", #selector(accountSetting)),
                                                ("密碼修改", "change_password", #selector(passwordSetting)),
                                                ("重新綁定 OTP", "rebind_otp", #selector(rebindOtp))]
+    @IBOutlet weak var accountLabel: UILabel!
+    @IBOutlet weak var unitLabel: UILabel!
+    @IBOutlet weak var signoutView: UIView!
+    @IBOutlet weak var settingTableView: UITableView!
+    weak var delegate: MixedDelegate?
+
+    private var isNetworkProcessing: Bool = false {
+        didSet {
+            switch isNetworkProcessing {
+            case true: startAnimatingActivityIndicator()
+            case false: stopAnimatinActivityIndicator()
+            }
+        }
+    }
+    
+    var account: Account? {
+        didSet {
+            DispatchQueue.main.async {
+                self.accountLabel.text = self.account?.name
+            }
+        }
+    }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
 
-    weak var delegate: MixedDelegate?
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        settingTableView?.deselectSelectedRow(animated: true)
+        
+        MyMindEmployeeAPIService.shared.me()
+            .ensure {
+                self.isNetworkProcessing = false
+            }
+            .done { [weak self] account in
+                guard let self = self else { return }
+                self.account = account
+            }
+            .catch { [weak self] error in
+                guard let self = self else { return }
+                switch error {
+                case APIError.serviceError(let message):
+                    ToastView.showIn(self, message: message)
+                default:
+                    ToastView.showIn(self, message: error.localizedDescription)
+                }
+            }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        isNetworkProcessing = true
+        if let session = KeychainUserSessionDataStore().readUserSession() {
+            self.unitLabel.text = String(session.businessInfo.name)
+        }
+        
+        signoutView.addTapGesture { [weak self] in
+            self?.signout()
+        }
     }
 }
 
@@ -59,9 +111,13 @@ extension AccountSettingViewController: UITableViewDelegate {
 extension AccountSettingViewController {
     @objc
     func accountSetting() {
-//        let storyboard: UIStoryboard = UIStoryboard(name: "TOTP", bundle: nil)
-//        let viewController = storyboard.instantiateViewController(withIdentifier: "SecretListViewController")
-//        show(viewController, sender: self)
+        if let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "Setting") as? SettingViewController {
+            viewController.delegate = self.delegate
+            viewController.account = self.account
+            viewController.tabBarItem.image = UIImage(named: "account_icon")
+            viewController.tabBarItem.title = "帳號"
+            show(viewController, sender: self)
+        }
     }
     
     @objc
@@ -84,5 +140,33 @@ extension AccountSettingViewController {
     
     @objc
     func rebindOtp() {
+    }
+    
+    func signout() {
+        if let contentView = navigationController?.view {
+            let alertView = CustomAlertView(frame: contentView.bounds, title: "確定登出嗎？", descriptions: "請確定是否要登出。")
+            alertView.confirmButton.addAction {
+                self.isNetworkProcessing = true
+                MyMindUserSessionRepository.shared.signOut()
+                    .ensure {
+                        self.isNetworkProcessing = false
+                    }
+                    .done { [weak self] in
+                        guard let self = self else { return }
+                        alertView.removeFromSuperview()
+                        self.dismiss(animated: true, completion: nil)
+                        self.delegate?.didSignOut()
+                    }
+                    .catch { [weak self] error in
+                        guard let self = self else { return }
+                        alertView.removeFromSuperview()
+                        ToastView.showIn(self, message: error.localizedDescription)
+                    }
+            }
+            alertView.cancelButton.addAction {
+                alertView.removeFromSuperview()
+            }
+            contentView.addSubview(alertView)
+        }
     }
 }
