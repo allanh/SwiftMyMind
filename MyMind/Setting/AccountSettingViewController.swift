@@ -20,10 +20,15 @@ class AccountSettingViewController: UIViewController {
     private let serviceInfos: [SettingInfo] = [("帳號資料維護", "account_info_setting", #selector(accountSetting)),
                                                ("密碼修改", "change_password", #selector(passwordSetting)),
                                                ("重新綁定 OTP", "rebind_otp", #selector(rebindOtp))]
+    
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var accountLabel: UILabel!
     @IBOutlet weak var unitLabel: UILabel!
+    @IBOutlet weak var versionView: UIView!
     @IBOutlet weak var signoutView: UIView!
     @IBOutlet weak var settingTableView: UITableView!
+    @IBOutlet weak var latedVersionLabel: UILabel!
+    
     weak var delegate: MixedDelegate?
 
     private var isNetworkProcessing: Bool = false {
@@ -52,6 +57,7 @@ class AccountSettingViewController: UIViewController {
         super.viewWillAppear(animated)
         settingTableView?.deselectSelectedRow(animated: true)
         
+        isNetworkProcessing = true
         MyMindEmployeeAPIService.shared.me()
             .ensure {
                 self.isNetworkProcessing = false
@@ -73,14 +79,36 @@ class AccountSettingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        isNetworkProcessing = true
         if let session = KeychainUserSessionDataStore().readUserSession() {
             self.unitLabel.text = String(session.businessInfo.name)
         }
         
+        titleLabel.roundCorners([.topRight, .bottomRight], radius: 100)
+        configTableView()
+        setShadow(versionView)
+        setShadow(signoutView)
+
         signoutView.addTapGesture { [weak self] in
             self?.signout()
         }
+    }
+    
+    func configTableView() {
+        settingTableView.layer.cornerRadius = 8
+        settingTableView.layer.shadowColor = UIColor.init(hex: "#000000").withAlphaComponent(0.1).cgColor
+        settingTableView.layer.shadowOpacity = 1
+        settingTableView.layer.shadowOffset = CGSize(width: 0, height: 10)
+        settingTableView.layer.shadowRadius = 15
+    }
+    
+    func setShadow(_ view: UIView) {
+        view.applySketchShadow(
+            color: UIColor.init(hex: "#000000").withAlphaComponent(0.1),
+            alpha: 1,
+            x: 0, y: 10,
+            blur: 30,
+            spread: 0
+        )
     }
 }
 
