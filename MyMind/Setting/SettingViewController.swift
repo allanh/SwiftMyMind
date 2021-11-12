@@ -16,11 +16,8 @@ class SettingViewController: UIViewController {
     weak var delegate: MixedDelegate?
 
     @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var accountLabel: UILabel!
-    @IBOutlet weak var nameTitleLabel: UILabel!
     @IBOutlet weak var nameErrorLabel: UILabel!
     @IBOutlet weak var nameTextField: UITextField!
-    @IBOutlet weak var emailTitleLabel: UILabel!
     @IBOutlet weak var emailErrorLabel: UILabel!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var mobileLabel: UILabel!
@@ -30,7 +27,6 @@ class SettingViewController: UIViewController {
     var account: Account? {
         didSet {
             DispatchQueue.main.async {
-                self.accountLabel.text = self.account?.account
                 self.nameTextField.text = self.account?.name
                 self.emailTextField.text = self.account?.email
                 self.mobileLabel.text = self.account?.mobile
@@ -70,12 +66,6 @@ class SettingViewController: UIViewController {
         emailTextField.layer.borderWidth = 1
         clearErrorMessage()
         title = "帳號設定"
-        var attributedString = NSMutableAttributedString(string: "*姓名", attributes: [.foregroundColor: UIColor.label])
-        attributedString.addAttributes([.foregroundColor : UIColor.red], range: NSRange(location:0,length:1))
-        nameTitleLabel.attributedText = attributedString
-        attributedString = NSMutableAttributedString(string: "*Email", attributes: [.foregroundColor: UIColor.label])
-        attributedString.addAttributes([.foregroundColor : UIColor.red], range: NSRange(location:0,length:1))
-        emailTitleLabel.attributedText =  attributedString
 
         // Do any additional setup after loading the view.
     }
@@ -88,7 +78,7 @@ class SettingViewController: UIViewController {
         super.viewWillDisappear(animated)
         removeObservers()
     }
-    
+
     @IBAction func save(_ sender: Any) {
         let newAccount = Account(id: 0, mobile: "", account: "", lastLoginIP: "", lastLoginTime: "", updateTime: "", name: nameTextField.text ?? "", email: emailTextField.text ?? "")
         let status = newAccount.validate()
@@ -109,7 +99,7 @@ class SettingViewController: UIViewController {
             showErrorMessage(status)
         }
     }
-    
+
     @IBAction func back(_ sender: Any) {
         if let contentView = navigationController?.view {
             let alertView = CustomAlertView(frame: contentView.bounds, title: "確定返回嗎？", descriptions: "返回後本頁面資料將無法儲存，\n請確定是否要返回首頁。")
@@ -124,7 +114,7 @@ class SettingViewController: UIViewController {
             contentView.addSubview(alertView)
         }
     }
-    
+
     /*
     // MARK: - Navigation
 
