@@ -32,6 +32,8 @@ class MainPageViewController: UIViewController {
         }
         navigationItem.titleView = navigationTitleView
         navigationItem.backButtonTitle = ""
+        setTabBarBackgroundColor(UIColor.mainPageTabBar)
+
         remoteConfig = RemoteConfig.remoteConfig()
         let settings = RemoteConfigSettings()
         settings.minimumFetchInterval = 0

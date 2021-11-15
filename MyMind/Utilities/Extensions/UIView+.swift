@@ -22,7 +22,7 @@ final class BindableGestureRecognizer: UITapGestureRecognizer {
     }
 }
 
-public extension UIView {
+extension UIView {
     /// A discrete gesture recognizer that interprets single or multiple taps.
     /// - Parameters:
     ///   - tapNumber: The number of taps necessary for gesture recognition.

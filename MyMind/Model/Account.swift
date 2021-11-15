@@ -35,7 +35,7 @@ struct Account: Codable {
     }
     func validate() -> AccountValidateStatus {
         var status: AccountValidateStatus = .valid
-        if name.count < 1 && name.count > 20 {
+        if name.count < 1 || name.count > 20 {
             status.update(with: .nameError)
         }
         if SignInValidatoinService().validateEmail(email) != .valid {

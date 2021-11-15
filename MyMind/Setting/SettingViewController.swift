@@ -15,6 +15,8 @@ class SettingViewController: UIViewController {
     }
     weak var delegate: MixedDelegate?
 
+    @IBOutlet weak var accountLabel: UILabel!
+    @IBOutlet weak var unitLabel: UILabel!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var nameErrorLabel: UILabel!
     @IBOutlet weak var nameTextField: UITextField!
@@ -27,6 +29,7 @@ class SettingViewController: UIViewController {
     var account: Account? {
         didSet {
             DispatchQueue.main.async {
+                self.accountLabel.text = self.account?.account
                 self.nameTextField.text = self.account?.name
                 self.emailTextField.text = self.account?.email
                 self.mobileLabel.text = self.account?.mobile
@@ -46,12 +49,12 @@ class SettingViewController: UIViewController {
     }
     private func showErrorMessage(_ status: AccountValidateStatus) {
         if status.contains(.nameError) {
-            nameErrorLabel.text = "\u{26a0}請輸入有效姓名"
-            nameTextField.layer.borderColor = UIColor.red.cgColor
+            nameErrorLabel.text = "姓名輸入格式錯誤"
+            nameTextField.layer.borderColor = UIColor.vividRed.cgColor
         }
         if status.contains(.emailError) {
-            emailErrorLabel.text = "\u{26a0}請輸入有效Email"
-            emailTextField.layer.borderColor = UIColor.red.cgColor
+            emailErrorLabel.text = "電子郵件輸入格式錯誤"
+            emailTextField.layer.borderColor = UIColor.vividRed.cgColor
         }
     }
     private func clearErrorMessage() {
@@ -65,12 +68,16 @@ class SettingViewController: UIViewController {
         nameTextField.layer.borderWidth = 1
         emailTextField.layer.borderWidth = 1
         clearErrorMessage()
-        title = "帳號設定"
-
+        title = "帳號資料維護"
+        
+        if let session = KeychainUserSessionDataStore().readUserSession() {
+            self.unitLabel.text = String(session.businessInfo.name)
+        }
         // Do any additional setup after loading the view.
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        setTabBarBackgroundColor(UIColor.prussianBlue)
         addKeyboardObservers()
         addTapToResignKeyboardGesture()
     }
@@ -93,7 +100,12 @@ class SettingViewController: UIViewController {
                     ToastView.showIn(self, message: "修改成功", iconName: "success", at: .center)
                 }
                 .catch { error in
-                    ToastView.showIn(self, message: error.localizedDescription)
+                    switch error {
+                    case APIError.serviceError(let message):
+                        ToastView.showIn(self, message: message)
+                    default:
+                        ToastView.showIn(self, message: error.localizedDescription)
+                    }
                 }
         } else {
             showErrorMessage(status)

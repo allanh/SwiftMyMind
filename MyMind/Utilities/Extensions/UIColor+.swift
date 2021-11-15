@@ -144,6 +144,11 @@ extension UIColor {
 
 /// Color palette
 extension UIColor {
+    static var mainPageTabBar: UIColor {
+        get {
+            return UIColor(hex: "060d32")
+        }
+    }
     static var prussianBlue: UIColor {
         get {
             return UIColor(hex: "004477")

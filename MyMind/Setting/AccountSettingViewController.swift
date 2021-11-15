@@ -43,7 +43,7 @@ class AccountSettingViewController: UIViewController {
     var account: Account? {
         didSet {
             DispatchQueue.main.async {
-                self.accountLabel.text = self.account?.name
+                self.accountLabel.text = self.account?.account
             }
         }
     }

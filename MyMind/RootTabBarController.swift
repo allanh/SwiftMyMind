@@ -53,16 +53,14 @@ final class RootTabBarController: UITabBarController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loadNotifications()
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithOpaqueBackground()
-        appearance.titleTextAttributes = [
-            .foregroundColor: UIColor.white,
-            .font: UIFont.pingFangTCSemibold(ofSize: 18)
-        ]
-        appearance.backgroundColor = UIColor(hex: "060d32")
-        navigationController?.navigationBar.standardAppearance = appearance
-        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        setTabBarBackgroundColor(UIColor.prussianBlue)
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setTabBarBackgroundColor(UIColor.mainPageTabBar)
+    }
+    
     @objc
     private func showAnnouncement(_ sender: Any?) {
         show(AnnouncementListViewController(announcementListLoader: MyMindAnnouncementAPIService.shared), sender: nil)

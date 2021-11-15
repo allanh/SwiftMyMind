@@ -35,6 +35,18 @@ extension UIViewController {
         barButton.style = .plain
         navigationItem.setLeftBarButton(barButton, animated: true)
     }
+    
+    func setTabBarBackgroundColor(_ color: UIColor) {
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.titleTextAttributes = [
+            .foregroundColor: UIColor.white,
+            .font: UIFont.pingFangTCSemibold(ofSize: 18)
+        ]
+        appearance.backgroundColor = color
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+    }
 }
 
 private var indicator: Void?
