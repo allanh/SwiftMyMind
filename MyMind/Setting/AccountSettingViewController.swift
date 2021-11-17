@@ -48,6 +48,14 @@ class AccountSettingViewController: UIViewController {
         }
     }
     
+    var accountUnit: String? {
+        didSet {
+            DispatchQueue.main.async {
+                self.unitLabel.text = self.accountUnit
+            }
+        }
+    }
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
@@ -55,8 +63,6 @@ class AccountSettingViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        settingTableView?.deselectSelectedRow(animated: true)
-        
         isNetworkProcessing = true
         MyMindEmployeeAPIService.shared.me()
             .ensure {
@@ -68,10 +74,9 @@ class AccountSettingViewController: UIViewController {
             }
             .catch { [weak self] error in
                 guard let self = self else { return }
-                switch error {
-                case APIError.serviceError(let message):
-                    ToastView.showIn(self, message: message)
-                default:
+                if let apiError = error as? APIError {
+                    _ = ErrorHandler.shared.handle(apiError)
+                } else {
                     ToastView.showIn(self, message: error.localizedDescription)
                 }
             }
@@ -80,7 +85,7 @@ class AccountSettingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         if let session = KeychainUserSessionDataStore().readUserSession() {
-            self.unitLabel.text = String(session.businessInfo.name)
+            self.accountUnit = String(session.businessInfo.name)
         }
         
         titleLabel.roundCorners([.topRight, .bottomRight], radius: 100)
@@ -132,6 +137,7 @@ extension AccountSettingViewController: UITableViewDataSource {
 }
 extension AccountSettingViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         perform(serviceInfos[indexPath.section].action)
     }
 }
@@ -142,28 +148,19 @@ extension AccountSettingViewController {
         if let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "Setting") as? SettingViewController {
             viewController.delegate = self.delegate
             viewController.account = self.account
-            viewController.tabBarItem.image = UIImage(named: "account_icon")
-            viewController.tabBarItem.title = "帳號"
+            viewController.accountUnit = self.accountUnit
             show(viewController, sender: self)
         }
     }
     
     @objc
     func passwordSetting() {
-//        MyMindEmployeeAPIService.shared.authorization()
-//            .done { authorization in
-//                let rootTabBarViewController = RootTabBarController(authorization: authorization)
-//                self.show(rootTabBarViewController, sender: self)
-//            }
-//            .ensure {
-//            }
-//            .catch { error in
-//                if let apiError = error as? APIError {
-//                    _ = ErrorHandler.shared.handle(apiError, forceAction: true)
-//                } else {
-//                    ToastView.showIn(self, message: error.localizedDescription)
-//                }
-//            }
+        if let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "PasswordSetting") as? PasswordSettingViewController {
+            viewController.delegate = self.delegate
+            viewController.account = self.account
+            viewController.accountUnit = self.accountUnit
+            show(viewController, sender: self)
+        }
     }
     
     @objc

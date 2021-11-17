@@ -39,6 +39,15 @@ class SettingViewController: UIViewController {
             }
         }
     }
+    
+    var accountUnit: String? {
+        didSet {
+            DispatchQueue.main.async {
+                self.unitLabel.text = self.accountUnit
+            }
+        }
+    }
+    
     private var isNetworkProcessing: Bool = false {
         didSet {
             switch isNetworkProcessing {
@@ -47,6 +56,7 @@ class SettingViewController: UIViewController {
             }
         }
     }
+    
     private func showErrorMessage(_ status: AccountValidateStatus) {
         if status.contains(.nameError) {
             nameErrorLabel.text = "姓名輸入格式錯誤"
@@ -57,30 +67,30 @@ class SettingViewController: UIViewController {
             emailTextField.layer.borderColor = UIColor.vividRed.cgColor
         }
     }
+    
     private func clearErrorMessage() {
         nameErrorLabel.text = nil
         nameTextField.layer.borderColor = UIColor.lightGray.cgColor
         emailErrorLabel.text = nil
         emailTextField.layer.borderColor = UIColor.lightGray.cgColor
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        nameTextField.layer.borderWidth = 1
-        emailTextField.layer.borderWidth = 1
         clearErrorMessage()
         title = "帳號資料維護"
-        
-        if let session = KeychainUserSessionDataStore().readUserSession() {
-            self.unitLabel.text = String(session.businessInfo.name)
-        }
+        nameTextField.layer.borderWidth = 1
+        emailTextField.layer.borderWidth = 1
         // Do any additional setup after loading the view.
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setTabBarBackgroundColor(UIColor.prussianBlue)
         addKeyboardObservers()
         addTapToResignKeyboardGesture()
     }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         removeObservers()
@@ -100,10 +110,9 @@ class SettingViewController: UIViewController {
                     ToastView.showIn(self, message: "修改成功", iconName: "success", at: .center)
                 }
                 .catch { error in
-                    switch error {
-                    case APIError.serviceError(let message):
-                        ToastView.showIn(self, message: message)
-                    default:
+                    if let apiError = error as? APIError {
+                        _ = ErrorHandler.shared.handle(apiError)
+                    } else {
                         ToastView.showIn(self, message: error.localizedDescription)
                     }
                 }
@@ -113,20 +122,11 @@ class SettingViewController: UIViewController {
     }
 
     @IBAction func back(_ sender: Any) {
-        if let contentView = navigationController?.view {
-            let alertView = CustomAlertView(frame: contentView.bounds, title: "確定返回嗎？", descriptions: "返回後本頁面資料將無法儲存，\n請確定是否要返回首頁。")
-            alertView.confirmButton.addAction { [weak self] in
-                guard let self = self else { return }
-                alertView.removeFromSuperview()
-                self.delegate?.didCancel()
-            }
-            alertView.cancelButton.addAction {
-                alertView.removeFromSuperview()
-            }
-            contentView.addSubview(alertView)
+        showAlert(title: "確定返回嗎？", message: "您目前編輯的資料尚未儲存，請確定是否要返回。") { _ in
+            self.delegate?.didCancel()
         }
     }
-
+    
     /*
     // MARK: - Navigation
 
