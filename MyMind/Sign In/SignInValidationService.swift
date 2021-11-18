@@ -14,6 +14,7 @@ enum ValidationResult: Equatable {
 }
 
 struct SignInValidatoinService {
+    static let passwordChars = CharacterSet(charactersIn:"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvxyz@$!%*#&?").inverted
 
     func validate(_ value: String) -> ValidationResult {
         if value.count == 0 {
@@ -107,23 +108,38 @@ struct SignInValidatoinService {
 */
     func validatePassword(_ password: String) -> ValidationResult {
         let count = password.count
-        if count == 0 {
-            return .invalid("此欄位必填")
+        if count < 6 {
+            return .invalid("密碼至少6個字元")
         }
-        if count < 6 || count > 20 {
-            return .invalid("請輸入 6~20 個半形英文/數字/特殊符號")
-        }
-        if password.contains(" ") {
-            return .invalid("此欄位不支援空白")
+        if count > 20 {
+            return .invalid("密碼最多20個字元")
         }
         do {
-            let regex = try NSRegularExpression(pattern:"(?=.*\\d)(?=.*[a-zA-z])(?=.*[@$!%*#?&])" , options: [])
+            let regex = try NSRegularExpression(pattern: "[A-Za-z]{1,}", options: [])
             if  regex.firstMatch(in: password, options: [], range: NSMakeRange(0, password.count)) == nil {
-                return .invalid("請輸入至少各一個半形英文、數字、特殊符號")
+                return .invalid("密碼必須包含1個大小寫英文字母")
             }
         }
         catch {
-            return .invalid("請輸入至少各一個半形英文、數字、特殊符號")
+            return .invalid("密碼必須包含1個大小寫英文字母")
+        }
+        do {
+            let regex = try NSRegularExpression(pattern: "[0-9]{1,}" , options: [])
+            if  regex.firstMatch(in: password, options: [], range: NSMakeRange(0, password.count)) == nil {
+                return .invalid("密碼必須包含1個數字")
+            }
+        }
+        catch {
+            return .invalid("密碼必須包含1個數字")
+        }
+        do {
+            let regex = try NSRegularExpression(pattern:"[@$%*#&?!]{1,}" , options: [])
+            if  regex.firstMatch(in: password, options: [], range: NSMakeRange(0, password.count)) == nil {
+                return .invalid("密碼必須包含1個符號")
+            }
+        }
+        catch {
+            return .invalid("密碼必須包含1個符號")
         }
         return .valid
     }

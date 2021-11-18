@@ -7,13 +7,6 @@
 //
 
 import Foundation
-struct ChangePasswordInfoValidateStatus: OptionSet {
-    let rawValue: Int
-    static let valid = ChangePasswordInfoValidateStatus(rawValue: 1 << 0)
-    static let oldPasswordError = ChangePasswordInfoValidateStatus(rawValue: 1 << 1)
-    static let passwordError = ChangePasswordInfoValidateStatus(rawValue: 1 << 2)
-    static let confirmPasswordError = ChangePasswordInfoValidateStatus(rawValue: 1 << 3)
-}
 
 struct ChangePasswordInfo {
     private enum CodingKeys: String, CodingKey {
@@ -22,21 +15,16 @@ struct ChangePasswordInfo {
 
     var oldPassword: String
     var password: String
-
-    static func empty() -> ChangePasswordInfo {
-        let info = ChangePasswordInfo(oldPassword: "", password: "")
-        return info
+    var confirmPassword: String
+    var jsonRepresentation: [String: Any] {
+        get {
+            return ["old_password": oldPassword, "password": password]
+        }
     }
     
-    func validate() -> AccountValidateStatus {
-        var status: AccountValidateStatus = .valid
-        if oldPassword.count < 1 || oldPassword.count > 20 {
-            status.update(with: .nameError)
-        }
-        if SignInValidatoinService().validateEmail(email) != .valid {
-            status.update(with: .emailError)
-        }
-        return status
+    static func empty() -> ChangePasswordInfo {
+        let info = ChangePasswordInfo(oldPassword: "", password: "", confirmPassword: "")
+        return info
     }
 }
 

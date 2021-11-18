@@ -185,7 +185,11 @@ extension AccountSettingViewController {
                     .catch { [weak self] error in
                         guard let self = self else { return }
                         alertView.removeFromSuperview()
-                        ToastView.showIn(self, message: error.localizedDescription)
+                        if let apiError = error as? APIError {
+                            _ = ErrorHandler.shared.handle(apiError)
+                        } else {
+                            ToastView.showIn(self, message: error.localizedDescription)
+                        }
                     }
             }
             alertView.cancelButton.addAction {

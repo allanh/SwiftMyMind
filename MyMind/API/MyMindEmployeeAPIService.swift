@@ -52,4 +52,23 @@ class MyMindEmployeeAPIService: PromiseKitAPIService {
         return sendRequest(request: request)
 
     }
+    
+    func changePassword(info: ChangePasswordInfo) -> Promise<Account.Employee> {
+        guard let userSession = userSessionDataStore.readUserSession() else {
+            return .init(error: APIError.noAccessTokenError)
+        }
+        
+        guard let body = try? JSONSerialization.data(withJSONObject: info.jsonRepresentation as Any, options: .fragmentsAllowed) else {
+            return .init(error: APIError.parseError)
+        }
+        
+        let request = request(
+            endPoint: .password,
+            httpMethod: "PUT",
+            httpHeader: ["Authorization": "Bearer \(userSession.token)"],
+            httpBody: body
+        )
+        
+        return sendRequest(request: request)
+    }
 }

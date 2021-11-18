@@ -105,6 +105,11 @@ extension Endpoint {
         Endpoint(path: "/employee/me", serviceType: .auth)
     }
     
+    static var password: Self {
+        Endpoint(path: "/employee/password", serviceType: .auth)
+    }
+    
+    
     static var purchaseApply: Self {
         Endpoint(path: "/api/admin/\(version)/purchase")
     }

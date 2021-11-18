@@ -25,6 +25,15 @@ class PasswordSettingViewController: UIViewController {
     @IBOutlet weak var confirmPasswordTextField: UITextField!
     @IBOutlet weak var confirmPasswordErrorLabel: UILabel!
     
+    private var isNetworkProcessing: Bool = false {
+        didSet {
+            switch isNetworkProcessing {
+            case true: startAnimatingActivityIndicator()
+            case false: stopAnimatinActivityIndicator()
+            }
+        }
+    }
+    
     var account: Account? {
         didSet {
             DispatchQueue.main.async {
@@ -40,53 +49,16 @@ class PasswordSettingViewController: UIViewController {
             }
         }
     }
-    
-    private func showErrorMessage(_ status: AccountValidateStatus) {
-        if status.contains(.nameError) {
-            oldPasswordErrorLabel.text = "密碼輸入錯誤"
-            oldPasswordTextField.layer.borderColor = UIColor.vividRed.cgColor
-        }
-        if status.contains(.emailError) {
-            newPasswordErrorLabel.text = "密碼太短提示：密碼至少6個字元"
-            newPasswordTextField.layer.borderColor = UIColor.vividRed.cgColor
-        }
-        if status.contains(.nameError) {
-            confirmPasswordErrorLabel.text = "密碼輸入錯誤"
-            confirmPasswordTextField.layer.borderColor = UIColor.vividRed.cgColor
-        }
-    }
-    
-    private func clearErrorMessage() {
-        oldPasswordErrorLabel.text = nil
-        oldPasswordTextField.layer.borderColor = UIColor.lightGray.cgColor
-        newPasswordErrorLabel.text = nil
-        newPasswordTextField.layer.borderColor = UIColor.lightGray.cgColor
-        confirmPasswordErrorLabel.text = nil
-        confirmPasswordTextField.layer.borderColor = UIColor.lightGray.cgColor
-    }
-    
-    private func createViewModel() {
-        var otpEnabled: Bool = false
-        do {
-            otpEnabled = try KeychainHelper.default.readItem(key: .otpStatus, valueType: Bool.self)
-        } catch {
-            print(error)
-        }
-        viewModel = SignInViewModel(
-            userSessionRepository: MyMindUserSessionRepository.shared,
-            signInValidationService: SignInValidatoinService(),
-            lastSignInInfoDataStore: MyMindLastSignInInfoDataStore(),
-            otpEnabled: otpEnabled
-        )
-    }
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
-        clearErrorMessage()
         title = "密碼修改"
         oldPasswordTextField.layer.borderWidth = 1
+        oldPasswordTextField.delegate = self
         newPasswordTextField.layer.borderWidth = 1
+        newPasswordTextField.delegate = self
         confirmPasswordTextField.layer.borderWidth = 1
+        confirmPasswordTextField.delegate = self
         // Do any additional setup after loading the view.
     }
     
@@ -103,29 +75,30 @@ class PasswordSettingViewController: UIViewController {
     }
     
     @IBAction func save(_ sender: Any) {
-//        let newAccount = Account(id: 0, mobile: "", account: "", lastLoginIP: "", lastLoginTime: "", updateTime: "", name: nameTextField.text ?? "", email: emailTextField.text ?? "")
-//        let status = newAccount.validate()
-//        if status == .valid {
-//            clearErrorMessage()
-//            isNetworkProcessing = true
-//            MyMindEmployeeAPIService.shared.updateAccount(account: newAccount)
-//                .ensure {
-//                    self.isNetworkProcessing = false
-//                }
-//                .done {_ in
-//                    ToastView.showIn(self, message: "修改成功", iconName: "success", at: .center)
-//                }
-//                .catch { error in
-//                    switch error {
-//                    case APIError.serviceError(let message):
-//                        ToastView.showIn(self, message: message)
-//                    default:
-//                        ToastView.showIn(self, message: error.localizedDescription)
-//                    }
-//                }
-//        } else {
-//            showErrorMessage(status)
-//        }
+        let oldPasswordResult = validatePassword(oldPasswordTextField)
+        let newPasswordResult = validatePassword(newPasswordTextField)
+        let confirmPasswordResult = validatePassword(confirmPasswordTextField)
+
+        if oldPasswordResult && newPasswordResult && confirmPasswordResult {
+            let newPasswordInfo = ChangePasswordInfo(oldPassword: oldPasswordTextField.text ?? "",
+                                                     password: newPasswordTextField.text ?? "",
+                                                     confirmPassword: confirmPasswordTextField.text ?? "")
+            isNetworkProcessing = true
+            MyMindEmployeeAPIService.shared.changePassword(info: newPasswordInfo)
+                .ensure {
+                    self.isNetworkProcessing = false
+                }
+                .done {_ in
+                    ToastView.showIn(self, message: "更新成功", iconName: "success", at: .center)
+                }
+                .catch { error in
+                    if let apiError = error as? APIError {
+                        _ = ErrorHandler.shared.handle(apiError)
+                    } else {
+                        ToastView.showIn(self, message: error.localizedDescription)
+                    }
+                }
+        }
     }
     
     @IBAction func cancel(_ sender: Any) {
@@ -133,7 +106,80 @@ class PasswordSettingViewController: UIViewController {
             self.delegate?.didCancel()
         }
     }
+    
+    private func validatePassword(_ textField: UITextField) -> Bool {
+        let result = SignInValidatoinService().validatePassword(textField.text ?? "")
+        switch result {
+        case .valid:
+            self.cleanErrorMessage(for: textField)
+            return true
+        case .invalid(let message):
+            self.showErrorMessage(for: textField, message: message)
+            return false
+        }
+    }
+
+    private func showErrorMessage(for textField: UITextField, message: String) {
+        textField.layer.borderColor = UIColor.vividRed.cgColor
+        switch textField {
+        case oldPasswordTextField:
+            oldPasswordErrorLabel.text = message
+            oldPasswordErrorLabel.isHidden = false
+        case newPasswordTextField:
+            newPasswordErrorLabel.text = message
+            newPasswordErrorLabel.isHidden = false
+        case confirmPasswordTextField:
+            confirmPasswordErrorLabel.text = message
+            confirmPasswordErrorLabel.isHidden = false
+        default: break
+        }
+    }
+
+    private func cleanErrorMessage(for textField: UITextField) {
+        textField.layer.borderColor = UIColor.lightGray.cgColor
+        switch textField {
+        case oldPasswordTextField:
+            oldPasswordErrorLabel.isHidden = true
+        case newPasswordTextField:
+            newPasswordErrorLabel.isHidden = true
+        case confirmPasswordTextField:
+            confirmPasswordErrorLabel.isHidden = true
+        default: break
+        }
+    }
 }
+
+extension PasswordSettingViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        // Set the maximum character length of a UITextField
+        let maxLength = 20
+        let currentString: NSString = (textField.text ?? "") as NSString
+        let newString: NSString =
+            currentString.replacingCharacters(in: range, with: string) as NSString
+        if newString.length > maxLength {
+            return false
+        }
+        
+        // Allowing only a specified set of characters to be entered into a given text field
+        let components = string.components(separatedBy: SignInValidatoinService.passwordChars)
+        let filtered = components.joined(separator: "")
+        
+        if string == filtered {
+            
+            return true
+
+        } else {
+            
+            return false
+        }
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        _ = validatePassword(textField)
+    }
+}
+
 
 extension PasswordSettingViewController {
     func addKeyboardObservers() {
