@@ -107,6 +107,7 @@ class AccountSettingViewController: UIViewController {
     }
     
     func setShadow(_ view: UIView) {
+        view.layer.cornerRadius = 8
         view.applySketchShadow(
             color: UIColor.init(hex: "#000000").withAlphaComponent(0.1),
             alpha: 1,
@@ -165,6 +166,11 @@ extension AccountSettingViewController {
     
     @objc
     func rebindOtp() {
+        let viewModel = ResendOTPViewModel(authService: MyMindAuthService(),
+                                           signInValidationService: SignInValidatoinService()
+        )
+        let viewController = ResendOTPViewController(viewModel: viewModel)
+        show(viewController, sender: self)
     }
     
     func signout() {

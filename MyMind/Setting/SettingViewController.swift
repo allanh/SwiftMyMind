@@ -122,9 +122,7 @@ class SettingViewController: UIViewController {
     }
 
     @IBAction func back(_ sender: Any) {
-        showAlert(title: "確定返回嗎？", message: "您目前編輯的資料尚未儲存，請確定是否要返回。") { _ in
-            self.delegate?.didCancel()
-        }
+        self.delegate?.didCancel()
     }
     
     /*

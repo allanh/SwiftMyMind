@@ -371,7 +371,7 @@ extension ForgotPasswordRootView {
     }
     private func activateConstraintsBackgroundImageView() {
         let top = backgroundImageView.topAnchor
-            .constraint(equalTo: topAnchor, constant: -1)
+            .constraint(equalTo: backgroundView.topAnchor, constant: -1)
         let leading = backgroundImageView.leadingAnchor
             .constraint(equalTo: leadingAnchor)
         let trailing = backgroundImageView.trailingAnchor
@@ -383,7 +383,7 @@ extension ForgotPasswordRootView {
     }
     private func activateConstraintsBackgroundTitleLabel() {
         let top = backgroundTitleLabel.topAnchor
-            .constraint(equalTo: topAnchor, constant: 20)
+            .constraint(equalTo: backgroundView.topAnchor, constant: 20)
         let height = backgroundTitleLabel.heightAnchor
             .constraint(equalToConstant: 33)
         let leading = backgroundTitleLabel.leadingAnchor

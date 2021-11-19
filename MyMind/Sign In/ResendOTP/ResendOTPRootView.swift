@@ -332,7 +332,7 @@ extension ResendOTPRootView {
     }
     private func activateConstraintsBackgroundImageView() {
         let top = backgroundImageView.topAnchor
-            .constraint(equalTo: topAnchor, constant: -1)
+            .constraint(equalTo: backgroundView.topAnchor, constant: -1)
         let leading = backgroundImageView.leadingAnchor
             .constraint(equalTo: leadingAnchor)
         let trailing = backgroundImageView.trailingAnchor
@@ -344,7 +344,7 @@ extension ResendOTPRootView {
     }
     private func activateConstraintsBackgroundTitleLabel() {
         let top = backgroundTitleLabel.topAnchor
-            .constraint(equalTo: topAnchor, constant: 20)
+            .constraint(equalTo: backgroundView.topAnchor, constant: 20)
         let height = backgroundTitleLabel.heightAnchor
             .constraint(equalToConstant: 33)
         let leading = backgroundTitleLabel.leadingAnchor
@@ -368,7 +368,7 @@ extension ResendOTPRootView {
         let top = scrollView.topAnchor
             .constraint(equalTo: backgroundDescriptionLabel.bottomAnchor, constant: 15)
         let bottom = scrollView.bottomAnchor
-            .constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -9)
+            .constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -32)
         let leading = scrollView.leadingAnchor
             .constraint(equalTo: leadingAnchor, constant: 25)
         let trailing = scrollView.trailingAnchor
