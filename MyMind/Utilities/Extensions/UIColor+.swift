@@ -225,4 +225,9 @@ extension UIColor {
             return UIColor(hex: "f5222d")
         }
     }
+    static var border: UIColor {
+        get {
+            return UIColor(hex: "cccccc")
+        }
+    }
 }

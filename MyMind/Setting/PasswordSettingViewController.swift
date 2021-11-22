@@ -53,11 +53,8 @@ class PasswordSettingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "密碼修改"
-        oldPasswordTextField.layer.borderWidth = 1
         oldPasswordTextField.delegate = self
-        newPasswordTextField.layer.borderWidth = 1
         newPasswordTextField.delegate = self
-        confirmPasswordTextField.layer.borderWidth = 1
         confirmPasswordTextField.delegate = self
         // Do any additional setup after loading the view.
     }
@@ -134,7 +131,7 @@ class PasswordSettingViewController: UIViewController {
     }
 
     private func cleanErrorMessage(for textField: UITextField) {
-        textField.layer.borderColor = UIColor.lightGray.cgColor
+        textField.layer.borderColor = UIColor.border.cgColor
         switch textField {
         case oldPasswordTextField:
             oldPasswordErrorLabel.isHidden = true

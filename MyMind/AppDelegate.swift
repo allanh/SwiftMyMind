@@ -15,6 +15,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         setUpAppearance()
         FirebaseApp.configure()
+        
+        //version on appStore
+        _ = try? VersionManager.shared.isUpdateAvailable { (version, canUpdate, error) in
+            if let currentVersion = version, let isUpdateAvailable = canUpdate {
+                print("version: \(currentVersion), canUpdate: \(isUpdateAvailable)")
+            }
+        }
 
         #if !targetEnvironment(simulator)
         Messaging.messaging().delegate = self

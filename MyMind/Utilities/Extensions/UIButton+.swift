@@ -61,7 +61,7 @@ extension UIButton {
 
 @IBDesignable extension UIButton {
 
-    @IBInspectable var borderWidth: CGFloat {
+    @IBInspectable override var borderWidth: CGFloat {
         set {
             layer.borderWidth = newValue
         }
@@ -70,7 +70,7 @@ extension UIButton {
         }
     }
 
-    @IBInspectable var cornerRadius: CGFloat {
+    @IBInspectable override var cornerRadius: CGFloat {
         set {
             layer.cornerRadius = newValue
         }
@@ -79,7 +79,7 @@ extension UIButton {
         }
     }
 
-    @IBInspectable var borderColor: UIColor? {
+    @IBInspectable override var borderColor: UIColor? {
         set {
             guard let uiColor = newValue else { return }
             layer.borderColor = uiColor.cgColor

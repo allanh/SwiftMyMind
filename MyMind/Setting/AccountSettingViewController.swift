@@ -25,6 +25,8 @@ class AccountSettingViewController: UIViewController {
     @IBOutlet weak var accountLabel: UILabel!
     @IBOutlet weak var unitLabel: UILabel!
     @IBOutlet weak var versionView: UIView!
+    @IBOutlet weak var currentVersionLabel: UILabel!
+    @IBOutlet weak var versionStatusLabel: UILabel!
     @IBOutlet weak var signoutView: UIView!
     @IBOutlet weak var settingTableView: UITableView!
     @IBOutlet weak var latedVersionLabel: UILabel!
@@ -96,9 +98,10 @@ class AccountSettingViewController: UIViewController {
         signoutView.addTapGesture { [weak self] in
             self?.signout()
         }
+        checkVersion()
     }
     
-    func configTableView() {
+    private func configTableView() {
         settingTableView.layer.cornerRadius = 8
         settingTableView.layer.shadowColor = UIColor.init(hex: "#000000").withAlphaComponent(0.1).cgColor
         settingTableView.layer.shadowOpacity = 1
@@ -106,7 +109,7 @@ class AccountSettingViewController: UIViewController {
         settingTableView.layer.shadowRadius = 15
     }
     
-    func setShadow(_ view: UIView) {
+    private func setShadow(_ view: UIView) {
         view.layer.cornerRadius = 8
         view.applySketchShadow(
             color: UIColor.init(hex: "#000000").withAlphaComponent(0.1),
@@ -115,6 +118,28 @@ class AccountSettingViewController: UIViewController {
             blur: 30,
             spread: 0
         )
+    }
+    
+    // check if the app has a new version
+    private func checkVersion() {
+        _ = try? VersionManager.shared.isUpdateAvailable { (version, canUpdate, error) in
+            if let currentVersion = version, let isUpdateAvailable = canUpdate {
+                print("version: \(currentVersion), canUpdate: \(isUpdateAvailable)")
+                
+                DispatchQueue.main.async { [weak self] in
+                    self?.currentVersionLabel.text = "版本 V\(currentVersion)"
+                    if isUpdateAvailable {
+                        self?.versionStatusLabel.text = "請更新版本"
+                        self?.versionStatusLabel.textColor = UIColor.vividRed
+                        self?.versionStatusLabel.backgroundColor = UIColor.vividRed.withAlphaComponent(0.2)
+                    } else {
+                        self?.versionStatusLabel.text = "已為最新版本"
+                        self?.versionStatusLabel.textColor = UIColor(hex: "1fa1ff")
+                        self?.versionStatusLabel.backgroundColor = UIColor(hex: "1fa1ff").withAlphaComponent(0.2)
+                    }
+                }
+            }
+        }
     }
 }
 
