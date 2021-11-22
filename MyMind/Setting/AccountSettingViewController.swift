@@ -199,9 +199,8 @@ extension AccountSettingViewController {
     }
     
     func signout() {
-        if let contentView = navigationController?.view {
-            let alertView = CustomAlertView(frame: contentView.bounds, title: "確定登出嗎？", descriptions: "請確定是否要登出。")
-            alertView.confirmButton.addAction {
+        if let contentViewController = navigationController {
+            contentViewController.showAlert(title: "確定登出？", message: "確定登出 My mind 賣賣管理平台 ?") { _ in
                 self.isNetworkProcessing = true
                 MyMindUserSessionRepository.shared.signOut()
                     .ensure {
@@ -209,13 +208,11 @@ extension AccountSettingViewController {
                     }
                     .done { [weak self] in
                         guard let self = self else { return }
-                        alertView.removeFromSuperview()
                         self.dismiss(animated: true, completion: nil)
                         self.delegate?.didSignOut()
                     }
                     .catch { [weak self] error in
                         guard let self = self else { return }
-                        alertView.removeFromSuperview()
                         if let apiError = error as? APIError {
                             _ = ErrorHandler.shared.handle(apiError)
                         } else {
@@ -223,10 +220,33 @@ extension AccountSettingViewController {
                         }
                     }
             }
-            alertView.cancelButton.addAction {
-                alertView.removeFromSuperview()
-            }
-            contentView.addSubview(alertView)
+//            let alertView = CustomAlertView(frame: contentView.bounds, title: "確定登出嗎？", descriptions: "請確定是否要登出。")
+//            alertView.confirmButton.addAction {
+//                self.isNetworkProcessing = true
+//                MyMindUserSessionRepository.shared.signOut()
+//                    .ensure {
+//                        self.isNetworkProcessing = false
+//                    }
+//                    .done { [weak self] in
+//                        guard let self = self else { return }
+//                        alertView.removeFromSuperview()
+//                        self.dismiss(animated: true, completion: nil)
+//                        self.delegate?.didSignOut()
+//                    }
+//                    .catch { [weak self] error in
+//                        guard let self = self else { return }
+//                        alertView.removeFromSuperview()
+//                        if let apiError = error as? APIError {
+//                            _ = ErrorHandler.shared.handle(apiError)
+//                        } else {
+//                            ToastView.showIn(self, message: error.localizedDescription)
+//                        }
+//                    }
+//            }
+//            alertView.cancelButton.addAction {
+//                alertView.removeFromSuperview()
+//            }
+//            contentView.addSubview(alertView)
         }
     }
 }

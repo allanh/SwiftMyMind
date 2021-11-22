@@ -11,10 +11,10 @@ import UIKit
 extension UIViewController {
     func showAlert(title: String?, message: String?, action: ((UIAlertAction) -> Void)? = nil) {
         let controller = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        controller.setValue(NSAttributedString(string: "確定返回嗎？",
+        controller.setValue(NSAttributedString(string: title ?? "確定返回嗎？",
                                                attributes: [NSAttributedString.Key.font : UIFont.pingFangTCSemibold(ofSize: 16),
                                                             NSAttributedString.Key.foregroundColor : UIColor.prussianBlue]), forKey: "attributedTitle")
-        controller.setValue(NSAttributedString(string: "您目前編輯的資料尚未儲存，請確定是否要返回。",
+        controller.setValue(NSAttributedString(string: message ?? "您目前編輯的資料尚未儲存，請確定是否要返回。",
                                                attributes: [NSAttributedString.Key.font : UIFont.pingFangTCRegular(ofSize: 14),
                                                             NSAttributedString.Key.foregroundColor :UIColor.brownGrey]), forKey: "attributedMessage")
 
