@@ -21,6 +21,7 @@ class AccountSettingViewController: UIViewController {
                                                ("密碼修改", "change_password", #selector(passwordSetting)),
                                                ("重新綁定 OTP", "rebind_otp", #selector(rebindOtp))]
     
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var accountLabel: UILabel!
     @IBOutlet weak var unitLabel: UILabel!
@@ -32,7 +33,10 @@ class AccountSettingViewController: UIViewController {
     @IBOutlet weak var latedVersionLabel: UILabel!
     
     weak var delegate: MixedDelegate?
-
+    var statusBarFrame: CGRect!
+    var statusBarView: UIView!
+    var offset: CGFloat!
+    
     private var isNetworkProcessing: Bool = false {
         didSet {
             switch isNetworkProcessing {
@@ -82,6 +86,15 @@ class AccountSettingViewController: UIViewController {
                     ToastView.showIn(self, message: error.localizedDescription)
                 }
             }
+        //header view begins under the navigation bar
+        scrollView.contentInsetAdjustmentBehavior = .never
+        configStatuView()
+        navigationController?.navigationBar.alpha = 0.0
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.navigationBar.alpha = 1.0
     }
     
     override func viewDidLoad() {
@@ -89,8 +102,11 @@ class AccountSettingViewController: UIViewController {
         if let session = KeychainUserSessionDataStore().readUserSession() {
             self.accountUnit = String(session.businessInfo.name)
         }
+        //required statement to access the scrollViewDidScroll function
+        scrollView.delegate = self
         
         titleLabel.roundCorners([.topRight, .bottomRight], radius: 100)
+
         configTableView()
         setShadow(versionView)
         setShadow(signoutView)
@@ -99,6 +115,22 @@ class AccountSettingViewController: UIViewController {
             self?.signout()
         }
         checkVersion()
+    }
+    
+    private func configStatuView() {
+         //get height of status bar
+         if #available(iOS 13.0, *) {
+             statusBarFrame = UIApplication.shared.windows[0].windowScene?.statusBarManager?.statusBarFrame ?? CGRect.zero
+         } else {
+             // Fallback on earlier versions
+             statusBarFrame = UIApplication.shared.statusBarFrame
+         }
+
+         //initially add a view which overlaps the status bar. Will be altered later.
+         statusBarView = UIView(frame: statusBarFrame)
+         statusBarView.isOpaque = false
+         statusBarView.backgroundColor = .prussianBlue
+         view.addSubview(statusBarView)
     }
     
     private func configTableView() {
@@ -220,33 +252,41 @@ extension AccountSettingViewController {
                         }
                     }
             }
-//            let alertView = CustomAlertView(frame: contentView.bounds, title: "確定登出嗎？", descriptions: "請確定是否要登出。")
-//            alertView.confirmButton.addAction {
-//                self.isNetworkProcessing = true
-//                MyMindUserSessionRepository.shared.signOut()
-//                    .ensure {
-//                        self.isNetworkProcessing = false
-//                    }
-//                    .done { [weak self] in
-//                        guard let self = self else { return }
-//                        alertView.removeFromSuperview()
-//                        self.dismiss(animated: true, completion: nil)
-//                        self.delegate?.didSignOut()
-//                    }
-//                    .catch { [weak self] error in
-//                        guard let self = self else { return }
-//                        alertView.removeFromSuperview()
-//                        if let apiError = error as? APIError {
-//                            _ = ErrorHandler.shared.handle(apiError)
-//                        } else {
-//                            ToastView.showIn(self, message: error.localizedDescription)
-//                        }
-//                    }
-//            }
-//            alertView.cancelButton.addAction {
-//                alertView.removeFromSuperview()
-//            }
-//            contentView.addSubview(alertView)
         }
+    }
+}
+
+extension AccountSettingViewController {
+    //function that is called everytime the scrollView scrolls
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        //Mark the end of the offset
+        let targetHeight = 200 - (navigationController?.navigationBar.bounds.height)! - statusBarFrame.height
+        
+        //calculate how much has been scrolled relative to the targetHeight
+        offset = scrollView.contentOffset.y / targetHeight
+                
+        //cap offset to 1 to conform to UIColor alpha parameter
+        if offset > 1 {offset = 1}
+        
+        //once the scroll reaches halfway to the target, flip the style/color of the status bar
+        //this only affect the information in status bar. DOES NOT affect the background color.
+        if offset > 0.5 {
+            self.navigationController?.navigationBar.barStyle = UIBarStyle.default
+        } else {
+            self.navigationController?.navigationBar.barStyle = UIBarStyle.black
+        }
+        
+        self.navigationController?.navigationBar.alpha = offset
+
+        //Define colors that change based off the offset
+        let clearToWhite = UIColor(red: 1, green: 1, blue: 1, alpha: offset)
+        let whiteToBlack = UIColor(hue: 1, saturation: 0, brightness: 1-offset, alpha: 1 )
+        
+        //Dynamically change the color of the barbuttonitems and title
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : whiteToBlack]
+        
+        //Dynamically change the background color of the navigation bar
+        self.navigationController?.navigationBar.backgroundColor = clearToWhite
     }
 }

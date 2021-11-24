@@ -55,7 +55,7 @@ final class RootTabBarController: UITabBarController {
         loadNotifications()
         setTabBarBackgroundColor(UIColor.prussianBlue)
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setTabBarBackgroundColor(UIColor.mainPageTabBar)
@@ -96,9 +96,7 @@ final class RootTabBarController: UITabBarController {
     }
     
     private func generateAccountViewController() {
-        
         if let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "AccountSettingViewController") as? AccountSettingViewController {
-//        if let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "Setting") as? SettingViewController {
             viewController.delegate = self
             viewController.tabBarItem.image = UIImage(named: "account_icon")
             viewController.tabBarItem.title = "帳號"
