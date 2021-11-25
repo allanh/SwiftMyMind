@@ -86,7 +86,8 @@ class SettingViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setTabBarBackgroundColor(UIColor.prussianBlue)
+        navigationController?.setNavigationBarHidden(false, animated: false)
+        navigationController?.navigationBar.alpha = 1.0
         addKeyboardObservers()
         addTapToResignKeyboardGesture()
     }

@@ -69,6 +69,8 @@ class AccountSettingViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: false)
+        navigationController?.navigationBar.alpha = 0.0
         isNetworkProcessing = true
         MyMindEmployeeAPIService.shared.me()
             .ensure {
@@ -89,11 +91,11 @@ class AccountSettingViewController: UIViewController {
         //header view begins under the navigation bar
         scrollView.contentInsetAdjustmentBehavior = .never
         configStatuView()
-        navigationController?.navigationBar.alpha = 0.0
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: false)
         navigationController?.navigationBar.alpha = 1.0
     }
     
@@ -119,8 +121,9 @@ class AccountSettingViewController: UIViewController {
     
     private func configStatuView() {
          //get height of status bar
+        
          if #available(iOS 13.0, *) {
-             statusBarFrame = UIApplication.shared.windows[0].windowScene?.statusBarManager?.statusBarFrame ?? CGRect.zero
+             statusBarFrame = UIWindow.keyWindow?.windowScene?.statusBarManager?.statusBarFrame ?? CGRect.zero
          } else {
              // Fallback on earlier versions
              statusBarFrame = UIApplication.shared.statusBarFrame
@@ -268,25 +271,31 @@ extension AccountSettingViewController {
                 
         //cap offset to 1 to conform to UIColor alpha parameter
         if offset > 1 {offset = 1}
-        
-        //once the scroll reaches halfway to the target, flip the style/color of the status bar
-        //this only affect the information in status bar. DOES NOT affect the background color.
-        if offset > 0.5 {
-            self.navigationController?.navigationBar.barStyle = UIBarStyle.default
+        if offset > 0 {
+            navigationController?.setNavigationBarHidden(false, animated: false)
         } else {
-            self.navigationController?.navigationBar.barStyle = UIBarStyle.black
+            navigationController?.setNavigationBarHidden(true, animated: false)
         }
         
         self.navigationController?.navigationBar.alpha = offset
+        
+        //once the scroll reaches halfway to the target, flip the style/color of the status bar
+        //this only affect the information in status bar. DOES NOT affect the background color.
+//        if offset > 0.5 {
+//            self.navigationController?.navigationBar.barStyle = UIBarStyle.default
+//        } else {
+//            self.navigationController?.navigationBar.barStyle = UIBarStyle.black
+//        }
+        
 
-        //Define colors that change based off the offset
-        let clearToWhite = UIColor(red: 1, green: 1, blue: 1, alpha: offset)
-        let whiteToBlack = UIColor(hue: 1, saturation: 0, brightness: 1-offset, alpha: 1 )
-        
-        //Dynamically change the color of the barbuttonitems and title
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : whiteToBlack]
-        
-        //Dynamically change the background color of the navigation bar
-        self.navigationController?.navigationBar.backgroundColor = clearToWhite
+//        //Define colors that change based off the offset
+//        let clearToWhite = UIColor(red: 1, green: 1, blue: 1, alpha: offset)
+//        let whiteToBlack = UIColor(hue: 1, saturation: 0, brightness: 1-offset, alpha: 1 )
+//
+//        //Dynamically change the color of the barbuttonitems and title
+//        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : whiteToBlack]
+//
+//        //Dynamically change the background color of the navigation bar
+//        self.navigationController?.navigationBar.backgroundColor = clearToWhite
     }
 }
