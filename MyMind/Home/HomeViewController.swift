@@ -53,6 +53,7 @@ final class HomeViewController: UIViewController {
             loadGrossProfitRankingReportList()
         }
     }
+<<<<<<< HEAD
     private func scrollThenReset(_ match: Int) {
         if let section = section, section == match {
             self.section = nil
@@ -60,6 +61,9 @@ final class HomeViewController: UIViewController {
         }
     }
     private var headerInfos: [(title: String, info: SwitcherInfo)] = [("", ("", "", 0, Section.bulliten)), ("待辦事項", ("", "", 0, Section.todo)), ("", ("", "", 0, Section.today)), ("近30日銷售數量", ("銷售數量", "銷售總額", 0, Section.thirtyDays)), ("近7日SKU銷售排行", ("銷售數量", "銷售總額", 0, Section.sevenDaysSKU)), ("近7日加工組合SKU銷售排行", ("銷售數量", "銷售總額", 0, Section.sevenDaysSetSKU)), ("近7日銷售金額佔比", ("通路", "供應商", 0, Section.sevenDaysSaleAmount)), ("近7日銷售毛利佔比", ("通路", "供應商", 0, Section.sevenDaysGrossProfit))]
+=======
+    private var headerInfos: [(title: String, info: SwitcherInfo)] = [("", ("", "", 0, Section.bulliten)), ("", ("", "", 0, Section.todo)), ("今日數據", ("", "", 0, Section.today)), ("近30日銷售數量", ("銷售數量", "銷售總額", 0, Section.thirtyDays)), ("近7日SKU銷售排行", ("銷售數量", "銷售總額", 0, Section.sevenDaysSKU)), ("近7日加工組合SKU銷售排行", ("銷售數量", "銷售總額", 0, Section.sevenDaysSetSKU)), ("近7日銷售金額佔比", ("通路", "供應商", 0, Section.sevenDaysSaleAmount)), ("近7日銷售毛利佔比", ("通路", "供應商", 0, Section.sevenDaysGrossProfit))]
+>>>>>>> d02a8b8 (feat: add a header image on the home view)
     private var bulletins: BulletinList? {
         didSet {
             collectionView.reloadSections([Section.bulliten.rawValue])
@@ -108,6 +112,7 @@ final class HomeViewController: UIViewController {
             scrollThenReset(Section.sevenDaysGrossProfit.rawValue)
         }
     }
+    
     var authorization: Authorization?
     /// Must set on main thread
     private var isNetworkProcessing: Bool = false {
@@ -139,7 +144,7 @@ extension HomeViewController {
         }
     }
     private func loadHomeData() {
-//        loadBulletins()
+        loadBulletins()
         loadToDoList()
         loadTodaySaleReports()
         loadSaleReportList()
@@ -418,7 +423,9 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         switch indexPath.section {
         case Section.bulliten.rawValue:
-            return CGSize(width: collectionView.bounds.width, height: 24)
+            return CGSize(width: collectionView.bounds.width, height: 222)
+        case Section.todo.rawValue:
+            return CGSize(width: collectionView.bounds.width, height: 96)
         default:
             let width = collectionView.bounds.width
             return CGSize(width: width, height: width*0.75)
@@ -428,7 +435,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         let width = collectionView.bounds.width
         switch section {
-        case Section.bulliten.rawValue, Section.today.rawValue:
+        case Section.bulliten.rawValue, Section.todo.rawValue:
             return .zero
         default:
             return CGSize(width: width, height: 50)
@@ -436,7 +443,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     }
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         if kind == UICollectionView.elementKindSectionHeader {
-            if indexPath.section == Section.todo.rawValue {
+            if indexPath.section == Section.today.rawValue {
                 if let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HomeHeader", for: indexPath) as? HomeCollectionViewHeaderView {
                     headerView.config(with: 6, title: headerInfos[indexPath.section].title)
                     return headerView
@@ -486,6 +493,15 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
             print("seven days set gross profit detail \(grossProfitRankingDevider)")
         default:
             print(indexPath)
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        switch section {
+        case Section.bulliten.rawValue:
+            return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        default:
+            return UIEdgeInsets(top: 0, left: 0, bottom: 16, right: 0)
         }
     }
 }
