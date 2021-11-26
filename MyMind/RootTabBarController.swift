@@ -34,6 +34,7 @@ final class RootTabBarController: UITabBarController {
         navigationItem.backButtonTitle = ""
         addRightBarItem()
         generateHomeViewController()
+        generateOldHomeViewController()
         generateMainFunctionEntryViewController()
         generateAccountViewController()
         viewControllers = contentViewControlelrs
@@ -83,6 +84,19 @@ final class RootTabBarController: UITabBarController {
             let viewController = HomeViewController()
             viewController.tabBarItem.image = UIImage(named: "home")
             viewController.tabBarItem.title = "首頁"
+            contentViewControlelrs.append(viewController)
+        }
+    }
+    private func generateOldHomeViewController() {
+        if let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "OldHome") as? OldHomeViewController {
+            viewController.authorization = authorization
+            viewController.tabBarItem.image = UIImage(named: "home")
+            viewController.tabBarItem.title = "舊首頁"
+            contentViewControlelrs.append(viewController)
+       } else {
+            let viewController = HomeViewController()
+            viewController.tabBarItem.image = UIImage(named: "home")
+            viewController.tabBarItem.title = "舊首頁"
             contentViewControlelrs.append(viewController)
         }
     }
