@@ -166,7 +166,7 @@ class SuggestionProductMaterialViewModelTests: XCTestCase {
             stockUnitName: "串",
             boxStockUnitName: "箱",
             quantityPerBox: 22,
-            purchaseSuggestionInfo: .init(id: "00", number: "test", originalProductNumber: "123", name: "", quantityPerBox: "", channelStockQuantity: "", fineStockQuantity: "", totalStockQuantity: "", monthSaleQuantity: "", suggestedQuantity: "100", daysSalesOfInventory: "", cost: "", movingAverageCost: "", stockUnitName: "", boxStockUnitName: ""),
+            purchaseSuggestionInfo: .init(id: "00", number: "test", originalProductNumber: "123", name: "", quantityPerBox: "", channelStockQuantity: "", fineStockQuantity: "", totalStockQuantity: "", monthSaleQuantity: "", suggestedQuantity: "100", daysSalesOfInventory: "", cost: "", movingAverageCost: "", stockUnitName: "", boxStockUnitName: "", imageInfos: []),
             purchaseCostPerItem: 200.0,
             vendorName: "test",
             vendorID: "123")

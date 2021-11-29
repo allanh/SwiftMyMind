@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import WidgetKit
 import RxSwift
 import NVActivityIndicatorView
 
@@ -88,7 +89,7 @@ class SignInViewController: NiblessViewController {
             .done { authorization in
                 let scene = UIApplication.shared.connectedScenes.first
                 if let sceneDelegate : SceneDelegate = (scene?.delegate as? SceneDelegate) {
-                    let rootTabBarViewController = RootTabBarController(authorization: authorization)
+                    let rootTabBarViewController = RootTabBarController(authorization: authorization, section: nil)
                     let rootViewController = sceneDelegate.window?.rootViewController
                     if let navigationController = rootViewController as? UINavigationController {
                         navigationController.popToRootViewController(animated: false)
@@ -185,6 +186,10 @@ class SignInViewController: NiblessViewController {
                         }
                 
                 } catch {}
+                if #available(iOS 14.0, *) {
+                    WidgetCenter.shared.reloadTimelines(ofKind: "MyMind_Widget")
+                    WidgetCenter.shared.reloadTimelines(ofKind: "MyMind_ChartWidget")
+                }
                 showHomePage()
             })
             .disposed(by: bag)

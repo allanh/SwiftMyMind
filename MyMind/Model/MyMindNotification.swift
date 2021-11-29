@@ -36,9 +36,8 @@ struct MyMindNotification: Codable {
         importance = try container.decode(Importance.self, forKey: .importance)
         top = try container.decode(Bool.self, forKey: .top)
         let string = try container.decode(String.self, forKey: .started)
-        let formatter = DateFormatter {
-            $0.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        }
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         started = formatter.date(from: string) ?? .distantPast
         if let string = try? container.decode(String.self, forKey: .readed) {
             readed = formatter.date(from: string)

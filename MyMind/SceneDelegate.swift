@@ -15,6 +15,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
+        let contexts = connectionOptions.urlContexts
+        if let context = contexts.first {
+            Presenter.shared.handle(context.url)
+        }
+
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -27,33 +32,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneDidBecomeActive(_ scene: UIScene) {
         // Called when the scene has moved from an inactive state to an active state.
         // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
-//        guard let windowScene = (scene as? UIWindowScene) else { return }
-//        self.window = UIWindow(windowScene: windowScene)
-//        self.window?.makeKeyAndVisible()
-//        MyMindEmployeeAPIService.shared.authorization()
-//            .done { authorization in
-//                self.showHomePage(authorization)
-//            }
-//            .ensure {
-//            }
-//            .catch { error in
-//                _ = ErrorHandler.shared.handle((error as! APIError))
-//            }
-    }
-    private func showHomePage(_ authorization: Authorization? = nil) {
-//        let rootTabBarViewController = RootTabBarController(authorization: authorization)
-//        self.window?.makeKeyAndVisible()
-//        self.window?.rootViewController = rootTabBarViewController
-
-//        if let rootViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "Home") as? HomeViewController {
-//            rootViewController.authorization = authorization
-//            let navigationViewController = UINavigationController(rootViewController: rootViewController)
-//            self.window?.rootViewController = navigationViewController
-//        } else {
-//            let navigationViewController = UINavigationController(rootViewController: UIViewController())
-//            self.window?.makeKeyAndVisible()
-//            self.window?.rootViewController = navigationViewController
-//        }
     }
     func sceneWillResignActive(_ scene: UIScene) {
         // Called when the scene will move from an active state to an inactive state.
@@ -70,5 +48,49 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
     }
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        if let context = URLContexts.first {
+            Presenter.shared.handle(context.url)
+        }
+    }
 }
-
+/// Presenter
+class Presenter {
+    static let shared = Presenter()
+    func handle(_ url: URL) {
+        let scene = UIApplication.shared.connectedScenes.first
+        if let sceneDelegate : SceneDelegate = (scene?.delegate as? SceneDelegate) {
+            if url.scheme == "mymindwidget" {
+                switch url.host {
+                case "otp" :
+                    let rootViewController = sceneDelegate.window?.rootViewController
+                    if let navigationController = rootViewController as? UINavigationController {
+                        navigationController.popToRootViewController(animated: false)
+                        if let topViewController = navigationController.topViewController as? MainPageViewController {
+                            topViewController.otp()
+                        }
+                    }
+                case "dashboard":
+                    let rootViewController = sceneDelegate.window?.rootViewController
+                    if let navigationController = rootViewController as? UINavigationController {
+                        navigationController.popToRootViewController(animated: false)
+                        if let topViewController = navigationController.topViewController as? MainPageViewController {
+                            topViewController.section = Section.thirtyDays.rawValue
+                            topViewController.myMind()
+                        }
+                    }
+                case "login":
+                    let rootViewController = sceneDelegate.window?.rootViewController
+                    if let navigationController = rootViewController as? UINavigationController {
+                        navigationController.popToRootViewController(animated: false)
+                        if let topViewController = navigationController.topViewController as? MainPageViewController {
+                            topViewController.myMind()
+                        }
+                    }
+                default:
+                    break
+                }
+            }
+        }
+    }
+}

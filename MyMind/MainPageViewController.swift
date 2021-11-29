@@ -17,6 +17,7 @@ class MyMindNavigationController: UINavigationController {
 typealias ServiceInfo = (title: String, version: String, icon: String, descriptions: String, action: Selector)
 class MainPageViewController: UIViewController {
 
+    var section: Int?
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
@@ -67,7 +68,7 @@ extension MainPageViewController {
     func myMind() {
         MyMindEmployeeAPIService.shared.authorization()
             .done { authorization in
-                let rootTabBarViewController = RootTabBarController(authorization: authorization)
+                let rootTabBarViewController = RootTabBarController(authorization: authorization, section: self.section)
                 self.show(rootTabBarViewController, sender: self)
             }
             .ensure {

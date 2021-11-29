@@ -12,6 +12,7 @@
 		520776AD26B5106D005BA621 /* SignInPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520776AC26B5106D005BA621 /* SignInPresentationController.swift */; };
 		5216399326D49EB6008E7BB9 /* Debug in Resources */ = {isa = PBXBuildFile; fileRef = 5216399226D49EB6008E7BB9 /* Debug */; };
 		5216399526D49F74008E7BB9 /* Demo in Resources */ = {isa = PBXBuildFile; fileRef = 5216399426D49F74008E7BB9 /* Demo */; };
+		52268F0A2715885A00D3B593 /* CornerRadiusViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52268F092715885A00D3B593 /* CornerRadiusViewModifier.swift */; };
 		52282372268EB41400A66340 /* PurchaseBriefReviewingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52282370268EB41400A66340 /* PurchaseBriefReviewingCollectionViewCell.swift */; };
 		52282373268EB41400A66340 /* PurchaseBriefReviewingCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52282371268EB41400A66340 /* PurchaseBriefReviewingCollectionViewCell.xib */; };
 		522F855626BB85C7002ED473 /* EmptyDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522F855526BB85C7002ED473 /* EmptyDataView.swift */; };
@@ -19,6 +20,26 @@
 		5246E4742690385C005C11EC /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5246E4732690385C005C11EC /* Account.swift */; };
 		5246E4772690A2A4005C11EC /* CustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5246E4762690A2A4005C11EC /* CustomAlertView.swift */; };
 		524AB04826A802BA003D1E92 /* MyMindEmptySecretView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524AB04726A802BA003D1E92 /* MyMindEmptySecretView.swift */; };
+		5260FB8826FD6912003BB399 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5260FB8726FD6912003BB399 /* WidgetKit.framework */; };
+		5260FB8A26FD6912003BB399 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5260FB8926FD6912003BB399 /* SwiftUI.framework */; };
+		5260FB8D26FD6913003BB399 /* MyMind_Widgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5260FB8C26FD6913003BB399 /* MyMind_Widgets.swift */; };
+		5260FB8F26FD6916003BB399 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5260FB8E26FD6916003BB399 /* Assets.xcassets */; };
+		5260FB9426FD6916003BB399 /* MyMind WidgetsExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 5260FB8626FD6912003BB399 /* MyMind WidgetsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		5260FB9B26FD76D1003BB399 /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5293EE9D269A8F5B001A9754 /* Report.swift */; };
+		5260FB9C26FD81E5003BB399 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5293EEA1269AF20F001A9754 /* Date+.swift */; };
+		5260FB9D26FD81ED003BB399 /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4793CB026048BB600AD280C /* UIFont+.swift */; };
+		5261E43E270171C400B81BCE /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BDC7B8260B3E0A005C33A5 /* KeychainHelper.swift */; };
+		5261E43F270171E600B81BCE /* UserSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4793C7E2604573700AD280C /* UserSession.swift */; };
+		5261E441270172E900B81BCE /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49CF8BF260306D200AFC170 /* APIError.swift */; };
+		5261E442270172FE00B81BCE /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4705B9026020E5700B30CE6 /* Response.swift */; };
+		5261E4432701745700B81BCE /* Authorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527E11BA2692A05900FB8B01 /* Authorization.swift */; };
+		5261E444270176CA00B81BCE /* ToDo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52944E202697F798006CC865 /* ToDo.swift */; };
+		5261E445270177BC00B81BCE /* MyMindNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B8749F26DF364F008F3CF2 /* MyMindNotification.swift */; };
+		5261E44627017A2E00B81BCE /* Announcement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B8749526DCBFA1008F3CF2 /* Announcement.swift */; };
+		5261E4472701800200B81BCE /* OptionSet+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527E11BC2692A0D500FB8B01 /* OptionSet+.swift */; };
+		5261E4482701802900B81BCE /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4793CBA260490A600AD280C /* UIColor+.swift */; };
+		5261E44B270180A900B81BCE /* MultiPageList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5261E44A270180A900B81BCE /* MultiPageList.swift */; };
+		5261E44C270180A900B81BCE /* MultiPageList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5261E44A270180A900B81BCE /* MultiPageList.swift */; };
 		526364CA26EAF65D00C26FE4 /* FilterViewToggleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526364C926EAF65D00C26FE4 /* FilterViewToggleButton.swift */; };
 		527E11BB2692A05900FB8B01 /* Authorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527E11BA2692A05900FB8B01 /* Authorization.swift */; };
 		527E11BD2692A0D500FB8B01 /* OptionSet+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527E11BC2692A0D500FB8B01 /* OptionSet+.swift */; };
@@ -34,6 +55,12 @@
 		528A697C26CBADD600FC3387 /* Release in Resources */ = {isa = PBXBuildFile; fileRef = 528A697B26CBADD600FC3387 /* Release */; };
 		528AEF7F26EF3DF4004EC51C /* UIView+Badge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528AEF7E26EF3DF4004EC51C /* UIView+Badge.swift */; };
 		528AEF8126EF5D94004EC51C /* RangeExpression+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528AEF8026EF5D94004EC51C /* RangeExpression+.swift */; };
+		528C86BF2707063C0084BB27 /* Report+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528C86BE2707063C0084BB27 /* Report+.swift */; };
+		528C86C1270707950084BB27 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528C86C0270707940084BB27 /* NetworkManager.swift */; };
+		528C86C3270709230084BB27 /* UDILineChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528C86C2270709230084BB27 /* UDILineChart.swift */; };
+		528C86C527070A160084BB27 /* IndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528C86C427070A160084BB27 /* IndicatorView.swift */; };
+		528C86C727070AF30084BB27 /* IconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528C86C627070AF30084BB27 /* IconView.swift */; };
+		528C86C927070B140084BB27 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528C86C827070B140084BB27 /* LoginView.swift */; };
 		5293EE9C269A8AEB001A9754 /* HorizontalCellSizePagingFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5293EE9B269A8AEB001A9754 /* HorizontalCellSizePagingFlowLayout.swift */; };
 		5293EE9E269A8F5B001A9754 /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5293EE9D269A8F5B001A9754 /* Report.swift */; };
 		5293EEA0269A9DBC001A9754 /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5293EE9F269A9DBC001A9754 /* HomeModel.swift */; };
@@ -55,6 +82,13 @@
 		52AC22A226FACA04003AF437 /* AnnouncementListFilterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52AC22A126FACA04003AF437 /* AnnouncementListFilterModel.swift */; };
 		52B15CBA2691BAFC0010FCED /* MyMindEmployeeAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B15CB92691BAFC0010FCED /* MyMindEmployeeAPIService.swift */; };
 		52B8734F270FF4BF00102C98 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B8734E270FF4BF00102C98 /* CategoryViewController.swift */; };
+		52B62539270AE04B00E03220 /* Report+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528C86BE2707063C0084BB27 /* Report+.swift */; };
+		52B6253A270AE04F00E03220 /* UDILineChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528C86C2270709230084BB27 /* UDILineChart.swift */; };
+		52B6253B270BFCC800E03220 /* IconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528C86C627070AF30084BB27 /* IconView.swift */; };
+		52B6253E270C306E00E03220 /* UDIPieChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B6253D270C306E00E03220 /* UDIPieChart.swift */; };
+		52B6253F270C306E00E03220 /* UDIPieChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B6253D270C306E00E03220 /* UDIPieChart.swift */; };
+		52B62541270D537F00E03220 /* SelectChartIntents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 52B62540270D537F00E03220 /* SelectChartIntents.intentdefinition */; };
+		52B62542270D84B700E03220 /* SelectChartIntents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 52B62540270D537F00E03220 /* SelectChartIntents.intentdefinition */; };
 		52B8749026DC7C38008F3CF2 /* BulletinCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B8748F26DC7C38008F3CF2 /* BulletinCollectionViewCell.swift */; };
 		52B8749226DC88EA008F3CF2 /* Bulletin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B8749126DC88EA008F3CF2 /* Bulletin.swift */; };
 		52B8749426DCBE74008F3CF2 /* MyMindAnnouncementAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B8749326DCBE74008F3CF2 /* MyMindAnnouncementAPIService.swift */; };
@@ -291,6 +325,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		5260FB9126FD6916003BB399 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A44A5A6225F9B0D200995823 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5260FB8526FD6912003BB399;
+			remoteInfo = "MyMind WidgetsExtension";
+		};
 		A44A5A8125F9B0D300995823 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A44A5A6225F9B0D200995823 /* Project object */;
@@ -307,6 +348,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		5260FB9326FD6916003BB399 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				5260FB9426FD6916003BB399 /* MyMind WidgetsExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		13CCE330B89D7786D5D97F51 /* Pods-MyMindTests.alpha.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMindTests.alpha.xcconfig"; path = "Target Support Files/Pods-MyMindTests/Pods-MyMindTests.alpha.xcconfig"; sourceTree = "<group>"; };
 		2A4AA838BC0B3D93EAEAC627 /* Pods-MyMind-MyMindUITests.gamma.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMind-MyMindUITests.gamma.xcconfig"; path = "Target Support Files/Pods-MyMind-MyMindUITests/Pods-MyMind-MyMindUITests.gamma.xcconfig"; sourceTree = "<group>"; };
@@ -322,6 +377,7 @@
 		520776AC26B5106D005BA621 /* SignInPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInPresentationController.swift; sourceTree = "<group>"; };
 		5216399226D49EB6008E7BB9 /* Debug */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Debug; sourceTree = "<group>"; };
 		5216399426D49F74008E7BB9 /* Demo */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Demo; sourceTree = "<group>"; };
+		52268F092715885A00D3B593 /* CornerRadiusViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornerRadiusViewModifier.swift; sourceTree = "<group>"; };
 		52282370268EB41400A66340 /* PurchaseBriefReviewingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseBriefReviewingCollectionViewCell.swift; sourceTree = "<group>"; };
 		52282371268EB41400A66340 /* PurchaseBriefReviewingCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PurchaseBriefReviewingCollectionViewCell.xib; sourceTree = "<group>"; };
 		522F855526BB85C7002ED473 /* EmptyDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyDataView.swift; sourceTree = "<group>"; };
@@ -330,6 +386,14 @@
 		5246E4762690A2A4005C11EC /* CustomAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertView.swift; sourceTree = "<group>"; };
 		524AB04726A802BA003D1E92 /* MyMindEmptySecretView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMindEmptySecretView.swift; sourceTree = "<group>"; };
 		524AB12B26A80913003D1E92 /* Demo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Demo-Info.plist"; path = "/Users/nelson/Program/BitBucket/mymind/Demo-Info.plist"; sourceTree = "<absolute>"; };
+		5260FB8626FD6912003BB399 /* MyMind WidgetsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "MyMind WidgetsExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5260FB8726FD6912003BB399 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		5260FB8926FD6912003BB399 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		5260FB8C26FD6913003BB399 /* MyMind_Widgets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMind_Widgets.swift; sourceTree = "<group>"; };
+		5260FB8E26FD6916003BB399 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5260FB9026FD6916003BB399 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5261E44A270180A900B81BCE /* MultiPageList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiPageList.swift; sourceTree = "<group>"; };
+		5261E44D2701AD5300B81BCE /* MyMind WidgetsExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "MyMind WidgetsExtension.entitlements"; sourceTree = "<group>"; };
 		526364C926EAF65D00C26FE4 /* FilterViewToggleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewToggleButton.swift; sourceTree = "<group>"; };
 		5277788226A80DF500CF4E07 /* Production-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Production-Info.plist"; path = "/Users/nelson/Program/BitBucket/mymind/Production-Info.plist"; sourceTree = "<absolute>"; };
 		527E11BA2692A05900FB8B01 /* Authorization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authorization.swift; sourceTree = "<group>"; };
@@ -346,6 +410,12 @@
 		528A697B26CBADD600FC3387 /* Release */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Release; sourceTree = "<group>"; };
 		528AEF7E26EF3DF4004EC51C /* UIView+Badge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Badge.swift"; sourceTree = "<group>"; };
 		528AEF8026EF5D94004EC51C /* RangeExpression+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RangeExpression+.swift"; sourceTree = "<group>"; };
+		528C86BE2707063C0084BB27 /* Report+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Report+.swift"; sourceTree = "<group>"; };
+		528C86C0270707940084BB27 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		528C86C2270709230084BB27 /* UDILineChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UDILineChart.swift; sourceTree = "<group>"; };
+		528C86C427070A160084BB27 /* IndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatorView.swift; sourceTree = "<group>"; };
+		528C86C627070AF30084BB27 /* IconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconView.swift; sourceTree = "<group>"; };
+		528C86C827070B140084BB27 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		5293EE9B269A8AEB001A9754 /* HorizontalCellSizePagingFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalCellSizePagingFlowLayout.swift; sourceTree = "<group>"; };
 		5293EE9D269A8F5B001A9754 /* Report.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Report.swift; sourceTree = "<group>"; };
 		5293EE9F269A9DBC001A9754 /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
@@ -367,6 +437,8 @@
 		52AC22A126FACA04003AF437 /* AnnouncementListFilterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementListFilterModel.swift; sourceTree = "<group>"; };
 		52B15CB92691BAFC0010FCED /* MyMindEmployeeAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMindEmployeeAPIService.swift; sourceTree = "<group>"; };
 		52B8734E270FF4BF00102C98 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
+		52B6253D270C306E00E03220 /* UDIPieChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UDIPieChart.swift; sourceTree = "<group>"; };
+		52B62540270D537F00E03220 /* SelectChartIntents.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = SelectChartIntents.intentdefinition; sourceTree = "<group>"; };
 		52B8748F26DC7C38008F3CF2 /* BulletinCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletinCollectionViewCell.swift; sourceTree = "<group>"; };
 		52B8749126DC88EA008F3CF2 /* Bulletin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bulletin.swift; sourceTree = "<group>"; };
 		52B8749326DCBE74008F3CF2 /* MyMindAnnouncementAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMindAnnouncementAPIService.swift; sourceTree = "<group>"; };
@@ -628,6 +700,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		5260FB8326FD6912003BB399 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5260FB8A26FD6912003BB399 /* SwiftUI.framework in Frameworks */,
+				5260FB8826FD6912003BB399 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A44A5A6725F9B0D200995823 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -671,6 +752,20 @@
 				5246E4762690A2A4005C11EC /* CustomAlertView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		5260FB8B26FD6913003BB399 /* MyMind Widgets */ = {
+			isa = PBXGroup;
+			children = (
+				5260FB8C26FD6913003BB399 /* MyMind_Widgets.swift */,
+				5260FB8E26FD6916003BB399 /* Assets.xcassets */,
+				5260FB9026FD6916003BB399 /* Info.plist */,
+				528C86BE2707063C0084BB27 /* Report+.swift */,
+				528C86C0270707940084BB27 /* NetworkManager.swift */,
+				52B62540270D537F00E03220 /* SelectChartIntents.intentdefinition */,
+				52268F092715885A00D3B593 /* CornerRadiusViewModifier.swift */,
+			);
+			path = "MyMind Widgets";
 			sourceTree = "<group>";
 		};
 		5293EE9A269A8AC0001A9754 /* Layout */ = {
@@ -735,6 +830,18 @@
 				52B8734E270FF4BF00102C98 /* CategoryViewController.swift */,
 			);
 			path = Controller;
+            sourceTree = "<group>";
+        };
+		52B6253C270C302200E03220 /* SwiftUIView */ = {
+			isa = PBXGroup;
+			children = (
+				528C86C2270709230084BB27 /* UDILineChart.swift */,
+				528C86C427070A160084BB27 /* IndicatorView.swift */,
+				528C86C627070AF30084BB27 /* IconView.swift */,
+				528C86C827070B140084BB27 /* LoginView.swift */,
+				52B6253D270C306E00E03220 /* UDIPieChart.swift */,
+			);
+			path = SwiftUIView;
 			sourceTree = "<group>";
 		};
 		52E505FC26A53189000E5116 /* ResendOTP */ = {
@@ -945,9 +1052,11 @@
 		A44A5A6125F9B0D200995823 = {
 			isa = PBXGroup;
 			children = (
+				5261E44D2701AD5300B81BCE /* MyMind WidgetsExtension.entitlements */,
 				A44A5A6C25F9B0D200995823 /* MyMind */,
 				A44A5A8325F9B0D300995823 /* MyMindTests */,
 				A44A5A8E25F9B0D300995823 /* MyMindUITests */,
+				5260FB8B26FD6913003BB399 /* MyMind Widgets */,
 				A44A5A6B25F9B0D200995823 /* Products */,
 				FE90B85D82B6B4639CD1A164 /* Pods */,
 				E7E3945A97ADB2DD58A2DA48 /* Frameworks */,
@@ -960,6 +1069,7 @@
 				A44A5A6A25F9B0D200995823 /* MyMind.app */,
 				A44A5A8025F9B0D300995823 /* MyMindTests.xctest */,
 				A44A5A8B25F9B0D300995823 /* MyMindUITests.xctest */,
+				5260FB8626FD6912003BB399 /* MyMind WidgetsExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1096,6 +1206,7 @@
 				52B8749D26DF3627008F3CF2 /* AnnouncementListQueryInfo.swift */,
 				52B8749F26DF364F008F3CF2 /* MyMindNotification.swift */,
 				52AC22A126FACA04003AF437 /* AnnouncementListFilterModel.swift */,
+				5261E44A270180A900B81BCE /* MultiPageList.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1120,6 +1231,7 @@
 			isa = PBXGroup;
 			children = (
 				52B8734D270FF46800102C98 /* Controller */,
+				52B6253C270C302200E03220 /* SwiftUIView */,
 				52F564282694086500171032 /* View */,
 				A4BDC7B2260B0F34005C33A5 /* UILayer */,
 				A4793C9D26047DA300AD280C /* Extensions */,
@@ -1315,6 +1427,8 @@
 				C35ECDE517A2C6A01C3E7141 /* Pods_MyMindTests.framework */,
 				6D795DE7991B001D5F99673C /* Pods_MyMind_Demo.framework */,
 				D9EC33AD66AB1E6F6EF4FE95 /* Pods_MyMind_Production.framework */,
+				5260FB8726FD6912003BB399 /* WidgetKit.framework */,
+				5260FB8926FD6912003BB399 /* SwiftUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1350,6 +1464,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		5260FB8526FD6912003BB399 /* MyMind WidgetsExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5260FB9A26FD6916003BB399 /* Build configuration list for PBXNativeTarget "MyMind WidgetsExtension" */;
+			buildPhases = (
+				5260FB8226FD6912003BB399 /* Sources */,
+				5260FB8326FD6912003BB399 /* Frameworks */,
+				5260FB8426FD6912003BB399 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "MyMind WidgetsExtension";
+			productName = "MyMind WidgetsExtension";
+			productReference = 5260FB8626FD6912003BB399 /* MyMind WidgetsExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		A44A5A6925F9B0D200995823 /* MyMind */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A44A5A9425F9B0D300995823 /* Build configuration list for PBXNativeTarget "MyMind" */;
@@ -1360,10 +1491,12 @@
 				A44A5A6825F9B0D200995823 /* Resources */,
 				E51B057EE87CB516D0017E0A /* [CP] Embed Pods Frameworks */,
 				528A697E26CBB71B00FC3387 /* GoogleServiceInfo */,
+				5260FB9326FD6916003BB399 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				5260FB9226FD6916003BB399 /* PBXTargetDependency */,
 			);
 			name = MyMind;
 			productName = MyMind;
@@ -1416,10 +1549,13 @@
 		A44A5A6225F9B0D200995823 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1240;
+				LastSwiftUpdateCheck = 1300;
 				LastUpgradeCheck = 1240;
 				ORGANIZATIONNAME = "United Digital Intelligence";
 				TargetAttributes = {
+					5260FB8526FD6912003BB399 = {
+						CreatedOnToolsVersion = 13.0;
+					};
 					A44A5A6925F9B0D200995823 = {
 						CreatedOnToolsVersion = 12.4;
 					};
@@ -1449,11 +1585,20 @@
 				A44A5A6925F9B0D200995823 /* MyMind */,
 				A44A5A7F25F9B0D300995823 /* MyMindTests */,
 				A44A5A8A25F9B0D300995823 /* MyMindUITests */,
+				5260FB8526FD6912003BB399 /* MyMind WidgetsExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		5260FB8426FD6912003BB399 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5260FB8F26FD6916003BB399 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A44A5A6825F9B0D200995823 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1642,6 +1787,37 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		5260FB8226FD6912003BB399 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				528C86C527070A160084BB27 /* IndicatorView.swift in Sources */,
+				5260FB9D26FD81ED003BB399 /* UIFont+.swift in Sources */,
+				5261E4472701800200B81BCE /* OptionSet+.swift in Sources */,
+				5261E44C270180A900B81BCE /* MultiPageList.swift in Sources */,
+				5261E44627017A2E00B81BCE /* Announcement.swift in Sources */,
+				528C86C727070AF30084BB27 /* IconView.swift in Sources */,
+				5260FB9C26FD81E5003BB399 /* Date+.swift in Sources */,
+				528C86C3270709230084BB27 /* UDILineChart.swift in Sources */,
+				5261E444270176CA00B81BCE /* ToDo.swift in Sources */,
+				5260FB8D26FD6913003BB399 /* MyMind_Widgets.swift in Sources */,
+				52B6253F270C306E00E03220 /* UDIPieChart.swift in Sources */,
+				5261E442270172FE00B81BCE /* Response.swift in Sources */,
+				5261E43F270171E600B81BCE /* UserSession.swift in Sources */,
+				5261E441270172E900B81BCE /* APIError.swift in Sources */,
+				528C86C1270707950084BB27 /* NetworkManager.swift in Sources */,
+				5261E445270177BC00B81BCE /* MyMindNotification.swift in Sources */,
+				528C86C927070B140084BB27 /* LoginView.swift in Sources */,
+				5261E43E270171C400B81BCE /* KeychainHelper.swift in Sources */,
+				52B62541270D537F00E03220 /* SelectChartIntents.intentdefinition in Sources */,
+				5260FB9B26FD76D1003BB399 /* Report.swift in Sources */,
+				52268F0A2715885A00D3B593 /* CornerRadiusViewModifier.swift in Sources */,
+				5261E4432701745700B81BCE /* Authorization.swift in Sources */,
+				5261E4482701802900B81BCE /* UIColor+.swift in Sources */,
+				528C86BF2707063C0084BB27 /* Report+.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A44A5A6625F9B0D200995823 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1673,6 +1849,7 @@
 				A4BCA0CA267C802B00E3B274 /* PurchaseOrderLoader.swift in Sources */,
 				527E11BD2692A0D500FB8B01 /* OptionSet+.swift in Sources */,
 				52B15CBA2691BAFC0010FCED /* MyMindEmployeeAPIService.swift in Sources */,
+				52B6253B270BFCC800E03220 /* IconView.swift in Sources */,
 				A4CBD8B6266A2CF200B19119 /* ProductMaterialSuggestionInfoTableViewCell.swift in Sources */,
 				97B117342653AF1E00242428 /* ProductMaterialQueryInfo.swift in Sources */,
 				52B8749E26DF3627008F3CF2 /* AnnouncementListQueryInfo.swift in Sources */,
@@ -1700,6 +1877,7 @@
 				52944E2926997654006CC865 /* ToDoItemView.swift in Sources */,
 				A4BDC79E260ADFC5005C33A5 /* UIViewController+Rx.swift in Sources */,
 				52944E212697F798006CC865 /* ToDo.swift in Sources */,
+				52B6253E270C306E00E03220 /* UDIPieChart.swift in Sources */,
 				A4CF09B32636C36800439D5F /* UIView+shadow.swift in Sources */,
 				A4793CAC260488E800AD280C /* Declarative.swift in Sources */,
 				A405410F264A758B00E2D21B /* PurchaseStatusSelectionViewController.swift in Sources */,
@@ -1723,10 +1901,12 @@
 				A494D9CA2670CCFC008658F8 /* ApplyPuchaseService.swift in Sources */,
 				52C2CBE4269E9F20002A2BA9 /* SaleRankingCollectionViewCell.swift in Sources */,
 				A4159219260C8FC600FD3989 /* ForgotPasswordViewModel.swift in Sources */,
+				52B62542270D84B700E03220 /* SelectChartIntents.intentdefinition in Sources */,
 				A43E8514268C08FC008C8369 /* UserDefaultSecretDataStore.swift in Sources */,
 				520776A926B50FBC005BA621 /* SignInTransitionDelegate.swift in Sources */,
 				97AFE36926661750002CBE01 /* SuggestionProductMaterialViewModel.swift in Sources */,
 				A4BDC7B9260B3E0A005C33A5 /* KeychainHelper.swift in Sources */,
+				5261E44B270180A900B81BCE /* MultiPageList.swift in Sources */,
 				A405410D264A670100E2D21B /* MultiSelectableDropDownTableViewCell.swift in Sources */,
 				97AFE37326673535002CBE01 /* PurchaseSuggestionViewController.swift in Sources */,
 				A457AEB42660F5F80029DDBB /* StageProgressView.swift in Sources */,
@@ -1774,6 +1954,7 @@
 				52E5060026A532D7000E5116 /* ResendOTPViewModel.swift in Sources */,
 				A464877E2689BBD60053E6F5 /* EditingPurchaseOrderViewController.swift in Sources */,
 				A464877A26899DEF0053E6F5 /* EditingPurchaseOrderViewModel.swift in Sources */,
+				52B6253A270AE04F00E03220 /* UDILineChart.swift in Sources */,
 				97B117372653B1AF00242428 /* PickProductMaterialsViewModel.swift in Sources */,
 				A4793CB126048BB600AD280C /* UIFont+.swift in Sources */,
 				A4648774268970750053E6F5 /* UDI3DESCryptor.swift in Sources */,
@@ -1789,6 +1970,7 @@
 				A47AB49A265E4DA400FE3CFA /* SearchMaterialNamesViewController.swift in Sources */,
 				52944E2726982B88006CC865 /* ToDoInfoView.swift in Sources */,
 				9CEFCA5426DE171100506308 /* AnnouncementQueryDateSelectionViewController.swift in Sources */,
+				52B62539270AE04B00E03220 /* Report+.swift in Sources */,
 				97B117432656064300242428 /* SingleLabelTableViewCell.swift in Sources */,
 				A4ACEDC526490E25008724E4 /* SelectedQueryCollectionViewCell.swift in Sources */,
 				52AC22A226FACA04003AF437 /* AnnouncementListFilterModel.swift in Sources */,
@@ -1917,6 +2099,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		5260FB9226FD6916003BB399 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5260FB8526FD6912003BB399 /* MyMind WidgetsExtension */;
+			targetProxy = 5260FB9126FD6916003BB399 /* PBXContainerItemProxy */;
+		};
 		A44A5A8225F9B0D300995823 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = A44A5A6925F9B0D200995823 /* MyMind */;
@@ -2216,6 +2403,161 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = MyMind;
+			};
+			name = Demo;
+		};
+		5260FB9526FD6916003BB399 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_ENTITLEMENTS = "MyMind WidgetsExtension.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = NCP4JUG36Z;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "MyMind Widgets/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "MyMind Widgets";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2021 United Digital Intelligence. All rights reserved.";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.shopping.udi.MyMind.beta.MyMind-Widgets";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SERVER_URL = "http://api-beta-dos.udnshopping.com";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		5260FB9626FD6916003BB399 /* Alpha */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_ENTITLEMENTS = "MyMind WidgetsExtension.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = NCP4JUG36Z;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "MyMind Widgets/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "MyMind Widgets";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2021 United Digital Intelligence. All rights reserved.";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.shopping.udi.MyMind.alpha.MyMind-Widgets";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SERVER_URL = "http://api-gke-alpha-dos.udnshopping.com";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Alpha;
+		};
+		5260FB9726FD6916003BB399 /* Gamma */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_ENTITLEMENTS = "MyMind WidgetsExtension.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = NCP4JUG36Z;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "MyMind Widgets/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "MyMind Widgets";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2021 United Digital Intelligence. All rights reserved.";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.shopping.udi.MyMind.gamma.MyMind-Widgets";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SERVER_URL = "http://api-gke-alpha-dos.udnshopping.com";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Gamma;
+		};
+		5260FB9826FD6916003BB399 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_ENTITLEMENTS = "MyMind WidgetsExtension.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = NCP4JUG36Z;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "MyMind Widgets/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "MyMind Widgets";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2021 United Digital Intelligence. All rights reserved.";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.shopping.udi.MyMind.MyMind-Widgets";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SERVER_URL = "https://api-mymind.udicommerce.com";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		5260FB9926FD6916003BB399 /* Demo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_ENTITLEMENTS = "MyMind WidgetsExtension.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = NCP4JUG36Z;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "MyMind Widgets/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "MyMind Widgets";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2021 United Digital Intelligence. All rights reserved.";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.shopping.udi.MyMind.demo.MyMind-Widgets";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SERVER_URL = "https://demo-mymind.udicommerce.com";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Demo;
 		};
@@ -2630,6 +2972,18 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		5260FB9A26FD6916003BB399 /* Build configuration list for PBXNativeTarget "MyMind WidgetsExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5260FB9526FD6916003BB399 /* Debug */,
+				5260FB9626FD6916003BB399 /* Alpha */,
+				5260FB9726FD6916003BB399 /* Gamma */,
+				5260FB9826FD6916003BB399 /* Release */,
+				5260FB9926FD6916003BB399 /* Demo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		A44A5A6525F9B0D200995823 /* Build configuration list for PBXProject "MyMind" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

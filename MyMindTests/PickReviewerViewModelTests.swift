@@ -26,7 +26,7 @@ class PickReviewerViewModelTests: XCTestCase {
 
     override func setUpWithError() throws {
         mockLoader = MockPurchaseReviewerListLoader()
-        sut = PickPurchaseReviewerViewModel(loader: mockLoader)
+        sut = PickPurchaseReviewerViewModel(loader: mockLoader, status: .review)
     }
 
     override func tearDownWithError() throws {
