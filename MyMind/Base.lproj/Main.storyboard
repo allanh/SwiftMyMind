@@ -58,29 +58,38 @@
                                                     </constraints>
                                                     <imageReference key="image" image="home_banner_header"/>
                                                 </imageView>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mtk-63-9mU" customClass="UDNSKInteractiveMarqueeView" customModule="MyMind" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="350" height="40"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="40" id="f1C-GV-wAm"/>
+                                                    </constraints>
+                                                </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello, android/品牌營銷處歡迎回來！" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x6N-FT-psI" userLabel="Account Label">
-                                                    <rect key="frame" x="16" y="104.00000000000001" width="194" height="50.666666666666671"/>
+                                                    <rect key="frame" x="27.666666666666671" y="104.00000000000001" width="182.33333333333331" height="50.666666666666671"/>
                                                     <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="18"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mtk-63-9mU" customClass="UDNSKInteractiveMarqueeView" customModule="MyMind" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="170.66666666666666" width="350" height="51.333333333333343"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w7N-S4-p7f" customClass="RollingNoticeView" customModule="MyMind" customModuleProvider="target">
+                                                    <rect key="frame" x="16" y="170.66666666666666" width="318" height="32"/>
+                                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </view>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="w7N-S4-p7f" firstAttribute="leading" secondItem="gAi-Vj-OMM" secondAttribute="leading" constant="16" id="0Nz-0b-sm7"/>
                                                 <constraint firstItem="x6N-FT-psI" firstAttribute="top" secondItem="gAi-Vj-OMM" secondAttribute="top" constant="104" id="3iX-JR-jAs"/>
-                                                <constraint firstItem="Mtk-63-9mU" firstAttribute="top" secondItem="x6N-FT-psI" secondAttribute="bottom" constant="16" id="4Qc-37-Oll"/>
-                                                <constraint firstItem="x6N-FT-psI" firstAttribute="leading" secondItem="gAi-Vj-OMM" secondAttribute="leading" constant="16" id="Hkh-q4-3uN"/>
+                                                <constraint firstItem="Mtk-63-9mU" firstAttribute="top" secondItem="gAi-Vj-OMM" secondAttribute="top" id="4Qc-37-Oll"/>
+                                                <constraint firstItem="x6N-FT-psI" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="gAi-Vj-OMM" secondAttribute="leading" constant="20" symbolic="YES" id="Hkh-q4-3uN"/>
                                                 <constraint firstItem="PoZ-O3-Scl" firstAttribute="leading" secondItem="gAi-Vj-OMM" secondAttribute="leading" id="NuD-CC-3eq"/>
                                                 <constraint firstAttribute="trailing" secondItem="Mtk-63-9mU" secondAttribute="trailing" id="Quj-2c-lCc"/>
                                                 <constraint firstItem="Mtk-63-9mU" firstAttribute="leading" secondItem="gAi-Vj-OMM" secondAttribute="leading" id="Rsm-SU-R5R"/>
                                                 <constraint firstAttribute="trailing" secondItem="x6N-FT-psI" secondAttribute="trailing" constant="140" id="UaG-sM-Tnx"/>
+                                                <constraint firstAttribute="bottom" secondItem="w7N-S4-p7f" secondAttribute="bottom" id="g4q-Sj-gbx"/>
                                                 <constraint firstAttribute="bottom" secondItem="PoZ-O3-Scl" secondAttribute="bottom" id="mbx-mZ-Z6e"/>
                                                 <constraint firstItem="PoZ-O3-Scl" firstAttribute="top" secondItem="gAi-Vj-OMM" secondAttribute="top" id="rsW-qC-B0C"/>
                                                 <constraint firstAttribute="trailing" secondItem="PoZ-O3-Scl" secondAttribute="trailing" id="saj-13-Pyo"/>
-                                                <constraint firstAttribute="bottom" secondItem="Mtk-63-9mU" secondAttribute="bottom" id="t3G-ei-1yf"/>
+                                                <constraint firstAttribute="trailing" secondItem="w7N-S4-p7f" secondAttribute="trailing" constant="16" id="xUE-5s-NTa"/>
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="350" height="222"/>
@@ -1606,7 +1615,7 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="buy_icon" translatesAutoresizingMaskIntoConstraints="NO" id="RaA-dH-aTD">
-                                                    <rect key="frame" x="44" y="31" width="40" height="40"/>
+                                                    <rect key="frame" x="44" y="31.333333333333329" width="40" height="40"/>
                                                 </imageView>
                                                 <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="W4E-jq-qLN">
                                                     <rect key="frame" x="0.0" y="92" width="128" height="2"/>
