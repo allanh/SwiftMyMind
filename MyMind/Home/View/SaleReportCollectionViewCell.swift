@@ -27,15 +27,17 @@ extension SaleReportList {
         for report in reports {
             if let date = report.date {
                 let components = Calendar.current.dateComponents([.day], from: fromDate, to: formatter.date(from: date)!)
-                switch order {
-                case .TOTAL_SALE_QUANTITY:
-                    saleEntries[components.day!].y += Double(report.saleQuantity)
-                    canceledEntries[components.day!].y += Double(report.canceledQuantity)
-                    returnedEntries[components.day!].y += Double(report.returnQuantity)
-                case .TOTAL_SALE_AMOUNT:
-                    saleEntries[components.day!].y += Double(report.saleAmount)
-                    canceledEntries[components.day!].y += Double(report.canceledAmount)
-                    returnedEntries[components.day!].y += Double(report.returnAmount)
+                if let day = components.day, day < offset{
+                    switch order {
+                    case .TOTAL_SALE_QUANTITY:
+                        saleEntries[day].y += Double(report.saleQuantity)
+                        canceledEntries[day].y += Double(report.canceledQuantity)
+                        returnedEntries[day].y += Double(report.returnQuantity)
+                    case .TOTAL_SALE_AMOUNT:
+                        saleEntries[day].y += Double(report.saleAmount)
+                        canceledEntries[day].y += Double(report.canceledAmount)
+                        returnedEntries[day].y += Double(report.returnAmount)
+                    }
                 }
             }
         }
