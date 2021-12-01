@@ -12,6 +12,7 @@
 		3F7E8F4D2750C6B900392E20 /* OldHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7E8F4C2750C6B900392E20 /* OldHomeViewController.swift */; };
 		3F7E8F502750E80500392E20 /* RollingNoticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7E8F4F2750E80500392E20 /* RollingNoticeView.swift */; };
 		3F7E8F522750E86100392E20 /* NoticeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7E8F512750E86100392E20 /* NoticeViewCell.swift */; };
+		3F7E8F562757511C00392E20 /* Array+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7E8F552757511C00392E20 /* Array+.swift */; };
 		3F851E092733B947006CD5EC /* AccountSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F851E082733B947006CD5EC /* AccountSettingViewController.swift */; };
 		3F851E0B27352BA5006CD5EC /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F851E0A27352BA4006CD5EC /* SettingTableViewCell.swift */; };
 		3F851E0D273B7805006CD5EC /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F851E0C273B7805006CD5EC /* UIView+.swift */; };
@@ -381,6 +382,7 @@
 		3F7E8F4C2750C6B900392E20 /* OldHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldHomeViewController.swift; sourceTree = "<group>"; };
 		3F7E8F4F2750E80500392E20 /* RollingNoticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RollingNoticeView.swift; sourceTree = "<group>"; };
 		3F7E8F512750E86100392E20 /* NoticeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeViewCell.swift; sourceTree = "<group>"; };
+		3F7E8F552757511C00392E20 /* Array+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+.swift"; sourceTree = "<group>"; };
 		3F851E082733B947006CD5EC /* AccountSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingViewController.swift; sourceTree = "<group>"; };
 		3F851E0A27352BA4006CD5EC /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
 		3F851E0C273B7805006CD5EC /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
@@ -1287,6 +1289,7 @@
 				528AEF8026EF5D94004EC51C /* RangeExpression+.swift */,
 				3F851E0C273B7805006CD5EC /* UIView+.swift */,
 				3F851E142743AAB2006CD5EC /* UIViewController+Alert.swift */,
+				3F7E8F552757511C00392E20 /* Array+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1982,6 +1985,7 @@
 				A4793CB126048BB600AD280C /* UIFont+.swift in Sources */,
 				A4648774268970750053E6F5 /* UDI3DESCryptor.swift in Sources */,
 				5246E47226901BEC005C11EC /* SettingViewController.swift in Sources */,
+				3F7E8F562757511C00392E20 /* Array+.swift in Sources */,
 				A40EBFE1267216C100A4863D /* PurchaseApplyViewController.swift in Sources */,
 				97B1172F26535B9800242428 /* ProductMaterial.swift in Sources */,
 				A44A5A7225F9B0D200995823 /* MainFunctionEntryViewController.swift in Sources */,

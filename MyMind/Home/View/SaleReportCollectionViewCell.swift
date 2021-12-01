@@ -27,7 +27,7 @@ extension SaleReportList {
         for report in reports {
             if let date = report.date {
                 let components = Calendar.current.dateComponents([.day], from: fromDate, to: formatter.date(from: date)!)
-                if let day = components.day, day < offset{
+                if let day = components.day, day < offset, day >= 0 {
                     switch order {
                     case .TOTAL_SALE_QUANTITY:
                         saleEntries[day].y += Double(report.saleQuantity)

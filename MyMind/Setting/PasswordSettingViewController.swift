@@ -61,6 +61,7 @@ class PasswordSettingViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationController?.navigationBar.alpha = 1.0
         addKeyboardObservers()
         addTapToResignKeyboardGesture()
     }

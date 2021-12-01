@@ -121,8 +121,26 @@ final class HomeViewController: UIViewController {
             }
         }
     }
+    
+    private var statusBarFrame: CGRect!
+    private var statusBarView: UIView!
+    private var offset: CGFloat!
 
     @IBOutlet weak var collectionView: UICollectionView!
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        //header view begins under the navigation bar
+        navigationController?.navigationBar.alpha = 0.0
+        collectionView.contentInsetAdjustmentBehavior = .never
+        configStatuView()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+//        navigationController?.navigationBar.alpha = 1.0
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.backButtonTitle = ""
@@ -589,3 +607,37 @@ final class ActionCollectionViewCell: UICollectionViewCell {
     }
 }
 */
+
+
+extension HomeViewController {
+    func configStatuView() {
+         //get height of status bar
+
+         if #available(iOS 13.0, *) {
+             statusBarFrame = UIWindow.keyWindow?.windowScene?.statusBarManager?.statusBarFrame ?? CGRect.zero
+         } else {
+             // Fallback on earlier versions
+             statusBarFrame = UIApplication.shared.statusBarFrame
+         }
+
+         //initially add a view which overlaps the status bar. Will be altered later.
+         statusBarView = UIView(frame: statusBarFrame)
+         statusBarView.isOpaque = false
+         statusBarView.backgroundColor = .prussianBlue
+         view.addSubview(statusBarView)
+    }
+    
+    //function that is called everytime the scrollView scrolls
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        //Mark the end of the offset
+        let targetHeight = 200 - (navigationController?.navigationBar.bounds.height)! - statusBarFrame.height
+        
+        //calculate how much has been scrolled relative to the targetHeight
+        offset = scrollView.contentOffset.y / targetHeight
+                
+        //cap offset to 1 to conform to UIColor alpha parameter
+        if offset > 1 {offset = 1}
+        self.navigationController?.navigationBar.alpha = offset
+    }
+}

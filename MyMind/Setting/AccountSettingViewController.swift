@@ -33,9 +33,9 @@ class AccountSettingViewController: UIViewController {
     @IBOutlet weak var latedVersionLabel: UILabel!
     
     weak var delegate: MixedDelegate?
-    var statusBarFrame: CGRect!
-    var statusBarView: UIView!
-    var offset: CGFloat!
+    private var statusBarFrame: CGRect!
+    private var statusBarView: UIView!
+    private var offset: CGFloat!
     
     private var isNetworkProcessing: Bool = false {
         didSet {
@@ -69,8 +69,11 @@ class AccountSettingViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        navigationController?.setNavigationBarHidden(true, animated: false)
+        //header view begins under the navigation bar
         navigationController?.navigationBar.alpha = 0.0
+        scrollView.contentInsetAdjustmentBehavior = .never
+        configStatuView()
+        
         isNetworkProcessing = true
         MyMindEmployeeAPIService.shared.me()
             .ensure {
@@ -88,15 +91,12 @@ class AccountSettingViewController: UIViewController {
                     ToastView.showIn(self, message: error.localizedDescription)
                 }
             }
-        //header view begins under the navigation bar
-        scrollView.contentInsetAdjustmentBehavior = .never
-        configStatuView()
+
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-//        navigationController?.setNavigationBarHidden(false, animated: false)
-        navigationController?.navigationBar.alpha = 1.0
+//        navigationController?.navigationBar.alpha = 1.0
     }
     
     override func viewDidLoad() {
@@ -121,7 +121,7 @@ class AccountSettingViewController: UIViewController {
     
     private func configStatuView() {
          //get height of status bar
-        
+
          if #available(iOS 13.0, *) {
              statusBarFrame = UIWindow.keyWindow?.windowScene?.statusBarManager?.statusBarFrame ?? CGRect.zero
          } else {
@@ -271,31 +271,6 @@ extension AccountSettingViewController {
                 
         //cap offset to 1 to conform to UIColor alpha parameter
         if offset > 1 {offset = 1}
-//        if offset > 0 {
-//            navigationController?.setNavigationBarHidden(false, animated: false)
-//        } else {
-//            navigationController?.setNavigationBarHidden(true, animated: false)
-//        }
-        
         self.navigationController?.navigationBar.alpha = offset
-        
-        //once the scroll reaches halfway to the target, flip the style/color of the status bar
-        //this only affect the information in status bar. DOES NOT affect the background color.
-//        if offset > 0.5 {
-//            self.navigationController?.navigationBar.barStyle = UIBarStyle.default
-//        } else {
-//            self.navigationController?.navigationBar.barStyle = UIBarStyle.black
-//        }
-        
-
-//        //Define colors that change based off the offset
-//        let clearToWhite = UIColor(red: 1, green: 1, blue: 1, alpha: offset)
-//        let whiteToBlack = UIColor(hue: 1, saturation: 0, brightness: 1-offset, alpha: 1 )
-//
-//        //Dynamically change the color of the barbuttonitems and title
-//        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : whiteToBlack]
-//
-//        //Dynamically change the background color of the navigation bar
-//        self.navigationController?.navigationBar.backgroundColor = clearToWhite
     }
 }
