@@ -69,7 +69,7 @@ class AccountSettingViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: false)
+//        navigationController?.setNavigationBarHidden(true, animated: false)
         navigationController?.navigationBar.alpha = 0.0
         isNetworkProcessing = true
         MyMindEmployeeAPIService.shared.me()
@@ -95,7 +95,7 @@ class AccountSettingViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: false)
+//        navigationController?.setNavigationBarHidden(false, animated: false)
         navigationController?.navigationBar.alpha = 1.0
     }
     
@@ -271,11 +271,11 @@ extension AccountSettingViewController {
                 
         //cap offset to 1 to conform to UIColor alpha parameter
         if offset > 1 {offset = 1}
-        if offset > 0 {
-            navigationController?.setNavigationBarHidden(false, animated: false)
-        } else {
-            navigationController?.setNavigationBarHidden(true, animated: false)
-        }
+//        if offset > 0 {
+//            navigationController?.setNavigationBarHidden(false, animated: false)
+//        } else {
+//            navigationController?.setNavigationBarHidden(true, animated: false)
+//        }
         
         self.navigationController?.navigationBar.alpha = offset
         

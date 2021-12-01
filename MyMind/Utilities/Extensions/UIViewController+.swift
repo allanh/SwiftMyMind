@@ -36,7 +36,7 @@ extension UIViewController {
         navigationItem.setLeftBarButton(barButton, animated: true)
     }
     
-    func setTabBarBackgroundColor(_ color: UIColor) {
+    func setNavigationBarBackgroundColor(_ color: UIColor) {
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
         appearance.titleTextAttributes = [

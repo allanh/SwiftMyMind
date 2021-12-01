@@ -57,7 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             .foregroundColor: UIColor.white,
             .font: UIFont.pingFangTCSemibold(ofSize: 18)
         ]
-        appearance.backgroundColor = UIColor(hex: "060d32")
+        appearance.backgroundColor = UIColor.mainPageNavBar
         UINavigationBar.appearance().standardAppearance = appearance
         UINavigationBar.appearance().tintColor = .white
         UINavigationBar.appearance().scrollEdgeAppearance = appearance

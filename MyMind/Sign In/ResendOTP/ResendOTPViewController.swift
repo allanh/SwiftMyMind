@@ -42,6 +42,7 @@ class ResendOTPViewController: NiblessViewController {
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.setNavigationBarHidden(false, animated: false)
         navigationController?.navigationBar.alpha = 1.0
+        setNavigationBarBackgroundColor(UIColor.mainPageNavBar)
         super.viewWillAppear(animated)
         addKeyboardObservers()
     }

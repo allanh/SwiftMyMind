@@ -23,6 +23,12 @@ class MainPageViewController: UIViewController {
     }
     private let serviceInfos: [ServiceInfo] = [("My Mind 買賣", "V 1.0.0", "my_mind_icon", "雲端進銷存．一鍵上架．多通路訂單整合，輕鬆搞定電商營運。", #selector(myMind)), ("OTP 服務", "V 1.0.0", "otp", "取得My Mind 買賣「一次性動態安全密碼」，保護資訊安全有保障。",#selector(otp))]
     var remoteConfig: RemoteConfig!
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setNavigationBarBackgroundColor(UIColor.mainPageNavBar)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

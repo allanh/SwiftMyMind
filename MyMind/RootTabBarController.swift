@@ -54,12 +54,7 @@ final class RootTabBarController: UITabBarController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loadNotifications()
-        setTabBarBackgroundColor(UIColor.prussianBlue)
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        setTabBarBackgroundColor(UIColor.mainPageTabBar)
+        setNavigationBarBackgroundColor(UIColor.prussianBlue)
     }
     
     @objc
