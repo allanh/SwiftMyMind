@@ -70,6 +70,7 @@ class AccountSettingViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         //header view begins under the navigation bar
+        navigationController?.setNavigationBarHidden(true, animated: false)
         navigationController?.navigationBar.alpha = 0.0
         scrollView.contentInsetAdjustmentBehavior = .never
         configStatuView()
@@ -272,5 +273,10 @@ extension AccountSettingViewController {
         //cap offset to 1 to conform to UIColor alpha parameter
         if offset > 1 {offset = 1}
         self.navigationController?.navigationBar.alpha = offset
+        if offset > 0 {
+            navigationController?.setNavigationBarHidden(false, animated: false)
+        } else {
+            navigationController?.setNavigationBarHidden(true, animated: false)
+        }
     }
 }

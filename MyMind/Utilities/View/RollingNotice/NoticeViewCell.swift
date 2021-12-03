@@ -15,21 +15,22 @@ open class NoticeViewCell: UIView {
     
     open private(set) lazy var contentView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor.white
+        view.backgroundColor = .clear
         self.addSubview(view)
         isAddedContentView = true
         return view
     }()
     
     open private(set) lazy var textLabel: UILabel = {
-        let lab = UILabel()
-        self.contentView.addSubview(lab)
-        return lab
+        let label = UILabel()
+        label.textColor = .white
+        label.font = .pingFangTCSemibold(ofSize: 12)
+        self.contentView.addSubview(label)
+        return label
     }()
     
     @objc open private(set) var reuseIdentifier: String?
     fileprivate var isAddedContentView = false
-    
     
     /// leading >= 0
     open var textLabelLeading: CGFloat
@@ -43,7 +44,6 @@ open class NoticeViewCell: UIView {
         self.textLabelTrailing = textLabelTrailing
         self.reuseIdentifier = reuseIdentifier
         
-        
         super.init(frame: .zero)
         
         if RollingDebugLog {
@@ -54,8 +54,8 @@ open class NoticeViewCell: UIView {
     }
     
     public required init?(coder aDecoder: NSCoder){
-        self.textLabelLeading = 10
-        self.textLabelTrailing = 10
+        self.textLabelLeading = 8
+        self.textLabelTrailing = 8
         super.init(coder: aDecoder)
         if RollingDebugLog {
             print(String(format: "init a cell from xib: %p", self))
@@ -96,6 +96,6 @@ open class NoticeViewCell: UIView {
 
 extension NoticeViewCell{
     fileprivate func setupInitialUI() {
-        self.backgroundColor = UIColor.white
+        self.backgroundColor = .clear
     }
 }

@@ -131,6 +131,7 @@ final class HomeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         //header view begins under the navigation bar
+        navigationController?.setNavigationBarHidden(true, animated: false)
         navigationController?.navigationBar.alpha = 0.0
         collectionView.contentInsetAdjustmentBehavior = .never
         configStatuView()
@@ -138,7 +139,6 @@ final class HomeViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-//        navigationController?.navigationBar.alpha = 1.0
     }
     
     override func viewDidLoad() {
@@ -147,7 +147,16 @@ final class HomeViewController: UIViewController {
         title = "首頁"
         collectionView.register(HomeCollectionViewHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HomeHeader")
         collectionView.register(HomeCollectionViewSwitchContentHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HomeSwitchContentHeader")
+        
         loadHomeData()
+    }
+    
+    @IBAction func back(_ sender: Any) {
+        self.navigationController?.popToRootViewController(animated: true)
+    }
+    
+    @IBAction func showAnnouncement(_ sender: Any) {
+        show(AnnouncementListViewController(announcementListLoader: MyMindAnnouncementAPIService.shared), sender: nil)
     }
 }
 // MARK: data loading
@@ -369,11 +378,11 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch section {
-        case Section.todo.rawValue, Section.today.rawValue, Section.thirtyDays.rawValue, Section.sevenDaysSKU.rawValue, Section.sevenDaysSetSKU.rawValue,
+        case Section.bulliten.rawValue, Section.todo.rawValue, Section.today.rawValue, Section.thirtyDays.rawValue, Section.sevenDaysSKU.rawValue, Section.sevenDaysSetSKU.rawValue,
         Section.sevenDaysSaleAmount.rawValue, Section.sevenDaysGrossProfit.rawValue :
             return 1
-        case Section.bulliten.rawValue:
-            return bulletins?.items.count ?? 0 > 0 ? 1 : 0
+//        case Section.bulliten.rawValue:
+//            return bulletins?.items.count ?? 0 > 0 ? 1 : 0
         default: return 0
         }
     }
@@ -428,6 +437,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
             return UICollectionViewCell()
         case Section.bulliten.rawValue:
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BulletinCollectionViewCell", for: indexPath) as? BulletinCollectionViewCell {
+                cell.config(with: bulletins)
                 return cell
             }
             return UICollectionViewCell()
@@ -439,7 +449,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         switch indexPath.section {
         case Section.bulliten.rawValue:
-            return CGSize(width: collectionView.bounds.width, height: 222)
+            return CGSize(width: collectionView.bounds.width, height: 158)
         case Section.todo.rawValue:
             return CGSize(width: collectionView.bounds.width, height: 96)
         default:
@@ -485,16 +495,16 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         }
     }
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        switch indexPath.section {
-        case Section.bulliten.rawValue:
-            if let bulletinCell = cell as? BulletinCollectionViewCell {
-                bulletinCell.marqueeView.dataSource = self
-                bulletinCell.marqueeView.marqueeDelegate = self
-                bulletinCell.marqueeView.startAnimateMarqueeDuration(8, delay: 0.4, completion: nil)
-            }
-        default:
-            break
-        }
+//        switch indexPath.section {
+//        case Section.bulliten.rawValue:
+//            if let bulletinCell = cell as? BulletinCollectionViewCell {
+//                bulletinCell.marqueeView.dataSource = self
+//                bulletinCell.marqueeView.marqueeDelegate = self
+//                bulletinCell.marqueeView.startAnimateMarqueeDuration(8, delay: 0.4, completion: nil)
+//            }
+//        default:
+//            break
+//        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -544,30 +554,30 @@ extension HomeViewController: IndicatorSwitchContentHeaderViewDelegate {
     }
 }
 // MARK: UDNSKInteractiveMarqueeViewDataSource
-extension HomeViewController: UDNSKInteractiveMarqueeViewDataSource, UDNSKInteractiveMarqueeViewDelegate {
-    func interactiveMarqueeView(_ marqueeView: UDNSKInteractiveMarqueeView, contentViewAt indexPath: IndexPath) -> UIView {
-        let label: UILabel = UILabel {
-            $0.text = bulletins?.items[indexPath.row].title
-            $0.textColor = .label
-            $0.backgroundColor = UIColor(hex: "fefbe8")
-            $0.frame = CGRect(origin: .zero, size: CGSize(width: marqueeView.bounds.width, height: 24))
-        }
-        return label
-    }
-    
-    func numberOfMarquees(in marqueeView: UDNSKInteractiveMarqueeView) -> Int {
-        return bulletins?.items.count ?? 0
-    }
-    
-    func direction(of marqueeView: UDNSKInteractiveMarqueeView) -> UDNSKInteractiveMarqueeView.ScrollDirection {
-        .left
-    }
-    func interactiveMarqueeView(_ marqueeView: UDNSKInteractiveMarqueeView, didSelectItemAt indexPath: IndexPath) {
-        print(bulletins?.items[indexPath.row].id)
-        #warning("show single bulletin")
-    }
-    
-}
+//extension HomeViewController: UDNSKInteractiveMarqueeViewDataSource, UDNSKInteractiveMarqueeViewDelegate {
+//    func interactiveMarqueeView(_ marqueeView: UDNSKInteractiveMarqueeView, contentViewAt indexPath: IndexPath) -> UIView {
+//        let label: UILabel = UILabel {
+//            $0.text = bulletins?.items[indexPath.row].title
+//            $0.textColor = .label
+//            $0.backgroundColor = UIColor(hex: "fefbe8")
+//            $0.frame = CGRect(origin: .zero, size: CGSize(width: marqueeView.bounds.width, height: 24))
+//        }
+//        return label
+//    }
+//
+//    func numberOfMarquees(in marqueeView: UDNSKInteractiveMarqueeView) -> Int {
+//        return bulletins?.items.count ?? 0
+//    }
+//
+//    func direction(of marqueeView: UDNSKInteractiveMarqueeView) -> UDNSKInteractiveMarqueeView.ScrollDirection {
+//        .left
+//    }
+//    func interactiveMarqueeView(_ marqueeView: UDNSKInteractiveMarqueeView, didSelectItemAt indexPath: IndexPath) {
+//        print(bulletins?.items[indexPath.row].id)
+//        #warning("show single bulletin")
+//    }
+//
+//}
 /*
 final class ActionCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var iconImageView: UIImageView!
@@ -631,13 +641,23 @@ extension HomeViewController {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
         //Mark the end of the offset
-        let targetHeight = 200 - (navigationController?.navigationBar.bounds.height)! - statusBarFrame.height
+        guard let navigationBar = navigationController?.navigationBar else {
+            return
+        }
+        let targetHeight = 200 - navigationBar.bounds.height - statusBarFrame.height
         
         //calculate how much has been scrolled relative to the targetHeight
         offset = scrollView.contentOffset.y / targetHeight
                 
         //cap offset to 1 to conform to UIColor alpha parameter
-        if offset > 1 {offset = 1}
-        self.navigationController?.navigationBar.alpha = offset
+        if offset > 1 {
+            offset = 1
+        }
+        navigationBar.alpha = offset
+        if offset > 0 {
+            navigationController?.setNavigationBarHidden(false, animated: false)
+        } else {
+            navigationController?.setNavigationBarHidden(true, animated: false)
+        }
     }
 }

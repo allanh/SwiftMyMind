@@ -13,6 +13,8 @@
 		3F7E8F502750E80500392E20 /* RollingNoticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7E8F4F2750E80500392E20 /* RollingNoticeView.swift */; };
 		3F7E8F522750E86100392E20 /* NoticeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7E8F512750E86100392E20 /* NoticeViewCell.swift */; };
 		3F7E8F562757511C00392E20 /* Array+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7E8F552757511C00392E20 /* Array+.swift */; };
+		3F7E8F5E2759ADF500392E20 /* BulletinView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F7E8F5D2759ADF500392E20 /* BulletinView.xib */; };
+		3F7E8F602759AE0B00392E20 /* BulletinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7E8F5F2759AE0B00392E20 /* BulletinView.swift */; };
 		3F851E092733B947006CD5EC /* AccountSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F851E082733B947006CD5EC /* AccountSettingViewController.swift */; };
 		3F851E0B27352BA5006CD5EC /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F851E0A27352BA4006CD5EC /* SettingTableViewCell.swift */; };
 		3F851E0D273B7805006CD5EC /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F851E0C273B7805006CD5EC /* UIView+.swift */; };
@@ -383,6 +385,8 @@
 		3F7E8F4F2750E80500392E20 /* RollingNoticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RollingNoticeView.swift; sourceTree = "<group>"; };
 		3F7E8F512750E86100392E20 /* NoticeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeViewCell.swift; sourceTree = "<group>"; };
 		3F7E8F552757511C00392E20 /* Array+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+.swift"; sourceTree = "<group>"; };
+		3F7E8F5D2759ADF500392E20 /* BulletinView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BulletinView.xib; sourceTree = "<group>"; };
+		3F7E8F5F2759AE0B00392E20 /* BulletinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletinView.swift; sourceTree = "<group>"; };
 		3F851E082733B947006CD5EC /* AccountSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingViewController.swift; sourceTree = "<group>"; };
 		3F851E0A27352BA4006CD5EC /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
 		3F851E0C273B7805006CD5EC /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
@@ -820,6 +824,9 @@
 		52944E2526982B2C006CC865 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				52B8748F26DC7C38008F3CF2 /* BulletinCollectionViewCell.swift */,
+				3F7E8F5D2759ADF500392E20 /* BulletinView.xib */,
+				3F7E8F5F2759AE0B00392E20 /* BulletinView.swift */,
 				52A289F126D8C9C700084893 /* UDNSKMarqueeView.swift */,
 				52944E2626982B88006CC865 /* ToDoInfoView.swift */,
 				52944E2826997654006CC865 /* ToDoItemView.swift */,
@@ -841,7 +848,6 @@
 				52C2CBE3269E9F20002A2BA9 /* SaleRankingCollectionViewCell.swift */,
 				52C2CBE5269ED0D5002A2BA9 /* SaleReportCollectionViewCell.swift */,
 				52C2CBE826A01B70002A2BA9 /* DashedLineView.swift */,
-				52B8748F26DC7C38008F3CF2 /* BulletinCollectionViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -871,6 +877,7 @@
 		52F564282694086500171032 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				3F7E8F4E2750E7EB00392E20 /* RollingNotice */,
 				52F56429269408A300171032 /* StaticView.swift */,
 				522F855526BB85C7002ED473 /* EmptyDataView.swift */,
 				3F7E8F46274B86CD00392E20 /* PasswordTextField.swift */,
@@ -1247,7 +1254,6 @@
 			isa = PBXGroup;
 			children = (
 				52B6253C270C302200E03220 /* SwiftUIView */,
-				3F7E8F4E2750E7EB00392E20 /* RollingNotice */,
 				52F564282694086500171032 /* View */,
 				A4BDC7B2260B0F34005C33A5 /* UILayer */,
 				A4793C9D26047DA300AD280C /* Extensions */,
@@ -1633,6 +1639,7 @@
 				A489A1B2263FAA7D00832679 /* PurchaseBriefCollectionViewCell.xib in Resources */,
 				A43E850E268C0889008C8369 /* TOTP.storyboard in Resources */,
 				5216399526D49F74008E7BB9 /* Demo in Resources */,
+				3F7E8F5E2759ADF500392E20 /* BulletinView.xib in Resources */,
 				52282373268EB41400A66340 /* PurchaseBriefReviewingCollectionViewCell.xib in Resources */,
 				527E11C12692C38D00FB8B01 /* PurchaseReviewingApplyInfoViewController.xib in Resources */,
 				A40EBFDA2671AD4900A4863D /* PurchaseApplyInfoViewController.xib in Resources */,
@@ -1944,6 +1951,7 @@
 				A49CF8BB2603028C00AFC170 /* APIService.swift in Sources */,
 				A4CBD8AD2669C50A00B19119 /* StageProgressCollectionReusableView.swift in Sources */,
 				5246E4772690A2A4005C11EC /* CustomAlertView.swift in Sources */,
+				3F7E8F602759AE0B00392E20 /* BulletinView.swift in Sources */,
 				520776AD26B5106D005BA621 /* SignInPresentationController.swift in Sources */,
 				527E11C02692C38D00FB8B01 /* PurchaseReviewingApplyInfoViewController.swift in Sources */,
 				A48389BE260876770044C09E /* AuthService.swift in Sources */,

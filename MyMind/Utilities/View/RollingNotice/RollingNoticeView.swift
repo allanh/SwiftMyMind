@@ -15,7 +15,7 @@ public enum RollingNoticeViewStatus: UInt {
 open class RollingNoticeView: UIView {
     weak open var dataSource : RollingNoticeViewDataSource?
     weak open var delegate : RollingNoticeViewDelegate?
-    open var stayInterval = 2.0
+    open var stayInterval = 8.0
     open private(set) var status: RollingNoticeViewStatus = .idle
     open var currentIndex: Int {
         guard let count = (self.dataSource?.numberOfRowsFor(roolingView: self)) else { return 0}
@@ -173,7 +173,7 @@ extension RollingNoticeView{
         let h = self.frame.size.height
         
         isAnimating = true
-        UIView.animate(withDuration: 0.5, animations: {
+        UIView.animate(withDuration: 1, animations: {
             self.currentCell?.frame = CGRect(x: 0, y: -h, width: w, height: h)
             self.willShowCell?.frame = CGRect(x: 0, y: 0, width: w, height: h)
         }) { (flag) in

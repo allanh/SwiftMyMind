@@ -46,8 +46,6 @@ final class MainFunctionEntryViewController: NiblessViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.setNavigationBarHidden(false, animated: true)
-        navigationController?.navigationBar.alpha = 1.0
         // Do any additional setup after loading the view.
         view.backgroundColor = .white
         self.tabBarItem.title = "功能"
@@ -79,6 +77,7 @@ final class MainFunctionEntryViewController: NiblessViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         navigationController?.navigationBar.alpha = 1.0
+        navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     private func constructViewHeirarchy() {
@@ -89,8 +88,7 @@ final class MainFunctionEntryViewController: NiblessViewController {
     private let columns = 2
     private func activateConstraintsStackView() {
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        // TODO: to fix the top constraint
-        let top = stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20 + 44)
+        let top = stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20)
         let centerX = stackView.centerXAnchor
             .constraint(equalTo: view.centerXAnchor)
         let width = stackView.widthAnchor
