@@ -759,6 +759,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3F31E1B4275A1F190002CA6A /* Todo */ = {
+			isa = PBXGroup;
+			children = (
+				52944E2626982B88006CC865 /* ToDoInfoView.swift */,
+				52944E2826997654006CC865 /* ToDoItemView.swift */,
+				52944E2C269976C9006CC865 /* ToDoInfoHeaderView.swift */,
+				52944E302699CE8B006CC865 /* ToDoInfoCollectionViewCell.swift */,
+				52944E322699CEF0006CC865 /* ToDoListCollectionViewCell.swift */,
+			);
+			path = Todo;
+			sourceTree = "<group>";
+		};
+		3F31E1B5275A1F3F0002CA6A /* Bulletin */ = {
+			isa = PBXGroup;
+			children = (
+				52B8748F26DC7C38008F3CF2 /* BulletinCollectionViewCell.swift */,
+				3F7E8F5D2759ADF500392E20 /* BulletinView.xib */,
+				3F7E8F5F2759AE0B00392E20 /* BulletinView.swift */,
+			);
+			path = Bulletin;
+			sourceTree = "<group>";
+		};
 		3F7E8F4E2750E7EB00392E20 /* RollingNotice */ = {
 			isa = PBXGroup;
 			children = (
@@ -824,17 +846,11 @@
 		52944E2526982B2C006CC865 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				52B8748F26DC7C38008F3CF2 /* BulletinCollectionViewCell.swift */,
-				3F7E8F5D2759ADF500392E20 /* BulletinView.xib */,
-				3F7E8F5F2759AE0B00392E20 /* BulletinView.swift */,
+				3F31E1B5275A1F3F0002CA6A /* Bulletin */,
+				3F31E1B4275A1F190002CA6A /* Todo */,
 				52A289F126D8C9C700084893 /* UDNSKMarqueeView.swift */,
-				52944E2626982B88006CC865 /* ToDoInfoView.swift */,
-				52944E2826997654006CC865 /* ToDoItemView.swift */,
 				52944E2A2699767F006CC865 /* GridentCircleView.swift */,
-				52944E2C269976C9006CC865 /* ToDoInfoHeaderView.swift */,
 				52944E2E2699CE02006CC865 /* IndicatorHeaderView.swift */,
-				52944E302699CE8B006CC865 /* ToDoInfoCollectionViewCell.swift */,
-				52944E322699CEF0006CC865 /* ToDoListCollectionViewCell.swift */,
 				52944E342699CFC1006CC865 /* HomeCollectionViewHeaderView.swift */,
 				52C2CBCF269BE52B002A2BA9 /* TodaySaleReportCollectionViewCell.swift */,
 				52C2CBD1269BE6BC002A2BA9 /* TodaySaleInfoCollectionViewCell.swift */,

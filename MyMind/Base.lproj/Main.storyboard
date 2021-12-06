@@ -155,8 +155,8 @@
                                                     </constraints>
                                                     <imageReference key="image" image="home_banner_todo"/>
                                                 </imageView>
-                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ROE-gm-8eb">
-                                                    <rect key="frame" x="0.0" y="0.0" width="358" height="88"/>
+                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ROE-gm-8eb">
+                                                    <rect key="frame" x="0.0" y="16" width="358" height="80"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <collectionViewLayout key="collectionViewLayout" id="Oue-3v-Ovb" customClass="HorizontalCellSizePagingFlowLayout" customModule="MyMind" customModuleProvider="target"/>
                                                     <cells>
@@ -174,15 +174,15 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="8Au-74-dIU" firstAttribute="leading" secondItem="y6w-uT-ggo" secondAttribute="leading" id="1Yj-p2-OWp"/>
-                                                <constraint firstItem="ROE-gm-8eb" firstAttribute="top" secondItem="y6w-uT-ggo" secondAttribute="top" id="3yA-Xf-atD"/>
+                                                <constraint firstItem="ROE-gm-8eb" firstAttribute="top" secondItem="y6w-uT-ggo" secondAttribute="top" constant="16" id="3yA-Xf-atD"/>
                                                 <constraint firstAttribute="trailing" secondItem="ROE-gm-8eb" secondAttribute="trailing" id="FTk-Aa-bfT"/>
                                                 <constraint firstItem="8Au-74-dIU" firstAttribute="top" secondItem="y6w-uT-ggo" secondAttribute="top" id="LgS-0f-bDO"/>
-                                                <constraint firstAttribute="bottom" secondItem="ROE-gm-8eb" secondAttribute="bottom" constant="8" id="Odf-yQ-i7h"/>
+                                                <constraint firstAttribute="bottom" secondItem="ROE-gm-8eb" secondAttribute="bottom" id="Odf-yQ-i7h"/>
                                                 <constraint firstItem="ROE-gm-8eb" firstAttribute="leading" secondItem="y6w-uT-ggo" secondAttribute="leading" id="SKU-Do-hxR"/>
                                                 <constraint firstAttribute="trailing" secondItem="8Au-74-dIU" secondAttribute="trailing" id="Wym-DT-ggC"/>
                                             </constraints>
                                         </collectionViewCellContentView>
-                                        <color key="backgroundColor" systemColor="linkColor"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <size key="customSize" width="358" height="96"/>
                                         <connections>
                                             <outlet property="toDoListCollectionView" destination="ROE-gm-8eb" id="37F-2g-xsS"/>
@@ -1734,9 +1734,6 @@
         <image name="right" width="28" height="28"/>
         <image name="setting_banner" width="375" height="66"/>
         <image name="user_image_icon" width="44" height="45"/>
-        <systemColor name="linkColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
         <systemColor name="secondaryLabelColor">
             <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

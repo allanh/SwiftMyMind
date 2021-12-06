@@ -13,4 +13,8 @@ extension Array {
         let isValidIndex = index >= 0 && index < count
         return isValidIndex ? self[index] : nil
     }
+    
+    func sum<T: AdditiveArithmetic>(_ predicate: (Element) -> T) -> T {
+        reduce(.zero) { $0 + predicate($1) }
+    }
 }

@@ -27,7 +27,7 @@ class ToDoItemView: NiblessView {
         activateConstraints()
         backgroundColor = .tertiarySystemBackground
         titleLabel.text = item.type.displayName
-        countLabel.text = item.count
+        countLabel.text = String(item.count)
         hierarchyNotReady = false
     }
     private let titleLabel: UILabel = UILabel {

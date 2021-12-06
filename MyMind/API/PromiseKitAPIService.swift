@@ -44,7 +44,7 @@ extension PromiseKitAPIService {
                     seal.reject(APIError.dataNotFoundError)
                     return
                 }
-
+                
                 do {
                     let response = try JSONDecoder().decode(Response<T>.self, from: data)
                     guard let content = response.data else {

@@ -27,9 +27,13 @@ class ToDoListCollectionViewCell: UICollectionViewCell {
         // Initialization code
         toDoListCollectionView.dataSource = self
         toDoListCollectionView.delegate = self
-        toDoListCollectionView.clipsToBounds = true
-        toDoListCollectionView.layer.cornerRadius = 16
-        toDoListCollectionView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+        
+        // remove all the spaces
+        if let layout = toDoListCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.minimumLineSpacing = 0
+            layout.minimumInteritemSpacing = 0
+            toDoListCollectionView.collectionViewLayout = layout
+        }
     }
     func config(with toDos:[ToDo]) {
         self.toDos = toDos
@@ -51,7 +55,7 @@ extension ToDoListCollectionViewCell: UICollectionViewDataSource {
 }
 extension ToDoListCollectionViewCell: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return  CGSize(width: toDoListCollectionView.bounds.size.width-60, height: toDoListCollectionView.bounds.size.height-16)
+        return  CGSize(width: 149, height: 80)
     }
 }
 
