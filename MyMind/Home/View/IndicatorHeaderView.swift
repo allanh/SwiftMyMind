@@ -49,19 +49,20 @@ final class IndicatorHeaderView: NiblessView {
         $0.textAlignment = .right
 
     }
-    private let seperatorView: UIView = UIView {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.backgroundColor = .secondarySystemBackground
-    }
+//    private let seperatorView: UIView = UIView {
+//        $0.translatesAutoresizingMaskIntoConstraints = false
+//        $0.backgroundColor = .secondarySystemBackground
+//    }
 }
 extension IndicatorHeaderView {
     private func arrangeView() {
+        
         addSubview(indicatorView)
         addSubview(titleLabel)
         if alternativeInfo != nil {
             addSubview(alternativeLabel)
         }
-        addSubview(seperatorView)
+//        addSubview(seperatorView)
     }
     private func activateConstraints() {
         activateConstraintsIndicatorView()
@@ -69,7 +70,7 @@ extension IndicatorHeaderView {
         if alternativeInfo != nil {
             activateConstraintsAlternativeLabel()
         }
-        activateConstraintsSeperatorView()
+//        activateConstraintsSeperatorView()
     }
 }
 extension IndicatorHeaderView {
@@ -111,19 +112,19 @@ extension IndicatorHeaderView {
             centerY, leading, trailing
         ])
     }
-    private func activateConstraintsSeperatorView() {
-        let trailing = seperatorView.trailingAnchor
-            .constraint(equalTo: trailingAnchor, constant: 0)
-        let leading = seperatorView.leadingAnchor
-            .constraint(equalTo: leadingAnchor, constant: 0)
-        let height = seperatorView.heightAnchor
-            .constraint(equalToConstant: 1)
-        
-        let bottom = seperatorView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -1)
-        NSLayoutConstraint.activate([
-            leading, trailing, height, bottom
-        ])
-    }
+//    private func activateConstraintsSeperatorView() {
+//        let trailing = seperatorView.trailingAnchor
+//            .constraint(equalTo: trailingAnchor, constant: 0)
+//        let leading = seperatorView.leadingAnchor
+//            .constraint(equalTo: leadingAnchor, constant: 0)
+//        let height = seperatorView.heightAnchor
+//            .constraint(equalToConstant: 1)
+//
+//        let bottom = seperatorView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -1)
+//        NSLayoutConstraint.activate([
+//            leading, trailing, height, bottom
+//        ])
+//    }
 }
 protocol IndicatorSwitchContentHeaderViewDelegate: AnyObject {
     func contentNeedSwitch(to index: Int, for section: Section)

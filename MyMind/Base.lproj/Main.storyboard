@@ -188,8 +188,17 @@
                                             <outlet property="toDoListCollectionView" destination="ROE-gm-8eb" id="37F-2g-xsS"/>
                                         </connections>
                                     </collectionViewCell>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="TodaySaleReportCollectionViewCell" id="24v-0e-cfv" customClass="TodaySaleReportCollectionViewCell" customModule="MyMind" customModuleProvider="target">
+                                        <rect key="frame" x="35" y="274" width="358" height="267"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Rkj-vK-kSS">
+                                            <rect key="frame" x="0.0" y="0.0" width="358" height="267"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </collectionViewCellContentView>
+                                        <size key="customSize" width="358" height="267"/>
+                                    </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SaleReportCollectionViewCell" id="5re-E6-mqc" customClass="SaleReportCollectionViewCell" customModule="MyMind" customModuleProvider="target">
-                                        <rect key="frame" x="36" y="274" width="356" height="298"/>
+                                        <rect key="frame" x="36" y="551" width="356" height="298"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="fCs-oG-46x">
                                             <rect key="frame" x="0.0" y="0.0" width="356" height="298"/>
@@ -213,7 +222,7 @@
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SaleRankingCollectionViewCell" id="b5P-M5-o9I" customClass="SaleRankingCollectionViewCell" customModule="MyMind" customModuleProvider="target">
-                                        <rect key="frame" x="35.666666666666664" y="582" width="357" height="311"/>
+                                        <rect key="frame" x="35.666666666666664" y="859" width="357" height="311"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="JgU-PI-bCO">
                                             <rect key="frame" x="0.0" y="0.0" width="357" height="311"/>
@@ -232,49 +241,13 @@
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SKURankingCollectionViewCell" id="4Ts-Ig-zsC" customClass="SKURankingCollectionViewCell" customModule="MyMind" customModuleProvider="target">
-                                        <rect key="frame" x="33.666666666666664" y="903" width="361" height="318"/>
+                                        <rect key="frame" x="33.666666666666664" y="1180" width="361" height="318"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" id="xor-pT-8AI">
                                             <rect key="frame" x="0.0" y="0.0" width="361" height="318"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="361" height="318"/>
-                                    </collectionViewCell>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="TodaySaleReportCollectionViewCell" id="24v-0e-cfv" customClass="TodaySaleReportCollectionViewCell" customModule="MyMind" customModuleProvider="target">
-                                        <rect key="frame" x="35" y="1231" width="358" height="267"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" id="Rkj-vK-kSS">
-                                            <rect key="frame" x="0.0" y="0.0" width="358" height="267"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <subviews>
-                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="BmS-kt-0x6">
-                                                    <rect key="frame" x="0.0" y="0.0" width="358" height="259"/>
-                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                    <collectionViewLayout key="collectionViewLayout" id="j1o-Mw-QEo" customClass="HorizontalCellSizePagingFlowLayout" customModule="MyMind" customModuleProvider="target"/>
-                                                    <cells>
-                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="TodaySaleInfoCollectionViewCell" id="ZZt-rz-wSj" customClass="TodaySaleInfoCollectionViewCell" customModule="MyMind" customModuleProvider="target">
-                                                            <rect key="frame" x="-5" y="0.0" width="368" height="250"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" id="Mq5-lr-QzA">
-                                                                <rect key="frame" x="0.0" y="0.0" width="368" height="250"/>
-                                                                <autoresizingMask key="autoresizingMask"/>
-                                                            </collectionViewCellContentView>
-                                                            <size key="customSize" width="368" height="250"/>
-                                                        </collectionViewCell>
-                                                    </cells>
-                                                </collectionView>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="BmS-kt-0x6" secondAttribute="bottom" constant="8" id="M0v-Xe-mi4"/>
-                                                <constraint firstAttribute="trailing" secondItem="BmS-kt-0x6" secondAttribute="trailing" id="RdN-Gr-nao"/>
-                                                <constraint firstItem="BmS-kt-0x6" firstAttribute="leading" secondItem="Rkj-vK-kSS" secondAttribute="leading" id="XI8-nv-66M"/>
-                                                <constraint firstItem="BmS-kt-0x6" firstAttribute="top" secondItem="Rkj-vK-kSS" secondAttribute="top" id="ggI-1q-4jW"/>
-                                            </constraints>
-                                        </collectionViewCellContentView>
-                                        <size key="customSize" width="358" height="267"/>
-                                        <connections>
-                                            <outlet property="todaySaleReportCollectionView" destination="BmS-kt-0x6" id="vxA-Yt-Y3F"/>
-                                        </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ActionCollectionViewCell" id="LTg-Lk-Nvk" customClass="ActionCollectionViewCell" customModule="MyMind" customModuleProvider="target">
                                         <rect key="frame" x="150" y="1508" width="128" height="128"/>

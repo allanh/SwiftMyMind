@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		01FE629A3FE5283B00E20CB8 /* Pods_MyMind.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F231C5BAACFDBA2A1B0E19E /* Pods_MyMind.framework */; };
+		3F31E1B9275F06970002CA6A /* PagedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F31E1B8275F06970002CA6A /* PagedView.swift */; };
+		3F31E1BB275F0B520002CA6A /* PageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F31E1BA275F0B520002CA6A /* PageCollectionViewCell.swift */; };
+		3F31E1BD275F17090002CA6A /* TabbedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F31E1BC275F17090002CA6A /* TabbedView.swift */; };
+		3F31E1BF275F36A70002CA6A /* TabCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F31E1BE275F36A70002CA6A /* TabCollectionViewCell.swift */; };
+		3F31E1C1275F46190002CA6A /* ViewPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F31E1C0275F46190002CA6A /* ViewPager.swift */; };
+		3F31E1C3275F67480002CA6A /* TodayTabItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F31E1C2275F67480002CA6A /* TodayTabItemView.swift */; };
 		3F7E8F47274B86CD00392E20 /* PasswordTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7E8F46274B86CD00392E20 /* PasswordTextField.swift */; };
 		3F7E8F4D2750C6B900392E20 /* OldHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7E8F4C2750C6B900392E20 /* OldHomeViewController.swift */; };
 		3F7E8F502750E80500392E20 /* RollingNoticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7E8F4F2750E80500392E20 /* RollingNoticeView.swift */; };
@@ -380,6 +386,12 @@
 		34F89462B27B89078B3D4902 /* Pods-MyMind-Demo.alpha.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMind-Demo.alpha.xcconfig"; path = "Target Support Files/Pods-MyMind-Demo/Pods-MyMind-Demo.alpha.xcconfig"; sourceTree = "<group>"; };
 		350AF3857EED6BF3C4C0A94B /* Pods-MyMind.alpha.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMind.alpha.xcconfig"; path = "Target Support Files/Pods-MyMind/Pods-MyMind.alpha.xcconfig"; sourceTree = "<group>"; };
 		39809ECD90D525C7264665CC /* Pods-MyMindTests.demo.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMindTests.demo.xcconfig"; path = "Target Support Files/Pods-MyMindTests/Pods-MyMindTests.demo.xcconfig"; sourceTree = "<group>"; };
+		3F31E1B8275F06970002CA6A /* PagedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagedView.swift; sourceTree = "<group>"; };
+		3F31E1BA275F0B520002CA6A /* PageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageCollectionViewCell.swift; sourceTree = "<group>"; };
+		3F31E1BC275F17090002CA6A /* TabbedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbedView.swift; sourceTree = "<group>"; };
+		3F31E1BE275F36A70002CA6A /* TabCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCollectionViewCell.swift; sourceTree = "<group>"; };
+		3F31E1C0275F46190002CA6A /* ViewPager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewPager.swift; sourceTree = "<group>"; };
+		3F31E1C2275F67480002CA6A /* TodayTabItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayTabItemView.swift; sourceTree = "<group>"; };
 		3F7E8F46274B86CD00392E20 /* PasswordTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordTextField.swift; sourceTree = "<group>"; };
 		3F7E8F4C2750C6B900392E20 /* OldHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldHomeViewController.swift; sourceTree = "<group>"; };
 		3F7E8F4F2750E80500392E20 /* RollingNoticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RollingNoticeView.swift; sourceTree = "<group>"; };
@@ -781,6 +793,29 @@
 			path = Bulletin;
 			sourceTree = "<group>";
 		};
+		3F31E1B6275EF2B80002CA6A /* Today */ = {
+			isa = PBXGroup;
+			children = (
+				3F31E1B7275F06650002CA6A /* ViewPager */,
+				3F31E1C2275F67480002CA6A /* TodayTabItemView.swift */,
+				52C2CBCF269BE52B002A2BA9 /* TodaySaleReportCollectionViewCell.swift */,
+				52C2CBD1269BE6BC002A2BA9 /* TodaySaleInfoCollectionViewCell.swift */,
+			);
+			path = Today;
+			sourceTree = "<group>";
+		};
+		3F31E1B7275F06650002CA6A /* ViewPager */ = {
+			isa = PBXGroup;
+			children = (
+				3F31E1B8275F06970002CA6A /* PagedView.swift */,
+				3F31E1BA275F0B520002CA6A /* PageCollectionViewCell.swift */,
+				3F31E1BC275F17090002CA6A /* TabbedView.swift */,
+				3F31E1BE275F36A70002CA6A /* TabCollectionViewCell.swift */,
+				3F31E1C0275F46190002CA6A /* ViewPager.swift */,
+			);
+			path = ViewPager;
+			sourceTree = "<group>";
+		};
 		3F7E8F4E2750E7EB00392E20 /* RollingNotice */ = {
 			isa = PBXGroup;
 			children = (
@@ -848,12 +883,11 @@
 			children = (
 				3F31E1B5275A1F3F0002CA6A /* Bulletin */,
 				3F31E1B4275A1F190002CA6A /* Todo */,
+				3F31E1B6275EF2B80002CA6A /* Today */,
 				52A289F126D8C9C700084893 /* UDNSKMarqueeView.swift */,
 				52944E2A2699767F006CC865 /* GridentCircleView.swift */,
 				52944E2E2699CE02006CC865 /* IndicatorHeaderView.swift */,
 				52944E342699CFC1006CC865 /* HomeCollectionViewHeaderView.swift */,
-				52C2CBCF269BE52B002A2BA9 /* TodaySaleReportCollectionViewCell.swift */,
-				52C2CBD1269BE6BC002A2BA9 /* TodaySaleInfoCollectionViewCell.swift */,
 				52C2CBD3269BED72002A2BA9 /* SaleReportInfoView.swift */,
 				52C2CBD7269C4D4E002A2BA9 /* SaleReportInfoItemView.swift */,
 				52C2CBD9269D6325002A2BA9 /* IndicatorSwitchContentHeaderView.swift */,
@@ -1907,6 +1941,7 @@
 				A4793C9626047C8000AD280C /* NibOwnerLoadable.swift in Sources */,
 				97547CC52681DC4C001859A8 /* PurchaseCompletedApplyViewController.swift in Sources */,
 				A4DD410926427DD5007B2A41 /* MyMindAutoCompleteAPIService.swift in Sources */,
+				3F31E1C3275F67480002CA6A /* TodayTabItemView.swift in Sources */,
 				52D7249F268D62BC00B00585 /* MyMindPurchaseReviewAPIService.swift in Sources */,
 				3F851E092733B947006CD5EC /* AccountSettingViewController.swift in Sources */,
 				52B8749C26DCE7A2008F3CF2 /* Registration.swift in Sources */,
@@ -1979,6 +2014,7 @@
 				A4BDC7BE260B418E005C33A5 /* SignInAccountInfo.swift in Sources */,
 				A439BD372637E42F004F47C8 /* MyMindPurchaseAPIService.swift in Sources */,
 				A405410B264A575E00E2D21B /* UITextField+.swift in Sources */,
+				3F31E1BD275F17090002CA6A /* TabbedView.swift in Sources */,
 				52B8749626DCBFA1008F3CF2 /* Announcement.swift in Sources */,
 				52944E2F2699CE02006CC865 /* IndicatorHeaderView.swift in Sources */,
 				A439B5412609D61C002352C2 /* String+.swift in Sources */,
@@ -1991,6 +2027,7 @@
 				97547CBD2680957D001859A8 /* PurchaseSuggestionInfosLoader.swift in Sources */,
 				A4F2D015265D088B004D8D6D /* ProductMaterialAutoCompleteAdapters.swift in Sources */,
 				A4DD410726425496007B2A41 /* PromiseKitAPIService.swift in Sources */,
+				3F31E1B9275F06970002CA6A /* PagedView.swift in Sources */,
 				52F5642A269408A300171032 /* StaticView.swift in Sources */,
 				3F7E8F502750E80500392E20 /* RollingNoticeView.swift in Sources */,
 				A43E8510268C08B8008C8369 /* InstructionView.swift in Sources */,
@@ -2027,6 +2064,7 @@
 				52AC22A226FACA04003AF437 /* AnnouncementListFilterModel.swift in Sources */,
 				A4B55E4F265B538F002E1880 /* KeychainUserSessionDataStore.swift in Sources */,
 				A4CBD8A72664E1E800B19119 /* VendorInfoLoader.swift in Sources */,
+				3F31E1C1275F46190002CA6A /* ViewPager.swift in Sources */,
 				528AEF8126EF5D94004EC51C /* RangeExpression+.swift in Sources */,
 				A494D9D02670CE0E008658F8 /* PurchaseReviewerListLoader.swift in Sources */,
 				A494D9CC2670CD68008658F8 /* ApplyPurchaseParameterInfo.swift in Sources */,
@@ -2085,6 +2123,7 @@
 				52DD927A26E9EF0900987536 /* AnnouncementListFilterView.swift in Sources */,
 				3F851E152743AAB2006CD5EC /* UIViewController+Alert.swift in Sources */,
 				A47F39D5263A5A9B00A3097C /* PurchaseBriefTableViewCell.swift in Sources */,
+				3F31E1BF275F36A70002CA6A /* TabCollectionViewCell.swift in Sources */,
 				A489A1B1263FAA7D00832679 /* PurchaseBriefCollectionViewCell.swift in Sources */,
 				97B117392654B8FC00242428 /* PickProductMaterialsViewController.swift in Sources */,
 				52C2CBE0269E890B002A2BA9 /* NoDataView.swift in Sources */,
@@ -2101,6 +2140,7 @@
 				A4793CB626048EBA00AD280C /* ValidatableInputView.swift in Sources */,
 				A46487722689702B0053E6F5 /* DateFormatter+Secret.swift in Sources */,
 				524AB04826A802BA003D1E92 /* MyMindEmptySecretView.swift in Sources */,
+				3F31E1BB275F0B520002CA6A /* PageCollectionViewCell.swift in Sources */,
 				A4159209260C603B00FD3989 /* ForgotPasswordInfo.swift in Sources */,
 				A4054111264A8F7600E2D21B /* PurchaseQueryDateSelectionViewController.swift in Sources */,
 				A456700926830BAB009598AE /* PurchasedProductInfoTableViewCell.swift in Sources */,

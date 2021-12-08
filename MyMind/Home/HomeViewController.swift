@@ -381,8 +381,6 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         case Section.bulliten.rawValue, Section.todo.rawValue, Section.today.rawValue, Section.thirtyDays.rawValue, Section.sevenDaysSKU.rawValue, Section.sevenDaysSetSKU.rawValue,
         Section.sevenDaysSaleAmount.rawValue, Section.sevenDaysGrossProfit.rawValue :
             return 1
-//        case Section.bulliten.rawValue:
-//            return bulletins?.items.count ?? 0 > 0 ? 1 : 0
         default: return 0
         }
     }
@@ -447,14 +445,16 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = collectionView.bounds.width
         switch indexPath.section {
         case Section.bulliten.rawValue:
-            return CGSize(width: collectionView.bounds.width, height: 158)
+            return CGSize(width: width, height: 158)
         case Section.todo.rawValue:
-            return CGSize(width: collectionView.bounds.width, height: 96)
+            return CGSize(width: width, height: 96)
+        case Section.today.rawValue:
+            return CGSize(width: width-32, height: 281)
         default:
-            let width = collectionView.bounds.width
-            return CGSize(width: width, height: width*0.75)
+            return CGSize(width: width-32, height: width*0.75)
         }
     }
     
@@ -464,7 +464,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         case Section.bulliten.rawValue, Section.todo.rawValue:
             return .zero
         default:
-            return CGSize(width: width, height: 50)
+            return CGSize(width: width-32, height: 50)
         }
     }
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -526,8 +526,10 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         switch section {
         case Section.bulliten.rawValue:
             return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        default:
+        case Section.todo.rawValue:
             return UIEdgeInsets(top: 0, left: 0, bottom: 16, right: 0)
+        default:
+            return UIEdgeInsets(top: 0, left: 16, bottom: 16, right: 16)
         }
     }
 }
