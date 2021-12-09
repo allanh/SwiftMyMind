@@ -26,8 +26,8 @@ class TodayTabItemView: UIView, TabItemProtocol {
     
     lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 18)
-        label.textColor = .white
+        label.font = .pingFangTCRegular(ofSize: 16)
+        label.textColor = .brownGrey
         label.text = title
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -35,29 +35,33 @@ class TodayTabItemView: UIView, TabItemProtocol {
     
     lazy var borderView: UIView = {
         let view = UIView()
-        view.backgroundColor = .systemOrange
+        view.backgroundColor = .prussianBlue
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
     func onSelected() {
-        self.titleLabel.font = .systemFont(ofSize: 18, weight: .bold)
-        
+        self.titleLabel.font = .pingFangTCSemibold(ofSize: 16)
+        self.titleLabel.textColor = .prussianBlue
+
         if borderView.superview == nil {
+            borderView.layer.cornerRadius = 16
+            borderView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
             self.addSubview(borderView)
-            
+
             NSLayoutConstraint.activate([
-                borderView.leftAnchor.constraint(equalTo: self.leftAnchor),
-                borderView.rightAnchor.constraint(equalTo: self.rightAnchor),
-                borderView.heightAnchor.constraint(equalToConstant: 5),
+                borderView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+                borderView.widthAnchor.constraint(equalToConstant: 100),
+                borderView.heightAnchor.constraint(equalToConstant: 3),
                 borderView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
             ])
         }
     }
     
     func onNotSelected() {
-        self.titleLabel.font = .systemFont(ofSize: 18)
-        
+        self.titleLabel.font = .pingFangTCRegular(ofSize: 16)
+        self.titleLabel.textColor = .brownGrey
+
         self.layer.shadowOpacity = 0
         
         self.borderView.removeFromSuperview()
@@ -66,7 +70,6 @@ class TodayTabItemView: UIView, TabItemProtocol {
     
     // MARK: - UI Setup
     private func setupUI() {
-        self.backgroundColor = .systemBlue
         self.addSubview(titleLabel)
         
         NSLayoutConstraint.activate([

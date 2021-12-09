@@ -23,4 +23,14 @@ extension Date {
             return Calendar.current.date(byAdding: .day, value: -30, to: self)!
         }
     }
+    
+    // A string that contains the short date string representation of the current DateTime object.
+    var shortDateString: String {
+        get {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "y-MM-dd"
+            // Convert Date to String
+            return dateFormatter.string(from: self)
+        }
+    }
 }

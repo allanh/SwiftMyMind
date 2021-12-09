@@ -1,5 +1,5 @@
 //
-//  TodaySaleReportCollectionViewCell.swift
+//  TodaySaleReportCollectionViewswift
 //  MyMind
 //
 //  Created by Nelson Chan on 2021/7/12.
@@ -9,7 +9,43 @@
 import UIKit
 
 class TodaySaleReportCollectionViewCell: UICollectionViewCell {
-//    @IBOutlet weak var todaySaleReportCollectionView: UICollectionView!
+    @IBOutlet weak var todaySaleReportCollectionView: UICollectionView!
+    
+    private lazy var headerView: HeaderView = {
+        let view = HeaderView(
+            frame: CGRect(origin: .zero, size: .init(width: contentView.frame.width, height: 56)),
+            title: "今日數據"
+        )
+        view.backgroundColor = .prussianBlue
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private lazy var viewPager: ViewPager = {
+        let viewPager = ViewPager(tabSizeConfiguration: .fillEqually(height: 50, spacing: 0))
+
+        let view1 = UIView()
+        view1.backgroundColor = .red
+
+        let view2 = UIView()
+        view2.backgroundColor = .blue
+
+        let view3 = UIView()
+        view3.backgroundColor = .orange
+
+        viewPager.tabbedView.tabs = [
+            TodayTabItemView(title: "銷售數據"),
+            TodayTabItemView(title: "取消數據"),
+            TodayTabItemView(title: "退貨數據")
+        ]
+        viewPager.pagedView.pages = [
+            view1,
+            view2,
+            view3
+        ]
+        viewPager.translatesAutoresizingMaskIntoConstraints = false
+        return viewPager
+    }()
     
     private var saleReports: SaleReports? {
         didSet {
@@ -20,56 +56,55 @@ class TodaySaleReportCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         // Initialization code
         contentView.backgroundColor = .white
+        constructViewHierarchy()
+        activateConstratins()
 //        todaySaleReportCollectionView.dataSource = self
 //        todaySaleReportCollectionView.delegate = self
 //        todaySaleReportCollectionView.clipsToBounds = true
 //        todaySaleReportCollectionView.layer.cornerRadius = 16
 //        todaySaleReportCollectionView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
     }
+    
     func config(with saleReports: SaleReports?) {
         self.saleReports = saleReports
-        clipsToBounds = true
-        layer.cornerRadius = 16
-        layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
-        setupUI()
+        headerView.alternativeInfo = saleReports?.date ?? ""
+        constructViewHierarchy()
+        activateConstratins()
+//        clipsToBounds = true
+//        layer.cornerRadius = 16
+//        layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
     }
 }
 
 // MARK: - UI Setup
 
 extension TodaySaleReportCollectionViewCell {
-    private func setupUI() {
-        let viewPager: ViewPager = {
-            let viewPager = ViewPager(tabSizeConfiguration: .fillEqually(height: 50, spacing: 0))
+    
+    func constructViewHierarchy() {
+        contentView.addSubview(headerView)
+        contentView.addSubview(viewPager)
+    }
 
-            let view1 = UIView()
-            view1.backgroundColor = .red
+    func activateConstratins() {
+        activateConstraintsHeaderView()
+        activateConstraintsViewPager()
+    }
+    
+    func activateConstraintsHeaderView() {
+        NSLayoutConstraint.activate([
+            headerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            headerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            headerView.topAnchor.constraint(equalTo: topAnchor),
+        ])
+    }
 
-            let view2 = UIView()
-            view2.backgroundColor = .blue
-
-            let view3 = UIView()
-            view3.backgroundColor = .orange
-
-            viewPager.tabbedView.tabs = [
-                TodayTabItemView(title: "First"),
-                TodayTabItemView(title: "Second"),
-                TodayTabItemView(title: "Third")
-            ]
-            viewPager.pagedView.pages = [
-                view1,
-                view2,
-                view3
-            ]
-            viewPager.translatesAutoresizingMaskIntoConstraints = false
-            return viewPager
-        }()
-        
-        addSubview(viewPager)
-        viewPager.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        viewPager.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-        viewPager.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        viewPager.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+    func activateConstraintsViewPager() {
+        NSLayoutConstraint.activate([
+            viewPager.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            viewPager.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            viewPager.topAnchor.constraint(equalTo: headerView.bottomAnchor),
+            viewPager.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)
+        ])
     }
 }
 
@@ -80,7 +115,7 @@ extension TodaySaleReportCollectionViewCell {
 //
 //    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 //        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TodaySaleInfoCollectionViewCell", for: indexPath) as? TodaySaleInfoCollectionViewCell {
-//            cell.config(with: saleReports, at: indexPath.item)
+//            config(with: saleReports, at: indexPath.item)
 //            return cell
 //        }
 //        return UICollectionViewCell()

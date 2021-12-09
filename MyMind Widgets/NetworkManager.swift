@@ -170,8 +170,7 @@ class NetworkManager {
                 let todayShippedSaleReport = item.reports.first {
                     $0.type == .SHIPPED
                 }
-
-                completion(SaleReports(todayTransformedSaleReport: todayTransformedSaleReport, todayShippedSaleReport: todayShippedSaleReport, yesterdayTransformedSaleReport: nil, yesterdayShippedSaleReport: nil), true)
+                completion(SaleReports(date: end.shortDateString, todayTransformedSaleReport: todayTransformedSaleReport, todayShippedSaleReport: todayShippedSaleReport, yesterdayTransformedSaleReport: nil, yesterdayShippedSaleReport: nil), true)
             } catch {
                 completion(nil, false)
             }

@@ -186,7 +186,7 @@ extension OldHomeViewController {
                         let yesterdayShippedSaleReport = yesterdaySaleReportList.reports.first {
                             $0.type == .SHIPPED
                         }
-                        self.saleReports = SaleReports(todayTransformedSaleReport: todayTransformedSaleReport, todayShippedSaleReport: todayShippedSaleReport, yesterdayTransformedSaleReport: yesterdayTransformedSaleReport, yesterdayShippedSaleReport: yesterdayShippedSaleReport)
+                        self.saleReports = SaleReports(date: end.shortDateString, todayTransformedSaleReport: todayTransformedSaleReport, todayShippedSaleReport: todayShippedSaleReport, yesterdayTransformedSaleReport: yesterdayTransformedSaleReport, yesterdayShippedSaleReport: yesterdayShippedSaleReport)
                     }
                     .ensure {
                         self.isNetworkProcessing = false

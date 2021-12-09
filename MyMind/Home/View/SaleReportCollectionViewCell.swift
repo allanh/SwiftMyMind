@@ -106,6 +106,7 @@ extension SaleReportList {
 
 class SaleReportCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var lineChartView: LineChartView!
+    @IBOutlet weak var mylineChartView: MyMindLineChartView!
     var saleReportList: SaleReportList?
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -144,9 +145,13 @@ class SaleReportCollectionViewCell: UICollectionViewCell {
                 leftAxis.axisMaximum = 10000
             }
             lineChartView.data = reportList.lineChartData(order: order)
+            mylineChartView.data = MyMindLineChartData(points: reportList.points(for: .TOTAL_SALE_AMOUNT)[.sale] ?? [], gradientColors: [UIColor(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, alpha: 0.8), UIColor(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, alpha: 0.5), UIColor(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, alpha: 0.0)], gradientLocations: [NSNumber(value: 0), NSNumber(value: 0.3), NSNumber(value: 1)])
+            //MyMindLineChartData(points: reportList.points(for: .TOTAL_SALE_AMOUNT)[.sale], gradientColors: [UIColor.white, UIColor.black], gradientLocations: [NSNumber(value: 0), NSNumber(value: 1)])
         } else {
             leftAxis.axisMaximum = 10000
             lineChartView.data = SaleReportList.emptyLineChartData(order: order)
+            mylineChartView.data = MyMindLineChartData.empty
+            //(points: reportList.points(for: .TOTAL_SALE_AMOUNT)[.sale], gradientColors: [UIColor.white, UIColor.black], gradientLocations: [NSNumber(value: 0), NSNumber(value: 1)])
         }
     }
 }

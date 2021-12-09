@@ -103,13 +103,14 @@ extension SaleRankingReportList {
 }
 class SaleRankingCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var chartView: PieChartView!
+    @IBOutlet weak var myChartView: MyMindPieChartView!
     override func awakeFromNib() {
         super.awakeFromNib()
         chartView.translatesAutoresizingMaskIntoConstraints = false
         chartView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         chartView.topAnchor.constraint(equalTo: topAnchor).isActive = true
         chartView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-        chartView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+//        chartView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         chartView.drawEntryLabelsEnabled = false
         chartView.drawHoleEnabled = true
         chartView.drawSlicesUnderHoleEnabled = true
@@ -162,6 +163,6 @@ class SaleRankingCollectionViewCell: UICollectionViewCell {
             legend.xOffset = 20
             chartView.data = SaleRankingReportList.emptyPieChartData()
         }
-
+        myChartView.data = MyMindPieChartData.mock
     }
 }

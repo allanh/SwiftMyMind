@@ -245,7 +245,7 @@ extension HomeViewController {
                         let yesterdayShippedSaleReport = yesterdaySaleReportList.reports.first {
                             $0.type == .SHIPPED
                         }
-                        self.saleReports = SaleReports(todayTransformedSaleReport: todayTransformedSaleReport, todayShippedSaleReport: todayShippedSaleReport, yesterdayTransformedSaleReport: yesterdayTransformedSaleReport, yesterdayShippedSaleReport: yesterdayShippedSaleReport)
+                        self.saleReports = SaleReports(date: end.shortDateString, todayTransformedSaleReport: todayTransformedSaleReport, todayShippedSaleReport: todayShippedSaleReport, yesterdayTransformedSaleReport: yesterdayTransformedSaleReport, yesterdayShippedSaleReport: yesterdayShippedSaleReport)
                     }
                     .ensure {
                         self.isNetworkProcessing = false
@@ -400,24 +400,28 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         case Section.today.rawValue:
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TodaySaleReportCollectionViewCell", for: indexPath) as? TodaySaleReportCollectionViewCell {
                 cell.config(with: saleReports)
+                configCellShadow(cell)
                 return cell
             }
             return UICollectionViewCell()
         case Section.thirtyDays.rawValue:
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SaleReportCollectionViewCell", for: indexPath) as? SaleReportCollectionViewCell {
                 cell.config(with: saleReportList, order: saleReportSortOrder)
+                configCellShadow(cell)
                 return cell
             }
             return UICollectionViewCell()
         case Section.sevenDaysSKU.rawValue:
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SKURankingCollectionViewCell", for: indexPath) as? SKURankingCollectionViewCell {
                 cell.config(with: skuRankingReportList, order: skuRankingSortOrder)
+                configCellShadow(cell)
                 return cell
             }
             return UICollectionViewCell()
         case Section.sevenDaysSetSKU.rawValue:
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SKURankingCollectionViewCell", for: indexPath) as? SKURankingCollectionViewCell {
                 cell.config(with: setSKURankingReportList, order: setSKURankingSortOrder)
+                configCellShadow(cell)
                 return cell
             }
             return UICollectionViewCell()
@@ -430,6 +434,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         case Section.sevenDaysGrossProfit.rawValue:
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SaleRankingCollectionViewCell", for: indexPath) as? SaleRankingCollectionViewCell {
                 cell.config(with: grossProfitRankingReportList, devider: grossProfitRankingDevider, profit: true)
+                configCellShadow(cell)
                 return cell
             }
             return UICollectionViewCell()
@@ -452,42 +457,46 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         case Section.todo.rawValue:
             return CGSize(width: width, height: 96)
         case Section.today.rawValue:
-            return CGSize(width: width-32, height: 281)
+            return CGSize(width: width-32,  height: 322)
+        case Section.thirtyDays.rawValue:
+            return CGSize(width: width-32,  height: 632)
+        case Section.sevenDaysSaleAmount.rawValue, Section.sevenDaysGrossProfit.rawValue:
+            return CGSize(width: width-32,  height: 632)
         default:
             return CGSize(width: width-32, height: width*0.75)
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        let width = collectionView.bounds.width
-        switch section {
-        case Section.bulliten.rawValue, Section.todo.rawValue:
+//        let width = collectionView.bounds.width
+//        switch section {
+//        case Section.bulliten.rawValue, Section.todo.rawValue:
             return .zero
-        default:
-            return CGSize(width: width-32, height: 50)
-        }
+//        default:
+//            return CGSize(width: width-32, height: 50)
+//        }
     }
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        if kind == UICollectionView.elementKindSectionHeader {
-            if indexPath.section == Section.today.rawValue {
-                if let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HomeHeader", for: indexPath) as? HomeCollectionViewHeaderView {
-                    headerView.config(with: 6, title: headerInfos[indexPath.section].title)
-                    return headerView
-                }
-            } else {
-                if let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HomeSwitchContentHeader", for: indexPath) as? HomeCollectionViewSwitchContentHeaderView {
-                    var title = headerInfos[indexPath.section].title
-                    if indexPath.section == Section.thirtyDays.rawValue, saleReportSortOrder == .TOTAL_SALE_AMOUNT {
-                        title = "近30日銷售總額"
-                    }
-                    headerView.config(with: 6, title: title, switcher: headerInfos[indexPath.section].info, delegate: self)
-                    return headerView
-                }
-            }
-            return UICollectionReusableView()
-        }
-        return UICollectionReusableView()
-    }
+//    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+//        if kind == UICollectionView.elementKindSectionHeader {
+//            if indexPath.section == Section.today.rawValue {
+//                if let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HomeHeader", for: indexPath) as? HomeCollectionViewHeaderView {
+//                    headerView.config(with: 6, title: headerInfos[indexPath.section].title)
+//                    return headerView
+//                }
+//            } else {
+//                if let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HomeSwitchContentHeader", for: indexPath) as? HomeCollectionViewSwitchContentHeaderView {
+//                    var title = headerInfos[indexPath.section].title
+//                    if indexPath.section == Section.thirtyDays.rawValue, saleReportSortOrder == .TOTAL_SALE_AMOUNT {
+//                        title = "近30日銷售總額"
+//                    }
+//                    headerView.config(with: 6, title: title, switcher: headerInfos[indexPath.section].info, delegate: self)
+//                    return headerView
+//                }
+//            }
+//            return UICollectionReusableView()
+//        }
+//        return UICollectionReusableView()
+//    }
     func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
         switch indexPath.section {
         case Section.sevenDaysSKU.rawValue, Section.sevenDaysSetSKU.rawValue, Section.sevenDaysSaleAmount.rawValue, Section.sevenDaysGrossProfit.rawValue: return false
@@ -661,5 +670,16 @@ extension HomeViewController {
         } else {
             navigationController?.setNavigationBarHidden(true, animated: false)
         }
+    }
+    
+    func configCellShadow(_ cell: UICollectionViewCell) {
+        // Configure the cell
+        cell.contentView.layer.cornerRadius = 16.0
+        cell.contentView.layer.masksToBounds = true
+        cell.layer.shadowColor = UIColor.black.withAlphaComponent(0.1).cgColor
+        cell.layer.shadowOffset = CGSize(width: 0, height: 8.0)
+        cell.layer.shadowRadius = 16.0
+        cell.layer.shadowOpacity = 1
+        cell.layer.masksToBounds = false
     }
 }
