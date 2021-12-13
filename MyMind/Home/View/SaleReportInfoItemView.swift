@@ -8,17 +8,18 @@
 
 import UIKit
 class SaleReportInfoItemView: NiblessView {
-    enum SaleReportInfoType {
+    // 數量或總額
+    enum ItemType {
         case quantity, amount
     }
     var hierarchyNotReady: Bool = true
     let saleReports: SaleReports?
-    let index: Int
-    let type: SaleReportInfoType
-    init(frame: CGRect, saleReports: SaleReports?, index: Int, type: SaleReportInfoType) {
+    let infoType: SaleReportInfoView.InfoType
+    let itemType: ItemType
+    init(frame: CGRect, saleReports: SaleReports?, type: SaleReportInfoView.InfoType, itemType: ItemType) {
         self.saleReports = saleReports
-        self.index = index
-        self.type = type
+        self.infoType = type
+        self.itemType = itemType
         super.init(frame: frame)
         self.translatesAutoresizingMaskIntoConstraints = false
         self.layer.cornerRadius = 8
@@ -35,22 +36,36 @@ class SaleReportInfoItemView: NiblessView {
     }
     private let quantityTitleLabel: UILabel = UILabel {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.textColor = .secondaryLabel
+        $0.textAlignment = .center
+        $0.textColor = .white
+        $0.backgroundColor = UIColor(patternImage: UIImage(named: "today_label")!)
         $0.font = .pingFangTCRegular(ofSize: 12)
-    }
-    private let quantityRatioLabel: UILabel = UILabel {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.font = .pingFangTCRegular(ofSize: 10)
     }
     private let quantityLabel: UILabel = UILabel {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.font = .pingFangTCSemibold(ofSize: 18)
-        $0.textColor = .label
+        $0.font = .pingFangTCSemibold(ofSize: 24)
+        $0.textColor = .prussianBlue
+    }
+    private let quantityUnitLabel: UILabel = UILabel {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.font = .pingFangTCSemibold(ofSize: 14)
+        $0.textColor = .prussianBlue
+        $0.text = "元"
+    }
+    private let quantityRatioLabel: EdgeInsetLabel = EdgeInsetLabel {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.font = .pingFangTCRegular(ofSize: 12)
+        $0.textAlignment = .center
+        $0.textColor = .prussianBlue
+        $0.backgroundColor = .prussianBlue.withAlphaComponent(0.2)
+        $0.layer.cornerRadius = 8
+        $0.layer.masksToBounds = true
+        $0.textInsets = UIEdgeInsets(top: 0, left: 6, bottom: 0, right: 6)
     }
     private let yesterdayQuantityLabel: UILabel = UILabel {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.font = .pingFangTCSemibold(ofSize: 14)
-        $0.textColor = .label
+        $0.font = .pingFangTCSemibold(ofSize: 12)
+        $0.textColor = .brownGrey
     }
     private let seperator: DashedLineView = DashedLineView {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -58,25 +73,27 @@ class SaleReportInfoItemView: NiblessView {
     }
     private let transformedTitleLabel: UILabel = UILabel {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.font = .pingFangTCRegular(ofSize: 14)
-        $0.textColor = .secondaryLabel
+        $0.font = .pingFangTCRegular(ofSize: 12)
+        $0.textColor = .brownGrey
         $0.text = "轉單"
     }
     private let transformedValueLabel: UILabel = UILabel {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.font = .pingFangTCSemibold(ofSize: 14)
-        $0.textColor = .label
+        $0.font = .pingFangTCSemibold(ofSize: 12)
+        $0.textAlignment = .right
+        $0.textColor = .emperor
     }
     private let shippedTitleLabel: UILabel = UILabel {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.font = .pingFangTCRegular(ofSize: 14)
-        $0.textColor = .secondaryLabel
+        $0.font = .pingFangTCRegular(ofSize: 12)
+        $0.textColor = .brownGrey
         $0.text = "寄倉"
     }
     private let shippedValueLabel: UILabel = UILabel {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.font = .pingFangTCSemibold(ofSize: 14)
-        $0.textColor = .label
+        $0.font = .pingFangTCSemibold(ofSize: 12)
+        $0.textAlignment = .right
+        $0.textColor = .emperor
     }
 }
 /// helper
@@ -163,46 +180,82 @@ extension SaleReportInfoItemView {
             $0.numberStyle = .decimal
         }
         
-        switch type {
+        // TODO: Modify infoType
+        let index = infoType.rawValue
+
+        switch itemType {
         case .quantity:
-            quantityTitleLabel.text = index == 0 ? "銷售數量" : index == 1 ? "取消數量" : "銷退數量"
+            quantityTitleLabel.text = "數量"
+            
+            // 變動率
             let ratio = index == 0 ? saleQuantityRatio: index == 1 ? canceledQuantityRatio : returnQuantityRatio
             let string = formatter.string(from: NSNumber(value:ratio))
-            if ratio >= 0 {
-                quantityRatioLabel.textColor = .systemGreen
+            if ratio == 0 {
+                quantityRatioLabel.textColor = .prussianBlue
+                quantityRatioLabel.backgroundColor = .prussianBlue.withAlphaComponent(0.2)
+                quantityRatioLabel.text = "-"
+            } else if ratio > 0 {
+                quantityRatioLabel.textColor = .percentIncrease
+                quantityRatioLabel.backgroundColor = .percentIncrease.withAlphaComponent(0.2)
+                quantityRatioLabel.text = string
             } else {
-                quantityRatioLabel.textColor = .systemRed
+                quantityRatioLabel.textColor = .vividRed
+                quantityRatioLabel.backgroundColor = .vividRed.withAlphaComponent(0.2)
+                quantityRatioLabel.text = string
             }
-            quantityRatioLabel.text = (ratio == 0) ? "--" : string
+            
+            // 今日數量
             var quantity = index == 0 ? saleQuantityDividend : index == 1 ? canceledQuantityDividend : returnQuantityDividend
             quantityLabel.text = numberFormatter.string(from: NSNumber(value: quantity))
+            
+            // 昨日數量
             quantity = index == 0 ? saleQuantityDivisor : index == 1 ? canceledQuantityDivisor : returnQuantityDivisor
             yesterdayQuantityLabel.text = "昨日數量 "+(numberFormatter.string(from: NSNumber(value: quantity)) ?? "")
             
+            // 轉單
             var value = index == 0 ? saleReports?.todayTransformedSaleReport?.saleQuantity : index == 1 ? saleReports?.todayTransformedSaleReport?.canceledQuantity : saleReports?.todayTransformedSaleReport?.returnQuantity
             transformedValueLabel.text = numberFormatter.string(from: NSNumber(value: value ?? 0))
+            
+            // 寄倉
             value = index == 0 ? saleReports?.todayShippedSaleReport?.saleQuantity : index == 1 ? saleReports?.todayShippedSaleReport?.canceledQuantity : saleReports?.todayShippedSaleReport?.returnQuantity
             shippedValueLabel.text = numberFormatter.string(from: NSNumber(value: value ?? 0))
+            
         case .amount:
-            quantityTitleLabel.text = index == 0 ? "銷售總額" : index == 1 ? "取消總額" : "銷退總額"
+            addSubview(quantityUnitLabel)
+            
+            quantityTitleLabel.text = "總額"
             let ratio = index == 0 ? saleAmountRatio: index == 1 ? canceledAmountRatio : returnAmountRatio
             let string = formatter.string(from: NSNumber(value:ratio))
-            if ratio >= 0 {
-                quantityRatioLabel.textColor = .systemGreen
+            if ratio == 0 {
+                quantityRatioLabel.textColor = .prussianBlue
+                quantityRatioLabel.backgroundColor = .prussianBlue.withAlphaComponent(0.2)
+                quantityRatioLabel.text = "-"
+            } else if ratio > 0 {
+                quantityRatioLabel.textColor = .percentIncrease
+                quantityRatioLabel.backgroundColor = .percentIncrease.withAlphaComponent(0.2)
+                quantityRatioLabel.text = string
             } else {
-                quantityRatioLabel.textColor = .systemRed
+                quantityRatioLabel.textColor = .vividRed
+                quantityRatioLabel.backgroundColor = .vividRed.withAlphaComponent(0.2)
+                quantityRatioLabel.text = string
             }
-            quantityRatioLabel.text = (ratio == 0) ? "--" : string
+            
             var quantity = index == 0 ? saleAmountDividend : index == 1 ? canceledAmountDividend : returnAmountDividend
             quantityLabel.text = numberFormatter.string(from: NSNumber(value: quantity))
+            
             quantity = index == 0 ? saleAmountDivisor : index == 1 ? canceledAmountDivisor : returnAmountDivisor
-            yesterdayQuantityLabel.text = "昨日總額 "+(numberFormatter.string(from: NSNumber(value: quantity)) ?? "")
+            yesterdayQuantityLabel.text = "昨日總額 " + (numberFormatter.string(from: NSNumber(value: quantity)) ?? "") + "元"
+            
             var value = index == 0 ? saleReports?.todayTransformedSaleReport?.saleAmount : index == 1 ? saleReports?.todayTransformedSaleReport?.canceledAmount : saleReports?.todayTransformedSaleReport?.returnAmount
-            transformedValueLabel.text = numberFormatter.string(from: NSNumber(value: value ?? 0))
+            let transformedValue = numberFormatter.string(from: NSNumber(value: value ?? 0))
+            transformedValueLabel.text = "\(transformedValue ?? "0")元"
+            
             value = index == 0 ? saleReports?.todayShippedSaleReport?.saleAmount : index == 1 ? saleReports?.todayShippedSaleReport?.canceledAmount : saleReports?.todayShippedSaleReport?.returnAmount
-            shippedValueLabel.text = numberFormatter.string(from: NSNumber(value: value ?? 0))
+            let shippedValue = numberFormatter.string(from: NSNumber(value: value ?? 0))
+            shippedValueLabel.text = "\(shippedValue ?? "0")元"
         }
     }
+    
     private func activateConstraints() {
         activateConstraintsQuantityTitleLabel()
         activateConstraintsQuantityRatioLabel()
@@ -213,53 +266,77 @@ extension SaleReportInfoItemView {
         activateConstraintsTransformedValueLabel()
         activateConstraintsShippedTitleLabel()
         activateConstraintsShippedValueLabel()
+        if itemType == .amount {
+            activateConstraintsQuantityUnitLabel()
+        }
     }
 }
 /// constraint
 extension SaleReportInfoItemView {
     private func activateConstraintsQuantityTitleLabel() {
         let top = quantityTitleLabel.topAnchor
-            .constraint(equalTo: topAnchor, constant: 8)
+            .constraint(equalTo: topAnchor)
         let leading = quantityTitleLabel.leadingAnchor
-            .constraint(equalTo: leadingAnchor, constant: 8)
+            .constraint(equalTo: leadingAnchor)
+        let width = quantityTitleLabel.widthAnchor
+            .constraint(equalToConstant: 54)
         let height = quantityTitleLabel.heightAnchor
-            .constraint(equalToConstant: 17)
+            .constraint(equalToConstant: 24)
+
+        NSLayoutConstraint.activate([
+            top, leading, width, height
+        ])
+    }
+    
+    private func activateConstraintsQuantityLabel() {
+        let top = quantityLabel.topAnchor
+            .constraint(equalTo: quantityTitleLabel.bottomAnchor, constant: 8)
+        let leading = quantityLabel.leadingAnchor
+            .constraint(equalTo: leadingAnchor, constant: 16)
+        let trailing = quantityLabel.trailingAnchor
+            .constraint(equalTo: itemType == .amount ? quantityUnitLabel.leadingAnchor : trailingAnchor)
+        let height = quantityLabel.heightAnchor
+            .constraint(equalToConstant: 33)
+
+        NSLayoutConstraint.activate([
+            top, leading, trailing, height
+        ])
+    }
+    
+    private func activateConstraintsQuantityUnitLabel() {
+        let bottom = quantityUnitLabel.bottomAnchor
+            .constraint(equalTo: quantityLabel.bottomAnchor, constant: -4)
+        let leading = quantityUnitLabel.leadingAnchor
+            .constraint(equalTo: quantityLabel.trailingAnchor, constant: 4)
+        let trailing = quantityUnitLabel.trailingAnchor
+            .constraint(equalTo: trailingAnchor)
+        let height = quantityUnitLabel.heightAnchor
+            .constraint(equalToConstant: 20)
+
+        NSLayoutConstraint.activate([
+            bottom, leading, trailing, height
+        ])
+    }
+    
+    private func activateConstraintsQuantityRatioLabel() {
+        let top = quantityRatioLabel.topAnchor
+            .constraint(equalTo: quantityLabel.bottomAnchor, constant: 4)
+        let leading = quantityRatioLabel.leadingAnchor
+            .constraint(equalTo: leadingAnchor, constant: 16)
+        let height = quantityRatioLabel.heightAnchor
+            .constraint(equalToConstant: 16)
 
         NSLayoutConstraint.activate([
             top, leading, height
         ])
     }
-    private func activateConstraintsQuantityRatioLabel() {
-        let centerY = quantityRatioLabel.centerYAnchor
-            .constraint(equalTo: quantityTitleLabel.centerYAnchor)
-        let leading = quantityRatioLabel.leadingAnchor
-            .constraint(equalTo: quantityTitleLabel.trailingAnchor, constant: 4)
-        let height = quantityRatioLabel.heightAnchor
-            .constraint(equalToConstant: 17)
-
-        NSLayoutConstraint.activate([
-            centerY, leading, height
-        ])
-    }
-    private func activateConstraintsQuantityLabel() {
-        let top = quantityLabel.topAnchor
-            .constraint(equalTo: quantityTitleLabel.bottomAnchor, constant: 8)
-        let leading = quantityLabel.leadingAnchor
-            .constraint(equalTo: leadingAnchor, constant: 8)
-        let trailing = quantityLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8)
-        let height = quantityLabel.heightAnchor
-            .constraint(equalToConstant: 24)
-
-        NSLayoutConstraint.activate([
-            top, leading, height, trailing
-        ])
-    }
+    
     private func activateConstraintsYesterdayQuantityLabel() {
         let top = yesterdayQuantityLabel.topAnchor
-            .constraint(equalTo: quantityLabel.bottomAnchor, constant: 8)
+            .constraint(equalTo: quantityRatioLabel.bottomAnchor, constant: 8)
         let leading = yesterdayQuantityLabel.leadingAnchor
-            .constraint(equalTo: leadingAnchor, constant: 8)
-        let trailing = yesterdayQuantityLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8)
+            .constraint(equalTo: leadingAnchor, constant: 16)
+        let trailing = yesterdayQuantityLabel.trailingAnchor.constraint(equalTo: trailingAnchor)
         let height = yesterdayQuantityLabel.heightAnchor
             .constraint(equalToConstant: 17)
 
@@ -269,10 +346,10 @@ extension SaleReportInfoItemView {
     }
     private func activateConstraintsSeperator() {
         let top = seperator.topAnchor
-            .constraint(equalTo: yesterdayQuantityLabel.bottomAnchor, constant: 8)
+            .constraint(equalTo: yesterdayQuantityLabel.bottomAnchor, constant: 7.5)
         let leading = seperator.leadingAnchor
-            .constraint(equalTo: leadingAnchor, constant: 8)
-        let trailing = seperator.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8)
+            .constraint(equalTo: leadingAnchor, constant: 16)
+        let trailing = seperator.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16)
         let height = seperator.heightAnchor
             .constraint(equalToConstant: 1)
 
@@ -282,11 +359,11 @@ extension SaleReportInfoItemView {
     }
     private func activateConstraintsTransformedTitleLabel() {
         let top = transformedTitleLabel.topAnchor
-            .constraint(equalTo: seperator.bottomAnchor, constant: 8)
+            .constraint(equalTo: seperator.bottomAnchor, constant: 7.5)
         let leading = transformedTitleLabel.leadingAnchor
-            .constraint(equalTo: leadingAnchor, constant: 8)
+            .constraint(equalTo: leadingAnchor, constant: 16)
         let height = transformedTitleLabel.heightAnchor
-            .constraint(equalToConstant: 16)
+            .constraint(equalToConstant: 17)
         let width = transformedTitleLabel.widthAnchor.constraint(equalToConstant: 40)
         NSLayoutConstraint.activate([
             top, leading, height, width
@@ -296,8 +373,8 @@ extension SaleReportInfoItemView {
         let centerY = transformedValueLabel.centerYAnchor
             .constraint(equalTo: transformedTitleLabel.centerYAnchor)
         let leading = transformedValueLabel.leadingAnchor
-            .constraint(equalTo: transformedTitleLabel.trailingAnchor, constant: 8)
-        let trailing = transformedValueLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8)
+            .constraint(equalTo: transformedTitleLabel.trailingAnchor)
+        let trailing = transformedValueLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16)
 
         NSLayoutConstraint.activate([
             centerY, leading, trailing
@@ -307,9 +384,9 @@ extension SaleReportInfoItemView {
         let top = shippedTitleLabel.topAnchor
             .constraint(equalTo: transformedTitleLabel.bottomAnchor, constant: 8)
         let leading = shippedTitleLabel.leadingAnchor
-            .constraint(equalTo: leadingAnchor, constant: 8)
+            .constraint(equalTo: leadingAnchor, constant: 16)
         let height = shippedTitleLabel.heightAnchor
-            .constraint(equalToConstant: 16)
+            .constraint(equalToConstant: 17)
         let width = shippedTitleLabel.widthAnchor.constraint(equalToConstant: 40)
         NSLayoutConstraint.activate([
             top, leading, height, width
@@ -319,8 +396,8 @@ extension SaleReportInfoItemView {
         let centerY = shippedValueLabel.centerYAnchor
             .constraint(equalTo: shippedTitleLabel.centerYAnchor)
         let leading = shippedValueLabel.leadingAnchor
-            .constraint(equalTo: shippedTitleLabel.trailingAnchor, constant: 8)
-        let trailing = shippedValueLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8)
+            .constraint(equalTo: shippedTitleLabel.trailingAnchor)
+        let trailing = shippedValueLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16)
 
         NSLayoutConstraint.activate([
             centerY, leading, trailing

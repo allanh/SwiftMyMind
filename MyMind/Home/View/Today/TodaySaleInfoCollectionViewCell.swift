@@ -11,7 +11,7 @@ import UIKit
 class TodaySaleInfoCollectionViewCell: UICollectionViewCell {
     var infoView: SaleReportInfoView!
     func config(with saleReports: SaleReports?, at index: Int) {
-        infoView = SaleReportInfoView(frame: bounds.inset(by: UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)), saleReports: saleReports, index: index)
-        contentView.addSubview(infoView)
+//        infoView = SaleReportInfoView(frame: bounds.inset(by: UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)), saleReports: saleReports, index: index)
+//        contentView.addSubview(infoView)
     }
 }

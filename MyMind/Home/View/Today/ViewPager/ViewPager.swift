@@ -59,7 +59,7 @@ class ViewPager: UIView {
             pagedView.leftAnchor
                 .constraint(equalTo: self.leftAnchor),
             pagedView.topAnchor
-                .constraint(equalTo: self.tabbedView.bottomAnchor),
+                .constraint(equalTo: self.tabbedView.bottomAnchor, constant: 16),
             pagedView.rightAnchor
                 .constraint(equalTo: self.rightAnchor),
             pagedView.bottomAnchor

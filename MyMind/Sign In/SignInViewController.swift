@@ -168,8 +168,9 @@ class SignInViewController: NiblessViewController {
 
         viewModel.userSession
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [unowned self] _ in
-                ToastView.showIn(self, message: "登入成功", iconName: "success", at: .center)
+            .subscribe(onNext: { [weak self] _ in
+                guard let viewController = self else { return }
+                ToastView.showIn(viewController, message: "登入成功", iconName: "success", at: .center)
                 do {
                     let token = try KeychainHelper.default.readItem(key: .token, valueType: String.self)
                     MyMindPushAPIService.shared.registration(with: RegistrationInfo(token: token))
@@ -177,11 +178,16 @@ class SignInViewController: NiblessViewController {
                             print(registration)
                         })
                         .catch { error in
+                            guard let viewController = self else {
+                                print(error)
+                                return
+                            }
+                            
                             switch error {
                             case APIError.serviceError(let message):
-                                ToastView.showIn(self, message: message)
+                                ToastView.showIn(viewController, message: message)
                             default:
-                                ToastView.showIn(self, message: error.localizedDescription)
+                                ToastView.showIn(viewController, message: error.localizedDescription)
                             }
                         }
                 
@@ -190,7 +196,7 @@ class SignInViewController: NiblessViewController {
                     WidgetCenter.shared.reloadTimelines(ofKind: "MyMind_Widget")
                     WidgetCenter.shared.reloadTimelines(ofKind: "MyMind_ChartWidget")
                 }
-                showHomePage()
+                viewController.showHomePage()
             })
             .disposed(by: bag)
     }

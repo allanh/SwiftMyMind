@@ -33,9 +33,8 @@ class TodayTabItemView: UIView, TabItemProtocol {
         return label
     }()
     
-    lazy var borderView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .prussianBlue
+    lazy var borderView: UIImageView = {
+        let view = UIImageView(image: UIImage(named: "today_tab_border"))
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -45,13 +44,11 @@ class TodayTabItemView: UIView, TabItemProtocol {
         self.titleLabel.textColor = .prussianBlue
 
         if borderView.superview == nil {
-            borderView.layer.cornerRadius = 16
-            borderView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
             self.addSubview(borderView)
 
             NSLayoutConstraint.activate([
                 borderView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-                borderView.widthAnchor.constraint(equalToConstant: 100),
+                borderView.widthAnchor.constraint(equalToConstant: 64),
                 borderView.heightAnchor.constraint(equalToConstant: 3),
                 borderView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
             ])

@@ -10,7 +10,7 @@ import Foundation
 class MyMindSaleReportRatioNumberFormatter: NumberFormatter {
     override func string(from number: NSNumber) -> String? {
         if number.floatValue == 0.0 {
-            return "--"
+            return "-"
         }
         return super.string(from: number)
     }

@@ -32,7 +32,7 @@ extension SaleReportList {
         for report in reports {
             if let date = report.date {
                 let components = Calendar.current.dateComponents([.day], from: fromDate, to: formatter.date(from: date)!)
-                if let day = components.day, day < offset {
+                if let day = components.day, day < offset, day >= 0 {
                     if order == .TOTAL_SALE_AMOUNT {
                         salePoints[day].y += CGFloat(report.saleAmount)
                         canceledPoints[day].y += CGFloat(report.canceledAmount)

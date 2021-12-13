@@ -9,16 +9,20 @@
 import UIKit
 
 class SaleReportInfoView: NiblessView {
+    // 數據類型
+    enum InfoType: Int {
+        case sale = 0, canceled, sale_return
+    }
     var hierarchyNotReady: Bool = true
     let saleReports: SaleReports?
-    let index: Int
-    init(frame: CGRect, saleReports: SaleReports?, index: Int) {
-        self.index = index
+    let type: InfoType
+    init(frame: CGRect, saleReports: SaleReports?, type: InfoType) {
         self.saleReports = saleReports
+        self.type = type
         super.init(frame: frame)
-        self.layer.cornerRadius = 8
-        self.layer.borderWidth = 1
-        self.layer.borderColor = UIColor.tertiaryLabel.cgColor
+//        self.layer.cornerRadius = 8
+//        self.layer.borderWidth = 1
+//        self.layer.borderColor = UIColor.tertiaryLabel.cgColor
     }
     override func didMoveToSuperview() {
         super.didMoveToSuperview()
@@ -31,27 +35,20 @@ class SaleReportInfoView: NiblessView {
         backgroundColor = .systemBackground
         hierarchyNotReady = false
     }
-    private var headerView: IndicatorHeaderView!
     private var quantityView: SaleReportInfoItemView!
     private var amountView: SaleReportInfoItemView!
 }
 /// helper
 extension SaleReportInfoView {
     private func constructViews() {
-        let formatter = DateFormatter {
-            $0.dateFormat = "yyyy-MM-dd"
-        }
-        headerView = IndicatorHeaderView(frame: bounds, indicatorWidth: 6, title: index == 0 ? "今日銷售數據": index == 1 ? "今日取消數據": "今日銷退數據", alternativeInfo: formatter.string(from: Date()))
-        quantityView = SaleReportInfoItemView(frame: bounds, saleReports: saleReports, index: index, type: .quantity)
-        amountView = SaleReportInfoItemView(frame: bounds, saleReports: saleReports, index: index, type: .amount)
+        quantityView = SaleReportInfoItemView(frame: bounds, saleReports: saleReports, type: type, itemType: .quantity)
+        amountView = SaleReportInfoItemView(frame: bounds, saleReports: saleReports, type: type, itemType: .amount)
     }
     private func arrangeView() {
-        addSubview(headerView)
         addSubview(quantityView)
         addSubview(amountView)
     }
     private func activateConstraints() {
-        activateConstraintsHeaderView()
         activateConstraintsQuantityView()
         activateConstraintsAmountView()
     }
@@ -61,46 +58,25 @@ extension SaleReportInfoView {
 }
 /// constraints
 extension SaleReportInfoView {
-    private func activateConstraintsHeaderView() {
-        let top = headerView.topAnchor
-            .constraint(equalTo: topAnchor, constant: 8)
-        let height = headerView.heightAnchor
-            .constraint(equalToConstant: 56)
-        let leading = headerView.leadingAnchor
-            .constraint(equalTo: leadingAnchor, constant: 8)
-        let trailing = headerView.trailingAnchor
-            .constraint(equalTo: trailingAnchor, constant: -8)
-
-        NSLayoutConstraint.activate([
-            top, height, leading, trailing
-        ])
-    }
     private func activateConstraintsQuantityView() {
-        let top = quantityView.topAnchor
-            .constraint(equalTo: headerView.bottomAnchor, constant: 16)
-        let bottom = quantityView.bottomAnchor
-            .constraint(equalTo: bottomAnchor, constant: -16)
-        let leading = quantityView.leadingAnchor
-            .constraint(equalTo: leadingAnchor, constant: 8)
-        let width = quantityView.widthAnchor
-            .constraint(equalTo: widthAnchor, multiplier: 0.45)
+        let top = quantityView.topAnchor.constraint(equalTo: topAnchor)
+        let bottom = quantityView.bottomAnchor.constraint(equalTo: bottomAnchor)
+        let leading = quantityView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8)
+        let width = quantityView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.4617)
 
         NSLayoutConstraint.activate([
             top, bottom, leading, width
         ])
     }
     private func activateConstraintsAmountView() {
-        let top = amountView.topAnchor
-            .constraint(equalTo: headerView.bottomAnchor, constant: 16)
-        let bottom = amountView.bottomAnchor
-            .constraint(equalTo: bottomAnchor, constant: -16)
-        let trailing = amountView.trailingAnchor
-            .constraint(equalTo: trailingAnchor, constant: -8)
-        let width = amountView.widthAnchor
-            .constraint(equalTo: widthAnchor, multiplier: 0.45)
+        let top = amountView.topAnchor.constraint(equalTo: topAnchor)
+        let bottom = amountView.bottomAnchor.constraint(equalTo: bottomAnchor)
+        let leading = amountView.leadingAnchor.constraint(equalTo: quantityView.trailingAnchor, constant: 8)
+        let trailing = amountView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8)
+        let width = amountView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.4617)
 
         NSLayoutConstraint.activate([
-            top, bottom, trailing, width
+            top, bottom, leading, trailing, width
         ])
     }
 }

@@ -230,4 +230,9 @@ extension UIColor {
             return UIColor(hex: "cccccc")
         }
     }
+    static var percentIncrease: UIColor {
+        get {
+            return UIColor(hex: "1fa1ff")
+        }
+    }
 }

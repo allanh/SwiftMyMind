@@ -23,56 +23,33 @@ class TodaySaleReportCollectionViewCell: UICollectionViewCell {
     
     private lazy var viewPager: ViewPager = {
         let viewPager = ViewPager(tabSizeConfiguration: .fillEqually(height: 50, spacing: 0))
-
-        let view1 = UIView()
-        view1.backgroundColor = .red
-
-        let view2 = UIView()
-        view2.backgroundColor = .blue
-
-        let view3 = UIView()
-        view3.backgroundColor = .orange
-
         viewPager.tabbedView.tabs = [
             TodayTabItemView(title: "銷售數據"),
             TodayTabItemView(title: "取消數據"),
             TodayTabItemView(title: "退貨數據")
         ]
-        viewPager.pagedView.pages = [
-            view1,
-            view2,
-            view3
-        ]
         viewPager.translatesAutoresizingMaskIntoConstraints = false
         return viewPager
     }()
-    
-    private var saleReports: SaleReports? {
-        didSet {
-//            todaySaleReportCollectionView.reloadData()
-        }
-    }
+        
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         contentView.backgroundColor = .white
         constructViewHierarchy()
         activateConstratins()
-//        todaySaleReportCollectionView.dataSource = self
-//        todaySaleReportCollectionView.delegate = self
-//        todaySaleReportCollectionView.clipsToBounds = true
-//        todaySaleReportCollectionView.layer.cornerRadius = 16
-//        todaySaleReportCollectionView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
     }
     
     func config(with saleReports: SaleReports?) {
-        self.saleReports = saleReports
-        headerView.alternativeInfo = saleReports?.date ?? ""
+        headerView.alternativeInfo = saleReports?.dateString ?? Date().shortDateString
         constructViewHierarchy()
         activateConstratins()
-//        clipsToBounds = true
-//        layer.cornerRadius = 16
-//        layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+        
+        viewPager.pagedView.pages = [
+            SaleReportInfoView(frame: bounds.inset(by: UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)), saleReports: saleReports, type: .sale),
+            SaleReportInfoView(frame: bounds.inset(by: UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)), saleReports: saleReports, type: .canceled),
+            SaleReportInfoView(frame: bounds.inset(by: UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)), saleReports: saleReports, type: .sale_return)
+        ]
     }
 }
 
@@ -92,38 +69,19 @@ extension TodaySaleReportCollectionViewCell {
     
     func activateConstraintsHeaderView() {
         NSLayoutConstraint.activate([
-            headerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            headerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            headerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            headerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             headerView.topAnchor.constraint(equalTo: topAnchor),
         ])
     }
 
     func activateConstraintsViewPager() {
         NSLayoutConstraint.activate([
-            viewPager.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            viewPager.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            viewPager.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
+            viewPager.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
             viewPager.topAnchor.constraint(equalTo: headerView.bottomAnchor),
             viewPager.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)
         ])
     }
 }
-
-//extension TodaySaleReportCollectionViewCell: UICollectionViewDataSource {
-//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return 3
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TodaySaleInfoCollectionViewCell", for: indexPath) as? TodaySaleInfoCollectionViewCell {
-//            config(with: saleReports, at: indexPath.item)
-//            return cell
-//        }
-//        return UICollectionViewCell()
-//    }
-//}
-//extension TodaySaleReportCollectionViewCell: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        return  CGSize(width: todaySaleReportCollectionView.bounds.size.width-20, height: todaySaleReportCollectionView.bounds.size.height-16)
-//    }
-//}
 

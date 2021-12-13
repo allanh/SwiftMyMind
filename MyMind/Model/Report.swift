@@ -159,13 +159,12 @@ struct SaleReportList: Codable {
 }
 // MARK: -- SaleReports --
 struct SaleReports {
-    let date: String?
+    let dateString: String?
     let todayTransformedSaleReport: SaleReport?
     let todayShippedSaleReport: SaleReport?
     let yesterdayTransformedSaleReport: SaleReport?
     let yesterdayShippedSaleReport: SaleReport?
-    static let empty: Self = SaleReports(date: nil, todayTransformedSaleReport: nil, todayShippedSaleReport: nil, yesterdayTransformedSaleReport: nil, yesterdayShippedSaleReport: nil)
-
+    static let empty: Self = SaleReports(dateString: nil, todayTransformedSaleReport: nil, todayShippedSaleReport: nil, yesterdayTransformedSaleReport: nil, yesterdayShippedSaleReport: nil)
 }
 
 // MARK: -- SKURankingReport --
