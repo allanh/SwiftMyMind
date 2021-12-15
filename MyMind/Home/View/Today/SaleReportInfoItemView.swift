@@ -45,6 +45,7 @@ class SaleReportInfoItemView: NiblessView {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = .pingFangTCSemibold(ofSize: 24)
         $0.textColor = .prussianBlue
+        $0.sizeToFit()
     }
     private let quantityUnitLabel: UILabel = UILabel {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -66,6 +67,7 @@ class SaleReportInfoItemView: NiblessView {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = .pingFangTCSemibold(ofSize: 12)
         $0.textColor = .brownGrey
+        $0.sizeToFit()
     }
     private let seperator: DashedLineView = DashedLineView {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -82,6 +84,7 @@ class SaleReportInfoItemView: NiblessView {
         $0.font = .pingFangTCSemibold(ofSize: 12)
         $0.textAlignment = .right
         $0.textColor = .emperor
+        $0.sizeToFit()
     }
     private let shippedTitleLabel: UILabel = UILabel {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -94,6 +97,7 @@ class SaleReportInfoItemView: NiblessView {
         $0.font = .pingFangTCSemibold(ofSize: 12)
         $0.textAlignment = .right
         $0.textColor = .emperor
+        $0.sizeToFit()
     }
 }
 /// helper

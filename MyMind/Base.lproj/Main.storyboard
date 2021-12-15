@@ -80,8 +80,14 @@
                                                         <action selector="back:" destination="AYc-8A-Vs7" eventType="touchUpInside" id="TIJ-gA-Me1"/>
                                                     </connections>
                                                 </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello, android/品牌營銷處歡迎回來！" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x6N-FT-psI" userLabel="Account Label">
-                                                    <rect key="frame" x="16" y="59.333333333333343" width="262" height="50.666666666666657"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello, android/品牌營銷處" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5hC-EC-BzF" userLabel="Account Label">
+                                                    <rect key="frame" x="16" y="55.333333333333336" width="396" height="25.333333333333336"/>
+                                                    <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="18"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="歡迎回來！" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x6N-FT-psI" userLabel="Welcome Label">
+                                                    <rect key="frame" x="16" y="84.666666666666671" width="262" height="25.333333333333329"/>
                                                     <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="18"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -117,10 +123,13 @@
                                         </view>
                                         <constraints>
                                             <constraint firstItem="w7N-S4-p7f" firstAttribute="leading" secondItem="XLc-0E-3Lz" secondAttribute="leading" constant="16" id="0Nz-0b-sm7"/>
+                                            <constraint firstItem="5hC-EC-BzF" firstAttribute="leading" secondItem="XLc-0E-3Lz" secondAttribute="leading" constant="16" id="1Wm-3a-UiB"/>
                                             <constraint firstItem="Mtk-63-9mU" firstAttribute="top" secondItem="XLc-0E-3Lz" secondAttribute="top" id="4Qc-37-Oll"/>
+                                            <constraint firstAttribute="trailing" secondItem="5hC-EC-BzF" secondAttribute="trailing" constant="16" id="5pu-Rk-bXP"/>
                                             <constraint firstAttribute="bottom" secondItem="w7N-S4-p7f" secondAttribute="bottom" id="Frw-CH-gVm"/>
                                             <constraint firstAttribute="trailing" secondItem="mJl-P3-Ram" secondAttribute="trailing" constant="16" id="Hct-HB-XNr"/>
                                             <constraint firstItem="x6N-FT-psI" firstAttribute="leading" secondItem="XLc-0E-3Lz" secondAttribute="leading" constant="16" id="Hkh-q4-3uN"/>
+                                            <constraint firstItem="x6N-FT-psI" firstAttribute="top" secondItem="5hC-EC-BzF" secondAttribute="bottom" constant="4" id="MUb-KS-a0N"/>
                                             <constraint firstItem="PoZ-O3-Scl" firstAttribute="leading" secondItem="XLc-0E-3Lz" secondAttribute="leading" id="NuD-CC-3eq"/>
                                             <constraint firstAttribute="trailing" secondItem="Mtk-63-9mU" secondAttribute="trailing" id="Quj-2c-lCc"/>
                                             <constraint firstItem="Mtk-63-9mU" firstAttribute="leading" secondItem="XLc-0E-3Lz" secondAttribute="leading" id="Rsm-SU-R5R"/>
@@ -204,41 +213,54 @@
                                             <rect key="frame" x="0.0" y="0.0" width="356" height="298"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dAD-eF-r6u" customClass="LineChartView" customModule="Charts">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YF6-X4-2ps">
                                                     <rect key="frame" x="0.0" y="0.0" width="356" height="298"/>
-                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="298" id="WnF-ct-Sjz"/>
-                                                    </constraints>
-                                                </view>
+                                                    <imageReference key="image" image="thirty_days_report_bg"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="近30日數據" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4QO-eV-4hZ">
+                                                    <rect key="frame" x="16" y="24" width="93.666666666666671" height="25.333333333333329"/>
+                                                    <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="18"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mvL-2S-Ukb" userLabel="Date Label">
+                                                    <rect key="frame" x="16" y="53.333333333333336" width="0.0" height="0.0"/>
+                                                    <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="12"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TpA-iG-aze" customClass="MyMindLineChartView" customModule="MyMind" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="298" width="356" height="0.0"/>
+                                                    <rect key="frame" x="0.0" y="151" width="356" height="98"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="298" id="mvD-de-v3o"/>
+                                                        <constraint firstAttribute="height" constant="98" id="mvD-de-v3o"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="TpA-iG-aze" secondAttribute="bottom" id="1cV-BO-IgC"/>
-                                                <constraint firstItem="dAD-eF-r6u" firstAttribute="top" secondItem="fCs-oG-46x" secondAttribute="top" id="5U8-m4-HSV"/>
-                                                <constraint firstItem="TpA-iG-aze" firstAttribute="top" secondItem="dAD-eF-r6u" secondAttribute="bottom" id="L6W-sV-jyL"/>
+                                                <constraint firstAttribute="bottom" secondItem="TpA-iG-aze" secondAttribute="bottom" constant="49" id="1cV-BO-IgC"/>
+                                                <constraint firstItem="4QO-eV-4hZ" firstAttribute="top" secondItem="fCs-oG-46x" secondAttribute="top" constant="24" id="HJE-wb-Tdf"/>
+                                                <constraint firstItem="mvL-2S-Ukb" firstAttribute="top" secondItem="4QO-eV-4hZ" secondAttribute="bottom" constant="4" id="IDi-a0-ZGo"/>
+                                                <constraint firstItem="YF6-X4-2ps" firstAttribute="leading" secondItem="fCs-oG-46x" secondAttribute="leading" id="Mbd-hM-FEl"/>
+                                                <constraint firstItem="mvL-2S-Ukb" firstAttribute="leading" secondItem="fCs-oG-46x" secondAttribute="leading" constant="16" id="PqH-9B-G2Y"/>
                                                 <constraint firstItem="TpA-iG-aze" firstAttribute="leading" secondItem="fCs-oG-46x" secondAttribute="leading" id="Qxb-MW-82q"/>
+                                                <constraint firstItem="YF6-X4-2ps" firstAttribute="top" secondItem="fCs-oG-46x" secondAttribute="top" id="dxW-ZB-DCe"/>
+                                                <constraint firstAttribute="bottom" secondItem="YF6-X4-2ps" secondAttribute="bottom" id="osI-es-NQd"/>
                                                 <constraint firstAttribute="trailing" secondItem="TpA-iG-aze" secondAttribute="trailing" id="r9W-UA-fF5"/>
-                                                <constraint firstAttribute="trailing" secondItem="dAD-eF-r6u" secondAttribute="trailing" id="wHo-hb-vEP"/>
-                                                <constraint firstItem="dAD-eF-r6u" firstAttribute="leading" secondItem="fCs-oG-46x" secondAttribute="leading" id="woS-tB-QyU"/>
+                                                <constraint firstItem="4QO-eV-4hZ" firstAttribute="leading" secondItem="fCs-oG-46x" secondAttribute="leading" constant="16" id="sWK-gE-ydy"/>
+                                                <constraint firstAttribute="trailing" secondItem="YF6-X4-2ps" secondAttribute="trailing" id="zc7-PX-Jav"/>
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="356" height="298"/>
                                         <connections>
-                                            <outlet property="lineChartView" destination="dAD-eF-r6u" id="LZH-Jz-Ajm"/>
+                                            <outlet property="dateLabel" destination="mvL-2S-Ukb" id="7dw-Zp-Lt9"/>
                                             <outlet property="mylineChartView" destination="TpA-iG-aze" id="vPY-Rh-2cW"/>
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SKURankingCollectionViewCell" id="4Ts-Ig-zsC" customClass="SKURankingCollectionViewCell" customModule="MyMind" customModuleProvider="target">
                                         <rect key="frame" x="33.666666666666664" y="859" width="361" height="318"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="xor-pT-8AI">
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" id="xor-pT-8AI">
                                             <rect key="frame" x="0.0" y="0.0" width="361" height="318"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </collectionViewCellContentView>
@@ -247,16 +269,16 @@
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SaleRankingCollectionViewCell" id="b5P-M5-o9I" customClass="SaleRankingCollectionViewCell" customModule="MyMind" customModuleProvider="target">
                                         <rect key="frame" x="35.666666666666664" y="1187" width="357" height="311"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="JgU-PI-bCO">
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" id="JgU-PI-bCO">
                                             <rect key="frame" x="0.0" y="0.0" width="357" height="311"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" id="bKj-c5-PwS" customClass="PieChartView" customModule="Charts">
+                                                <view contentMode="scaleToFill" ambiguous="YES" id="bKj-c5-PwS" customClass="PieChartView" customModule="Charts">
                                                     <rect key="frame" x="0.0" y="0.0" width="357" height="303"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 </view>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3cd-4c-MIF" customClass="MyMindPieChartView" customModule="MyMind" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3cd-4c-MIF" customClass="MyMindPieChartView" customModule="MyMind" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="303" width="357" height="8"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
@@ -1734,6 +1756,7 @@
         <image name="my_mind_icon" width="54" height="54"/>
         <image name="right" width="28" height="28"/>
         <image name="setting_banner" width="375" height="66"/>
+        <image name="thirty_days_report_bg" width="343" height="316"/>
         <image name="user_image_icon" width="44" height="45"/>
         <systemColor name="secondaryLabelColor">
             <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>

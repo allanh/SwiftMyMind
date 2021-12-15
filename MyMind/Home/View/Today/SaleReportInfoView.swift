@@ -20,9 +20,6 @@ class SaleReportInfoView: NiblessView {
         self.saleReports = saleReports
         self.type = type
         super.init(frame: frame)
-//        self.layer.cornerRadius = 8
-//        self.layer.borderWidth = 1
-//        self.layer.borderColor = UIColor.tertiaryLabel.cgColor
     }
     override func didMoveToSuperview() {
         super.didMoveToSuperview()

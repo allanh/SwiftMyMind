@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol TabItemProtocol: UIView {
+protocol ReportItemProtocol: UIView {
     func onSelected()
     func onNotSelected()
 }
@@ -25,7 +25,7 @@ class TabCollectionViewCell: UICollectionViewCell {
     }
     
     // MARK: - Properties
-    public var view: TabItemProtocol? {
+    public var view: ReportItemProtocol? {
         didSet {
             self.setupUI()
         }

@@ -377,12 +377,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         return Section.allCases.count
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        switch section {
-        case Section.bulliten.rawValue, Section.todo.rawValue, Section.today.rawValue, Section.thirtyDays.rawValue, Section.sevenDaysSKU.rawValue, Section.sevenDaysSetSKU.rawValue,
-        Section.sevenDaysSaleAmount.rawValue, Section.sevenDaysGrossProfit.rawValue :
-            return 1
-        default: return 0
-        }
+        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -459,7 +454,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         case Section.today.rawValue:
             return CGSize(width: width-32,  height: 322)
         case Section.thirtyDays.rawValue:
-            return CGSize(width: width-32,  height: 632)
+            return CGSize(width: width-32,  height: 316)
         case Section.sevenDaysSaleAmount.rawValue, Section.sevenDaysGrossProfit.rawValue:
             return CGSize(width: width-32,  height: 632)
         default:

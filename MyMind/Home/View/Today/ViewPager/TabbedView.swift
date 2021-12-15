@@ -30,7 +30,7 @@ class TabbedView: UIView {
     
     // MARK: - Lifecycle
     init(sizeConfiguration: SizeConfiguration,
-         tabs: [TabItemProtocol] = []) {
+         tabs: [ReportItemProtocol] = []) {
         
         self.sizeConfiguration = sizeConfiguration
         self.tabs = tabs
@@ -47,7 +47,7 @@ class TabbedView: UIView {
     weak var delegate: TabbedViewDelegate?
     
     public let sizeConfiguration: SizeConfiguration
-    public var tabs: [TabItemProtocol] {
+    public var tabs: [ReportItemProtocol] {
         didSet {
             self.collectionView.reloadData()
             self.tabs[currentlySelectedIndex].onSelected()

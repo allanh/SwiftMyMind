@@ -18,6 +18,8 @@
 		3F31E1C82761ADE60002CA6A /* MyMindLineChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F31E1C72761ADE60002CA6A /* MyMindLineChartView.swift */; };
 		3F31E1CA2761AE0C0002CA6A /* MyMindPieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F31E1C92761AE0C0002CA6A /* MyMindPieChartView.swift */; };
 		3F31E1CE27635B9E0002CA6A /* EdgeInsetLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F31E1CD27635B9E0002CA6A /* EdgeInsetLabel.swift */; };
+		3F31E1D227674C040002CA6A /* SaleReportTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F31E1D127674C040002CA6A /* SaleReportTypeView.swift */; };
+		3F31E1DA276879F80002CA6A /* Double+Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F31E1D9276879F80002CA6A /* Double+Int.swift */; };
 		3F7E8F47274B86CD00392E20 /* PasswordTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7E8F46274B86CD00392E20 /* PasswordTextField.swift */; };
 		3F7E8F4D2750C6B900392E20 /* OldHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7E8F4C2750C6B900392E20 /* OldHomeViewController.swift */; };
 		3F7E8F502750E80500392E20 /* RollingNoticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7E8F4F2750E80500392E20 /* RollingNoticeView.swift */; };
@@ -400,6 +402,8 @@
 		3F31E1C72761ADE60002CA6A /* MyMindLineChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMindLineChartView.swift; sourceTree = "<group>"; };
 		3F31E1C92761AE0C0002CA6A /* MyMindPieChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMindPieChartView.swift; sourceTree = "<group>"; };
 		3F31E1CD27635B9E0002CA6A /* EdgeInsetLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdgeInsetLabel.swift; sourceTree = "<group>"; };
+		3F31E1D127674C040002CA6A /* SaleReportTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaleReportTypeView.swift; sourceTree = "<group>"; };
+		3F31E1D9276879F80002CA6A /* Double+Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Int.swift"; sourceTree = "<group>"; };
 		3F7E8F46274B86CD00392E20 /* PasswordTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordTextField.swift; sourceTree = "<group>"; };
 		3F7E8F4C2750C6B900392E20 /* OldHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldHomeViewController.swift; sourceTree = "<group>"; };
 		3F7E8F4F2750E80500392E20 /* RollingNoticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RollingNoticeView.swift; sourceTree = "<group>"; };
@@ -808,6 +812,8 @@
 				3F31E1C2275F67480002CA6A /* TodayTabItemView.swift */,
 				52C2CBCF269BE52B002A2BA9 /* TodaySaleReportCollectionViewCell.swift */,
 				52C2CBD1269BE6BC002A2BA9 /* TodaySaleInfoCollectionViewCell.swift */,
+				52C2CBD3269BED72002A2BA9 /* SaleReportInfoView.swift */,
+				52C2CBD7269C4D4E002A2BA9 /* SaleReportInfoItemView.swift */,
 			);
 			path = Today;
 			sourceTree = "<group>";
@@ -827,8 +833,10 @@
 		3F31E1C62761ADC20002CA6A /* SaleReport */ = {
 			isa = PBXGroup;
 			children = (
+				52C2CBE5269ED0D5002A2BA9 /* SaleReportCollectionViewCell.swift */,
 				3F31E1C72761ADE60002CA6A /* MyMindLineChartView.swift */,
 				3F31E1C92761AE0C0002CA6A /* MyMindPieChartView.swift */,
+				3F31E1D127674C040002CA6A /* SaleReportTypeView.swift */,
 			);
 			path = SaleReport;
 			sourceTree = "<group>";
@@ -906,15 +914,12 @@
 				52944E2A2699767F006CC865 /* GridentCircleView.swift */,
 				52944E2E2699CE02006CC865 /* IndicatorHeaderView.swift */,
 				52944E342699CFC1006CC865 /* HomeCollectionViewHeaderView.swift */,
-				52C2CBD3269BED72002A2BA9 /* SaleReportInfoView.swift */,
-				52C2CBD7269C4D4E002A2BA9 /* SaleReportInfoItemView.swift */,
 				52C2CBD9269D6325002A2BA9 /* IndicatorSwitchContentHeaderView.swift */,
 				52C2CBDB269D63D8002A2BA9 /* SKURankingCollectionViewCell.swift */,
 				52C2CBDD269D643B002A2BA9 /* SKURankingInfoView.swift */,
 				52C2CBDF269E890B002A2BA9 /* NoDataView.swift */,
 				52C2CBE1269E8950002A2BA9 /* SKURankingInfoItemView.swift */,
 				52C2CBE3269E9F20002A2BA9 /* SaleRankingCollectionViewCell.swift */,
-				52C2CBE5269ED0D5002A2BA9 /* SaleReportCollectionViewCell.swift */,
 				52C2CBE826A01B70002A2BA9 /* DashedLineView.swift */,
 				3F31E1C42760BAEA0002CA6A /* HeaderView.swift */,
 			);
@@ -1366,6 +1371,7 @@
 				3F851E0C273B7805006CD5EC /* UIView+.swift */,
 				3F851E142743AAB2006CD5EC /* UIViewController+Alert.swift */,
 				3F7E8F552757511C00392E20 /* Array+.swift */,
+				3F31E1D9276879F80002CA6A /* Double+Int.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -2103,6 +2109,7 @@
 				A47F39CD263A58F700A3097C /* PurchaseListViewController.swift in Sources */,
 				A4B55E4B265B4749002E1880 /* MyMindUserSessionRepository.swift in Sources */,
 				97AFE3702667246B002CBE01 /* PurchaseProductSuggestionViewController.swift in Sources */,
+				3F31E1D227674C040002CA6A /* SaleReportTypeView.swift in Sources */,
 				9C926AEB26E0C9990067C61E /* AutoCompleteTitleSearchModel.swift in Sources */,
 				A4F2D013265D07C7004D8D6D /* AutoCompleteSearchViewModel.swift in Sources */,
 				A439B53C2609CDC3002352C2 /* ToastView.swift in Sources */,
@@ -2167,6 +2174,7 @@
 				3F31E1BB275F0B520002CA6A /* PageCollectionViewCell.swift in Sources */,
 				A4159209260C603B00FD3989 /* ForgotPasswordInfo.swift in Sources */,
 				A4054111264A8F7600E2D21B /* PurchaseQueryDateSelectionViewController.swift in Sources */,
+				3F31E1DA276879F80002CA6A /* Double+Int.swift in Sources */,
 				A456700926830BAB009598AE /* PurchasedProductInfoTableViewCell.swift in Sources */,
 				97B1174126550C5E00242428 /* PickSortTypeView.swift in Sources */,
 				52944E232697FCFD006CC865 /* MyMindDashboardAPIService.swift in Sources */,

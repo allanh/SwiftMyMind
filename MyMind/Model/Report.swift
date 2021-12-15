@@ -156,6 +156,28 @@ struct SaleReportList: Codable {
             return Double(max(maximumSaleAmount, maximumCanceledAmount, maximumReturnAmount))
         }
     }
+    
+    // 起迄時間
+    var startDate: Date?
+    var endDate: Date?
+    
+    // 取得數量
+    func totalQuantity(pointsType: SaleReportList.SaleReportPointsType) -> Double {
+        switch pointsType {
+        case .sale: return totalSaleQuantity
+        case .cancel: return totalCanceledQuantity
+        case .returned: return totalReturnQuantity
+        }
+    }
+    
+    // 取得總額
+    func totalAmount(pointsType: SaleReportList.SaleReportPointsType) -> Double {
+        switch pointsType {
+        case .sale: return totalSaleAmount
+        case .cancel: return totalCanceledAmount
+        case .returned: return totalReturnAmount
+        }
+    }
 }
 // MARK: -- SaleReports --
 struct SaleReports {

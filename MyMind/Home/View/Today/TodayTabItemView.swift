@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TodayTabItemView: UIView, TabItemProtocol {
+class TodayTabItemView: UIView, ReportItemProtocol {
     
     init(title: String) {
         self.title = title

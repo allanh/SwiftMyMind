@@ -152,9 +152,11 @@ class MyMindLineChartView: UIView {
         shapeLayer.fillColor = UIColor.black.cgColor
         gradientLayer.mask = shapeLayer
         data.strokeColor.setStroke()
+        
         let path = UIBezierPath(cgPath: path.cgPath)
         path.lineWidth = data.strokeWidth
         path.stroke()
+        
         let verticalLinePath = UIBezierPath()
         let startOffset: CGFloat = CGFloat(verticalLineInsets)
         let width: CGFloat = (bounds.width - CGFloat(verticalLineInsets*2))/CGFloat(verticalLinesCount-1)
@@ -163,6 +165,7 @@ class MyMindLineChartView: UIView {
             verticalLinePath.addLine(to: CGPoint(x: startOffset+width*CGFloat(index), y: bounds.maxY))
         }
         verticalLinePath.lineWidth = 1
+        
         let pattern: [CGFloat] = [5.0, 2.0]
         verticalLinePath.setLineDash(pattern, count: 2, phase: 0)
         UIColor(hex: "4b7b9c").setStroke()
