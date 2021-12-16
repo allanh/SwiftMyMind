@@ -12,10 +12,16 @@ typealias Layout = (x: CGFloat, y: CGFloat, width: CGFloat, height: CGFloat)
 
 class DropDownView<T, Cell: UITableViewCell>: NiblessView, UITableViewDelegate, UITableViewDataSource {
     private let dismissableView: UIView = UIView()
-    private let tableViewContainerView: UIView = UIView()
     private let tableView: UITableView = UITableView()
+    public var tableViewContainerView: UIView = UIView()
     weak var anchorView: UIView?
 
+    var tableViewBackgroundColor: UIColor? {
+        didSet {
+            tableViewContainerView.backgroundColor = tableViewBackgroundColor
+        }
+    }
+    
     var width: CGFloat? {
         didSet {
             setNeedsUpdateConstraints()
@@ -32,6 +38,14 @@ class DropDownView<T, Cell: UITableViewCell>: NiblessView, UITableViewDelegate, 
     var topInset: CGFloat? {
         didSet {
             setNeedsUpdateConstraints()
+        }
+    }
+    
+    var contentInset: UIEdgeInsets? {
+        didSet {
+            if let inset = contentInset {
+                self.tableView.contentInset = inset
+            }
         }
     }
 
@@ -99,7 +113,6 @@ class DropDownView<T, Cell: UITableViewCell>: NiblessView, UITableViewDelegate, 
     }
 
     private func configTableViewContainerView() {
-        tableViewContainerView.backgroundColor = .clear
         tableViewContainerView.layer.cornerRadius = 4
         tableViewContainerView.layer.borderWidth = 1
         tableViewContainerView.layer.borderColor = UIColor.separator.cgColor
@@ -109,6 +122,7 @@ class DropDownView<T, Cell: UITableViewCell>: NiblessView, UITableViewDelegate, 
     private func configTableView() {
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.backgroundColor = .clear
         tableView.rowHeight = heightForRow
         tableView.register(DropDownListTableViewCell.self, forCellReuseIdentifier: String(describing: DropDownListTableViewCell.self))
     }

@@ -107,13 +107,28 @@ extension SaleReportList {
 class SaleReportCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var mylineChartView: MyMindLineChartView!
     @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var pointTypeLabel: UILabel!
+    @IBOutlet weak var pointTypeButton: UIButton!
     
-    private lazy var dropDownView: DropDownView<AnnouncementType, DropDownListTableViewCell> = {
-        let dropDownView = DropDownView(dataSource: AnnouncementType.allCases) { (cell: DropDownListTableViewCell, item) in
-//            self.configCell(cell: cell, with: item)
+    @IBOutlet weak var startDateLabel: UILabel!
+    @IBOutlet weak var secondDateLabel: UILabel!
+    @IBOutlet weak var thirdDateLabel: UILabel!
+    @IBOutlet weak var fourDateLabel: UILabel!
+    @IBOutlet weak var endDateLabel: UILabel!
+        
+    private lazy var dropDownView: DropDownView<SaleReportList.SaleReportPointsType, DataTypeDropDownListTableViewCell> = {
+        let dropDownView = DropDownView(dataSource: SaleReportList.SaleReportPointsType.allCases) { (cell: DataTypeDropDownListTableViewCell, item) in
+            self.configCell(cell: cell, with: item)
         } selectHandler: { item in
-//            self.selectItem(item: item)
+            self.selectItem(item: item)
         }
+        self.configTableViewContainerView(dropDownView.tableViewContainerView)
+        dropDownView.tableViewBackgroundColor = .monthlyReportDropDownBg
+        dropDownView.contentInset = UIEdgeInsets(top: 4, left: 0, bottom: 4, right: 0)
+        dropDownView.topInset = -32
+        dropDownView.heightForRow = 30
+        dropDownView.height = 100
+        dropDownView.shouldReloadItemWhenSelect = true
         return dropDownView
     }()
     
@@ -156,8 +171,12 @@ class SaleReportCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        dropDownView.anchorView = pointTypeButton
+        self.dateLabel.text = "\(Date().thirtyDaysBefore.shortDateString) ~ \(Date().yesterday.shortDateString)"
+        configDateLables()
         constructViewHierarchy()
         activateConstratins()
+        
 //        lineChartView.chartDescription?.enabled = false
 //        lineChartView.drawGridBackgroundEnabled = false
 //
@@ -181,14 +200,37 @@ class SaleReportCollectionViewCell: UICollectionViewCell {
     }
     
     func config(with saleReportList: SaleReportList?, order: SKURankingReport.SKURankingReportSortOrder) {
+        self.dateLabel.text = "\(Date().thirtyDaysBefore.shortDateString) ~ \(Date().yesterday.shortDateString)"
+        configDateLables()
 //        clipsToBounds = true
 //        backgroundColor = .systemBackground
 //        layer.cornerRadius = 16
 //        layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
-        self.dateLabel.text = "\(Date().thirtyDaysBefore.shortDateString) ~ \(Date().yesterday.shortDateString)"
         self.saleReportList = saleReportList
 //        let leftAxis = lineChartView.leftAxis
         configLineChart(order: .TOTAL_SALE_QUANTITY, pointType: .sale)
+    }
+    
+    @IBAction func selectPointType(_ sender: Any) {
+        dropDownView.show()
+    }
+    
+    private func configCell(cell: DataTypeDropDownListTableViewCell,  with item: SaleReportList.SaleReportPointsType) {
+        cell.titleLabel.text = item.description
+        cell.titleLabel.textColor = item == currentPointsType ? .white : .white.withAlphaComponent(0.65)
+        cell.backgroundColor = .clear
+    }
+    
+    private func selectItem(item: SaleReportList.SaleReportPointsType) {
+        self.currentPointsType = item
+        self.pointTypeLabel.text = item.description
+        dropDownView.hide()
+    }
+    
+    private func configTableViewContainerView(_ view: UIView) {
+        view.layer.cornerRadius = 16
+        view.layer.borderWidth = 0
+        view.clipsToBounds = true
     }
     
     func configLineChart(order: SKURankingReport.SKURankingReportSortOrder, pointType: SaleReportList.SaleReportPointsType) {
@@ -202,6 +244,14 @@ class SaleReportCollectionViewCell: UICollectionViewCell {
             quantityTypeView.countLabel.text = "-"
             amountTypeView.countLabel.text = "-"
             mylineChartView.data = MyMindLineChartData.empty
+        }
+    }
+
+    func configDateLables() {
+        let labels: [UILabel] = [startDateLabel, secondDateLabel, thirdDateLabel, fourDateLabel, endDateLabel]
+        let startDate = Date().thirtyDaysBefore
+        for (index, element) in labels.enumerated() {
+            element.text = Calendar.current.date(byAdding: .day, value: index*7, to: startDate)?.getFormattedDate("MM-dd")
         }
     }
 }

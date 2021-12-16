@@ -9,8 +9,21 @@
 import Foundation
 import SwiftUI
 extension SaleReportList {
-    enum SaleReportPointsType {
+    enum SaleReportPointsType: CaseIterable {
         case sale, cancel, returned
+        
+        var description: String {
+            get {
+                switch self {
+                case .sale:
+                    return "銷售數據"
+                case .cancel:
+                    return "取消數據"
+                case .returned:
+                    return "退貨數據"
+                }
+            }
+        }
     }
     func points(for order: SKURankingReport.SKURankingReportSortOrder) -> [SaleReportPointsType: [CGPoint]] {
         let toDate: Date = Date().yesterday

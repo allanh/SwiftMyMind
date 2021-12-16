@@ -235,4 +235,9 @@ extension UIColor {
             return UIColor(hex: "1fa1ff")
         }
     }
+    static var monthlyReportDropDownBg: UIColor {
+        get {
+            return UIColor(hex: "2587a0")
+        }
+    }
 }

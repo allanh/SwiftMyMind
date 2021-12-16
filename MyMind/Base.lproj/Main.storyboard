@@ -229,6 +229,55 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="21A-Q4-UcP" userLabel="DataTypeView">
+                                                    <rect key="frame" x="240" y="24" width="100" height="32"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="銷售數據" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dtK-iw-keS" userLabel="Point Type Label">
+                                                            <rect key="frame" x="16" y="6.3333333333333304" width="56" height="19.666666666666671"/>
+                                                            <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="14"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Cql-Rv-Ols" userLabel="Point Type Button">
+                                                            <rect key="frame" x="0.0" y="0.0" width="100" height="32"/>
+                                                            <inset key="titleEdgeInsets" minX="16" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                            <state key="normal">
+                                                                <attributedString key="attributedTitle"/>
+                                                            </state>
+                                                            <connections>
+                                                                <action selector="selectPointType:" destination="5re-E6-mqc" eventType="touchUpInside" id="otu-xw-fBA"/>
+                                                            </connections>
+                                                        </button>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gs7-IL-MjR">
+                                                            <rect key="frame" x="76" y="8" width="16" height="16"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="16" id="cIE-4I-zqo"/>
+                                                                <constraint firstAttribute="height" constant="16" id="fdY-bD-e9b"/>
+                                                            </constraints>
+                                                            <imageReference key="image" image="arrow_down"/>
+                                                        </imageView>
+                                                    </subviews>
+                                                    <color key="backgroundColor" red="0.27031195159999999" green="0.52002626659999995" blue="0.61563318970000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="trailing" secondItem="Cql-Rv-Ols" secondAttribute="trailing" id="6sx-dl-fgg"/>
+                                                        <constraint firstItem="gs7-IL-MjR" firstAttribute="leading" secondItem="dtK-iw-keS" secondAttribute="trailing" constant="4" id="CfL-ps-O0M"/>
+                                                        <constraint firstItem="gs7-IL-MjR" firstAttribute="centerY" secondItem="21A-Q4-UcP" secondAttribute="centerY" id="Nro-i5-eKB"/>
+                                                        <constraint firstAttribute="bottom" secondItem="Cql-Rv-Ols" secondAttribute="bottom" id="Odd-1Y-xfk"/>
+                                                        <constraint firstAttribute="height" constant="32" id="Sdw-xp-AKk"/>
+                                                        <constraint firstAttribute="trailing" secondItem="gs7-IL-MjR" secondAttribute="trailing" constant="8" id="V1V-gm-6a4"/>
+                                                        <constraint firstItem="Cql-Rv-Ols" firstAttribute="top" secondItem="21A-Q4-UcP" secondAttribute="top" id="eHx-GT-dq8"/>
+                                                        <constraint firstItem="dtK-iw-keS" firstAttribute="leading" secondItem="21A-Q4-UcP" secondAttribute="leading" constant="16" id="fjq-fq-KeN"/>
+                                                        <constraint firstAttribute="width" constant="100" id="gcJ-2u-1IM"/>
+                                                        <constraint firstItem="dtK-iw-keS" firstAttribute="centerY" secondItem="21A-Q4-UcP" secondAttribute="centerY" id="h3z-mT-qgN"/>
+                                                        <constraint firstItem="Cql-Rv-Ols" firstAttribute="leading" secondItem="21A-Q4-UcP" secondAttribute="leading" id="mrv-bv-bcb"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="16"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TpA-iG-aze" customClass="MyMindLineChartView" customModule="MyMind" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="151" width="356" height="98"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -236,16 +285,59 @@
                                                         <constraint firstAttribute="height" constant="98" id="mvD-de-v3o"/>
                                                     </constraints>
                                                 </view>
+                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="WMR-GR-zD3" userLabel="Date Stack View">
+                                                    <rect key="frame" x="0.0" y="257" width="356" height="17"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dVK-46-ZD1" userLabel="Start Date Label">
+                                                            <rect key="frame" x="0.0" y="0.0" width="50" height="17"/>
+                                                            <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="12"/>
+                                                            <color key="textColor" white="1" alpha="0.65000000000000002" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mXP-DI-ZBw" userLabel="Second Date Label">
+                                                            <rect key="frame" x="76.666666666666671" y="0.0" width="50" height="17"/>
+                                                            <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="12"/>
+                                                            <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="0.65000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M3B-2c-Mv7" userLabel="Third Date Label">
+                                                            <rect key="frame" x="153" y="0.0" width="50" height="17"/>
+                                                            <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="12"/>
+                                                            <color key="textColor" white="1" alpha="0.65000000000000002" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g7u-ac-I6G" userLabel="Four Date Label">
+                                                            <rect key="frame" x="229.66666666666666" y="0.0" width="49.999999999999972" height="17"/>
+                                                            <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="12"/>
+                                                            <color key="textColor" white="1" alpha="0.65000000000000002" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J3I-ec-hzm" userLabel="End Date Label">
+                                                            <rect key="frame" x="306" y="0.0" width="50" height="17"/>
+                                                            <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="12"/>
+                                                            <color key="textColor" white="1" alpha="0.64638888125388039" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="21A-Q4-UcP" secondAttribute="trailing" constant="16" id="00Q-xV-I9x"/>
                                                 <constraint firstAttribute="bottom" secondItem="TpA-iG-aze" secondAttribute="bottom" constant="49" id="1cV-BO-IgC"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="mvL-2S-Ukb" secondAttribute="trailing" id="3ce-3f-Hjw"/>
+                                                <constraint firstItem="WMR-GR-zD3" firstAttribute="top" secondItem="TpA-iG-aze" secondAttribute="bottom" constant="8" id="462-7P-hM0"/>
+                                                <constraint firstAttribute="bottom" secondItem="WMR-GR-zD3" secondAttribute="bottom" constant="24" id="8wN-qX-LHQ"/>
                                                 <constraint firstItem="4QO-eV-4hZ" firstAttribute="top" secondItem="fCs-oG-46x" secondAttribute="top" constant="24" id="HJE-wb-Tdf"/>
                                                 <constraint firstItem="mvL-2S-Ukb" firstAttribute="top" secondItem="4QO-eV-4hZ" secondAttribute="bottom" constant="4" id="IDi-a0-ZGo"/>
                                                 <constraint firstItem="YF6-X4-2ps" firstAttribute="leading" secondItem="fCs-oG-46x" secondAttribute="leading" id="Mbd-hM-FEl"/>
+                                                <constraint firstItem="WMR-GR-zD3" firstAttribute="leading" secondItem="fCs-oG-46x" secondAttribute="leading" id="N1R-z6-DRG"/>
                                                 <constraint firstItem="mvL-2S-Ukb" firstAttribute="leading" secondItem="fCs-oG-46x" secondAttribute="leading" constant="16" id="PqH-9B-G2Y"/>
                                                 <constraint firstItem="TpA-iG-aze" firstAttribute="leading" secondItem="fCs-oG-46x" secondAttribute="leading" id="Qxb-MW-82q"/>
+                                                <constraint firstItem="21A-Q4-UcP" firstAttribute="leading" relation="lessThanOrEqual" secondItem="4QO-eV-4hZ" secondAttribute="trailing" constant="130.33333333333331" id="X2u-h9-y7z"/>
+                                                <constraint firstAttribute="trailing" secondItem="WMR-GR-zD3" secondAttribute="trailing" id="d5f-LT-xoJ"/>
                                                 <constraint firstItem="YF6-X4-2ps" firstAttribute="top" secondItem="fCs-oG-46x" secondAttribute="top" id="dxW-ZB-DCe"/>
                                                 <constraint firstAttribute="bottom" secondItem="YF6-X4-2ps" secondAttribute="bottom" id="osI-es-NQd"/>
+                                                <constraint firstItem="21A-Q4-UcP" firstAttribute="top" secondItem="fCs-oG-46x" secondAttribute="top" constant="24" id="qB1-9U-Hu0"/>
                                                 <constraint firstAttribute="trailing" secondItem="TpA-iG-aze" secondAttribute="trailing" id="r9W-UA-fF5"/>
                                                 <constraint firstItem="4QO-eV-4hZ" firstAttribute="leading" secondItem="fCs-oG-46x" secondAttribute="leading" constant="16" id="sWK-gE-ydy"/>
                                                 <constraint firstAttribute="trailing" secondItem="YF6-X4-2ps" secondAttribute="trailing" id="zc7-PX-Jav"/>
@@ -254,7 +346,14 @@
                                         <size key="customSize" width="356" height="298"/>
                                         <connections>
                                             <outlet property="dateLabel" destination="mvL-2S-Ukb" id="7dw-Zp-Lt9"/>
+                                            <outlet property="endDateLabel" destination="J3I-ec-hzm" id="PZY-xv-mSA"/>
+                                            <outlet property="fourDateLabel" destination="g7u-ac-I6G" id="0rE-Fu-bs3"/>
                                             <outlet property="mylineChartView" destination="TpA-iG-aze" id="vPY-Rh-2cW"/>
+                                            <outlet property="pointTypeButton" destination="Cql-Rv-Ols" id="PME-8t-4lB"/>
+                                            <outlet property="pointTypeLabel" destination="dtK-iw-keS" id="sC0-Eq-maw"/>
+                                            <outlet property="secondDateLabel" destination="mXP-DI-ZBw" id="khg-1h-B7B"/>
+                                            <outlet property="startDateLabel" destination="dVK-46-ZD1" id="WAY-C1-MBW"/>
+                                            <outlet property="thirdDateLabel" destination="M3B-2c-Mv7" id="8so-eg-w8H"/>
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SKURankingCollectionViewCell" id="4Ts-Ig-zsC" customClass="SKURankingCollectionViewCell" customModule="MyMind" customModuleProvider="target">
@@ -1746,6 +1845,7 @@
     </scenes>
     <resources>
         <image name="account_banner" width="375" height="168"/>
+        <image name="arrow_down" width="16" height="16"/>
         <image name="back_arrow" width="28" height="28"/>
         <image name="bell" width="20" height="20"/>
         <image name="buy_icon" width="40" height="40"/>

@@ -33,4 +33,11 @@ extension Date {
             return dateFormatter.string(from: self)
         }
     }
+    
+    // Convert date format
+    func getFormattedDate(_ format: String? = "y-MM-dd") -> String {
+         let dateformat = DateFormatter()
+         dateformat.dateFormat = format
+         return dateformat.string(from: self)
+     }
 }

@@ -20,6 +20,7 @@
 		3F31E1CE27635B9E0002CA6A /* EdgeInsetLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F31E1CD27635B9E0002CA6A /* EdgeInsetLabel.swift */; };
 		3F31E1D227674C040002CA6A /* SaleReportTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F31E1D127674C040002CA6A /* SaleReportTypeView.swift */; };
 		3F31E1DA276879F80002CA6A /* Double+Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F31E1D9276879F80002CA6A /* Double+Int.swift */; };
+		3F31E1DC276AEA830002CA6A /* DataTypeDropDownListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F31E1DB276AEA820002CA6A /* DataTypeDropDownListTableViewCell.swift */; };
 		3F7E8F47274B86CD00392E20 /* PasswordTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7E8F46274B86CD00392E20 /* PasswordTextField.swift */; };
 		3F7E8F4D2750C6B900392E20 /* OldHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7E8F4C2750C6B900392E20 /* OldHomeViewController.swift */; };
 		3F7E8F502750E80500392E20 /* RollingNoticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7E8F4F2750E80500392E20 /* RollingNoticeView.swift */; };
@@ -404,6 +405,7 @@
 		3F31E1CD27635B9E0002CA6A /* EdgeInsetLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdgeInsetLabel.swift; sourceTree = "<group>"; };
 		3F31E1D127674C040002CA6A /* SaleReportTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaleReportTypeView.swift; sourceTree = "<group>"; };
 		3F31E1D9276879F80002CA6A /* Double+Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Int.swift"; sourceTree = "<group>"; };
+		3F31E1DB276AEA820002CA6A /* DataTypeDropDownListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTypeDropDownListTableViewCell.swift; sourceTree = "<group>"; };
 		3F7E8F46274B86CD00392E20 /* PasswordTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordTextField.swift; sourceTree = "<group>"; };
 		3F7E8F4C2750C6B900392E20 /* OldHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldHomeViewController.swift; sourceTree = "<group>"; };
 		3F7E8F4F2750E80500392E20 /* RollingNoticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RollingNoticeView.swift; sourceTree = "<group>"; };
@@ -837,6 +839,7 @@
 				3F31E1C72761ADE60002CA6A /* MyMindLineChartView.swift */,
 				3F31E1C92761AE0C0002CA6A /* MyMindPieChartView.swift */,
 				3F31E1D127674C040002CA6A /* SaleReportTypeView.swift */,
+				3F31E1DB276AEA820002CA6A /* DataTypeDropDownListTableViewCell.swift */,
 			);
 			path = SaleReport;
 			sourceTree = "<group>";
@@ -2135,6 +2138,7 @@
 				A4F2D017265D08D3004D8D6D /* SearchMaterialNamesViewModel.swift in Sources */,
 				52C2CBE6269ED0D5002A2BA9 /* SaleReportCollectionViewCell.swift in Sources */,
 				A49CF8C0260306D200AFC170 /* APIError.swift in Sources */,
+				3F31E1DC276AEA830002CA6A /* DataTypeDropDownListTableViewCell.swift in Sources */,
 				5280D6E726C0D711004363C6 /* ServiceCellTableViewCell.swift in Sources */,
 				A442A16B266F692600AAB1ED /* PurchaseApplyInfoViewModel.swift in Sources */,
 				A415920F260C796500FD3989 /* ForgotPasswordRootView.swift in Sources */,
