@@ -11,8 +11,8 @@ import UIKit
 class TodaySaleReportCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var todaySaleReportCollectionView: UICollectionView!
     
-    private lazy var headerView: HeaderView = {
-        let view = HeaderView(
+    private lazy var headerView: TodayHeaderView = {
+        let view = TodayHeaderView(
             frame: CGRect(origin: .zero, size: .init(width: contentView.frame.width, height: 56)),
             title: "今日數據"
         )

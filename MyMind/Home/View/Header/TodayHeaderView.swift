@@ -7,7 +7,7 @@
 //
 
 import UIKit
-final class HeaderView: NiblessView {
+final class TodayHeaderView: NiblessView {
     var hierarchyNotReady: Bool = true
     let title: String
     var alternativeInfo: String? {
@@ -55,7 +55,7 @@ final class HeaderView: NiblessView {
 //        $0.backgroundColor = .secondarySystemBackground
 //    }
 }
-extension HeaderView {
+extension TodayHeaderView {
     private func arrangeView() {
         
 //        addSubview(indicatorView)
@@ -74,7 +74,7 @@ extension HeaderView {
 //        activateConstraintsSeperatorView()
     }
 }
-extension HeaderView {
+extension TodayHeaderView {
 //    private func activateConstraintsIndicatorView() {
 //        let top = indicatorView.topAnchor
 //            .constraint(equalTo: topAnchor, constant: 8)

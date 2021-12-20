@@ -106,10 +106,6 @@ extension SaleReportList {
 
 class SaleReportCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var mylineChartView: MyMindLineChartView!
-    @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var pointTypeLabel: UILabel!
-    @IBOutlet weak var pointTypeButton: UIButton!
-    
     @IBOutlet weak var startDateLabel: UILabel!
     @IBOutlet weak var secondDateLabel: UILabel!
     @IBOutlet weak var thirdDateLabel: UILabel!
@@ -130,6 +126,17 @@ class SaleReportCollectionViewCell: UICollectionViewCell {
         dropDownView.height = 100
         dropDownView.shouldReloadItemWhenSelect = true
         return dropDownView
+    }()
+    
+    private lazy var headerView: DropDownHeaderView = {
+        let date = "\(Date().thirtyDaysBefore.shortDateString) ~ \(Date().yesterday.shortDateString)"
+        let view = DropDownHeaderView(frame: .zero,
+                                      title: "近30日數據",
+                                      alternativeInfo: "銷售數據",
+                                      date: date
+        )
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
     
     private lazy var quantityTypeView: SaleReportTypeView = {
@@ -171,48 +178,16 @@ class SaleReportCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        dropDownView.anchorView = pointTypeButton
-        self.dateLabel.text = "\(Date().thirtyDaysBefore.shortDateString) ~ \(Date().yesterday.shortDateString)"
-        configDateLables()
+        dropDownView.anchorView = headerView.alternativeInfoView
+        configDateLabels()
         constructViewHierarchy()
         activateConstratins()
-        
-//        lineChartView.chartDescription?.enabled = false
-//        lineChartView.drawGridBackgroundEnabled = false
-//
-//
-//        let leftAxis = lineChartView.leftAxis
-//        leftAxis.drawGridLinesEnabled = true
-//        leftAxis.axisMaximum = 10000
-//        leftAxis.axisMinimum = 0
-//        leftAxis.valueFormatter = self
-//
-//        let xAxis = lineChartView.xAxis
-//        xAxis.labelPosition = .bottom
-//        xAxis.labelFont = .pingFangTCRegular(ofSize: 10)
-//        xAxis.drawGridLinesEnabled = false
-//        xAxis.granularity = 1
-//        xAxis.labelCount = 7
-//        xAxis.valueFormatter = self
-//
-//        lineChartView.rightAxis.enabled = false
-//        lineChartView.legend.form = .line
     }
     
     func config(with saleReportList: SaleReportList?, order: SKURankingReport.SKURankingReportSortOrder) {
-        self.dateLabel.text = "\(Date().thirtyDaysBefore.shortDateString) ~ \(Date().yesterday.shortDateString)"
-        configDateLables()
-//        clipsToBounds = true
-//        backgroundColor = .systemBackground
-//        layer.cornerRadius = 16
-//        layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+        configDateLabels()
         self.saleReportList = saleReportList
-//        let leftAxis = lineChartView.leftAxis
         configLineChart(order: .TOTAL_SALE_QUANTITY, pointType: .sale)
-    }
-    
-    @IBAction func selectPointType(_ sender: Any) {
-        dropDownView.show()
     }
     
     private func configCell(cell: DataTypeDropDownListTableViewCell,  with item: SaleReportList.SaleReportPointsType) {
@@ -220,13 +195,13 @@ class SaleReportCollectionViewCell: UICollectionViewCell {
         cell.titleLabel.textColor = item == currentPointsType ? .white : .white.withAlphaComponent(0.65)
         cell.backgroundColor = .clear
     }
-    
+
     private func selectItem(item: SaleReportList.SaleReportPointsType) {
         self.currentPointsType = item
-        self.pointTypeLabel.text = item.description
+        self.headerView.alternativeInfo = item.description
         dropDownView.hide()
     }
-    
+
     private func configTableViewContainerView(_ view: UIView) {
         view.layer.cornerRadius = 16
         view.layer.borderWidth = 0
@@ -247,7 +222,7 @@ class SaleReportCollectionViewCell: UICollectionViewCell {
         }
     }
 
-    func configDateLables() {
+    func configDateLabels() {
         let labels: [UILabel] = [startDateLabel, secondDateLabel, thirdDateLabel, fourDateLabel, endDateLabel]
         let startDate = Date().thirtyDaysBefore
         for (index, element) in labels.enumerated() {
@@ -258,8 +233,12 @@ class SaleReportCollectionViewCell: UICollectionViewCell {
 
 extension SaleReportCollectionViewCell {
     func constructViewHierarchy() {
+        contentView.addSubview(headerView)
         contentView.addSubview(quantityTypeView)
         contentView.addSubview(amountTypeView)
+        headerView.alternativeInfoView.addTapGesture {
+            self.dropDownView.show()
+        }
         quantityTypeView.addTapGesture {
             self.quantityTypeView.onSelected()
             self.amountTypeView.onNotSelected()
@@ -273,14 +252,24 @@ extension SaleReportCollectionViewCell {
     }
     
     func activateConstratins() {
+        activateConstraintsHeaderView()
         activateConstraintsQuantityTypeView()
         activateConstraintsAmountTypeView()
+    }
+    
+    func activateConstraintsHeaderView() {
+        NSLayoutConstraint.activate([
+            headerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            headerView.topAnchor.constraint(equalTo: topAnchor),
+            headerView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            headerView.heightAnchor.constraint(equalToConstant: 70)
+        ])
     }
     
     func activateConstraintsQuantityTypeView() {
         NSLayoutConstraint.activate([
             quantityTypeView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            quantityTypeView.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 8),
+            quantityTypeView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 8),
             quantityTypeView.bottomAnchor.constraint(equalTo: mylineChartView.topAnchor, constant: -6),
             quantityTypeView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.4422)
         ])
@@ -290,29 +279,9 @@ extension SaleReportCollectionViewCell {
         NSLayoutConstraint.activate([
             amountTypeView.leadingAnchor.constraint(equalTo: quantityTypeView.trailingAnchor, constant: 8),
             amountTypeView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            amountTypeView.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 8),
+            amountTypeView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 8),
             amountTypeView.bottomAnchor.constraint(equalTo: mylineChartView.topAnchor, constant: -6),
             amountTypeView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.4422)
         ])
     }
 }
-
-//extension SaleReportCollectionViewCell: IAxisValueFormatter {
-//    func stringForValue(_ value: Double, axis: AxisBase?) -> String {
-//        if axis == lineChartView.leftAxis {
-//            let formatter = NumberFormatter {
-//                $0.numberStyle = .decimal
-//                $0.maximumFractionDigits = 2
-//            }
-//            return formatter.string(from: NSNumber(value: value)) ?? ""
-//        } else {
-//            if let date = lineChartView.data?.dataSets[0].entriesForXValue(value).first?.data as? Date {
-//                let formatter = DateFormatter {
-//                    $0.dateFormat = "MM-dd"
-//                }
-//                return formatter.string(from: date)
-//            }
-//        }
-//        return  ""
-//    }
-//}
