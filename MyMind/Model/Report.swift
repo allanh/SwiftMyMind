@@ -191,8 +191,26 @@ struct SaleReports {
 
 // MARK: -- SKURankingReport --
 struct SKURankingReport: Codable {
-    enum SKURankingReportSortOrder: String {
+    enum SKURankingReportSortOrder: String, CaseIterable {
         case TOTAL_SALE_QUANTITY = "TOTAL_SALE_QUANTITY", TOTAL_SALE_AMOUNT = "TOTAL_SALE_AMOUNT"
+        var index: Int {
+            get {
+                switch self {
+                case .TOTAL_SALE_QUANTITY: return 0
+                case .TOTAL_SALE_AMOUNT: return 1
+                }
+            }
+        }
+        var description: String {
+            get {
+                switch self {
+                case .TOTAL_SALE_QUANTITY:
+                    return "銷售數量"
+                case .TOTAL_SALE_AMOUNT:
+                    return "銷售總額"
+                }
+            }
+        }
     }
     private enum CodingKeys: String, CodingKey {
         case image = "image_url"
@@ -217,6 +235,20 @@ struct SKURankingReport: Codable {
 }
 // MARK: -- SKURankingReportList --
 struct SKURankingReportList: Codable {
+    enum sevenDaysType: CaseIterable {
+        case commodity, combined_commodity
+        
+        var description: String {
+            get {
+                switch self {
+                case .commodity:
+                    return "近7日SKU排行"
+                case .combined_commodity:
+                    return "近7日加工組合SKU排行"
+                }
+            }
+        }
+    }
     private enum CodingKeys: String, CodingKey {
         case reports = "detail"
     }

@@ -29,11 +29,11 @@ class ToDoListCollectionViewCell: UICollectionViewCell {
         toDoListCollectionView.delegate = self
         
         // remove all the spaces
-        if let layout = toDoListCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.minimumLineSpacing = 0
-            layout.minimumInteritemSpacing = 0
-            toDoListCollectionView.collectionViewLayout = layout
-        }
+//        if let layout = toDoListCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+//            layout.minimumLineSpacing = 0
+//            layout.minimumInteritemSpacing = 0
+//            toDoListCollectionView.collectionViewLayout = layout
+//        }
     }
     func config(with toDos:[ToDo]) {
         self.toDos = toDos

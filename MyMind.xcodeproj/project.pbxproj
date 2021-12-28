@@ -22,6 +22,9 @@
 		3F31E1DA276879F80002CA6A /* Double+Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F31E1D9276879F80002CA6A /* Double+Int.swift */; };
 		3F31E1DC276AEA830002CA6A /* DataTypeDropDownListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F31E1DB276AEA820002CA6A /* DataTypeDropDownListTableViewCell.swift */; };
 		3F31E1E2276B4B870002CA6A /* DropDownHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F31E1E1276B4B870002CA6A /* DropDownHeaderView.swift */; };
+		3F31E1E42771AAC80002CA6A /* SKURankingListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F31E1E32771AAC70002CA6A /* SKURankingListCollectionViewCell.swift */; };
+		3F31E1E62771C24C0002CA6A /* UICollectionViewCell+shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F31E1E52771C24C0002CA6A /* UICollectionViewCell+shadow.swift */; };
+		3F31E1E82772DE050002CA6A /* SKURankingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F31E1E72772DE050002CA6A /* SKURankingTableViewCell.swift */; };
 		3F7E8F47274B86CD00392E20 /* PasswordTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7E8F46274B86CD00392E20 /* PasswordTextField.swift */; };
 		3F7E8F4D2750C6B900392E20 /* OldHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7E8F4C2750C6B900392E20 /* OldHomeViewController.swift */; };
 		3F7E8F502750E80500392E20 /* RollingNoticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7E8F4F2750E80500392E20 /* RollingNoticeView.swift */; };
@@ -408,6 +411,9 @@
 		3F31E1D9276879F80002CA6A /* Double+Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Int.swift"; sourceTree = "<group>"; };
 		3F31E1DB276AEA820002CA6A /* DataTypeDropDownListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTypeDropDownListTableViewCell.swift; sourceTree = "<group>"; };
 		3F31E1E1276B4B870002CA6A /* DropDownHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownHeaderView.swift; sourceTree = "<group>"; };
+		3F31E1E32771AAC70002CA6A /* SKURankingListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKURankingListCollectionViewCell.swift; sourceTree = "<group>"; };
+		3F31E1E52771C24C0002CA6A /* UICollectionViewCell+shadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewCell+shadow.swift"; sourceTree = "<group>"; };
+		3F31E1E72772DE050002CA6A /* SKURankingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKURankingTableViewCell.swift; sourceTree = "<group>"; };
 		3F7E8F46274B86CD00392E20 /* PasswordTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordTextField.swift; sourceTree = "<group>"; };
 		3F7E8F4C2750C6B900392E20 /* OldHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldHomeViewController.swift; sourceTree = "<group>"; };
 		3F7E8F4F2750E80500392E20 /* RollingNoticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RollingNoticeView.swift; sourceTree = "<group>"; };
@@ -848,9 +854,11 @@
 		3F31E1DD276B47EC0002CA6A /* SKURanking */ = {
 			isa = PBXGroup;
 			children = (
+				3F31E1E32771AAC70002CA6A /* SKURankingListCollectionViewCell.swift */,
 				52C2CBDB269D63D8002A2BA9 /* SKURankingCollectionViewCell.swift */,
 				52C2CBDD269D643B002A2BA9 /* SKURankingInfoView.swift */,
 				52C2CBE1269E8950002A2BA9 /* SKURankingInfoItemView.swift */,
+				3F31E1E72772DE050002CA6A /* SKURankingTableViewCell.swift */,
 			);
 			path = SKURanking;
 			sourceTree = "<group>";
@@ -1394,6 +1402,7 @@
 				3F851E142743AAB2006CD5EC /* UIViewController+Alert.swift */,
 				3F7E8F552757511C00392E20 /* Array+.swift */,
 				3F31E1D9276879F80002CA6A /* Double+Int.swift */,
+				3F31E1E52771C24C0002CA6A /* UICollectionViewCell+shadow.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -2094,6 +2103,7 @@
 				3F851E0D273B7805006CD5EC /* UIView+.swift in Sources */,
 				97B117372653B1AF00242428 /* PickProductMaterialsViewModel.swift in Sources */,
 				A4793CB126048BB600AD280C /* UIFont+.swift in Sources */,
+				3F31E1E62771C24C0002CA6A /* UICollectionViewCell+shadow.swift in Sources */,
 				A4648774268970750053E6F5 /* UDI3DESCryptor.swift in Sources */,
 				5246E47226901BEC005C11EC /* SettingViewController.swift in Sources */,
 				3F7E8F562757511C00392E20 /* Array+.swift in Sources */,
@@ -2106,6 +2116,7 @@
 				52C2CBED26A04243002A2BA9 /* MainPageViewController.swift in Sources */,
 				52B8749A26DCE71D008F3CF2 /* RegistrationInfo.swift in Sources */,
 				A47AB49A265E4DA400FE3CFA /* SearchMaterialNamesViewController.swift in Sources */,
+				3F31E1E42771AAC80002CA6A /* SKURankingListCollectionViewCell.swift in Sources */,
 				52944E2726982B88006CC865 /* ToDoInfoView.swift in Sources */,
 				9CEFCA5426DE171100506308 /* AnnouncementQueryDateSelectionViewController.swift in Sources */,
 				52B62539270AE04B00E03220 /* Report+.swift in Sources */,
@@ -2115,6 +2126,7 @@
 				A4B55E4F265B538F002E1880 /* KeychainUserSessionDataStore.swift in Sources */,
 				A4CBD8A72664E1E800B19119 /* VendorInfoLoader.swift in Sources */,
 				3F31E1C1275F46190002CA6A /* ViewPager.swift in Sources */,
+				3F31E1E82772DE050002CA6A /* SKURankingTableViewCell.swift in Sources */,
 				528AEF8126EF5D94004EC51C /* RangeExpression+.swift in Sources */,
 				A494D9D02670CE0E008658F8 /* PurchaseReviewerListLoader.swift in Sources */,
 				A494D9CC2670CD68008658F8 /* ApplyPurchaseParameterInfo.swift in Sources */,

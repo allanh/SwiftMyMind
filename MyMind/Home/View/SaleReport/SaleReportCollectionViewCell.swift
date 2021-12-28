@@ -121,6 +121,7 @@ class SaleReportCollectionViewCell: UICollectionViewCell {
         self.configTableViewContainerView(dropDownView.tableViewContainerView)
         dropDownView.tableViewBackgroundColor = .monthlyReportDropDownBg
         dropDownView.contentInset = UIEdgeInsets(top: 4, left: 0, bottom: 4, right: 0)
+        dropDownView.showScrollBar = false
         dropDownView.topInset = -32
         dropDownView.heightForRow = 30
         dropDownView.height = 100
@@ -182,6 +183,9 @@ class SaleReportCollectionViewCell: UICollectionViewCell {
         configDateLabels()
         constructViewHierarchy()
         activateConstratins()
+        headerView.alternativeInfoView.addTapGesture {
+            self.dropDownView.show()
+        }
     }
     
     func config(with saleReportList: SaleReportList?, order: SKURankingReport.SKURankingReportSortOrder) {
@@ -236,9 +240,7 @@ extension SaleReportCollectionViewCell {
         contentView.addSubview(headerView)
         contentView.addSubview(quantityTypeView)
         contentView.addSubview(amountTypeView)
-        headerView.alternativeInfoView.addTapGesture {
-            self.dropDownView.show()
-        }
+
         quantityTypeView.addTapGesture {
             self.quantityTypeView.onSelected()
             self.amountTypeView.onNotSelected()

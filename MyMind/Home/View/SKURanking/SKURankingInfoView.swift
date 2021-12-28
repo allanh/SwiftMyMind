@@ -10,16 +10,30 @@ import UIKit
 class SKURankingInfoView: NiblessView {
     var hierarchyNotReady: Bool = true
     let noDataView: NoDataView
-    let rankingList: SKURankingReportList?
+    var rankingList: SKURankingReportList? {
+        didSet {
+            setupUI()
+        }
+    }
     let order: SKURankingReport.SKURankingReportSortOrder
-    init(frame: CGRect, rankingList: SKURankingReportList?, order: SKURankingReport.SKURankingReportSortOrder) {
+    init(frame: CGRect, rankingList: SKURankingReportList? = nil, order: SKURankingReport.SKURankingReportSortOrder) {
         self.rankingList = rankingList
+        self.order = order
+        self.noDataView = NoDataView()
+        super.init(frame: frame)
+    }
+    init(frame: CGRect, order: SKURankingReport.SKURankingReportSortOrder) {
         self.order = order
         self.noDataView = NoDataView()
         super.init(frame: frame)
     }
     override func didMoveToSuperview() {
         super.didMoveToSuperview()
+        setupUI()
+    }
+    var itemViews: [SKURankingInfoItemView] = []
+    
+    private func setupUI() {
         guard hierarchyNotReady else {
           return
         }
@@ -29,7 +43,6 @@ class SKURankingInfoView: NiblessView {
         backgroundColor = .systemBackground
         hierarchyNotReady = false
     }
-    var itemViews: [SKURankingInfoItemView] = []
 }
 /// helper
 extension SKURankingInfoView {

@@ -23,11 +23,6 @@ final class OldHomeViewController: UIViewController {
             loadSKURankingReportList()
         }
     }
-    private var setSKURankingSortOrder: SKURankingReport.SKURankingReportSortOrder = .TOTAL_SALE_QUANTITY {
-        didSet {
-            loadSetSKURankingReportList()
-        }
-    }
     private var amountRankingDevider: SaleRankingReport.SaleRankingReportDevider = .store {
         didSet {
             loadSaleRankingReportList()
@@ -38,7 +33,7 @@ final class OldHomeViewController: UIViewController {
             loadGrossProfitRankingReportList()
         }
     }
-    private var headerInfos: [(title: String, info: SwitcherInfo)] = [("", ("", "", 0, Section.bulliten)), ("待辦事項", ("", "", 0, Section.todo)), ("", ("", "", 0, Section.today)), ("近30日銷售數量", ("銷售數量", "銷售總額", 0, Section.thirtyDays)), ("近7日SKU銷售排行", ("銷售數量", "銷售總額", 0, Section.sevenDaysSKU)), ("近7日加工組合SKU銷售排行", ("銷售數量", "銷售總額", 0, Section.sevenDaysSetSKU)), ("近7日銷售金額佔比", ("通路", "供應商", 0, Section.sevenDaysSaleAmount)), ("近7日銷售毛利佔比", ("通路", "供應商", 0, Section.sevenDaysGrossProfit))]
+    private var headerInfos: [(title: String, info: SwitcherInfo)] = [("", ("", "", 0, Section.bulliten)), ("待辦事項", ("", "", 0, Section.todo)), ("", ("", "", 0, Section.today)), ("近30日銷售數量", ("銷售數量", "銷售總額", 0, Section.thirtyDays)), ("近7日SKU銷售排行", ("銷售數量", "銷售總額", 0, Section.sevenDaysSKU)),  ("近7日銷售金額佔比", ("通路", "供應商", 0, Section.sevenDaysSaleAmount)), ("近7日銷售毛利佔比", ("通路", "供應商", 0, Section.sevenDaysGrossProfit))]
     private var bulletins: BulletinList? {
         didSet {
             collectionView.reloadSections([Section.bulliten.rawValue])
@@ -62,11 +57,6 @@ final class OldHomeViewController: UIViewController {
     private var skuRankingReportList: SKURankingReportList? {
         didSet {
             collectionView.reloadSections([Section.sevenDaysSKU.rawValue])
-        }
-    }
-    private var setSKURankingReportList: SKURankingReportList? {
-        didSet {
-            collectionView.reloadSections([Section.sevenDaysSetSKU.rawValue])
         }
     }
     private var saleRankingReportList: SaleRankingReportList? {
@@ -115,7 +105,6 @@ extension OldHomeViewController {
         loadTodaySaleReports()
         loadSaleReportList()
         loadSKURankingReportList()
-        loadSetSKURankingReportList()
         loadSaleRankingReportList()
         loadGrossProfitRankingReportList()
     }
@@ -233,22 +222,7 @@ extension OldHomeViewController {
                 self.handlerError(error)
             }
     }
-    private func loadSetSKURankingReportList() {
-        isNetworkProcessing = true
-        let dashboardLoader = MyMindDashboardAPIService.shared
-        let end = Date()
-        dashboardLoader.skuRankingReport(start: end.sevenDaysBefore, end: end.yesterday, isSet: true, order: setSKURankingSortOrder.rawValue, count: 5)
-            .done { setRankingReportList in
-                self.setSKURankingReportList = setRankingReportList
-            }
-            .ensure {
-                self.isNetworkProcessing = false
-            }
-            .catch { error in
-                self.setSKURankingReportList = nil
-                self.handlerError(error)
-            }
-    }
+
     private func loadSaleRankingReportList() {
         isNetworkProcessing = true
         let dashboardLoader = MyMindDashboardAPIService.shared
@@ -319,7 +293,7 @@ extension OldHomeViewController: UICollectionViewDataSource, UICollectionViewDel
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch section {
-        case Section.todo.rawValue, Section.today.rawValue, Section.thirtyDays.rawValue, Section.sevenDaysSKU.rawValue, Section.sevenDaysSetSKU.rawValue,
+        case Section.todo.rawValue, Section.today.rawValue, Section.thirtyDays.rawValue, Section.sevenDaysSKU.rawValue,
         Section.sevenDaysSaleAmount.rawValue, Section.sevenDaysGrossProfit.rawValue :
             return 1
         case Section.bulliten.rawValue:
@@ -355,12 +329,6 @@ extension OldHomeViewController: UICollectionViewDataSource, UICollectionViewDel
         case Section.sevenDaysSKU.rawValue:
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SKURankingCollectionViewCell", for: indexPath) as? SKURankingCollectionViewCell {
                 cell.config(with: skuRankingReportList, order: skuRankingSortOrder)
-                return cell
-            }
-            return UICollectionViewCell()
-        case Section.sevenDaysSetSKU.rawValue:
-            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SKURankingCollectionViewCell", for: indexPath) as? SKURankingCollectionViewCell {
-                cell.config(with: setSKURankingReportList, order: setSKURankingSortOrder)
                 return cell
             }
             return UICollectionViewCell()
@@ -428,7 +396,7 @@ extension OldHomeViewController: UICollectionViewDataSource, UICollectionViewDel
     }
     func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
         switch indexPath.section {
-        case Section.sevenDaysSKU.rawValue, Section.sevenDaysSetSKU.rawValue, Section.sevenDaysSaleAmount.rawValue, Section.sevenDaysGrossProfit.rawValue: return false
+        case Section.sevenDaysSKU.rawValue, Section.sevenDaysSaleAmount.rawValue, Section.sevenDaysGrossProfit.rawValue: return false
         default: return false
         }
     }
@@ -449,8 +417,6 @@ extension OldHomeViewController: UICollectionViewDataSource, UICollectionViewDel
         switch indexPath.section {
         case Section.sevenDaysSKU.rawValue:
             print("seven days SKU ranking \(skuRankingSortOrder)")
-        case Section.sevenDaysSetSKU.rawValue:
-            print("seven days set SKU ranking \(setSKURankingSortOrder)")
         case Section.sevenDaysSaleAmount.rawValue:
             print("seven days set sale amount detail \(amountRankingDevider)")
         case Section.sevenDaysGrossProfit.rawValue:
@@ -470,8 +436,6 @@ extension OldHomeViewController: IndicatorSwitchContentHeaderViewDelegate {
             saleReportSortOrder = (index == 0) ? .TOTAL_SALE_QUANTITY : .TOTAL_SALE_AMOUNT
         case Section.sevenDaysSKU:
             skuRankingSortOrder = (index == 0) ? .TOTAL_SALE_QUANTITY : .TOTAL_SALE_AMOUNT
-        case Section.sevenDaysSetSKU:
-            setSKURankingSortOrder = (index == 0) ? .TOTAL_SALE_QUANTITY : .TOTAL_SALE_AMOUNT
         case Section.sevenDaysSaleAmount:
             amountRankingDevider = (index == 0) ? .store : .vendor
         case Section.sevenDaysGrossProfit:

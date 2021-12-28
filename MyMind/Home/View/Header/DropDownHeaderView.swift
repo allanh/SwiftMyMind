@@ -9,7 +9,11 @@
 import UIKit
 final class DropDownHeaderView : NiblessView {
     var hierarchyNotReady: Bool = true
-    let title: String
+    var title: String? {
+        didSet {
+            titleLabel.text = title ?? ""
+        }
+    }
     var date: String? {
         didSet {
             dateLabel.text = date ?? ""
@@ -18,6 +22,21 @@ final class DropDownHeaderView : NiblessView {
     var alternativeInfo: String? {
         didSet {
             alternativeLabel.text = alternativeInfo ?? ""
+        }
+    }
+    var titleTextColor: UIColor? {
+        didSet {
+            titleLabel.textColor = titleTextColor ?? .white
+        }
+    }
+    var dateTextColor: UIColor? {
+        didSet {
+            dateLabel.textColor = dateTextColor ?? .white
+        }
+    }
+    var alternativeInfoViewBackgroundColor: UIColor? {
+        didSet {
+            alternativeInfoView.backgroundColor = alternativeInfoViewBackgroundColor
         }
     }
     
@@ -64,7 +83,7 @@ final class DropDownHeaderView : NiblessView {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.backgroundColor = .monthlyReportDropDownBg
         $0.clipsToBounds = true
-        $0.layer.cornerRadius = 16
+        $0.layer.cornerRadius = 20
     }
     
     private let alternativeLabel: UILabel = UILabel {

@@ -29,12 +29,14 @@ class DropDownView<T, Cell: UITableViewCell>: NiblessView, UITableViewDelegate, 
     }
 
     var height: CGFloat = 226
+    
     var heightForRow: CGFloat = 44 {
         didSet {
             tableView.rowHeight = heightForRow
             tableView.reloadData()
         }
     }
+    
     var topInset: CGFloat? {
         didSet {
             setNeedsUpdateConstraints()
@@ -48,7 +50,15 @@ class DropDownView<T, Cell: UITableViewCell>: NiblessView, UITableViewDelegate, 
             }
         }
     }
-
+    
+    var showScrollBar: Bool? {
+        didSet {
+            if let isShow = showScrollBar {
+                self.tableView.showsVerticalScrollIndicator = isShow
+            }
+        }
+    }
+    
     private lazy var xConstraint: NSLayoutConstraint = {
         self.tableViewContainerView.leadingAnchor.constraint(equalTo: leadingAnchor)
     }()
