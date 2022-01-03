@@ -8,43 +8,49 @@
 
 import UIKit
 
+enum GradientDirection {
+    case topDown, leftRight
+}
+
 final class SKURankingTableViewCell: UITableViewCell {
     
-    var cellType = SKURankingReportList.sevenDaysType.commodity
-    
-    let skuRankingImage: UIImage? = {
+    private var cellType = SKURankingReportList.sevenDaysType.commodity
+    private let gradientLayer = CAGradientLayer()
+    private var progressWidthConstraint = NSLayoutConstraint()
+
+    private let skuRankingImage: UIImage? = {
        return UIImage(named: "sku_ranking")
     }()
     
-    let skuSetRankingImage: UIImage? = {
+    private let skuSetRankingImage: UIImage? = {
        return UIImage(named: "sku_set_ranking")
     }()
     
-    let skuRankingProgressColor: [CGColor] = [
-        UIColor(hex: "50d6ff").cgColor,
-        UIColor(hex: "3b4bea").cgColor,
-        UIColor(hex: "9827d5").cgColor
+    private let skuRankingProgressColor: [UIColor] = [
+        UIColor(hex: "50d6ff"),
+        UIColor(hex: "3b4bea"),
+        UIColor(hex: "9827d5")
     ]
     
-    let skuSetRankingProgressColor: [CGColor] = [
-        UIColor(hex: "ffd67d").cgColor,
-        UIColor(hex: "f94f27").cgColor,
-        UIColor(hex: "fe2c7d").cgColor
+    private let skuSetRankingProgressColor: [UIColor] = [
+        UIColor(hex: "ffd67d"),
+        UIColor(hex: "f94f27"),
+        UIColor(hex: "fe2c7d")
     ]
 
-    let rankingLabel: UILabel = UILabel {
+    private let rankingLabel: UILabel = UILabel {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = .pingFangTCSemibold(ofSize: 14)
         $0.textColor = .white
     }
     
-    let rankingImageView: UIImageView = UIImageView {
+    private let rankingImageView: UIImageView = UIImageView {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.image = UIImage(named: "sku_ranking")
         $0.layer.masksToBounds = false
     }
     
-    let titleLabel: UILabel = UILabel {
+    private let titleLabel: UILabel = UILabel {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = .pingFangTCRegular(ofSize: 12)
         $0.textColor = .emperor
@@ -65,6 +71,7 @@ final class SKURankingTableViewCell: UITableViewCell {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = .pingFangTCRegular(ofSize: 12)
         $0.textColor = .white
+        $0.sizeToFit()
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -76,38 +83,67 @@ final class SKURankingTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        switch cellType {
-        case .commodity:
-            progressView.addGradient(skuRankingProgressColor, direction: .leftRight, layerCornerRadius: 11.5)
-        case .combined_commodity:
-            progressView.addGradient(skuSetRankingProgressColor, direction: .leftRight, layerCornerRadius: 11.5)
-        }
+    
+    override func layoutSublayers(of layer: CALayer) {
+        super.layoutSublayers(of: self.layer)
+        gradientLayer.frame = progressView.bounds
     }
     
-    func config(type: SKURankingReportList.sevenDaysType, index: Int, item: SKURankingReport?) {
+    func config(type: SKURankingReportList.sevenDaysType, sortOrder: SKURankingReport.SKURankingReportSortOrder, index: Int, progress: Float, item: SKURankingReport?) {
         cellType = type
         titleLabel.text = item?.name ?? ""
         rankingLabel.text = "\(index + 1)"
+        
+        // 設定總額或數量
+        var progressValue: Float = 0
+        switch sortOrder {
+        case .TOTAL_SALE_QUANTITY:
+            progressValue = Float(item?.saleQuantity ?? 0)
+        case .TOTAL_SALE_AMOUNT:
+            progressValue = item?.saleAmount ?? 0
+        }
+        progressLabel.text = "\(progressValue.roundToInt() ?? 0)"
+
+        // 設定進度條
+        progressView.removeGradient()
         switch type {
         case .commodity:
             rankingImageView.image = skuRankingImage
             progressBackgroundView.backgroundColor = UIColor(hex: "f1effd")
+            progressView.addGradient(with: gradientLayer, colorSet: skuRankingProgressColor, direction: .leftRight, layerCornerRadius: 11.5)
+            progressView.applySketchShadow(
+                color: UIColor.init(hex: "#9129d6").withAlphaComponent(0.3),
+                alpha: 1,
+                x: 0, y: 7,
+                blur: 7,
+                spread: 0
+            )
         case .combined_commodity:
             rankingImageView.image = skuSetRankingImage
             progressBackgroundView.backgroundColor = UIColor(hex: "feede9")
+            progressView.addGradient(with: gradientLayer, colorSet: skuSetRankingProgressColor, direction: .leftRight, layerCornerRadius: 11.5)
+            progressView.applySketchShadow(
+                color: UIColor.init(hex: "#f94f27").withAlphaComponent(0.3),
+                alpha: 1,
+                x: 0, y: 7,
+                blur: 7,
+                spread: 0
+            )
         }
+        
+        // 設定進度條寛度
+        let progressLabelWidth = CGFloat(20) + CGFloat(progressLabel.getFontSize(.pingFangTCRegular(ofSize: 12))?.width ?? 0)
+        let progressBarWidth = CGFloat(progress * 120)
+        progressWidthConstraint.constant = progressBarWidth > progressLabelWidth ? progressBarWidth : progressLabelWidth
     }
-
+        
     private func constructViewHierarchy() {
         contentView.addSubview(rankingImageView)
         contentView.addSubview(rankingLabel)
         contentView.addSubview(titleLabel)
         contentView.addSubview(progressBackgroundView)
         contentView.addSubview(progressView)
-        contentView.addSubview(progressLabel)
+        progressView.addSubview(progressLabel)
     }
 
     private func activateConstraints() {
@@ -170,18 +206,16 @@ final class SKURankingTableViewCell: UITableViewCell {
     }
     
     private func activateConstraintsProgressView() {
-        let top = progressView.topAnchor
-            .constraint(equalTo: progressBackgroundView.topAnchor)
-        let bottom = progressView.bottomAnchor
-            .constraint(equalTo: progressBackgroundView.bottomAnchor)
+        let centerY = progressView.centerYAnchor
+            .constraint(equalTo: contentView.centerYAnchor)
         let trail = progressView.trailingAnchor
-            .constraint(equalTo: progressBackgroundView.trailingAnchor)
-        let width = progressView.widthAnchor
-            .constraint(equalToConstant: 60)
+            .constraint(equalTo: contentView.trailingAnchor, constant: -16)
+        progressWidthConstraint = progressView.widthAnchor
+            .constraint(equalToConstant: 120)
         let height = progressView.heightAnchor
             .constraint(equalTo: progressBackgroundView.heightAnchor)
         NSLayoutConstraint.activate([
-            top, bottom, trail, width, height
+            centerY, trail, height, progressWidthConstraint
         ])
     }
     

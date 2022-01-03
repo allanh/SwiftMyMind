@@ -235,8 +235,9 @@ struct SKURankingReport: Codable {
 }
 // MARK: -- SKURankingReportList --
 struct SKURankingReportList: Codable {
-    enum sevenDaysType: CaseIterable {
-        case commodity, combined_commodity
+    enum sevenDaysType: Int, CaseIterable {
+        case commodity = 0
+        case combined_commodity
         
         var description: String {
             get {
@@ -254,6 +255,29 @@ struct SKURankingReportList: Codable {
     }
     let reports: [SKURankingReport]
     static let mock: Self = SKURankingReportList(reports: [SKURankingReport(image: "", id: "1", name: "【CONVERSE】1234567890 All Star CHUCK 70 男女 高筒 休閒鞋", saleQuantity: 99999999, saleAmount: 66666666.0), SKURankingReport(image: "", id: "2", name: "【SASAKI 棉質吸濕排汗功能運動休閒長衫-女-深葡", saleQuantity: 9999999, saleAmount: 6666666.0), SKURankingReport(image: "", id: "3", name: "SASAKI 棉質吸濕排汗功能運動休閒長衫-女-深葡", saleQuantity: 999999, saleAmount: 666666.0), SKURankingReport(image: "", id: "4", name: "SK-II 亮采化妝水160ml", saleQuantity: 99999, saleAmount: 66666.0), SKURankingReport(image: "", id: "5", name: "【Philips 飛利浦】耳掛式耳機SHS4700", saleQuantity: 9999, saleAmount: 6666.0)])
+    
+    // find the max value in reports?
+    func getMaxValue(sortOrder: SKURankingReport.SKURankingReportSortOrder) -> Float {
+        switch sortOrder {
+        case .TOTAL_SALE_QUANTITY:
+            return Float(reports.map{ $0.saleQuantity }.max() ?? 0)
+        case .TOTAL_SALE_AMOUNT:
+            return reports.map{ $0.saleAmount }.max() ?? 0.0
+        }
+    }
+    
+    func getProgress(_ index: Int, sortOrder: SKURankingReport.SKURankingReportSortOrder) -> Float {
+        if reports.indices.contains(index) {
+            switch sortOrder {
+            case .TOTAL_SALE_QUANTITY:
+                return Float(reports[index].saleQuantity ) / getMaxValue(sortOrder: sortOrder)
+            case .TOTAL_SALE_AMOUNT:
+                return reports[index].saleAmount / getMaxValue(sortOrder: sortOrder)
+            }
+        } else {
+            return 0.0
+        }
+    }
 }
 // MARK: -- SaleRankingReport --
 struct SaleRankingReport: Codable {

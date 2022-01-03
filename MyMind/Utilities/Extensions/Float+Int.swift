@@ -8,10 +8,10 @@
 
 import Foundation
 
-extension Double {
-    func toInt() -> Int? {
-        if self >= Double(Int.min) && self < Double(Int.max) {
-            return Int(self)
+extension Float {
+    func roundToInt() -> Int? {
+        if self >= Float(Int.min) && self < Float(Int.max) {
+            return Int(self.rounded(.toNearestOrEven))
         } else {
             return nil
         }

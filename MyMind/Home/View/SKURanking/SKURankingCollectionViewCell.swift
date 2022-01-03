@@ -173,15 +173,18 @@ extension SKURankingCollectionViewCell: UITableViewDelegate, UITableViewDataSour
         }
         
         var item: SKURankingReport? = nil
+        var progress: Float = 0
         switch cellType {
         case .commodity:
             item = rankingList?.reports.getElement(at: indexPath.row)
+            progress = rankingList?.getProgress(indexPath.row, sortOrder: currentOrder) ?? 0
         case .combined_commodity:
             item = setRankingList?.reports.getElement(at: indexPath.row)
+            progress = setRankingList?.getProgress(indexPath.row, sortOrder: currentOrder) ?? 0
         }
         
         if item != nil {
-            cell.config(type: cellType, index: indexPath.row, item: item)
+            cell.config(type: cellType, sortOrder: currentOrder, index: indexPath.row, progress: progress, item: item)
 //            cell.construct(with: item, marked: announcementListQueryInfo.title)
         }
         return cell

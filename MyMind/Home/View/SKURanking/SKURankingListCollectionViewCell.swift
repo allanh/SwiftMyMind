@@ -30,14 +30,12 @@ class SKURankingListCollectionViewCell: UICollectionViewCell {
     }
     private var skuRankingReportList: SKURankingReportList? {
         didSet {
-            skuRankingListCollectionView.reloadItems(at: [IndexPath(row: 0, section: 0)])
-//            scrollThenReset(Section.sevenDaysSKU.rawValue)
+            skuRankingListCollectionView.reloadSections([SKURankingReportList.sevenDaysType.commodity.rawValue])
         }
     }
     private var skuSetRankingReportList: SKURankingReportList? {
         didSet {
-            skuRankingListCollectionView.reloadItems(at: [IndexPath(row: 1, section: 0)])
-//            scrollThenReset(Section.sevenDaysSKU.rawValue)
+            skuRankingListCollectionView.reloadSections([SKURankingReportList.sevenDaysType.combined_commodity.rawValue])
         }
     }
     
@@ -95,23 +93,38 @@ class SKURankingListCollectionViewCell: UICollectionViewCell {
             }
     }
 }
-extension SKURankingListCollectionViewCell: UICollectionViewDataSource {    
+extension SKURankingListCollectionViewCell: UICollectionViewDataSource {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return SKURankingReportList.sevenDaysType.allCases.count
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
+        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SKURankingCollectionViewCell", for: indexPath) as? SKURankingCollectionViewCell {
-            cell.backgroundColor = .clear
-            if indexPath.row == 0 {
-                cell.config(type: .commodity, currentOrder: skuRankingSortOrder, rankingList: skuRankingReportList, delegate: self)
-            } else {
-                cell.config(type: .combined_commodity, currentOrder: skuSetRankingSortOrder, rankingList: skuSetRankingReportList, delegate: self)
+        switch indexPath.section {
+        case SKURankingReportList.sevenDaysType.commodity.rawValue:
+            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SKURankingCollectionViewCell", for: indexPath) as? SKURankingCollectionViewCell {
+                cell.backgroundColor = .clear
+                    cell.config(type: .commodity, currentOrder: skuRankingSortOrder, rankingList: skuRankingReportList, delegate: self)
+                addShadow(cell)
+                return cell
             }
-            addShadow(cell)
-            return cell
+            return UICollectionViewCell()
+            
+        case SKURankingReportList.sevenDaysType.combined_commodity.rawValue:
+            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SKURankingCollectionViewCell", for: indexPath) as? SKURankingCollectionViewCell {
+                cell.backgroundColor = .clear
+                cell.config(type: .combined_commodity, currentOrder: skuSetRankingSortOrder, rankingList: skuSetRankingReportList, delegate: self)
+                addShadow(cell)
+                return cell
+            }
+            return UICollectionViewCell()
+            
+        default:
+            return UICollectionViewCell()
         }
-        return UICollectionViewCell()
     }
     
     // TODO: add an shadow for the cell

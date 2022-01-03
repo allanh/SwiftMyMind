@@ -34,7 +34,7 @@ extension UIView {
     enum GradientDirection {
         case topDown, leftRight
     }
-    func addGradient(_ gradientColors: [CGColor], direction: GradientDirection = .topDown, layerCornerRadius: CGFloat? = 0) {
+    func makeGradient(_ gradientColors: [CGColor], direction: GradientDirection = .leftRight, layerCornerRadius: CGFloat? = 0) -> CAGradientLayer {
         let gradientLayer = CAGradientLayer()
 //        gradientLayer.frame = CGRect(x: bounds.minX, y: bounds.minY, width: bounds.width, height: bounds.height-35)
         gradientLayer.frame = self.bounds
@@ -48,6 +48,31 @@ extension UIView {
             gradientLayer.startPoint = CGPoint(x: 0.5, y: 0)
             gradientLayer.endPoint = CGPoint(x: 0.5, y: 1)
         }
-        layer.insertSublayer(gradientLayer, at: 0)
+        return gradientLayer
+//        layer.insertSublayer(gradientLayer, at: 0)
+    }
+    
+    func addGradient(with layer: CAGradientLayer, gradientFrame: CGRect? = nil, colorSet: [UIColor],
+                     direction: GradientDirection = .leftRight, layerCornerRadius: CGFloat? = 0) {
+        layer.frame = gradientFrame ?? self.bounds
+        layer.frame.origin = .zero
+        layer.cornerRadius = layerCornerRadius ?? 0
+
+        let layerColorSet = colorSet.map { $0.cgColor }
+        layer.colors = layerColorSet
+        switch direction {
+        case .leftRight:
+            layer.startPoint = CGPoint(x: 0, y: 0.5)
+            layer.endPoint = CGPoint(x: 1, y: 0.5)
+        case .topDown:
+            layer.startPoint = CGPoint(x: 0.5, y: 0)
+            layer.endPoint = CGPoint(x: 0.5, y: 1)
+        }
+
+        self.layer.insertSublayer(layer, at: 0)
+    }
+    
+    func removeGradient() {
+        layer.sublayers?.filter{ $0 is CAGradientLayer }.forEach{ $0.removeFromSuperlayer() }
     }
 }
