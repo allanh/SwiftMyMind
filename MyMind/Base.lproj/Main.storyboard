@@ -292,7 +292,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="GhF-dE-Yso" userLabel="SKU Ranking List Collection View">
-                                                    <rect key="frame" x="0.0" y="0.0" width="361" height="318"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="361" height="290.66666666666669"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="8" minimumInteritemSpacing="4" id="u9k-GT-9YM">
                                                         <size key="itemSize" width="128" height="128"/>
@@ -311,18 +311,27 @@
                                                         </collectionViewCell>
                                                     </cells>
                                                 </collectionView>
+                                                <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="2" translatesAutoresizingMaskIntoConstraints="NO" id="TF7-vy-ueN">
+                                                    <rect key="frame" x="0.0" y="290.66666666666669" width="361" height="27.333333333333314"/>
+                                                    <color key="pageIndicatorTintColor" red="0.80014377830000005" green="0.7960171103" blue="0.79999786620000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <color key="currentPageIndicatorTintColor" red="0.10193643719999999" green="0.26297065619999999" blue="0.4508885145" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                </pageControl>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstItem="GhF-dE-Yso" firstAttribute="top" secondItem="xor-pT-8AI" secondAttribute="top" id="BHJ-Zg-uoZ"/>
                                                 <constraint firstAttribute="trailing" secondItem="GhF-dE-Yso" secondAttribute="trailing" id="Sce-1R-wIY"/>
+                                                <constraint firstAttribute="bottom" secondItem="TF7-vy-ueN" secondAttribute="bottom" id="UMX-Kn-5Rr"/>
+                                                <constraint firstItem="TF7-vy-ueN" firstAttribute="top" secondItem="GhF-dE-Yso" secondAttribute="bottom" id="WTB-pn-tb9"/>
+                                                <constraint firstAttribute="trailing" secondItem="TF7-vy-ueN" secondAttribute="trailing" id="ZZP-XW-bk6"/>
+                                                <constraint firstItem="TF7-vy-ueN" firstAttribute="leading" secondItem="xor-pT-8AI" secondAttribute="leading" id="e7v-NX-sEE"/>
                                                 <constraint firstItem="GhF-dE-Yso" firstAttribute="leading" secondItem="xor-pT-8AI" secondAttribute="leading" id="kpa-v5-Q7Z"/>
-                                                <constraint firstAttribute="bottom" secondItem="GhF-dE-Yso" secondAttribute="bottom" id="wUo-mu-0kd"/>
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <size key="customSize" width="361" height="318"/>
                                         <connections>
+                                            <outlet property="pageDot" destination="TF7-vy-ueN" id="CDz-vo-yEE"/>
                                             <outlet property="skuRankingListCollectionView" destination="GhF-dE-Yso" id="Lci-XU-ikX"/>
                                         </connections>
                                     </collectionViewCell>
@@ -334,7 +343,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="7Rw-hc-edB" userLabel="Sale Ranking List Collection View">
-                                                    <rect key="frame" x="0.0" y="0.0" width="361" height="311"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="361" height="283.66666666666669"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="8" minimumInteritemSpacing="8" id="ayA-6l-OE1">
                                                         <size key="itemSize" width="128" height="128"/>
@@ -353,18 +362,27 @@
                                                         </collectionViewCell>
                                                     </cells>
                                                 </collectionView>
+                                                <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="2" translatesAutoresizingMaskIntoConstraints="NO" id="QYs-hc-4UN">
+                                                    <rect key="frame" x="0.0" y="283.66666666666669" width="361" height="27.333333333333314"/>
+                                                    <color key="pageIndicatorTintColor" red="0.80014377830000005" green="0.7960171103" blue="0.79999786620000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <color key="currentPageIndicatorTintColor" red="0.10193643719999999" green="0.26297065619999999" blue="0.4508885145" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                </pageControl>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="QYs-hc-4UN" secondAttribute="bottom" id="1dF-pJ-6Hb"/>
+                                                <constraint firstItem="QYs-hc-4UN" firstAttribute="leading" secondItem="JgU-PI-bCO" secondAttribute="leading" id="SRl-Si-scD"/>
                                                 <constraint firstAttribute="trailing" secondItem="7Rw-hc-edB" secondAttribute="trailing" id="arW-9l-Suf"/>
-                                                <constraint firstAttribute="bottom" secondItem="7Rw-hc-edB" secondAttribute="bottom" id="fFr-D6-ccJ"/>
                                                 <constraint firstItem="7Rw-hc-edB" firstAttribute="top" secondItem="JgU-PI-bCO" secondAttribute="top" id="g34-mM-ynB"/>
+                                                <constraint firstItem="7Rw-hc-edB" firstAttribute="bottom" secondItem="QYs-hc-4UN" secondAttribute="top" id="j6Q-Ti-vPY"/>
                                                 <constraint firstItem="7Rw-hc-edB" firstAttribute="leading" secondItem="JgU-PI-bCO" secondAttribute="leading" id="neq-b8-C7U"/>
+                                                <constraint firstAttribute="trailing" secondItem="QYs-hc-4UN" secondAttribute="trailing" id="yLi-IZ-UNg"/>
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <size key="customSize" width="361" height="311"/>
                                         <connections>
+                                            <outlet property="pageDot" destination="QYs-hc-4UN" id="XQL-2J-XLN"/>
                                             <outlet property="rankingListCollectionView" destination="7Rw-hc-edB" id="a3K-Gj-jpo"/>
                                         </connections>
                                     </collectionViewCell>

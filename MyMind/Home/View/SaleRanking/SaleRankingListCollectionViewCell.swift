@@ -11,6 +11,7 @@ import UIKit
 class SaleRankingListCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var rankingListCollectionView: UICollectionView!
+    @IBOutlet weak var pageDot: UIPageControl!
     private weak var delegate: RankingListCollectionViewCellDelegate?
     
     private var amountRankingDevider: SaleRankingReport.SaleRankingReportDevider = .store {
@@ -163,6 +164,21 @@ extension SaleRankingListCollectionViewCell: UICollectionViewDataSource {
 //        cell.layer.shadowRadius = 16.0
 //        cell.layer.shadowOpacity = 1
 //        cell.layer.masksToBounds = false
+    }
+    
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        pageDot.currentPage = Int(
+//            (rankingListCollectionView.contentOffset.x / rankingListCollectionView.frame.width)
+//                .rounded(.toNearestOrAwayFromZero)
+//            )
+//        )
+//    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let witdh = scrollView.frame.width - (scrollView.contentInset.left*2)
+        let index = scrollView.contentOffset.x / witdh
+        let roundedIndex = round(index)
+        self.pageDot?.currentPage = Int(roundedIndex)
     }
 }
 

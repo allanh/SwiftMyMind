@@ -16,6 +16,7 @@ protocol RankingListCollectionViewCellDelegate: AnyObject {
 class SKURankingListCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var skuRankingListCollectionView: UICollectionView!
+    @IBOutlet weak var pageDot: UIPageControl!
     private weak var delegate: RankingListCollectionViewCellDelegate?
     
     private var skuRankingSortOrder: SKURankingReport.SKURankingReportSortOrder = .TOTAL_SALE_QUANTITY {
@@ -137,6 +138,13 @@ extension SKURankingListCollectionViewCell: UICollectionViewDataSource {
 //        cell.layer.shadowRadius = 16.0
 //        cell.layer.shadowOpacity = 1
 //        cell.layer.masksToBounds = false
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let witdh = scrollView.frame.width - (scrollView.contentInset.left*2)
+        let index = scrollView.contentOffset.x / witdh
+        let roundedIndex = round(index)
+        self.pageDot?.currentPage = Int(roundedIndex)
     }
 }
 

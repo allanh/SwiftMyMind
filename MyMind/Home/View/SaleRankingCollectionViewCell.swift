@@ -160,9 +160,6 @@ class SaleRankingCollectionViewCell: UICollectionViewCell {
                                       alternativeInfo: "通路商店",
                                       date: date
         )
-        view.alternativeInfoViewBackgroundColor = .prussianBlue
-        view.titleTextColor = .prussianBlue
-        view.dateTextColor = .brownGrey2
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()

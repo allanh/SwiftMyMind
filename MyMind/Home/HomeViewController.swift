@@ -459,9 +459,9 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         case Section.thirtyDays.rawValue:
             return CGSize(width: width-32,  height: 316)
         case Section.sevenDaysSKU.rawValue:
-            return CGSize(width: width,  height: 297)
+            return CGSize(width: width,  height: 337)
         case Section.sevenDaysSaleAmount.rawValue:
-            return CGSize(width: width,  height: 498)
+            return CGSize(width: width,  height: 538)
         default:
             return CGSize(width: width-32, height: width*0.75)
         }
@@ -531,11 +531,9 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         switch section {
-        case Section.bulliten.rawValue:
+        case Section.bulliten.rawValue, Section.sevenDaysSKU.rawValue:
             return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         case Section.todo.rawValue:
-            return UIEdgeInsets(top: 0, left: 0, bottom: 16, right: 0)
-        case Section.sevenDaysSKU.rawValue:
             return UIEdgeInsets(top: 0, left: 0, bottom: 16, right: 0)
         default:
             return UIEdgeInsets(top: 0, left: 16, bottom: 16, right: 16)
