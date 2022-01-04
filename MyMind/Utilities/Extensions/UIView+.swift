@@ -43,6 +43,12 @@ extension UIView {
          mask.path = path.cgPath
          self.layer.mask = mask
     }
+    
+    func setBackgroundImage(_ name: String) {
+        if let image = UIImage(named: name) {
+            self.backgroundColor = UIColor(patternImage: image)
+        }
+    }
 }
 
 extension UIView {

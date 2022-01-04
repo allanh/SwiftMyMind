@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol SKURankingListCollectionViewCellDelegate: AnyObject {
+protocol RankingListCollectionViewCellDelegate: AnyObject {
     func showLoading(_ isNetworkProcessing: Bool)
     func handlerCellError(_ error: Error)
 }
@@ -16,7 +16,7 @@ protocol SKURankingListCollectionViewCellDelegate: AnyObject {
 class SKURankingListCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var skuRankingListCollectionView: UICollectionView!
-    private weak var delegate: SKURankingListCollectionViewCellDelegate?
+    private weak var delegate: RankingListCollectionViewCellDelegate?
     
     private var skuRankingSortOrder: SKURankingReport.SKURankingReportSortOrder = .TOTAL_SALE_QUANTITY {
         didSet {
@@ -53,7 +53,7 @@ class SKURankingListCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    func config(delegate: SKURankingListCollectionViewCellDelegate? = nil) {
+    func config(delegate: RankingListCollectionViewCellDelegate? = nil) {
         self.delegate = delegate
         loadSkuRankingReportList()
         loadSkuSetRankingReportList()
@@ -143,6 +143,17 @@ extension SKURankingListCollectionViewCell: UICollectionViewDataSource {
 extension SKURankingListCollectionViewCell: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return  CGSize(width: self.frame.width-32, height: 297)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        switch section {
+        case SKURankingReportList.sevenDaysType.commodity.rawValue:
+            return UIEdgeInsets(top: 0.0, left: 16.0, bottom: 0.0, right: 8.0)
+        case SKURankingReportList.sevenDaysType.combined_commodity.rawValue:
+            return UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 16.0)
+        default:
+            return UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 8.0)
+        }
     }
 }
 

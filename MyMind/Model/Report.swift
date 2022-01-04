@@ -281,7 +281,7 @@ struct SKURankingReportList: Codable {
 }
 // MARK: -- SaleRankingReport --
 struct SaleRankingReport: Codable {
-    enum SaleRankingReportDevider: CustomStringConvertible {
+    enum SaleRankingReportDevider: CustomStringConvertible, CaseIterable {
         case store, vendor
         var description: String {
             get {

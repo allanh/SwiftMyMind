@@ -6,8 +6,9 @@
 //  Copyright © 2021 United Digital Intelligence. All rights reserved.
 //
 
-//import UIKit
+import UIKit
 import Charts
+
 class EmptyValuePieChartRenderer: PieChartRenderer {
     override func drawValues(context: CGContext) {
         
@@ -101,29 +102,119 @@ extension SaleRankingReportList {
         return data
     }
 }
+
+
+protocol SaleRankingCollectionViewCellDelegate: AnyObject {
+    func switchContent(type: SaleRankingCollectionViewCell.RankingType, devider: SaleRankingReport.SaleRankingReportDevider)
+}
+
 class SaleRankingCollectionViewCell: UICollectionViewCell {
-    @IBOutlet weak var chartView: PieChartView!
-    @IBOutlet weak var myChartView: MyMindPieChartView!
+    
+    enum RankingType: Int, CaseIterable {
+        case sale = 0
+        case grossProfit
+        
+        var description: String {
+            get {
+                switch self {
+                case .sale:
+                    return "近7日銷售金額佔比"
+                case .grossProfit:
+                    return "近7日銷售毛利佔比"
+                }
+            }
+        }
+    }
+    
+    private weak var delegate: SaleRankingCollectionViewCellDelegate?
+    private var rankingType: RankingType = .sale {
+        didSet {
+            headerView.title = rankingType.description
+        }
+    }
+    private var devider: SaleRankingReport.SaleRankingReportDevider = .store
+    private var saleRankingReportList: SaleRankingReportList?
+    private var grossProfitRankingReportList: SaleRankingReportList?
+    
+    private lazy var dropDownView: DropDownView<SaleRankingReport.SaleRankingReportDevider, DataTypeDropDownListTableViewCell> = {
+        let dropDownView = DropDownView(dataSource: SaleRankingReport.SaleRankingReportDevider.allCases) { (cell: DataTypeDropDownListTableViewCell, item) in
+            self.configCell(cell: cell, with: item)
+        } selectHandler: { item in
+            self.selectItem(item: item)
+        }
+        self.configTableViewContainerView(dropDownView.tableViewContainerView)
+        dropDownView.tableViewBackgroundColor = .prussianBlue
+        dropDownView.contentInset = UIEdgeInsets(top: 4, left: 0, bottom: 4, right: 0)
+        dropDownView.showScrollBar = false
+        dropDownView.topInset = -32
+        dropDownView.heightForRow = 32
+        dropDownView.height = 76
+        dropDownView.shouldReloadItemWhenSelect = true
+        return dropDownView
+    }()
+    
+    private lazy var headerView: DropDownHeaderView = {
+        let date = "\(Date().sevenDaysBefore.shortDateString) ~ \(Date().yesterday.shortDateString)"
+        let view = DropDownHeaderView(frame: .zero,
+                                      title: "近7日銷售金額佔比",
+                                      alternativeInfo: "通路商店",
+                                      date: date
+        )
+        view.alternativeInfoViewBackgroundColor = .prussianBlue
+        view.titleTextColor = .prussianBlue
+        view.dateTextColor = .brownGrey2
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let backgroundImageView = UIImageView {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.image = UIImage(named: "sale_ranking_bg")
+    }
+    
+    weak var chartView: PieChartView!
+    weak var myChartView: MyMindPieChartView!
     override func awakeFromNib() {
         super.awakeFromNib()
-        chartView.translatesAutoresizingMaskIntoConstraints = false
-        chartView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        chartView.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        chartView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-//        chartView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        chartView.drawEntryLabelsEnabled = false
-        chartView.drawHoleEnabled = true
-        chartView.drawSlicesUnderHoleEnabled = true
-        chartView.holeRadiusPercent = 0.6
-        chartView.chartDescription?.enabled = true
-        chartView.setExtraOffsets(left: 0, top: 0, right: 0, bottom: 0)
-        chartView.drawCenterTextEnabled = true
-        chartView.rotationAngle = 0
-        chartView.rotationEnabled = true
-        chartView.highlightPerTapEnabled = true
-                
-        chartView.renderer = EmptyValuePieChartRenderer(chart: chartView, animator: chartView.chartAnimator, viewPortHandler: chartView.viewPortHandler)
+        dropDownView.anchorView = headerView.alternativeInfoView
+        constructViewHierarchy()
+        activateConstratins()
+        configTableView()
+        headerView.alternativeInfoView.addTapGesture {
+            self.dropDownView.show()
+        }
+//        chartView.translatesAutoresizingMaskIntoConstraints = false
+//        chartView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+//        chartView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+//        chartView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+////        chartView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+//        chartView.drawEntryLabelsEnabled = false
+//        chartView.drawHoleEnabled = true
+//        chartView.drawSlicesUnderHoleEnabled = true
+//        chartView.holeRadiusPercent = 0.6
+//        chartView.chartDescription?.enabled = true
+//        chartView.setExtraOffsets(left: 0, top: 0, right: 0, bottom: 0)
+//        chartView.drawCenterTextEnabled = true
+//        chartView.rotationAngle = 0
+//        chartView.rotationEnabled = true
+//        chartView.highlightPerTapEnabled = true
+//
+//        chartView.renderer = EmptyValuePieChartRenderer(chart: chartView, animator: chartView.chartAnimator, viewPortHandler: chartView.viewPortHandler)
     }
+    
+    func config(rankingType: RankingType, devider: SaleRankingReport.SaleRankingReportDevider, rankingList: SaleRankingReportList? = nil, delegate: SaleRankingCollectionViewCellDelegate? = nil) {
+        self.rankingType = rankingType
+        self.devider = devider
+        self.headerView.alternativeInfo = devider.description
+        self.delegate = delegate
+        switch rankingType {
+        case .sale:
+            self.saleRankingReportList = rankingList
+        case .grossProfit:
+            self.grossProfitRankingReportList = rankingList
+        }
+    }
+    
     func config(with rankingList: SaleRankingReportList?, devider: SaleRankingReport.SaleRankingReportDevider, profit: Bool) {
         clipsToBounds = true
         backgroundColor = .systemBackground
@@ -165,4 +256,71 @@ class SaleRankingCollectionViewCell: UICollectionViewCell {
         }
         myChartView.data = MyMindPieChartData.mock
     }
+}
+
+extension SaleRankingCollectionViewCell {
+    private func configCell(cell: DataTypeDropDownListTableViewCell,  with item: SaleRankingReport.SaleRankingReportDevider) {
+        cell.titleLabel.text = item.description
+        cell.titleLabel.textColor = item == devider ? .white : .white.withAlphaComponent(0.65)
+        cell.backgroundColor = .clear
+    }
+
+    private func selectItem(item: SaleRankingReport.SaleRankingReportDevider) {
+        delegate?.switchContent(type: rankingType, devider: item)
+        dropDownView.hide()
+    }
+
+    private func configTableViewContainerView(_ view: UIView) {
+        view.layer.cornerRadius = 20
+        view.layer.borderWidth = 0
+        view.clipsToBounds = true
+    }
+}
+
+extension SaleRankingCollectionViewCell {
+    private func configTableView() {
+//        tableView.separatorStyle = .none
+//        tableView.delegate = self
+//        tableView.dataSource = self
+//        tableView.registerCell(SKURankingTableViewCell.self)
+    }
+    
+    func constructViewHierarchy() {
+        contentView.addSubview(backgroundImageView)
+        contentView.addSubview(headerView)
+//        contentView.addSubview(tableView)
+    }
+    
+    func activateConstratins() {
+        activateConstraintsBackgroundImageView()
+        activateConstraintsHeaderView()
+//        activateConstraintsTableView()
+    }
+    
+    func activateConstraintsBackgroundImageView() {
+        NSLayoutConstraint.activate([
+            backgroundImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            backgroundImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            backgroundImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            backgroundImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+        ])
+    }
+    
+    func activateConstraintsHeaderView() {
+        NSLayoutConstraint.activate([
+            headerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            headerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            headerView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            headerView.heightAnchor.constraint(equalToConstant: 70)
+        ])
+    }
+    
+//    func activateConstraintsTableView() {
+//        NSLayoutConstraint.activate([
+//            tableView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+//            tableView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+//            tableView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 13),
+//            tableView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -9)
+//        ])
+//    }
 }

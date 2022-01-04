@@ -17,7 +17,7 @@ enum Section: Int, CaseIterable {
     case thirtyDays
     case sevenDaysSKU
     case sevenDaysSaleAmount
-    case sevenDaysGrossProfit
+//    case sevenDaysGrossProfit
 }
 typealias FunctionControlInfo = (type: MainFunctoinType, imageName: String, title: String)
 typealias SwitcherInfo = (firstTitle: String, secondTitle: String, current: Int, section: Section)
@@ -42,16 +42,16 @@ final class HomeViewController: UIViewController {
 //            loadSkuSetRankingReportList()
 //        }
 //    }
-    private var amountRankingDevider: SaleRankingReport.SaleRankingReportDevider = .store {
-        didSet {
-            loadSaleRankingReportList()
-        }
-    }
-    private var grossProfitRankingDevider: SaleRankingReport.SaleRankingReportDevider = .store {
-        didSet {
-            loadGrossProfitRankingReportList()
-        }
-    }
+//    private var amountRankingDevider: SaleRankingReport.SaleRankingReportDevider = .store {
+//        didSet {
+//            loadSaleRankingReportList()
+//        }
+//    }
+//    private var grossProfitRankingDevider: SaleRankingReport.SaleRankingReportDevider = .store {
+//        didSet {
+//            loadGrossProfitRankingReportList()
+//        }
+//    }
     private func scrollThenReset(_ match: Int) {
         if let section = section, section == match {
             self.section = nil
@@ -59,7 +59,7 @@ final class HomeViewController: UIViewController {
         }
     }
 
-    private var headerInfos: [(title: String, info: SwitcherInfo)] = [("", ("", "", 0, Section.bulliten)), ("", ("", "", 0, Section.todo)), ("今日數據", ("", "", 0, Section.today)), ("近30日銷售數量", ("銷售數量", "銷售總額", 0, Section.thirtyDays)), ("近7日SKU銷售排行", ("銷售數量", "銷售總額", 0, Section.sevenDaysSKU)), ("近7日銷售金額佔比", ("通路", "供應商", 0, Section.sevenDaysSaleAmount)), ("近7日銷售毛利佔比", ("通路", "供應商", 0, Section.sevenDaysGrossProfit))]
+    private var headerInfos: [(title: String, info: SwitcherInfo)] = [("", ("", "", 0, Section.bulliten)), ("", ("", "", 0, Section.todo)), ("今日數據", ("", "", 0, Section.today)), ("近30日銷售數量", ("銷售數量", "銷售總額", 0, Section.thirtyDays)), ("近7日SKU銷售排行", ("銷售數量", "銷售總額", 0, Section.sevenDaysSKU)), ("近7日銷售金額佔比", ("通路", "供應商", 0, Section.sevenDaysSaleAmount))]
 
     private var bulletins: BulletinList? {
         didSet {
@@ -97,18 +97,18 @@ final class HomeViewController: UIViewController {
 //            scrollThenReset(Section.sevenDaysSKU.rawValue)
 //        }
 //    }
-    private var saleRankingReportList: SaleRankingReportList? {
-        didSet {
-            collectionView.reloadSections([Section.sevenDaysSaleAmount.rawValue])
-            scrollThenReset(Section.sevenDaysSaleAmount.rawValue)
-        }
-    }
-    private var grossProfitRankingReportList: SaleRankingReportList? {
-        didSet {
-            collectionView.reloadSections([Section.sevenDaysGrossProfit.rawValue])
-            scrollThenReset(Section.sevenDaysGrossProfit.rawValue)
-        }
-    }
+//    private var saleRankingReportList: SaleRankingReportList? {
+//        didSet {
+//            collectionView.reloadSections([Section.sevenDaysSaleAmount.rawValue])
+//            scrollThenReset(Section.sevenDaysSaleAmount.rawValue)
+//        }
+//    }
+//    private var grossProfitRankingReportList: SaleRankingReportList? {
+//        didSet {
+//            collectionView.reloadSections([Section.sevenDaysGrossProfit.rawValue])
+//            scrollThenReset(Section.sevenDaysGrossProfit.rawValue)
+//        }
+//    }
     
     var authorization: Authorization?
     /// Must set on main thread
@@ -174,8 +174,8 @@ extension HomeViewController {
         loadSaleReportList()
 //        loadSkuRankingReportList()
 //        loadSkuSetRankingReportList()
-        loadSaleRankingReportList()
-        loadGrossProfitRankingReportList()
+//        loadSaleRankingReportList()
+//        loadGrossProfitRankingReportList()
     }
     private func loadBulletins() {
         let dashboardLoader = MyMindDashboardAPIService.shared
@@ -309,67 +309,67 @@ extension HomeViewController {
 //                self.handlerError(error)
 //            }
 //    }
-
-    private func loadSaleRankingReportList() {
-        isNetworkProcessing = true
-        let dashboardLoader = MyMindDashboardAPIService.shared
-        let end = Date()
-        if amountRankingDevider == .store {
-            dashboardLoader.storeRankingReport(start: end.sevenDaysBefore, end: end.yesterday, order: "TOTAL_SALE_AMOUNT")
-                .done { saleRankingReportList in
-                    self.saleRankingReportList = saleRankingReportList
-                }
-                .ensure {
-                    self.isNetworkProcessing = false
-                }
-                .catch { error in
-                    self.saleRankingReportList = nil
-                    self.handlerError(error)
-                }
-        } else {
-            dashboardLoader.vendorRankingReport(start: end.sevenDaysBefore, end: end.yesterday, order: "TOTAL_SALE_AMOUNT")
-                .done { saleRankingReportList in
-                    self.saleRankingReportList = saleRankingReportList
-                }
-                .ensure {
-                    self.isNetworkProcessing = false
-                }
-                .catch { error in
-                    self.saleRankingReportList = nil
-                    self.handlerError(error)
-                }
-        }
-    }
-    private func loadGrossProfitRankingReportList() {
-        isNetworkProcessing = true
-        let dashboardLoader = MyMindDashboardAPIService.shared
-        let end = Date()
-        if grossProfitRankingDevider == .store {
-            dashboardLoader.storeRankingReport(start: end.sevenDaysBefore, end: end.yesterday, order: "SALE_GROSS_PROFIT")
-                .done { grossProfitRankingReportList in
-                    self.grossProfitRankingReportList = grossProfitRankingReportList
-                }
-                .ensure {
-                    self.isNetworkProcessing = false
-                }
-                .catch { error in
-                    self.grossProfitRankingReportList = nil
-                    self.handlerError(error)
-                }
-        } else {
-            dashboardLoader.vendorRankingReport(start: end.sevenDaysBefore, end: end.yesterday, order: "SALE_GROSS_PROFIT")
-                .done { grossProfitRankingReportList in
-                    self.grossProfitRankingReportList = grossProfitRankingReportList
-                }
-                .ensure {
-                    self.isNetworkProcessing = false
-                }
-                .catch { error in
-                    self.grossProfitRankingReportList = nil
-                    self.handlerError(error)
-                }
-        }
-    }
+//
+//    private func loadSaleRankingReportList() {
+//        isNetworkProcessing = true
+//        let dashboardLoader = MyMindDashboardAPIService.shared
+//        let end = Date()
+//        if amountRankingDevider == .store {
+//            dashboardLoader.storeRankingReport(start: end.sevenDaysBefore, end: end.yesterday, order: "TOTAL_SALE_AMOUNT")
+//                .done { saleRankingReportList in
+//                    self.saleRankingReportList = saleRankingReportList
+//                }
+//                .ensure {
+//                    self.isNetworkProcessing = false
+//                }
+//                .catch { error in
+//                    self.saleRankingReportList = nil
+//                    self.handlerError(error)
+//                }
+//        } else {
+//            dashboardLoader.vendorRankingReport(start: end.sevenDaysBefore, end: end.yesterday, order: "TOTAL_SALE_AMOUNT")
+//                .done { saleRankingReportList in
+//                    self.saleRankingReportList = saleRankingReportList
+//                }
+//                .ensure {
+//                    self.isNetworkProcessing = false
+//                }
+//                .catch { error in
+//                    self.saleRankingReportList = nil
+//                    self.handlerError(error)
+//                }
+//        }
+//    }
+//    private func loadGrossProfitRankingReportList() {
+//        isNetworkProcessing = true
+//        let dashboardLoader = MyMindDashboardAPIService.shared
+//        let end = Date()
+//        if grossProfitRankingDevider == .store {
+//            dashboardLoader.storeRankingReport(start: end.sevenDaysBefore, end: end.yesterday, order: "SALE_GROSS_PROFIT")
+//                .done { grossProfitRankingReportList in
+//                    self.grossProfitRankingReportList = grossProfitRankingReportList
+//                }
+//                .ensure {
+//                    self.isNetworkProcessing = false
+//                }
+//                .catch { error in
+//                    self.grossProfitRankingReportList = nil
+//                    self.handlerError(error)
+//                }
+//        } else {
+//            dashboardLoader.vendorRankingReport(start: end.sevenDaysBefore, end: end.yesterday, order: "SALE_GROSS_PROFIT")
+//                .done { grossProfitRankingReportList in
+//                    self.grossProfitRankingReportList = grossProfitRankingReportList
+//                }
+//                .ensure {
+//                    self.isNetworkProcessing = false
+//                }
+//                .catch { error in
+//                    self.grossProfitRankingReportList = nil
+//                    self.handlerError(error)
+//                }
+//        }
+//    }
 }
 // MARK: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout
 /// UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout
@@ -384,6 +384,12 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch indexPath.section {
+        case Section.bulliten.rawValue:
+            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BulletinCollectionViewCell", for: indexPath) as? BulletinCollectionViewCell {
+                cell.config(with: bulletins)
+                return cell
+            }
+            return UICollectionViewCell()
         case Section.todo.rawValue:
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ToDoListCollectionViewCell", for: indexPath) as? ToDoListCollectionViewCell {
                 if let items = toDoList?.items, items.count > 0 {
@@ -417,24 +423,25 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
             }
             return UICollectionViewCell()
         case Section.sevenDaysSaleAmount.rawValue:
-            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SaleRankingCollectionViewCell", for: indexPath) as? SaleRankingCollectionViewCell {
-                cell.config(with: saleRankingReportList, devider: amountRankingDevider, profit: false)
+            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SaleRankingListCollectionViewCell", for: indexPath) as? SaleRankingListCollectionViewCell {
+                cell.config(delegate: self)
+                cell.layer.masksToBounds = false
+                cell.clipsToBounds = false
                 return cell
             }
             return UICollectionViewCell()
-        case Section.sevenDaysGrossProfit.rawValue:
-            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SaleRankingCollectionViewCell", for: indexPath) as? SaleRankingCollectionViewCell {
-                cell.config(with: grossProfitRankingReportList, devider: grossProfitRankingDevider, profit: true)
-                cell.addShadow()
-                return cell
-            }
+//            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SaleRankingCollectionViewCell", for: indexPath) as? SaleRankingCollectionViewCell {
+//                cell.config(with: saleRankingReportList, devider: amountRankingDevider, profit: false)
+//                return cell
+//            }
             return UICollectionViewCell()
-        case Section.bulliten.rawValue:
-            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BulletinCollectionViewCell", for: indexPath) as? BulletinCollectionViewCell {
-                cell.config(with: bulletins)
-                return cell
-            }
-            return UICollectionViewCell()
+//        case Section.sevenDaysGrossProfit.rawValue:
+//            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SaleRankingCollectionViewCell", for: indexPath) as? SaleRankingCollectionViewCell {
+//                cell.config(with: grossProfitRankingReportList, devider: grossProfitRankingDevider, profit: true)
+//                cell.addShadow()
+//                return cell
+//            }
+//            return UICollectionViewCell()
         default:
             return UICollectionViewCell()
         }
@@ -453,8 +460,8 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
             return CGSize(width: width-32,  height: 316)
         case Section.sevenDaysSKU.rawValue:
             return CGSize(width: width,  height: 297)
-        case Section.sevenDaysSaleAmount.rawValue, Section.sevenDaysGrossProfit.rawValue:
-            return CGSize(width: width-32,  height: 632)
+        case Section.sevenDaysSaleAmount.rawValue:
+            return CGSize(width: width,  height: 498)
         default:
             return CGSize(width: width-32, height: width*0.75)
         }
@@ -492,7 +499,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
 //    }
     func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
         switch indexPath.section {
-        case Section.sevenDaysSKU.rawValue, Section.sevenDaysSaleAmount.rawValue, Section.sevenDaysGrossProfit.rawValue: return false
+        case Section.sevenDaysSKU.rawValue, Section.sevenDaysSaleAmount.rawValue: return false
         default: return false
         }
     }
@@ -513,10 +520,10 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         switch indexPath.section {
 //        case Section.sevenDaysSKU.rawValue:
 //            print("seven days SKU ranking \(skuRankingSortOrder)")
-        case Section.sevenDaysSaleAmount.rawValue:
-            print("seven days set sale amount detail \(amountRankingDevider)")
-        case Section.sevenDaysGrossProfit.rawValue:
-            print("seven days set gross profit detail \(grossProfitRankingDevider)")
+//        case Section.sevenDaysSaleAmount.rawValue:
+//            print("seven days set sale amount detail \(amountRankingDevider)")
+//        case Section.sevenDaysGrossProfit.rawValue:
+//            print("seven days set gross profit detail \(grossProfitRankingDevider)")
         default:
             print(indexPath)
         }
@@ -545,10 +552,10 @@ extension HomeViewController: IndicatorSwitchContentHeaderViewDelegate {
             saleReportSortOrder = (index == 0) ? .TOTAL_SALE_QUANTITY : .TOTAL_SALE_AMOUNT
 //        case Section.sevenDaysSKU:
 //            skuRankingSortOrder = (index == 0) ? .TOTAL_SALE_QUANTITY : .TOTAL_SALE_AMOUNT
-        case Section.sevenDaysSaleAmount:
-            amountRankingDevider = (index == 0) ? .store : .vendor
-        case Section.sevenDaysGrossProfit:
-            grossProfitRankingDevider = (index == 0) ? .store : .vendor
+//        case Section.sevenDaysSaleAmount:
+//            amountRankingDevider = (index == 0) ? .store : .vendor
+//        case Section.sevenDaysGrossProfit:
+//            grossProfitRankingDevider = (index == 0) ? .store : .vendor
         default:
             collectionView.reloadSections([section.rawValue])
             
@@ -664,7 +671,7 @@ extension HomeViewController {
     }
 }
 
-extension HomeViewController: SKURankingListCollectionViewCellDelegate {
+extension HomeViewController: RankingListCollectionViewCellDelegate {
     func showLoading(_ isNetworkProcessing: Bool) {
         self.isNetworkProcessing = isNetworkProcessing
     }

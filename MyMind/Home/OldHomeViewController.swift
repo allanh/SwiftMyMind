@@ -33,7 +33,7 @@ final class OldHomeViewController: UIViewController {
             loadGrossProfitRankingReportList()
         }
     }
-    private var headerInfos: [(title: String, info: SwitcherInfo)] = [("", ("", "", 0, Section.bulliten)), ("待辦事項", ("", "", 0, Section.todo)), ("", ("", "", 0, Section.today)), ("近30日銷售數量", ("銷售數量", "銷售總額", 0, Section.thirtyDays)), ("近7日SKU銷售排行", ("銷售數量", "銷售總額", 0, Section.sevenDaysSKU)),  ("近7日銷售金額佔比", ("通路", "供應商", 0, Section.sevenDaysSaleAmount)), ("近7日銷售毛利佔比", ("通路", "供應商", 0, Section.sevenDaysGrossProfit))]
+    private var headerInfos: [(title: String, info: SwitcherInfo)] = [("", ("", "", 0, Section.bulliten)), ("待辦事項", ("", "", 0, Section.todo)), ("", ("", "", 0, Section.today)), ("近30日銷售數量", ("銷售數量", "銷售總額", 0, Section.thirtyDays)), ("近7日SKU銷售排行", ("銷售數量", "銷售總額", 0, Section.sevenDaysSKU)),  ("近7日銷售金額佔比", ("通路", "供應商", 0, Section.sevenDaysSaleAmount))]
     private var bulletins: BulletinList? {
         didSet {
             collectionView.reloadSections([Section.bulliten.rawValue])
@@ -66,7 +66,7 @@ final class OldHomeViewController: UIViewController {
     }
     private var grossProfitRankingReportList: SaleRankingReportList? {
         didSet {
-            collectionView.reloadSections([Section.sevenDaysGrossProfit.rawValue])
+//            collectionView.reloadSections([Section.sevenDaysGrossProfit.rawValue])
         }
     }
     var authorization: Authorization?
@@ -294,7 +294,7 @@ extension OldHomeViewController: UICollectionViewDataSource, UICollectionViewDel
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch section {
         case Section.todo.rawValue, Section.today.rawValue, Section.thirtyDays.rawValue, Section.sevenDaysSKU.rawValue,
-        Section.sevenDaysSaleAmount.rawValue, Section.sevenDaysGrossProfit.rawValue :
+        Section.sevenDaysSaleAmount.rawValue :
             return 1
         case Section.bulliten.rawValue:
             return bulletins?.items.count ?? 0 > 0 ? 1 : 0
@@ -338,12 +338,12 @@ extension OldHomeViewController: UICollectionViewDataSource, UICollectionViewDel
                 return cell
             }
             return UICollectionViewCell()
-        case Section.sevenDaysGrossProfit.rawValue:
-            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SaleRankingCollectionViewCell", for: indexPath) as? SaleRankingCollectionViewCell {
-                cell.config(with: grossProfitRankingReportList, devider: grossProfitRankingDevider, profit: true)
-                return cell
-            }
-            return UICollectionViewCell()
+//        case Section.sevenDaysGrossProfit.rawValue:
+//            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SaleRankingCollectionViewCell", for: indexPath) as? SaleRankingCollectionViewCell {
+//                cell.config(with: grossProfitRankingReportList, devider: grossProfitRankingDevider, profit: true)
+//                return cell
+//            }
+//            return UICollectionViewCell()
         case Section.bulliten.rawValue:
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BulletinCollectionViewCell", for: indexPath) as? BulletinCollectionViewCell {
                 return cell
@@ -396,7 +396,7 @@ extension OldHomeViewController: UICollectionViewDataSource, UICollectionViewDel
     }
     func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
         switch indexPath.section {
-        case Section.sevenDaysSKU.rawValue, Section.sevenDaysSaleAmount.rawValue, Section.sevenDaysGrossProfit.rawValue: return false
+        case Section.sevenDaysSKU.rawValue, Section.sevenDaysSaleAmount.rawValue: return false
         default: return false
         }
     }
@@ -419,8 +419,8 @@ extension OldHomeViewController: UICollectionViewDataSource, UICollectionViewDel
             print("seven days SKU ranking \(skuRankingSortOrder)")
         case Section.sevenDaysSaleAmount.rawValue:
             print("seven days set sale amount detail \(amountRankingDevider)")
-        case Section.sevenDaysGrossProfit.rawValue:
-            print("seven days set gross profit detail \(grossProfitRankingDevider)")
+//        case Section.sevenDaysGrossProfit.rawValue:
+//            print("seven days set gross profit detail \(grossProfitRankingDevider)")
         default:
             print(indexPath)
         }
@@ -438,8 +438,8 @@ extension OldHomeViewController: IndicatorSwitchContentHeaderViewDelegate {
             skuRankingSortOrder = (index == 0) ? .TOTAL_SALE_QUANTITY : .TOTAL_SALE_AMOUNT
         case Section.sevenDaysSaleAmount:
             amountRankingDevider = (index == 0) ? .store : .vendor
-        case Section.sevenDaysGrossProfit:
-            grossProfitRankingDevider = (index == 0) ? .store : .vendor
+//        case Section.sevenDaysGrossProfit:
+//            grossProfitRankingDevider = (index == 0) ? .store : .vendor
         default:
             collectionView.reloadSections([section.rawValue])
             
