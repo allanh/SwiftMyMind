@@ -109,7 +109,6 @@ protocol SaleRankingCollectionViewCellDelegate: AnyObject {
 }
 
 class SaleRankingCollectionViewCell: UICollectionViewCell {
-    
     enum RankingType: Int, CaseIterable {
         case sale = 0
         case grossProfit
@@ -136,6 +135,8 @@ class SaleRankingCollectionViewCell: UICollectionViewCell {
     private var saleRankingReportList: SaleRankingReportList?
     private var grossProfitRankingReportList: SaleRankingReportList?
     
+    // MARK: UI
+
     private lazy var dropDownView: DropDownView<SaleRankingReport.SaleRankingReportDevider, DataTypeDropDownListTableViewCell> = {
         let dropDownView = DropDownView(dataSource: SaleRankingReport.SaleRankingReportDevider.allCases) { (cell: DataTypeDropDownListTableViewCell, item) in
             self.configCell(cell: cell, with: item)
@@ -169,11 +170,40 @@ class SaleRankingCollectionViewCell: UICollectionViewCell {
         $0.image = UIImage(named: "sale_ranking_bg")
     }
     
-    weak var chartView: PieChartView!
-    weak var myChartView: MyMindPieChartView!
+    private let ringBackgroundImageView = UIImageView {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.image = UIImage(named: "sale_ranking_ring_bg")
+    }
+    
+    private let rankingLabel = UILabel {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.textColor = .white
+        $0.textAlignment = NSTextAlignment.center
+        $0.font = .pingFangTCSemibold(ofSize: 18)
+    }
+    
+    private var chartView: PieChartView!
+    private var myChartView: MyMindPieChartView = {
+        let view = MyMindPieChartView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        let collectionView = UICollectionView(frame: .zero,collectionViewLayout: layout)
+        collectionView.isScrollEnabled = false
+        collectionView.register(PageCollectionViewCell.self, forCellWithReuseIdentifier: "PageCollectionViewCell")
+        collectionView.translatesAutoresizingMaskIntoConstraints =  false
+        return collectionView
+    }()
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         dropDownView.anchorView = headerView.alternativeInfoView
+        collectionView.delegate = self
+        collectionView.dataSource = self
         constructViewHierarchy()
         activateConstratins()
         configTableView()
@@ -203,6 +233,7 @@ class SaleRankingCollectionViewCell: UICollectionViewCell {
         self.rankingType = rankingType
         self.devider = devider
         self.headerView.alternativeInfo = devider.description
+        self.rankingLabel.text = devider.description
         self.delegate = delegate
         switch rankingType {
         case .sale:
@@ -210,6 +241,7 @@ class SaleRankingCollectionViewCell: UICollectionViewCell {
         case .grossProfit:
             self.grossProfitRankingReportList = rankingList
         }
+        myChartView.data = MyMindPieChartData.mock
     }
     
     func config(with rankingList: SaleRankingReportList?, devider: SaleRankingReport.SaleRankingReportDevider, profit: Bool) {
@@ -251,7 +283,6 @@ class SaleRankingCollectionViewCell: UICollectionViewCell {
             legend.xOffset = 20
             chartView.data = SaleRankingReportList.emptyPieChartData()
         }
-        myChartView.data = MyMindPieChartData.mock
     }
 }
 
@@ -285,13 +316,17 @@ extension SaleRankingCollectionViewCell {
     func constructViewHierarchy() {
         contentView.addSubview(backgroundImageView)
         contentView.addSubview(headerView)
-//        contentView.addSubview(tableView)
+        contentView.addSubview(ringBackgroundImageView)
+        contentView.addSubview(myChartView)
+        contentView.addSubview(rankingLabel)
     }
     
     func activateConstratins() {
         activateConstraintsBackgroundImageView()
         activateConstraintsHeaderView()
-//        activateConstraintsTableView()
+        activateConstraintsRingBackgroundImageView()
+        activateConstraintsChartView()
+        activateConstraintsRankingLabel()
     }
     
     func activateConstraintsBackgroundImageView() {
@@ -312,12 +347,56 @@ extension SaleRankingCollectionViewCell {
         ])
     }
     
-//    func activateConstraintsTableView() {
-//        NSLayoutConstraint.activate([
-//            tableView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-//            tableView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-//            tableView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 13),
-//            tableView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -9)
-//        ])
-//    }
+    func activateConstraintsRingBackgroundImageView() {
+        NSLayoutConstraint.activate([
+            ringBackgroundImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            ringBackgroundImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 102),
+            ringBackgroundImageView.widthAnchor.constraint(equalToConstant: 200),
+            ringBackgroundImageView.heightAnchor.constraint(equalTo: ringBackgroundImageView.widthAnchor)
+        ])
+    }
+    
+    func activateConstraintsChartView() {
+        NSLayoutConstraint.activate([
+            myChartView.centerXAnchor.constraint(equalTo: ringBackgroundImageView.centerXAnchor),
+            myChartView.centerYAnchor.constraint(equalTo: ringBackgroundImageView.centerYAnchor),
+            myChartView.widthAnchor.constraint(equalToConstant: 176),
+            myChartView.heightAnchor.constraint(equalTo: myChartView.widthAnchor)
+        ])
+    }
+    
+    func activateConstraintsRankingLabel() {
+        NSLayoutConstraint.activate([
+            rankingLabel.centerXAnchor.constraint(equalTo: ringBackgroundImageView.centerXAnchor),
+            rankingLabel.centerYAnchor.constraint(equalTo: ringBackgroundImageView.centerYAnchor)
+        ])
+    }
+}
+
+extension SaleRankingCollectionViewCell: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 10
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+//        cell.backgroundColor = .randomColor()
+        return cell
+    }
+}
+
+extension SaleRankingCollectionViewCell: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView,
+                  layout collectionViewLayout: UICollectionViewLayout,
+                  insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 1.0, left: 8.0, bottom: 1.0, right: 8.0)
+    }
+
+    func collectionView(_ collectionView: UICollectionView,
+                   layout collectionViewLayout: UICollectionViewLayout,
+                   sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let lay = collectionViewLayout as! UICollectionViewFlowLayout
+        let widthPerItem = collectionView.frame.width / 2 - lay.minimumInteritemSpacing
+        return CGSize(width: widthPerItem - 8, height: 250)
+    }
 }

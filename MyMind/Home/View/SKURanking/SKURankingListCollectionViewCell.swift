@@ -108,7 +108,7 @@ extension SKURankingListCollectionViewCell: UICollectionViewDataSource {
         case SKURankingReportList.sevenDaysType.commodity.rawValue:
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SKURankingCollectionViewCell", for: indexPath) as? SKURankingCollectionViewCell {
                 cell.backgroundColor = .clear
-                    cell.config(type: .commodity, currentOrder: skuRankingSortOrder, rankingList: skuRankingReportList, delegate: self)
+                cell.config(type: .commodity, currentOrder: skuRankingSortOrder, rankingList: skuRankingReportList, delegate: self)
                 addShadow(cell)
                 return cell
             }
