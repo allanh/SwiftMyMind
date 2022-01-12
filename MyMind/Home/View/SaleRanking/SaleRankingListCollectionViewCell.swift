@@ -10,6 +10,8 @@ import UIKit
 
 class SaleRankingListCollectionViewCell: UICollectionViewCell {
     
+    // MARK: - Properties
+
     @IBOutlet weak var rankingListCollectionView: UICollectionView!
     @IBOutlet weak var pageDot: UIPageControl!
     private weak var delegate: RankingListCollectionViewCellDelegate?
@@ -28,13 +30,13 @@ class SaleRankingListCollectionViewCell: UICollectionViewCell {
     
     private var saleRankingReportList: SaleRankingReportList? {
         didSet {
-            rankingListCollectionView.reloadSections([SaleRankingCollectionViewCell.RankingType.sale.rawValue])
+            rankingListCollectionView.reloadSections([SaleRankingReportList.RankingType.sale.rawValue])
         }
     }
     
     private var grossProfitRankingReportList: SaleRankingReportList? {
         didSet {
-            rankingListCollectionView.reloadSections([SaleRankingCollectionViewCell.RankingType.grossProfit.rawValue])
+            rankingListCollectionView.reloadSections([SaleRankingReportList.RankingType.grossProfit.rawValue])
         }
     }
     
@@ -122,7 +124,7 @@ class SaleRankingListCollectionViewCell: UICollectionViewCell {
 
 extension SaleRankingListCollectionViewCell: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return SaleRankingCollectionViewCell.RankingType.allCases.count
+        return SaleRankingReportList.RankingType.allCases.count
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -131,7 +133,7 @@ extension SaleRankingListCollectionViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch indexPath.section {
-        case SaleRankingCollectionViewCell.RankingType.sale.rawValue:
+        case SaleRankingReportList.RankingType.sale.rawValue:
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SaleRankingCollectionViewCell", for: indexPath) as? SaleRankingCollectionViewCell {
                 cell.backgroundColor = .clear
                 cell.config(rankingType: .sale, devider: amountRankingDevider, rankingList: saleRankingReportList, delegate: self)
@@ -140,7 +142,7 @@ extension SaleRankingListCollectionViewCell: UICollectionViewDataSource {
             }
             return UICollectionViewCell()
 
-        case SaleRankingCollectionViewCell.RankingType.grossProfit.rawValue:
+        case SaleRankingReportList.RankingType.grossProfit.rawValue:
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SaleRankingCollectionViewCell", for: indexPath) as? SaleRankingCollectionViewCell {
                 cell.backgroundColor = .clear
                 cell.config(rankingType: .grossProfit, devider: grossProfitRankingDevider, rankingList: grossProfitRankingReportList, delegate: self)
@@ -189,9 +191,9 @@ extension SaleRankingListCollectionViewCell: UICollectionViewDelegate, UICollect
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         switch section {
-        case SaleRankingCollectionViewCell.RankingType.sale.rawValue:
+        case SaleRankingReportList.RankingType.sale.rawValue:
             return UIEdgeInsets(top: 0.0, left: 16.0, bottom: 0.0, right: 8.0)
-        case SaleRankingCollectionViewCell.RankingType.grossProfit.rawValue:
+        case SaleRankingReportList.RankingType.grossProfit.rawValue:
             return UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 16.0)
         default:
             return UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 8.0)
@@ -200,7 +202,7 @@ extension SaleRankingListCollectionViewCell: UICollectionViewDelegate, UICollect
 }
 
 extension SaleRankingListCollectionViewCell: SaleRankingCollectionViewCellDelegate {
-    func switchContent(type: SaleRankingCollectionViewCell.RankingType, devider: SaleRankingReport.SaleRankingReportDevider) {
+    func switchContent(type: SaleRankingReportList.RankingType, devider: SaleRankingReport.SaleRankingReportDevider) {
         switch type {
         case .sale:
             self.amountRankingDevider = devider

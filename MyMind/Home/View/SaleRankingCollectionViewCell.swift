@@ -105,35 +105,41 @@ extension SaleRankingReportList {
 
 
 protocol SaleRankingCollectionViewCellDelegate: AnyObject {
-    func switchContent(type: SaleRankingCollectionViewCell.RankingType, devider: SaleRankingReport.SaleRankingReportDevider)
+    func switchContent(type: SaleRankingReportList.RankingType, devider: SaleRankingReport.SaleRankingReportDevider)
 }
 
 class SaleRankingCollectionViewCell: UICollectionViewCell {
-    enum RankingType: Int, CaseIterable {
-        case sale = 0
-        case grossProfit
-        
-        var description: String {
-            get {
-                switch self {
-                case .sale:
-                    return "近7日銷售金額佔比"
-                case .grossProfit:
-                    return "近7日銷售毛利佔比"
-                }
-            }
-        }
-    }
     
+    // MARK: - Properties
+
     private weak var delegate: SaleRankingCollectionViewCellDelegate?
-    private var rankingType: RankingType = .sale {
+    private var rankingType: SaleRankingReportList.RankingType = .sale {
         didSet {
             headerView.title = rankingType.description
         }
     }
     private var devider: SaleRankingReport.SaleRankingReportDevider = .store
-    private var saleRankingReportList: SaleRankingReportList?
-    private var grossProfitRankingReportList: SaleRankingReportList?
+//    private var saleRankingReportList: SaleRankingReportList? {
+//        didSet {
+//            collectionView.reloadData()
+//        }
+//    }
+//    private var grossProfitRankingReportList: SaleRankingReportList? {
+//        didSet {
+//            collectionView.reloadData()
+//        }
+//    }
+    
+    private var saleRankingReportList: [SaleRankingReport]? {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
+    private var grossProfitRankingReportList: [SaleRankingReport]? {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
     
     // MARK: UI
 
@@ -192,21 +198,25 @@ class SaleRankingCollectionViewCell: UICollectionViewCell {
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
+//        layout.minimumLineSpacing = 8
+        layout.minimumInteritemSpacing = 8
+        
         let collectionView = UICollectionView(frame: .zero,collectionViewLayout: layout)
+        collectionView.backgroundColor = .clear
         collectionView.isScrollEnabled = false
-        collectionView.register(PageCollectionViewCell.self, forCellWithReuseIdentifier: "PageCollectionViewCell")
+        collectionView.register(SaleRankingItemCollectionViewCell.self, forCellWithReuseIdentifier: "SaleRankingItemCollectionViewCell")
         collectionView.translatesAutoresizingMaskIntoConstraints =  false
         return collectionView
     }()
     
+    // MARK: - Life Cycle
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         dropDownView.anchorView = headerView.alternativeInfoView
-        collectionView.delegate = self
-        collectionView.dataSource = self
         constructViewHierarchy()
         activateConstratins()
-        configTableView()
+        configCollectionView()
         headerView.alternativeInfoView.addTapGesture {
             self.dropDownView.show()
         }
@@ -229,7 +239,9 @@ class SaleRankingCollectionViewCell: UICollectionViewCell {
 //        chartView.renderer = EmptyValuePieChartRenderer(chart: chartView, animator: chartView.chartAnimator, viewPortHandler: chartView.viewPortHandler)
     }
     
-    func config(rankingType: RankingType, devider: SaleRankingReport.SaleRankingReportDevider, rankingList: SaleRankingReportList? = nil, delegate: SaleRankingCollectionViewCellDelegate? = nil) {
+    // MARK: - Config
+    
+    func config(rankingType: SaleRankingReportList.RankingType, devider: SaleRankingReport.SaleRankingReportDevider, rankingList: SaleRankingReportList? = nil, delegate: SaleRankingCollectionViewCellDelegate? = nil) {
         self.rankingType = rankingType
         self.devider = devider
         self.headerView.alternativeInfo = devider.description
@@ -237,9 +249,9 @@ class SaleRankingCollectionViewCell: UICollectionViewCell {
         self.delegate = delegate
         switch rankingType {
         case .sale:
-            self.saleRankingReportList = rankingList
+            self.saleRankingReportList = rankingList?.getPieChartReports(type: rankingType)
         case .grossProfit:
-            self.grossProfitRankingReportList = rankingList
+            self.grossProfitRankingReportList = rankingList?.getPieChartReports(type: rankingType)
         }
         myChartView.data = MyMindPieChartData.mock
     }
@@ -286,6 +298,8 @@ class SaleRankingCollectionViewCell: UICollectionViewCell {
     }
 }
 
+// MARK: - Drop down view
+
 extension SaleRankingCollectionViewCell {
     private func configCell(cell: DataTypeDropDownListTableViewCell,  with item: SaleRankingReport.SaleRankingReportDevider) {
         cell.titleLabel.text = item.description
@@ -305,12 +319,12 @@ extension SaleRankingCollectionViewCell {
     }
 }
 
+// MARK: - Constructs
+
 extension SaleRankingCollectionViewCell {
-    private func configTableView() {
-//        tableView.separatorStyle = .none
-//        tableView.delegate = self
-//        tableView.dataSource = self
-//        tableView.registerCell(SKURankingTableViewCell.self)
+    private func configCollectionView() {
+        collectionView.delegate = self
+        collectionView.dataSource = self
     }
     
     func constructViewHierarchy() {
@@ -319,6 +333,7 @@ extension SaleRankingCollectionViewCell {
         contentView.addSubview(ringBackgroundImageView)
         contentView.addSubview(myChartView)
         contentView.addSubview(rankingLabel)
+        contentView.addSubview(collectionView)
     }
     
     func activateConstratins() {
@@ -327,6 +342,7 @@ extension SaleRankingCollectionViewCell {
         activateConstraintsRingBackgroundImageView()
         activateConstraintsChartView()
         activateConstraintsRankingLabel()
+        activateConstraintsCollectionView()
     }
     
     func activateConstraintsBackgroundImageView() {
@@ -371,25 +387,52 @@ extension SaleRankingCollectionViewCell {
             rankingLabel.centerYAnchor.constraint(equalTo: ringBackgroundImageView.centerYAnchor)
         ])
     }
+    
+    func activateConstraintsCollectionView() {
+        NSLayoutConstraint.activate([
+            collectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            collectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            collectionView.topAnchor.constraint(equalTo: ringBackgroundImageView.bottomAnchor, constant: 24),
+            collectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -23)
+        ])
+    }
 }
+
+// MARK: - UICollectionViewDataSource
 
 extension SaleRankingCollectionViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        switch rankingType {
+        case .sale:
+            return self.saleRankingReportList?.count ?? 0
+        case .grossProfit:
+            return self.grossProfitRankingReportList?.count ?? 0
+        }
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
-//        cell.backgroundColor = .randomColor()
-        return cell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SaleRankingItemCollectionViewCell", for: indexPath) as? SaleRankingItemCollectionViewCell
+        let report: SaleRankingReport?
+        switch rankingType {
+        case .sale:
+            report = self.saleRankingReportList?.getElement(at: indexPath.row)
+        case .grossProfit:
+            report = self.grossProfitRankingReportList?.getElement(at: indexPath.row)
+        }
+        if let rankingReport = report {
+            cell?.config(type: rankingType, index: indexPath.row, report: rankingReport)
+        }
+        return cell ?? SaleRankingItemCollectionViewCell()
     }
 }
+
+// MARK: - UICollectionViewDelegateFlowLayout
 
 extension SaleRankingCollectionViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                   layout collectionViewLayout: UICollectionViewLayout,
                   insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 1.0, left: 8.0, bottom: 1.0, right: 8.0)
+        return UIEdgeInsets(top: 0.0, left: 4.0, bottom: 8.0, right: 4.0)
     }
 
     func collectionView(_ collectionView: UICollectionView,
@@ -397,6 +440,6 @@ extension SaleRankingCollectionViewCell: UICollectionViewDelegateFlowLayout {
                    sizeForItemAt indexPath: IndexPath) -> CGSize {
         let lay = collectionViewLayout as! UICollectionViewFlowLayout
         let widthPerItem = collectionView.frame.width / 2 - lay.minimumInteritemSpacing
-        return CGSize(width: widthPerItem - 8, height: 250)
+        return CGSize(width: widthPerItem - 8, height: 41)
     }
 }

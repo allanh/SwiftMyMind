@@ -320,10 +320,44 @@ struct SaleRankingReport: Codable {
 }
 // MARK: -- SaleRankingReportList --
 struct SaleRankingReportList: Codable {
+    enum RankingType: Int, CaseIterable {
+        case sale = 0
+        case grossProfit
+        
+        var description: String {
+            get {
+                switch self {
+                case .sale:
+                    return "近7日銷售金額佔比"
+                case .grossProfit:
+                    return "近7日銷售毛利佔比"
+                }
+            }
+        }
+    }
+    
     private enum CodingKeys: String, CodingKey {
         case reports = "detail"
     }
     let reports: [SaleRankingReport]
+    
+    // 取得圖表用的列表
+    func getPieChartReports(type: RankingType) -> [SaleRankingReport] {
+        let array = reports
+            .filter{ type == .sale ? $0.saleAmount > 0 : $0.saleGrossProfit > 0 }
+            .sorted { type == .sale ? $0.saleAmount > $1.saleAmount : $0.saleGrossProfit > $1.saleGrossProfit }
+        
+        if array.count > 6 {
+            return array
+        } else {
+            return array
+        }
+    }
+//    let pieChartReports: [SaleRankingReport] {
+//        get {
+//            reports.filter{ $0.}
+//        }
+//    }
 }
 /*
 struct StoreRankingReport: Codable {
