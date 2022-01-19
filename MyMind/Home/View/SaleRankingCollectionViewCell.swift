@@ -15,28 +15,9 @@ class EmptyValuePieChartRenderer: PieChartRenderer {
     }
 }
 extension SaleRankingReportList {
-    var totalSaleAmount: Float {
-        get {
-            var amount: Float = 0
-            for report in reports {
-                if report.saleAmount > 0 {
-                    amount += report.saleAmount
-                }
-            }
-            return amount > 0 ? amount : 1
-        }
+    func customizeChart(dataPoints: [String], values: [Double]) {
     }
-    var totalGrossProfit: Float {
-        get {
-            var grossProfit: Float = 0
-            for report in reports {
-                if report.saleGrossProfit > 0 {
-                    grossProfit += report.saleGrossProfit
-                }
-            }
-            return grossProfit > 0 ? grossProfit : 1
-        }
-    }
+    
     func pieChartData(maximum: Int = 5, profit: Bool = false) -> PieChartData {
         var pieChartEntries: [PieChartDataEntry] = []
         let formatter = NumberFormatter {
@@ -65,9 +46,17 @@ extension SaleRankingReportList {
         }
         let set = PieChartDataSet(entries: pieChartEntries, label: "")
         set.drawIconsEnabled = false
-        set.sliceSpace = 2
+        set.sliceSpace = 0
         
-        set.colors = [.systemOrange, .systemYellow, .systemRed, .systemTeal, .systemGreen, .systemGray2]
+//        set.colors = [.systemOrange, .systemYellow, .systemRed, .systemTeal, .systemGreen, .systemGray2]
+        let colors: [UIColor] = [
+            UIColor(red: 255/255, green: 223/255, blue: 122/255, alpha: 1),
+             UIColor(red: 102/255, green: 228/255, blue: 255/255, alpha: 1),
+            .white.withAlphaComponent(0.8), .white.withAlphaComponent(0.6),
+            .white.withAlphaComponent(0.4), .white.withAlphaComponent(0.2)
+        ]
+        set.colors = colors
+
         let data = PieChartData(dataSet: set)
         
         let pFormatter = NumberFormatter()
@@ -103,7 +92,6 @@ extension SaleRankingReportList {
     }
 }
 
-
 protocol SaleRankingCollectionViewCellDelegate: AnyObject {
     func switchContent(type: SaleRankingReportList.RankingType, devider: SaleRankingReport.SaleRankingReportDevider)
 }
@@ -111,7 +99,15 @@ protocol SaleRankingCollectionViewCellDelegate: AnyObject {
 class SaleRankingCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Properties
-
+    private let colors: [[UIColor]] = [
+        [UIColor(red: 255/255, green: 223/255, blue: 122/255, alpha: 1), UIColor(red: 255/255, green: 160/255, blue: 30/255, alpha: 1)],
+        [UIColor(red: 102/255, green: 228/255, blue: 255/255, alpha: 1), UIColor(red: 39/255, green: 124/255, blue: 228/255, alpha: 1)],
+        [.white.withAlphaComponent(0.8), .white.withAlphaComponent(0.8)],
+        [.white.withAlphaComponent(0.6), .white.withAlphaComponent(0.6)],
+        [.white.withAlphaComponent(0.4), .white.withAlphaComponent(0.4)],
+        [.white.withAlphaComponent(0.2), .white.withAlphaComponent(0.2)]
+    ]
+    
     private weak var delegate: SaleRankingCollectionViewCellDelegate?
     private var rankingType: SaleRankingReportList.RankingType = .sale {
         didSet {
@@ -119,17 +115,6 @@ class SaleRankingCollectionViewCell: UICollectionViewCell {
         }
     }
     private var devider: SaleRankingReport.SaleRankingReportDevider = .store
-//    private var saleRankingReportList: SaleRankingReportList? {
-//        didSet {
-//            collectionView.reloadData()
-//        }
-//    }
-//    private var grossProfitRankingReportList: SaleRankingReportList? {
-//        didSet {
-//            collectionView.reloadData()
-//        }
-//    }
-    
     private var saleRankingReportList: [SaleRankingReport]? {
         didSet {
             collectionView.reloadData()
@@ -181,19 +166,29 @@ class SaleRankingCollectionViewCell: UICollectionViewCell {
         $0.image = UIImage(named: "sale_ranking_ring_bg")
     }
     
-    private let rankingLabel = UILabel {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.textColor = .white
-        $0.textAlignment = NSTextAlignment.center
-        $0.font = .pingFangTCSemibold(ofSize: 18)
-    }
-    
-    private var chartView: PieChartView!
     private var myChartView: MyMindPieChartView = {
         let view = MyMindPieChartView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
+    
+    private var chartView: PieChartView = {
+        let view = PieChartView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let holeBackgroundImageView = UIImageView {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.image = UIImage(named: "sale_ranking_center_bg")
+    }
+    
+    private let holeTextLabel = UILabel {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.textColor = .white
+        $0.textAlignment = NSTextAlignment.center
+        $0.font = .pingFangTCSemibold(ofSize: 18)
+    }
     
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -220,23 +215,21 @@ class SaleRankingCollectionViewCell: UICollectionViewCell {
         headerView.alternativeInfoView.addTapGesture {
             self.dropDownView.show()
         }
-//        chartView.translatesAutoresizingMaskIntoConstraints = false
-//        chartView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-//        chartView.topAnchor.constraint(equalTo: topAnchor).isActive = true
-//        chartView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-////        chartView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-//        chartView.drawEntryLabelsEnabled = false
-//        chartView.drawHoleEnabled = true
-//        chartView.drawSlicesUnderHoleEnabled = true
-//        chartView.holeRadiusPercent = 0.6
-//        chartView.chartDescription?.enabled = true
-//        chartView.setExtraOffsets(left: 0, top: 0, right: 0, bottom: 0)
-//        chartView.drawCenterTextEnabled = true
-//        chartView.rotationAngle = 0
-//        chartView.rotationEnabled = true
-//        chartView.highlightPerTapEnabled = true
-//
-//        chartView.renderer = EmptyValuePieChartRenderer(chart: chartView, animator: chartView.chartAnimator, viewPortHandler: chartView.viewPortHandler)
+        chartView.drawEntryLabelsEnabled = false
+        chartView.drawHoleEnabled = true
+//        if let image = UIImage(named: "sale_ranking_center_bg") {
+//            chartView.holeColor = UIColor(patternImage: image)
+//        }
+        chartView.holeColor = UIColor(hex: "167B9F")
+        chartView.drawSlicesUnderHoleEnabled = true
+        chartView.holeRadiusPercent = 0.8
+        chartView.legend.enabled = false
+        chartView.setExtraOffsets(left: 0, top: 0, right: 0, bottom: 0)
+        chartView.drawCenterTextEnabled = false
+        chartView.rotationAngle = 0
+        chartView.rotationEnabled = false
+        chartView.highlightPerTapEnabled = false
+        chartView.renderer = EmptyValuePieChartRenderer(chart: chartView, animator: chartView.chartAnimator, viewPortHandler: chartView.viewPortHandler)
     }
     
     // MARK: - Config
@@ -245,7 +238,7 @@ class SaleRankingCollectionViewCell: UICollectionViewCell {
         self.rankingType = rankingType
         self.devider = devider
         self.headerView.alternativeInfo = devider.description
-        self.rankingLabel.text = devider.description
+        self.holeTextLabel.text = devider.description
         self.delegate = delegate
         switch rankingType {
         case .sale:
@@ -253,46 +246,42 @@ class SaleRankingCollectionViewCell: UICollectionViewCell {
         case .grossProfit:
             self.grossProfitRankingReportList = rankingList?.getPieChartReports(type: rankingType)
         }
-        myChartView.data = MyMindPieChartData.mock
-    }
-    
-    func config(with rankingList: SaleRankingReportList?, devider: SaleRankingReport.SaleRankingReportDevider, profit: Bool) {
-        clipsToBounds = true
-        backgroundColor = .systemBackground
-        layer.cornerRadius = 16
-        layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
-
+        
+        if let pieChatData = rankingList?.getPieChartData(type: rankingType, colors: colors) {
+            myChartView.data = pieChatData
+        }
+        
         let paragraphStyle = NSParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
         paragraphStyle.lineBreakMode = .byTruncatingTail
         paragraphStyle.alignment = .center
 
         let centerText = NSMutableAttributedString(string: devider.description)
-        centerText.setAttributes([.font : UIFont.pingFangTCRegular(ofSize: 13),
-                                  .paragraphStyle : paragraphStyle], range: NSRange(location: 0, length: centerText.length))
+        centerText.setAttributes([.font : UIFont.pingFangTCSemibold(ofSize: 18), .paragraphStyle : paragraphStyle,
+            .foregroundColor: UIColor.white], range: NSRange(location: 0, length: centerText.length))
         chartView.centerAttributedText = centerText
-        let legend = chartView.legend
-        legend.horizontalAlignment = .right
-        legend.verticalAlignment = .center
-        legend.orientation = .vertical
-        legend.drawInside = false
-        legend.yOffset = 0
-        legend.xEntrySpace = 40
-        legend.yEntrySpace = 20
+//        let legend = chartView.legend
+//        legend.horizontalAlignment = .right
+//        legend.verticalAlignment = .center
+//        legend.orientation = .vertical
+//        legend.drawInside = false
+//        legend.yOffset = 0
+//        legend.xEntrySpace = 40
+//        legend.yEntrySpace = 20
         if let rankingList = rankingList, rankingList.reports.count > 0 {
-            let data = rankingList.pieChartData(profit: profit)
+            let data = rankingList.pieChartData(profit: rankingType == .grossProfit)
             if data.entryCount > 0 {
-                legend.form = .circle
-                legend.formSize = 10
-                legend.xOffset = 0
+//                legend.form = .circle
+//                legend.formSize = 10
+//                legend.xOffset = 0
                 chartView.data = data
             } else {
-                legend.form = .none
-                legend.xOffset = 20
+//                legend.form = .none
+//                legend.xOffset = 20
                 chartView.data = SaleRankingReportList.emptyPieChartData()
             }
         } else {
-            legend.form = .none
-            legend.xOffset = 20
+//            legend.form = .none
+//            legend.xOffset = 20
             chartView.data = SaleRankingReportList.emptyPieChartData()
         }
     }
@@ -331,8 +320,10 @@ extension SaleRankingCollectionViewCell {
         contentView.addSubview(backgroundImageView)
         contentView.addSubview(headerView)
         contentView.addSubview(ringBackgroundImageView)
-        contentView.addSubview(myChartView)
-        contentView.addSubview(rankingLabel)
+//        contentView.addSubview(myChartView)
+        contentView.addSubview(chartView)
+        contentView.addSubview(holeBackgroundImageView)
+        contentView.addSubview(holeTextLabel)
         contentView.addSubview(collectionView)
     }
     
@@ -341,7 +332,8 @@ extension SaleRankingCollectionViewCell {
         activateConstraintsHeaderView()
         activateConstraintsRingBackgroundImageView()
         activateConstraintsChartView()
-        activateConstraintsRankingLabel()
+        activateConstraintsHoleBackgroundImageView()
+        activateConstraintsHoleTextLabel()
         activateConstraintsCollectionView()
     }
     
@@ -372,7 +364,7 @@ extension SaleRankingCollectionViewCell {
         ])
     }
     
-    func activateConstraintsChartView() {
+    func activateConstraintsMyChartView() {
         NSLayoutConstraint.activate([
             myChartView.centerXAnchor.constraint(equalTo: ringBackgroundImageView.centerXAnchor),
             myChartView.centerYAnchor.constraint(equalTo: ringBackgroundImageView.centerYAnchor),
@@ -381,10 +373,28 @@ extension SaleRankingCollectionViewCell {
         ])
     }
     
-    func activateConstraintsRankingLabel() {
+    func activateConstraintsChartView() {
         NSLayoutConstraint.activate([
-            rankingLabel.centerXAnchor.constraint(equalTo: ringBackgroundImageView.centerXAnchor),
-            rankingLabel.centerYAnchor.constraint(equalTo: ringBackgroundImageView.centerYAnchor)
+            chartView.centerXAnchor.constraint(equalTo: ringBackgroundImageView.centerXAnchor),
+            chartView.centerYAnchor.constraint(equalTo: ringBackgroundImageView.centerYAnchor),
+            chartView.widthAnchor.constraint(equalToConstant: 200),
+            chartView.heightAnchor.constraint(equalTo: chartView.widthAnchor)
+        ])
+    }
+    
+    func activateConstraintsHoleBackgroundImageView() {
+        NSLayoutConstraint.activate([
+            holeBackgroundImageView.topAnchor.constraint(equalTo: ringBackgroundImageView.topAnchor, constant: 32),
+            holeBackgroundImageView.bottomAnchor.constraint(equalTo: ringBackgroundImageView.bottomAnchor, constant: -32),
+            holeBackgroundImageView.leadingAnchor.constraint(equalTo: ringBackgroundImageView.leadingAnchor, constant: 32),
+            holeBackgroundImageView.trailingAnchor.constraint(equalTo: ringBackgroundImageView.trailingAnchor, constant: -32)
+        ])
+    }
+    
+    func activateConstraintsHoleTextLabel() {
+        NSLayoutConstraint.activate([
+            holeTextLabel.centerXAnchor.constraint(equalTo: holeBackgroundImageView.centerXAnchor),
+            holeTextLabel.centerYAnchor.constraint(equalTo: holeBackgroundImageView.centerYAnchor)
         ])
     }
     
@@ -413,14 +423,17 @@ extension SaleRankingCollectionViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SaleRankingItemCollectionViewCell", for: indexPath) as? SaleRankingItemCollectionViewCell
         let report: SaleRankingReport?
+        var value: Float = 0
         switch rankingType {
         case .sale:
             report = self.saleRankingReportList?.getElement(at: indexPath.row)
+            value = (report?.saleAmount ?? 0) / (self.saleRankingReportList?.map({$0.saleAmount}).reduce(0, +) ?? 0)
         case .grossProfit:
             report = self.grossProfitRankingReportList?.getElement(at: indexPath.row)
+            value = (report?.saleGrossProfit ?? 0) / (self.grossProfitRankingReportList?.map({$0.saleGrossProfit}).reduce(0, +) ?? 0)
         }
         if let rankingReport = report {
-            cell?.config(type: rankingType, index: indexPath.row, report: rankingReport)
+            cell?.config(type: rankingType, index: indexPath.row, report: rankingReport, value: value)
         }
         return cell ?? SaleRankingItemCollectionViewCell()
     }

@@ -6,21 +6,10 @@
 //
 
 import UIKit
-struct MyMindPieSliceData {
-    let ratio: CGFloat
-    let title: String
-    let colors: [UIColor]
-}
-struct MyMindPieChartData {
-    let slices: [MyMindPieSliceData]
-    let borderColor: UIColor
-    let holeRatio: CGFloat?
-    let title: String?
-    static var mock: MyMindPieChartData = MyMindPieChartData(slices: [MyMindPieSliceData(ratio: 0.2, title: "", colors: [.blue, .red]), MyMindPieSliceData(ratio: 0.2, title: "", colors: [.red, .green]), MyMindPieSliceData(ratio: 0.3, title: "", colors: [.green, .orange]), MyMindPieSliceData(ratio: 0.4, title: "", colors: [.orange, .blue])], borderColor: .clear, holeRatio: 0.8, title: nil)
-    static var empty: MyMindPieChartData = MyMindPieChartData(slices: [], borderColor: .clear, holeRatio: 0.8, title: nil)
-}
 
 class MyMindPieChartView: UIView {
+    private let colors: [[UIColor]] = [[.blue, .red]]
+
     var data: MyMindPieChartData = MyMindPieChartData.mock {
         didSet {
             setNeedsDisplay()

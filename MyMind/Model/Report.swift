@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import UIKit
+
 // MARK: -- SaleReport --
 struct SaleReport: Codable {
     enum SaleReportType {
@@ -286,7 +288,7 @@ struct SaleRankingReport: Codable {
         var description: String {
             get {
                 switch self {
-                case .store: return "通路"
+                case .store: return "通路商店"
                 case .vendor: return "供應商"
                 }
             }
@@ -311,6 +313,13 @@ struct SaleRankingReport: Codable {
         saleAmount = try container.decode(Float.self, forKey: .saleAmount)
         saleGrossProfit = try container.decode(Float.self, forKey: .saleGrossProfit)
     }
+    
+    init(name: String, saleAmount: Float, saleGrossProfit: Float) {
+        self.name = name
+        self.saleAmount = saleAmount
+        self.saleGrossProfit = saleGrossProfit
+    }
+    
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(name, forKey: .store)
@@ -339,26 +348,98 @@ struct SaleRankingReportList: Codable {
     private enum CodingKeys: String, CodingKey {
         case reports = "detail"
     }
-    let reports: [SaleRankingReport]
     
+    let reports: [SaleRankingReport]
+            
     // 取得圖表用的列表
     func getPieChartReports(type: RankingType) -> [SaleRankingReport] {
+        // exclude negative value and sort this array
         let array = reports
             .filter{ type == .sale ? $0.saleAmount > 0 : $0.saleGrossProfit > 0 }
-            .sorted { type == .sale ? $0.saleAmount > $1.saleAmount : $0.saleGrossProfit > $1.saleGrossProfit }
-        
+            .sorted{ type == .sale ? $0.saleAmount > $1.saleAmount : $0.saleGrossProfit > $1.saleGrossProfit }
+            
         if array.count > 6 {
-            return array
+            // calculate the sale amount and the sale gross profit
+            var sale: Float = 0
+            var grossProfit: Float = 0
+            switch type {
+            case .sale:
+                sale = array.enumerated().filter{ $0.offset >= 5 }.map({$0.element.saleAmount}).reduce(0, +)
+            case .grossProfit:
+                grossProfit = array.enumerated().filter{ $0.offset >= 5 }.map({$0.element.saleGrossProfit}).reduce(0, +)
+            }
+            
+            // insert an other report
+            let other = SaleRankingReport(name: "其他", saleAmount: sale, saleGrossProfit: grossProfit)
+            var reports = array[0..<5]
+            reports.append(other)
+            return Array(reports)
         } else {
             return array
         }
     }
-//    let pieChartReports: [SaleRankingReport] {
-//        get {
-//            reports.filter{ $0.}
-//        }
-//    }
+
+    func getPieChartData(type: RankingType, colors: [[UIColor]]) -> MyMindPieChartData {
+//        static var mock: MyMindPieChartData = MyMindPieChartData(slices: [MyMindPieSliceData(ratio: 0.2, title: "", colors: [.blue, .red]), MyMindPieSliceData(ratio: 0.2, title: "", colors: [.red, .green]), MyMindPieSliceData(ratio: 0.3, title: "", colors: [.green, .orange]), MyMindPieSliceData(ratio: 0.4, title: "", colors: [.orange, .blue])], borderColor: .clear, holeRatio: 0.8, title: nil)
+        let reports = getPieChartReports(type: type)
+        var slices: [MyMindPieSliceData] = []
+        for (index, element) in reports.enumerated() {
+            let ratio: CGFloat
+            switch type {
+            case .sale:
+                ratio = CGFloat(element.saleAmount / reports.map({$0.saleAmount}).reduce(0, +))
+            case .grossProfit:
+                ratio = CGFloat(element.saleGrossProfit / reports.map({$0.saleAmount}).reduce(0, +))
+            }
+            
+            let color: [UIColor] = colors[index]//.getElement(at: index) ?? [.clear, .clear]4 52 88
+            slices.append(MyMindPieSliceData(ratio: ratio, title: element.name, colors: color))
+        }
+        return MyMindPieChartData(slices: slices, borderColor: .clear, holeRatio: 0.8, title: nil)
+    }
 }
+
+// MARK: - PieChart
+extension SaleRankingReportList {
+    var totalSaleAmount: Float {
+        get {
+            var amount: Float = 0
+            for report in reports {
+                if report.saleAmount > 0 {
+                    amount += report.saleAmount
+                }
+            }
+            return amount > 0 ? amount : 1
+        }
+    }
+    var totalGrossProfit: Float {
+        get {
+            var grossProfit: Float = 0
+            for report in reports {
+                if report.saleGrossProfit > 0 {
+                    grossProfit += report.saleGrossProfit
+                }
+            }
+            return grossProfit > 0 ? grossProfit : 1
+        }
+    }
+}
+
+struct MyMindPieSliceData {
+    let ratio: CGFloat
+    let title: String
+    let colors: [UIColor]
+}
+
+struct MyMindPieChartData {
+    let slices: [MyMindPieSliceData]
+    let borderColor: UIColor
+    let holeRatio: CGFloat?
+    let title: String?
+    static var mock: MyMindPieChartData = MyMindPieChartData(slices: [MyMindPieSliceData(ratio: 0.2, title: "", colors: [.blue, .red]), MyMindPieSliceData(ratio: 0.2, title: "", colors: [.red, .green]), MyMindPieSliceData(ratio: 0.3, title: "", colors: [.green, .orange]), MyMindPieSliceData(ratio: 0.4, title: "", colors: [.orange, .blue])], borderColor: .clear, holeRatio: 0.8, title: nil)
+    static var empty: MyMindPieChartData = MyMindPieChartData(slices: [], borderColor: .clear, holeRatio: 0.8, title: nil)
+}
+
 /*
 struct StoreRankingReport: Codable {
     private enum CodingKeys: String, CodingKey {

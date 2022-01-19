@@ -21,7 +21,7 @@ class SaleRankingItemCollectionViewCell: UICollectionViewCell {
     private let contentLabel: UILabel = UILabel {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = .pingFangTCSemibold(ofSize: 14)
-        $0.numberOfLines = 2
+        $0.lineBreakMode = NSLineBreakMode.byWordWrapping
         $0.textColor = .white
     }
 
@@ -41,7 +41,7 @@ class SaleRankingItemCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func config(type: SaleRankingReportList.RankingType, index: Int, report: SaleRankingReport?) {
+    func config(type: SaleRankingReportList.RankingType, index: Int, report: SaleRankingReport?, value: Float) {
 //        contentView.layer.cornerRadius = 4
 //        contentView.backgroundColor = .lightGray
 //        contentView.clipsToBounds = true
@@ -49,9 +49,7 @@ class SaleRankingItemCollectionViewCell: UICollectionViewCell {
             raningImage.setBackgroundImage(image)
         }
         contentLabel.text = report?.name
-        
-        let value = type == .sale ? report?.saleAmount : report?.saleGrossProfit
-        valueLabel.text = "\(value ?? 0)%"
+        valueLabel.text = "\(String(format:"%.2f", value * 100))%"
     }
 
     private func constructViewHierarchy() {
