@@ -10,8 +10,8 @@ import UIKit
 
 class ToDoInfoView: NiblessView {
     var hierarchyNotReady: Bool = true
-    let toDo: ToDo
-    init(frame: CGRect, toDo: ToDo) {
+    var toDo: ToDo?
+    init(frame: CGRect, toDo: ToDo? = nil) {
         self.toDo = toDo
         super.init(frame: frame)
 //        self.layer.cornerRadius = 8
@@ -34,7 +34,8 @@ class ToDoInfoView: NiblessView {
 /// helper
 extension ToDoInfoView {
     private func constructViews() {
-        headerView = ToDoInfoHeaderView(frame: bounds, toDo: toDo)
+        headerView = ToDoInfoHeaderView(frame: bounds, backgroundType: .BACKGROUND)
+        headerView.toDo = toDo
 //        for index in 0..<toDo.items.count {
 //            itemViews.append(ToDoItemView(frame: .zero, item: toDo.items[index]))
 //        }

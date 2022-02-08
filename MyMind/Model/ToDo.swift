@@ -56,6 +56,18 @@ struct ToDo: Codable {
             }
         }
         
+        var popupImageName: String {
+            get {
+                switch self {
+                case .RECEIPT: return "receipt_popup_bg"
+                case .RECEIPT_RETURN: return "receipt_return_popup_bg"
+                case .PURCHASE: return "purchase_popup_bg"
+                case .INBOUND: return "inbound_popup_bg"
+                case .STOCK: return "stock_popup_bg"
+                }
+            }
+        }
+        
         var gradients: [CGColor] {
             get {
                 switch self {

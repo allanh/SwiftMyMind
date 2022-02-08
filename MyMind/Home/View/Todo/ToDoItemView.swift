@@ -9,8 +9,15 @@
 import UIKit
 class ToDoItemView: NiblessView {
     var hierarchyNotReady: Bool = true
-    let item: ToDo.ToDoItem
-    init(frame: CGRect, item: ToDo.ToDoItem) {
+    var item: ToDo.ToDoItem? = nil {
+        didSet {
+            if let toDo = item {
+                titleLabel.text = toDo.type.displayName
+                countLabel.text = String(toDo.count)
+            }
+        }
+    }
+    init(frame: CGRect, item: ToDo.ToDoItem? = nil) {
         self.item = item
         super.init(frame: frame)
         self.translatesAutoresizingMaskIntoConstraints = false
@@ -26,8 +33,6 @@ class ToDoItemView: NiblessView {
         arrangeView()
         activateConstraints()
         backgroundColor = .tertiarySystemBackground
-        titleLabel.text = item.type.displayName
-        countLabel.text = String(item.count)
         hierarchyNotReady = false
     }
     private let titleLabel: UILabel = UILabel {

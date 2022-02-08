@@ -68,6 +68,7 @@ class SaleRankingItemCollectionViewCell: UICollectionViewCell {
         contentLabel.text = content
     }
 }
+
 // MARK: - Layouts
 extension SaleRankingItemCollectionViewCell {
     private func activateConstraintsRaningImage() {

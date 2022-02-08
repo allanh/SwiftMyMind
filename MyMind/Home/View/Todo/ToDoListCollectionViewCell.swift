@@ -7,36 +7,35 @@
 //
 
 import UIKit
-//extension UIView {
-//   func roundCorners(corners: UIRectCorner, radius: CGFloat) {
-//        let path = UIBezierPath(roundedRect: bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
-//        let mask = CAShapeLayer()
-//        mask.path = path.cgPath
-//        layer.mask = mask
-//    }
-//}
-class ToDoListCollectionViewCell: UICollectionViewCell {
-    @IBOutlet weak var toDoListCollectionView: UICollectionView!
+
+protocol ToDoListCollectionViewCellDelegate: AnyObject {
+    func showToDoListPopupWindow(index: Int)
+}
+
+class ToDoListCollectionViewCell : UICollectionViewCell {
+    @IBOutlet weak var collectionView: UICollectionView!
+    private weak var delegate: ToDoListCollectionViewCellDelegate?
+    
     private var toDos: [ToDo] = [] {
         didSet {
-            toDoListCollectionView.reloadData()
+            collectionView.reloadData()
         }
     }
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        toDoListCollectionView.dataSource = self
-        toDoListCollectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.delegate = self
         
         // remove all the spaces
-//        if let layout = toDoListCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-//            layout.minimumLineSpacing = 0
-//            layout.minimumInteritemSpacing = 0
-//            toDoListCollectionView.collectionViewLayout = layout
-//        }
+        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.scrollDirection = .horizontal
+            collectionView.collectionViewLayout = layout
+        }
     }
-    func config(with toDos:[ToDo]) {
+    func config(with toDos:[ToDo], delegate: ToDoListCollectionViewCellDelegate?) {
         self.toDos = toDos
+        self.delegate = delegate
     }
 
 }
@@ -46,16 +45,21 @@ extension ToDoListCollectionViewCell: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ToDoInfoCollectionViewCell", for: indexPath) as? ToDoInfoCollectionViewCell {
-            cell.config(with: toDos[indexPath.item])
-            return cell
+        guard let cell = collectionView.dequeueReusableCell(ToDoInfoCollectionViewCell.self, for: indexPath) as? ToDoInfoCollectionViewCell else {
+            fatalError("Wrong cell identifier or not registered yet")
         }
-        return UICollectionViewCell()
+        cell.config(with: toDos[indexPath.item])
+        return cell
     }
 }
 extension ToDoListCollectionViewCell: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return  CGSize(width: 149, height: 80)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: false)
+        delegate?.showToDoListPopupWindow(index: indexPath.row)
     }
 }
 

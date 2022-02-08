@@ -112,7 +112,7 @@ extension SKURankingListCollectionViewCell: UICollectionViewDataSource {
                 addShadow(cell)
                 return cell
             }
-            return UICollectionViewCell()
+            return SKURankingCollectionViewCell()
             
         case SKURankingReportList.sevenDaysType.combined_commodity.rawValue:
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SKURankingCollectionViewCell", for: indexPath) as? SKURankingCollectionViewCell {
@@ -121,10 +121,10 @@ extension SKURankingListCollectionViewCell: UICollectionViewDataSource {
                 addShadow(cell)
                 return cell
             }
-            return UICollectionViewCell()
+            return SKURankingCollectionViewCell()
             
         default:
-            return UICollectionViewCell()
+            return SKURankingCollectionViewCell()
         }
     }
     

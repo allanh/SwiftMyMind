@@ -8,8 +8,26 @@
 
 import UIKit
 class ToDoInfoHeaderView: NiblessView {
+    enum BackgroundType {
+        case BACKGROUND, POPUP
+    }
+    
+    var backgroundType: BackgroundType = .BACKGROUND
     var hierarchyNotReady: Bool = true
-    let toDo: ToDo
+    var toDo: ToDo? = nil {
+        didSet {
+            if let item = toDo {
+                backgroundView.image = UIImage(named: backgroundType == .BACKGROUND ? item.type.imageName : item.type.popupImageName)
+                titleLabel.text = item.type.displayName
+                totalLabel.text = String(item.items.sum(\.count))
+            }
+        }
+    }
+    
+    init(frame: CGRect, backgroundType: BackgroundType) {
+        self.backgroundType = backgroundType
+        super.init(frame: frame)
+    }
     
     private let backgroundView: UIImageView = UIImageView {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -27,12 +45,6 @@ class ToDoInfoHeaderView: NiblessView {
         $0.font = .pingFangTCSemibold(ofSize: 24)
     }
     
-    init(frame: CGRect, toDo: ToDo) {
-        self.toDo = toDo
-        super.init(frame: frame)
-        self.translatesAutoresizingMaskIntoConstraints = false
-    }
-    
     override func didMoveToWindow() {
         super.didMoveToWindow()
         guard hierarchyNotReady else {
@@ -40,9 +52,6 @@ class ToDoInfoHeaderView: NiblessView {
         }
         arrangeView()
         activateConstraints()
-        backgroundView.image = UIImage(named: toDo.type.imageName)
-        titleLabel.text = toDo.type.displayName
-        totalLabel.text = String(toDo.items.sum(\.count))
         hierarchyNotReady = false
     }
 }

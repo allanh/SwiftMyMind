@@ -250,9 +250,9 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         case Section.todo.rawValue:
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ToDoListCollectionViewCell", for: indexPath) as? ToDoListCollectionViewCell {
                 if let items = toDoList?.items, items.count > 0 {
-                    cell.config(with: items)
+                    cell.config(with: items, delegate: self)
                 } else {
-                    cell.config(with: ToDoList.emptyItems)
+                    cell.config(with: ToDoList.emptyItems, delegate: self)
                 }
                 return cell
             }
@@ -405,6 +405,20 @@ extension HomeViewController: IndicatorSwitchContentHeaderViewDelegate {
         }
     }
 }
+
+extension HomeViewController: ToDoListCollectionViewCellDelegate {
+    func showToDoListPopupWindow(index: Int) {
+        if let items = toDoList?.items, items.count > 0 {
+            let viewController = ToDoPopupWindowViewController(toDos: items)
+            viewController.config(index: index)
+            self.present(viewController, animated: true, completion: nil)
+//        } else {
+//            let viewController = ToDoPopupWindowViewController(toDos: ToDoList.emptyItems)
+//            self.present(viewController, animated: true, completion: nil)
+        }
+    }
+}
+
 // MARK: UDNSKInteractiveMarqueeViewDataSource
 //extension HomeViewController: UDNSKInteractiveMarqueeViewDataSource, UDNSKInteractiveMarqueeViewDelegate {
 //    func interactiveMarqueeView(_ marqueeView: UDNSKInteractiveMarqueeView, contentViewAt indexPath: IndexPath) -> UIView {

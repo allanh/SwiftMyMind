@@ -14,5 +14,4 @@ class ToDoInfoCollectionViewCell: UICollectionViewCell {
         infoView = ToDoInfoView(frame: bounds.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)), toDo: toDo)
         contentView.addSubview(infoView)
     }
-
 }
