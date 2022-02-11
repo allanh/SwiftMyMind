@@ -18,7 +18,7 @@ enum Section: Int, CaseIterable {
     case sevenDaysSKU
     case sevenDaysSaleAmount
 }
-typealias FunctionControlInfo = (type: MainFunctoinType, imageName: String, title: String)
+//typealias FunctionControlInfo = (type: MainFunctoinType, imageName: String, title: String)
 typealias SwitcherInfo = (firstTitle: String, secondTitle: String, current: Int, section: Section)
 final class HomeViewController: UIViewController {
 

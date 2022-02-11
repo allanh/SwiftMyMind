@@ -24,6 +24,7 @@ extension Permit {
 
 struct Authorization: Decodable {
     struct Navigations: Decodable, CustomStringConvertible {
+        //SKU管理
         struct Product: Permit {
             let rawValue: Int
             
@@ -31,8 +32,9 @@ struct Authorization: Decodable {
             static let proman = Product(rawValue: 1 << 0)
             static let procom = Product(rawValue: 1 << 1)
             static let prosale = Product(rawValue: 1 << 2)
-            
-            static let all: Product = [.proman, .procom, .prosale]
+            static let procate = Product(rawValue: 1 << 3)
+
+            static let all: Product = [.proman, .procom, .prosale, .procate]
             init(rawValue: Int) {
                 self.rawValue = rawValue
             }
@@ -45,6 +47,8 @@ struct Authorization: Decodable {
                         self = .procom
                     case Product.prosale.description:
                         self = .prosale
+                    case Product.procate.description:
+                        self = .procate
                     default:
                         self = .invalid
                     }
@@ -61,31 +65,39 @@ struct Authorization: Decodable {
                         return "proman"
                     case .prosale:
                         return "prosale"
+                    case .procate:
+                        return "procate"
                     default:
                         return ""
                     }
                 }
             }
         }
+        //通路管理
         struct Channel: Permit {
             let rawValue: Int
             
             static let invalid = Channel(rawValue: 1 >> 1)
-            static let chacha = Channel(rawValue: 1 << 0)
-            static let chaman = Channel(rawValue: 1 << 1)
-            static let chamal = Channel(rawValue: 1 << 2)
-            static let chasho = Channel(rawValue: 1 << 3)
-            static let chaauc = Channel(rawValue: 1 << 4)
-            static let chapla = Channel(rawValue: 1 << 5)
-            static let chagro = Channel(rawValue: 1 << 6)
+            static let chatool = Channel(rawValue: 1 << 0)
+            static let chacha = Channel(rawValue: 1 << 1)
+            static let chaman = Channel(rawValue: 1 << 2)
+            static let chamal = Channel(rawValue: 1 << 3)//deprecated
+            static let chasho = Channel(rawValue: 1 << 4)//deprecated
+            static let chaauc = Channel(rawValue: 1 << 5)//deprecated
+            static let chapla = Channel(rawValue: 1 << 6)//deprecated
+            static let chagro = Channel(rawValue: 1 << 7)//deprecated
+            static let chapro = Channel(rawValue: 1 << 8)
+            static let chadist = Channel(rawValue: 1 << 9)
 
-            static let all: Channel = [.chacha, .chaman, .chamal, .chasho, .chaauc, .chapla, .chagro]
+            static let all: Channel = [.chatool, .chacha, .chaman, .chamal, .chasho, .chaauc, .chapla, .chagro, .chapro, .chadist]
             init(rawValue: Int) {
                 self.rawValue = rawValue
             }
             init(string: String?) {
                 if let string = string {
                     switch string {
+                    case Channel.chatool.description:
+                        self = .chatool
                     case Channel.chacha.description:
                         self = .chacha
                     case Channel.chaman.description:
@@ -100,6 +112,10 @@ struct Authorization: Decodable {
                         self = .chapla
                     case Channel.chagro.description:
                         self = .chagro
+                    case Channel.chapro.description:
+                        self = .chapro
+                    case Channel.chadist.description:
+                        self = .chadist
                     default:
                         self = .invalid
                     }
@@ -110,6 +126,8 @@ struct Authorization: Decodable {
             var description: String {
                 get {
                     switch self {
+                    case .chatool:
+                        return "chatool"
                     case .chacha:
                         return "chacha"
                     case .chaman:
@@ -124,12 +142,17 @@ struct Authorization: Decodable {
                         return "chapla"
                     case .chagro:
                         return "chagro"
+                    case .chapro:
+                        return "chapro"
+                    case .chadist:
+                        return "chadist"
                     default:
                         return ""
                     }
                 }
             }
         }
+        //庫存管理
         struct Storage: Permit {
             let rawValue: Int
             
@@ -144,8 +167,9 @@ struct Authorization: Decodable {
             static let stoinb = Storage(rawValue: 1 << 7)
             static let stoout = Storage(rawValue: 1 << 8)
             static let stoinv = Storage(rawValue: 1 << 9)
+            static let stolog = Storage(rawValue: 1 << 10)
 
-            static let all: Storage = [.stosel, .stosea, .stoimp, .stoexp, .stomov, .stopro, .stoage, .stoinb, .stoout, .stoinv]
+            static let all: Storage = [.stosel, .stosea, .stoimp, .stoexp, .stomov, .stopro, .stoage, .stoinb, .stoout, .stoinv, .stolog]
             init(rawValue: Int) {
                 self.rawValue = rawValue
             }
@@ -172,6 +196,8 @@ struct Authorization: Decodable {
                         self = .stoout
                     case Storage.stoinv.description:
                         self = .stoinv
+                    case Storage.stolog.description:
+                        self = .stolog
                     default:
                         self = .invalid
                     }
@@ -202,12 +228,15 @@ struct Authorization: Decodable {
                         return "stoout"
                     case .stoinv:
                         return "stoinv"
+                    case .stolog:
+                        return "stolog"
                     default:
                         return ""
                     }
                 }
             }
         }
+        //訂單管理
         struct Order: Permit {
             let rawValue: Int
             
@@ -223,8 +252,9 @@ struct Authorization: Decodable {
             static let recmom = Order(rawValue: 1 << 8)
             static let recmomsal = Order(rawValue: 1 << 9)
             static let recmomret = Order(rawValue: 1 << 10)
+            static let rechis = Order(rawValue: 1 << 11)
 
-            static let all: Order = [.recsal, .recret, .reclen, .recler, .recrep, .recexc, .recshp, .recshpsal, .recmom, .recmomsal, recmomret]
+            static let all: Order = [.recsal, .recret, .reclen, .recler, .recrep, .recexc, .recshp, .recshpsal, .recmom, .recmomsal, recmomret, rechis]
             init(rawValue: Int) {
                 self.rawValue = rawValue
             }
@@ -253,6 +283,8 @@ struct Authorization: Decodable {
                         self = .recmomsal
                     case Order.recmomret.description:
                         self = .recmomret
+                    case Order.rechis.description:
+                        self = .rechis
                     default:
                         self = .invalid
                     }
@@ -285,12 +317,15 @@ struct Authorization: Decodable {
                         return "recmomsal"
                     case .recmomret:
                         return "recmomret"
+                    case .rechis:
+                        return "rechis"
                     default:
                         return ""
                     }
                 }
             }
         }
+        //供應商管理
         struct Vender: Permit {
             let rawValue: Int
             
@@ -324,12 +359,14 @@ struct Authorization: Decodable {
                 }
             }
         }
+        //採購管理
         struct Purchase: Permit {
             let rawValue: Int
             
             static let invalid = Purchase(rawValue: 1 >> 1)
             static let purapp = Purchase(rawValue: 1 << 0)
             static let purrev = Purchase(rawValue: 1 << 1)
+            static let purret = Purchase(rawValue: 1 << 2)
 
             static let all: Purchase = [.purapp, purrev]
             init(rawValue: Int) {
@@ -342,6 +379,8 @@ struct Authorization: Decodable {
                         self = .purapp
                     case Purchase.purrev.description:
                         self = .purrev
+                    case Purchase.purret.description:
+                        self = .purret
                     default:
                         self = .invalid
                     }
@@ -356,12 +395,15 @@ struct Authorization: Decodable {
                         return "purapp"
                     case .purrev:
                         return "purrev"
+                    case .purret:
+                        return "purret"
                     default:
                         return ""
                     }
                 }
             }
         }
+        //帳務管理
         struct Payment: Permit {
             let rawValue: Int
             
@@ -395,14 +437,18 @@ struct Authorization: Decodable {
                 }
             }
         }
+        //報表管理
         struct Receipt: Permit {
             let rawValue: Int
             
             static let invalid = Receipt(rawValue: 1 >> 1)
-            static let repsal = Receipt(rawValue: 1 << 0)
-            static let reprev = Receipt(rawValue: 1 << 1)
+            static let repsal = Receipt(rawValue: 1 << 0)//deprecated
+            static let reprev = Receipt(rawValue: 1 << 1)//deprecated
+            static let repdet = Receipt(rawValue: 1 << 2)
+            static let reprak = Receipt(rawValue: 1 << 3)
+            static let repsta = Receipt(rawValue: 1 << 4)
 
-            static let all: Receipt = [.repsal, reprev]
+            static let all: Receipt = [.repsal, reprev, .repdet, .reprak, .repsta]
             init(rawValue: Int) {
                 self.rawValue = rawValue
             }
@@ -413,6 +459,12 @@ struct Authorization: Decodable {
                         self = .repsal
                     case Receipt.reprev.description:
                         self = .reprev
+                    case Receipt.repdet.description:
+                        self = .repdet
+                    case Receipt.reprak.description:
+                        self = .reprak
+                    case Receipt.repsta.description:
+                        self = .repsta
                     default:
                         self = .invalid
                     }
@@ -427,12 +479,19 @@ struct Authorization: Decodable {
                         return "repsal"
                     case .reprev:
                         return "reprev"
+                    case .repdet:
+                        return "repdet"
+                    case .reprak:
+                        return "reprak"
+                    case .repsta:
+                        return "repsta"
                     default:
                         return ""
                     }
                 }
             }
         }
+        //權限管理
         struct Admin: Permit {
             let rawValue: Int
             
@@ -471,6 +530,7 @@ struct Authorization: Decodable {
                 }
             }
         }
+        //系統管理
         struct Setting: Permit {
             let rawValue: Int
             

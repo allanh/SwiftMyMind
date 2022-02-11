@@ -10,12 +10,13 @@ import UIKit
 
 final class MainFunctionControl: UIControl {
     // MARK: - Properties
-    let functionType: MainFunctoinType
+    let functionType: FunctionEntryList.FunctionEntry.FunctionEntryItem
 
     let contentView: UIView = UIView {
-        $0.layer.cornerRadius = 8
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.layer.cornerRadius = 16
         $0.layer.masksToBounds = true
-        $0.backgroundColor = .clear
+        $0.backgroundColor = .white
         $0.isUserInteractionEnabled = false
     }
 
@@ -44,7 +45,7 @@ final class MainFunctionControl: UIControl {
         $0.isUserInteractionEnabled = false
     }
     // MARK: - Methods
-    init(frame: CGRect = .zero, mainFunctionType: MainFunctoinType) {
+    init(frame: CGRect = .zero, mainFunctionType: FunctionEntryList.FunctionEntry.FunctionEntryItem) {
         functionType = mainFunctionType
         titleLabel.text = functionType.rawValue
         super.init(frame: frame)
@@ -96,7 +97,6 @@ final class MainFunctionControl: UIControl {
 // MARK: - Layouts
 extension MainFunctionControl {
     func activateConstraintsContentView() {
-        contentView.translatesAutoresizingMaskIntoConstraints = false
         let top = contentView.topAnchor
             .constraint(equalTo: topAnchor)
         let leading = contentView.leadingAnchor

@@ -113,8 +113,11 @@
 		52944E352699CFC1006CC865 /* HomeCollectionViewHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52944E342699CFC1006CC865 /* HomeCollectionViewHeaderView.swift */; };
 		52A289F226D8C9C800084893 /* UDNSKMarqueeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A289F126D8C9C700084893 /* UDNSKMarqueeView.swift */; };
 		52A289F426D8CB4100084893 /* UIView+copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A289F326D8CB4100084893 /* UIView+copy.swift */; };
+		52A8DA3A27167B7800CFE78F /* MainFunctionEntryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A8DA3827167B7800CFE78F /* MainFunctionEntryCollectionViewCell.swift */; };
+		52A8DA3B27167B7800CFE78F /* MainFunctionEntryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52A8DA3927167B7800CFE78F /* MainFunctionEntryCollectionViewCell.xib */; };
 		52AC22A226FACA04003AF437 /* AnnouncementListFilterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52AC22A126FACA04003AF437 /* AnnouncementListFilterModel.swift */; };
 		52B15CBA2691BAFC0010FCED /* MyMindEmployeeAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B15CB92691BAFC0010FCED /* MyMindEmployeeAPIService.swift */; };
+		52B8734F270FF4BF00102C98 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B8734E270FF4BF00102C98 /* CategoryViewController.swift */; };
 		52B62539270AE04B00E03220 /* Report+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528C86BE2707063C0084BB27 /* Report+.swift */; };
 		52B6253A270AE04F00E03220 /* UDILineChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528C86C2270709230084BB27 /* UDILineChart.swift */; };
 		52B6253B270BFCC800E03220 /* IconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528C86C627070AF30084BB27 /* IconView.swift */; };
@@ -501,8 +504,11 @@
 		52944E342699CFC1006CC865 /* HomeCollectionViewHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewHeaderView.swift; sourceTree = "<group>"; };
 		52A289F126D8C9C700084893 /* UDNSKMarqueeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UDNSKMarqueeView.swift; sourceTree = "<group>"; };
 		52A289F326D8CB4100084893 /* UIView+copy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+copy.swift"; sourceTree = "<group>"; };
+		52A8DA3827167B7800CFE78F /* MainFunctionEntryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFunctionEntryCollectionViewCell.swift; sourceTree = "<group>"; };
+		52A8DA3927167B7800CFE78F /* MainFunctionEntryCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainFunctionEntryCollectionViewCell.xib; sourceTree = "<group>"; };
 		52AC22A126FACA04003AF437 /* AnnouncementListFilterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementListFilterModel.swift; sourceTree = "<group>"; };
 		52B15CB92691BAFC0010FCED /* MyMindEmployeeAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMindEmployeeAPIService.swift; sourceTree = "<group>"; };
+		52B8734E270FF4BF00102C98 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 		52B6253D270C306E00E03220 /* UDIPieChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UDIPieChart.swift; sourceTree = "<group>"; };
 		52B62540270D537F00E03220 /* SelectChartIntents.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = SelectChartIntents.intentdefinition; sourceTree = "<group>"; };
 		52B8748F26DC7C38008F3CF2 /* BulletinCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletinCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -985,6 +991,23 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		52A8DA3727167B3100CFE78F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				52A8DA3827167B7800CFE78F /* MainFunctionEntryCollectionViewCell.swift */,
+				52A8DA3927167B7800CFE78F /* MainFunctionEntryCollectionViewCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		52B8734D270FF46800102C98 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				52B8734E270FF4BF00102C98 /* CategoryViewController.swift */,
+			);
+			path = Controller;
+            sourceTree = "<group>";
+        };
 		52B6253C270C302200E03220 /* SwiftUIView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1387,6 +1410,7 @@
 		A4793C9426047C6500AD280C /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				52B8734D270FF46800102C98 /* Controller */,
 				52B6253C270C302200E03220 /* SwiftUIView */,
 				52F564282694086500171032 /* View */,
 				A4BDC7B2260B0F34005C33A5 /* UILayer */,
@@ -1492,6 +1516,7 @@
 		A4AF79F52637B110002B04F6 /* MainFunctionEntry */ = {
 			isa = PBXGroup;
 			children = (
+				52A8DA3727167B3100CFE78F /* View */,
 				A4AF79F62637B13B002B04F6 /* MainFunctionControl.swift */,
 				A44A5A7125F9B0D200995823 /* MainFunctionEntryViewController.swift */,
 			);
@@ -1766,6 +1791,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				52A8DA3B27167B7800CFE78F /* MainFunctionEntryCollectionViewCell.xib in Resources */,
 				5216399326D49EB6008E7BB9 /* Debug in Resources */,
 				97547CC32681D8FF001859A8 /* PurchaseLogInfoViewController.xib in Resources */,
 				528A697C26CBADD600FC3387 /* Release in Resources */,
@@ -2123,6 +2149,7 @@
 				A43E8510268C08B8008C8369 /* InstructionView.swift in Sources */,
 				97AFE3792668D727002CBE01 /* UIViewController+loadNib.swift in Sources */,
 				52F564272693F14200171032 /* ErrorHandler.swift in Sources */,
+				52A8DA3A27167B7800CFE78F /* MainFunctionEntryCollectionViewCell.swift in Sources */,
 				52C2CBD8269C4D4E002A2BA9 /* SaleReportInfoItemView.swift in Sources */,
 				A456701226845D14009598AE /* RootTabBarController.swift in Sources */,
 				9CEFCA4C26DE171100506308 /* AnnouncementAutoCompleteAdapters.swift in Sources */,
@@ -2167,6 +2194,7 @@
 				97AFE3662665E7DD002CBE01 /* ProductMaterialDetail.swift in Sources */,
 				527E11C32693084B00FB8B01 /* ReturnPurchaseOrderInfo.swift in Sources */,
 				A4159204260C394F00FD3989 /* UIButton+.swift in Sources */,
+				52B8734F270FF4BF00102C98 /* CategoryViewController.swift in Sources */,
 				9C926AE526E0B04B0067C61E /* FilterBottomView.swift in Sources */,
 				A4CBD8A32664900100B19119 /* PickVendorViewController.swift in Sources */,
 				A439B52C26099AA1002352C2 /* UIViewController+.swift in Sources */,
