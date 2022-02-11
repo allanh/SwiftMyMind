@@ -8,24 +8,24 @@
 
 import UIKit
 class ToDoInfoHeaderView: NiblessView {
-    enum BackgroundType {
-        case BACKGROUND, POPUP
+    enum HeaderType {
+        case TAB, POPUP
     }
     
-    var backgroundType: BackgroundType = .BACKGROUND
+    var type: HeaderType = .TAB
     var hierarchyNotReady: Bool = true
     var toDo: ToDo? = nil {
         didSet {
             if let item = toDo {
-                backgroundView.image = UIImage(named: backgroundType == .BACKGROUND ? item.type.imageName : item.type.popupImageName)
+                backgroundView.image = UIImage(named: type == .TAB ? item.type.imageName : item.type.popupImageName)
                 titleLabel.text = item.type.displayName
-                totalLabel.text = String(item.items.sum(\.count))
+                totalLabel.text = item.items.sum(\.count).toDecimalString()
             }
         }
     }
     
-    init(frame: CGRect, backgroundType: BackgroundType) {
-        self.backgroundType = backgroundType
+    init(frame: CGRect, type: HeaderType) {
+        self.type = type
         super.init(frame: frame)
     }
     
@@ -36,13 +36,11 @@ class ToDoInfoHeaderView: NiblessView {
     private let titleLabel: UILabel = UILabel {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.textColor = .white
-        $0.font = .pingFangTCSemibold(ofSize: 14)
     }
 
     private let totalLabel: UILabel = UILabel {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.textColor = .white
-        $0.font = .pingFangTCSemibold(ofSize: 24)
     }
     
     override func didMoveToWindow() {
@@ -59,6 +57,15 @@ class ToDoInfoHeaderView: NiblessView {
 /// helper
 extension ToDoInfoHeaderView {
     private func arrangeView() {
+        switch type {
+        case .TAB:
+            titleLabel.font = .pingFangTCSemibold(ofSize: 14)
+            totalLabel.font = .pingFangTCSemibold(ofSize: 24)
+        case .POPUP:
+            titleLabel.font = .pingFangTCSemibold(ofSize: 16)
+            totalLabel.font = .pingFangTCSemibold(ofSize: 28)
+        }
+        
         addSubview(backgroundView)
         addSubview(titleLabel)
         addSubview(totalLabel)
@@ -83,9 +90,10 @@ extension ToDoInfoHeaderView {
     }
 
     private func activateConstraintsTitleLabel() {
-        let top = titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 16)
+        let top = titleLabel.topAnchor
+            .constraint(equalTo: topAnchor, constant: type == .TAB ? 16 : 36)
         let trailing = titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 16)
-        let leading = titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 24)
+        let leading = titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: type == .TAB ? 24 : 32)
 
         NSLayoutConstraint.activate([
             top, leading, trailing
@@ -94,7 +102,7 @@ extension ToDoInfoHeaderView {
 
     private func activateConstraintsTotalLabel() {
         let top = totalLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 2)
-        let leading = totalLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 24)
+        let leading = totalLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: type == .TAB ? 24 : 32)
 
         NSLayoutConstraint.activate([
             top, leading

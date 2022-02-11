@@ -102,7 +102,7 @@ final class SKURankingTableViewCell: UITableViewCell {
         case .TOTAL_SALE_AMOUNT:
             progressValue = item?.saleAmount ?? 0
         }
-        progressLabel.text = "\(progressValue.roundToInt() ?? 0)"
+        progressLabel.text = progressValue.roundToInt()?.toDecimalString() ?? "0"
 
         // 設定進度條
         progressView.removeGradient()

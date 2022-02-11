@@ -10,13 +10,14 @@ import UIKit
 
 class ToDoPopupWindowViewController: NiblessViewController {
 
+    private var defaultIndex = 0
     private var toDos: [ToDo] = [] {
         didSet {
-            collectionView.reloadData()
+            self.collectionView.reloadData()
         }
     }
     
-    private let contentView: UIView = UIView {
+    private let backgroundView: UIView = UIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.backgroundColor = .black.withAlphaComponent(0.5)
     }
@@ -36,26 +37,48 @@ class ToDoPopupWindowViewController: NiblessViewController {
         return collectionView
     }()
     
+    private let pageControl: UIPageControl = {
+        let view = UIPageControl()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.pageIndicatorTintColor = .border
+        view.currentPageIndicatorTintColor = .prussianBlue
+        return view
+    }()
+    
+    private let closeImageView = UIImageView {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.image = UIImage(named: "close_popup")
+        $0.contentMode = .scaleAspectFit
+    }
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        modalPresentationStyle = .overFullScreen
         constructViewHierarchy()
         activateConstraints()
         configCollectionView()
     }
     
+    override func viewDidLayoutSubviews() {
+       self.collectionView.scrollToItem(at: NSIndexPath(item: self.defaultIndex, section: 0) as IndexPath,
+                                   at: .centeredHorizontally,
+                                   animated: false)
+    }
+    
     // MARK: - Methods
 
-    init(toDos: [ToDo]) {
+    init(toDos: [ToDo], index: Int) {
         self.toDos = toDos
+        self.defaultIndex = index
+        pageControl.numberOfPages = toDos.count
         super.init()
     }
     
     func config(index: Int) {
+//        collectionView.scrollToItem(at: NSIndexPath(item: index, section: 0) as IndexPath, at: .centeredHorizontally, animated: false)
 //        collectionView.selectItem(at: NSIndexPath(item: index, section: 0) as IndexPath, animated: false, scrollPosition: .centeredHorizontally)
     }
     
@@ -64,17 +87,24 @@ class ToDoPopupWindowViewController: NiblessViewController {
     }
     
     private func constructViewHierarchy() {
-        view.addSubview(contentView)
+        view.addSubview(backgroundView)
         // 1. create a gesture recognizer (tap gesture)
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
         // 2. add the gesture recognizer to a view
-        contentView.addGestureRecognizer(tapGesture)
-        contentView.addSubview(collectionView)
+        backgroundView.addGestureRecognizer(tapGesture)
+        view.addSubview(collectionView)
+        view.addSubview(pageControl)
+        view.addSubview(closeImageView)
+        closeImageView.addTapGesture {
+            self.dismiss(animated: true, completion: nil)
+        }
     }
 
     private func activateConstraints() {
-        activateConstraintsContentView()
+        activateConstraintsbackgroundView()
         activateConstraintsCollectionView()
+        activateConstraintsPageControl()
+        activateConstraintsCloseImageView()
     }
 
     private func configCollectionView() {
@@ -90,18 +120,14 @@ class ToDoPopupWindowViewController: NiblessViewController {
     }
 }
 
-extension ToDoPopupWindowViewController {
-
-}
-
 // MARK: - Layouts
 
 extension ToDoPopupWindowViewController {
-    private func activateConstraintsContentView() {
-        let leading = contentView.leadingAnchor.constraint(equalTo: view.leadingAnchor)
-        let trailing = contentView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-        let topAnchor = contentView.topAnchor.constraint(equalTo: view.topAnchor)
-        let bottomAnchor = contentView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+    private func activateConstraintsbackgroundView() {
+        let leading = backgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor)
+        let trailing = backgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        let topAnchor = backgroundView.topAnchor.constraint(equalTo: view.topAnchor)
+        let bottomAnchor = backgroundView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         
         NSLayoutConstraint.activate([
             leading, trailing, topAnchor, bottomAnchor
@@ -110,14 +136,35 @@ extension ToDoPopupWindowViewController {
     
     private func activateConstraintsCollectionView() {
         let leading = collectionView.leadingAnchor
-            .constraint(equalTo: contentView.leadingAnchor, constant: 0)
+            .constraint(equalTo: backgroundView.leadingAnchor, constant: 0)
         let trailing = collectionView.trailingAnchor
-            .constraint(equalTo: contentView.trailingAnchor, constant: 0)
+            .constraint(equalTo: backgroundView.trailingAnchor, constant: 0)
         let height = collectionView.heightAnchor.constraint(equalToConstant: 380)
-        let centerYAnchor = collectionView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
+        let centerYAnchor = collectionView.centerYAnchor.constraint(equalTo: backgroundView.centerYAnchor)
 
         NSLayoutConstraint.activate([
             centerYAnchor, leading, trailing, height
+        ])
+    }
+    
+    private func activateConstraintsPageControl() {
+        let bottom = pageControl.bottomAnchor.constraint(equalTo: collectionView.bottomAnchor)
+        let leading = pageControl.leadingAnchor.constraint(equalTo: view.leadingAnchor)
+        let trailing = pageControl.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        let height = pageControl.heightAnchor.constraint(equalToConstant: 32)
+        NSLayoutConstraint.activate([
+            leading, trailing, bottom, height
+        ])
+    }
+    
+    private func activateConstraintsCloseImageView() {
+        let centerXAnchor = closeImageView.centerXAnchor
+            .constraint(equalTo: view.centerXAnchor)
+        let top = closeImageView.topAnchor
+            .constraint(equalTo: collectionView.bottomAnchor, constant: 40)
+
+        NSLayoutConstraint.activate([
+            centerXAnchor, top
         ])
     }
 }
@@ -150,5 +197,14 @@ extension ToDoPopupWindowViewController: UICollectionViewDelegateFlowLayout {
                    layout collectionViewLayout: UICollectionViewLayout,
                    sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: view.frame.width * 0.72, height: 380)
+    }
+    
+    // For Display the page number in page controll of collection view Cell
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let visibleRect = CGRect(origin: self.collectionView.contentOffset, size: self.collectionView.bounds.size)
+        let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
+        if let visibleIndexPath = self.collectionView.indexPathForItem(at: visiblePoint) {
+            self.pageControl.currentPage = visibleIndexPath.row
+        }
     }
 }

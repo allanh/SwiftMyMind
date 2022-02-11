@@ -29,7 +29,7 @@ class SKURankingInfoItemView: NiblessView {
         if let report = report {
             rankingLabel.text = "\(ranking)"
             titleLabel.text = report.name
-            countLabel.text = (order == .TOTAL_SALE_AMOUNT) ? "\(report.saleAmount)" : "\(report.saleQuantity)"
+            countLabel.text = (order == .TOTAL_SALE_AMOUNT) ? "\(report.saleAmount.toDecimalString())" : "\(report.saleQuantity.toDecimalString())"
             if let urlString = report.image,
                let url = URL(string: urlString) {
                 imageView.kf.setImage(with: url)

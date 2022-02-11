@@ -173,9 +173,6 @@ class SaleReportCollectionViewCell: UICollectionViewCell {
                                 UIColor(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, alpha: 0.5),
                                 UIColor(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, alpha: 0.0)]
     private let gradientLocations = [NSNumber(value: 0), NSNumber(value: 0.3), NSNumber(value: 1)]
-    private let numberFormatter = NumberFormatter {
-        $0.numberStyle = .decimal
-    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -214,8 +211,8 @@ class SaleReportCollectionViewCell: UICollectionViewCell {
     
     func configLineChart(order: SKURankingReport.SKURankingReportSortOrder, pointType: SaleReportList.SaleReportPointsType) {
         if let reportList = saleReportList, reportList.reports.count > 0 {
-            quantityTypeView.countLabel.text = numberFormatter.string(from: NSNumber(value: reportList.totalQuantity(pointsType: pointType))) ?? "0"
-            amountTypeView.countLabel.text = numberFormatter.string(from: NSNumber(value: reportList.totalAmount(pointsType: pointType))) ?? "0"
+            quantityTypeView.countLabel.text = reportList.totalQuantity(pointsType: pointType).toDecimalString()
+            amountTypeView.countLabel.text = reportList.totalAmount(pointsType: pointType).toDecimalString()
             mylineChartView.data = MyMindLineChartData(points: reportList.points(for: order)[pointType] ?? [],
                                                        gradientColors: gradientColors,
                                                        gradientLocations: gradientLocations)

@@ -34,7 +34,7 @@ class ToDoInfoView: NiblessView {
 /// helper
 extension ToDoInfoView {
     private func constructViews() {
-        headerView = ToDoInfoHeaderView(frame: bounds, backgroundType: .BACKGROUND)
+        headerView = ToDoInfoHeaderView(frame: bounds, type: .TAB)
         headerView.toDo = toDo
 //        for index in 0..<toDo.items.count {
 //            itemViews.append(ToDoItemView(frame: .zero, item: toDo.items[index]))

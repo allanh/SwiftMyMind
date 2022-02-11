@@ -409,8 +409,7 @@ extension HomeViewController: IndicatorSwitchContentHeaderViewDelegate {
 extension HomeViewController: ToDoListCollectionViewCellDelegate {
     func showToDoListPopupWindow(index: Int) {
         if let items = toDoList?.items, items.count > 0 {
-            let viewController = ToDoPopupWindowViewController(toDos: items)
-            viewController.config(index: index)
+            let viewController = ToDoPopupWindowViewController(toDos: items, index: index)
             self.present(viewController, animated: true, completion: nil)
 //        } else {
 //            let viewController = ToDoPopupWindowViewController(toDos: ToDoList.emptyItems)

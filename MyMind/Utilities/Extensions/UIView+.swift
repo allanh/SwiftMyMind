@@ -49,6 +49,29 @@ extension UIView {
             self.backgroundColor = UIColor(patternImage: image)
         }
     }
+    
+    func drawBorder(edges: [UIRectEdge], borderWidth: CGFloat, color: UIColor) {
+        for item in edges {
+            let borderLayer: CALayer = CALayer()
+            borderLayer.borderColor = color.cgColor
+            borderLayer.borderWidth = borderWidth
+            switch item {
+            case .top:
+                borderLayer.frame = CGRect(x: 0, y: 0, width: frame.width, height: borderWidth)
+            case .left:
+                borderLayer.frame =  CGRect(x: 0, y: 0, width: borderWidth, height: frame.height)
+            case .bottom:
+                borderLayer.frame = CGRect(x: 0, y: frame.height - borderWidth, width: frame.width, height: borderWidth)
+            case .right:
+                borderLayer.frame = CGRect(x: frame.width - borderWidth, y: 0, width: borderWidth, height: frame.height)
+            case .all:
+                drawBorder(edges: [.top, .left, .bottom, .right], borderWidth: borderWidth, color: color)
+            default:
+                break
+            }
+            self.layer.addSublayer(borderLayer)
+        }
+    }
 }
 
 extension UIView {

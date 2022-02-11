@@ -25,6 +25,7 @@
 		3F31E1E42771AAC80002CA6A /* SKURankingListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F31E1E32771AAC70002CA6A /* SKURankingListCollectionViewCell.swift */; };
 		3F31E1E62771C24C0002CA6A /* UICollectionViewCell+shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F31E1E52771C24C0002CA6A /* UICollectionViewCell+shadow.swift */; };
 		3F31E1E82772DE050002CA6A /* SKURankingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F31E1E72772DE050002CA6A /* SKURankingTableViewCell.swift */; };
+		3F7162AC27B4F942007A6966 /* Double+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7162AB27B4F941007A6966 /* Double+.swift */; };
 		3F7D9C3527A3A8E50055A612 /* ToDoPopupWindowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7D9C3427A3A8E50055A612 /* ToDoPopupWindowViewController.swift */; };
 		3F7E8F47274B86CD00392E20 /* PasswordTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7E8F46274B86CD00392E20 /* PasswordTextField.swift */; };
 		3F7E8F502750E80500392E20 /* RollingNoticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7E8F4F2750E80500392E20 /* RollingNoticeView.swift */; };
@@ -418,6 +419,7 @@
 		3F31E1E32771AAC70002CA6A /* SKURankingListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKURankingListCollectionViewCell.swift; sourceTree = "<group>"; };
 		3F31E1E52771C24C0002CA6A /* UICollectionViewCell+shadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewCell+shadow.swift"; sourceTree = "<group>"; };
 		3F31E1E72772DE050002CA6A /* SKURankingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKURankingTableViewCell.swift; sourceTree = "<group>"; };
+		3F7162AB27B4F941007A6966 /* Double+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+.swift"; sourceTree = "<group>"; };
 		3F7D9C3427A3A8E50055A612 /* ToDoPopupWindowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoPopupWindowViewController.swift; sourceTree = "<group>"; };
 		3F7E8F46274B86CD00392E20 /* PasswordTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordTextField.swift; sourceTree = "<group>"; };
 		3F7E8F4F2750E80500392E20 /* RollingNoticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RollingNoticeView.swift; sourceTree = "<group>"; };
@@ -1431,6 +1433,7 @@
 				3F31E1D9276879F80002CA6A /* Float+Int.swift */,
 				3F31E1E52771C24C0002CA6A /* UICollectionViewCell+shadow.swift */,
 				3F8B46C12782CFB100158607 /* UILabel+.swift */,
+				3F7162AB27B4F941007A6966 /* Double+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -2199,6 +2202,7 @@
 				A4F2D017265D08D3004D8D6D /* SearchMaterialNamesViewModel.swift in Sources */,
 				52C2CBE6269ED0D5002A2BA9 /* SaleReportCollectionViewCell.swift in Sources */,
 				A49CF8C0260306D200AFC170 /* APIError.swift in Sources */,
+				3F7162AC27B4F942007A6966 /* Double+.swift in Sources */,
 				3F31E1DC276AEA830002CA6A /* DataTypeDropDownListTableViewCell.swift in Sources */,
 				5280D6E726C0D711004363C6 /* ServiceCellTableViewCell.swift in Sources */,
 				3F8B46C22782CFB100158607 /* UILabel+.swift in Sources */,

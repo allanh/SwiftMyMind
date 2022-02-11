@@ -16,4 +16,8 @@ extension Float {
             return nil
         }
     }
+    
+    func toDecimalString() -> String {
+        return Double(self).toDecimalString()
+    }
 }
