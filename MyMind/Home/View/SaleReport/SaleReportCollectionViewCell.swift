@@ -176,11 +176,11 @@ class SaleReportCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        dropDownView.anchorView = headerView.alternativeInfoView
+        dropDownView.anchorView = headerView.dropDownView
         configDateLabels()
         constructViewHierarchy()
         activateConstratins()
-        headerView.alternativeInfoView.addTapGesture {
+        headerView.dropDownView.addTapGesture {
             self.dropDownView.show()
         }
     }

@@ -117,7 +117,6 @@
 		52A8DA3B27167B7800CFE78F /* MainFunctionEntryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52A8DA3927167B7800CFE78F /* MainFunctionEntryCollectionViewCell.xib */; };
 		52AC22A226FACA04003AF437 /* AnnouncementListFilterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52AC22A126FACA04003AF437 /* AnnouncementListFilterModel.swift */; };
 		52B15CBA2691BAFC0010FCED /* MyMindEmployeeAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B15CB92691BAFC0010FCED /* MyMindEmployeeAPIService.swift */; };
-		52B8734F270FF4BF00102C98 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B8734E270FF4BF00102C98 /* CategoryViewController.swift */; };
 		52B62539270AE04B00E03220 /* Report+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528C86BE2707063C0084BB27 /* Report+.swift */; };
 		52B6253A270AE04F00E03220 /* UDILineChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528C86C2270709230084BB27 /* UDILineChart.swift */; };
 		52B6253B270BFCC800E03220 /* IconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528C86C627070AF30084BB27 /* IconView.swift */; };
@@ -125,6 +124,7 @@
 		52B6253F270C306E00E03220 /* UDIPieChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B6253D270C306E00E03220 /* UDIPieChart.swift */; };
 		52B62541270D537F00E03220 /* SelectChartIntents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 52B62540270D537F00E03220 /* SelectChartIntents.intentdefinition */; };
 		52B62542270D84B700E03220 /* SelectChartIntents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 52B62540270D537F00E03220 /* SelectChartIntents.intentdefinition */; };
+		52B8734F270FF4BF00102C98 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B8734E270FF4BF00102C98 /* CategoryViewController.swift */; };
 		52B8749026DC7C38008F3CF2 /* BulletinCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B8748F26DC7C38008F3CF2 /* BulletinCollectionViewCell.swift */; };
 		52B8749226DC88EA008F3CF2 /* Bulletin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B8749126DC88EA008F3CF2 /* Bulletin.swift */; };
 		52B8749426DCBE74008F3CF2 /* MyMindAnnouncementAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B8749326DCBE74008F3CF2 /* MyMindAnnouncementAPIService.swift */; };
@@ -135,7 +135,6 @@
 		52B8749E26DF3627008F3CF2 /* AnnouncementListQueryInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B8749D26DF3627008F3CF2 /* AnnouncementListQueryInfo.swift */; };
 		52B874A026DF364F008F3CF2 /* MyMindNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B8749F26DF364F008F3CF2 /* MyMindNotification.swift */; };
 		52C2CBD0269BE52B002A2BA9 /* TodaySaleReportCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C2CBCF269BE52B002A2BA9 /* TodaySaleReportCollectionViewCell.swift */; };
-		52C2CBD2269BE6BC002A2BA9 /* TodaySaleInfoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C2CBD1269BE6BC002A2BA9 /* TodaySaleInfoCollectionViewCell.swift */; };
 		52C2CBD4269BED72002A2BA9 /* SaleReportInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C2CBD3269BED72002A2BA9 /* SaleReportInfoView.swift */; };
 		52C2CBD6269C4CED002A2BA9 /* MyMindSaleReportRatioNumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C2CBD5269C4CED002A2BA9 /* MyMindSaleReportRatioNumberFormatter.swift */; };
 		52C2CBD8269C4D4E002A2BA9 /* SaleReportInfoItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C2CBD7269C4D4E002A2BA9 /* SaleReportInfoItemView.swift */; };
@@ -508,9 +507,9 @@
 		52A8DA3927167B7800CFE78F /* MainFunctionEntryCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainFunctionEntryCollectionViewCell.xib; sourceTree = "<group>"; };
 		52AC22A126FACA04003AF437 /* AnnouncementListFilterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementListFilterModel.swift; sourceTree = "<group>"; };
 		52B15CB92691BAFC0010FCED /* MyMindEmployeeAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMindEmployeeAPIService.swift; sourceTree = "<group>"; };
-		52B8734E270FF4BF00102C98 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 		52B6253D270C306E00E03220 /* UDIPieChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UDIPieChart.swift; sourceTree = "<group>"; };
 		52B62540270D537F00E03220 /* SelectChartIntents.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = SelectChartIntents.intentdefinition; sourceTree = "<group>"; };
+		52B8734E270FF4BF00102C98 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 		52B8748F26DC7C38008F3CF2 /* BulletinCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletinCollectionViewCell.swift; sourceTree = "<group>"; };
 		52B8749126DC88EA008F3CF2 /* Bulletin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bulletin.swift; sourceTree = "<group>"; };
 		52B8749326DCBE74008F3CF2 /* MyMindAnnouncementAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMindAnnouncementAPIService.swift; sourceTree = "<group>"; };
@@ -521,7 +520,6 @@
 		52B8749D26DF3627008F3CF2 /* AnnouncementListQueryInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementListQueryInfo.swift; sourceTree = "<group>"; };
 		52B8749F26DF364F008F3CF2 /* MyMindNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMindNotification.swift; sourceTree = "<group>"; };
 		52C2CBCF269BE52B002A2BA9 /* TodaySaleReportCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodaySaleReportCollectionViewCell.swift; sourceTree = "<group>"; };
-		52C2CBD1269BE6BC002A2BA9 /* TodaySaleInfoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodaySaleInfoCollectionViewCell.swift; sourceTree = "<group>"; };
 		52C2CBD3269BED72002A2BA9 /* SaleReportInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaleReportInfoView.swift; sourceTree = "<group>"; };
 		52C2CBD5269C4CED002A2BA9 /* MyMindSaleReportRatioNumberFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMindSaleReportRatioNumberFormatter.swift; sourceTree = "<group>"; };
 		52C2CBD7269C4D4E002A2BA9 /* SaleReportInfoItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaleReportInfoItemView.swift; sourceTree = "<group>"; };
@@ -838,7 +836,6 @@
 				3F31E1B7275F06650002CA6A /* ViewPager */,
 				3F31E1C2275F67480002CA6A /* TodayTabItemView.swift */,
 				52C2CBCF269BE52B002A2BA9 /* TodaySaleReportCollectionViewCell.swift */,
-				52C2CBD1269BE6BC002A2BA9 /* TodaySaleInfoCollectionViewCell.swift */,
 				52C2CBD3269BED72002A2BA9 /* SaleReportInfoView.swift */,
 				52C2CBD7269C4D4E002A2BA9 /* SaleReportInfoItemView.swift */,
 			);
@@ -1000,14 +997,6 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		52B8734D270FF46800102C98 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				52B8734E270FF4BF00102C98 /* CategoryViewController.swift */,
-			);
-			path = Controller;
-            sourceTree = "<group>";
-        };
 		52B6253C270C302200E03220 /* SwiftUIView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1018,6 +1007,14 @@
 				52B6253D270C306E00E03220 /* UDIPieChart.swift */,
 			);
 			path = SwiftUIView;
+			sourceTree = "<group>";
+		};
+		52B8734D270FF46800102C98 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				52B8734E270FF4BF00102C98 /* CategoryViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		52E505FC26A53189000E5116 /* ResendOTP */ = {
@@ -2223,7 +2220,6 @@
 				A43E0B6F260DC66D005FC6CE /* UIControl+.swift in Sources */,
 				A46BA1DD263AAD2A0075E8C8 /* OrganizeOptionView.swift in Sources */,
 				A43E0B63260D7CA4005FC6CE /* NiblessViewController.swift in Sources */,
-				52C2CBD2269BE6BC002A2BA9 /* TodaySaleInfoCollectionViewCell.swift in Sources */,
 				A457AEAE2660A2230029DDBB /* PurchaseListFilterViewModel.swift in Sources */,
 				522F855626BB85C7002ED473 /* EmptyDataView.swift in Sources */,
 				3F31E1CE27635B9E0002CA6A /* EdgeInsetLabel.swift in Sources */,

@@ -60,6 +60,7 @@ class SaleRankingListCollectionViewCell: UICollectionViewCell {
         loadGrossProfitRankingReportList()
     }
     
+    // 取得銷售金額佔比列表
     private func loadSaleRankingReportList() {
         self.delegate?.showLoading(true)
         let dashboardLoader = MyMindDashboardAPIService.shared
@@ -90,6 +91,8 @@ class SaleRankingListCollectionViewCell: UICollectionViewCell {
                 }
         }
     }
+    
+    // 取得銷售毛利佔比列表
     private func loadGrossProfitRankingReportList() {
         self.delegate?.showLoading(true)
         let dashboardLoader = MyMindDashboardAPIService.shared

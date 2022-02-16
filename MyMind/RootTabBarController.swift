@@ -7,17 +7,20 @@
 //
 import WidgetKit
 import UIKit
-final class RootTabBarController: UITabBarController {
+import Firebase
 
+final class RootTabBarController: UITabBarController {
     override var childForStatusBarStyle: UIViewController? {
         return selectedViewController
     }
     private var contentViewControlelrs: [UIViewController] = []
     var authorization: Authorization?
     var section: Int?
+    
     convenience init() {
         self.init(authorization: nil, section: nil)
-        }
+    }
+    
     init(authorization: Authorization?, section: Int?) {
         self.authorization = authorization
         self.section = section
@@ -27,6 +30,7 @@ final class RootTabBarController: UITabBarController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         addCustomBackNavigationItem()
@@ -52,8 +56,27 @@ final class RootTabBarController: UITabBarController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        loadNotifications()
+        if authorization == nil {
+            authorizationAccount()
+        }
         setNavigationBarBackgroundColor(UIColor.prussianBlue)
+    }
+        
+    private func authorizationAccount() {
+        MyMindEmployeeAPIService.shared.authorization()
+            .done { authorization in
+                self.authorization = authorization
+                self.loadNotifications()
+            }
+            .ensure {
+            }
+            .catch { error in
+                if let apiError = error as? APIError {
+                    _ = ErrorHandler.shared.handle(apiError, forceAction: true)
+                } else {
+                    ToastView.showIn(self, message: error.localizedDescription)
+                }
+            }
     }
     
     @objc

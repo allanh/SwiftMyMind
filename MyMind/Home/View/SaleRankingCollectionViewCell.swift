@@ -135,7 +135,7 @@ class SaleRankingCollectionViewCell: UICollectionViewCell {
             self.selectItem(item: item)
         }
         self.configTableViewContainerView(dropDownView.tableViewContainerView)
-        dropDownView.tableViewBackgroundColor = .prussianBlue
+        dropDownView.tableViewBackgroundColor = .monthlyReportDropDownBg
         dropDownView.contentInset = UIEdgeInsets(top: 4, left: 0, bottom: 4, right: 0)
         dropDownView.showScrollBar = false
         dropDownView.topInset = -32
@@ -208,11 +208,11 @@ class SaleRankingCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        dropDownView.anchorView = headerView.alternativeInfoView
+        dropDownView.anchorView = headerView.dropDownView
         constructViewHierarchy()
         activateConstratins()
         configCollectionView()
-        headerView.alternativeInfoView.addTapGesture {
+        headerView.dropDownView.addTapGesture {
             self.dropDownView.show()
         }
         chartView.drawEntryLabelsEnabled = false

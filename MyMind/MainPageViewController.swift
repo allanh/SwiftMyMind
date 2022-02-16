@@ -10,10 +10,62 @@ import UIKit
 import Firebase
 
 class MyMindNavigationController: UINavigationController {
+    var remoteConfig: RemoteConfig?
+
+    override init(rootViewController : UIViewController) {
+        super.init(rootViewController : rootViewController)
+    }
+
+    override init(navigationBarClass: AnyClass?, toolbarClass: AnyClass?) {
+        super.init(navigationBarClass : navigationBarClass, toolbarClass : toolbarClass)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        fetchRemoteConfig()
+        showSignInPage()
+    }
+    
     override var childForStatusBarStyle: UIViewController? {
         return topViewController
     }
+    
+    private func fetchRemoteConfig() {
+        remoteConfig = RemoteConfig.remoteConfig()
+        let settings = RemoteConfigSettings()
+        settings.minimumFetchInterval = 0
+        remoteConfig?.configSettings = settings
+        remoteConfig?.fetch { status, error in
+            self.remoteConfig?.activate()
+            do {
+                // 目前未開啟OTP功能，先不使用 remote config
+//                try KeychainHelper.default.saveItem(self.remoteConfig["otp_enable"].boolValue, for: .otpStatus)
+                try KeychainHelper.default.saveItem(false, for: .otpStatus)
+            } catch {
+                ToastView.showIn(self, message: "save keychain failed")
+            }
+        }
+    }
+    
+    // 顯示登入頁
+    private func showSignInPage() {
+        var otpEnabled: Bool = false
+        do {
+            otpEnabled = try KeychainHelper.default.readItem(key: .otpStatus, valueType: Bool.self)
+        } catch {
+            print(error)
+        }
+        let viewModel = SignInViewModel(
+            userSessionRepository: MyMindUserSessionRepository.shared,
+            signInValidationService: SignInValidatoinService(),
+            lastSignInInfoDataStore: MyMindLastSignInInfoDataStore(),
+            otpEnabled: otpEnabled
+        )
+        let signInViewController = SignInViewController(viewModel: viewModel)
+        self.setViewControllers([signInViewController], animated: false)
+    }
 }
+
 typealias ServiceInfo = (title: String, version: String, icon: String, descriptions: String, action: Selector)
 class MainPageViewController: UIViewController {
 
@@ -48,7 +100,8 @@ class MainPageViewController: UIViewController {
         remoteConfig.fetch { status, error in
             self.remoteConfig.activate()
             do {
-                try KeychainHelper.default.saveItem(self.remoteConfig["otp_enable"].boolValue, for: .otpStatus)
+//                try KeychainHelper.default.saveItem(self.remoteConfig["otp_enable"].boolValue, for: .otpStatus)
+                try KeychainHelper.default.saveItem(false, for: .otpStatus)
             } catch {
                 ToastView.showIn(self, message: "save keychain failed")
             }

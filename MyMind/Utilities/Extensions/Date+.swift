@@ -8,7 +8,7 @@
 
 import Foundation
 extension Date {
-    var yesterday: Self {
+    var yesterday: Date {
         get {
             return Calendar.current.date(byAdding: .day, value: -1, to: self)!
         }

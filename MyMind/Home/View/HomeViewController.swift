@@ -106,10 +106,6 @@ final class HomeViewController: UIViewController {
         loadHomeData()
     }
     
-    @IBAction func back(_ sender: Any) {
-        self.navigationController?.popToRootViewController(animated: true)
-    }
-    
     @IBAction func showAnnouncement(_ sender: Any) {
         show(AnnouncementListViewController(announcementListLoader: MyMindAnnouncementAPIService.shared), sender: nil)
     }
@@ -182,35 +178,46 @@ extension HomeViewController {
         let end = Date()
         dashboardLoader.orderSaleReport(start: end, end: end, type: .byType)
             .done { todaySaleReportList in
-                dashboardLoader.orderSaleReport(start: end.yesterday, end: end.yesterday, type: .byType)
-                    .done { yesterdaySaleReportList in
-                        let todayTransformedSaleReport = todaySaleReportList.reports.first {
-                            $0.type == .TRANSFORMED
-                        }
-                        let todayShippedSaleReport = todaySaleReportList.reports.first {
-                            $0.type == .SHIPPED
-                        }
-                        let yesterdayTransformedSaleReport = yesterdaySaleReportList.reports.first {
-                            $0.type == .TRANSFORMED
-                        }
-                        let yesterdayShippedSaleReport = yesterdaySaleReportList.reports.first {
-                            $0.type == .SHIPPED
-                        }
-                        self.saleReports = SaleReports(dateString: end.shortDateString, todayTransformedSaleReport: todayTransformedSaleReport, todayShippedSaleReport: todayShippedSaleReport, yesterdayTransformedSaleReport: yesterdayTransformedSaleReport, yesterdayShippedSaleReport: yesterdayShippedSaleReport)
-                    }
-                    .ensure {
-                        self.isNetworkProcessing = false
-                    }
-                    .catch { error in
-                        self.saleReports = nil
-                        self.handlerError(error)
-                    }
+                self.loadYesterdaySaleReports(todaySaleReportList: todaySaleReportList)
+            }
+            .ensure {
+                self.isNetworkProcessing = false
             }
             .catch { error in
                 self.saleReports = nil
                 self.handlerError(error)
             }
     }
+    
+    private func loadYesterdaySaleReports(todaySaleReportList: SaleReportList) {
+        isNetworkProcessing = true
+        let dashboardLoader = MyMindDashboardAPIService.shared
+        let end = Date()
+        dashboardLoader.orderSaleReport(start: end.yesterday, end: end.yesterday, type: .byType)
+            .done { yesterdaySaleReportList in
+                let todayTransformedSaleReport = todaySaleReportList.reports.first {
+                    $0.type == .TRANSFORMED
+                }
+                let todayShippedSaleReport = todaySaleReportList.reports.first {
+                    $0.type == .SHIPPED
+                }
+                let yesterdayTransformedSaleReport = yesterdaySaleReportList.reports.first {
+                    $0.type == .TRANSFORMED
+                }
+                let yesterdayShippedSaleReport = yesterdaySaleReportList.reports.first {
+                    $0.type == .SHIPPED
+                }
+                self.saleReports = SaleReports(dateString: end.shortDateString, todayTransformedSaleReport: todayTransformedSaleReport, todayShippedSaleReport: todayShippedSaleReport, yesterdayTransformedSaleReport: yesterdayTransformedSaleReport, yesterdayShippedSaleReport: yesterdayShippedSaleReport)
+            }
+            .ensure {
+                self.isNetworkProcessing = false
+            }
+            .catch { error in
+                self.saleReports = nil
+                self.handlerError(error)
+            }
+    }
+    
     private func loadSaleReportList() {
         isNetworkProcessing = true
         let dashboardLoader = MyMindDashboardAPIService.shared

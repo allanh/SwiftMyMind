@@ -17,10 +17,8 @@ typealias SettingInfo = (title: String, icon: String, action: Selector)
 
 class AccountSettingViewController: UIViewController {
 
-    private let serviceInfos: [SettingInfo] = [("帳號資料維護", "account_info_setting", #selector(accountSetting)),
-                                               ("密碼修改", "change_password", #selector(passwordSetting)),
-                                               ("重新綁定 OTP", "rebind_otp", #selector(rebindOtp))]
-    
+    private var serviceInfos: [SettingInfo] = []
+        
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var accountLabel: UILabel!
@@ -36,6 +34,18 @@ class AccountSettingViewController: UIViewController {
     private var statusBarFrame: CGRect!
     private var statusBarView: UIView!
     private var offset: CGFloat!
+    
+    private var otpEnabled: Bool {
+        get {
+            var otpEnabled: Bool = false
+            do {
+                otpEnabled = try KeychainHelper.default.readItem(key: .otpStatus, valueType: Bool.self)
+            } catch {
+                print(error)
+            }
+            return otpEnabled
+        }
+    }
     
     private var isNetworkProcessing: Bool = false {
         didSet {
@@ -109,7 +119,7 @@ class AccountSettingViewController: UIViewController {
         scrollView.delegate = self
         
         titleLabel.roundCorners([.topRight, .bottomRight], radius: 100)
-
+        configServiceInfo()
         configTableView()
         setShadow(versionView)
         setShadow(signoutView)
@@ -137,12 +147,22 @@ class AccountSettingViewController: UIViewController {
          view.addSubview(statusBarView)
     }
     
+    func configServiceInfo() {
+        var serviceInfos: [SettingInfo] = [("帳號資料維護", "account_info_setting", #selector(accountSetting)),
+                        ("密碼修改", "change_password", #selector(passwordSetting))]
+        if otpEnabled {
+            serviceInfos.append(("重新綁定 OTP", "rebind_otp", #selector(rebindOtp)))
+        }
+        self.serviceInfos = serviceInfos
+    }
+    
     private func configTableView() {
         settingTableView.layer.cornerRadius = 8
         settingTableView.layer.shadowColor = UIColor.init(hex: "#000000").withAlphaComponent(0.1).cgColor
         settingTableView.layer.shadowOpacity = 1
         settingTableView.layer.shadowOffset = CGSize(width: 0, height: 10)
         settingTableView.layer.shadowRadius = 15
+        settingTableView.heightAnchor.constraint(equalToConstant: otpEnabled ? 212 : 140).isActive = true
     }
     
     private func setShadow(_ view: UIView) {

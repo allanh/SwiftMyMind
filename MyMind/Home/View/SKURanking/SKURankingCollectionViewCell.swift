@@ -67,11 +67,11 @@ class SKURankingCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         contentView.backgroundColor = .white
-        dropDownView.anchorView = headerView.alternativeInfoView
+        dropDownView.anchorView = headerView.dropDownView
         constructViewHierarchy()
         activateConstratins()
         configTableView()
-        headerView.alternativeInfoView.addTapGesture {
+        headerView.dropDownView.addTapGesture {
             self.dropDownView.show()
         }
     }

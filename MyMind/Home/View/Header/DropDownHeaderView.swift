@@ -36,7 +36,7 @@ final class DropDownHeaderView : NiblessView {
     }
     var alternativeInfoViewBackgroundColor: UIColor? {
         didSet {
-            alternativeInfoView.backgroundColor = alternativeInfoViewBackgroundColor
+            dropDownView.backgroundColor = alternativeInfoViewBackgroundColor
         }
     }
     
@@ -79,11 +79,11 @@ final class DropDownHeaderView : NiblessView {
     }
 
     // Drop down view
-    let alternativeInfoView: UIView = UIView {
+    let dropDownView: UIView = UIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.backgroundColor = .monthlyReportDropDownBg
         $0.clipsToBounds = true
-        $0.layer.cornerRadius = 20
+        $0.layer.cornerRadius = 16
     }
     
     private let alternativeLabel: UILabel = UILabel {
@@ -105,9 +105,9 @@ extension DropDownHeaderView {
         if date != nil {
             addSubview(dateLabel)
         }
-        alternativeInfoView.addSubview(alternativeLabel)
-        alternativeInfoView.addSubview(arrowDownImageView)
-        addSubview(alternativeInfoView)
+        dropDownView.addSubview(alternativeLabel)
+        dropDownView.addSubview(arrowDownImageView)
+        addSubview(dropDownView)
     }
     
     private func activateConstraints() {
@@ -139,17 +139,17 @@ extension DropDownHeaderView {
     }
     private func activateConstraintsAlternativeInfoView() {
         NSLayoutConstraint.activate([
-            alternativeInfoView.topAnchor.constraint(equalTo: topAnchor, constant: 16),
-            alternativeInfoView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            alternativeInfoView.widthAnchor.constraint(equalToConstant: 100),
-            alternativeInfoView.heightAnchor.constraint(equalToConstant: 32)
+            dropDownView.topAnchor.constraint(equalTo: topAnchor, constant: 16),
+            dropDownView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            dropDownView.widthAnchor.constraint(equalToConstant: 100),
+            dropDownView.heightAnchor.constraint(equalToConstant: 32)
         ])
     }
     
     private func activateConstraintsAlternativeLabel() {
         NSLayoutConstraint.activate([
-            alternativeLabel.centerYAnchor.constraint(equalTo: alternativeInfoView.centerYAnchor),
-            alternativeLabel.leadingAnchor.constraint(equalTo: alternativeInfoView.leadingAnchor, constant: 16),
+            alternativeLabel.centerYAnchor.constraint(equalTo: dropDownView.centerYAnchor),
+            alternativeLabel.leadingAnchor.constraint(equalTo: dropDownView.leadingAnchor, constant: 16),
             alternativeLabel.trailingAnchor.constraint(equalTo: arrowDownImageView.leadingAnchor, constant: -4),
             alternativeLabel.heightAnchor.constraint(equalToConstant: 22)
         ])
@@ -157,9 +157,9 @@ extension DropDownHeaderView {
     
     private func activateConstraintsArrowDownImageView() {
         NSLayoutConstraint.activate([
-            arrowDownImageView.centerYAnchor.constraint(equalTo: alternativeInfoView.centerYAnchor),
+            arrowDownImageView.centerYAnchor.constraint(equalTo: dropDownView.centerYAnchor),
             arrowDownImageView.leadingAnchor.constraint(equalTo: alternativeLabel.trailingAnchor, constant: 4),
-            arrowDownImageView.trailingAnchor.constraint(equalTo: alternativeInfoView.trailingAnchor, constant: -8),
+            arrowDownImageView.trailingAnchor.constraint(equalTo: dropDownView.trailingAnchor, constant: -8),
             arrowDownImageView.widthAnchor.constraint(equalToConstant: 16),
             arrowDownImageView.heightAnchor.constraint(equalToConstant: 16)
         ])

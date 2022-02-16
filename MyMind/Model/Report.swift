@@ -307,8 +307,10 @@ struct SaleRankingReport: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         if let string = try? container.decode(String.self, forKey: .store) {
             name = string
+        } else if let vendor = try? container.decode(String.self, forKey: .vendor) {
+            name = vendor
         } else {
-            name = try container.decode(String.self, forKey: .vendor)
+            name = ""
         }
         saleAmount = try container.decode(Float.self, forKey: .saleAmount)
         saleGrossProfit = try container.decode(Float.self, forKey: .saleGrossProfit)

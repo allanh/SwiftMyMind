@@ -10,7 +10,11 @@ import UIKit
 
 class ToDoCardCollectionViewCell: UICollectionViewCell {
 
-    private var todo: ToDo?
+    private var todo: ToDo? {
+        didSet {
+            tableView.reloadData()
+        }
+    }
     private var headerView: ToDoInfoHeaderView = {
         let view = ToDoInfoHeaderView(frame: .zero, type: .POPUP)
         view.backgroundColor = .clear

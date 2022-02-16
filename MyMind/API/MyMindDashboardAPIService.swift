@@ -38,9 +38,7 @@ final class MyMindDashboardAPIService: PromiseKitAPIService {
         guard let userSession = userSessionDataStore.readUserSession() else {
             return .init(error: APIError.noAccessTokenError)
         }
-
         let endpoint = Endpoint.saleReport(partnerID: "\(userSession.partnerInfo.id)", start: start, end: end, type: type)
-
         let request = request(
             endPoint: endpoint,
             httpHeader: ["Authorization": "Bearer \(userSession.token)"]

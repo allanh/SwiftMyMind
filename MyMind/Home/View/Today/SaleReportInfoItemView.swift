@@ -56,7 +56,7 @@ class SaleReportInfoItemView: NiblessView {
     private let quantityRatioLabel: EdgeInsetLabel = EdgeInsetLabel {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = .pingFangTCRegular(ofSize: 12)
-        $0.textAlignment = .center
+        $0.textAlignment = .left
         $0.textColor = .prussianBlue
         $0.backgroundColor = .prussianBlue.withAlphaComponent(0.2)
         $0.layer.cornerRadius = 8
@@ -329,9 +329,9 @@ extension SaleReportInfoItemView {
             .constraint(equalTo: leadingAnchor, constant: 16)
         let height = quantityRatioLabel.heightAnchor
             .constraint(equalToConstant: 16)
-
+        let width = quantityRatioLabel.widthAnchor.constraint(greaterThanOrEqualToConstant: 50)
         NSLayoutConstraint.activate([
-            top, leading, height
+            top, leading, width, height
         ])
     }
     

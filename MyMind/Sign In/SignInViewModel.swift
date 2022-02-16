@@ -53,9 +53,11 @@ class SignInViewModel {
         self.signInValidationService = signInValidationService
         self.lastSignInInfoDataStore = lastSignInInfoDataStore
         self.otpEnabled = otpEnabled
-        do {
-            self.signInInfo.uuid = try KeychainHelper.default.readItem(key: .uuid, valueType: String.self)
-        } catch {}
+        if otpEnabled {
+            do {
+                self.signInInfo.uuid = try KeychainHelper.default.readItem(key: .uuid, valueType: String.self)
+            } catch {}
+        }
         configLastSignInStatus()
     }
 
@@ -106,7 +108,6 @@ class SignInViewModel {
 
     @objc
     func signIn() {
-        
         indicateSigningIn(true)
         guard validateSignInInfo() else {
             indicateSigningIn(false)
