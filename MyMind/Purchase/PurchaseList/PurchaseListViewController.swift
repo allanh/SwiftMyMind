@@ -157,6 +157,8 @@ final class PurchaseListViewController: NiblessViewController {
             self.purchaseList?.updateWithNextPageList(purchaseList: purchaseList)
         } else {
             self.purchaseList = purchaseList
+            rootView.tableView.setContentOffset(.zero, animated: true)
+            rootView.collectionView.setContentOffset(.zero, animated: true)
         }
         purchaseListQueryInfo.updateCurrentPageInfo(with: purchaseList)
         if self.purchaseList?.items.count == 0 {
