@@ -100,7 +100,7 @@ class PickProductMaterialsViewController: NiblessViewController {
         case .suggestion:
             let productMaterialListLoader = MyMindPurchaseAPIService.shared
             let adapter = PurchaseSuggestionInfosLoaderToSuggestionProductMaterialViewModelAdapter(loader: productMaterialListLoader)
-            let pickedOrderedIDs = viewModel.pickedMaterials.map { $0.id }
+            let pickedOrderedIDs = viewModel.pickedMaterials.map { "\($0.id)" }
             let purchaseSuggestionViewModel = PurchaseSuggestionViewModel(pickedProductIDList: pickedOrderedIDs , loader: adapter)
             let viewController = PurchaseSuggestionViewController(viewModel: purchaseSuggestionViewModel)
             show(viewController, sender: nil)
@@ -146,7 +146,7 @@ extension PickProductMaterialsViewController: UITableViewDataSource {
         }
         let material = viewModel.currentProductMaterials.value[indexPath.row]
         cell.config(with: material)
-        let isSelected = viewModel.pickedMaterialIDs.contains(material.id)
+        let isSelected = viewModel.pickedMaterialIDs.contains("\(material.id)")
         cell.checkBoxButton.isSelected = isSelected
         cell.checkBoxButton.addTarget(self, action: #selector(didTapCheckBoxButton(_:)), for: .touchUpInside)
         return cell

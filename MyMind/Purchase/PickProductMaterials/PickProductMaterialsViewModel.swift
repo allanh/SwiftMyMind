@@ -88,13 +88,13 @@ class PickProductMaterialsViewModel {
 
     func selectMaterial(at index: Int) {
         let material = currentProductMaterials.value[index]
-        let inserted = pickedMaterialIDs.insert(material.id).inserted
+        let inserted = pickedMaterialIDs.insert("\(material.id)").inserted
 
         switch inserted {
         case true:
             pickedMaterials.append(material)
         case false:
-            pickedMaterialIDs.remove(material.id)
+            pickedMaterialIDs.remove("\(material.id)")
             guard let indexForRemove = pickedMaterials.firstIndex(of: material) else { return }
             pickedMaterials.remove(at: indexForRemove)
         }
