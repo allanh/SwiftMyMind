@@ -122,6 +122,13 @@ class PurchaseListFilterViewController: NiblessViewController {
         }
     }
 
+    private func resetSearchViewControllerContent() {
+        for index in 0..<children.count {
+            if let childView = children[index].view as? AutoCompleteSearchRootView {
+                childView.textField.text = nil
+            }
+        }
+    }
     private func addViewControllerAsChild(_ viewController: UIViewController) {
         contentView.addSubview(viewController.view)
         addChild(viewController)
@@ -168,6 +175,7 @@ class PurchaseListFilterViewController: NiblessViewController {
     @objc
     private func cleanButtonDidTapped(_ sender: UIButton) {
         viewModel.cleanQueryInfo()
+        resetSearchViewControllerContent()
     }
 
     @objc

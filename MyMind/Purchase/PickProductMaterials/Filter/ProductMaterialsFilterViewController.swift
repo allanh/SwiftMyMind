@@ -22,13 +22,56 @@ class ProductMaterialsFilterViewController: NiblessViewController {
     private let contentView: UIView = UIView {
         $0.backgroundColor = .white
     }
-
-    lazy var vendorInfoView: AutoCompleteSearchRootView = AutoCompleteSearchRootView {
+    lazy var vendorInfoView: UIView = UIView {
+        $0.translatesAutoresizingMaskIntoConstraints = false
         $0.backgroundColor = .white
-        $0.textField.text = viewModel.queryInfo.vendorInfo.name
-        $0.textField.isUserInteractionEnabled = false
-        $0.titleLabel.text = "供應商"
+        let titleLabel: UILabel = UILabel {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.font = .pingFangTCSemibold(ofSize: 18)
+            $0.textColor = .veryDarkGray
+            $0.text = "供應商"
+        }
+        let valueLabel: UILabel = UILabel {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.font = .pingFangTCRegular(ofSize: 14)
+            $0.textColor = .veryDarkGray
+            $0.text = viewModel.queryInfo.vendorInfo.name
+        }
+        $0.addSubview(titleLabel)
+        $0.addSubview(valueLabel)
+        
+        let titleTop = titleLabel.topAnchor
+            .constraint(equalTo: $0.topAnchor, constant: 10)
+        let titleLeading = titleLabel.leadingAnchor
+            .constraint(equalTo: $0.leadingAnchor, constant: 20)
+        let titleHeight = titleLabel.heightAnchor
+            .constraint(greaterThanOrEqualToConstant: 25)
+
+        NSLayoutConstraint.activate([
+            titleTop, titleLeading, titleHeight
+        ])
+        let valueTop = valueLabel.topAnchor
+            .constraint(equalTo: titleLabel.bottomAnchor, constant: 15)
+        let valueLeading = valueLabel.leadingAnchor
+            .constraint(equalTo: titleLabel.leadingAnchor)
+        let valueTrailing = valueLabel.trailingAnchor
+            .constraint(equalTo: $0.trailingAnchor, constant: -20)
+        let valueHeight = valueLabel.heightAnchor
+            .constraint(equalToConstant: 40)
+        let valueBottom = valueLabel.bottomAnchor
+            .constraint(equalTo: $0.bottomAnchor, constant: -5)
+        NSLayoutConstraint.activate([
+            valueTop, valueLeading, valueTrailing, valueHeight, valueBottom
+        ])
+
     }
+    
+//    lazy var vendorInfoView: AutoCompleteSearchRootView = AutoCompleteSearchRootView {
+//        $0.backgroundColor = .white
+//        $0.textField.text = viewModel.queryInfo.vendorInfo.name
+//        $0.textField.isUserInteractionEnabled = false
+//        $0.titleLabel.text = "供應商"
+//    }
 
     private let bottomView: FilterSideMenuBottomView = FilterSideMenuBottomView {
         $0.backgroundColor = .white
@@ -111,7 +154,14 @@ class ProductMaterialsFilterViewController: NiblessViewController {
         activateConstraintsContentView()
         activateConstraintsBottomView()
     }
-
+    
+    private func resetSearchViewControllerContent() {
+        for index in 0..<contentViewControllers.count {
+            if let childView = contentViewControllers[index].view as? AutoCompleteSearchRootView {
+                childView.textField.text = nil
+            }
+        }
+    }
     private func configBottomView() {
         bottomView.confirmButton.rx.tap
             .subscribe(onNext: { [unowned self] in
@@ -122,6 +172,7 @@ class ProductMaterialsFilterViewController: NiblessViewController {
         bottomView.cancelButton.rx.tap
             .subscribe(onNext: { [unowned self] in
                 self.viewModel.cleanToDefaultStatus()
+                self.resetSearchViewControllerContent()
             })
             .disposed(by: bag)
     }
