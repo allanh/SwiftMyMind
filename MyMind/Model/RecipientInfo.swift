@@ -18,7 +18,7 @@ struct RecipientInfo: Codable {
 
     let name, phone: String?
     let address: Address
-    let warehouseIndex: Int
+    let warehouseIndex: Int?
 }
 
 struct Address: Codable {
