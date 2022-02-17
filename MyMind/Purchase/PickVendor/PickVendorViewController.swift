@@ -63,8 +63,8 @@ final class PickVendorViewController: UITableViewController {
                     self.tableView.addSubview(self.emptyListView)
                 } else {
                     self.emptyListView.removeFromSuperview()
-                    self.tableView.reloadData()
                 }
+                self.tableView.reloadData()
             })
             .catch { error in
                 if let apiError = error as? APIError {
