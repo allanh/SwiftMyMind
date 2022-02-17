@@ -76,6 +76,7 @@ class DropDownView<T, Cell: UITableViewCell>: NiblessView, UITableViewDelegate, 
         didSet {
             DispatchQueue.executeOnMainThread {
                 self.tableView.reloadData()
+                self.updateContainerLayout()
                 self.setNeedsUpdateConstraints()
             }
         }
@@ -87,8 +88,8 @@ class DropDownView<T, Cell: UITableViewCell>: NiblessView, UITableViewDelegate, 
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        let layout = computeLayout()
-        updateContainerLayout(layout: layout)
+//        let layout = computeLayout()
+        updateContainerLayout()
     }
 
     init(dataSource: [T],
@@ -178,15 +179,16 @@ extension DropDownView {
         let x = anchorViewFrameInWindow?.minX ?? 0
         let y = (anchorViewFrameInWindow?.maxY ?? 0) + (topInset ?? 0)
         let width = self.width ?? (anchorViewFrameInWindow?.width ?? 0)
-        let height = self.height
+        let height = min(self.height, self.heightForRow*CGFloat(dataSource.count))
         return (x, y, width, height)
     }
 
-    func updateContainerLayout(layout: Layout) {
+    func updateContainerLayout() {
         let layout = computeLayout()
         xConstraint.constant = layout.x
         yConstraint.constant = layout.y
         widthConstraint.constant = layout.width
+        heightConstraint.constant = layout.height
         self.layoutIfNeeded()
     }
 
@@ -201,13 +203,13 @@ extension DropDownView {
         bottomAnchor.constraint(equalTo: window.bottomAnchor).isActive = true
         trailingAnchor.constraint(equalTo: window.trailingAnchor).isActive = true
 
-        let layout = computeLayout()
-        updateContainerLayout(layout: layout)
+//        let layout = computeLayout()
+        updateContainerLayout()
 
         self.isHidden = false
         UIView.animate(withDuration: 0.1) { [weak self] in
             guard let self = self else { return }
-            self.heightConstraint.constant = layout.height
+//            self.heightConstraint.constant = layout.height
             self.tableView.flashScrollIndicators()
             self.layoutIfNeeded()
         }
