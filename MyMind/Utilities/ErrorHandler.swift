@@ -27,7 +27,7 @@ class ErrorHandler: ErrorHandling {
         case .noAccessTokenError, .invalidAccessToken:
             showSignInPage()
         case .serviceError(_), .parseError:
-            showServiceErrorPage()
+            showServiceErrorPage(error)
         case .maintenanceError:
             showMaintenanceErrorPage(forceAction)
         case .networkError:
@@ -65,8 +65,9 @@ extension ErrorHandler {
     private func showStaticPage(_ controller: UIViewController, page: StaticView) {
         controller.view.addSubview(page)
     }
-    private func showServiceErrorPage() {
+    private func showServiceErrorPage(_ error: APIError) {
             if let topMostViewController = topMostViewController {
+//                let page = StaticView(frame: topMostViewController.view.bounds, type: .service, title: error.localizedDescription, descriptions: "您可以前往首頁或返回上一頁。", defaultButtonTitle: "回上一頁", alternativeButtonTitle: "前往首頁")
                 let page = StaticView(frame: topMostViewController.view.bounds, type: .service, title:"哦喔～出了一點小狀況.......\n請稍候再試。" , descriptions: "您可以前往首頁或返回上一頁。", defaultButtonTitle: "回上一頁", alternativeButtonTitle: "前往首頁")
                 page.defaultButton.addAction {
                     page.removeFromSuperview()

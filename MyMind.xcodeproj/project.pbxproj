@@ -2572,7 +2572,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.shopping.udi.MyMind.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PUSH_KEY = "f6fnHfjjPERLsl5YcEntYDFpXCGVKnkNAIz4O2GSYtI=";
-				PUSH_SERVER_URL = "https://api-subsystem.udnshopping.com";
+				PUSH_SERVER_URL = "http://api-alpha-subsystem.udnshopping.com";
 				SERVER_URL = "https://demo-mymind.udicommerce.com";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEMO;
 				SWIFT_OBJC_BRIDGING_HEADER = "MyMind/TOTP/MyMind-Bridging-Header.h";
@@ -2920,7 +2920,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.shopping.udi.MyMind.beta;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PUSH_KEY = kPcqmOhEJ6caWdwu0Skk7dpoFTUXB7CJK4UknfV5tHc;
-				PUSH_SERVER_URL = "http://api-beta-subsystem.udnshopping.com";
+				PUSH_SERVER_URL = "http://api-alpha-subsystem.udnshopping.com";
 				SERVER_URL = "http://api-beta-dos.udnshopping.com";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG BETA";
 				SWIFT_OBJC_BRIDGING_HEADER = "MyMind/TOTP/MyMind-Bridging-Header.h";
@@ -2953,7 +2953,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.shopping.udi.MyMind;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PUSH_KEY = "f6fnHfjjPERLsl5YcEntYDFpXCGVKnkNAIz4O2GSYtI=";
-				PUSH_SERVER_URL = "https://api-subsystem.udnshopping.com";
+				PUSH_SERVER_URL = "http://api-alpha-subsystem.udnshopping.com";
 				SERVER_URL = "https://api-mymind.udicommerce.com";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = PRODUCTION;
 				SWIFT_OBJC_BRIDGING_HEADER = "MyMind/TOTP/MyMind-Bridging-Header.h";

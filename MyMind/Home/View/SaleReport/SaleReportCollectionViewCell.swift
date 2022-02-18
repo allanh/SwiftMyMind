@@ -214,7 +214,7 @@ class SaleReportCollectionViewCell: UICollectionViewCell {
             quantityTypeView.countLabel.text = reportList.totalQuantity(pointsType: pointType).toDecimalString()
             amountTypeView.countLabel.text = reportList.totalAmount(pointsType: pointType).toDecimalString()
             mylineChartView.data = MyMindLineChartData(points: reportList.points(for: order)[pointType] ?? [],
-                                                       gradientColors: gradientColors,
+                                                       gradientColors: self.gradientColors,
                                                        gradientLocations: gradientLocations)
         } else {
             quantityTypeView.countLabel.text = "-"

@@ -10,6 +10,12 @@ import UIKit
 import Firebase
 
 class MyMindNavigationController: UINavigationController {
+    override var childForStatusBarStyle: UIViewController? {
+        return topViewController
+    }
+}
+
+class HomeNavigationController: UINavigationController {
     var remoteConfig: RemoteConfig?
 
     override init(rootViewController : UIViewController) {
@@ -22,8 +28,11 @@ class MyMindNavigationController: UINavigationController {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        self.navigationItem.setHidesBackButton(true, animated: false)
         fetchRemoteConfig()
         showSignInPage()
+//        let rootTabBarViewController = RootTabBarController(authorization: nil, section: nil)
+//        self.show(rootTabBarViewController, sender: self)
     }
     
     override var childForStatusBarStyle: UIViewController? {

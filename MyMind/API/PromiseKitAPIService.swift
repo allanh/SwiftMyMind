@@ -16,8 +16,12 @@ extension PromiseKitAPIService {
         return Promise<T> { seal in
             URLSession.shared.dataTask(with: request) { data, urlResponse, error in
                 if let httpResponse = urlResponse as? HTTPURLResponse {
-                    if let host = httpResponse.url?.host {
-                        if !Endpoint.baseAuthURL.contains(host) {
+                    // 1. auth api 沒有權限的問題, 所以不會回應403, 且回應401都是帳號密碼錯誤的狀況
+                    // 2. mymind / dos api, 發生401驗證問題永遠都是token錯誤 or 過期
+                    // 但 employee 也是在 auth api，所以仍需錯誤處理
+                    if let host = httpResponse.url?.host,
+                        let relativePath = httpResponse.url?.relativePath {
+                        if !Endpoint.baseAuthURL.contains(host) || relativePath.contains(Endpoint.employeePath) {
                             switch httpResponse.statusCode {
                             case 401:
                                 seal.reject(APIError.invalidAccessToken)
@@ -62,8 +66,9 @@ extension PromiseKitAPIService {
         return Promise<Void> { seal in
             URLSession.shared.dataTask(with: request) { data, urlResponse, error in
                 if let httpResponse = urlResponse as? HTTPURLResponse {
-                    if let host = httpResponse.url?.host {
-                        if !Endpoint.baseAuthURL.contains(host) {
+                    if let host = httpResponse.url?.host,
+                        let relativePath = httpResponse.url?.relativePath {
+                        if !Endpoint.baseAuthURL.contains(host) || relativePath.contains(Endpoint.employeePath) {
                             switch httpResponse.statusCode {
                             case 401:
                                 seal.reject(APIError.invalidAccessToken)

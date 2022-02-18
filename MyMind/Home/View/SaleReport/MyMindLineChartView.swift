@@ -13,7 +13,7 @@ struct MyMindLineChartData {
     let gradientColors: [UIColor]
     let gradientLocations: [NSNumber]
     var gradientStartPoint: CGPoint = CGPoint(x: 0.5, y: 0)
-    var gradientEndPoint: CGPoint = CGPoint(x: 0.5, y: 0)
+    var gradientEndPoint: CGPoint = CGPoint(x: 0.5, y: 1)
     var strokeColor: UIColor = UIColor(red: 127.0/255.0, green: 194.0/255.0, blue: 250.0/255.0, alpha: 1.0)
     var strokeWidth: CGFloat = 3
     static var empty: MyMindLineChartData = MyMindLineChartData(points: [], gradientColors: [UIColor.white, UIColor.black], gradientLocations: [NSNumber(value: 0), NSNumber(value: 1)])

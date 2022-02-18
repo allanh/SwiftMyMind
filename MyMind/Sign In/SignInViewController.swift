@@ -42,7 +42,7 @@ class SignInViewController: NiblessViewController {
         observerViewModel()
         configForgotPasswordButton()
         configResendOTPButton()
-        addCustomBackNavigationItem()
+//        addCustomBackNavigationItem()
         title = "My Mind 買賣後台"
         navigationItem.backButtonTitle = ""
     }
@@ -50,13 +50,14 @@ class SignInViewController: NiblessViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if viewModel.otpEnabled { viewModel.time() }
+        navigationController?.navigationBar.alpha = 1.0
+        navigationController?.setNavigationBarHidden(false, animated: false)
+        navigationController?.navigationItem.setHidesBackButton(true, animated: false)
         addKeyboardObservers()
-//        navigationController?.isNavigationBarHidden = true
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        removeObservers()
 //        navigationController?.isNavigationBarHidden = false
     }
 
@@ -171,6 +172,7 @@ class SignInViewController: NiblessViewController {
             .subscribe(onNext: { [weak self] _ in
                 guard let viewController = self else { return }
                 ToastView.showIn(viewController, message: "登入成功", iconName: "success", at: .center)
+                
                 do {
                     let token = try KeychainHelper.default.readItem(key: .token, valueType: String.self)
                     MyMindPushAPIService.shared.registration(with: RegistrationInfo(token: token))
@@ -190,7 +192,7 @@ class SignInViewController: NiblessViewController {
                                 ToastView.showIn(viewController, message: error.localizedDescription)
                             }
                         }
-                
+                    
                 } catch {}
                 if #available(iOS 14.0, *) {
                     WidgetCenter.shared.reloadTimelines(ofKind: "MyMind_Widget")

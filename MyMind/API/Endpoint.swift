@@ -53,6 +53,8 @@ extension Endpoint {
         return ""
     }()
     
+    static let employeePath: String = "/employee"
+    
     var url: URL {
         var components: URLComponents?
         switch serviceType {

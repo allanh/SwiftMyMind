@@ -290,16 +290,16 @@ struct MyMind_WidgetsEntryView : View {
                         .blendMode(.sourceAtop)
                     IconView(iconName: "announcement", background: [Color(red: 255.0/255.0, green: 97.0/255.0, blue: 97.0/255.0), Color(red: 239.0/255.0, green: 29.0/255.0, blue: 98.0/255.0)], title: "公告通知", value: entry.announcementCount == nil ? nil : "\(entry.announcementCount!)")
                         .blendMode(.sourceAtop)
-                    IconView(iconName: "otp", background: [Color(red: 0.0/255.0, green: 68.0/255.0, blue: 119.0/255.0), Color(red: 0.0/255.0, green: 68.0/255.0, blue: 119.0/255.0)], title: "MyMind", value: "OTP")
-                        .blendMode(.sourceAtop)
+//                    IconView(iconName: "otp", background: [Color(red: 0.0/255.0, green: 68.0/255.0, blue: 119.0/255.0), Color(red: 0.0/255.0, green: 68.0/255.0, blue: 119.0/255.0)], title: "MyMind", value: "OTP")
+//                        .blendMode(.sourceAtop)
                     Spacer()
                 } else {
                     Spacer()
                     LoginView()
                         .frame(minWidth: 200, maxWidth: .infinity, maxHeight: .infinity)
                         .blendMode(.sourceAtop)
-                    IconView(iconName: "otp", background: [Color(red: 0.0/255.0, green: 68.0/255.0, blue: 119.0/255.0), Color(red: 0.0/255.0, green: 68.0/255.0, blue: 119.0/255.0)], title: "MyMind", value: "OTP")
-                        .blendMode(.sourceAtop)
+//                    IconView(iconName: "otp", background: [Color(red: 0.0/255.0, green: 68.0/255.0, blue: 119.0/255.0), Color(red: 0.0/255.0, green: 68.0/255.0, blue: 119.0/255.0)], title: "MyMind", value: "OTP")
+//                        .blendMode(.sourceAtop)
                     Spacer()
 
                 }
@@ -384,22 +384,22 @@ struct MyMind_WidgetsEntryView : View {
                         .frame(maxWidth: .infinity)
                         .blendMode(.sourceAtop)
                     Spacer()
-                    Link(destination: URL(string: "mymindwidget://otp")!) {
-                        HStack {
-                            Image("otp")
-                                .renderingMode(.template)
-                                .foregroundColor(.white)
-                                .frame(width: 20, height: 20)
-                            Text("OTP")
-                                .font(.custom("PingFangTC-Semibold", size: 24))
-                                .foregroundColor(.white)
-                        }
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 48)
-                        .background(Color(red: 0.0/255.0, green: 68.0/255.0, blue: 119.0/255.0))
-                        .cornerRadius(16)
-                        .blendMode(.sourceAtop)
-                    }
+//                    Link(destination: URL(string: "mymindwidget://otp")!) {
+//                        HStack {
+//                            Image("otp")
+//                                .renderingMode(.template)
+//                                .foregroundColor(.white)
+//                                .frame(width: 20, height: 20)
+//                            Text("OTP")
+//                                .font(.custom("PingFangTC-Semibold", size: 24))
+//                                .foregroundColor(.white)
+//                        }
+//                        .frame(maxWidth: .infinity)
+//                        .frame(height: 48)
+//                        .background(Color(red: 0.0/255.0, green: 68.0/255.0, blue: 119.0/255.0))
+//                        .cornerRadius(16)
+//                        .blendMode(.sourceAtop)
+//                    }
                 }
                 .frame(height: 48)
                 .padding(.trailing, 16)
