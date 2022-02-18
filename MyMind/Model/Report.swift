@@ -44,6 +44,43 @@ struct SaleReport: Codable {
     let saleAmount: Float
     let returnAmount: Float
     let canceledAmount: Float
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        type = try? container.decode(ReportType.self, forKey: .type)
+        if let receiptDate = try? container.decode(String.self, forKey: .date) {
+            date = receiptDate
+        } else {
+            date = ""
+        }
+        saleQuantity = try container.decode(Int.self, forKey: .saleQuantity)
+        returnQuantity = try container.decode(Int.self, forKey: .returnQuantity)
+        canceledQuantity = try container.decode(Int.self, forKey: .canceledQuantity)
+
+        if let saleAmount = try? container.decode(Float.self, forKey: .saleAmount) {
+            self.saleAmount = saleAmount
+        } else if let saleAmount = try? container.decode(Int.self, forKey: .saleAmount) {
+            self.saleAmount = Float(saleAmount)
+        } else {
+            self.saleAmount = 0
+        }
+        
+        if let returnAmount = try? container.decode(Float.self, forKey: .returnAmount) {
+            self.returnAmount = returnAmount
+        } else if let returnAmount = try? container.decode(Int.self, forKey: .returnAmount) {
+            self.returnAmount = Float(returnAmount)
+        } else {
+            self.returnAmount = 0
+        }
+        
+        if let canceledAmount = try? container.decode(Float.self, forKey: .canceledAmount) {
+            self.canceledAmount = canceledAmount
+        } else if let canceledAmount = try? container.decode(Int.self, forKey: .canceledAmount) {
+            self.canceledAmount = Float(canceledAmount)
+        } else {
+            self.canceledAmount = 0
+        }
+    }
 }
 // MARK: -- SaleReportList --
 struct SaleReportList: Codable {

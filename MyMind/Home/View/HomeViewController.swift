@@ -90,6 +90,7 @@ final class HomeViewController: UIViewController {
         navigationController?.navigationBar.alpha = 0.0
         collectionView.contentInsetAdjustmentBehavior = .never
         configStatuView()
+        loadHomeData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -102,8 +103,6 @@ final class HomeViewController: UIViewController {
         title = "首頁"
         collectionView.register(HomeCollectionViewHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HomeHeader")
         collectionView.register(HomeCollectionViewSwitchContentHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HomeSwitchContentHeader")
-        
-        loadHomeData()
     }
     
     @IBAction func showAnnouncement(_ sender: Any) {
