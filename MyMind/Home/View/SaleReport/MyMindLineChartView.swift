@@ -36,6 +36,7 @@ class MyMindLineChartView: UIView {
             setNeedsDisplay()
         }
     }
+    
     private var maximum: CGFloat {
         get {
             let max = data.points.map{ $0.y }.sorted{ $0 > $1}.first ?? 0

@@ -28,13 +28,17 @@ extension Response: Decodable {
         id = try container.decode(String.self, forKey: .id)
         data = try container.decodeIfPresent(T.self, forKey: .data)
         
-//        var message = try container.decodeIfPresent(String.self, forKey: .message)
-        if let errorContainer = try? container.nestedContainer(keyedBy: ResponseKeys.self, forKey: .error) {
-            message = try errorContainer.decodeIfPresent(String.self, forKey: .message)
+        // 若 message array 有值，顯示 message 內所有訊息
+        // 若 message array 為空值，就顯示 error.message
+        if let messages = try? container.decodeIfPresent([String].self, forKey: .message), !messages.isEmpty {
+            message = messages.joined(separator: ", ")
         } else {
-            message = nil
+            if let errorContainer = try? container.nestedContainer(keyedBy: ResponseKeys.self, forKey: .error) {
+                message = try errorContainer.decodeIfPresent(String.self, forKey: .message)
+            } else {
+                message = nil
+            }
         }
-//        self.message = message
     }
 }
 extension Response: Encodable {
