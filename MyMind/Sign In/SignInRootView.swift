@@ -173,6 +173,7 @@ class SignInRootView: NiblessView {
         let imageView = UIImageView(frame: CGRect(x: 8, y: containerView.frame.midY-7, width: 14, height: 14))
         imageView.image = image
         containerView.addSubview(imageView)
+        $0.textField.keyboardType = .numberPad
         $0.textField.leftView = containerView
         $0.textField.leftViewMode = .always
         $0.translatesAutoresizingMaskIntoConstraints = false

@@ -160,6 +160,7 @@ class ForgotPasswordRootView: NiblessView {
         let imageView = UIImageView(frame: CGRect(x: 8, y: containerView.frame.midY-7, width: 14, height: 14))
         imageView.image = image
         containerView.addSubview(imageView)
+        $0.textField.keyboardType = .numberPad
         $0.textField.leftView = containerView
         $0.textField.leftViewMode = .always
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -626,8 +627,14 @@ extension ForgotPasswordRootView {
 //    }
 
     private func activateConstraintsConfirmButton() {
-        let top = confirmButton.topAnchor
-            .constraint(equalTo: inputStackView.bottomAnchor, constant: 4)
+        let top: NSLayoutConstraint
+        if viewModel.otpEnabled {
+            top = confirmButton.topAnchor
+                .constraint(equalTo: inputStackView.bottomAnchor, constant: 4)
+        } else {
+            top = confirmButton.topAnchor
+                .constraint(equalTo: captchaInputView.bottomAnchor, constant: 4)
+        }
         let leading = confirmButton.leadingAnchor
             .constraint(equalTo: inputStackView.leadingAnchor)
         let trailing = confirmButton.trailingAnchor

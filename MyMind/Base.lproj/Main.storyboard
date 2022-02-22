@@ -129,6 +129,7 @@
                                         </constraints>
                                         <size key="customSize" width="428" height="158"/>
                                         <connections>
+                                            <outlet property="accountLabel" destination="5hC-EC-BzF" id="uK0-C2-8Lc"/>
                                             <outlet property="bulletinView" destination="w7N-S4-p7f" id="fan-51-z5N"/>
                                             <outlet property="marqueeView" destination="Mtk-63-9mU" id="VXy-Vg-6y8"/>
                                         </connections>
@@ -765,33 +766,26 @@
                                 <rect key="frame" x="0.0" y="44" width="428" height="798"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aQv-P8-AdE">
-                                        <rect key="frame" x="0.0" y="0.0" width="428" height="658.33333333333337"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="428" height="658.66666666666663"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uJc-e9-JHV" userLabel="Banner View">
-                                                <rect key="frame" x="0.0" y="0.0" width="428" height="75.333333333333329"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="428" height="75.666666666666671"/>
                                                 <subviews>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lMM-uz-B6u">
-                                                        <rect key="frame" x="0.0" y="0.0" width="428" height="75.333333333333329"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" secondItem="lMM-uz-B6u" secondAttribute="height" multiplier="375:66" id="KzO-vc-LXA"/>
-                                                        </constraints>
-                                                        <imageReference key="image" image="setting_banner"/>
-                                                    </imageView>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" highlighted="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g8f-4w-NFs">
-                                                        <rect key="frame" x="16.000000000000004" y="15.000000000000004" width="45.333333333333343" height="45.333333333333343"/>
+                                                        <rect key="frame" x="15.999999999999996" y="14.999999999999996" width="45.666666666666657" height="45.666666666666657"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="g8f-4w-NFs" secondAttribute="height" multiplier="1:1" id="PBV-iy-HTi"/>
                                                         </constraints>
                                                         <imageReference key="image" image="user_image_icon"/>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Account Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sNe-R1-MjZ">
-                                                        <rect key="frame" x="77.333333333333343" y="14.999999999999998" width="334.66666666666663" height="22.333333333333329"/>
+                                                        <rect key="frame" x="77.666666666666657" y="15.000000000000002" width="334.33333333333337" height="22.666666666666671"/>
                                                         <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="16"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Unit Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ojn-9V-vCu">
-                                                        <rect key="frame" x="77.333333333333343" y="37.333333333333329" width="334.66666666666663" height="22"/>
+                                                        <rect key="frame" x="77.666666666666657" y="37.666666666666671" width="334.33333333333337" height="22"/>
                                                         <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="0.59722819549999995" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <nil key="highlightedColor"/>
@@ -800,8 +794,7 @@
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstItem="sNe-R1-MjZ" firstAttribute="leading" secondItem="g8f-4w-NFs" secondAttribute="trailing" constant="16" id="9q4-vc-nFR"/>
-                                                    <constraint firstItem="lMM-uz-B6u" firstAttribute="top" secondItem="uJc-e9-JHV" secondAttribute="top" id="Eqp-1a-dJw"/>
-                                                    <constraint firstAttribute="bottom" secondItem="lMM-uz-B6u" secondAttribute="bottom" id="JfP-UD-HaL"/>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="66" id="FlZ-hj-lnD"/>
                                                     <constraint firstAttribute="trailing" secondItem="sNe-R1-MjZ" secondAttribute="trailing" constant="16" id="KeK-77-Trf"/>
                                                     <constraint firstAttribute="bottom" secondItem="ojn-9V-vCu" secondAttribute="bottom" constant="16" id="Mr9-JE-a6v"/>
                                                     <constraint firstItem="sNe-R1-MjZ" firstAttribute="bottom" secondItem="ojn-9V-vCu" secondAttribute="top" id="QMs-0P-bF2"/>
@@ -809,18 +802,15 @@
                                                     <constraint firstAttribute="trailing" secondItem="ojn-9V-vCu" secondAttribute="trailing" constant="16" id="SBZ-SY-Zgi"/>
                                                     <constraint firstItem="g8f-4w-NFs" firstAttribute="top" secondItem="uJc-e9-JHV" secondAttribute="top" constant="15" id="XlA-gX-Ga6"/>
                                                     <constraint firstItem="sNe-R1-MjZ" firstAttribute="top" secondItem="uJc-e9-JHV" secondAttribute="top" constant="15" id="bIK-Zm-uKa"/>
-                                                    <constraint firstAttribute="width" secondItem="uJc-e9-JHV" secondAttribute="height" multiplier="375:66" id="dlw-jA-zcY"/>
                                                     <constraint firstItem="ojn-9V-vCu" firstAttribute="leading" secondItem="g8f-4w-NFs" secondAttribute="trailing" constant="16" id="e0v-Js-QCa"/>
                                                     <constraint firstAttribute="bottom" secondItem="g8f-4w-NFs" secondAttribute="bottom" constant="15" id="hvj-H1-I8P"/>
-                                                    <constraint firstItem="lMM-uz-B6u" firstAttribute="leading" secondItem="uJc-e9-JHV" secondAttribute="leading" id="jtw-tj-pX9"/>
-                                                    <constraint firstAttribute="trailing" secondItem="lMM-uz-B6u" secondAttribute="trailing" id="khM-1k-ODW"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Wg-M5-l3p" userLabel="Account View">
-                                                <rect key="frame" x="0.0" y="75.333333333333314" width="428" height="270"/>
+                                                <rect key="frame" x="0.0" y="75.666666666666686" width="428" height="270"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GeV-c6-Zvm">
-                                                        <rect key="frame" x="16" y="16.000000000000014" width="396" height="23"/>
+                                                        <rect key="frame" x="16" y="15.999999999999986" width="396" height="23"/>
                                                         <attributedString key="attributedText">
                                                             <fragment content="姓名">
                                                                 <attributes>
@@ -832,7 +822,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="Ph9-Dy-wFI" userLabel="Name Round Style Text Field">
-                                                        <rect key="frame" x="16" y="43.000000000000014" width="396" height="40"/>
+                                                        <rect key="frame" x="16" y="42.999999999999986" width="396" height="40"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="1Yb-l9-Dwy"/>
                                                         </constraints>
@@ -840,7 +830,7 @@
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aW4-a5-DrU" userLabel="Name Error label">
-                                                        <rect key="frame" x="16" y="83.000000000000014" width="396" height="24"/>
+                                                        <rect key="frame" x="16" y="82.999999999999986" width="396" height="24"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="24" id="CN1-3S-fYa"/>
                                                         </constraints>
@@ -849,7 +839,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RQc-oF-Qi5">
-                                                        <rect key="frame" x="16" y="107.00000000000001" width="396" height="22.999999999999986"/>
+                                                        <rect key="frame" x="16" y="106.99999999999999" width="396" height="23.000000000000014"/>
                                                         <attributedString key="attributedText">
                                                             <fragment content="Email">
                                                                 <attributes>
@@ -920,7 +910,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lDt-FN-u9l" userLabel="Sign In View">
-                                                <rect key="frame" x="0.0" y="353.33333333333331" width="428" height="288.99999999999994"/>
+                                                <rect key="frame" x="0.0" y="353.66666666666669" width="428" height="289.00000000000006"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="最近登入IP" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nks-Em-zrs">
                                                         <rect key="frame" x="16" y="16" width="396" height="23"/>
@@ -938,13 +928,13 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="更新日期" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tlr-4J-dio">
-                                                        <rect key="frame" x="16" y="198.00000000000006" width="396" height="23"/>
+                                                        <rect key="frame" x="16" y="197.99999999999994" width="396" height="23"/>
                                                         <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s0t-fa-BEE" userLabel="Sign In Date Label">
-                                                        <rect key="frame" x="16" y="143.00000000000006" width="396" height="22"/>
+                                                        <rect key="frame" x="16" y="142.99999999999994" width="396" height="22"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="22" id="2Mj-6E-lAM"/>
                                                         </constraints>
@@ -959,7 +949,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cLV-UJ-KB2" userLabel="Update Date Label">
-                                                        <rect key="frame" x="16" y="234.00000000000006" width="396" height="22"/>
+                                                        <rect key="frame" x="16" y="233.99999999999994" width="396" height="22"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="22" id="eH5-Uq-luA"/>
                                                         </constraints>
@@ -1033,6 +1023,7 @@
                     </view>
                     <connections>
                         <outlet property="accountLabel" destination="sNe-R1-MjZ" id="tTq-Li-S8a"/>
+                        <outlet property="bannerView" destination="uJc-e9-JHV" id="tmV-x1-ezU"/>
                         <outlet property="emailErrorLabel" destination="caG-Dp-mmW" id="Erj-LN-PsW"/>
                         <outlet property="emailTextField" destination="Tls-uB-Nrf" id="kvF-BL-zVu"/>
                         <outlet property="lastLoginIPLabel" destination="2sb-oq-idD" id="XlH-1r-4JQ"/>
@@ -1367,13 +1358,6 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NvX-gB-L94" userLabel="Banner View">
                                                 <rect key="frame" x="0.0" y="0.0" width="428" height="75.333333333333329"/>
                                                 <subviews>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GMl-8Q-Rx9">
-                                                        <rect key="frame" x="0.0" y="0.0" width="428" height="75.333333333333329"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" secondItem="GMl-8Q-Rx9" secondAttribute="height" multiplier="375:66" id="Tot-KR-y4S"/>
-                                                        </constraints>
-                                                        <imageReference key="image" image="setting_banner"/>
-                                                    </imageView>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" highlighted="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8pj-Lk-HxW">
                                                         <rect key="frame" x="16.000000000000004" y="15.000000000000004" width="45.333333333333343" height="45.333333333333343"/>
                                                         <constraints>
@@ -1396,21 +1380,17 @@
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="66" id="0Nf-dI-lBi"/>
                                                     <constraint firstAttribute="bottom" secondItem="YHX-Bl-CxB" secondAttribute="bottom" constant="16" id="69z-TC-Spi"/>
                                                     <constraint firstItem="YHX-Bl-CxB" firstAttribute="leading" secondItem="8pj-Lk-HxW" secondAttribute="trailing" constant="16" id="7jJ-Sf-wH5"/>
                                                     <constraint firstItem="etT-CS-p97" firstAttribute="top" secondItem="NvX-gB-L94" secondAttribute="top" constant="15" id="84k-Zv-Ryd"/>
                                                     <constraint firstItem="8pj-Lk-HxW" firstAttribute="leading" secondItem="NvX-gB-L94" secondAttribute="leading" constant="16" id="8ei-Qp-RyF"/>
                                                     <constraint firstAttribute="trailing" secondItem="YHX-Bl-CxB" secondAttribute="trailing" constant="16" id="O3P-l0-uQ7"/>
-                                                    <constraint firstAttribute="width" secondItem="NvX-gB-L94" secondAttribute="height" multiplier="375:66" id="SwI-5p-bK9"/>
                                                     <constraint firstAttribute="trailing" secondItem="etT-CS-p97" secondAttribute="trailing" constant="16" id="bua-9l-bEB"/>
-                                                    <constraint firstItem="GMl-8Q-Rx9" firstAttribute="top" secondItem="NvX-gB-L94" secondAttribute="top" id="cj0-Nw-Wcw"/>
                                                     <constraint firstItem="8pj-Lk-HxW" firstAttribute="top" secondItem="NvX-gB-L94" secondAttribute="top" constant="15" id="fba-CB-Gb6"/>
                                                     <constraint firstAttribute="bottom" secondItem="8pj-Lk-HxW" secondAttribute="bottom" constant="15" id="hBA-AU-aBd"/>
-                                                    <constraint firstAttribute="trailing" secondItem="GMl-8Q-Rx9" secondAttribute="trailing" id="lNx-IH-FzZ"/>
                                                     <constraint firstItem="etT-CS-p97" firstAttribute="bottom" secondItem="YHX-Bl-CxB" secondAttribute="top" id="m2W-YZ-NHI"/>
                                                     <constraint firstItem="etT-CS-p97" firstAttribute="leading" secondItem="8pj-Lk-HxW" secondAttribute="trailing" constant="16" id="mVQ-a1-B2m"/>
-                                                    <constraint firstAttribute="bottom" secondItem="GMl-8Q-Rx9" secondAttribute="bottom" id="q3L-uG-zBF"/>
-                                                    <constraint firstItem="GMl-8Q-Rx9" firstAttribute="leading" secondItem="NvX-gB-L94" secondAttribute="leading" id="wHz-1F-YLR"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aB3-2G-Mv8" userLabel="Account View">
@@ -1565,6 +1545,7 @@
                     </view>
                     <connections>
                         <outlet property="accountLabel" destination="etT-CS-p97" id="GEy-F6-13h"/>
+                        <outlet property="bannerView" destination="NvX-gB-L94" id="waz-gx-tYL"/>
                         <outlet property="confirmPasswordErrorLabel" destination="icV-vz-FRU" id="5zp-ZB-mPO"/>
                         <outlet property="confirmPasswordTextField" destination="Pa3-Ot-zTC" id="h9N-Qh-oTF"/>
                         <outlet property="newPasswordErrorLabel" destination="Ty7-cS-oq2" id="fnL-6y-cmC"/>
@@ -1590,7 +1571,6 @@
         <image name="main_page_background" width="375" height="181"/>
         <image name="my_mind_icon" width="54" height="54"/>
         <image name="right" width="28" height="28"/>
-        <image name="setting_banner" width="375" height="66"/>
         <image name="thirty_days_report_bg" width="343" height="316"/>
         <image name="user_image_icon" width="44" height="45"/>
         <systemColor name="secondaryLabelColor">

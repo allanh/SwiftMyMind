@@ -15,6 +15,7 @@ class SettingViewController: UIViewController {
     }
     weak var delegate: MixedDelegate?
 
+    @IBOutlet weak var bannerView: UIView!
     @IBOutlet weak var accountLabel: UILabel!
     @IBOutlet weak var unitLabel: UILabel!
     @IBOutlet weak var scrollView: UIScrollView!
@@ -79,6 +80,7 @@ class SettingViewController: UIViewController {
         super.viewDidLoad()
         clearErrorMessage()
         title = "帳號資料維護"
+        bannerView.setBackgroundImage("setting_banner")
         nameTextField.layer.borderWidth = 1
         emailTextField.layer.borderWidth = 1
         // Do any additional setup after loading the view.

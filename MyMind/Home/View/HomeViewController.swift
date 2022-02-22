@@ -40,7 +40,8 @@ final class HomeViewController: UIViewController {
     }
 
     private var headerInfos: [(title: String, info: SwitcherInfo)] = [("", ("", "", 0, Section.bulliten)), ("", ("", "", 0, Section.todo)), ("今日數據", ("", "", 0, Section.today)), ("近30日銷售數量", ("銷售數量", "銷售總額", 0, Section.thirtyDays)), ("近7日SKU銷售排行", ("銷售數量", "銷售總額", 0, Section.sevenDaysSKU)), ("近7日銷售金額佔比", ("通路", "供應商", 0, Section.sevenDaysSaleAmount))]
-
+    
+    private var account: Account?
     private var bulletins: BulletinList? {
         didSet {
             collectionView.reloadSections([Section.bulliten.rawValue])
@@ -90,7 +91,7 @@ final class HomeViewController: UIViewController {
         navigationController?.navigationBar.alpha = 0.0
         collectionView.contentInsetAdjustmentBehavior = .never
         configStatuView()
-        loadHomeData()
+        loadMe()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -118,6 +119,22 @@ extension HomeViewController {
             ToastView.showIn(self.tabBarController ?? self, message: error.localizedDescription)
         }
     }
+    private func loadMe() {
+        isNetworkProcessing = true
+        MyMindEmployeeAPIService.shared.me()
+            .ensure {
+                self.isNetworkProcessing = false
+            }
+            .done { [weak self] account in
+                guard let self = self else { return }
+                self.account = account
+                self.loadHomeData()
+            }
+            .catch { error in
+                self.handlerError(error)
+            }
+    }
+    
     private func loadHomeData() {
         loadBulletins()
         loadToDoList()
@@ -249,7 +266,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         switch indexPath.section {
         case Section.bulliten.rawValue:
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BulletinCollectionViewCell", for: indexPath) as? BulletinCollectionViewCell {
-                cell.config(with: bulletins)
+                cell.config(with: bulletins, account: account)
                 return cell
             }
             return UICollectionViewCell()

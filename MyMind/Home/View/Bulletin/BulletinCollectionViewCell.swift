@@ -11,11 +11,23 @@ import UIKit
 class BulletinCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var marqueeView: UDNSKInteractiveMarqueeView!
     @IBOutlet weak var bulletinView: RollingNoticeView!
+    @IBOutlet weak var accountLabel: UILabel!
     
     var bulletins: BulletinList? {
         didSet {
             bulletinView.isHidden = bulletins?.items.count ?? 0 == 0
             self.bulletinView.reloadDataAndStartRoll()
+        }
+    }
+    
+    var account: Account? {
+        didSet {
+            DispatchQueue.main.async {
+                if let session = KeychainUserSessionDataStore().readUserSession() {
+                    let accountUnit = String(session.businessInfo.name)
+                    self.accountLabel.text = "Hello, \(self.account?.account ?? "")/\(accountUnit)"
+                }
+            }
         }
     }
 
@@ -29,7 +41,8 @@ class BulletinCollectionViewCell: UICollectionViewCell {
         marqueeView.isHidden = true
         bulletinView.isHidden = true
     }
-    func config(with bulletins: BulletinList?) {
+    func config(with bulletins: BulletinList?, account: Account?) {
+        self.account = account
         self.bulletins = bulletins
     }
 }

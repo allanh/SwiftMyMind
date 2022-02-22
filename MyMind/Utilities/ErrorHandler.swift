@@ -45,21 +45,21 @@ extension ErrorHandler {
         if let topMostViewController = topMostViewController {
             topMostViewController.navigationController?.popToRootViewController(animated: true)
         }
-        var otpEnabled: Bool = false
-        do {
-            otpEnabled = try KeychainHelper.default.readItem(key: .otpStatus, valueType: Bool.self)
-        } catch {
-            print(error)
-        }
-        let viewModel = SignInViewModel(
-            userSessionRepository: MyMindUserSessionRepository.shared,
-            signInValidationService: SignInValidatoinService(),
-            lastSignInInfoDataStore: MyMindLastSignInInfoDataStore(),
-            otpEnabled: otpEnabled
-        )
-        let signInViewController = SignInViewController(viewModel: viewModel)
+//        var otpEnabled: Bool = false
+//        do {
+//            otpEnabled = try KeychainHelper.default.readItem(key: .otpStatus, valueType: Bool.self)
+//        } catch {
+//            print(error)
+//        }
+//        let viewModel = SignInViewModel(
+//            userSessionRepository: MyMindUserSessionRepository.shared,
+//            signInValidationService: SignInValidatoinService(),
+//            lastSignInInfoDataStore: MyMindLastSignInInfoDataStore(),
+//            otpEnabled: otpEnabled
+//        )
+//        let signInViewController = SignInViewController(viewModel: viewModel)
         topMostViewController?.navigationController?.popToRootViewController(animated: false)
-        topMostViewController?.show(signInViewController, sender: self)
+//        topMostViewController?.show(signInViewController, sender: self)
     }
     
     private func showStaticPage(_ controller: UIViewController, page: StaticView) {

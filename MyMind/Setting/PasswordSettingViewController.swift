@@ -16,6 +16,7 @@ class PasswordSettingViewController: UIViewController {
     var viewModel: SignInViewModel?
     weak var delegate: MixedDelegate?
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var bannerView: UIView!
     @IBOutlet weak var accountLabel: UILabel!
     @IBOutlet weak var unitLabel: UILabel!
     @IBOutlet weak var oldPasswordTextField: UITextField!
@@ -53,6 +54,7 @@ class PasswordSettingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "密碼修改"
+        bannerView.setBackgroundImage("setting_banner")
         oldPasswordTextField.delegate = self
         newPasswordTextField.delegate = self
         confirmPasswordTextField.delegate = self
@@ -76,8 +78,15 @@ class PasswordSettingViewController: UIViewController {
         let oldPasswordResult = validatePassword(oldPasswordTextField)
         let newPasswordResult = validatePassword(newPasswordTextField)
         let confirmPasswordResult = validatePassword(confirmPasswordTextField)
-
+        
         if oldPasswordResult && newPasswordResult && confirmPasswordResult {
+            // 比對新密碼和確認新密碼字串是否一致
+            if newPasswordTextField.text?.elementsEqual(confirmPasswordTextField.text ?? "") != true {
+                showErrorMessage(for: newPasswordTextField, message: "密碼輸入錯誤")
+                showErrorMessage(for: confirmPasswordTextField, message: "密碼輸入錯誤")
+                return
+            }
+            
             let newPasswordInfo = ChangePasswordInfo(oldPassword: oldPasswordTextField.text ?? "",
                                                      password: newPasswordTextField.text ?? "",
                                                      confirmPassword: confirmPasswordTextField.text ?? "")
@@ -89,11 +98,13 @@ class PasswordSettingViewController: UIViewController {
                 .done {_ in
                     ToastView.showIn(self, message: "更新成功", iconName: "success", at: .center)
                 }
-                .catch { error in
-                    if let apiError = error as? APIError {
-                        _ = ErrorHandler.shared.handle(apiError)
-                    } else {
-                        ToastView.showIn(self, message: error.localizedDescription)
+                .catch { [weak self] error in
+                    guard let viewController = self else { return }
+                    switch error {
+                    case APIError.serviceError(let message):
+                        ToastView.showIn(viewController, message: message)
+                    default:
+                        ToastView.showIn(viewController, message: error.localizedDescription)
                     }
                 }
         }
@@ -162,11 +173,8 @@ extension PasswordSettingViewController: UITextFieldDelegate {
         let filtered = components.joined(separator: "")
         
         if string == filtered {
-            
             return true
-
         } else {
-            
             return false
         }
     }

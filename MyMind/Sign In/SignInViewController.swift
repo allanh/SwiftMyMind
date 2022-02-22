@@ -58,6 +58,7 @@ class SignInViewController: NiblessViewController {
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+//        rootView.passwordInputView.textField.text = ""
 //        navigationController?.isNavigationBarHidden = false
     }
 
