@@ -16,7 +16,8 @@ class SignInViewController: NiblessViewController {
     let viewModel: SignInViewModel
     let bag: DisposeBag = DisposeBag()
     private var didLayoutRootView: Bool = false
-
+    private let userSessionDataStore = KeychainUserSessionDataStore()
+    
     var rootView: SignInRootView {
         return view as! SignInRootView
     }
@@ -54,6 +55,7 @@ class SignInViewController: NiblessViewController {
         navigationController?.setNavigationBarHidden(false, animated: false)
         navigationController?.navigationItem.setHidesBackButton(true, animated: false)
         addKeyboardObservers()
+        autoLogin()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -67,6 +69,22 @@ class SignInViewController: NiblessViewController {
         if didLayoutRootView == false {
             rootView.resetScrollViewContentInsets()
             didLayoutRootView = true
+        }
+    }
+    
+    private func autoLogin() {
+        if userSessionDataStore.readUserSession() != nil {
+            MyMindEmployeeAPIService.shared.authorization()
+                .done { authorization in
+                    self.showHomePage(authorization: authorization)
+                }
+                .ensure {
+                }
+                .catch { error in
+                    // remove invalid session
+                    _ = self.userSessionDataStore.deleteUserSession()
+                    print(error.localizedDescription)
+                }
         }
     }
 
@@ -86,18 +104,11 @@ class SignInViewController: NiblessViewController {
             })
             .disposed(by: bag)
     }
+    
     private func showHomePage() {
         MyMindEmployeeAPIService.shared.authorization()
             .done { authorization in
-                let scene = UIApplication.shared.connectedScenes.first
-                if let sceneDelegate : SceneDelegate = (scene?.delegate as? SceneDelegate) {
-                    let rootTabBarViewController = RootTabBarController(authorization: authorization, section: nil)
-                    let rootViewController = sceneDelegate.window?.rootViewController
-                    if let navigationController = rootViewController as? UINavigationController {
-                        navigationController.popToRootViewController(animated: false)
-                    }
-                    rootViewController?.show(rootTabBarViewController, sender: nil)
-                }
+                self.showHomePage(authorization: authorization)
             }
             .ensure {
             }
@@ -108,6 +119,18 @@ class SignInViewController: NiblessViewController {
                     ToastView.showIn(self, message: error.localizedDescription)
                 }
             }
+    }
+    
+    private func showHomePage(authorization: Authorization) {
+        let scene = UIApplication.shared.connectedScenes.first
+        if let sceneDelegate : SceneDelegate = (scene?.delegate as? SceneDelegate) {
+            let rootTabBarViewController = RootTabBarController(authorization: authorization, section: nil)
+            let rootViewController = sceneDelegate.window?.rootViewController
+            if let navigationController = rootViewController as? UINavigationController {
+                navigationController.popToRootViewController(animated: false)
+            }
+            rootViewController?.show(rootTabBarViewController, sender: nil)
+        }
     }
 
     func observerViewModel() {
