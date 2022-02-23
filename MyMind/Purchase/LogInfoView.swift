@@ -51,6 +51,7 @@ class LogInfoView: NiblessView {
         $0.textContainerInset = .zero
     }
 
+    private var noteTextViewHeightConstraint: NSLayoutConstraint = NSLayoutConstraint()
     override init(frame: CGRect) {
         super.init(frame: frame)
 
@@ -84,6 +85,8 @@ class LogInfoView: NiblessView {
         createrNameLabel.text = logInfo.createrName
         statusLabel.text = logInfo.status.description
         noteTextView.text = logInfo.note
+        let height = logInfo.note?.height(withConstrainedWidth: noteTextView.bounds.width, font: .pingFangTCRegular(ofSize: 14))
+        noteTextViewHeightConstraint.constant = height ?? 0
     }
 }
 // MARK: - Layouts
@@ -126,11 +129,11 @@ extension LogInfoView {
             .constraint(equalTo: dotView.centerYAnchor)
         let leading = timeStampLabel.leadingAnchor
             .constraint(equalTo: dotView.trailingAnchor, constant: 15)
-        let width = timeStampLabel.widthAnchor
-            .constraint(equalToConstant: 142)
+        let trailing = timeStampLabel.trailingAnchor
+            .constraint(equalTo: trailingAnchor, constant: -10)
 
         NSLayoutConstraint.activate([
-            centerY, leading, width
+            centerY, leading, trailing
         ])
     }
 
@@ -176,13 +179,13 @@ extension LogInfoView {
             .constraint(equalTo: timeStampLabel.leadingAnchor)
         let trailing = noteTextView.trailingAnchor
             .constraint(equalTo: trailingAnchor, constant: -10)
-        let height = noteTextView.heightAnchor
+        noteTextViewHeightConstraint = noteTextView.heightAnchor
             .constraint(greaterThanOrEqualToConstant: 150)
         let bottom = noteTextView.bottomAnchor
-            .constraint(equalTo: bottomAnchor)
+            .constraint(equalTo: bottomAnchor, constant: -10)
 
         NSLayoutConstraint.activate([
-            top, leading, trailing, height, bottom
+            top, leading, trailing, noteTextViewHeightConstraint, bottom
         ])
     }
 }
