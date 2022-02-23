@@ -34,7 +34,7 @@ final class OrganizeOptionView: NiblessView {
         $0.titleLabel?.font = .pingFangTCRegular(ofSize: 14)
         $0.setTitleColor(.veryDarkGray, for: .normal)
         $0.setImage(UIImage(named: "filter"), for: .normal)
-       // $0.setTitle("篩選條件", for: .normal)
+        $0.setTitle("篩選條件", for: .normal)
     }
 
     let layoutButton: UIButton = UIButton {
