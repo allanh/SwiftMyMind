@@ -97,6 +97,7 @@ class PurchaseProductSuggestionViewController: UIViewController {
             })
             .bind(to: viewModel.purchaseCostInput)
             .disposed(by: bag)
+        
     }
 
     private func subscribeViewModel() {
@@ -149,6 +150,19 @@ class PurchaseProductSuggestionViewController: UIViewController {
                 }
             })
             .disposed(by: bag)
+        
+        viewModel.purchaseMovingCost
+            .map { cost in
+                let formatter: NumberFormatter = NumberFormatter {
+                    $0.numberStyle = .currency
+                    $0.currencySymbol = ""
+                }
+                let value = Double(cost) ?? Double(0)
+                let string = formatter.string(from: value as NSNumber) ?? ""
+                return "移動平均成本 \(string)"
+            }
+            .bind(to: purchaseCostPerItemErrorLabel.rx.text)
+            .disposed(by: bag)
     }
 
     private func showErrorMessage(for textField: UITextField, message: String) {
@@ -156,7 +170,7 @@ class PurchaseProductSuggestionViewController: UIViewController {
         switch textField {
         case purchaseCostPerItemTextField:
             purchaseCostPerItemErrorLabel.text = message
-            purchaseCostPerItemErrorLabel.isHidden = false
+//            purchaseCostPerItemErrorLabel.isHidden = false
         case purchaseQuantityTextField:
             purchaseQuantityErrorLabel.text = message
             purchaseQuantityErrorLabel.isHidden = false
@@ -170,8 +184,8 @@ class PurchaseProductSuggestionViewController: UIViewController {
     private func cleanErrorMessage(for textField: UITextField) {
         textField.layer.borderColor = UIColor.separator.cgColor
         switch textField {
-        case purchaseCostPerItemTextField:
-            purchaseCostPerItemErrorLabel.isHidden = true
+//        case purchaseCostPerItemTextField:
+//            purchaseCostPerItemErrorLabel.isHidden = true
         case purchaseQuantityTextField:
             purchaseQuantityErrorLabel.isHidden = true
         case totalPurchaseCostTextField:

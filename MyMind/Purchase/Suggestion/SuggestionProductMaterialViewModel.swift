@@ -23,6 +23,8 @@ struct SuggestionProductMaterialViewModel {
     let vendorName: String
     let vendorID: String
 
+    let purchaseMovingCost: BehaviorRelay<String>
+    
     let purchaseCostPerItemInput: PublishRelay<String> = .init()
     let purchaseCostPerItem: BehaviorRelay<Double>
     let validationStatusForpurchaseCostPerItem: BehaviorRelay<ValidationResult> = .init(value: .valid)
@@ -63,6 +65,7 @@ struct SuggestionProductMaterialViewModel {
         self.quantityPerBox = quantityPerBox
         self.purchaseSuggestionInfo = purchaseSuggestionInfo
         self.purchaseCostPerItem = .init(value: purchaseCostPerItem)
+        self.purchaseMovingCost = .init(value: purchaseSuggestionInfo.movingAverageCost)
         self.vendorID = vendorID
         self.vendorName = vendorName
         if let quantity = purchasedQuantity {
@@ -124,6 +127,14 @@ struct SuggestionProductMaterialViewModel {
             .bind(to: purchaseCost)
             .disposed(by: bag)
 
+        purchaseCost
+            .map{ cost in
+                cost > 0 ? .valid : .invalid("")
+            }
+            .skip(1)
+            .bind(to: validationStatusForPurchaseCost)
+            .disposed(by: bag)
+
         purchaseCostInput
             .map({ Double($0) ?? 0 })
             .bind(to: purchaseCost)
@@ -148,7 +159,8 @@ struct SuggestionProductMaterialViewModel {
         let standardPurchaseCost = purchaseCostPerItem.value * Double(purchaseQuantity.value)
         let adjustedValue = abs(input - standardPurchaseCost)
         switch standardPurchaseCost {
-        case 0: return .valid
+        case 0:
+            return .invalid("")
         case 1...30:
              return adjustedValue > 1 ? .invalid("進貨成本小計(未稅) 1-30 元修正不得大於 1 元") : .valid
         case 31...100:
