@@ -14,7 +14,7 @@ final class PurchaseApplyViewController: NiblessViewController {
         .lightContent
     }
     // MARK: - Properties
-    let viewModel: PurchaseApplyViewModel
+    var viewModel: PurchaseApplyViewModel
 
     let bag: DisposeBag = DisposeBag()
 
@@ -119,28 +119,23 @@ final class PurchaseApplyViewController: NiblessViewController {
 
     @objc
     private func saveButtonDidTapped(_ sender: UIButton) {
-        let expectStorageDate = viewModel.purchaseInfoViewModel.expectedStorageDate.value ?? Date()
-        let days = Calendar.current.dateComponents([.day], from: Date(), to: expectStorageDate).day ?? 0
-        if days < 3 {
-//            let titleFont = UIFont.preferredFont(forTextStyle: .headline).withTraits(traits: .traitBold)
-//            let bodyFont = UIFont.preferredFont(forTextStyle: .body)
-//            let alertController = UIAlertController(title: NSAttributedString(string: "確定申請?", attributes: [.foregroundColor: UIColor(hex: "1c4373"), .font: titleFont]), message:  NSAttributedString(string: "預計入庫日距離今日小於 3 天，請確定是否送出申請。", attributes: [.foregroundColor: UIColor(hex: "7f7f7f"), .font: bodyFont]), preferredStyle: .alert)
-//            let cancelAction = UIAlertAction(title: "取消", style: .cancel, color: UIColor(hex: "7f7f7f")) { action in
-//            }
-//            let confirmAction = UIAlertAction(title: "確定", style: .default, color: UIColor(hex: "1c4373")) { [weak self] action in
-//                self?.viewModel.applyPurchase()
-//           }
-            let alertController = UIAlertController(title: "確定申請?", message: "預計入庫日距離今日小於 3 天，請確定是否送出申請。", preferredStyle: .alert)
-            let cancelAction = UIAlertAction(title: "取消", style: .cancel) { action in
+        viewModel.finalized()
+        if viewModel.centralizedValidationStatus.value {
+            let expectStorageDate = viewModel.purchaseInfoViewModel.expectedStorageDate.value ?? Date()
+            let days = Calendar.current.dateComponents([.day], from: Date(), to: expectStorageDate).day ?? 0
+            if days < 3 {
+                let alertController = UIAlertController(title: "確定申請?", message: "預計入庫日距離今日小於 3 天，請確定是否送出申請。", preferredStyle: .alert)
+                let cancelAction = UIAlertAction(title: "取消", style: .cancel) { action in
+                }
+                let confirmAction = UIAlertAction(title: "確定", style: .default) { [weak self] action in
+                    self?.viewModel.applyPurchase()
+                }
+                alertController.addAction(cancelAction)
+                alertController.addAction(confirmAction)
+                present(alertController, animated: true, completion: nil)
+            } else {
+                viewModel.applyPurchase()
             }
-            let confirmAction = UIAlertAction(title: "確定", style: .default) { [weak self] action in
-                self?.viewModel.applyPurchase()
-            }
-            alertController.addAction(cancelAction)
-            alertController.addAction(confirmAction)
-            present(alertController, animated: true, completion: nil)
-        } else {
-            viewModel.applyPurchase()
         }
     }
 
@@ -190,7 +185,7 @@ extension PurchaseApplyViewController: UICollectionViewDelegateFlowLayout {
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: view.frame.width, height: 125)
+        return CGSize(width: view.frame.width, height: 100)
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

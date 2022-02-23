@@ -41,7 +41,7 @@ struct PurchaseApplyViewModel {
         subscribeChildViewModel()
     }
 
-    func applyPurchase() {
+    func finalized() {
         guard centralizedValidationStatus.value else {
             // Emit current element to update UI in case user didn't do anything before apply
             purchaseInfoViewModel.expectedStorageDateValidationStatus
@@ -52,7 +52,9 @@ struct PurchaseApplyViewModel {
                 .accept(pickReviewerViewModel.pickedReviewerValidationStatus.value)
             return
         }
-
+    }
+    func applyPurchase() {
+        finalized()
         guard let purchaseInfo = mapCurrentInfoToApplyPurchaseParameterInfo() else {
             return
         }
