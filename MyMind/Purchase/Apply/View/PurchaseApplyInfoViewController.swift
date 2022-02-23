@@ -158,21 +158,6 @@ final class PurchaseApplyInfoViewController: UIViewController {
             .subscribe(onNext: handleItemUpdated(with:))
             .disposed(by: bag)
 
-//        let formatter: NumberFormatter = NumberFormatter {
-//            $0.numberStyle = .currency
-//            $0.currencySymbol = ""
-//        }
-//
-//        let totalCost = viewModel.suggestionProductMaterialViewModels.value
-//            .map {
-//                $0.purchaseCost.value
-//            }.reduce(0) { (sum, num) -> Double in
-//                return sum+num
-//            }
-//        let tax = totalCost * 0.05
-//        totalCostLabel.text = formatter.string(from: NSNumber(value: totalCost))
-//        taxLabel.text = formatter.string(from: NSNumber(value: tax))
-//        totalLabel.text = formatter.string(from: NSNumber(value: totalCost+tax))
     }
 
     private func configureContentWithViewModel() {
