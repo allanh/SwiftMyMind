@@ -203,7 +203,8 @@ extension Authorization.Navigations.Storage {
 extension Authorization.Navigations.Order {
     var functionEntry: FunctionEntryList.FunctionEntry {
         get {
-            return FunctionEntryList.FunctionEntry(category: .order, items: [.orderSale, .orderReturn, .orderBorrow, .orderPayOff, .orderSupply, .orderExchange])
+            return FunctionEntryList.FunctionEntry(category: .vender, items: [])
+//            return FunctionEntryList.FunctionEntry(category: .order, items: [.orderSale, .orderReturn, .orderBorrow, .orderPayOff, .orderSupply, .orderExchange])
         }
     }
 }

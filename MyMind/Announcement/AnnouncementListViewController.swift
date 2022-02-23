@@ -106,7 +106,8 @@ class AnnouncementListViewController: NiblessViewController {
         appearance.backgroundColor = .prussianBlue
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
-
+        navigationController?.navigationBar.alpha = 1.0
+        navigationController?.setNavigationBarHidden(false, animated: false)
         configTableView()
         loadAnnouncementList(query: announcementListQueryInfo)
         addButtonActions()

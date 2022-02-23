@@ -12,6 +12,7 @@ class BulletinCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var marqueeView: UDNSKInteractiveMarqueeView!
     @IBOutlet weak var bulletinView: RollingNoticeView!
     @IBOutlet weak var accountLabel: UILabel!
+    @IBOutlet weak var announcementButton: UIButton!
     
     var bulletins: BulletinList? {
         didSet {
@@ -40,6 +41,8 @@ class BulletinCollectionViewCell: UICollectionViewCell {
         bulletinView.register(UINib.init(nibName: "BulletinView", bundle: nil), forCellReuseIdentifier: "BulletinView")
         marqueeView.isHidden = true
         bulletinView.isHidden = true
+        announcementButton.touchEdgeInsets = UIEdgeInsets(top: -10, left: -10, bottom: -10, right: -10)
+
     }
     func config(with bulletins: BulletinList?, account: Account?) {
         self.account = account

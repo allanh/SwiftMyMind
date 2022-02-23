@@ -130,6 +130,7 @@
                                         <size key="customSize" width="428" height="158"/>
                                         <connections>
                                             <outlet property="accountLabel" destination="5hC-EC-BzF" id="uK0-C2-8Lc"/>
+                                            <outlet property="announcementButton" destination="mJl-P3-Ram" id="V3d-Hd-mru"/>
                                             <outlet property="bulletinView" destination="w7N-S4-p7f" id="fan-51-z5N"/>
                                             <outlet property="marqueeView" destination="Mtk-63-9mU" id="VXy-Vg-6y8"/>
                                         </connections>
@@ -487,6 +488,22 @@
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nDU-lm-XzC" userLabel="AnnouncementButton">
+                                                <rect key="frame" x="388" y="13" width="24" height="24"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="nDU-lm-XzC" secondAttribute="height" multiplier="1:1" id="14h-kI-r8S"/>
+                                                    <constraint firstAttribute="height" constant="24" id="v45-tU-4Zz"/>
+                                                </constraints>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title=" ">
+                                                    <imageReference key="image" image="bell"/>
+                                                </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="showAnnouncement:" destination="AYc-8A-Vs7" eventType="touchUpInside" id="j95-Qb-dCf"/>
+                                                    <action selector="showAnnouncement:" destination="7eo-T7-NN6" eventType="touchUpInside" id="vv1-sK-1pC"/>
+                                                </connections>
+                                            </button>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="AnA-zQ-1eb" customClass="DynamicSizeTableView" customModule="MyMind" customModuleProvider="target">
                                                 <rect key="frame" x="16" y="136" width="396" height="140"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -626,6 +643,7 @@
                                             <constraint firstItem="AnA-zQ-1eb" firstAttribute="top" secondItem="ZsG-5s-OWS" secondAttribute="bottom" constant="16" id="7uI-1V-Djw"/>
                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ZsG-5s-OWS" secondAttribute="trailing" constant="20" symbolic="YES" id="9id-Lf-WEA"/>
                                             <constraint firstItem="ZsG-5s-OWS" firstAttribute="leading" secondItem="Mxs-Y4-bbB" secondAttribute="leading" constant="16" id="AHu-4E-kJE"/>
+                                            <constraint firstItem="nDU-lm-XzC" firstAttribute="top" secondItem="Mxs-Y4-bbB" secondAttribute="top" constant="13" id="Cgs-bC-XFR"/>
                                             <constraint firstItem="SHX-oa-eky" firstAttribute="top" secondItem="Mxs-Y4-bbB" secondAttribute="top" constant="16" id="E0J-Pk-1jA"/>
                                             <constraint firstAttribute="trailing" secondItem="nrr-IM-nDm" secondAttribute="trailing" constant="16" id="KIl-aM-MwC"/>
                                             <constraint firstAttribute="trailing" secondItem="g87-rU-9HS" secondAttribute="trailing" constant="16" id="Lhb-BP-jKk"/>
@@ -642,6 +660,7 @@
                                             <constraint firstItem="nrr-IM-nDm" firstAttribute="top" secondItem="AnA-zQ-1eb" secondAttribute="bottom" constant="16" id="k1Q-4p-JRT"/>
                                             <constraint firstItem="ZsG-5s-OWS" firstAttribute="top" secondItem="1xi-oJ-gRL" secondAttribute="bottom" id="lVx-3f-JaK"/>
                                             <constraint firstItem="AnA-zQ-1eb" firstAttribute="top" secondItem="Mxs-Y4-bbB" secondAttribute="top" constant="136" id="laS-di-9GH"/>
+                                            <constraint firstAttribute="trailing" secondItem="nDU-lm-XzC" secondAttribute="trailing" constant="16" id="mmA-qO-VIt"/>
                                             <constraint firstAttribute="trailing" secondItem="VxC-1M-Edz" secondAttribute="trailing" id="yLc-M1-wRw"/>
                                             <constraint firstItem="nrr-IM-nDm" firstAttribute="leading" secondItem="Mxs-Y4-bbB" secondAttribute="leading" constant="16" id="ysu-lj-T6C"/>
                                         </constraints>
@@ -670,6 +689,7 @@
                     </view>
                     <connections>
                         <outlet property="accountLabel" destination="1xi-oJ-gRL" id="mLZ-2t-b9J"/>
+                        <outlet property="announcementButton" destination="nDU-lm-XzC" id="4QO-hc-slL"/>
                         <outlet property="currentVersionLabel" destination="emV-k2-ql9" id="png-NL-cJj"/>
                         <outlet property="latedVersionLabel" destination="LAz-tb-oRh" id="KnM-G6-0cP"/>
                         <outlet property="scrollView" destination="AjX-H5-nQV" id="V2Z-se-i0G"/>
