@@ -176,11 +176,12 @@ class EditingPurchaseOrderViewModel {
                     suggestedQuantity: String(info.suggestedQuantity),
                     daysSalesOfInventory: String(info.daysSalesOfInventory ?? 0),
                     cost: String(info.cost ?? 0),
+                    untaxCoast: String(info.untaxCoast ?? 0),
                     movingAverageCost: String(info.movingAverageCost ?? 0),
                     stockUnitName: info.stockUnitName,
                     boxStockUnitName: info.boxStockUnitName,
                     imageInfos: info.imageInfos),
-                purchaseCostPerItem: Double(info.purchaseCost),
+                purchaseCostPerItem: Double( round(info.purchaseCost * 100) / 100.0),
                 vendorName: order.vendorName,
                 vendorID: String(order.vendorID),
                 purchasedQuantity: Int(info.purchaseQuantity))
@@ -354,8 +355,8 @@ class EditingPurchaseOrderViewModel {
         let infos: [EditingPurchaseOrderParameterInfo.ProductInfo] = suggestionProductMaterialViewModels.map { viewModel in
             let id = viewModel.purchaseSuggestionInfo.id
             let quantity = String(viewModel.purchaseQuantity.value)
-            let purchaseCost = String(viewModel.purchaseCostPerItem.value)
-            let totalCost = String(viewModel.purchaseCost.value)
+            let purchaseCost = String(format: "%.2f", viewModel.purchaseCostPerItem.value)
+            let totalCost = String(format: "%.2f", viewModel.purchaseCost.value)
 
             let info = EditingPurchaseOrderParameterInfo.ProductInfo.init(
                 productID: id,
