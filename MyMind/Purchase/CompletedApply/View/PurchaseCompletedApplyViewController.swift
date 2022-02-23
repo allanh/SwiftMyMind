@@ -188,7 +188,7 @@ extension PurchaseCompletedApplyViewController: UICollectionViewDelegateFlowLayo
         if isForRead {
             return .zero
         } else {
-            return CGSize(width: view.frame.width, height: 125)
+            return CGSize(width: view.frame.width, height: 100)
         }
     }
 
