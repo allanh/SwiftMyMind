@@ -12,6 +12,7 @@ class MultiSelectableDropDownTableViewCell: UITableViewCell {
     let checkBoxButton: UIButton = UIButton {
         $0.setImage(UIImage(named: "unchecked"), for: .normal)
         $0.setImage(UIImage(named: "checked"), for: .selected)
+        $0.isUserInteractionEnabled = false
     }
 
     let titleLabel: UILabel = {
