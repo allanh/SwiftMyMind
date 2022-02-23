@@ -186,7 +186,11 @@ final class PurchaseListViewController: NiblessViewController {
     }
 
     private func didPickSortType(sortType: PurchaseListQueryInfo.OrderReference) {
-        purchaseListQueryInfo.orderReference = sortType
+        if purchaseListQueryInfo.orderReference == sortType {
+            purchaseListQueryInfo.sortOrder = purchaseListQueryInfo.sortOrder == .ascending ? .decending : .ascending
+        } else {
+            purchaseListQueryInfo.orderReference = sortType
+        }
         refreshFetchPurchaseList(query: purchaseListQueryInfo)
         rootView.organizeOptionView.sortButton.setTitle(sortType.description, for: .normal)
         pickSortTypeView.hide()
