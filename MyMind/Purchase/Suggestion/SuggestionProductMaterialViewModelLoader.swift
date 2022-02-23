@@ -33,7 +33,7 @@ struct PurchaseSuggestionInfosLoaderToSuggestionProductMaterialViewModelAdapter:
                             boxStockUnitName: info.stockUnitName,
                             quantityPerBox: Int(info.quantityPerBox) ?? 0,
                             purchaseSuggestionInfo: info,
-                            purchaseCostPerItem: Double(info.cost) ?? 0,
+                            purchaseCostPerItem: Double(info.untaxCoast) ?? 0,
                             vendorName: list.vendorName,
                             vendorID: list.vendorID
                         )

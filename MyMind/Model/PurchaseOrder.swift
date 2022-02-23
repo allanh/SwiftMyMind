@@ -73,7 +73,7 @@ struct PurchaseOrder: Codable {
         let channelStockQuantity, fineStockQuantity, monthSaleQuantity: Int?
         let suggestedQuantity : Int
         let totalStockQuantity, daysSalesOfInventory: Int?
-        let cost, movingAverageCost, totalPrice: Float?
+        let untaxCoast, cost, movingAverageCost, totalPrice: Float?
         let realPurchaseQuantity, realTotalPrice: Float?
         let imageInfos: [ImageInfo]
 
@@ -95,6 +95,7 @@ struct PurchaseOrder: Codable {
             case suggestedQuantity = "proposed_quantity"
             case daysSalesOfInventory = "days_sales_of_inventory"
             case cost
+            case untaxCoast = "untaxed_cost"
             case movingAverageCost = "moving_average_cost"
             case totalPrice = "total_price"
             case realPurchaseQuantity = "real_purchase_quantity"
@@ -120,6 +121,7 @@ struct PurchaseOrder: Codable {
 //            suggestedQuantity = try container.decode(Int.self, forKey: .suggestedQuantity)
 //            daysSalesOfInventory = try? container.decode(Int.self, forKey: .daysSalesOfInventory)
 //            cost = try? container.decode(Float.self, forKey: .cost)
+//            untaxCoast = try? container.decode(Float.self, forKey: .untaxCoast)
 //            movingAverageCost = try? container.decode(Float.self, forKey: .movingAverageCost)
 //            totalPrice = try? container.decode(Float.self, forKey: .totalPrice)
 //            realPurchaseQuantity = try? container.decode(Float.self, forKey: .realPurchaseQuantity)

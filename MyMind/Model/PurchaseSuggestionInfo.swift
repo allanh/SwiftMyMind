@@ -11,7 +11,7 @@ import Foundation
 struct PurchaseSuggestionInfo: Codable {
     let id, number, originalProductNumber, name: String
     let quantityPerBox, channelStockQuantity, fineStockQuantity, totalStockQuantity: String
-    let monthSaleQuantity, suggestedQuantity, daysSalesOfInventory, cost: String
+    let monthSaleQuantity, suggestedQuantity, daysSalesOfInventory, cost, untaxCoast: String
     let movingAverageCost, stockUnitName, boxStockUnitName: String
     let imageInfos: [ImageInfo]
 
@@ -28,6 +28,7 @@ struct PurchaseSuggestionInfo: Codable {
         case suggestedQuantity = "proposed_quantity"
         case daysSalesOfInventory = "days_sales_of_inventory"
         case cost
+        case untaxCoast = "untaxed_cost"
         case movingAverageCost = "moving_average_cost"
         case stockUnitName = "stock_unit_name"
         case boxStockUnitName = "box_stock_unit_name"
