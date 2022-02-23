@@ -8,7 +8,6 @@
 
 import UIKit
 import RxSwift
-
 class EditablePickedProductsInfoViewController: NiblessViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         .lightContent
@@ -100,7 +99,6 @@ class EditablePickedProductsInfoViewController: NiblessViewController {
         super.viewDidLoad()
 
         view.backgroundColor = .white
-
         addCustomBackNavigationItem()
         title = "採購SKU資訊"
         navigationItem.backButtonTitle = ""
@@ -170,21 +168,10 @@ class EditablePickedProductsInfoViewController: NiblessViewController {
             .map({ "共 \($0.count) 件SKU" })
             .bind(to: summaryLabel.rx.text)
             .disposed(by: bag)
-        let formatter: NumberFormatter = NumberFormatter {
-            $0.numberStyle = .currency
-            $0.currencySymbol = ""
-        }
-
-        let totalCost = viewModel.pickedProductMaterialViewModels.value
-            .map {
-                $0.purchaseCost.value
-            }.reduce(0) { (sum, num) -> Double in
-                return sum+num
-            }
-        let tax = totalCost * 0.05
-        costLabel.text = formatter.string(from: NSNumber(value: totalCost))
-        taxLabel.text = formatter.string(from: NSNumber(value: tax))
-        totalLabel.text = formatter.string(from: NSNumber(value: totalCost+tax))
+        
+        viewModel.pickedProductMaterialViewModels
+            .subscribe(onNext: handleItemUpdated(with:))
+            .disposed(by: bag)
 
     }
 
@@ -236,7 +223,25 @@ class EditablePickedProductsInfoViewController: NiblessViewController {
             show(viewController, sender: nil)
         }
     }
+    
+    private func handleItemUpdated(with items: [SuggestionProductMaterialViewModel]) {
+        let formatter: NumberFormatter = NumberFormatter {
+            $0.numberStyle = .currency
+            $0.currencySymbol = ""
+        }
 
+        let totalCost = items
+            .map {
+                $0.purchaseCost.value
+            }.reduce(0) { (sum, num) -> Double in
+                return sum+num
+            }
+        let tax = totalCost * 0.05
+        costLabel.text = formatter.string(from: NSNumber(value: totalCost))
+        taxLabel.text = formatter.string(from: NSNumber(value: tax))
+        totalLabel.text = formatter.string(from: NSNumber(value: totalCost+tax))
+    }
+    
     @objc
     private func deleteButtonDidTapped(_ sender: UIButton) {
         guard
