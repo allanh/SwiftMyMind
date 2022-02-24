@@ -12,7 +12,7 @@ class AnnouncementListViewController: NiblessViewController {
     // MARK: - Properties
     var rootView:  AnnouncementListRootView { view as! AnnouncementListRootView }
     
-    var reviewing: Bool 
+    var reviewing: Bool
     
     private lazy var emptyListView: EmptyDataView = {
         return EmptyDataView(frame: rootView.tableView.bounds, icon: "no_announcement", description: "目前尚未有公告訊息", font: .pingFangTCRegular(ofSize: 14), color: .brownGrey)
@@ -28,7 +28,7 @@ class AnnouncementListViewController: NiblessViewController {
             }
         }, didCancelUpdate: {
             UIView.animate(withDuration: 0.5, delay: 0, options: [.curveEaseInOut, .beginFromCurrentState]) {
-                self.filter.frame = CGRect(x: self.view.bounds.width, y: 0, width: self.view.bounds.width, height: self.view.bounds.height)
+                self.filter.frame = CGRect(x: self.view.bounds.width, y: self.navigationBarWithStatusBarHeight, width: self.view.bounds.width, height: self.view.bounds.height-self.navigationBarWithStatusBarHeight)
             } completion: { _ in
                 self.filter.removeFromSuperview()
             }
@@ -86,12 +86,6 @@ class AnnouncementListViewController: NiblessViewController {
         view = rootView
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.navigationBar.alpha = 1.0
-        navigationController?.setNavigationBarHidden(false, animated: false)
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -106,11 +100,14 @@ class AnnouncementListViewController: NiblessViewController {
         appearance.backgroundColor = .prussianBlue
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
-        navigationController?.navigationBar.alpha = 1.0
-        navigationController?.setNavigationBarHidden(false, animated: false)
         configTableView()
         loadAnnouncementList(query: announcementListQueryInfo)
         addButtonActions()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        navigationController?.navigationBar.alpha = 1.0
+        navigationController?.setNavigationBarHidden(false, animated: false)
     }
     
     // MARK: - Method
@@ -220,13 +217,13 @@ class AnnouncementListViewController: NiblessViewController {
     
     @objc
     private func filterButtonDidTapped(_ sender: UIButton) {
-        filter.frame = CGRect(x: view.bounds.width, y: 0, width: view.bounds.width, height: view.bounds.height)
+        filter.frame = CGRect(x: view.bounds.width, y: navigationBarWithStatusBarHeight, width: view.bounds.width, height: view.bounds.height-navigationBarWithStatusBarHeight)
         view.addSubview(filter)
 //        filter.delegate = self
         UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut) {
-            self.filter.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height)
+            self.filter.frame = CGRect(x: 0, y: self.navigationBarWithStatusBarHeight, width: self.view.bounds.width, height: self.view.bounds.height-self.navigationBarWithStatusBarHeight)
         } completion: { _ in
-            print("done")
+//            print("done")
         }
     }
     @objc

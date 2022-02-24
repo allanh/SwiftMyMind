@@ -96,50 +96,23 @@ class AnnouncementListFilterView: NiblessView {
         $0.textColor = .emperor
         $0.text = "發佈時間"
     }
-    private let startTimeTextField: UITextField = UITextField {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.borderStyle = .none
-        $0.font = .pingFangTCRegular(ofSize: 14)
-        $0.placeholder = "開始日期"
-        $0.layer.cornerRadius = 4
-        $0.layer.borderWidth = 1
-        $0.layer.borderColor = UIColor.lightGray.cgColor
-        let leftContainerView = UIView()
-        leftContainerView.frame = CGRect(origin: .zero, size: .init(width: 10, height: 32))
-        $0.leftView = leftContainerView
-        $0.leftViewMode = .always
-        $0.clearButtonMode = .never
-        let rightContainerView = UIView()
-        rightContainerView.frame = CGRect(origin: .zero, size: .init(width: 34, height: 32))
-        let iconImageView = UIImageView(image: UIImage(named: "date_picker"))
-        iconImageView.frame = CGRect(origin: .zero, size: .init(width: 34, height: 32))
-        iconImageView.contentMode = .center
-        rightContainerView.addSubview(iconImageView)
-        $0.rightView = rightContainerView
-        $0.rightViewMode = .always
-    }
-    private let endTimeTextField: UITextField = UITextField {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.borderStyle = .none
-        $0.font = .pingFangTCRegular(ofSize: 14)
-        $0.placeholder = "結束日期"
-        $0.layer.cornerRadius = 4
-        $0.layer.borderWidth = 1
-        $0.layer.borderColor = UIColor.lightGray.cgColor
-        let leftContainerView = UIView()
-        leftContainerView.frame = CGRect(origin: .zero, size: .init(width: 10, height: 32))
-        $0.leftView = leftContainerView
-        $0.leftViewMode = .always
-        $0.clearButtonMode = .never
-        let rightContainerView = UIView()
-        rightContainerView.frame = CGRect(origin: .zero, size: .init(width: 34, height: 32))
-        let iconImageView = UIImageView(image: UIImage(named: "date_picker"))
-        iconImageView.frame = CGRect(origin: .zero, size: .init(width: 34, height: 32))
-        iconImageView.contentMode = .center
-        rightContainerView.addSubview(iconImageView)
-        $0.rightView = rightContainerView
-        $0.rightViewMode = .always
-    }
+    
+    private var startTimeTextField: DatePickerTextField = {
+        let textField = DatePickerTextField()
+        textField.font = .pingFangTCRegular(ofSize: 14)
+        textField.placeholder = "開始日期"
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        return textField
+    }()
+    
+    private var endTimeTextField: DatePickerTextField = {
+        let textField = DatePickerTextField()
+        textField.font = .pingFangTCRegular(ofSize: 14)
+        textField.placeholder = "結束日期"
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        return textField
+    }()
+    
     private let bottomSeparator: UIView = UIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.backgroundColor = .mercury
@@ -180,6 +153,7 @@ class AnnouncementListFilterView: NiblessView {
         backgroundColor = .white
         hierarchyNotReady = false
     }
+    
     private func subscribe() {
         titleTextField.rx.text.orEmpty.subscribe(onNext: { [unowned self] string in
             self.model.title.accept(string)

@@ -112,7 +112,7 @@ class SignInRootView: NiblessView {
         $0.touchEdgeInsets = UIEdgeInsets(top: -10, left: -10, bottom: -10, right: -10)
     }
 
-    private lazy var passwordInputView: ValidatableInputView = ValidatableInputView {
+    lazy var passwordInputView: ValidatableInputView = ValidatableInputView {
         $0.textField.attributedPlaceholder = NSAttributedString(
             string: "請輸入密碼",
             attributes: [.foregroundColor: UIColor.brownGrey2]
@@ -162,7 +162,7 @@ class SignInRootView: NiblessView {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
 
-    private let captchaInputView: ValidatableInputView = ValidatableInputView {
+    let captchaInputView: ValidatableInputView = ValidatableInputView {
         $0.textField.attributedPlaceholder = NSAttributedString(
             string: "請輸入驗證碼",
             attributes: [.foregroundColor: UIColor.brownGrey2]
@@ -374,7 +374,7 @@ class SignInRootView: NiblessView {
             })
             .disposed(by: bag)
         
-        signInButton.addTarget(viewModel, action: #selector(viewModel.signIn), for: .touchUpInside)
+//        signInButton.addTarget(viewModel, action: #selector(viewModel.signIn), for: .touchUpInside)
     }
 
     func resetScrollViewContentInsets() {

@@ -39,6 +39,11 @@ class SignInViewController: NiblessViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         if !viewModel.otpEnabled { viewModel.captcha() }
+        
+        // 按下登入按鈕後，關閉鍵盤
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(signin))
+        rootView.signInButton.addGestureRecognizer(tapGesture)
+        
         addTapToResignKeyboardGesture()
         observerViewModel()
         configForgotPasswordButton()
@@ -55,6 +60,7 @@ class SignInViewController: NiblessViewController {
         navigationController?.setNavigationBarHidden(false, animated: false)
         navigationController?.navigationItem.setHidesBackButton(true, animated: false)
         addKeyboardObservers()
+        configView()
         autoLogin()
     }
 
@@ -72,6 +78,12 @@ class SignInViewController: NiblessViewController {
         }
     }
     
+    @objc
+    private func signin() {
+        self.view.endEditing(true)
+        viewModel.signIn()
+    }
+    
     private func autoLogin() {
         if userSessionDataStore.readUserSession() != nil {
             MyMindEmployeeAPIService.shared.authorization()
@@ -86,6 +98,12 @@ class SignInViewController: NiblessViewController {
                     print(error.localizedDescription)
                 }
         }
+    }
+    
+    func configView() {
+        viewModel.captcha()
+        rootView.passwordInputView.textField.text = nil
+        rootView.captchaInputView.textField.text = nil
     }
 
     func configForgotPasswordButton() {

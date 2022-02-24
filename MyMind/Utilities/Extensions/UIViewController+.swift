@@ -10,6 +10,20 @@ import UIKit
 import NVActivityIndicatorView
 
 extension UIViewController {
+    // 導覽列高度
+    var navigationBarHeight: CGFloat {
+        get {
+            return navigationController?.navigationBar.frame.height ?? 0
+        }
+    }
+    
+    // Get frame height with navigation bar height and status bar height
+    var navigationBarWithStatusBarHeight: CGFloat {
+        get {
+            return navigationBarHeight + UIApplication.statusBarHeight
+        }
+    }
+    
     func addTapToResignKeyboardGesture(in view: UIView? = nil) {
         var viewToAddGesture: UIView = self.view
         if view != nil {
