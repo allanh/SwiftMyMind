@@ -19,6 +19,7 @@ class PickProductMaterialsViewModel {
     let currentProductMaterials: BehaviorRelay<[ProductMaterial]> = .init(value: [])
     var currentQueryInfo: ProductMaterialQueryInfo
     let currentSortType: BehaviorRelay<ProductMaterialQueryInfo.SortType> = .init(value: .number)
+    let currentSortOrder: BehaviorRelay<SortOrder> = .init(value: .decending)
     var pickedMaterialIDs: Set<String> = .init()
     var pickedMaterials: [ProductMaterial] = []
     var currentPageInfo: MultiplePageList?
@@ -39,6 +40,13 @@ class PickProductMaterialsViewModel {
             .skip(1)
             .subscribe(onNext: { [unowned self] sortType in
                 self.currentQueryInfo.sortType = sortType
+                self.refreshFetchProductMaterials(with: currentQueryInfo)
+            })
+            .disposed(by: bag)
+        currentSortOrder.asObservable()
+            .skip(1)
+            .subscribe(onNext: { [unowned self] sortOrder in
+                self.currentQueryInfo.sortOrder = sortOrder
                 self.refreshFetchProductMaterials(with: currentQueryInfo)
             })
             .disposed(by: bag)

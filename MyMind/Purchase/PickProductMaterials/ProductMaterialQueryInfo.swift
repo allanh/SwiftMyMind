@@ -38,6 +38,7 @@ struct ProductMaterialQueryInfo: Equatable {
             }
         }
     }
+    
     let vendorInfo: VendorInfo
     var brandNames: [AutoCompleteInfo] = []
     var materialNumbers: [AutoCompleteInfo] = []
@@ -45,6 +46,7 @@ struct ProductMaterialQueryInfo: Equatable {
     var originalMaterialNumbers: [AutoCompleteInfo] = []
     var materailNames: [String] = []
     var sortType: SortType = .number
+    var sortOrder: SortOrder = .decending
     var pageNumber: Int = 1
 
     var queryItems: [URLQueryItem] {
@@ -84,6 +86,8 @@ struct ProductMaterialQueryInfo: Equatable {
         items.append(pageQuery)
         let sortQuery = URLQueryItem(name: "order_by", value: sortType.rawValue)
         items.append(sortQuery)
+        let orderQuery = URLQueryItem(name: "sort", value: sortOrder.rawValue)
+        items.append(orderQuery)
         return items
     }
 }

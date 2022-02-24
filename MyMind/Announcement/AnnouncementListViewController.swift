@@ -187,7 +187,11 @@ class AnnouncementListViewController: NiblessViewController {
     }
     
     private func didPickSortType(sortType: AnnouncementListQueryInfo.AnnouncementOrder) {
-        announcementListQueryInfo.order = sortType
+        if sortType == announcementListQueryInfo.order {
+            announcementListQueryInfo.sort = announcementListQueryInfo.sort == .ascending ? .decending : .ascending
+        } else {
+            announcementListQueryInfo.order = sortType
+        }
         refreshFetchAnnouncementList(query: announcementListQueryInfo)
         rootView.organizeOptionView.announcementSortButton.setTitle(sortType.description, for: .normal)
         pickSortTypeView.hide()

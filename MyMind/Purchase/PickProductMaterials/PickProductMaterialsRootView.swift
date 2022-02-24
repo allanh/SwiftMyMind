@@ -36,7 +36,12 @@ class PickProductMaterialsRootView: NiblessView {
             let isSelected = self.viewModel.currentQueryInfo.sortType == sortType
             cell.titleLabel.textColor = isSelected ? .prussianBlue : .veryDarkGray
         } cellSelectHandler: { [unowned self] sortType in
-            self.viewModel.currentSortType.accept(sortType)
+            if self.viewModel.currentSortType.value == sortType {
+                let sortOrder: SortOrder = self.viewModel.currentSortOrder.value == .decending ? .ascending : .decending
+                self.viewModel.currentSortOrder.accept(sortOrder)
+            } else {
+                self.viewModel.currentSortType.accept(sortType)
+            }
             self.pickSortTypeView.hide()
         }
         pickSortView.tableView.separatorStyle = .none
