@@ -29,6 +29,7 @@ class AccountSettingViewController: UIViewController {
     @IBOutlet weak var signoutView: UIView!
     @IBOutlet weak var settingTableView: UITableView!
     @IBOutlet weak var latedVersionLabel: UILabel!
+    @IBOutlet weak var announcementButton: UIButton!
     
     weak var delegate: MixedDelegate?
     private var statusBarFrame: CGRect!
@@ -83,6 +84,7 @@ class AccountSettingViewController: UIViewController {
         navigationController?.setNavigationBarHidden(true, animated: false)
         navigationController?.navigationBar.alpha = 0.0
         scrollView.contentInsetAdjustmentBehavior = .never
+        announcementButton.touchEdgeInsets = UIEdgeInsets(top: -10, left: -10, bottom: -10, right: -10)
         configStatuView()
         
         isNetworkProcessing = true
@@ -196,6 +198,10 @@ class AccountSettingViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    @IBAction func showAnnouncement(_ sender: Any) {
+        show(AnnouncementListViewController(announcementListLoader: MyMindAnnouncementAPIService.shared), sender: nil)
     }
 }
 

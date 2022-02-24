@@ -88,9 +88,12 @@ final class RootTabBarController: UITabBarController {
         let button = UIButton(type: .custom)
         button.setImage(UIImage(named: "bell")?.withRenderingMode(.alwaysTemplate), for: .normal)
         button.addTarget(self, action: #selector(showAnnouncement(_:)), for: .touchUpInside)
+        button.touchEdgeInsets = UIEdgeInsets(top: -10, left: -10, bottom: -10, right: -10)
+        button.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 3)
         let barButton = UIBarButtonItem(customView: button)
         navigationItem.rightBarButtonItem = barButton
     }
+    
     private func generateHomeViewController() {
         if let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "Home") as? HomeViewController {
             viewController.authorization = authorization
