@@ -104,7 +104,8 @@ class PickProductMaterialsViewController: NiblessViewController {
             let purchaseSuggestionViewModel = PurchaseSuggestionViewModel(pickedProductIDList: pickedOrderedIDs , loader: adapter)
             let viewController = PurchaseSuggestionViewController(viewModel: purchaseSuggestionViewModel)
             show(viewController, sender: nil)
-            break
+        case .empty:
+            ToastView.showIn(self, message: "請挑選商品", at: .center)
         }
     }
 

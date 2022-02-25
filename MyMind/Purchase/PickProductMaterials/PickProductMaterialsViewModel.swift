@@ -11,7 +11,7 @@ import RxSwift
 import RxRelay
 
 enum PickMaterialView {
-    case filter, suggestion
+    case filter, suggestion, empty
 }
 class PickProductMaterialsViewModel {
     // MARK: - Properties
@@ -114,7 +114,7 @@ class PickProductMaterialsViewModel {
 
     func pushSuggestion() {
         guard pickedMaterials.isEmpty == false else {
-            #warning("Show hint to user")
+            view.accept(.empty)
             return
         }
         view.accept(.suggestion)
