@@ -67,13 +67,8 @@ class SaleReportTypeView: NiblessView {
         $0.font = .pingFangTCSemibold(ofSize: 24)
         $0.textColor = .white
         $0.text = "-"
-    }
-    
-    private lazy var amountUnitLabel: UILabel = UILabel {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.font = .pingFangTCSemibold(ofSize: 14)
-        $0.textColor = .white
-        $0.text = "元"
+        $0.adjustsFontSizeToFitWidth = true
+        $0.minimumScaleFactor = 0.5
     }
     
     // MARK: - UI Setup
@@ -91,8 +86,6 @@ class SaleReportTypeView: NiblessView {
             self.backgroundImage.image = selectedimage
         } else {
             self.backgroundImage.image = unselectedimage
-            addSubview(amountUnitLabel)
-            activateConstraintsamountUnitLabel()
         }
 
         NSLayoutConstraint.activate([
@@ -119,21 +112,8 @@ class SaleReportTypeView: NiblessView {
             countLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 4),
             countLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 21),
             countLabel.trailingAnchor
-                .constraint(equalTo: infoType == .amount ? amountUnitLabel.leadingAnchor : trailingAnchor),
+                .constraint(equalTo: trailingAnchor, constant: -19),
             countLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -23)
-        ])
-    }
-    
-    func activateConstraintsamountUnitLabel() {
-        NSLayoutConstraint.activate([
-            amountUnitLabel.bottomAnchor
-                .constraint(equalTo: countLabel.bottomAnchor, constant: -4),
-            amountUnitLabel.leadingAnchor
-                .constraint(equalTo: countLabel.trailingAnchor, constant: 4),
-            amountUnitLabel.trailingAnchor
-                .constraint(lessThanOrEqualTo: trailingAnchor),
-            amountUnitLabel.heightAnchor
-                .constraint(equalToConstant: 20)
         ])
     }
 }

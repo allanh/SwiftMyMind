@@ -11,6 +11,17 @@ class SaleReportInfoItemView: NiblessView {
     // 數量或總額
     enum ItemType {
         case quantity, amount
+        
+        func getYesterdayTitleString(infoType: SaleReportInfoView.InfoType) -> String {
+            switch infoType {
+            case .sale:
+                return self == .quantity ? "昨日銷售" : "昨日總額"
+            case .canceled:
+                return self == .quantity ? "昨日取消" : "昨日取消"
+            case .sale_return:
+                return self == .quantity ? "昨日退貨" : "昨日退貨"
+            }
+        }
     }
     var hierarchyNotReady: Bool = true
     let saleReports: SaleReports?
@@ -31,7 +42,7 @@ class SaleReportInfoItemView: NiblessView {
         }
         arrangeView()
         activateConstraints()
-        backgroundColor = .secondarySystemBackground
+        backgroundColor = UIColor(hex: "f1f8fe")
         hierarchyNotReady = false
     }
     private let quantityTitleLabel: UILabel = UILabel {
@@ -47,12 +58,7 @@ class SaleReportInfoItemView: NiblessView {
         $0.textColor = .prussianBlue
         $0.sizeToFit()
     }
-    private let quantityUnitLabel: UILabel = UILabel {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.font = .pingFangTCSemibold(ofSize: 14)
-        $0.textColor = .prussianBlue
-        $0.text = "元"
-    }
+
     private let quantityRatioLabel: EdgeInsetLabel = EdgeInsetLabel {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = .pingFangTCRegular(ofSize: 12)
@@ -65,7 +71,7 @@ class SaleReportInfoItemView: NiblessView {
     }
     private let yesterdayQuantityLabel: UILabel = UILabel {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.font = .pingFangTCSemibold(ofSize: 12)
+        $0.font = .pingFangTCRegular(ofSize: 12)
         $0.textColor = .brownGrey
         $0.sizeToFit()
     }
@@ -186,7 +192,7 @@ extension SaleReportInfoItemView {
         
         // TODO: Modify infoType
         let index = infoType.rawValue
-
+        let yesterdayTitleString = itemType.getYesterdayTitleString(infoType: infoType)
         switch itemType {
         case .quantity:
             quantityTitleLabel.text = "數量"
@@ -212,9 +218,9 @@ extension SaleReportInfoItemView {
             var quantity = index == 0 ? saleQuantityDividend : index == 1 ? canceledQuantityDividend : returnQuantityDividend
             quantityLabel.text = numberFormatter.string(from: NSNumber(value: quantity))
             
-            // 昨日數量
+            // 昨日銷售
             quantity = index == 0 ? saleQuantityDivisor : index == 1 ? canceledQuantityDivisor : returnQuantityDivisor
-            yesterdayQuantityLabel.text = "昨日數量 "+(numberFormatter.string(from: NSNumber(value: quantity)) ?? "")
+            yesterdayQuantityLabel.text = "\(yesterdayTitleString) "+(numberFormatter.string(from: NSNumber(value: quantity)) ?? "")
             
             // 轉單
             var value = index == 0 ? saleReports?.todayTransformedSaleReport?.saleQuantity : index == 1 ? saleReports?.todayTransformedSaleReport?.canceledQuantity : saleReports?.todayTransformedSaleReport?.returnQuantity
@@ -225,8 +231,6 @@ extension SaleReportInfoItemView {
             shippedValueLabel.text = numberFormatter.string(from: NSNumber(value: value ?? 0))
             
         case .amount:
-            addSubview(quantityUnitLabel)
-            
             quantityTitleLabel.text = "總額"
             let ratio = index == 0 ? saleAmountRatio: index == 1 ? canceledAmountRatio : returnAmountRatio
             let string = formatter.string(from: NSNumber(value:ratio))
@@ -245,10 +249,10 @@ extension SaleReportInfoItemView {
             }
             
             var quantity = index == 0 ? saleAmountDividend : index == 1 ? canceledAmountDividend : returnAmountDividend
-            quantityLabel.text = numberFormatter.string(from: NSNumber(value: quantity))
+            quantityLabel.attributedText = quantity.toDollarsString(dollarFont: .pingFangTCSemibold(ofSize: 14), dollarColor: .prussianBlue)
             
             quantity = index == 0 ? saleAmountDivisor : index == 1 ? canceledAmountDivisor : returnAmountDivisor
-            yesterdayQuantityLabel.text = "昨日總額 " + (numberFormatter.string(from: NSNumber(value: quantity)) ?? "") + "元"
+            yesterdayQuantityLabel.text = "\(yesterdayTitleString) " + (numberFormatter.string(from: NSNumber(value: quantity)) ?? "") + "元"
             
             var value = index == 0 ? saleReports?.todayTransformedSaleReport?.saleAmount : index == 1 ? saleReports?.todayTransformedSaleReport?.canceledAmount : saleReports?.todayTransformedSaleReport?.returnAmount
             let transformedValue = numberFormatter.string(from: NSNumber(value: value ?? 0))
@@ -270,9 +274,6 @@ extension SaleReportInfoItemView {
         activateConstraintsTransformedValueLabel()
         activateConstraintsShippedTitleLabel()
         activateConstraintsShippedValueLabel()
-        if itemType == .amount {
-            activateConstraintsQuantityUnitLabel()
-        }
     }
 }
 /// constraint
@@ -298,27 +299,12 @@ extension SaleReportInfoItemView {
         let leading = quantityLabel.leadingAnchor
             .constraint(equalTo: leadingAnchor, constant: 16)
         let trailing = quantityLabel.trailingAnchor
-            .constraint(equalTo: itemType == .amount ? quantityUnitLabel.leadingAnchor : trailingAnchor)
+            .constraint(equalTo: trailingAnchor, constant: -16)
         let height = quantityLabel.heightAnchor
             .constraint(equalToConstant: 33)
 
         NSLayoutConstraint.activate([
             top, leading, trailing, height
-        ])
-    }
-    
-    private func activateConstraintsQuantityUnitLabel() {
-        let bottom = quantityUnitLabel.bottomAnchor
-            .constraint(equalTo: quantityLabel.bottomAnchor, constant: -4)
-        let leading = quantityUnitLabel.leadingAnchor
-            .constraint(equalTo: quantityLabel.trailingAnchor, constant: 4)
-        let trailing = quantityUnitLabel.trailingAnchor
-            .constraint(equalTo: trailingAnchor)
-        let height = quantityUnitLabel.heightAnchor
-            .constraint(equalToConstant: 20)
-
-        NSLayoutConstraint.activate([
-            bottom, leading, trailing, height
         ])
     }
     
@@ -328,7 +314,7 @@ extension SaleReportInfoItemView {
         let leading = quantityRatioLabel.leadingAnchor
             .constraint(equalTo: leadingAnchor, constant: 16)
         let height = quantityRatioLabel.heightAnchor
-            .constraint(equalToConstant: 16)
+            .constraint(equalToConstant: 18)
         let width = quantityRatioLabel.widthAnchor.constraint(greaterThanOrEqualToConstant: 50)
         NSLayoutConstraint.activate([
             top, leading, width, height

@@ -31,7 +31,8 @@ class MainFunctionEntryCollectionViewCell: UICollectionViewCell {
         layer.shadowOpacity = 1.0
         layer.masksToBounds = false
         layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: contentView.layer.cornerRadius).cgPath
-
+        entryTitleLabel.adjustsFontSizeToFitWidth = true
+        entryTitleLabel.minimumScaleFactor = 0.5
     }
 
     func config(with item: FunctionEntryList.FunctionEntry.FunctionEntryItem, category: Category) {

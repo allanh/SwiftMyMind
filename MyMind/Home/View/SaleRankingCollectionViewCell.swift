@@ -433,7 +433,7 @@ extension SaleRankingCollectionViewCell: UICollectionViewDataSource {
             value = (report?.saleGrossProfit ?? 0) / (self.grossProfitRankingReportList?.map({$0.saleGrossProfit}).reduce(0, +) ?? 0)
         }
         if let rankingReport = report {
-            cell?.config(type: rankingType, index: indexPath.row, report: rankingReport, value: value)
+            cell?.config(type: rankingType, devider: self.devider, index: indexPath.row, report: rankingReport, value: value)
         }
         return cell ?? SaleRankingItemCollectionViewCell()
     }

@@ -212,13 +212,13 @@ class SaleReportCollectionViewCell: UICollectionViewCell {
     func configLineChart(order: SKURankingReport.SKURankingReportSortOrder, pointType: SaleReportList.SaleReportPointsType) {
         if let reportList = saleReportList, reportList.reports.count > 0 {
             quantityTypeView.countLabel.text = reportList.totalQuantity(pointsType: pointType).toDecimalString()
-            amountTypeView.countLabel.text = reportList.totalAmount(pointsType: pointType).toDecimalString()
+            amountTypeView.countLabel.attributedText = reportList.totalAmount(pointsType: pointType).toDollarsString()
             mylineChartView.data = MyMindLineChartData(points: reportList.points(for: order)[pointType] ?? [],
                                                        gradientColors: self.gradientColors,
                                                        gradientLocations: gradientLocations)
         } else {
             quantityTypeView.countLabel.text = "-"
-            amountTypeView.countLabel.text = "-"
+            amountTypeView.countLabel.text = "- 元"
             mylineChartView.data = MyMindLineChartData.empty
         }
     }

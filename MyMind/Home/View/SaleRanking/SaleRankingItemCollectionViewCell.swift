@@ -41,14 +41,24 @@ class SaleRankingItemCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func config(type: SaleRankingReportList.RankingType, index: Int, report: SaleRankingReport?, value: Float) {
+    func config(type: SaleRankingReportList.RankingType, devider: SaleRankingReport.SaleRankingReportDevider, index: Int, report: SaleRankingReport?, value: Float) {
 //        contentView.layer.cornerRadius = 4
 //        contentView.backgroundColor = .lightGray
 //        contentView.clipsToBounds = true
         if let image = images.getElement(at: index) {
             raningImage.setBackgroundImage(image)
         }
-        contentLabel.text = report?.name
+        
+        switch devider {
+        case .store:
+            contentLabel.text = report?.name
+        case .vendor:
+            if let name = report?.name, !name.isEmpty {
+                contentLabel.text = name
+            } else {
+                contentLabel.text = "未設定供應商"
+            }
+        }
         valueLabel.text = "\(String(format:"%.2f", value * 100))%"
     }
 

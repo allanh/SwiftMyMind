@@ -44,6 +44,7 @@ class ToDoItemView: NiblessView {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = .pingFangTCSemibold(ofSize: 20)
         $0.textColor = .label
+        $0.sizeToFit()
     }
 }
 /// helper

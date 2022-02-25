@@ -6,7 +6,7 @@
 //  Copyright © 2021 United Digital Intelligence. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 extension Float {
     func roundToInt() -> Int? {
@@ -19,5 +19,9 @@ extension Float {
     
     func toDecimalString() -> String {
         return Double(self).toDecimalString()
+    }
+    
+    func toDollarsString(dollarFont: UIFont? = nil, dollarColor: UIColor? = nil) -> NSMutableAttributedString {
+        return Double(self).toDollarsString(dollarFont: dollarFont, dollarColor: dollarColor)
     }
 }

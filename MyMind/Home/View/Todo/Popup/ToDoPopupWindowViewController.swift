@@ -42,6 +42,7 @@ class ToDoPopupWindowViewController: NiblessViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.pageIndicatorTintColor = .border
         view.currentPageIndicatorTintColor = .prussianBlue
+        view.isUserInteractionEnabled = false
         return view
     }()
     

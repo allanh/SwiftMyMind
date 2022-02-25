@@ -40,6 +40,7 @@ class ToDoInfoHeaderView: NiblessView {
 
     private let totalLabel: UILabel = UILabel {
         $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.sizeToFit()
         $0.textColor = .white
     }
     
