@@ -225,21 +225,27 @@ class EditablePickedProductsInfoViewController: NiblessViewController {
     }
     
     private func handleItemUpdated(with items: [SuggestionProductMaterialViewModel]) {
-        let formatter: NumberFormatter = NumberFormatter {
-            $0.numberStyle = .currency
-            $0.currencySymbol = ""
-        }
-
-        let totalCost = items
-            .map {
-                $0.purchaseCost.value
-            }.reduce(0) { (sum, num) -> Double in
-                return sum+num
+        if items.isEmpty {
+            if let viewController = navigationController?.viewControllers[4] {
+                navigationController?.popToViewController(viewController, animated: true)
             }
-        let tax = totalCost * 0.05
-        costLabel.text = formatter.string(from: NSNumber(value: totalCost))
-        taxLabel.text = formatter.string(from: NSNumber(value: tax))
-        totalLabel.text = formatter.string(from: NSNumber(value: totalCost+tax))
+        } else {
+            let formatter: NumberFormatter = NumberFormatter {
+                $0.numberStyle = .currency
+                $0.currencySymbol = ""
+            }
+
+            let totalCost = items
+                .map {
+                    $0.purchaseCost.value
+                }.reduce(0) { (sum, num) -> Double in
+                    return sum+num
+                }
+            let tax = totalCost * 0.05
+            costLabel.text = formatter.string(from: NSNumber(value: totalCost))
+            taxLabel.text = formatter.string(from: NSNumber(value: tax))
+            totalLabel.text = formatter.string(from: NSNumber(value: totalCost+tax))
+        }
     }
     
     @objc
