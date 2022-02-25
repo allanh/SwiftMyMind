@@ -19,7 +19,7 @@ class PurchaseSuggestionViewController: NiblessViewController {
         let layout = UICollectionViewFlowLayout()
         layout.sectionHeadersPinToVisibleBounds = true
         let screenWidth = UIScreen.main.bounds.width
-        layout.headerReferenceSize = CGSize(width: screenWidth, height: 120)
+        layout.headerReferenceSize = CGSize(width: screenWidth, height: 100)
         let horizontalInset: CGFloat = 20
         layout.sectionInset = UIEdgeInsets(top: 15, left: horizontalInset, bottom: 15, right: horizontalInset)
         layout.itemSize = CGSize(width: screenWidth-horizontalInset*2, height: 495)
@@ -157,7 +157,10 @@ class PurchaseSuggestionViewController: NiblessViewController {
 
         viewModel.removeSuggestionProductMaterialViewModel(at: indexPath.item)
         removeChildViewController(at: indexPath.item)
-        collectionView.reloadData()
+        collectionView.deleteItems(at: [indexPath])
+        if viewModel.suggestionProductMaterialViewModels.isEmpty {
+            navigationController?.popViewController(animated: true)
+        }
     }
 
     @objc
