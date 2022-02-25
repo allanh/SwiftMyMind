@@ -142,8 +142,8 @@ struct PurchaseApplyViewModel {
             let suggestedPurchaseQuantity = viewModel.purchaseSuggestionInfo.suggestedQuantity
             let channelStockQuantity = viewModel.purchaseSuggestionInfo.channelStockQuantity
             let fineStockQuantity = viewModel.purchaseSuggestionInfo.fineStockQuantity
-            let purchaseCost = String(viewModel.purchaseCostPerItem.value)
-            let totalCost = String(viewModel.purchaseCost.value)
+            let purchaseCost = String(format: "%.2f", viewModel.purchaseCostPerItem.value)
+            let totalCost = String(format: "%.2f", viewModel.purchaseCost.value)
 
             let info: ApplyPurchaseParameterInfo.ProductInfo = .init(
                 productID: id,
