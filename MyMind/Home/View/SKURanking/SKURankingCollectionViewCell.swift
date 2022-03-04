@@ -61,6 +61,7 @@ class SKURankingCollectionViewCell: UICollectionViewCell {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.alwaysBounceVertical = false
         view.isScrollEnabled = false
+        view.allowsSelection = false
         return view
     }()
     
@@ -137,6 +138,7 @@ extension SKURankingCollectionViewCell {
             headerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             headerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             headerView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            headerView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width-32),
             headerView.heightAnchor.constraint(equalToConstant: 70)
         ])
     }

@@ -49,13 +49,12 @@ extension SaleRankingReportList {
         set.sliceSpace = 0
         
 //        set.colors = [.systemOrange, .systemYellow, .systemRed, .systemTeal, .systemGreen, .systemGray2]
-        let colors: [UIColor] = [
+        set.colors = [
             UIColor(red: 255/255, green: 223/255, blue: 122/255, alpha: 1),
              UIColor(red: 102/255, green: 228/255, blue: 255/255, alpha: 1),
             .white.withAlphaComponent(0.8), .white.withAlphaComponent(0.6),
             .white.withAlphaComponent(0.4), .white.withAlphaComponent(0.2)
         ]
-        set.colors = colors
 
         let data = PieChartData(dataSet: set)
         
@@ -102,10 +101,10 @@ class SaleRankingCollectionViewCell: UICollectionViewCell {
     private let colors: [[UIColor]] = [
         [UIColor(red: 255/255, green: 223/255, blue: 122/255, alpha: 1), UIColor(red: 255/255, green: 160/255, blue: 30/255, alpha: 1)],
         [UIColor(red: 102/255, green: 228/255, blue: 255/255, alpha: 1), UIColor(red: 39/255, green: 124/255, blue: 228/255, alpha: 1)],
-        [.white.withAlphaComponent(0.8), .white.withAlphaComponent(0.8)],
-        [.white.withAlphaComponent(0.6), .white.withAlphaComponent(0.6)],
-        [.white.withAlphaComponent(0.4), .white.withAlphaComponent(0.4)],
-        [.white.withAlphaComponent(0.2), .white.withAlphaComponent(0.2)]
+        [.white.withAlphaComponent(0.8)],
+        [.white.withAlphaComponent(0.6)],
+        [.white.withAlphaComponent(0.4)],
+        [.white.withAlphaComponent(0.2)]
     ]
     
     private weak var delegate: SaleRankingCollectionViewCellDelegate?
@@ -226,7 +225,7 @@ class SaleRankingCollectionViewCell: UICollectionViewCell {
         chartView.legend.enabled = false
         chartView.setExtraOffsets(left: 0, top: 0, right: 0, bottom: 0)
         chartView.drawCenterTextEnabled = false
-        chartView.rotationAngle = 0
+        chartView.rotationAngle = 270
         chartView.rotationEnabled = false
         chartView.highlightPerTapEnabled = false
         chartView.renderer = EmptyValuePieChartRenderer(chart: chartView, animator: chartView.chartAnimator, viewPortHandler: chartView.viewPortHandler)
@@ -421,22 +420,39 @@ extension SaleRankingCollectionViewCell: UICollectionViewDataSource {
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SaleRankingItemCollectionViewCell", for: indexPath) as? SaleRankingItemCollectionViewCell
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SaleRankingItemCollectionViewCell", for: indexPath) as? SaleRankingItemCollectionViewCell else {
+            return SaleRankingItemCollectionViewCell()
+        }
+        
+        let index = indexPath.row
         let report: SaleRankingReport?
         var value: Float = 0
+        
+        // 取得供應商或通路商店的資料
         switch rankingType {
         case .sale:
-            report = self.saleRankingReportList?.getElement(at: indexPath.row)
+            report = self.saleRankingReportList?.getElement(at: index)
             value = (report?.saleAmount ?? 0) / (self.saleRankingReportList?.map({$0.saleAmount}).reduce(0, +) ?? 0)
         case .grossProfit:
-            report = self.grossProfitRankingReportList?.getElement(at: indexPath.row)
+            report = self.grossProfitRankingReportList?.getElement(at: index)
             value = (report?.saleGrossProfit ?? 0) / (self.grossProfitRankingReportList?.map({$0.saleGrossProfit}).reduce(0, +) ?? 0)
         }
+        
         if let rankingReport = report {
-            cell?.config(type: rankingType, devider: self.devider, index: indexPath.row, report: rankingReport, value: value)
+            cell.config(type: rankingType, devider: self.devider, report: rankingReport, value: value)
+            if index < colors.count {
+                cell.raningView.backgroundColor = colors.getElement(at: index)?[0]
+
+//                switch index {
+//                case 0...1:
+//                    cell.raningView.addGradient(with: gradientLayer, colorSet: colors[index], direction: .topDown, layerCornerRadius: 2)
+//                default:
+//                    cell.raningView.backgroundColor = colors.getElement(at: index)?[0]
+//                }
+            }
         }
-        return cell ?? SaleRankingItemCollectionViewCell()
-    }
+        return cell
+    }    
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout

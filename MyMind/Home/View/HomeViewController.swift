@@ -86,6 +86,7 @@ final class HomeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        tabBarController?.title = "MyMind管理平台"
         //header view begins under the navigation bar
         navigationController?.setNavigationBarHidden(true, animated: false)
         navigationController?.navigationBar.alpha = 0.0

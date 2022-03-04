@@ -80,6 +80,7 @@ class AccountSettingViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        tabBarController?.title = "帳號設定"
         //header view begins under the navigation bar
         navigationController?.setNavigationBarHidden(true, animated: false)
         navigationController?.navigationBar.alpha = 0.0

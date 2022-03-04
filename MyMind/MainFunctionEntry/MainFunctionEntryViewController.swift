@@ -301,6 +301,7 @@ final class MainFunctionEntryViewController: NiblessViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        tabBarController?.title = "功能項目"
     }
     
     override func viewDidAppear(_ animated: Bool) {

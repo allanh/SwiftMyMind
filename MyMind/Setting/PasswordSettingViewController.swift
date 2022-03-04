@@ -26,6 +26,12 @@ class PasswordSettingViewController: UIViewController {
     @IBOutlet weak var confirmPasswordTextField: UITextField!
     @IBOutlet weak var confirmPasswordErrorLabel: UILabel!
     
+    private let passwordSecureButton: UIButton = UIButton {
+        $0.setImage(UIImage(named: "eye_open"), for: .normal)
+        $0.setImage(UIImage(named: "eye_close"), for: .selected)
+        $0.touchEdgeInsets = UIEdgeInsets(top: -10, left: -10, bottom: -10, right: -10)
+    }
+    
     private var isNetworkProcessing: Bool = false {
         didSet {
             switch isNetworkProcessing {
@@ -58,7 +64,10 @@ class PasswordSettingViewController: UIViewController {
         oldPasswordTextField.delegate = self
         newPasswordTextField.delegate = self
         confirmPasswordTextField.delegate = self
-        // Do any additional setup after loading the view.
+        
+        oldPasswordTextField.enablePasswordToggle()
+        newPasswordTextField.enablePasswordToggle()
+        confirmPasswordTextField.enablePasswordToggle()
     }
     
     override func viewWillAppear(_ animated: Bool) {

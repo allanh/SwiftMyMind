@@ -134,10 +134,6 @@ class MyMindLineChartView: UIView {
         super.layoutSublayers(of: layer)
         backgroundColor = .clear
         gradientLayer.frame = bounds
-        gradientLayer.locations = data.gradientLocations
-        gradientLayer.colors = data.gradientColors.map{$0.cgColor}
-        gradientLayer.startPoint = data.gradientStartPoint
-        gradientLayer.endPoint = data.gradientEndPoint
         if gradientLayer.superlayer == nil {
             layer.insertSublayer(gradientLayer, at: 0)
         }
@@ -151,6 +147,10 @@ class MyMindLineChartView: UIView {
         let shapeLayer = CAShapeLayer()
         shapeLayer.path = closedPath.cgPath
         shapeLayer.fillColor = UIColor.black.cgColor
+        gradientLayer.locations = data.gradientLocations
+        gradientLayer.colors = data.gradientColors.map{$0.cgColor}
+        gradientLayer.startPoint = data.gradientStartPoint
+        gradientLayer.endPoint = data.gradientEndPoint
         gradientLayer.mask = shapeLayer
         data.strokeColor.setStroke()
         

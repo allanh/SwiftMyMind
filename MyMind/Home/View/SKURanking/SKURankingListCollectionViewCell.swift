@@ -45,7 +45,7 @@ class SKURankingListCollectionViewCell: UICollectionViewCell {
         // Initialization code
         skuRankingListCollectionView.dataSource = self
         skuRankingListCollectionView.delegate = self
-        contentView.backgroundColor = .clear
+        skuRankingListCollectionView.allowsSelection = false
         if let layout = skuRankingListCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.scrollDirection = .horizontal
 //            layout.minimumLineSpacing = 15
@@ -162,6 +162,10 @@ extension SKURankingListCollectionViewCell: UICollectionViewDelegate, UICollecti
         default:
             return UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 8.0)
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: false)
     }
 }
 

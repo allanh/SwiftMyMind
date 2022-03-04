@@ -70,6 +70,7 @@ final class DropDownHeaderView : NiblessView {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = .pingFangTCSemibold(ofSize: 18)
         $0.textColor = .white
+        $0.adjustSizeToFit()
     }
     
     private let dateLabel: UILabel = UILabel {
@@ -126,6 +127,7 @@ extension DropDownHeaderView {
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 16),
             titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            titleLabel.trailingAnchor.constraint(greaterThanOrEqualTo: dropDownView.leadingAnchor, constant: -4),
             titleLabel.heightAnchor.constraint(equalToConstant: 32)
         ])
     }
@@ -140,6 +142,7 @@ extension DropDownHeaderView {
     private func activateConstraintsAlternativeInfoView() {
         NSLayoutConstraint.activate([
             dropDownView.topAnchor.constraint(equalTo: topAnchor, constant: 16),
+            dropDownView.leadingAnchor.constraint(greaterThanOrEqualTo: titleLabel.trailingAnchor, constant: 4),
             dropDownView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             dropDownView.widthAnchor.constraint(equalToConstant: 100),
             dropDownView.heightAnchor.constraint(equalToConstant: 32)
