@@ -105,9 +105,11 @@ struct ToDo: Codable {
 // MARK: -- ToDoList --
 struct ToDoList: Codable {
     let items: [ToDo]
+    let total: Int
     
     private enum CodingKeys: String, CodingKey {
         case items = "detail"
+        case total
     }
 
     static let emptyItems: [ToDo] = [ToDo(type: .RECEIPT, items: [ToDo.ToDoItem(type: .TRANSFER, count: 0), ToDo.ToDoItem(type: .BORROWING, count: 0)]), ToDo(type: .RECEIPT_RETURN, items: [ToDo.ToDoItem(type: .TRANSFER_RETURN, count: 0), ToDo.ToDoItem(type: .BORROWING_RETURN, count: 0)]), ToDo(type: .PURCHASE, items: [ToDo.ToDoItem(type: .PURCHASE_UNUSUAL, count: 0), ToDo.ToDoItem(type: .PURCHASE_REVIEW_REJECT, count: 0), ToDo.ToDoItem(type: .PURCHASE_APPROVED, count: 0), ToDo.ToDoItem(type: .PURCHASE_REVIEW, count: 0)]), ToDo(type: .INBOUND, items: [ToDo.ToDoItem(type: .INBOUND_UNUSUAL, count: 0), ToDo.ToDoItem(type: .INBOUND_PENDING, count: 0)]), ToDo(type: .STOCK, items: [ToDo.ToDoItem(type: .LOW_STOCK, count: 0), ToDo.ToDoItem(type: .NONE_STOCK, count: 0), ToDo.ToDoItem(type: .UNDERSTOCK, count: 0)])]

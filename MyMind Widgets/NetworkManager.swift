@@ -241,7 +241,7 @@ class NetworkManager {
                     completion(nil, false)
                     return
                 }
-                completion(item.items.count, true)
+                completion(item.total, true)
             } catch {
                 completion(nil, false)
             }
