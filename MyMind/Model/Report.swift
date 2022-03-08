@@ -16,12 +16,14 @@ struct SaleReport: Codable {
         case byDate
     }
     enum ReportType: String, Codable {
-        case TRANSFORMED, SHIPPED
+        case TRANSFORMED, SHIPPED, STORE, NORMAL
         var displayName: String {
             get {
                 switch self {
                 case .TRANSFORMED: return "轉單"
                 case .SHIPPED: return "寄倉"
+                case .STORE: return "門市"
+                case .NORMAL: return "一般"
                 }
             }
         }
@@ -217,15 +219,27 @@ struct SaleReportList: Codable {
         case .returned: return totalReturnAmount
         }
     }
+    
+    // 取得報表
+    func getSaleReport(type: SaleReport.ReportType) -> SaleReport? {
+        return self.reports.first {
+            $0.type == type
+        }
+    }
 }
 // MARK: -- SaleReports --
 struct SaleReports {
     let dateString: String?
     let todayTransformedSaleReport: SaleReport?
     let todayShippedSaleReport: SaleReport?
+    let todayStoreSaleReport: SaleReport?
+    let todayNormalSaleReport: SaleReport?
     let yesterdayTransformedSaleReport: SaleReport?
     let yesterdayShippedSaleReport: SaleReport?
-    static let empty: Self = SaleReports(dateString: nil, todayTransformedSaleReport: nil, todayShippedSaleReport: nil, yesterdayTransformedSaleReport: nil, yesterdayShippedSaleReport: nil)
+    let yesterdayStoreSaleReport: SaleReport?
+    let yesterdayNormalSaleReport: SaleReport?
+    
+    static let empty: Self = SaleReports(dateString: nil, todayTransformedSaleReport: nil, todayShippedSaleReport: nil, todayStoreSaleReport: nil, todayNormalSaleReport: nil, yesterdayTransformedSaleReport: nil, yesterdayShippedSaleReport: nil, yesterdayStoreSaleReport: nil, yesterdayNormalSaleReport: nil)
 }
 
 // MARK: -- SKURankingReport --

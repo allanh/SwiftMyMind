@@ -214,19 +214,16 @@ extension HomeViewController {
         let end = Date()
         dashboardLoader.orderSaleReport(start: end.yesterday, end: end.yesterday, type: .byType)
             .done { yesterdaySaleReportList in
-                let todayTransformedSaleReport = todaySaleReportList.reports.first {
-                    $0.type == .TRANSFORMED
-                }
-                let todayShippedSaleReport = todaySaleReportList.reports.first {
-                    $0.type == .SHIPPED
-                }
-                let yesterdayTransformedSaleReport = yesterdaySaleReportList.reports.first {
-                    $0.type == .TRANSFORMED
-                }
-                let yesterdayShippedSaleReport = yesterdaySaleReportList.reports.first {
-                    $0.type == .SHIPPED
-                }
-                self.saleReports = SaleReports(dateString: end.shortDateString, todayTransformedSaleReport: todayTransformedSaleReport, todayShippedSaleReport: todayShippedSaleReport, yesterdayTransformedSaleReport: yesterdayTransformedSaleReport, yesterdayShippedSaleReport: yesterdayShippedSaleReport)
+                self.saleReports = SaleReports(dateString: end.shortDateString,
+                                               todayTransformedSaleReport: todaySaleReportList.getSaleReport(type: .TRANSFORMED),
+                                               todayShippedSaleReport: todaySaleReportList.getSaleReport(type: .SHIPPED),
+                                               todayStoreSaleReport: todaySaleReportList.getSaleReport(type: .STORE),
+                                               todayNormalSaleReport: todaySaleReportList.getSaleReport(type: .NORMAL),
+                                               yesterdayTransformedSaleReport: yesterdaySaleReportList.getSaleReport(type: .TRANSFORMED),
+                                               yesterdayShippedSaleReport: yesterdaySaleReportList.getSaleReport(type: .SHIPPED),
+                                               yesterdayStoreSaleReport: yesterdaySaleReportList.getSaleReport(type: .STORE),
+                                               yesterdayNormalSaleReport: yesterdaySaleReportList.getSaleReport(type: .NORMAL)
+                )
             }
             .ensure {
                 self.isNetworkProcessing = false
@@ -269,7 +266,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         switch indexPath.section {
         case Section.bulliten.rawValue:
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BulletinCollectionViewCell", for: indexPath) as? BulletinCollectionViewCell {
-                cell.config(with: bulletins, account: account)
+                cell.config(with: bulletins, account: account, delegate: self)
                 return cell
             }
             return UICollectionViewCell()
@@ -326,7 +323,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         case Section.todo.rawValue:
             return CGSize(width: width, height: 96)
         case Section.today.rawValue:
-            return CGSize(width: width-32,  height: 322)
+            return CGSize(width: width-32,  height: 368)
         case Section.thirtyDays.rawValue:
             return CGSize(width: width-32,  height: 316)
         case Section.sevenDaysSKU.rawValue:
@@ -549,6 +546,16 @@ extension HomeViewController {
             navigationController?.setNavigationBarHidden(false, animated: false)
         } else {
             navigationController?.setNavigationBarHidden(true, animated: false)
+        }
+    }
+}
+
+
+extension HomeViewController: BulletinCollectionViewCellDelegate {
+    func showAnnouncement(id: Int) {
+        if let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "AnnouncementViewController") as? AnnouncementViewController {
+            viewController.id = id
+            show(viewController, sender: self)
         }
     }
 }

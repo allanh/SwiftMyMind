@@ -8,12 +8,18 @@
 
 import UIKit
 
+protocol BulletinCollectionViewCellDelegate: AnyObject {
+    func showAnnouncement(id: Int)
+}
+
 class BulletinCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var marqueeView: UDNSKInteractiveMarqueeView!
     @IBOutlet weak var bulletinView: RollingNoticeView!
     @IBOutlet weak var accountLabel: UILabel!
+    @IBOutlet weak var welcomeLabel: UILabel!
     @IBOutlet weak var announcementButton: UIButton!
-    
+    private weak var delegate: BulletinCollectionViewCellDelegate?
+
     var bulletins: BulletinList? {
         didSet {
             bulletinView.isHidden = bulletins?.items.count ?? 0 == 0
@@ -42,11 +48,15 @@ class BulletinCollectionViewCell: UICollectionViewCell {
         marqueeView.isHidden = true
         bulletinView.isHidden = true
         announcementButton.touchEdgeInsets = UIEdgeInsets(top: -10, left: -10, bottom: -10, right: -10)
+        
+        accountLabel.applySketchShadow(color: .black, alpha: 0.5, x: 0, y: 3, blur: 4, spread: 0)
+        welcomeLabel.applySketchShadow(color: .black, alpha: 0.5, x: 0, y: 3, blur: 4, spread: 0)
 
     }
-    func config(with bulletins: BulletinList?, account: Account?) {
+    func config(with bulletins: BulletinList?, account: Account?, delegate: BulletinCollectionViewCellDelegate? = nil) {
         self.account = account
         self.bulletins = bulletins
+        self.delegate = delegate
     }
 }
 
@@ -65,6 +75,8 @@ extension BulletinCollectionViewCell: RollingNoticeViewDelegate, RollingNoticeVi
     }
     
     func rollingNoticeView(_ roolingView: RollingNoticeView, didClickAt index: Int) {
-         print("did click index: \(roolingView.currentIndex)")
+        if let id = self.bulletins?.items.getElement(at: index)?.id {
+            delegate?.showAnnouncement(id: id)
+        }
     }
 }
