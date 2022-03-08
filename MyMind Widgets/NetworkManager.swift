@@ -187,7 +187,7 @@ class NetworkManager {
         }
         let end = Date()
         let request = request(
-            url: saleReport(partnerID: "\(userSession.partnerInfo.id)", start: end.thirtyDaysBefore, end: end, type: .byDate),
+            url: saleReport(partnerID: "\(userSession.partnerInfo.id)", start: end.thirtyDaysBefore, end: end.yesterday, type: .byDate),
             httpHeader: ["Authorization": "Bearer \(userSession.token)"]
         )
         let task = URLSession.shared.dataTask(with: request) { data, _, error in

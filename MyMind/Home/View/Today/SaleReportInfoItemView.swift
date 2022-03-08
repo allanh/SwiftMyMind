@@ -154,102 +154,84 @@ extension SaleReportInfoItemView {
         addSubview(storeValueLabel)
         
         // 昨日數據
-        var saleAmountDivisor: Float = .zero, returnAmountDivisor: Float = .zero, canceledAmountDivisor: Float = .zero
-        var saleQuantityDivisor: Float = .zero, returnQuantityDivisor: Float = .zero, canceledQuantityDivisor: Float = .zero
+        var saleAmountDivisor: Double = .zero, returnAmountDivisor: Double = .zero, canceledAmountDivisor: Double = .zero
+        var saleQuantityDivisor: Double = .zero, returnQuantityDivisor: Double = .zero, canceledQuantityDivisor: Double = .zero
         if let yesterdayTransformedSaleReport = saleReports?.yesterdayTransformedSaleReport {
             saleAmountDivisor += yesterdayTransformedSaleReport.saleAmount
             returnAmountDivisor += yesterdayTransformedSaleReport.returnAmount
             canceledAmountDivisor += yesterdayTransformedSaleReport.canceledAmount
-            saleQuantityDivisor += Float(yesterdayTransformedSaleReport.saleQuantity)
-            returnQuantityDivisor += Float(yesterdayTransformedSaleReport.returnQuantity)
-            canceledQuantityDivisor += Float(yesterdayTransformedSaleReport.canceledQuantity)
+            saleQuantityDivisor += Double(yesterdayTransformedSaleReport.saleQuantity)
+            returnQuantityDivisor += Double(yesterdayTransformedSaleReport.returnQuantity)
+            canceledQuantityDivisor += Double(yesterdayTransformedSaleReport.canceledQuantity)
         }
         if let yesterdayShippedSaleReport = saleReports?.yesterdayShippedSaleReport {
             saleAmountDivisor += yesterdayShippedSaleReport.saleAmount
             returnAmountDivisor += yesterdayShippedSaleReport.returnAmount
             canceledAmountDivisor += yesterdayShippedSaleReport.canceledAmount
-            saleQuantityDivisor += Float(yesterdayShippedSaleReport.saleQuantity)
-            returnQuantityDivisor += Float(yesterdayShippedSaleReport.returnQuantity)
-            canceledQuantityDivisor += Float(yesterdayShippedSaleReport.canceledQuantity)
+            saleQuantityDivisor += Double(yesterdayShippedSaleReport.saleQuantity)
+            returnQuantityDivisor += Double(yesterdayShippedSaleReport.returnQuantity)
+            canceledQuantityDivisor += Double(yesterdayShippedSaleReport.canceledQuantity)
         }
         if let yesterdayNormalSaleReport = saleReports?.yesterdayNormalSaleReport {
             saleAmountDivisor += yesterdayNormalSaleReport.saleAmount
             returnAmountDivisor += yesterdayNormalSaleReport.returnAmount
             canceledAmountDivisor += yesterdayNormalSaleReport.canceledAmount
-            saleQuantityDivisor += Float(yesterdayNormalSaleReport.saleQuantity)
-            returnQuantityDivisor += Float(yesterdayNormalSaleReport.returnQuantity)
-            canceledQuantityDivisor += Float(yesterdayNormalSaleReport.canceledQuantity)
+            saleQuantityDivisor += Double(yesterdayNormalSaleReport.saleQuantity)
+            returnQuantityDivisor += Double(yesterdayNormalSaleReport.returnQuantity)
+            canceledQuantityDivisor += Double(yesterdayNormalSaleReport.canceledQuantity)
         }
         if let yesterdayStoreSaleReport = saleReports?.yesterdayStoreSaleReport {
             saleAmountDivisor += yesterdayStoreSaleReport.saleAmount
             returnAmountDivisor += yesterdayStoreSaleReport.returnAmount
             canceledAmountDivisor += yesterdayStoreSaleReport.canceledAmount
-            saleQuantityDivisor += Float(yesterdayStoreSaleReport.saleQuantity)
-            returnQuantityDivisor += Float(yesterdayStoreSaleReport.returnQuantity)
-            canceledQuantityDivisor += Float(yesterdayStoreSaleReport.canceledQuantity)
+            saleQuantityDivisor += Double(yesterdayStoreSaleReport.saleQuantity)
+            returnQuantityDivisor += Double(yesterdayStoreSaleReport.returnQuantity)
+            canceledQuantityDivisor += Double(yesterdayStoreSaleReport.canceledQuantity)
         }
         
         // 今日數據
-        var saleAmountDividend: Float = .zero, returnAmountDividend: Float = .zero, canceledAmountDividend: Float = .zero
-        var saleQuantityDividend: Float = .zero, returnQuantityDividend: Float = .zero, canceledQuantityDividend: Float = .zero
+        var saleAmountDividend: Double = .zero, returnAmountDividend: Double = .zero, canceledAmountDividend: Double = .zero
+        var saleQuantityDividend: Double = .zero, returnQuantityDividend: Double = .zero, canceledQuantityDividend: Double = .zero
         if let todayTransformedSaleReport = saleReports?.todayTransformedSaleReport {
             saleAmountDividend += todayTransformedSaleReport.saleAmount
             returnAmountDividend += todayTransformedSaleReport.returnAmount
             canceledAmountDividend += todayTransformedSaleReport.canceledAmount
-            saleQuantityDividend += Float(todayTransformedSaleReport.saleQuantity)
-            returnQuantityDividend += Float(todayTransformedSaleReport.returnQuantity)
-            canceledQuantityDividend += Float(todayTransformedSaleReport.canceledQuantity)
+            saleQuantityDividend += Double(todayTransformedSaleReport.saleQuantity)
+            returnQuantityDividend += Double(todayTransformedSaleReport.returnQuantity)
+            canceledQuantityDividend += Double(todayTransformedSaleReport.canceledQuantity)
         }
         if let todayShippedSaleReport = saleReports?.todayShippedSaleReport {
             saleAmountDividend += todayShippedSaleReport.saleAmount
             returnAmountDividend += todayShippedSaleReport.returnAmount
             canceledAmountDividend += todayShippedSaleReport.canceledAmount
-            saleQuantityDividend += Float(todayShippedSaleReport.saleQuantity)
-            returnQuantityDividend += Float(todayShippedSaleReport.returnQuantity)
-            canceledQuantityDividend += Float(todayShippedSaleReport.canceledQuantity)
+            saleQuantityDividend += Double(todayShippedSaleReport.saleQuantity)
+            returnQuantityDividend += Double(todayShippedSaleReport.returnQuantity)
+            canceledQuantityDividend += Double(todayShippedSaleReport.canceledQuantity)
         }
         if let todayNormalSaleReport = saleReports?.todayNormalSaleReport {
             saleAmountDividend += todayNormalSaleReport.saleAmount
             returnAmountDividend += todayNormalSaleReport.returnAmount
             canceledAmountDividend += todayNormalSaleReport.canceledAmount
-            saleQuantityDividend += Float(todayNormalSaleReport.saleQuantity)
-            returnQuantityDividend += Float(todayNormalSaleReport.returnQuantity)
-            canceledQuantityDividend += Float(todayNormalSaleReport.canceledQuantity)
+            saleQuantityDividend += Double(todayNormalSaleReport.saleQuantity)
+            returnQuantityDividend += Double(todayNormalSaleReport.returnQuantity)
+            canceledQuantityDividend += Double(todayNormalSaleReport.canceledQuantity)
         }
         if let todayStoreSaleReport = saleReports?.todayStoreSaleReport {
             saleAmountDividend += todayStoreSaleReport.saleAmount
             returnAmountDividend += todayStoreSaleReport.returnAmount
             canceledAmountDividend += todayStoreSaleReport.canceledAmount
-            saleQuantityDividend += Float(todayStoreSaleReport.saleQuantity)
-            returnQuantityDividend += Float(todayStoreSaleReport.returnQuantity)
-            canceledQuantityDividend += Float(todayStoreSaleReport.canceledQuantity)
+            saleQuantityDividend += Double(todayStoreSaleReport.saleQuantity)
+            returnQuantityDividend += Double(todayStoreSaleReport.returnQuantity)
+            canceledQuantityDividend += Double(todayStoreSaleReport.canceledQuantity)
         }
         
         // 變動率
-        var saleAmountRatio: Float = .zero
-        if saleAmountDivisor != .zero && saleAmountDividend != .zero {
-            saleAmountRatio = (saleAmountDividend-saleAmountDivisor)/saleAmountDivisor
-        }
-        var saleQuantityRatio: Float = .zero
-        if saleQuantityDivisor != .zero && saleQuantityDividend != .zero {
-            saleQuantityRatio = (saleQuantityDividend-saleQuantityDivisor)/saleQuantityDivisor
-        }
-        var canceledAmountRatio: Float = .zero
-        if canceledAmountDivisor != .zero && canceledAmountDividend != .zero {
-            canceledAmountRatio = (canceledAmountDividend-canceledAmountDivisor)/canceledAmountDivisor
-        }
-        var canceledQuantityRatio: Float = .zero
-        if canceledQuantityDivisor != .zero && canceledQuantityDividend != .zero {
-            canceledQuantityRatio = (canceledQuantityDividend-canceledQuantityDivisor)/canceledQuantityDivisor
-        }
-        var returnAmountRatio: Float = .zero
-        if returnAmountDivisor != .zero && returnAmountDividend != .zero {
-            returnAmountRatio = (returnAmountDividend-returnAmountDivisor)/returnAmountDivisor
-        }
-        var returnQuantityRatio: Float = .zero
-        if returnQuantityDivisor != .zero && returnQuantityDividend != .zero {
-            returnQuantityRatio = (returnQuantityDividend-returnQuantityDivisor)/returnQuantityDivisor
-        }
+        let saleAmountRatio = calculateRatio(yesterday: saleAmountDivisor, today: saleAmountDividend)
+        let saleQuantityRatio = calculateRatio(yesterday: saleQuantityDivisor, today: saleQuantityDividend)
+        let canceledAmountRatio = calculateRatio(yesterday: canceledAmountDivisor, today: canceledAmountDividend)
+        let canceledQuantityRatio = calculateRatio(yesterday: canceledQuantityDivisor, today: canceledQuantityDividend)
+        let returnAmountRatio = calculateRatio(yesterday: returnAmountDivisor, today: returnAmountDividend)
+        let returnQuantityRatio = calculateRatio(yesterday: returnQuantityDivisor, today: returnQuantityDividend)
         
         let formatter = MyMindSaleReportRatioNumberFormatter()
         formatter.numberStyle = .percent
@@ -370,6 +352,19 @@ extension SaleReportInfoItemView {
         activateConstraintsNormalValueLabel()
         activateConstraintsStoreTitleLabel()
         activateConstraintsStoreValueLabel()
+    }
+    
+    // 計算變動率
+    private func calculateRatio(yesterday: Double, today: Double) -> Double {
+        var ratio: Double = .zero
+        if yesterday != .zero && today != .zero {
+            ratio = (today-yesterday)/yesterday
+        } else if yesterday != .zero {
+            ratio = -1
+        } else if today != .zero {
+            ratio = 1
+        }
+        return ratio
     }
 }
 /// constraint

@@ -43,9 +43,9 @@ struct SaleReport: Codable {
     let saleQuantity: Int
     let returnQuantity: Int
     let canceledQuantity: Int
-    let saleAmount: Float
-    let returnAmount: Float
-    let canceledAmount: Float
+    let saleAmount: Double
+    let returnAmount: Double
+    let canceledAmount: Double
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -59,26 +59,26 @@ struct SaleReport: Codable {
         returnQuantity = try container.decode(Int.self, forKey: .returnQuantity)
         canceledQuantity = try container.decode(Int.self, forKey: .canceledQuantity)
 
-        if let saleAmount = try? container.decode(Float.self, forKey: .saleAmount) {
-            self.saleAmount = saleAmount
+        if let saleAmount = try? container.decode(Double.self, forKey: .saleAmount) {
+            self.saleAmount = Double(saleAmount)
         } else if let saleAmount = try? container.decode(Int.self, forKey: .saleAmount) {
-            self.saleAmount = Float(saleAmount)
+            self.saleAmount = Double(saleAmount)
         } else {
             self.saleAmount = 0
         }
-        
-        if let returnAmount = try? container.decode(Float.self, forKey: .returnAmount) {
+
+        if let returnAmount = try? container.decode(Double.self, forKey: .returnAmount) {
             self.returnAmount = returnAmount
         } else if let returnAmount = try? container.decode(Int.self, forKey: .returnAmount) {
-            self.returnAmount = Float(returnAmount)
+            self.returnAmount = Double(returnAmount)
         } else {
             self.returnAmount = 0
         }
         
-        if let canceledAmount = try? container.decode(Float.self, forKey: .canceledAmount) {
+        if let canceledAmount = try? container.decode(Double.self, forKey: .canceledAmount) {
             self.canceledAmount = canceledAmount
         } else if let canceledAmount = try? container.decode(Int.self, forKey: .canceledAmount) {
-            self.canceledAmount = Float(canceledAmount)
+            self.canceledAmount = Double(canceledAmount)
         } else {
             self.canceledAmount = 0
         }
@@ -144,12 +144,12 @@ struct SaleReportList: Codable {
         }
     }
     
-    var maximumSaleAmount: Float {
+    var maximumSaleAmount: Double {
         return reports.sorted {
             $0.saleAmount > $1.saleAmount
         }.first?.saleAmount ?? 0
     }
-    var minimumSaleAmount: Float {
+    var minimumSaleAmount: Double {
         return reports.sorted {
             $0.saleAmount < $1.saleAmount
         }.first?.saleAmount ?? 0
@@ -160,12 +160,12 @@ struct SaleReportList: Codable {
             return Double(result)
         }
     }
-    var maximumCanceledAmount: Float {
+    var maximumCanceledAmount: Double {
         return reports.sorted {
             $0.canceledAmount > $1.canceledAmount
         }.first?.canceledAmount ?? 0
     }
-    var minimumCanceledAmount: Float {
+    var minimumCanceledAmount: Double {
         return reports.sorted {
             $0.canceledAmount < $1.canceledAmount
         }.first?.canceledAmount ?? 0
@@ -176,12 +176,12 @@ struct SaleReportList: Codable {
             return Double(result)
         }
     }
-    var maximumReturnAmount: Float {
+    var maximumReturnAmount: Double {
         return reports.sorted {
             $0.returnAmount > $1.returnAmount
         }.first?.returnAmount ?? 0
     }
-    var minimumReturnAmount: Float {
+    var minimumReturnAmount: Double {
         return reports.sorted {
             $0.returnAmount < $1.returnAmount
         }.first?.returnAmount ?? 0
