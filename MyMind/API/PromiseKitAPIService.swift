@@ -108,4 +108,43 @@ extension PromiseKitAPIService {
             }.resume()
         }
     }
+    
+    func sendRequest(request: URLRequest) -> Promise<Data> {
+        return Promise<Data> { seal in
+            URLSession.shared.dataTask(with: request) { data, urlResponse, error in
+                if let httpResponse = urlResponse as? HTTPURLResponse {
+                    if let host = httpResponse.url?.host,
+                        let relativePath = httpResponse.url?.relativePath {
+                        if !Endpoint.baseAuthURL.contains(host) || relativePath.contains(Endpoint.employeePath) {
+                            switch httpResponse.statusCode {
+                            case 401:
+                                seal.reject(APIError.invalidAccessToken)
+                                return
+                            case 503:
+                                seal.reject(APIError.maintenanceError)
+                                return
+                            case 403:
+                                seal.reject(APIError.insufficientPrivilegeError)
+                                return
+                            default:
+                                break
+                            }
+                        }
+                    }
+                }
+                if let error = error {
+                    seal.reject(error)
+                    return
+                }
+
+                guard let data = data else {
+                    seal.reject(APIError.dataNotFoundError)
+                    return
+                }
+
+                seal.fulfill(data)
+            }.resume()
+        }
+    }
+
 }

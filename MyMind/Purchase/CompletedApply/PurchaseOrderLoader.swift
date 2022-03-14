@@ -8,7 +8,22 @@
 
 import Foundation
 import PromiseKit
+struct ExportInfo: Encodable {
+    enum ExportType: String, Encodable {
+        case purchase = "PURCHASE"
+    }
+    enum CodingKeys: String, CodingKey {
+        case ids = "purchase_id"
+        case type = "action_type"
+        case remark
+    }
+    let ids: [String]
+    let type: ExportType
+    let remark: String?
+}
+
 
 protocol PurchaseOrderLoader {
     func loadPurchaseOrder(with purchaseID: String) -> Promise<PurchaseOrder>
+    func exportPurchaseOrder(for info: ExportInfo) -> Promise<Data>
 }

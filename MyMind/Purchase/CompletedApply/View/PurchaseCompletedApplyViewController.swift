@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Accelerate
 
 final class PurchaseCompletedApplyViewController: NiblessViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -19,6 +20,7 @@ final class PurchaseCompletedApplyViewController: NiblessViewController {
     let loader: PurchaseOrderLoader
     var purchaseOrder: PurchaseOrder?
     var isForRead: Bool = false
+    let documentInteractionController: UIDocumentInteractionController = UIDocumentInteractionController()
 
     // MARK: UI
     private let collectionView: UICollectionView = {
@@ -104,8 +106,8 @@ final class PurchaseCompletedApplyViewController: NiblessViewController {
     private func configureButtons() {
         guard isForRead == false else { return }
 
-        backToHomeButton.addTarget(self, action: #selector(backToHomeButtonDidTapped(_:)), for: .touchUpInside)
-        backToListButton.addTarget(self, action: #selector(backToListButtonDidTapped(_:)), for: .touchUpInside)
+        backToHomeButton.addTarget(self, action: #selector(alternativeButtonDidTapped(_:)), for: .touchUpInside)
+        backToListButton.addTarget(self, action: #selector(defaultButtonDidTapped(_:)), for: .touchUpInside)
     }
 
     private func loadPurchaseOrder() {
@@ -118,17 +120,64 @@ final class PurchaseCompletedApplyViewController: NiblessViewController {
                 guard let self = self else { return }
                 self.purchaseOrder = order
                 self.generateContentViewControllers(with: order)
+                if order.type != .normal {
+                    self.backToListButton.setTitle("匯出", for: .normal)
+                    self.backToHomeButton.setTitle("返回", for: .normal)
+                }
                 self.collectionView.reloadData()
             }.catch { error in
                 if let apiError = error as? APIError {
                     _ = ErrorHandler.shared.handle(apiError)
                 } else {
                     _ = ErrorHandler.shared.handle(APIError.serviceError(error.localizedDescription))
-//                    ToastView.showIn(self, message: error.localizedDescription)
                 }
             }
     }
-
+    private func openFile(_ url: URL) {
+        documentInteractionController.delegate = self
+        documentInteractionController.url = url
+        documentInteractionController.uti = url.typeIdentifier ?? "public.data, public.content"
+        documentInteractionController.name = url.localizedName ?? url.lastPathComponent
+        documentInteractionController.presentPreview(animated: true)
+    }
+    private func exportPurchaseOrder() {
+        let documentFolder = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        let mymindFolder = documentFolder.appendingPathComponent("MyMind")
+        print(mymindFolder.path)
+        if !FileManager.default.fileExists(atPath: mymindFolder.path) {
+            do {
+                try FileManager.default.createDirectory(at: mymindFolder, withIntermediateDirectories: true, attributes: nil)
+            } catch {
+                print("create folder fail")
+            }
+        }
+        let url = mymindFolder.appendingPathComponent("\(purchaseOrder?.number ?? "")-\(purchaseID)").appendingPathExtension("xls")
+        if FileManager.default.fileExists(atPath: url.path) {
+            openFile(url)
+        } else {
+            startAnimatingActivityIndicator()
+            loader.exportPurchaseOrder(for: ExportInfo(ids: [purchaseID], type: .purchase, remark: nil))
+                .ensure { [weak self] in
+                    self?.stopAnimatinActivityIndicator()
+                }
+                .done { result in
+                   print(url.path)
+                    do {
+                        try result.write(to: url)
+                        self.openFile(url)
+                   } catch let error {
+                        print(error.localizedDescription)
+                    }
+                }
+                .catch { error in
+                    if let apiError = error as? APIError {
+                        _ = ErrorHandler.shared.handle(apiError)
+                    } else {
+                        _ = ErrorHandler.shared.handle(APIError.serviceError(error.localizedDescription))
+                    }
+                }
+        }
+    }
     private func generateContentViewControllers(with purchaseOrder: PurchaseOrder) {
         let purchaseOrderInfoViewController = PurchaseOrderInfoViewController.loadFormNib()
         purchaseOrderInfoViewController.purchaseOrder = purchaseOrder
@@ -145,16 +194,28 @@ final class PurchaseCompletedApplyViewController: NiblessViewController {
     }
 
     @objc
-    private func backToHomeButtonDidTapped(_ sender: UIButton) {
-        if let viewControllers = navigationController?.viewControllers, viewControllers.count > 2 {
-            navigationController?.popToViewController(viewControllers[1], animated: true)
+    private func alternativeButtonDidTapped(_ sender: UIButton) {
+        if let type = purchaseOrder?.type {
+            if type == .normal {
+                if let viewControllers = navigationController?.viewControllers, viewControllers.count > 2 {
+                    navigationController?.popToViewController(viewControllers[1], animated: true)
+                }
+            } else {
+                navigationController?.popViewController(animated: true)
+            }
         }
     }
 
     @objc
-    private func backToListButtonDidTapped(_ sender: UIButton) {
-        if let viewControllers = navigationController?.viewControllers, viewControllers.count > 3 {
-            navigationController?.popToViewController(viewControllers[2], animated: true)
+    private func defaultButtonDidTapped(_ sender: UIButton) {
+        if let type = purchaseOrder?.type {
+            if type == .normal {
+                if let viewControllers = navigationController?.viewControllers, viewControllers.count > 3 {
+                    navigationController?.popToViewController(viewControllers[2], animated: true)
+                }
+            } else {
+                exportPurchaseOrder()
+            }
         }
     }
 }
@@ -262,5 +323,21 @@ extension PurchaseCompletedApplyViewController {
         NSLayoutConstraint.activate([
             leading, trailing, bottom, height
         ])
+    }
+}
+extension PurchaseCompletedApplyViewController: UIDocumentInteractionControllerDelegate {
+    func documentInteractionControllerViewControllerForPreview(_ controller: UIDocumentInteractionController) -> UIViewController {
+           guard let navVC = self.navigationController else {
+               return self
+           }
+           return navVC
+       }
+}
+extension URL {
+    var typeIdentifier: String? {
+        return (try? resourceValues(forKeys: [.typeIdentifierKey]))?.typeIdentifier
+    }
+    var localizedName: String? {
+        return (try? resourceValues(forKeys: [.localizedNameKey]))?.localizedName
     }
 }

@@ -303,14 +303,14 @@ extension PurchaseListViewController: UITableViewDelegate, UITableViewDataSource
         tableView.deselectRow(at: indexPath, animated: false)
         guard let item = purchaseList?.items[indexPath.row] else { return }
 
-        if item.availableActions.contains(.edit) {
+        if item.availableActions.contains(.edit) && item.type == .normal {
             showPurchaseEditingPage(with: item.purchaseID, status: item.status)
         } else {
             let viewController = PurchaseCompletedApplyViewController(
                 purchaseID: item.purchaseID,
                 loader: MyMindPurchaseAPIService.shared
             )
-            viewController.isForRead = true
+            viewController.isForRead = item.type == .normal ? true : false
             viewController.title = "採購單資訊"
             show(viewController, sender: nil)
         }
@@ -365,14 +365,14 @@ extension PurchaseListViewController: UICollectionViewDelegate, UICollectionView
         collectionView.deselectItem(at: indexPath, animated: false)
         guard let item = purchaseList?.items[indexPath.row] else { return }
 
-        if item.availableActions.contains(.edit) {
+        if item.availableActions.contains(.edit) && item.type == .normal {
             showPurchaseEditingPage(with: item.purchaseID, status: item.status)
         } else {
             let viewController = PurchaseCompletedApplyViewController(
                 purchaseID: item.purchaseID,
                 loader: MyMindPurchaseAPIService.shared
             )
-            viewController.isForRead = true
+            viewController.isForRead = item.type == .normal ? true : false
             viewController.title = "採購單資訊"
             show(viewController, sender: nil)
         }

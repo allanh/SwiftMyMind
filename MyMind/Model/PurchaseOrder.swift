@@ -134,6 +134,7 @@ struct PurchaseOrder: Codable {
     let reviewerAccount: String
     let reviewerName: String
     let status: PurchaseStatus
+    let type: PurchaseType
     let expectWarehouseType: Warehouse.WarehouseType?
     let expectWarehouseID: Int?
     let expectChannelWareroomID: String?
@@ -156,6 +157,7 @@ struct PurchaseOrder: Codable {
         case reviewerAccount = "review_account"
         case reviewerName = "review_name"
         case status
+        case type
         case expectWarehouseType = "expect_warehouse_type"
         case expectWarehouseID = "expect_warehouse_id"
         case expectChannelWareroomID = "expect_channel_wareroom_id"
@@ -182,13 +184,7 @@ struct PurchaseOrder: Codable {
         reviewerAccount = try container.decode(String.self, forKey: .reviewerAccount)
         reviewerName = try container.decode(String.self, forKey: .reviewerName)
         status = try container.decode(PurchaseStatus.self, forKey: .status)
-//        if let type = try? container.decode(Warehouse.WarehouseType.self, forKey: .expectWarehouseType) {
-//            expectWarehouseType = type
-//            expectWarehouseID = try container.decode(Int.self, forKey: .expectWarehouseID)
-//        } else {
-//            expectWarehouseType = .own
-//            expectWarehouseID = .max
-//        }
+        type = try container.decode(PurchaseType.self, forKey: .type)
         expectWarehouseType =  try? container.decode(Warehouse.WarehouseType.self, forKey: .expectWarehouseType)
         expectWarehouseID = try? container.decode(Int.self, forKey: .expectWarehouseID)
         expectChannelWareroomID = try? container.decode(String.self, forKey: .expectChannelWareroomID)

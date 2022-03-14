@@ -21,6 +21,11 @@ enum PurchaseStatus: String, Codable, CaseIterable {
     case revoked = "REVOKED"
 }
 
+enum PurchaseType: String, Codable {
+    case normal = "NORMAL"
+    case transformed = "RECEIPT_TRANSFORMED"
+    case receipt = "RECEIPT_NORMAL"
+}
 extension PurchaseStatus: CustomStringConvertible {
     var description: String {
         switch self {
@@ -169,6 +174,7 @@ struct PurchaseBrief: Codable {
     let purchaseID: String
     let purchaseNumber: String
     let status: PurchaseStatus
+    let type: PurchaseType
     let totalAmount: String
     let vendorName: String
     let vendorNumber: String
@@ -180,7 +186,8 @@ struct PurchaseBrief: Codable {
     private enum CodingKeys: String, CodingKey {
         case purchaseID = "purchase_id"
         case purchaseNumber = "purchase_no"
-        case status = "status"
+        case status
+        case type
         case totalAmount = "total_amount"
         case vendorName = "alias_name"
         case vendorNumber = "vendor_no"
