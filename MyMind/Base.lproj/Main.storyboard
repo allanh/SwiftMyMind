@@ -133,6 +133,7 @@
                                             <outlet property="announcementButton" destination="mJl-P3-Ram" id="V3d-Hd-mru"/>
                                             <outlet property="bulletinView" destination="w7N-S4-p7f" id="fan-51-z5N"/>
                                             <outlet property="marqueeView" destination="Mtk-63-9mU" id="VXy-Vg-6y8"/>
+                                            <outlet property="welcomeLabel" destination="x6N-FT-psI" id="W1o-Ao-M0b"/>
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ToDoListCollectionViewCell" id="chd-sF-Jh4" customClass="ToDoListCollectionViewCell" customModule="MyMind" customModuleProvider="target">
@@ -297,6 +298,7 @@
                                                                 <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                             </collectionViewCellContentView>
+                                                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </collectionViewCell>
                                                     </cells>
                                                 </collectionView>
@@ -1426,13 +1428,13 @@
                                                         <color key="textColor" red="0.70602548119999997" green="0.70190048220000001" blue="0.70588010550000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="請輸入舊密碼" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MT7-Ir-IFJ" userLabel="Old Password Text Field" customClass="PasswordTextField" customModule="MyMind" customModuleProvider="target">
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="請輸入舊密碼" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MT7-Ir-IFJ" userLabel="Old Password Text Field">
                                                         <rect key="frame" x="16" y="43.000000000000014" width="396" height="40"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="XaV-SX-cTX"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                                     </textField>
                                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8qV-wR-iNb" userLabel="Old Password Error label">
                                                         <rect key="frame" x="16" y="83.000000000000014" width="396" height="24"/>
@@ -1449,13 +1451,13 @@
                                                         <color key="textColor" red="0.70602548119999997" green="0.70190048220000001" blue="0.70588010550000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="請輸入新密碼" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="evK-4E-aia" userLabel="New Password Text Field" customClass="PasswordTextField" customModule="MyMind" customModuleProvider="target">
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="請輸入新密碼" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="evK-4E-aia" userLabel="New Password Text Field">
                                                         <rect key="frame" x="16" y="134" width="396" height="40"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="Zjz-kX-Wso"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                                     </textField>
                                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ty7-cS-oq2" userLabel="New Password Error Label">
                                                         <rect key="frame" x="16" y="174" width="396" height="24"/>
@@ -1472,13 +1474,13 @@
                                                         <color key="textColor" red="0.70602548119999997" green="0.70190048220000001" blue="0.70588010550000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="請輸入新密碼" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Pa3-Ot-zTC" userLabel="Confirm Password Text Field" customClass="PasswordTextField" customModule="MyMind" customModuleProvider="target">
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="請輸入新密碼" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Pa3-Ot-zTC" userLabel="Confirm Password Text Field">
                                                         <rect key="frame" x="16" y="225" width="396" height="40"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="k92-qi-0rk"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                                     </textField>
                                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="icV-vz-FRU" userLabel="Confirm Password Error Label">
                                                         <rect key="frame" x="16" y="265" width="396" height="24"/>

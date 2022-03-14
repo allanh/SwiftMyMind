@@ -11,11 +11,11 @@ import UIKit
 class SaleRankingItemCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Properties
-
-    private let images = ["sale_ranking_1", "sale_ranking_2", "sale_ranking_3", "sale_ranking_4", "sale_ranking_5", "sale_ranking_6"]
+    private let gradientLayer = CAGradientLayer()
     
-    private let raningImage: UIImageView = UIImageView {
+    var raningView: UIView = UIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.layer.cornerRadius = 2
     }
     
     private let contentLabel: UILabel = UILabel {
@@ -40,15 +40,12 @@ class SaleRankingItemCollectionViewCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    override func layoutSublayers(of layer: CALayer) {
+        super.layoutSublayers(of: self.layer)
+    }
 
-    func config(type: SaleRankingReportList.RankingType, devider: SaleRankingReport.SaleRankingReportDevider, index: Int, report: SaleRankingReport?, value: Float) {
-//        contentView.layer.cornerRadius = 4
-//        contentView.backgroundColor = .lightGray
-//        contentView.clipsToBounds = true
-        if let image = images.getElement(at: index) {
-            raningImage.setBackgroundImage(image)
-        }
-        
+    func config(type: SaleRankingReportList.RankingType, devider: SaleRankingReport.SaleRankingReportDevider, report: SaleRankingReport?, value: Float) {
         switch devider {
         case .store:
             contentLabel.text = report?.name
@@ -63,13 +60,13 @@ class SaleRankingItemCollectionViewCell: UICollectionViewCell {
     }
 
     private func constructViewHierarchy() {
-        contentView.addSubview(raningImage)
+        contentView.addSubview(raningView)
         contentView.addSubview(contentLabel)
         contentView.addSubview(valueLabel)
     }
 
     private func activateConstraints() {
-        activateConstraintsRaningImage()
+        activateConstraintsRaningView()
         activateConstraintsContentLabel()
         activateConstraintsValueLabel()
     }
@@ -81,14 +78,14 @@ class SaleRankingItemCollectionViewCell: UICollectionViewCell {
 
 // MARK: - Layouts
 extension SaleRankingItemCollectionViewCell {
-    private func activateConstraintsRaningImage() {
-        let leading = raningImage.leadingAnchor
+    private func activateConstraintsRaningView() {
+        let leading = raningView.leadingAnchor
             .constraint(equalTo: contentView.leadingAnchor)
-        let top = raningImage.topAnchor
+        let top = raningView.topAnchor
             .constraint(equalTo: contentView.topAnchor)
-        let width = raningImage.widthAnchor
+        let width = raningView.widthAnchor
             .constraint(equalToConstant: 4)
-        let height = raningImage.heightAnchor
+        let height = raningView.heightAnchor
             .constraint(equalToConstant: 20)
 
         NSLayoutConstraint.activate([
@@ -98,7 +95,7 @@ extension SaleRankingItemCollectionViewCell {
     
     private func activateConstraintsContentLabel() {
         let leading = contentLabel.leadingAnchor
-            .constraint(equalTo: raningImage.trailingAnchor, constant: 8)
+            .constraint(equalTo: raningView.trailingAnchor, constant: 8)
         let trailing = contentLabel.trailingAnchor
             .constraint(equalTo: contentView.trailingAnchor)
         let top = contentLabel.topAnchor

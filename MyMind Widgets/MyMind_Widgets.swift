@@ -70,8 +70,15 @@ struct Provider: TimelineProvider {
                                 if let transformed = reportOfToday?.todayTransformedSaleReport {
                                     today += CGFloat(transformed.saleAmount)
                                 }
+                                if let normal = reportOfToday?.todayNormalSaleReport {
+                                    today += CGFloat(normal.saleAmount)
+                                }
+                                if let store = reportOfToday?.todayStoreSaleReport {
+                                    today += CGFloat(store.saleAmount)
+                                }
                                 source = .saleAmount
                             }
+
                             let nextUpdateDate = Calendar.current.date(byAdding: .hour, value: 1, to: Date())!
                             let entry = MyMindEntry(date: Date(), isLogin: true, source: source, totalAmount: total, todayAmount: today, chartData: UDILineChartData(points:  points, fill: LinearGradient(stops: [.init(color:  Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.8), location: 0), .init(color: Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.5), location: 0.3), .init(color: Color(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, opacity: 0.0), location: 1)], startPoint: .top, endPoint: .bottom), stroke: Color(red: 127.0/255.0, green: 194.0/255.0, blue: 250.0/255.0), strokeWidth: 3), toDoCount: toDoCount, announcementCount: announcementCount)
                             let timeline = Timeline(entries: [entry], policy: .after(nextUpdateDate))
@@ -286,7 +293,7 @@ struct MyMind_WidgetsEntryView : View {
             HStack {
                 if entry.isLogin {
                     Spacer()
-                    IconView(iconName: "todo", background: [Color(red: 151.0/255.0, green: 125.0/255.0, blue: 240.0/255.0), Color(red: 116.0/255.0, green: 97.0/255.0, blue: 240.0/255.0)], title: "代辦事項", value: entry.toDoCount == nil ? nil : "\(entry.toDoCount!)")
+                    IconView(iconName: "todo", background: [Color(red: 151.0/255.0, green: 125.0/255.0, blue: 240.0/255.0), Color(red: 116.0/255.0, green: 97.0/255.0, blue: 240.0/255.0)], title: "待辦事項", value: entry.toDoCount == nil ? nil : "\(entry.toDoCount!)")
                         .blendMode(.sourceAtop)
                     IconView(iconName: "announcement", background: [Color(red: 255.0/255.0, green: 97.0/255.0, blue: 97.0/255.0), Color(red: 239.0/255.0, green: 29.0/255.0, blue: 98.0/255.0)], title: "公告通知", value: entry.announcementCount == nil ? nil : "\(entry.announcementCount!)")
                         .blendMode(.sourceAtop)

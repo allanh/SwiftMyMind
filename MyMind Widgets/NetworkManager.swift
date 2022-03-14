@@ -164,13 +164,16 @@ class NetworkManager {
                     completion(nil, false)
                     return
                 }
-                let todayTransformedSaleReport = item.reports.first {
-                    $0.type == .TRANSFORMED
-                }
-                let todayShippedSaleReport = item.reports.first {
-                    $0.type == .SHIPPED
-                }
-                completion(SaleReports(dateString: end.shortDateString, todayTransformedSaleReport: todayTransformedSaleReport, todayShippedSaleReport: todayShippedSaleReport, yesterdayTransformedSaleReport: nil, yesterdayShippedSaleReport: nil), true)
+                let saleReports = SaleReports(dateString: end.shortDateString,
+                                               todayTransformedSaleReport: item.getSaleReport(type: .TRANSFORMED),
+                                               todayShippedSaleReport: item.getSaleReport(type: .SHIPPED),
+                                               todayStoreSaleReport: item.getSaleReport(type: .STORE),
+                                               todayNormalSaleReport: item.getSaleReport(type: .NORMAL),
+                                               yesterdayTransformedSaleReport: nil,
+                                               yesterdayShippedSaleReport: nil,
+                                               yesterdayStoreSaleReport: nil,
+                                               yesterdayNormalSaleReport: nil)
+                completion(saleReports, true)
             } catch {
                 completion(nil, false)
             }
@@ -184,7 +187,7 @@ class NetworkManager {
         }
         let end = Date()
         let request = request(
-            url: saleReport(partnerID: "\(userSession.partnerInfo.id)", start: end.thirtyDaysBefore, end: end, type: .byDate),
+            url: saleReport(partnerID: "\(userSession.partnerInfo.id)", start: end.thirtyDaysBefore, end: end.yesterday, type: .byDate),
             httpHeader: ["Authorization": "Bearer \(userSession.token)"]
         )
         let task = URLSession.shared.dataTask(with: request) { data, _, error in
@@ -241,7 +244,7 @@ class NetworkManager {
                     completion(nil, false)
                     return
                 }
-                completion(item.items.count, true)
+                completion(item.total, true)
             } catch {
                 completion(nil, false)
             }

@@ -56,7 +56,7 @@ class SaleReportInfoItemView: NiblessView {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = .pingFangTCSemibold(ofSize: 24)
         $0.textColor = .prussianBlue
-        $0.sizeToFit()
+        $0.adjustSizeToFit()
     }
 
     private let quantityRatioLabel: EdgeInsetLabel = EdgeInsetLabel {
@@ -73,7 +73,7 @@ class SaleReportInfoItemView: NiblessView {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = .pingFangTCRegular(ofSize: 12)
         $0.textColor = .brownGrey
-        $0.sizeToFit()
+        $0.adjustSizeToFit()
     }
     private let seperator: DashedLineView = DashedLineView {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -90,7 +90,7 @@ class SaleReportInfoItemView: NiblessView {
         $0.font = .pingFangTCSemibold(ofSize: 12)
         $0.textAlignment = .right
         $0.textColor = .emperor
-        $0.sizeToFit()
+        $0.adjustSizeToFit()
     }
     private let shippedTitleLabel: UILabel = UILabel {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -103,7 +103,37 @@ class SaleReportInfoItemView: NiblessView {
         $0.font = .pingFangTCSemibold(ofSize: 12)
         $0.textAlignment = .right
         $0.textColor = .emperor
-        $0.sizeToFit()
+        $0.adjustSizeToFit()
+    }
+    
+    private let normalTitleLabel: UILabel = UILabel {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.font = .pingFangTCRegular(ofSize: 12)
+        $0.textColor = .brownGrey
+        $0.text = "一般"
+    }
+    
+    private let normalValueLabel: UILabel = UILabel {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.font = .pingFangTCSemibold(ofSize: 12)
+        $0.textAlignment = .right
+        $0.textColor = .emperor
+        $0.adjustSizeToFit()
+    }
+    
+    private let storeTitleLabel: UILabel = UILabel {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.font = .pingFangTCRegular(ofSize: 12)
+        $0.textColor = .brownGrey
+        $0.text = "門市"
+    }
+    
+    private let storeValueLabel: UILabel = UILabel {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.font = .pingFangTCSemibold(ofSize: 12)
+        $0.textAlignment = .right
+        $0.textColor = .emperor
+        $0.adjustSizeToFit()
     }
 }
 /// helper
@@ -118,67 +148,91 @@ extension SaleReportInfoItemView {
         addSubview(transformedValueLabel)
         addSubview(shippedTitleLabel)
         addSubview(shippedValueLabel)
-        var saleAmountDivisor: Float = .zero, returnAmountDivisor: Float = .zero, canceledAmountDivisor: Float = .zero
-        var saleQuantityDivisor: Float = .zero, returnQuantityDivisor: Float = .zero, canceledQuantityDivisor: Float = .zero
+        addSubview(normalTitleLabel)
+        addSubview(normalValueLabel)
+        addSubview(storeTitleLabel)
+        addSubview(storeValueLabel)
+        
+        // 昨日數據
+        var saleAmountDivisor: Double = .zero, returnAmountDivisor: Double = .zero, canceledAmountDivisor: Double = .zero
+        var saleQuantityDivisor: Double = .zero, returnQuantityDivisor: Double = .zero, canceledQuantityDivisor: Double = .zero
         if let yesterdayTransformedSaleReport = saleReports?.yesterdayTransformedSaleReport {
             saleAmountDivisor += yesterdayTransformedSaleReport.saleAmount
             returnAmountDivisor += yesterdayTransformedSaleReport.returnAmount
             canceledAmountDivisor += yesterdayTransformedSaleReport.canceledAmount
-            saleQuantityDivisor += Float(yesterdayTransformedSaleReport.saleQuantity)
-            returnQuantityDivisor += Float(yesterdayTransformedSaleReport.returnQuantity)
-            canceledQuantityDivisor += Float(yesterdayTransformedSaleReport.canceledQuantity)
+            saleQuantityDivisor += Double(yesterdayTransformedSaleReport.saleQuantity)
+            returnQuantityDivisor += Double(yesterdayTransformedSaleReport.returnQuantity)
+            canceledQuantityDivisor += Double(yesterdayTransformedSaleReport.canceledQuantity)
         }
         if let yesterdayShippedSaleReport = saleReports?.yesterdayShippedSaleReport {
             saleAmountDivisor += yesterdayShippedSaleReport.saleAmount
             returnAmountDivisor += yesterdayShippedSaleReport.returnAmount
             canceledAmountDivisor += yesterdayShippedSaleReport.canceledAmount
-            saleQuantityDivisor += Float(yesterdayShippedSaleReport.saleQuantity)
-            returnQuantityDivisor += Float(yesterdayShippedSaleReport.returnQuantity)
-            canceledQuantityDivisor += Float(yesterdayShippedSaleReport.canceledQuantity)
+            saleQuantityDivisor += Double(yesterdayShippedSaleReport.saleQuantity)
+            returnQuantityDivisor += Double(yesterdayShippedSaleReport.returnQuantity)
+            canceledQuantityDivisor += Double(yesterdayShippedSaleReport.canceledQuantity)
         }
-        var saleAmountDividend: Float = .zero, returnAmountDividend: Float = .zero, canceledAmountDividend: Float = .zero
-        var saleQuantityDividend: Float = .zero, returnQuantityDividend: Float = .zero, canceledQuantityDividend: Float = .zero
+        if let yesterdayNormalSaleReport = saleReports?.yesterdayNormalSaleReport {
+            saleAmountDivisor += yesterdayNormalSaleReport.saleAmount
+            returnAmountDivisor += yesterdayNormalSaleReport.returnAmount
+            canceledAmountDivisor += yesterdayNormalSaleReport.canceledAmount
+            saleQuantityDivisor += Double(yesterdayNormalSaleReport.saleQuantity)
+            returnQuantityDivisor += Double(yesterdayNormalSaleReport.returnQuantity)
+            canceledQuantityDivisor += Double(yesterdayNormalSaleReport.canceledQuantity)
+        }
+        if let yesterdayStoreSaleReport = saleReports?.yesterdayStoreSaleReport {
+            saleAmountDivisor += yesterdayStoreSaleReport.saleAmount
+            returnAmountDivisor += yesterdayStoreSaleReport.returnAmount
+            canceledAmountDivisor += yesterdayStoreSaleReport.canceledAmount
+            saleQuantityDivisor += Double(yesterdayStoreSaleReport.saleQuantity)
+            returnQuantityDivisor += Double(yesterdayStoreSaleReport.returnQuantity)
+            canceledQuantityDivisor += Double(yesterdayStoreSaleReport.canceledQuantity)
+        }
+        
+        // 今日數據
+        var saleAmountDividend: Double = .zero, returnAmountDividend: Double = .zero, canceledAmountDividend: Double = .zero
+        var saleQuantityDividend: Double = .zero, returnQuantityDividend: Double = .zero, canceledQuantityDividend: Double = .zero
         if let todayTransformedSaleReport = saleReports?.todayTransformedSaleReport {
             saleAmountDividend += todayTransformedSaleReport.saleAmount
             returnAmountDividend += todayTransformedSaleReport.returnAmount
             canceledAmountDividend += todayTransformedSaleReport.canceledAmount
-            saleQuantityDividend += Float(todayTransformedSaleReport.saleQuantity)
-            returnQuantityDividend += Float(todayTransformedSaleReport.returnQuantity)
-            canceledQuantityDividend += Float(todayTransformedSaleReport.canceledQuantity)
+            saleQuantityDividend += Double(todayTransformedSaleReport.saleQuantity)
+            returnQuantityDividend += Double(todayTransformedSaleReport.returnQuantity)
+            canceledQuantityDividend += Double(todayTransformedSaleReport.canceledQuantity)
         }
         if let todayShippedSaleReport = saleReports?.todayShippedSaleReport {
             saleAmountDividend += todayShippedSaleReport.saleAmount
             returnAmountDividend += todayShippedSaleReport.returnAmount
             canceledAmountDividend += todayShippedSaleReport.canceledAmount
-            saleQuantityDividend += Float(todayShippedSaleReport.saleQuantity)
-            returnQuantityDividend += Float(todayShippedSaleReport.returnQuantity)
-            canceledQuantityDividend += Float(todayShippedSaleReport.canceledQuantity)
+            saleQuantityDividend += Double(todayShippedSaleReport.saleQuantity)
+            returnQuantityDividend += Double(todayShippedSaleReport.returnQuantity)
+            canceledQuantityDividend += Double(todayShippedSaleReport.canceledQuantity)
         }
-        var saleAmountRatio: Float = .zero
-        if saleAmountDivisor != .zero && saleAmountDividend != .zero {
-            saleAmountRatio = (saleAmountDividend-saleAmountDivisor)/saleAmountDivisor
+        if let todayNormalSaleReport = saleReports?.todayNormalSaleReport {
+            saleAmountDividend += todayNormalSaleReport.saleAmount
+            returnAmountDividend += todayNormalSaleReport.returnAmount
+            canceledAmountDividend += todayNormalSaleReport.canceledAmount
+            saleQuantityDividend += Double(todayNormalSaleReport.saleQuantity)
+            returnQuantityDividend += Double(todayNormalSaleReport.returnQuantity)
+            canceledQuantityDividend += Double(todayNormalSaleReport.canceledQuantity)
         }
-        var saleQuantityRatio: Float = .zero
-        if saleQuantityDivisor != .zero && saleQuantityDividend != .zero {
-            saleQuantityRatio = (saleQuantityDividend-saleQuantityDivisor)/saleQuantityDivisor
+        if let todayStoreSaleReport = saleReports?.todayStoreSaleReport {
+            saleAmountDividend += todayStoreSaleReport.saleAmount
+            returnAmountDividend += todayStoreSaleReport.returnAmount
+            canceledAmountDividend += todayStoreSaleReport.canceledAmount
+            saleQuantityDividend += Double(todayStoreSaleReport.saleQuantity)
+            returnQuantityDividend += Double(todayStoreSaleReport.returnQuantity)
+            canceledQuantityDividend += Double(todayStoreSaleReport.canceledQuantity)
         }
-        var canceledAmountRatio: Float = .zero
-        if canceledAmountDivisor != .zero && canceledAmountDividend != .zero {
-            canceledAmountRatio = (canceledAmountDividend-canceledAmountDivisor)/canceledAmountDivisor
-        }
-        var canceledQuantityRatio: Float = .zero
-        if canceledQuantityDivisor != .zero && canceledQuantityDividend != .zero {
-            canceledQuantityRatio = (canceledQuantityDividend-canceledQuantityDivisor)/canceledQuantityDivisor
-        }
-        var returnAmountRatio: Float = .zero
-        if returnAmountDivisor != .zero && returnAmountDividend != .zero {
-            returnAmountRatio = (returnAmountDividend-returnAmountDivisor)/returnAmountDivisor
-        }
-        var returnQuantityRatio: Float = .zero
-        if returnQuantityDivisor != .zero && returnQuantityDividend != .zero {
-            returnQuantityRatio = (returnQuantityDividend-returnQuantityDivisor)/returnQuantityDivisor
-        }
-
+        
+        // 變動率
+        let saleAmountRatio = calculateRatio(yesterday: saleAmountDivisor, today: saleAmountDividend)
+        let saleQuantityRatio = calculateRatio(yesterday: saleQuantityDivisor, today: saleQuantityDividend)
+        let canceledAmountRatio = calculateRatio(yesterday: canceledAmountDivisor, today: canceledAmountDividend)
+        let canceledQuantityRatio = calculateRatio(yesterday: canceledQuantityDivisor, today: canceledQuantityDividend)
+        let returnAmountRatio = calculateRatio(yesterday: returnAmountDivisor, today: returnAmountDividend)
+        let returnQuantityRatio = calculateRatio(yesterday: returnQuantityDivisor, today: returnQuantityDividend)
+        
         let formatter = MyMindSaleReportRatioNumberFormatter()
         formatter.numberStyle = .percent
         formatter.positivePrefix = "▲"
@@ -230,6 +284,14 @@ extension SaleReportInfoItemView {
             value = index == 0 ? saleReports?.todayShippedSaleReport?.saleQuantity : index == 1 ? saleReports?.todayShippedSaleReport?.canceledQuantity : saleReports?.todayShippedSaleReport?.returnQuantity
             shippedValueLabel.text = numberFormatter.string(from: NSNumber(value: value ?? 0))
             
+            // 一般
+            value = index == 0 ? saleReports?.todayNormalSaleReport?.saleQuantity : index == 1 ? saleReports?.todayNormalSaleReport?.canceledQuantity : saleReports?.todayNormalSaleReport?.returnQuantity
+            normalValueLabel.text = numberFormatter.string(from: NSNumber(value: value ?? 0))
+            
+            // 門市
+            value = index == 0 ? saleReports?.todayStoreSaleReport?.saleQuantity : index == 1 ? saleReports?.todayStoreSaleReport?.canceledQuantity : saleReports?.todayStoreSaleReport?.returnQuantity
+            storeValueLabel.text = numberFormatter.string(from: NSNumber(value: value ?? 0))
+            
         case .amount:
             quantityTitleLabel.text = "總額"
             let ratio = index == 0 ? saleAmountRatio: index == 1 ? canceledAmountRatio : returnAmountRatio
@@ -254,13 +316,25 @@ extension SaleReportInfoItemView {
             quantity = index == 0 ? saleAmountDivisor : index == 1 ? canceledAmountDivisor : returnAmountDivisor
             yesterdayQuantityLabel.text = "\(yesterdayTitleString) " + (numberFormatter.string(from: NSNumber(value: quantity)) ?? "") + "元"
             
+            // 轉單
             var value = index == 0 ? saleReports?.todayTransformedSaleReport?.saleAmount : index == 1 ? saleReports?.todayTransformedSaleReport?.canceledAmount : saleReports?.todayTransformedSaleReport?.returnAmount
             let transformedValue = numberFormatter.string(from: NSNumber(value: value ?? 0))
             transformedValueLabel.text = "\(transformedValue ?? "0")元"
             
+            // 寄倉
             value = index == 0 ? saleReports?.todayShippedSaleReport?.saleAmount : index == 1 ? saleReports?.todayShippedSaleReport?.canceledAmount : saleReports?.todayShippedSaleReport?.returnAmount
             let shippedValue = numberFormatter.string(from: NSNumber(value: value ?? 0))
             shippedValueLabel.text = "\(shippedValue ?? "0")元"
+            
+            // 一般
+            value = index == 0 ? saleReports?.todayNormalSaleReport?.saleAmount : index == 1 ? saleReports?.todayNormalSaleReport?.canceledAmount : saleReports?.todayNormalSaleReport?.returnAmount
+            let normalValue = numberFormatter.string(from: NSNumber(value: value ?? 0))
+            normalValueLabel.text = "\(normalValue ?? "0")元"
+            
+            // 門市
+            value = index == 0 ? saleReports?.todayStoreSaleReport?.saleAmount : index == 1 ? saleReports?.todayStoreSaleReport?.canceledAmount : saleReports?.todayStoreSaleReport?.returnAmount
+            let storeValue = numberFormatter.string(from: NSNumber(value: value ?? 0))
+            storeValueLabel.text = "\(storeValue ?? "0")元"
         }
     }
     
@@ -274,6 +348,23 @@ extension SaleReportInfoItemView {
         activateConstraintsTransformedValueLabel()
         activateConstraintsShippedTitleLabel()
         activateConstraintsShippedValueLabel()
+        activateConstraintsNormalTitleLabel()
+        activateConstraintsNormalValueLabel()
+        activateConstraintsStoreTitleLabel()
+        activateConstraintsStoreValueLabel()
+    }
+    
+    // 計算變動率
+    private func calculateRatio(yesterday: Double, today: Double) -> Double {
+        var ratio: Double = .zero
+        if yesterday != .zero && today != .zero {
+            ratio = (today-yesterday)/yesterday
+        } else if yesterday != .zero {
+            ratio = -1
+        } else if today != .zero {
+            ratio = 1
+        }
+        return ratio
     }
 }
 /// constraint
@@ -388,6 +479,56 @@ extension SaleReportInfoItemView {
         let leading = shippedValueLabel.leadingAnchor
             .constraint(equalTo: shippedTitleLabel.trailingAnchor)
         let trailing = shippedValueLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16)
+
+        NSLayoutConstraint.activate([
+            centerY, leading, trailing
+        ])
+    }
+    
+    private func activateConstraintsNormalTitleLabel() {
+        let top = normalTitleLabel.topAnchor
+            .constraint(equalTo: shippedTitleLabel.bottomAnchor, constant: 8)
+        let leading = normalTitleLabel.leadingAnchor
+            .constraint(equalTo: leadingAnchor, constant: 16)
+        let height = normalTitleLabel.heightAnchor
+            .constraint(equalToConstant: 17)
+        let width = normalTitleLabel.widthAnchor.constraint(equalToConstant: 40)
+        NSLayoutConstraint.activate([
+            top, leading, height, width
+        ])
+    }
+    
+    private func activateConstraintsNormalValueLabel() {
+        let centerY = normalValueLabel.centerYAnchor
+            .constraint(equalTo: normalTitleLabel.centerYAnchor)
+        let leading = normalValueLabel.leadingAnchor
+            .constraint(equalTo: normalTitleLabel.trailingAnchor)
+        let trailing = normalValueLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16)
+
+        NSLayoutConstraint.activate([
+            centerY, leading, trailing
+        ])
+    }
+    
+    private func activateConstraintsStoreTitleLabel() {
+        let top = storeTitleLabel.topAnchor
+            .constraint(equalTo: normalTitleLabel.bottomAnchor, constant: 8)
+        let leading = storeTitleLabel.leadingAnchor
+            .constraint(equalTo: leadingAnchor, constant: 16)
+        let height = storeTitleLabel.heightAnchor
+            .constraint(equalToConstant: 17)
+        let width = storeTitleLabel.widthAnchor.constraint(equalToConstant: 40)
+        NSLayoutConstraint.activate([
+            top, leading, height, width
+        ])
+    }
+    
+    private func activateConstraintsStoreValueLabel() {
+        let centerY = storeValueLabel.centerYAnchor
+            .constraint(equalTo: storeTitleLabel.centerYAnchor)
+        let leading = storeValueLabel.leadingAnchor
+            .constraint(equalTo: storeTitleLabel.trailingAnchor)
+        let trailing = storeValueLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16)
 
         NSLayoutConstraint.activate([
             centerY, leading, trailing

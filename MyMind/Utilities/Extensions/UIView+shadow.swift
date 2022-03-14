@@ -34,24 +34,15 @@ extension UIView {
     enum GradientDirection {
         case topDown, leftRight
     }
-    func makeGradient(_ gradientColors: [CGColor], direction: GradientDirection = .leftRight, layerCornerRadius: CGFloat? = 0) -> CAGradientLayer {
-        let gradientLayer = CAGradientLayer()
-//        gradientLayer.frame = CGRect(x: bounds.minX, y: bounds.minY, width: bounds.width, height: bounds.height-35)
-        gradientLayer.frame = self.bounds
-        gradientLayer.cornerRadius = layerCornerRadius ?? 0
-        gradientLayer.colors = gradientColors
-        switch direction {
-        case .leftRight:
-            gradientLayer.startPoint = CGPoint(x: 0, y: 0.5)
-            gradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
-        case .topDown:
-            gradientLayer.startPoint = CGPoint(x: 0.5, y: 0)
-            gradientLayer.endPoint = CGPoint(x: 0.5, y: 1)
-        }
-        return gradientLayer
-//        layer.insertSublayer(gradientLayer, at: 0)
-    }
     
+    /**
+        Add a gradient layer to create a color gradient containing an arbitrary number of colors.
+
+        - Parameter with: A CAGradientLayer object.
+        - Parameter gradientFrame: The layer’s frame rectangle.
+        - Parameter direction: The direction of the gradient layer.
+        - Parameter layerCornerRadius: The radius to use when drawing rounded corners for the gradient layer’s background.
+    */
     func addGradient(with layer: CAGradientLayer, gradientFrame: CGRect? = nil, colorSet: [UIColor],
                      direction: GradientDirection = .leftRight, layerCornerRadius: CGFloat? = 0) {
         layer.frame = gradientFrame ?? self.bounds

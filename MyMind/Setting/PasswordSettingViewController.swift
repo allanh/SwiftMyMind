@@ -58,7 +58,10 @@ class PasswordSettingViewController: UIViewController {
         oldPasswordTextField.delegate = self
         newPasswordTextField.delegate = self
         confirmPasswordTextField.delegate = self
-        // Do any additional setup after loading the view.
+        
+        oldPasswordTextField.enablePasswordToggle()
+        newPasswordTextField.enablePasswordToggle()
+        confirmPasswordTextField.enablePasswordToggle()
     }
     
     override func viewWillAppear(_ animated: Bool) {

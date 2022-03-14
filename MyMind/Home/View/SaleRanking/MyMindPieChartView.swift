@@ -8,8 +8,6 @@
 import UIKit
 
 class MyMindPieChartView: UIView {
-    private let colors: [[UIColor]] = [[.blue, .red]]
-
     var data: MyMindPieChartData = MyMindPieChartData.mock {
         didSet {
             setNeedsDisplay()
