@@ -54,6 +54,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
     }
 }
+extension Collection {
+
+    /// Returns the element at the specified index if it is within bounds, otherwise nil.
+    subscript (safe index: Index) -> Element? {
+        return indices.contains(index) ? self[index] : nil
+    }
+}
 /// Presenter
 class Presenter {
     static let shared = Presenter()
@@ -73,19 +80,22 @@ class Presenter {
                 case "dashboard":
                     let rootViewController = sceneDelegate.window?.rootViewController
                     if let navigationController = rootViewController as? UINavigationController {
-                        navigationController.popToRootViewController(animated: false)
-                        if let topViewController = navigationController.topViewController as? MainPageViewController {
+                        guard let _ = KeychainUserSessionDataStore().readUserSession() else {
+                            navigationController.popToRootViewController(animated: true)
+                            return
+                        }
+                        if let tabbarViewController = navigationController.viewControllers[safe: 1] {
+                            navigationController.popToViewController(tabbarViewController, animated: true)
+                        }
+                        if let topViewController = navigationController.topViewController as? RootTabBarController {
+                            topViewController.selectedIndex = 0
                             topViewController.section = Section.thirtyDays.rawValue
-                            topViewController.myMind()
                         }
                     }
                 case "login":
                     let rootViewController = sceneDelegate.window?.rootViewController
                     if let navigationController = rootViewController as? UINavigationController {
                         navigationController.popToRootViewController(animated: false)
-                        if let topViewController = navigationController.topViewController as? MainPageViewController {
-                            topViewController.myMind()
-                        }
                     }
                 default:
                     break

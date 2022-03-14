@@ -421,7 +421,9 @@ struct MyMind_Widget: Widget {
 
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
-            MyMind_WidgetsEntryView(entry: entry)
+            Link(destination: URL(string: "mymindwidget://dashboard")!) {
+                MyMind_WidgetsEntryView(entry: entry)
+            }
         }
         .configurationDisplayName("My mind買賣")
         .description("電商多通路營運整合")
@@ -433,7 +435,9 @@ struct MyMind_ChartWidget: Widget {
 
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
-            MyMind_WidgetsEntryView(entry: entry)
+            Link(destination: URL(string: "mymindwidget://dashboard")!) {
+                MyMind_WidgetsEntryView(entry: entry)
+            }
         }
         .configurationDisplayName("My mind買賣")
         .description("電商多通路營運整合")
