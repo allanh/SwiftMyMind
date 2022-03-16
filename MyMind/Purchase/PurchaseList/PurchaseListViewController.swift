@@ -263,6 +263,16 @@ final class PurchaseListViewController: NiblessViewController {
         let viewController = EditingPurchaseOrderViewController(viewModel: viewModel, reviewing: reviewing, delegate: self)
         show(viewController, sender: nil)
     }
+    
+    private func showPurchaseCompletedPage(with purchaseID: String, readonly: Bool) {
+        let viewController = PurchaseCompletedApplyViewController(
+            purchaseID: purchaseID,
+            loader: MyMindPurchaseAPIService.shared
+        )
+        viewController.isForRead = readonly
+        viewController.title = "採購單資訊"
+        show(viewController, sender: nil)
+    }
 }
 // MARK: - Scroll view delegate
 extension PurchaseListViewController: UIScrollViewDelegate {
@@ -303,16 +313,14 @@ extension PurchaseListViewController: UITableViewDelegate, UITableViewDataSource
         tableView.deselectRow(at: indexPath, animated: false)
         guard let item = purchaseList?.items[indexPath.row] else { return }
 
-        if item.availableActions.contains(.edit) && item.type == .normal {
-            showPurchaseEditingPage(with: item.purchaseID, status: item.status)
+        if item.availableActions.contains(.edit) {
+            if item.type == .normal {
+                showPurchaseEditingPage(with: item.purchaseID, status: item.status)
+            } else {
+                showPurchaseCompletedPage(with: item.purchaseID, readonly: false)
+            }
         } else {
-            let viewController = PurchaseCompletedApplyViewController(
-                purchaseID: item.purchaseID,
-                loader: MyMindPurchaseAPIService.shared
-            )
-            viewController.isForRead = item.type == .normal ? true : false
-            viewController.title = "採購單資訊"
-            show(viewController, sender: nil)
+            showPurchaseCompletedPage(with: item.purchaseID, readonly: true)
         }
     }
 
@@ -365,16 +373,14 @@ extension PurchaseListViewController: UICollectionViewDelegate, UICollectionView
         collectionView.deselectItem(at: indexPath, animated: false)
         guard let item = purchaseList?.items[indexPath.row] else { return }
 
-        if item.availableActions.contains(.edit) && item.type == .normal {
-            showPurchaseEditingPage(with: item.purchaseID, status: item.status)
+        if item.availableActions.contains(.edit) {
+            if item.type == .normal {
+                showPurchaseEditingPage(with: item.purchaseID, status: item.status)
+            } else {
+                showPurchaseCompletedPage(with: item.purchaseID, readonly: false)
+            }
         } else {
-            let viewController = PurchaseCompletedApplyViewController(
-                purchaseID: item.purchaseID,
-                loader: MyMindPurchaseAPIService.shared
-            )
-            viewController.isForRead = item.type == .normal ? true : false
-            viewController.title = "採購單資訊"
-            show(viewController, sender: nil)
+            showPurchaseCompletedPage(with: item.purchaseID, readonly: true)
         }
     }
 }

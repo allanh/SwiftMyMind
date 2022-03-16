@@ -214,7 +214,15 @@ final class PurchaseCompletedApplyViewController: NiblessViewController {
                     navigationController?.popToViewController(viewControllers[2], animated: true)
                 }
             } else {
-                exportPurchaseOrder()
+                let alertController = UIAlertController(title: "確定匯出原廠採購單?", message: "匯出原廠採購單後，採購單狀態將變更為採購作業中，確認要匯出嗎？", preferredStyle: .alert)
+                let cancelAction = UIAlertAction(title: "取消", style: .cancel) { action in
+                }
+                let confirmAction = UIAlertAction(title: "確定", style: .default) { [weak self] action in
+                    self?.exportPurchaseOrder()
+                }
+                alertController.addAction(cancelAction)
+                alertController.addAction(confirmAction)
+                present(alertController, animated: true, completion: nil)
             }
         }
     }
