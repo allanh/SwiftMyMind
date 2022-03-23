@@ -383,7 +383,7 @@ struct MyMind_WidgetsEntryView : View {
                 }
                 Spacer(minLength: 16)
                 HStack {
-                    IndicatorView(count: entry.toDoCount, title: "代辦事項", colors: [Color(red: 139.0/255.0, green: 134.0/255.0, blue: 196.0/255.0), Color(red: 112.0/255.0, green: 107.0/255.0, blue: 178.0/255.0)])
+                    IndicatorView(count: entry.toDoCount, title: "待辦事項", colors: [Color(red: 139.0/255.0, green: 134.0/255.0, blue: 196.0/255.0), Color(red: 112.0/255.0, green: 107.0/255.0, blue: 178.0/255.0)])
                         .frame(maxWidth: .infinity)
                         .blendMode(.sourceAtop)
                     Spacer()

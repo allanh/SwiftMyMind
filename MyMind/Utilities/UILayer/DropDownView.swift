@@ -27,7 +27,7 @@ class DropDownView<T, Cell: UITableViewCell>: NiblessView, UITableViewDelegate, 
             setNeedsUpdateConstraints()
         }
     }
-
+    
     var height: CGFloat = 226
     
     var heightForRow: CGFloat = 44 {
@@ -83,6 +83,7 @@ class DropDownView<T, Cell: UITableViewCell>: NiblessView, UITableViewDelegate, 
     }
 
     var shouldReloadItemWhenSelect: Bool = false
+    var shouldReloadDataWhenSelect: Bool = false
     var cellConfigure: (Cell, T) -> Void
     var selectHandler: (T) -> Void
 
@@ -122,7 +123,7 @@ class DropDownView<T, Cell: UITableViewCell>: NiblessView, UITableViewDelegate, 
         activateConstraintsTableViewContainerView()
         activateConstraintsTableView()
     }
-
+    
     private func configTableViewContainerView() {
         tableViewContainerView.layer.cornerRadius = 4
         tableViewContainerView.layer.borderWidth = 1
@@ -168,6 +169,9 @@ class DropDownView<T, Cell: UITableViewCell>: NiblessView, UITableViewDelegate, 
         selectHandler(item)
         if shouldReloadItemWhenSelect {
             tableView.reloadRows(at: [indexPath], with: .automatic)
+        }
+        if shouldReloadDataWhenSelect {
+            tableView.reloadData()
         }
     }
 }

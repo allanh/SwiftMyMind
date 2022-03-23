@@ -38,7 +38,7 @@ class SKURankingCollectionViewCell: UICollectionViewCell {
         dropDownView.topInset = -32
         dropDownView.heightForRow = 32
         dropDownView.height = 76
-        dropDownView.shouldReloadItemWhenSelect = true
+        dropDownView.shouldReloadDataWhenSelect = true
         return dropDownView
     }()
     
@@ -75,10 +75,6 @@ class SKURankingCollectionViewCell: UICollectionViewCell {
         headerView.dropDownView.addTapGesture {
             self.dropDownView.show()
         }
-    }
-    
-    func config(with rankingList: SKURankingReportList?, order: SKURankingReport.SKURankingReportSortOrder) {
-
     }
     
     func config(type: SKURankingReportList.sevenDaysType, currentOrder: SKURankingReport.SKURankingReportSortOrder, rankingList: SKURankingReportList? = nil, delegate: SKURankingCollectionViewCellDelegate? = nil) {

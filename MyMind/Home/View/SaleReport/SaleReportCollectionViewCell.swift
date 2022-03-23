@@ -111,7 +111,7 @@ class SaleReportCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var thirdDateLabel: UILabel!
     @IBOutlet weak var fourDateLabel: UILabel!
     @IBOutlet weak var endDateLabel: UILabel!
-        
+            
     private lazy var dropDownView: DropDownView<SaleReportList.SaleReportPointsType, DataTypeDropDownListTableViewCell> = {
         let dropDownView = DropDownView(dataSource: SaleReportList.SaleReportPointsType.allCases) { (cell: DataTypeDropDownListTableViewCell, item) in
             self.configCell(cell: cell, with: item)
@@ -125,7 +125,7 @@ class SaleReportCollectionViewCell: UICollectionViewCell {
         dropDownView.topInset = -32
         dropDownView.heightForRow = 30
         dropDownView.height = 100
-        dropDownView.shouldReloadItemWhenSelect = true
+        dropDownView.shouldReloadDataWhenSelect = true
         return dropDownView
     }()
     
