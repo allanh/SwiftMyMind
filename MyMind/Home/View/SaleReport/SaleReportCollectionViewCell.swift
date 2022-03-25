@@ -7,6 +7,8 @@
 //
 
 import Charts
+import RxSwift
+
 extension SaleReportList {
     func lineChartData(order: SKURankingReport.SKURankingReportSortOrder) -> LineChartData {
         let toDate: Date = Date().yesterday
@@ -152,21 +154,9 @@ class SaleReportCollectionViewCell: UICollectionViewCell {
         return view
     }()
     
+    private weak var viewModel: SaleReportCellViewModel?
+    private let bag: DisposeBag = DisposeBag()
     private var saleReportList: SaleReportList?
-    
-    // 數量或總額
-    private var currentOrder: SKURankingReport.SKURankingReportSortOrder = .TOTAL_SALE_QUANTITY {
-        didSet {
-            configLineChart(order: currentOrder, pointType: currentPointsType)
-        }
-    }
-    
-    // 銷售、取消或退貨
-    private var currentPointsType: SaleReportList.SaleReportPointsType = .sale {
-        didSet {
-            configLineChart(order: currentOrder, pointType: currentPointsType)
-        }
-    }
     
     // line chart config
     private let gradientColors = [UIColor(red: 31.0/255.0, green: 161.0/255.0, blue: 255.0/255.0, alpha: 0.8),
@@ -185,20 +175,38 @@ class SaleReportCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    func config(with saleReportList: SaleReportList?, order: SKURankingReport.SKURankingReportSortOrder) {
+    func config(with saleReportList: SaleReportList?, viewModel: SaleReportCellViewModel) {
         configDateLabels()
         self.saleReportList = saleReportList
-        configLineChart(order: .TOTAL_SALE_QUANTITY, pointType: .sale)
+        self.viewModel = viewModel
+        self.configOrderTypeView(type: viewModel.reportOrderType.value)
+        headerView.alternativeInfo = viewModel.reportPointsType.value.description
+        subscribeViewModel()
     }
     
     private func configCell(cell: DataTypeDropDownListTableViewCell,  with item: SaleReportList.SaleReportPointsType) {
         cell.titleLabel.text = item.description
+        let currentPointsType = viewModel?.reportPointsType.value ?? .sale
         cell.titleLabel.textColor = item == currentPointsType ? .white : .white.withAlphaComponent(0.65)
         cell.backgroundColor = .clear
     }
+    
+    private func subscribeViewModel() {
+        viewModel?.reportOrderType
+            .subscribe(onNext: { [unowned self] orderType in
+                self.configLineChart(order: orderType, pointType: viewModel?.reportPointsType.value ?? .sale)
+            })
+            .disposed(by: bag)
+        
+        viewModel?.reportPointsType
+            .subscribe(onNext: { [unowned self] pointType in
+                self.configLineChart(order: viewModel?.reportOrderType.value ?? .TOTAL_SALE_QUANTITY, pointType: pointType)
+            })
+            .disposed(by: bag)
+    }
 
     private func selectItem(item: SaleReportList.SaleReportPointsType) {
-        self.currentPointsType = item
+        self.viewModel?.reportPointsType.accept(item)
         self.headerView.alternativeInfo = item.description
         dropDownView.hide()
     }
@@ -239,14 +247,23 @@ extension SaleReportCollectionViewCell {
         contentView.addSubview(amountTypeView)
 
         quantityTypeView.addTapGesture {
-            self.quantityTypeView.onSelected()
-            self.amountTypeView.onNotSelected()
-            self.currentOrder = .TOTAL_SALE_QUANTITY
+            self.configOrderTypeView(type: .TOTAL_SALE_QUANTITY)
+            self.viewModel?.reportOrderType.accept(.TOTAL_SALE_QUANTITY)
         }
         amountTypeView.addTapGesture {
+            self.configOrderTypeView(type: .TOTAL_SALE_AMOUNT)
+            self.viewModel?.reportOrderType.accept(.TOTAL_SALE_AMOUNT)
+        }
+    }
+    
+    private func configOrderTypeView(type: SKURankingReport.SKURankingReportSortOrder) {
+        switch type {
+        case .TOTAL_SALE_QUANTITY:
+            self.quantityTypeView.onSelected()
+            self.amountTypeView.onNotSelected()
+        case .TOTAL_SALE_AMOUNT:
             self.quantityTypeView.onNotSelected()
             self.amountTypeView.onSelected()
-            self.currentOrder = .TOTAL_SALE_AMOUNT
         }
     }
     

@@ -44,6 +44,7 @@
 		3F960220278D27D900D9688C /* SaleRankingItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F96021F278D27D900D9688C /* SaleRankingItemCollectionViewCell.swift */; };
 		3F96022727A1542300D9688C /* ToDoCardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F96022627A1542300D9688C /* ToDoCardCollectionViewCell.swift */; };
 		3FB8CCD127DF1AA60020ABED /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB8CCD027DF1AA60020ABED /* HomeViewModel.swift */; };
+		3FB8CCD527ED9BE70020ABED /* SaleReportCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB8CCD427ED9BE60020ABED /* SaleReportCellViewModel.swift */; };
 		3FCDA1B927C71F4100CF94FA /* UIApplication+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCDA1B827C71F4100CF94FA /* UIApplication+.swift */; };
 		3FCDA1BB27C784E000CF94FA /* DatePickerTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCDA1BA27C784DF00CF94FA /* DatePickerTextField.swift */; };
 		520776A926B50FBC005BA621 /* SignInTransitionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520776A826B50FBC005BA621 /* SignInTransitionDelegate.swift */; };
@@ -442,6 +443,7 @@
 		3F96021F278D27D900D9688C /* SaleRankingItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaleRankingItemCollectionViewCell.swift; sourceTree = "<group>"; };
 		3F96022627A1542300D9688C /* ToDoCardCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoCardCollectionViewCell.swift; sourceTree = "<group>"; };
 		3FB8CCD027DF1AA60020ABED /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		3FB8CCD427ED9BE60020ABED /* SaleReportCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaleReportCellViewModel.swift; sourceTree = "<group>"; };
 		3FCDA1B827C71F4100CF94FA /* UIApplication+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+.swift"; sourceTree = "<group>"; };
 		3FCDA1BA27C784DF00CF94FA /* DatePickerTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerTextField.swift; sourceTree = "<group>"; };
 		49082C5B628793B947583BE8 /* Pods_MyMind_MyMindUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyMind_MyMindUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -864,6 +866,7 @@
 				52C2CBE5269ED0D5002A2BA9 /* SaleReportCollectionViewCell.swift */,
 				3F31E1C72761ADE60002CA6A /* MyMindLineChartView.swift */,
 				3F31E1D127674C040002CA6A /* SaleReportTypeView.swift */,
+				3FB8CCD427ED9BE60020ABED /* SaleReportCellViewModel.swift */,
 			);
 			path = SaleReport;
 			sourceTree = "<group>";
@@ -2060,6 +2063,7 @@
 				97B1173F2654CBFD00242428 /* PickProductMaterialTableViewCell.swift in Sources */,
 				A4793C9626047C8000AD280C /* NibOwnerLoadable.swift in Sources */,
 				97547CC52681DC4C001859A8 /* PurchaseCompletedApplyViewController.swift in Sources */,
+				3FB8CCD527ED9BE70020ABED /* SaleReportCellViewModel.swift in Sources */,
 				A4DD410926427DD5007B2A41 /* MyMindAutoCompleteAPIService.swift in Sources */,
 				3F31E1C3275F67480002CA6A /* TodayTabItemView.swift in Sources */,
 				52D7249F268D62BC00B00585 /* MyMindPurchaseReviewAPIService.swift in Sources */,

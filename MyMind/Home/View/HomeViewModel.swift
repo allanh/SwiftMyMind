@@ -11,11 +11,5 @@ import RxSwift
 import RxRelay
 
 class HomeViewModel {
-    
-    let service: MyMindDashboardAPIService
-    
-    init(service: MyMindDashboardAPIService) {
-        self.service = service
-    }
-
+    let saleReportCellViewModel = SaleReportCellViewModel()
 }

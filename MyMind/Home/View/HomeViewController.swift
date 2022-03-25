@@ -26,12 +26,8 @@ final class HomeViewController: UIViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         .lightContent
     }
-    private var saleReportSortOrder: SKURankingReport.SKURankingReportSortOrder = .TOTAL_SALE_QUANTITY {
-        didSet {
-            collectionView.reloadSections([Section.thirtyDays.rawValue])
-        }
-    }
-
+    private let viewModel = HomeViewModel()
+    private var saleReportSortOrder: SKURankingReport.SKURankingReportSortOrder = .TOTAL_SALE_QUANTITY
     private func scrollThenReset(_ match: Int) {
         if let section = section, section == match {
             self.section = nil
@@ -289,7 +285,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
             return UICollectionViewCell()
         case Section.thirtyDays.rawValue:
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SaleReportCollectionViewCell", for: indexPath) as? SaleReportCollectionViewCell {
-                cell.config(with: saleReportList, order: saleReportSortOrder)
+                cell.config(with: saleReportList, viewModel: viewModel.saleReportCellViewModel)
                 cell.addShadow()
                 return cell
             }
