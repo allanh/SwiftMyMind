@@ -143,7 +143,6 @@
 		52C2CBD8269C4D4E002A2BA9 /* SaleReportInfoItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C2CBD7269C4D4E002A2BA9 /* SaleReportInfoItemView.swift */; };
 		52C2CBDA269D6325002A2BA9 /* IndicatorSwitchContentHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C2CBD9269D6325002A2BA9 /* IndicatorSwitchContentHeaderView.swift */; };
 		52C2CBDC269D63D8002A2BA9 /* SKURankingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C2CBDB269D63D8002A2BA9 /* SKURankingCollectionViewCell.swift */; };
-		52C2CBDE269D643B002A2BA9 /* SKURankingInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C2CBDD269D643B002A2BA9 /* SKURankingInfoView.swift */; };
 		52C2CBE0269E890B002A2BA9 /* NoDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C2CBDF269E890B002A2BA9 /* NoDataView.swift */; };
 		52C2CBE2269E8950002A2BA9 /* SKURankingInfoItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C2CBE1269E8950002A2BA9 /* SKURankingInfoItemView.swift */; };
 		52C2CBE4269E9F20002A2BA9 /* SaleRankingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C2CBE3269E9F20002A2BA9 /* SaleRankingCollectionViewCell.swift */; };
@@ -531,7 +530,6 @@
 		52C2CBD7269C4D4E002A2BA9 /* SaleReportInfoItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaleReportInfoItemView.swift; sourceTree = "<group>"; };
 		52C2CBD9269D6325002A2BA9 /* IndicatorSwitchContentHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatorSwitchContentHeaderView.swift; sourceTree = "<group>"; };
 		52C2CBDB269D63D8002A2BA9 /* SKURankingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKURankingCollectionViewCell.swift; sourceTree = "<group>"; };
-		52C2CBDD269D643B002A2BA9 /* SKURankingInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKURankingInfoView.swift; sourceTree = "<group>"; };
 		52C2CBDF269E890B002A2BA9 /* NoDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoDataView.swift; sourceTree = "<group>"; };
 		52C2CBE1269E8950002A2BA9 /* SKURankingInfoItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKURankingInfoItemView.swift; sourceTree = "<group>"; };
 		52C2CBE3269E9F20002A2BA9 /* SaleRankingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SaleRankingCollectionViewCell.swift; path = MyMind/Home/View/SaleRankingCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
@@ -876,7 +874,6 @@
 			children = (
 				3F31E1E32771AAC70002CA6A /* SKURankingListCollectionViewCell.swift */,
 				52C2CBDB269D63D8002A2BA9 /* SKURankingCollectionViewCell.swift */,
-				52C2CBDD269D643B002A2BA9 /* SKURankingInfoView.swift */,
 				52C2CBE1269E8950002A2BA9 /* SKURankingInfoItemView.swift */,
 				3F31E1E72772DE050002CA6A /* SKURankingTableViewCell.swift */,
 			);
@@ -2090,7 +2087,6 @@
 				A43F42952643C75C00A246CC /* FilterSideMenuBottomView.swift in Sources */,
 				3F31E1C82761ADE60002CA6A /* MyMindLineChartView.swift in Sources */,
 				A442A16F266F797500AAB1ED /* Reviewer.swift in Sources */,
-				52C2CBDE269D643B002A2BA9 /* SKURankingInfoView.swift in Sources */,
 				9C926AE926E0C1E40067C61E /* AutoCompleteTitleSerchView.swift in Sources */,
 				A48389B4260869940044C09E /* SignInViewModel.swift in Sources */,
 				5246E4742690385C005C11EC /* Account.swift in Sources */,

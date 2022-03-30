@@ -39,7 +39,7 @@ class SKURankingListCollectionViewCell: UICollectionViewCell {
             skuRankingListCollectionView.reloadSections([SKURankingReportList.sevenDaysType.combined_commodity.rawValue])
         }
     }
-    
+        
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

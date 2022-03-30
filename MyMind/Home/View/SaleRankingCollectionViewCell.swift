@@ -237,7 +237,6 @@ class SaleRankingCollectionViewCell: UICollectionViewCell {
         self.rankingType = rankingType
         self.devider = devider
         self.headerView.alternativeInfo = devider.description
-        self.holeTextLabel.text = devider.description
         self.delegate = delegate
         switch rankingType {
         case .sale:
@@ -272,15 +271,18 @@ class SaleRankingCollectionViewCell: UICollectionViewCell {
 //                legend.form = .circle
 //                legend.formSize = 10
 //                legend.xOffset = 0
+                self.holeTextLabel.text = devider.description
                 chartView.data = data
             } else {
 //                legend.form = .none
 //                legend.xOffset = 20
+                self.holeTextLabel.text = "尚無資料"
                 chartView.data = SaleRankingReportList.emptyPieChartData()
             }
         } else {
 //            legend.form = .none
 //            legend.xOffset = 20
+            self.holeTextLabel.text = "尚無資料"
             chartView.data = SaleRankingReportList.emptyPieChartData()
         }
     }

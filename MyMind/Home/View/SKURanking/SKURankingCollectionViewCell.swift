@@ -56,6 +56,8 @@ class SKURankingCollectionViewCell: UICollectionViewCell {
         return view
     }()
     
+    private let noDataView = NoDataView()
+    
     private let tableView: UITableView = {
         let view = UITableView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -75,6 +77,8 @@ class SKURankingCollectionViewCell: UICollectionViewCell {
         headerView.dropDownView.addTapGesture {
             self.dropDownView.show()
         }
+        noDataView.isHidden = false
+        tableView.isHidden = true
     }
     
     func config(type: SKURankingReportList.sevenDaysType, currentOrder: SKURankingReport.SKURankingReportSortOrder, rankingList: SKURankingReportList? = nil, delegate: SKURankingCollectionViewCellDelegate? = nil) {
@@ -88,7 +92,15 @@ class SKURankingCollectionViewCell: UICollectionViewCell {
         case .combined_commodity:
             self.setRankingList = rankingList
         }
-        tableView.reloadSections([0], with: .automatic)
+        
+        if (rankingList?.reports.count ?? 0) > 0 {
+            noDataView.isHidden = true
+            tableView.isHidden = false
+            tableView.reloadSections([0], with: .automatic)
+        } else {
+            noDataView.isHidden = false
+            tableView.isHidden = true
+        }
     }
 }
 
@@ -122,11 +134,13 @@ extension SKURankingCollectionViewCell {
     func constructViewHierarchy() {
         contentView.addSubview(headerView)
         contentView.addSubview(tableView)
+        contentView.addSubview(noDataView)
     }
     
     func activateConstratins() {
         activateConstraintsHeaderView()
         activateConstraintsTableView()
+        activateConstraintsNoDataView()
     }
     
     func activateConstraintsHeaderView() {
@@ -145,6 +159,14 @@ extension SKURankingCollectionViewCell {
             tableView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             tableView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 13),
             tableView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -9)
+        ])
+    }
+    
+    func activateConstraintsNoDataView() {
+        NSLayoutConstraint.activate([
+            noDataView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            noDataView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 71),
+            noDataView.bottomAnchor.constraint(greaterThanOrEqualTo: contentView.bottomAnchor, constant: -85)
         ])
     }
 }

@@ -28,7 +28,10 @@ class ForgotPasswordViewController: NiblessViewController {
     }
 
     override func loadView() {
-        view = ForgotPasswordRootView(viewModel: viewModel)
+        let view = ForgotPasswordRootView(viewModel: viewModel)
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(buttonTap))
+        view.confirmButton.addGestureRecognizer(tapGesture)
+        self.view = view
     }
 
     override func viewDidLoad() {
@@ -108,6 +111,13 @@ class ForgotPasswordViewController: NiblessViewController {
             })
             .disposed(by: bag)
     }
+    
+    @objc
+    private func buttonTap() {
+        // 按下登入按鈕後，關閉鍵盤
+        self.view.endEditing(true)
+        viewModel.confirmSendEmail()
+    }
 }
 
 // MARK: - Keyboard handle
@@ -137,13 +147,13 @@ extension ForgotPasswordViewController {
 }
 extension ForgotPasswordViewController: ScanViewControllerDelegate {
     func scanViewController(_ scanViewController: ScanViewController, didReceive qrCodeValue: String) {
-        if let url = URL(string: qrCodeValue),
-           let secret = Secret.init(url: url) {
-            updateAndSaveSecret(secret: secret)
-        } else if let secret = Secret.generateSecret(with: qrCodeValue) {
-            updateAndSaveSecret(secret: secret)
-        }
-        viewModel.confirmSendEmail()
+//        if let url = URL(string: qrCodeValue),
+//           let secret = Secret.init(url: url) {
+//            updateAndSaveSecret(secret: secret)
+//        } else if let secret = Secret.generateSecret(with: qrCodeValue) {
+//            updateAndSaveSecret(secret: secret)
+//        }
+//        viewModel.confirmSendEmail()
     }
     private func updateAndSaveSecret(secret: Secret) {
         viewModel.repository.update(newSecrets: secret)

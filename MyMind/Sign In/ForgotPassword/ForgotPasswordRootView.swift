@@ -197,7 +197,7 @@ class ForgotPasswordRootView: NiblessView {
 //        $0.font = .pingFangTCRegular(ofSize: 14)
 //    }
 
-    private let confirmButton: UIButton = UIButton {
+    let confirmButton: UIButton = UIButton {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.setTitle("確定", for: .normal)
         $0.setTitleColor(.white, for: .normal)
@@ -331,7 +331,7 @@ class ForgotPasswordRootView: NiblessView {
             })
             .disposed(by: bag)
 
-        confirmButton.addTarget(viewModel, action: #selector(ForgotPasswordViewModel.confirmSendEmail), for: .touchUpInside)
+//        confirmButton.addTarget(viewModel, action: #selector(ForgotPasswordViewModel.confirmSendEmail), for: .touchUpInside)
     }
 
     func resetScrollViewContentInsets() {
