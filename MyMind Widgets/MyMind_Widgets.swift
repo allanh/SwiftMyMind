@@ -286,6 +286,20 @@ struct MyMind_WidgetsEntryView : View {
         formatter.maximumFractionDigits = 2
         return formatter
     }()
+    
+    /// Widget background color
+    var gradient: LinearGradient {
+        LinearGradient(
+            gradient: Gradient(
+                colors:
+                [
+                    Color(red: 0.0/255.0, green: 68.0/255.0, blue: 119.0/255.0),
+                    Color(red: 0.0/255.0, green: 0.0/255.0, blue: 0.0/255.0)
+                ]),
+            startPoint: .top,
+            endPoint: .bottom)
+    }
+    
     @ViewBuilder
     var body: some View {
         switch family {
@@ -297,24 +311,33 @@ struct MyMind_WidgetsEntryView : View {
                         .blendMode(.sourceAtop)
                     IconView(iconName: "announcement", background: [Color(red: 255.0/255.0, green: 97.0/255.0, blue: 97.0/255.0), Color(red: 239.0/255.0, green: 29.0/255.0, blue: 98.0/255.0)], title: "公告通知", value: entry.announcementCount == nil ? nil : "\(entry.announcementCount!)")
                         .blendMode(.sourceAtop)
+                    VStack {
+                        Image("logo_70")
+                    }
+                    .frame(width: 80, height: 88)
 //                    IconView(iconName: "otp", background: [Color(red: 0.0/255.0, green: 68.0/255.0, blue: 119.0/255.0), Color(red: 0.0/255.0, green: 68.0/255.0, blue: 119.0/255.0)], title: "MyMind", value: "OTP")
 //                        .blendMode(.sourceAtop)
                     Spacer()
                 } else {
                     Spacer()
-                    LoginView()
-                        .frame(minWidth: 200, maxWidth: .infinity, maxHeight: .infinity)
+                    LoginView(isVerticalLayout: true)
+                        .frame(minWidth: 160, maxWidth: .infinity, maxHeight: .infinity)
                         .blendMode(.sourceAtop)
+                    VStack {
+                        Image("logo_70")
+                    }
+                    .frame(width: 100, height: 88)
+                    .background(Color(red: 0.0/255.0, green: 68.0/255.0, blue: 119.0/255.0))
+                    .cornerRadius(8)
 //                    IconView(iconName: "otp", background: [Color(red: 0.0/255.0, green: 68.0/255.0, blue: 119.0/255.0), Color(red: 0.0/255.0, green: 68.0/255.0, blue: 119.0/255.0)], title: "MyMind", value: "OTP")
 //                        .blendMode(.sourceAtop)
                     Spacer()
-
                 }
             }
             .padding(.top)
             .padding(.bottom)
-            .background(LinearGradient(colors: [Color(red: 0.0/255.0, green: 68.0/255.0, blue: 119.0/255.0), .black], startPoint: .top, endPoint: .bottom))
-            .blendMode(.darken)
+            .background(gradient)
+
         case .systemLarge:
             VStack {
                 Spacer()
@@ -376,7 +399,7 @@ struct MyMind_WidgetsEntryView : View {
                     .padding(.leading, 20)
                     .frame(maxHeight: .infinity)
                 } else {
-                    LoginView()
+                    LoginView(isVerticalLayout: false)
                         .frame(maxHeight: .infinity)
                         .blendMode(.sourceAtop)
                         .padding(.bottom, 51)
@@ -415,8 +438,8 @@ struct MyMind_WidgetsEntryView : View {
                 Spacer()
             }
             .frame(maxWidth: .infinity)
-            .background(LinearGradient(colors: [Color(red: 0.0/255.0, green: 68.0/255.0, blue: 119.0/255.0), .black], startPoint: .top, endPoint: .bottom))
-            .blendMode(.darken)
+            .background(gradient)
+
         default:
             Text("not available")
         }
